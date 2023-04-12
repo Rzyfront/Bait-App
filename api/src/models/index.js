@@ -1,3 +1,5 @@
 const localModel = require('./Local');
+const userModel = require('./User');
 
-module.exports = { localModel };
+module.exports = { localModel, userModel  };
+
