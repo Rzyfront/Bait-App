@@ -1,7 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const {menuModel} = require("./index")
-
+const { userModel, localModel , menuModel } = require('./models/index');
 
 const sequelize = new Sequelize(
   process.env.DB_URL,
@@ -11,7 +10,14 @@ const sequelize = new Sequelize(
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   },
 );
-menuModel(sequelize)
+
+
+// DEFINE MODELS
+menuModel(sequelize);
+localModel(sequelize);
+userModel(sequelize);
+
+// DEFINE RELATIONS
 
 module.exports = {
   ...sequelize.models,
