@@ -1,5 +1,5 @@
-const { DataTypes } = require('sequelize');
+// const { DataTypes } = require('sequelize');
 
-module.exports = (sequelize) => {
-  sequelize.define('Local');
-};
+// module.exports = (sequelize) => {
+//   sequelize.define('Local');
+// };

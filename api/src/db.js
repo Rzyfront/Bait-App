@@ -1,6 +1,8 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 
+const { reviewModel } = require('./models/index');
+
 const sequelize = new Sequelize(
   process.env.DB_URL,
   {
@@ -8,6 +10,8 @@ const sequelize = new Sequelize(
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
   },
 );
+
+reviewModel(sequelize);
 
 module.exports = {
   ...sequelize.models,
