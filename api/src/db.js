@@ -3,10 +3,8 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
-
 const sequelize = new Sequelize(
-  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/baitdb`,
+  process.env.DB_URL,
   {
     logging: false, // set to console.log to see the raw SQL queries
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -42,5 +40,5 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 module.exports = {
   ...sequelize.models,
-  conn: sequelize, // import connection { conn } = require('./db.js');
+  db: sequelize, // import connection { conn } = require('./db.js');
 };
