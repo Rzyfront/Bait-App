@@ -3,6 +3,10 @@ const { Sequelize } = require('sequelize');
 const {menuModel} = require("./index")
 
 
+const { localModel } = require('./models/index');
+const { userModel } = require('./models/index');
+
+
 const sequelize = new Sequelize(
   process.env.DB_URL,
   {
@@ -11,6 +15,14 @@ const sequelize = new Sequelize(
   },
 );
 menuModel(sequelize)
+
+
+// DEFINE MODELS
+localModel(sequelize);
+userModel(sequelize);
+
+// DEFINE RELATIONS
+
 
 module.exports = {
   ...sequelize.models,
