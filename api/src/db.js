@@ -1,9 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-
-const { localModel } = require('./models/index');
-const { userModel } = require('./models/index');
-
+const { userModel, localModel } = require('./models/index');
 
 const sequelize = new Sequelize(
   process.env.DB_URL,
@@ -13,13 +10,11 @@ const sequelize = new Sequelize(
   },
 );
 
-
 // DEFINE MODELS
 localModel(sequelize);
 userModel(sequelize);
 
 // DEFINE RELATIONS
-
 
 module.exports = {
   ...sequelize.models,
