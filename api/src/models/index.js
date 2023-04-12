@@ -1,6 +1,4 @@
 const menuModel = require("./Menu")
 
 
-module.exports = {
-    menuModel
-}
+module.exports = { localModel, userModel,menuModel };
