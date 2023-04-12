@@ -40,5 +40,5 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 module.exports = {
   ...sequelize.models,
-  db: sequelize, // import connection { conn } = require('./db.js');
+  db: sequelize, // import connection { db } = require('./db.js');
 };
