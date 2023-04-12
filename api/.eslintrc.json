@@ -15,6 +15,12 @@
         "linebreak-style": ["error", "windows"],
         "no-console": "off",
         "import/no-dynamic-require": "off",
-        "global-require": "off"
+        "global-require": "off",
+        "no-plusplus": [
+            "error",
+            {
+                "allowForLoopAfterthoughts": true
+            }
+        ]
     }
 }

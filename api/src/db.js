@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const { userModel, localModel , menuModel } = require('./models/index');
+const { userModel, localModel, reviewModel ,menuModel } = require('./models/index');
 
 const sequelize = new Sequelize(
   process.env.DB_URL,
@@ -16,10 +16,12 @@ const sequelize = new Sequelize(
 menuModel(sequelize);
 localModel(sequelize);
 userModel(sequelize);
+reviewModel(sequelize);
 
 // DEFINE RELATIONS
 
+
 module.exports = {
   ...sequelize.models,
-  db: sequelize, // import connection { db } = require('./db.js');
+  db: sequelize, // import connection { conn } = require('./db.js');
 };
