@@ -12,8 +12,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     verified: {
-      type: DataTypes.ENUM(true, false),
-      defaultValue: false,
+      type: DataTypes.ENUM('verified', 'unVerified'),
+      defaultValue: 'unVerified',
     },
     email: DataTypes.STRING,
     location: {
