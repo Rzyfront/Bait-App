@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../Card/Card";
+import "./Cards.css";
 function Cards() {
   const SoyUnaBaseDeDatos = [
     { Name: "Mc Donalls", Location: "Buenos Aires", Rating: 4.2 },
