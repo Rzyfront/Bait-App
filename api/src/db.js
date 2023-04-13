@@ -17,8 +17,7 @@ reviewModel(sequelize);
 
 // DEFINE RELATIONS
 
-
 module.exports = {
   ...sequelize.models,
-  db: sequelize, 
+  db: sequelize,
 };
