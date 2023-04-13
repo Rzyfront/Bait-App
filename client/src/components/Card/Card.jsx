@@ -16,8 +16,8 @@ function Card({ Location, Rating, Name }) {
           <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating} />
         </div>
         <div className="LocationGroup">
-          <GoLocation />
           <p className="Location">{Location || "No location"}</p>
+          <GoLocation />
         </div>
       </div>
     </div>
