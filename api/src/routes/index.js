@@ -5,7 +5,7 @@ const userRoutes = require("./users")
 
 mainRouter.use('/locals', localsRoute);
 mainRouter.use('/images', imageRoute);
-mainRouter.use('/user', userRoutes);
+mainRouter.use('/users', userRoutes);
 
 mainRouter.get('/', (req, res) => {
   res.send('Hello World!');

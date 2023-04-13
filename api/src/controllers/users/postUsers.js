@@ -1,20 +1,15 @@
 const {User} = require("../../db")
 
-const createUser = async(name,lastname,age,phone,email,location)=>{
-    if (!name||!lastname||!age||!phone||!email||!location) throw Error ("Missing data to create user")
-    
-    const user = {
-        name,
-        lastname,
-        age,
-        phone,
-        email,
-        location,
-        verified
-    }
-    await User.create()
-}
+module.exports = async (req, res) => {
+    const { name, lastname, age, phone_number, email, location, verified } = req.body
 
-module.exports = async(req,res)=>{
+    try {
+        const newUser = await User.create({name, lastname, age, phone_number, email, location, verified})
+
+        res.status(201).json(`User created correctly ${newUser}`)
+    } catch (error) {
+        res.status(404).json(`Failed to create user  ${error.message}`)
+    }
+
 
 }
