@@ -23,11 +23,17 @@ categoryModel(sequelize);
 
 // DEFINE RELATIONS
 const {
-  User, Category, Review, Local,
+  User, Category, Review, Local, Image,
 } = sequelize.models;
 
 Review.belongsTo(User);
 User.hasMany(Category);
+
+Image.belongsTo(Review);
+Review.hasMany(Image);
+
+Image.belongsTo(Local);
+Local.hasMany(Image);
 
 Local.belongsTo(User);
 User.hasMany(Local);
