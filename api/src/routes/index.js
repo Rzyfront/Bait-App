@@ -4,9 +4,11 @@ const localsRoute = require('./locals');
 const userRoutes = require("./users")
 
 
+const reviewsRoute = require('./reviews');
 const administratorRoute = require('./administrator');
 
 mainRouter.use('/locals', localsRoute);
+mainRouter.use('/reviews', reviewsRoute);
 mainRouter.use('/images', imageRoute);
 mainRouter.use('/administrator', administratorRoute);
 mainRouter.use('/users', userRoutes);
