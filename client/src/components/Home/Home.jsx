@@ -1,7 +1,8 @@
 import "./Home.css";
-import { BsFillSearchHeartFill } from "react-icons/bs";
+
 import Navbar from "../Navbar/Navbar";
 import Cards from "../Cards/Cards";
+import Footer from "./footer/Footer";
 const Home = () => {
   return (
     <div className="home">
@@ -17,6 +18,9 @@ const Home = () => {
             alt="map"
           />
         </div>
+      </div>
+      <div className="home_footer">
+        <Footer />
       </div>
     </div>
   );

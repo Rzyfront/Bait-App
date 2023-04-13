@@ -7,5 +7,10 @@
     width: 100%;
     color: var(--primary);
     background-color: var(--bg-primary);
-    height: 100vh;
+
+}
+.containerCardsall{
+    width: 100%;
+    display: block;
+
 }
