@@ -1,7 +1,7 @@
 .ContainerCards{
     display: flex;
     flex-wrap: wrap;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     justify-content: center;
     align-items: center;
     width: 100%;
