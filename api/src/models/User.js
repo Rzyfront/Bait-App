@@ -35,5 +35,9 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('verified', 'unVerified', 'suspended'),
       defaultValue: 'unVerified',
     },
+    rol: {
+      type: DataTypes.ENUM('admi', 'customer', 'owner'),
+      defaultValue: 'customer',
+    },
   });
 };
