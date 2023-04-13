@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     try {
         const newUser = await User.create({name, lastname, age, phone_number, email, location, verified})
 
-        res.status(201).json(`User created correctly ${newUser}`)
+        res.status(201).json(`User created correctly ${newUser.name} ${newUser.lastname}`)
     } catch (error) {
         res.status(404).json(`Failed to create user  ${error.message}`)
     }

@@ -1,4 +1,4 @@
-const {User} = require("./../../db")
+const {User} = require("../../db")
 
 module.exports =async (req,res)=>{
     try {
