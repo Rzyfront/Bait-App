@@ -15,7 +15,6 @@ mainRouter.use('/administrator', administratorRoute);
 mainRouter.use('/users', userRoutes);
 // mainRouter.use('/login', loginRoute);
 
-
 mainRouter.get('/', (req, res) => {
   res.send('Hello World!');
 });
