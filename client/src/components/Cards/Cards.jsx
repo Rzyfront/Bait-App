@@ -11,8 +11,10 @@ function Cards() {
   ];
   return (
     <div className="ContainerCards">
-      {SoyUnaBaseDeDatos.map(({ Name, Rating, Location }) => {
-        return <Card Name={Name} Rating={Rating} Location={Location} />;
+      {SoyUnaBaseDeDatos.map(({ Name, Rating, Location }, index) => {
+        return (
+          <Card Name={Name} Rating={Rating} Location={Location} key={index} />
+        );
       })}
     </div>
   );
