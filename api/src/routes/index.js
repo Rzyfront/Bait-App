@@ -1,8 +1,7 @@
 const mainRouter = require('express').Router();
 const imageRoute = require('./images');
 const localsRoute = require('./locals');
-const userRoutes = require("./users")
-
+const userRoutes = require('./users');
 
 const reviewsRoute = require('./reviews');
 const administratorRoute = require('./administrator');
