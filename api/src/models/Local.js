@@ -1,4 +1,5 @@
-/* const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize');
+
 module.exports = (sequelize) => {
   sequelize.define('Local', {
     id: {
@@ -23,4 +24,3 @@ module.exports = (sequelize) => {
     schedule: DataTypes.STRING,
   });
 };
-*/
