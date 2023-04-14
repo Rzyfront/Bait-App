@@ -1,15 +1,17 @@
-@font-face {
-    font-family: 'prueba';
-    src: url('fonts/goldplay-bold.otf') format('truetype');
-    font-style: normal;
-    font-weight: normal;
-  }
-
-*{
-    font-family: "prueba";
+.ReviewsForm{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(var(--bg-primary), 0.2);
+    backdrop-filter: blur(3px);
+    z-index: 999;
 }
 
-.title{
+
+.Title{
     font-size: 3.5em;
     text-align: center;
     color: black;
@@ -29,10 +31,16 @@
         opacity: 1;
     }
 }
-.container{
+.Container{
     display: flex;
     justify-content: center; 
     align-items: center; 
+    width: 700px;
+    height: 400px;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 20px;
 }
 .name{
     display: flex;

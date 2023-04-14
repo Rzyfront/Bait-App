@@ -4,6 +4,7 @@
     display: flex;
     background-color:var(--bg-primary);
     gap: 2.5%;
+    position: relative;
 }
 
 .Profile .ProfileInfo{
