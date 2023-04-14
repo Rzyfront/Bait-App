@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const {
-  userModel, localModel, reviewModel, menuModel, imageModel, categoryModel,
+  userModel, localModel, reviewModel, menuModel, imageModel, categoryModel, characteristicsModel,
 } = require('./models/index');
 
 const sequelize = new Sequelize(
@@ -20,10 +20,11 @@ userModel(sequelize);
 reviewModel(sequelize);
 imageModel(sequelize);
 categoryModel(sequelize);
+characteristicsModel(sequelize);
 
 // DEFINE RELATIONS
 const {
-  User, Category, Review, Local,
+  User, Category, Review, Local, Characteristics,
 } = sequelize.models;
 
 Review.belongsTo(User);
@@ -34,6 +35,9 @@ User.hasMany(Local);
 
 Category.belongsTo(Review);
 Review.hasMany(Category);
+
+Local.hasOne(Characteristics, { onDelete: 'CASCADE' });
+Characteristics.belongsTo(Local, { onDelete: 'CASCADE' });
 
 module.exports = {
   ...sequelize.models,
