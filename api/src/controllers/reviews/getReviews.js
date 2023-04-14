@@ -1,17 +1,23 @@
 const { Review } = require('../../db');
 
 module.exports = async (req, res) => {
-  const reviews = await Review.findAll({
-    attributes: ['id', 'title', 'comment', 'photoTicket', 'verified', 'food', 'service', 'environment', 'qaPrice', 'LocalId'],
-    where: { verified: true },
-  });
+  const { reviewId } = req.params;
 
-  const reviewData = reviews.map((review) => {
-    const {
-      id, title, comment, photoTicket, verified, food, service, environment, qaPrice, LocalId,
-    } = review;
+  try {
+    const review = await Review.findByPk(reviewId, {
+      attributes: ['id', 'title', 'comment', 'photoTicket', 'verified', 'food', 'service', 'environment', 'qaPrice', 'LocalId'],
+      where: { verified: true },
+    });
+
+    if (!review) {
+      return res.status(404).json({ error: 'Review not found' });
+    }
+
     const ratings = {
-      food, service, environment, qaPrice,
+      food: review.food,
+      service: review.service,
+      environment: review.environment,
+      qaPrice: review.qaPrice,
     };
     const filteredRatings = {};
 
@@ -28,17 +34,11 @@ module.exports = async (req, res) => {
 
     const averageRating = ratingCount ? totalRating / ratingCount : null;
 
-    return {
-      id,
-      title,
-      comment,
-      photoTicket,
-      verified,
-      LocalId,
-      ratings: filteredRatings,
-      averageRating,
-    };
-  });
+    const reviewWithAvgRating = { ...review.toJSON(), averageRating };
 
-  res.status(200).json({ reviews: reviewData, success: true });
+    return res.status(200).json({ review: reviewWithAvgRating, success: true });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 };
