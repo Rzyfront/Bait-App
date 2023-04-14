@@ -15,8 +15,8 @@
 }
 
 .Card .imgCard{
-    width: 210px;
-    height: 210px;
+    width: 200px;
+    height: 180px;
     border-radius: 10px;
     align-self: center;
     background-color: var(--bg-primary);
@@ -27,6 +27,7 @@
     flex-direction: column;
     gap: 2px;
     width: 210px;
+    height: 80px;
     padding: 5px 0px;
     background-color: var(--bg-primary);
 }
@@ -35,7 +36,15 @@
     display: flex;
 }
 
+.Card .RatingGroup .Rating {
+    font-family: var(--text);
+} 
+
 .Card .LocationGroup{
     display: flex;
     gap: 5px;
+}
+
+.Card .Price{
+ font-family: var(--text);
 }

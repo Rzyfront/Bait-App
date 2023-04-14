@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+a{
+  text-decoration: none;
+}
+
 @font-face {
   font-family: 'goldplay';
   src: url('../public/fonts/goldplay-bold.otf') format('truetype');
@@ -13,10 +17,9 @@
 
 :root {
   /* Fonts */
-  --title: 'goldplay';
-  
-  --text: sans-serif;
-/* NOTA sans-serif mientras encontramos una mejor fuente para texto general. */
+  --title:'Lobster Two', 'goldplay';
+  --subtitle:'Playfair Display','goldplay';
+  --text: 'Open Sans',sans-serif;
 
   /* Color text */
   --primary: #343434;
@@ -36,4 +39,50 @@
   --optional1:#679436;
   --optional2: #e01e00;
   
+   /* Scrollbar Color */
+   --bg-opac:#5958581a;
+   --bg-thumb:#34343452;
+}
+
+/* Webkit (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-opac);
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-thumb);
+  border-radius: 15px;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-thumb) var(--bg-opac);
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-opac);
+  border-radius: 15px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--bg-thumb);
+  border-radius: 15px;
+}
+
+*::-moz-scrollbar {
+  width: 5px;
+  background-color: var(--bg-opac);
+  border: 0;
+  border-radius: 15px;
+  border-image:
+    linear-gradient(to bottom, var(--bg-opac), var(--bg-thumb)) 1 100%;
+}
+
+*::-moz-scrollbar-thumb {
+  background-color: var(--bg-thumb);
+  border-radius: 15px;
 }

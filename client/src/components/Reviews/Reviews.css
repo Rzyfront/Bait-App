@@ -1,0 +1,114 @@
+.Reviews{
+    width: 98%;
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Reviews .Reviews-Title {
+    font-size: 60px;
+    font-family: var(--title);
+}
+
+.Reviews .Reviews-List {
+    width: 98%;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    overflow: auto;
+    gap: 15px;
+}
+
+.TitleGroup {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TitleGroup .Decorator {
+    width: 60%;
+    height: 3px;
+    background-color: var(--bg-tertiary);
+    border-radius: 10px;
+}
+
+.Reviews-List .ReviewCard{
+    display: flex;
+    width: 90%;
+    height: 300px;
+    border-radius: 10px;
+    background-color: var(--bg-primary);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.Reviews-List .ReviewCard .LeftInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 50%;
+    height: 280px;
+    padding: 20px;
+    border-right: 1px solid var(--bg-tertiary);
+}
+.Reviews-List .ReviewCard .RigthImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 280px;
+    padding: 10px;
+}
+
+.Reviews-List .ReviewCard .RigthImg img{
+    width: 90%;
+    height: 90%;
+    border-radius: 5px;
+}
+
+.ReviewCard .LeftInfo .RatingGroup{
+    display: flex;
+    gap: 5px;
+}
+
+.ReviewCard .LeftInfo h3{
+    font-size: 25px;
+    color: var(--primary);
+    font-family: var(--title);
+    font-weight: 700;
+    border-bottom: 2px solid var(--bg-tertiary);
+    border-radius: 0 0 10px 0;
+
+}
+
+
+.ReviewCard .LeftInfo .RatingGroup h4 {
+    font-size: 18px;
+    color: var(--primary);
+    font-family: var(--subtitle);
+    font-weight: 700;
+
+}
+.ReviewCard .LeftInfo .OpinionGroup h4 {
+    font-size: 18px;
+    color: var(--primary);
+    font-family: var(--subtitle);
+    font-weight: 700;
+}
+
+.ReviewCard .LeftInfo .OpinionGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto;
+}
+.ReviewCard .LeftInfo .OpinionGroup p {
+    font-size: 15px;
+    color: var(--primary);
+    font-family: var(--text);
+    font-weight: 300;
+    padding: 10px;
+}
