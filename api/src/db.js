@@ -19,11 +19,8 @@ for (const key in MODELS) {//eslint-disable-line
 
 // DEFINE RELATIONS
 const {
-  User, Category, Review, Local, Image, Dish, Menu,
+  User, Local, Image, Dish, Menu, Review,
 } = sequelize.models;
-
-Review.belongsTo(User);
-User.hasMany(Category);
 
 Image.belongsTo(Review);
 Review.hasMany(Image);
@@ -33,9 +30,6 @@ Local.hasMany(Image);
 
 Local.belongsTo(User);
 User.hasMany(Local);
-
-Category.belongsTo(Review);
-Review.hasMany(Category);
 
 Dish.belongsTo(Menu);
 Menu.hasMany(Dish);
