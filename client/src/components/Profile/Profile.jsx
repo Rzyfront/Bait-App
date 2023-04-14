@@ -9,12 +9,13 @@ import { GiMeal } from "react-icons/gi";
 import img from "../../assets/restaurante.jpg";
 import imgComida from "../../assets/comida.jpg";
 import Rimg from "../../assets/Reviewphoto.jpg";
-import { Menu, Reviews } from "../components";
+import { Menu, Reviews, ReviewsForm } from "../components";
 import { useState } from "react";
 import "./Profile.css";
 
 function Profile() {
   const [toogleModal, setToggleModal] = useState("Menu");
+  const [toogleModal2, setToggleModal2] = useState(false);
   const ListMenu = [
     { Name: "Pollo Teriyaky", Price: 200, Image: imgComida, Rating: 3 },
     { Name: "Milanesa", Price: 400, Image: imgComida, Rating: 3 },
@@ -82,6 +83,7 @@ function Profile() {
   };
   return (
     <div className="Profile">
+      {toogleModal2 && <ReviewsForm />}
       <div className="ProfileInfo">
         <img src={Image} alt={Name} className="ImageProfile" />
         <div className="Decorator"></div>
@@ -123,7 +125,18 @@ function Profile() {
               <p>Ver Reseñas</p>
               <TfiCommentAlt />
             </div>
-            <div className="HacerReseña">
+            <div
+              className="HacerReseña"
+              onClick={
+                toogleModal2
+                  ? () => {
+                      setToggleModal2(false);
+                    }
+                  : () => {
+                      setToggleModal2(true);
+                    }
+              }
+            >
               <p>Hacer Reseña</p>
               <TfiPencilAlt />
             </div>
