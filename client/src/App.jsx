@@ -1,10 +1,10 @@
 import './App.css'
-import Landing from "./components/Landing/Landing.jsx"
+import Login from "./components/Login/Login.jsx"
 
 function App() {
 
   return (
-    <Landing/>
+    <Login/>
   )
 }
 
