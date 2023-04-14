@@ -13,6 +13,7 @@ const sequelize = new Sequelize(
 
 // DEFINE MODELS
 for (const key in MODELS) {//eslint-disable-line
+  // Recorre y define los modelos
   MODELS[key](sequelize);
 }
 
