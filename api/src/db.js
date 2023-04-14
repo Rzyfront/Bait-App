@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
+
 const MODELS = require('./models/index');
 
 const sequelize = new Sequelize(
@@ -19,7 +20,7 @@ for (const key in MODELS) {//eslint-disable-line
 
 // DEFINE RELATIONS
 const {
-  User, Local, Image, Dish, Menu, Review,
+  User, Local, Image, Dish, Menu, Review, Characteristics,
 } = sequelize.models;
 
 Image.belongsTo(Review);
@@ -39,6 +40,9 @@ Menu.hasMany(Dish);
 
 Menu.belongsTo(Local);
 Local.hasOne(Menu);
+
+Local.hasOne(Characteristics, { onDelete: 'CASCADE' });
+Characteristics.belongsTo(Local, { onDelete: 'CASCADE' });
 
 module.exports = {
   ...sequelize.models,

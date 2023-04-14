@@ -3,7 +3,8 @@ const { Characteristics } = require('../../db');
 const { columnsToGetCharacteristics } = require('../../helpers/allCharacteristics');
 
 module.exports = async (req, res) => {
-  const locals = await Local.findAll({
+  const locals = await Local.findOne({
+    where: { id: req.local.id },
     include: {
       model: Characteristics,
       attributes: columnsToGetCharacteristics,
