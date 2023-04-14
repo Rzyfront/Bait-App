@@ -47,6 +47,22 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      food: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      service: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      environment: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
+      qaPrice: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+      },
     },
   );
 };
