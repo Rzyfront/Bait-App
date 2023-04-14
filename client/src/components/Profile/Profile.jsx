@@ -2,18 +2,19 @@ import React from "react";
 import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { GoLocation } from "react-icons/go";
-import img from "../../assets/restaurante.jpg";
-import imgComida from "../../assets/comida.jpg";
-import Rimg from "../../assets/Reviewphoto.jpg";
-import "./Profile.css";
-import Menu from "../Menu/Menu";
-import Reviews from "../Reviews/Reviews";
 import { BsCalendar3 } from "react-icons/bs";
 import { TfiCommentAlt } from "react-icons/tfi";
 import { TfiPencilAlt } from "react-icons/tfi";
 import { GiMeal } from "react-icons/gi";
+import img from "../../assets/restaurante.jpg";
+import imgComida from "../../assets/comida.jpg";
+import Rimg from "../../assets/Reviewphoto.jpg";
+import { Menu, Reviews } from "../components";
+import { useState } from "react";
+import "./Profile.css";
 
 function Profile() {
+  const [toogleModal, setToggleModal] = useState("Menu");
   const ListMenu = [
     { Name: "Pollo Teriyaky", Price: 200, Image: imgComida, Rating: 3 },
     { Name: "Milanesa", Price: 400, Image: imgComida, Rating: 3 },
@@ -113,7 +114,12 @@ function Profile() {
               <p>Reservar</p>
               <BsCalendar3 />
             </div>
-            <div className="VerReseña">
+            <div
+              className="VerReseña"
+              onClick={() => {
+                setToggleModal("Reviews");
+              }}
+            >
               <p>Ver Reseñas</p>
               <TfiCommentAlt />
             </div>
@@ -121,7 +127,12 @@ function Profile() {
               <p>Hacer Reseña</p>
               <TfiPencilAlt />
             </div>
-            <div className="VerMenu">
+            <div
+              className="VerMenu"
+              onClick={() => {
+                setToggleModal("Menu");
+              }}
+            >
               <p>Ver Menu</p>
               <GiMeal />
             </div>
@@ -130,8 +141,10 @@ function Profile() {
         </div>
       </div>
       <div className="ContainerSelection">
-        {/* <Menu ListMenu={ListMenu} /> */}
-        <Reviews ReviewsList={ReviewsList} />
+        {(toogleModal === "Menu" || !toogleModal) && (
+          <Menu ListMenu={ListMenu} />
+        )}
+        {toogleModal === "Reviews" && <Reviews ReviewsList={ReviewsList} />}
       </div>
     </div>
   );

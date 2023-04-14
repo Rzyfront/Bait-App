@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+a{
+  text-decoration: none;
+}
+
 @font-face {
   font-family: 'goldplay';
   src: url('../public/fonts/goldplay-bold.otf') format('truetype');

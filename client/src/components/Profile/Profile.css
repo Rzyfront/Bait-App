@@ -119,6 +119,7 @@
     transition: 0.1s;
     opacity: 0.8;
     background-color: rgb(213, 213, 213);
+    cursor: pointer;
     
 }
 

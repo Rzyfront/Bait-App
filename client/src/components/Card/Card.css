@@ -36,7 +36,15 @@
     display: flex;
 }
 
+.Card .RatingGroup .Rating {
+    font-family: var(--text);
+} 
+
 .Card .LocationGroup{
     display: flex;
     gap: 5px;
+}
+
+.Card .Price{
+ font-family: var(--text);
 }

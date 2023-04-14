@@ -1,24 +1,17 @@
-<<<<<<< HEAD
-import './App.css'
-import Login from "./components/Login/Login.jsx"
-=======
+import React from "react";
 import "./App.css";
-// import Landing from "./components/Landing/Landing.jsx";
-// import Home from "./components/Home/Home";
-import Profile from "./components/Profile/Profile";
->>>>>>> 220dcdabcd23a271f5bd4a941644541bd67e449a
+import { Landing, Home, Profile, FormRest } from "./components/components.js";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-<<<<<<< HEAD
-    <Login/>
-  )
-=======
-    <Profile />
-    // <Home />
-    // <Landing/>
+    <Routes>
+      <Route path="/home" element={<Home />} />
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/createplace" element={<FormRest />} />
+      <Route exact path="/" element={<Landing />} />
+    </Routes>
   );
->>>>>>> 220dcdabcd23a271f5bd4a941644541bd67e449a
 }
 
 export default App;
