@@ -7,17 +7,28 @@ import { useState } from "react";
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = () => {
   const [filterState, setFilterState] = useState(false);
+  const [selectOrder, setSelectOrder] = useState("");
   const dispatch = useDispatch();
   const ContainerCards = useSelector((state) => state.cards);
 
   const handlecafication = () => {
+    if (selectOrder !== "") {
+      setSelectOrder("");
+    }
     if (filterState === false) {
-      dispatch(order(ContainerCards));
+      dispatch(order(ContainerCards, "best"));
       setFilterState(true);
     } else {
       dispatch(reset());
       setFilterState(false);
     }
+  };
+
+  const handleSelect = (e) => {
+    if (filterState === true) {
+      handlecafication();
+    }
+    dispatch(order(ContainerCards, e.target.value));
   };
 
   return (
@@ -46,7 +57,18 @@ const Filters = () => {
           </div>
         )}
       </div> */}
-      <div></div>
+
+      <select
+        className="filter_calification"
+        onChange={handleSelect}
+        value={setSelectOrder}
+      >
+        <option value="" disabled>
+          Ordenar por
+        </option>
+        <option value={"A-Z"}>A-Z</option>
+        <option value={"Z-A"}>Z-A</option>
+      </select>
     </div>
   );
 };
