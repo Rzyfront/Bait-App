@@ -1,8 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const {
-  userModel, localModel, reviewModel, menuModel, imageModel,
-} = require('./models/index');
+const MODELS = require('./models/index');
 
 const sequelize = new Sequelize(
   process.env.DB_URL,
@@ -14,19 +12,30 @@ const sequelize = new Sequelize(
 );
 
 // DEFINE MODELS
-menuModel(sequelize);
-localModel(sequelize);
-userModel(sequelize);
-reviewModel(sequelize);
-imageModel(sequelize);
+for (const key in MODELS) {//eslint-disable-line
+  // Recorre y define los modelos
+  MODELS[key](sequelize);
+}
 
 // DEFINE RELATIONS
 const {
-  User, Local,
+  User, Local, Image, Dish, Menu, Review,
 } = sequelize.models;
+
+Image.belongsTo(Review);
+Review.hasMany(Image);
+
+Image.belongsTo(Local);
+Local.hasMany(Image);
 
 Local.belongsTo(User);
 User.hasMany(Local);
+
+Dish.belongsTo(Menu);
+Menu.hasMany(Dish);
+
+Menu.belongsTo(Local);
+Local.hasOne(Menu);
 
 module.exports = {
   ...sequelize.models,
