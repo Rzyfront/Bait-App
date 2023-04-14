@@ -1,13 +1,13 @@
 const { Review } = require('../../db');
 
 module.exports = async (req, res) => {
-  const { id } = req.params;
+  const { reviewId } = req.params;
   const {
     title, comment, photoTicket, verified, food, environment, service, qaPrice,
   } = req.body;
   try {
     // Associate the updated categories with the review
-    const updReview = await Review.findByPk(id);
+    const updReview = await Review.findByPk(reviewId);
 
     // Update the review with the new information
     await updReview.update({
