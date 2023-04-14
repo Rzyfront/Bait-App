@@ -25,6 +25,9 @@ const {
 Image.belongsTo(Review);
 Review.hasMany(Image);
 
+Review.belongsTo(Local);
+Local.hasMany(Review);
+
 Image.belongsTo(Local);
 Local.hasMany(Image);
 
