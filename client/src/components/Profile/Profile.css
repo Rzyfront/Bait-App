@@ -26,14 +26,13 @@
 
 .ProfileInfo .ImageProfile{
     width: 300px;
-    height: 300px;
+    height: 250px;
 
 }
 
 .ProfileInfo .Info{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     width: 300px;
     height: calc(100vh - 300px);
     overflow: auto;
@@ -41,9 +40,29 @@
     gap: 10px;
 }
 
-.Info .Decorator{
-    width: 95%;
+.ProfileInfo .Info h2{
+    font-size: 35px;
+    font-weight: 700;
+    font-family: var(--title);
+}
+
+.ProfileInfo.Info h3{
+    font-size: 20px;
+    font-weight: 700;
+    font-family: var(--subtitle);
+}
+
+.ProfileInfo .Info div p{
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    font-family: var(--text);
+}
+
+.ProfileInfo .Decorator{
+    width: 90%;
     height: 3px;
+    margin-top: 15px;
     background-color: var(--bg-tertiary);
     border-radius: 10px;
 }
@@ -51,20 +70,74 @@
 .Info .RatingGroup{
     display: flex;
     gap: 5px;
+    align-items: center;
 }
 .Info .LocationGroup {
     display: flex;
     gap: 5px;
+    align-items: center;
 }
 .Info .ScheduleGroup {
     display: flex;
     gap: 5px;
+    align-items: center;
 }
 .Info .TelGroup {
     display: flex;
     gap: 5px;
+    align-items: center;
 }
 .Info .EmailGroup {
     display: flex;
     gap: 5px;
+    align-items: center;
+}
+
+.ContainerSelection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Options{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center ;
+    justify-content: center;
+    gap: 5px;
+}
+
+.Options div{
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.1s;
+    opacity: 0.8;
+    background-color: rgb(213, 213, 213);
+    
+}
+
+.Options div:hover {
+    background-color: var(--bg-tertiary);
+    opacity: 1;
+}
+
+.Options div:active{
+    background-color: var(--bg-secondary);
+    opacity: 1;
+}
+
+.Options div p{
+    border-bottom: 2px solid var(--bg-tertiary);
+    border-radius: 0 0 0 10px;
+}
+
+.Options div:hover p {
+    border-bottom: 2px solid var(--bg-primary);
+    border-radius: 0 0 0 10px;
 }
