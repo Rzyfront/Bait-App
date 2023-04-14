@@ -1,3 +1,5 @@
+import { ORDER, RESET } from "../actions/actions";
+
 const initialState={
     cards:[[ { Name: "Mc Donalls", Location: "Buenos Aires", Rating: 4.2 },
     { Name: "BurgerKing", Location: "Buenos Aires", Rating: 4.3 },
@@ -42,14 +44,42 @@ const initialState={
 { Name: "Asados Argentinos", Location: "Buenos Aires", Rating: 4.5 },
 { Name: "La Pizzería del Centro", Location: "Santafe", Rating: 4.3 },
 { Name: "Los Tacos del Barrio", Location: "Buenos Aires", Rating: 4.2 },
-{ Name: "Cevichería del Mar", Location: "Santafe", Rating: 4.6 }]
-
-
-]
+{ Name: "Cevichería del Mar", Location: "Santafe", Rating: 4.6 }],],
+tipe:["italiano","peruana","mexicana","mar","comida rapida","bar"],
+reset:[]
 }
+
+//action paginate
+const paginate=(data)=>{
+  const size = 6;
+  let newarray = [];
+    for (var i = 0; i < data.length; i += size) {
+      const oneDate = data.slice(i, i + size);
+      newarray.push(oneDate);
+    }
+    return newarray
+}
+
+
+
+
 
 const rootReducer=(state=initialState ,{type,payload})=>{
      switch (type) {
+    case ORDER:
+    const newdata=paginate(payload)
+    return{
+        ...state,
+        reset:state.cards,
+        cards:newdata
+      
+    }
+    case  RESET:
+      return{
+        ...state,
+        cards:state.reset
+      }
+
 
            default:
             return{...state}

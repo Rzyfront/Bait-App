@@ -4,7 +4,7 @@ import Search_home from "./Search_home/Search_home";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { FaUserCircle } from "react-icons/fa";
 const Navbar = () => {
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useState(false);
   return (
     <div className="all_navbar">
       <div className="nav_ico">
@@ -18,10 +18,14 @@ const Navbar = () => {
       <div>
         <Search_home />
       </div>
+      <div className="nav_login">
+        <AiOutlineUserAdd />
+        <h4>Registrate</h4>
+      </div>
       {user === false ? (
         <div className="nav_login">
-          <AiOutlineUserAdd />
-          <h4>Registrate</h4>
+          <FaUserCircle />
+          <h4>Inicia sesión </h4>
         </div>
       ) : (
         <div className="nav_login">
