@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
 const {
-  userModel, localModel, reviewModel, menuModel, imageModel, categoryModel,
+  userModel, localModel, reviewModel, menuModel, imageModel,
 } = require('./models/index');
 
 const sequelize = new Sequelize(
@@ -19,21 +19,14 @@ localModel(sequelize);
 userModel(sequelize);
 reviewModel(sequelize);
 imageModel(sequelize);
-categoryModel(sequelize);
 
 // DEFINE RELATIONS
 const {
-  User, Category, Review, Local,
+  User, Local,
 } = sequelize.models;
-
-Review.belongsTo(User);
-User.hasMany(Category);
 
 Local.belongsTo(User);
 User.hasMany(Local);
-
-Category.belongsTo(Review);
-Review.hasMany(Category);
 
 module.exports = {
   ...sequelize.models,
