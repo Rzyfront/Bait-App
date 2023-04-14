@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
+import "./Cards.css";
+import { useSelector } from "react-redux";
+import Pagination from "../pagination/pagination";
+
 function Cards() {
-  const SoyUnaBaseDeDatos = [
-    { Name: "Mc Donalls", Location: "Buenos Aires", Rating: 4.2 },
-    { Name: "BurgerKing", Location: "Buenos Aires", Rating: 4.3 },
-    { Name: "Milanesas jons", Location: "Buenos Aires", Rating: 4.8 },
-    { Name: "Asados El boludo", Location: "Santafe", Rating: 5 },
-    { Name: "Boldmaunt", Location: "Buenos Aires", Rating: 3.2 },
-    { Name: "La esquida del sabor", Location: "Buenos Aires", Rating: 2.1 },
-  ];
+  //controller navegation
+  const [navegation, setnavegation] = useState(0);
+  //carts data
+  const ContainerCards = useSelector((state) => state.cards);
+  //reset filters or search
+  useEffect(() => {
+    setnavegation(0);
+  }, [ContainerCards]);
+
+  const handlepage = (data) => {
+    setnavegation(data);
+  };
+
   return (
-    <div className="ContainerCards">
-      {SoyUnaBaseDeDatos.map(({ Name, Rating, Location }) => {
-        return <Card Name={Name} Rating={Rating} Location={Location} />;
-      })}
+    <div className="containerCardsall">
+      <div className="ContainerCards">
+        {ContainerCards[navegation].map(({ Name, Rating, Location }, index) => {
+          return (
+            <Card Name={Name} Rating={Rating} Location={Location} key={index} />
+          );
+        })}
+      </div>
+      {ContainerCards.length === 0 ? (
+        <div></div>
+      ) : (
+        <Pagination
+          length_data={ContainerCards.length}
+          position={navegation}
+          handlepage={handlepage}
+        />
+      )}
     </div>
   );
 }
