@@ -45,6 +45,9 @@ Review.hasMany(Category);
 Dish.belongsTo(Menu);
 Menu.hasMany(Dish);
 
+Menu.belongsTo(Local);
+Local.hasOne(Menu);
+
 module.exports = {
   ...sequelize.models,
   db: sequelize,
