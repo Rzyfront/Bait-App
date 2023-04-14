@@ -1,13 +1,16 @@
 import "./Home.css";
-
+import Filters from "../filters/Filters";
 import Navbar from "../Navbar/Navbar";
 import Cards from "../Cards/Cards";
 import Footer from "./footer/Footer";
+
 const Home = () => {
   return (
     <div className="home">
       <Navbar />
-      <div className="filtros_home"></div>
+      <div className="home_filters">
+        <Filters />
+      </div>
       <div className="cards_home">
         <div className="cards_home_div">
           <Cards />

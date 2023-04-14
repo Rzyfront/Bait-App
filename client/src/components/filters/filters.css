@@ -1,0 +1,32 @@
+.filters{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    gap: 10px;
+}
+.filter_calification{
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    border: solid 2px black;
+    width: max-content;
+    padding: 3px;
+    border-radius: 10px;
+    transition: 0.5s;
+}
+.filter_calification_on{
+    transition: 0.5s;
+    display: flex;
+        gap: 4px;
+        align-items: center;
+        border: solid 2px black;
+        width: max-content;
+        padding: 3px;
+        border-radius: 10px;
+        background: var(--btn-secondary);
+        color: var(--tertiary);
+}
+.filter_type{
+  position: absolute;
+  transform: translateY(30px);
+}

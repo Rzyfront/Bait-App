@@ -18,10 +18,14 @@ const Navbar = () => {
       <div>
         <Search_home />
       </div>
+      <div className="nav_login">
+        <AiOutlineUserAdd />
+        <h4>Registrate</h4>
+      </div>
       {user === false ? (
         <div className="nav_login">
-          <AiOutlineUserAdd />
-          <h4>Registrate</h4>
+          <FaUserCircle />
+          <h4>Inicia sesión </h4>
         </div>
       ) : (
         <div className="nav_login">
