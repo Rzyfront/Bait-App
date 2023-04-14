@@ -1,69 +1,88 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+a{
+  text-decoration: none;
+}
+
+@font-face {
+  font-family: 'goldplay';
+  src: url('../public/fonts/goldplay-bold.otf') format('truetype');
+  font-style: normal;
+  font-weight: normal;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Fonts */
+  --title:'Lobster Two', 'goldplay';
+  --subtitle:'Playfair Display','goldplay';
+  --text: 'Open Sans',sans-serif;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Color text */
+  --primary: #343434;
+  --secondary: #3884fd;
+  --tertiary: #f4f4f4;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
+  /* background-color */
+  --bg-primary: #f4f4f4;
+  --bg-secondary: #343434;
+  --bg-tertiary: #3884fd;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  /* Botton color */
+  --btn-primary: #3884fd;
+  --btn-secondary: #343434;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  /* Optional colors */
+  --optional1:#679436;
+  --optional2: #e01e00;
+  
+   /* Scrollbar Color */
+   --bg-opac:#5958581a;
+   --bg-thumb:#34343452;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Webkit (Chrome, Safari, Opera) */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-opac);
+  border-radius: 15px;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+::-webkit-scrollbar-thumb {
+  background-color: var(--bg-thumb);
+  border-radius: 15px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-thumb) var(--bg-opac);
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  background-color: var(--bg-opac);
+  border-radius: 15px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--bg-thumb);
+  border-radius: 15px;
+}
+
+*::-moz-scrollbar {
+  width: 5px;
+  background-color: var(--bg-opac);
+  border: 0;
+  border-radius: 15px;
+  border-image:
+    linear-gradient(to bottom, var(--bg-opac), var(--bg-thumb)) 1 100%;
+}
+
+*::-moz-scrollbar-thumb {
+  background-color: var(--bg-thumb);
+  border-radius: 15px;
 }

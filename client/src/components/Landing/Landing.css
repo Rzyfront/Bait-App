@@ -1,0 +1,92 @@
+@font-face {
+    font-family: 'prueba';
+    src: url('fonts/goldplay-bold.otf') format('truetype');
+    font-style: normal;
+    font-weight: normal;
+  }
+
+*{
+    font-family: "prueba";
+}
+
+.container{
+    display: flex;
+    justify-content: space-around;
+    width: 70vw;
+    margin-left: 15vw;
+}
+
+.icon-container{
+    background-color: rgb(214, 214, 214);
+    padding: 15px 30px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.icon-container:hover{
+    background-color: var(--secondary);
+    scale: 1.05;
+    cursor:pointer;
+}
+
+.icon-container:hover .icon{
+    scale:1.15;
+}
+
+.text-icon{
+    color: black;
+    margin: 0;
+    text-align: center;
+}
+
+.icon{
+    width: 50px;
+    transition: .3s;
+}
+
+.title{
+    font-size: 3.5em;
+    text-align: center;
+    color: black;
+    margin-top: 20vh;
+    opacity:0;
+    scale:.6;
+    animation: aparecer .6s ease-in-out forwards;
+}
+
+@keyframes aparecer{
+    70%{
+        scale:1.1;
+
+    }
+    100%{
+        scale:1;
+        opacity: 1;
+    }
+}
+
+.saltar{
+    text-align: center;
+    margin-top: 10vh;
+    font-size: .9em;
+    color: var(--primary);
+    cursor:pointer
+}
+
+.select-container{
+    text-align: center;
+}
+
+.select{
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    font-size: 1.4em;
+    border: 0;
+    outline: 0;
+    cursor:pointer;
+}
+
+option:first-child{
+    color: var(--secondary)
+}

@@ -1,0 +1,35 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+.all_navbar{
+    color: var(--primary);
+    width: 90%;
+    margin: auto;
+  
+    display: flex;
+    gap: 20px;
+  
+}
+.nav_ico{
+    display: flex;
+    text-align: center;
+
+}
+.ico{
+    width: 50px;
+   
+}
+.titule{
+    margin: auto;
+}
+.search{
+    
+    background: rgb(184, 11, 11);
+}
+.nav_login{
+    display: flex;
+    font-size: 1rem;
+    gap: 3px;
+    margin: auto;
+}

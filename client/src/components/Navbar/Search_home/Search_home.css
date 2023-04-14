@@ -1,0 +1,70 @@
+.search_home{
+    position: relative;
+    height: 80%;
+    margin: auto ;
+    display: flex;
+    gap:20px;
+    color: var(
+        --primary
+    );
+    
+   
+}
+.searchs{
+    display: flex;
+  
+    width: 100%;
+}
+.input_search{
+    display: flex;
+    width: 80%;
+    border: solid  black 1px;
+    background: white;
+    height:100%;
+    font-size: 2rem;
+    transition: 1s;
+}
+.input_search:hover{
+    border: solid var(--secondary) 1px;
+}
+
+
+input{
+    height: 100%;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    font-size: 1.2rem;
+
+}
+.input:focus{
+background-color: yellow;
+}
+.icosearch{
+    margin: auto ;
+}
+.botton{
+    background: var(--btn-primary);
+    text-align: center;
+    color: white;
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.349);
+    transition: 0.5s;
+}
+.botton:hover{
+    cursor: pointer;
+    background: grey;
+}
+.botton:active{
+    box-shadow: none;
+
+}
+.filtros_home{
+    background: red;
+    width: 100%;
+    height: 100px;
+
+}
