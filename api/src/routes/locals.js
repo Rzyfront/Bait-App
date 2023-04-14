@@ -1,10 +1,10 @@
 const localsRoute = require('express').Router();
-const getLocals = require('../controllers/Locals/getLocals');
-const postLocal = require('../controllers/Locals/postLocal');
-const putLocal = require('../controllers/Locals/putLocal');
-const deleteLocal = require('../controllers/Locals/deleteLocal');
-const paramLocal = require('../controllers/Locals/paramLocal');
-const getLocalsDetail = require('../controllers/Locals/getLocalsDetail');
+const getLocals = require('../controllers/locals/getLocals');
+const postLocal = require('../controllers/locals/postLocal');
+const putLocal = require('../controllers/locals/putLocal');
+const deleteLocal = require('../controllers/locals/deleteLocal');
+const paramLocal = require('../controllers/locals/paramLocal');
+const getLocalsDetail = require('../controllers/locals/getLocalsDetail');
 
 localsRoute.param('localId', paramLocal);
 localsRoute.get('/', getLocals);

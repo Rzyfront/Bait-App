@@ -11,6 +11,6 @@ module.exports = async (req, res, next, id) => {
       throw new Error('Not Found');
     }
   } catch (err) {
-    return res.status(404).send(err.message);
+    return res.status(404).json({ success: false, message: err.message });
   }
 };
