@@ -1,8 +1,11 @@
+const { Local } = require('../../db');
+
 module.exports = async (req, res) => {
   try {
-    await req.local.destroy();
-    return res.status(204).send();
+    const localDeleted = await Local.findeByPk(req.local);
+    await localDeleted.destroy();
+    return res.status(201).json({ success: true, localDeleted });
   } catch (err) {
-    return res.status(500).send(err.message);
+    return res.status(400).json({ success: false, message: err.message });
   }
 };
