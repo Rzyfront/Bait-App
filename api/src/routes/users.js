@@ -11,6 +11,6 @@ userRoutes.get('/', getUsers);
 userRoutes.get('/:userId', getUsers);
 userRoutes.post('/', postUser);
 userRoutes.delete('/:userId', deleteUser);
-userRoutes.put('/users/:userId', modifyUser);
+userRoutes.put('/:userId', modifyUser);
 userRoutes.put('/inactive/:userId', putInactiveUser);
 module.exports = userRoutes;

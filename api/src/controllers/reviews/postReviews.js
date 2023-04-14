@@ -1,30 +1,19 @@
-const { Review, Category } = require('../../db');
+const { Review, Local } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    title, comment, photoTicket, verified, categories,
+    title, comment, photoTicket, verified, food, environment, service, qaPrice,
   } = req.body;
+  const { localId } = req.params;
   try {
-    // Create or update the categories and get their IDs
-    const categoryIds = await Promise.all(
-      categories.map(async ({ name, score }) => {
-        const [category, created] = await Category.findOrCreate({
-          where: { name },
-          defaults: { score },
-        });
-        if (!created) {
-          await category.update({ score });
-        }
-        return category.id;
-      }),
-    );
-
+    const local = await Local.findByPk(localId);
+    if (!local) throw new Error('Local not found');
     // Create the new review and associate the categories
     const newReview = await Review.create({
-      title, comment, photoTicket, verified,
+      title, comment, photoTicket, verified, food, environment, service, qaPrice,
     });
-    await newReview.addCategories(categoryIds);
-
+    await local.addReview(newReview.id);
+    await newReview.save();
     return res.status(201).json({ success: true, review: newReview });
   } catch (error) {
     return res.status(400).json({ message: error.message, success: false });

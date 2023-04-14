@@ -37,5 +37,9 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('verified', 'unVerified', 'suspended'),
       defaultValue: 'unVerified',
     },
+    isActive:{
+      type:DataTypes.BOOLEAN,
+      default:true
+    }
   });
 };
