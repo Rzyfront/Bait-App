@@ -1,8 +1,6 @@
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const {
-  userModel, localModel, reviewModel, menuModel, imageModel, categoryModel, dishModel,
-} = require('./models/index');
+const MODELS = require('./models/index');
 
 const sequelize = new Sequelize(
   process.env.DB_URL,
@@ -14,13 +12,9 @@ const sequelize = new Sequelize(
 );
 
 // DEFINE MODELS
-menuModel(sequelize);
-localModel(sequelize);
-userModel(sequelize);
-reviewModel(sequelize);
-imageModel(sequelize);
-categoryModel(sequelize);
-dishModel(sequelize);
+for (const key in MODELS) {//eslint-disable-line
+  MODELS[key](sequelize);
+}
 
 // DEFINE RELATIONS
 const {
