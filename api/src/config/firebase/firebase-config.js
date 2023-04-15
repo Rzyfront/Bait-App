@@ -1,9 +1,9 @@
-const admin = require('firebase-admin');// eslint-disable-line
+// const admin = require('firebase-admin');// eslint-disable-line
 
-const serviceAccount = require('./serviceAccount.json');
+// const serviceAccount = require('./serviceAccount.json');
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+// });
 
-module.exports = admin;
+// module.exports =admin;
