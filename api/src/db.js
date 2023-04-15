@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const { Sequelize } = require('sequelize');
 
 const MODELS = require('./models/index');
@@ -37,6 +38,9 @@ User.hasMany(Local);
 
 Dish.belongsTo(Menu);
 Menu.hasMany(Dish);
+
+Image.belongsTo(Dish);
+Dish.hasOne(Image);
 
 Menu.belongsTo(Local);
 Local.hasOne(Menu);

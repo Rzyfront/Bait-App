@@ -3,7 +3,7 @@ const { Menu, Dish } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const {
-      name, type, ingredients, price, description,
+      name, type, ingredients, price, description, image,
     } = req.body;
     const { menuId } = req.params;
     const menu = await Menu.findByPk(menuId);
@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
       name, type, ingredients, price, description,
     });
     await menu.addDish(newDish.id);
+    await newDish.setImage(image.id);
     res.status(201).json({ success: true, dish: newDish });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });

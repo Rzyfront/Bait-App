@@ -4,8 +4,8 @@ module.exports = async (req, res) => {
   try {
     const { userId } = req.params; // se envia por params el Id para obtener el registro a modificar
     console.log(userId);
-    if(!userId){
-      res.status(400).send("User Not found")
+    if (!userId) {
+      res.status(400).send('User Not found');
     }
     const updatedUserData = req.body; // se envia un objeto con las modificaciones desde el front
 
