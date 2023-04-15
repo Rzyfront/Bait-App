@@ -1,7 +1,12 @@
 //////names/////////////
+import axios from 'axios';
 export const FILTERS="FILTERS";
 export const ORDER="ORDER";
 export const RESET="RESET";
+export const GET_REV_DETAIL = 'GET_REV_DETAIL';
+export const POST_REV = 'POST_REV';
+export const UPDATE_REVIEW = 'UPDATE_REVIEW';
+export const DELETE_REVIEW = 'DELETE_REVIEW';
 
 //////////actions////////////////////////////
 
@@ -54,6 +59,7 @@ export const order=(data,actions)=>{
    //adgorithm aordering
      
 }
+
 export const reset=()=>{
   return{
     type:RESET,
@@ -61,5 +67,8 @@ export const reset=()=>{
   }
 }
 
+export const getRevDetail = () => {
+
+}
 
 

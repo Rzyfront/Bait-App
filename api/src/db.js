@@ -23,7 +23,7 @@ const {
 } = sequelize.models;
 
 Image.belongsTo(Review);
-Review.hasMany(Image);
+Review.hasOne(Image);
 
 Review.belongsTo(Local);
 Local.hasMany(Review);
