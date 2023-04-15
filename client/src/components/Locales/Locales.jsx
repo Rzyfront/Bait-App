@@ -2,8 +2,9 @@ import React from "react";
 import "./Locales.css";
 import { useState } from "react";
 // eslint-disable-next-line
-import axios from "axios";
+
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+import { useUploadImage } from "../../hooks/useUploadImage";
 
 export const validate = (inputs) => {
   let errors = {};
@@ -35,9 +36,7 @@ export const validate = (inputs) => {
 };
 
 function Locales() {
-  const [image, setImage] = useState();
-  const [loading, setLoading] = useState(false);
-
+  let { image, loading, handleChangeimage } = useUploadImage();
   const [inputs, setInputs] = useState({
     location: "",
     name: "",
@@ -113,24 +112,8 @@ function Locales() {
     }
   };
 
-  const handleChangeimage = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      setLoading(true);
-      axios
-        .post("http://localhost:3001/images", { image: e.target.result })
-        .then((res) => {
-          setImage(res.data.image.url);
-        })
-        .catch((err) => {
-          console.log(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    };
-    reader.readAsDataURL(file);
+  const handleChangeimages = (event) => {
+    handleChangeimage(event);
   };
 
   const handleSelect = (event) => {
@@ -147,12 +130,12 @@ function Locales() {
   };
 
   const handleCheck = (e) => {
-    console.log(e.target.name, e.target.value);
     if (e.target.value === "false") {
       setChekInputs({ ...chekinputs, [e.target.name]: true });
     } else {
       setChekInputs({ ...chekinputs, [e.target.name]: false });
     }
+    console.log(chekinputs);
   };
   return (
     <div className="locales">
@@ -170,7 +153,6 @@ function Locales() {
           />
           {errors.name && <p className="danger">{errors.name}</p>}
           <hr />
-
           <label>Ubicacion: </label>
           <select
             name="location"
@@ -197,7 +179,6 @@ function Locales() {
           />
           {errors.email && <p className="danger">{errors.email}</p>}
           <hr />
-
           <label>Telefono: </label>
           <input
             className="telefono"
@@ -216,20 +197,26 @@ function Locales() {
             name="imagen"
             accept="image/*"
             // multiple
-            onChange={handleChangeimage}
+            onChange={handleChangeimages}
           ></input>
           <hr />
-          {image}
-          {loading === true ? (
+          {image ? (
+            <img src={image} alt="imagen" className="LocalesImage" />
+          ) : loading === true ? (
             <img
-              src="https://res.cloudinary.com/drnt5l19i/image/upload/v1681571580/xyyhxbfwtuc3quzpmuki.gif"
-              alt="carga"
+              src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
+              alt="cargando"
+              className="LocalesImage"
             />
           ) : (
-            ""
+            <img
+              src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
+              alt="image default"
+              className="LocalesImage"
+            />
           )}
           <label>Tipos de Comida: </label>
-          <select
+          {/* <select
             id="category-select"
             multiple
             name="checkbox"
@@ -247,10 +234,9 @@ function Locales() {
             <option value="value8">Heladeria</option>
             <option value="value9">Postres</option>
             <option value="value10">Panaderia</option>
-          </select>
+          </select> */}
           <hr />
-
-          <legend>Días de Trabajo:</legend>
+          <legend>Caracteristicas:</legend>
           <label for="wifi">
             <input
               type="checkbox"
@@ -262,34 +248,95 @@ function Locales() {
             />
             Wifi
           </label>
-          <label for="martes">
-            <input type="checkbox" id="martes" name="dias" value="martes" />
-            Martes
-          </label>
-          <label for="miercoles">
+          <label for="parking_lot">
             <input
               type="checkbox"
-              id="miercoles"
-              name="dias"
-              value="miercoles"
+              name="parking_lot"
+              value={chekinputs.parking_lot}
+              checked={chekinputs.parking_lot}
+              onChange={handleCheck}
             />
-            Miércoles
+            Parqueadero
           </label>
-          <label for="jueves">
-            <input type="checkbox" id="jueves" name="dias" value="jueves" />
-            Jueves
+          <label for="outdoor_seating">
+            <input
+              type="checkbox"
+              name="outdoor_seating"
+              value={chekinputs.outdoor_seating}
+              checked={chekinputs.outdoor_seating}
+              onChange={handleCheck}
+            />
+            Asientos exteriores
           </label>
-          <label for="viernes">
-            <input type="checkbox" id="viernes" name="dias" value="viernes" />
-            Viernes
+          <label for="live_music">
+            <input
+              type="checkbox"
+              name="live_music"
+              value={chekinputs.live_music}
+              checked={chekinputs.live_music}
+              onChange={handleCheck}
+            />
+            Musica
           </label>
-          <label for="sabado">
-            <input type="checkbox" id="sabado" name="dias" value="sabado" />
-            Sabado
+          <label for="table_service">
+            <input
+              type="checkbox"
+              name="table_service"
+              value={chekinputs.table_service}
+              checked={chekinputs.table_service}
+              onChange={handleCheck}
+            />
+            servicio de mesa
           </label>
-          <label for="domingo">
-            <input type="checkbox" id="domingo" name="dias" value="domingo" />
-            Domingo
+          <label for="family_style">
+            <input
+              type="checkbox"
+              name="family_style"
+              value={chekinputs.family_style}
+              checked={chekinputs.family_style}
+              onChange={handleCheck}
+            />
+            Estilo familiar
+          </label>
+          <label for="romantic">
+            <input
+              type="checkbox"
+              name="romantic"
+              value={chekinputs.romantic}
+              checked={chekinputs.romantic}
+              onChange={handleCheck}
+            />
+            Estilo romantico
+          </label>
+          <label for="big_group">
+            <input
+              type="checkbox"
+              name="big_group"
+              value={chekinputs.big_group}
+              checked={chekinputs.big_group}
+              onChange={handleCheck}
+            />
+            Grupos grandes
+          </label>
+          <label for="work_friendly">
+            <input
+              type="checkbox"
+              name="work_friendly"
+              value={chekinputs.work_friendly}
+              checked={chekinputs.work_friendly}
+              onChange={handleCheck}
+            />
+            Ambiente relajante
+          </label>
+          <label for="pet_friendly">
+            <input
+              type="checkbox"
+              name="pet_friendly"
+              value={chekinputs.pet_friendly}
+              checked={chekinputs.pet_friendly}
+              onChange={handleCheck}
+            />
+            Mascotas
           </label>
           <hr />
 

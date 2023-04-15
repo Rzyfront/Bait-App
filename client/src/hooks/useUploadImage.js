@@ -21,5 +21,5 @@ export const useUploadImage=()=>{
         }
         reader.readAsDataURL(file)
     }
-    return {image,loading,handleChange}
+    return {image,loading,handleChangeimage}
 }
