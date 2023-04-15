@@ -5,12 +5,14 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/home" element={<Home />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/createplace" element={<Locales />} />
-      <Route exact path="/" element={<Landing />} />
-    </Routes>
+    <div className="App">
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/createplace" element={<Locales />} />
+        <Route exact path="/" element={<Landing />} />
+      </Routes>
+    </div>
   );
 }
 

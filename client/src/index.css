@@ -6,6 +6,7 @@
 
 a{
   text-decoration: none;
+  color: var(--primary);
 }
 
 @font-face {
@@ -18,8 +19,8 @@ a{
 :root {
   /* Fonts */
   --title:'Lobster Two', 'goldplay';
-  --subtitle:'Playfair Display','goldplay';
-  --text: 'Open Sans',sans-serif;
+  --subtitle:'Roboto','goldplay',sans-serif;
+  --text: 'Montserrat',sans-serif;
 
   /* Color text */
   --primary: #343434;
