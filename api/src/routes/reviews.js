@@ -5,7 +5,7 @@ const postReviews = require('../controllers/reviews/postReviews');
 const updateReviews = require('../controllers/reviews/updateReviews');
 const deleteReviews = require('../controllers/reviews/deleteReviews');
 
-reviewsRoute.get('/:reviewId', getReviews);
+reviewsRoute.get('/:localId', getReviews);
 reviewsRoute.post('/:localId', revValidator, postReviews);
 reviewsRoute.put('/:reviewId', revValidator, updateReviews);
 reviewsRoute.delete('/:reviewId', deleteReviews);
