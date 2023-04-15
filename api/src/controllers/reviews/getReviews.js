@@ -1,42 +1,45 @@
-const { Review } = require('../../db');
+const { Review, Local } = require('../../db');
 
 module.exports = async (req, res) => {
-  const { reviewId } = req.params;
+  const { localId } = req.params;
 
   try {
-    const review = await Review.findByPk(reviewId, {
-      attributes: ['id', 'title', 'comment', 'verified', 'food', 'service', 'environment', 'qaPrice', 'LocalId'],
-      where: { verified: true },
+    const localReviews = await Local.findByPk(localId, {
+
+      include: {
+        model: Review,
+        where: { verified: true },
+      },
     });
 
-    if (!review) {
-      return res.status(404).json({ error: 'Review not found' });
+    if (!localReviews) {
+      return res.status(404).json({ error: 'Not found' });
     }
 
-    const ratings = {
-      food: review.food,
-      service: review.service,
-      environment: review.environment,
-      qaPrice: review.qaPrice,
-    };
-    const filteredRatings = {};
+    // const ratings = {
+    //   food: review.food,
+    //   service: review.service,
+    //   environment: review.environment,
+    //   qaPrice: review.qaPrice,
+    // };
+    // const filteredRatings = {};
 
-    let totalRating = 0;
-    let ratingCount = 0;
+    // let totalRating = 0;
+    // let ratingCount = 0;
 
-    Object.entries(ratings).forEach(([key, value]) => {
-      if (value !== null || value > 0) {
-        filteredRatings[key] = value;
-        totalRating += value;
-        ratingCount += 1;
-      }
-    });
+    // Object.entries(ratings).forEach(([key, value]) => {
+    //   if (value !== null || value > 0) {
+    //     filteredRatings[key] = value;
+    //     totalRating += value;
+    //     ratingCount += 1;
+    //   }
+    // });
 
-    const averageRating = ratingCount ? totalRating / ratingCount : null;
+    // const averageRating = ratingCount ? totalRating / ratingCount : null;
 
-    const reviewWithAvgRating = { ...review.toJSON(), averageRating };
+    // const reviewWithAvgRating = { ...review.toJSON(), averageRating };
 
-    return res.status(200).json({ review: reviewWithAvgRating, success: true });
+    return res.status(200).json({ reviews: localReviews.Reviews, success: true });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: 'Internal server error' });

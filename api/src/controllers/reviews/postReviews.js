@@ -2,7 +2,7 @@ const { Review, Local } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    title, comment, photos, verified, food, environment, service, qaPrice,
+    title, comment, verified, food, image, environment, service, qaPrice,
   } = req.body;
   const { localId } = req.params;
   try {
@@ -10,9 +10,10 @@ module.exports = async (req, res) => {
     if (!local) throw new Error('Local not found');
 
     const newReview = await Review.create({
-      title, comment, photos, verified, food, environment, service, qaPrice,
+      title, comment, verified, food, environment, service, qaPrice,
     });
     await local.addReview(newReview.id);
+    await newReview.setImage(image.id);
     await newReview.save();
     return res.status(201).json({ success: true, review: newReview });
   } catch (error) {

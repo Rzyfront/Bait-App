@@ -45,7 +45,7 @@ module.exports = (sequelize) => {
       },
       food: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         validate: {
           isInt: {
             msg: 'The "food" value must be an integer.',
@@ -58,7 +58,7 @@ module.exports = (sequelize) => {
       },
       service: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         validate: {
           isInt: {
             msg: 'The "service" value must be an integer.',
@@ -71,7 +71,7 @@ module.exports = (sequelize) => {
       },
       environment: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         validate: {
           isInt: {
             msg: 'The "environment" value must be an integer.',
@@ -84,7 +84,7 @@ module.exports = (sequelize) => {
       },
       qaPrice: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
         validate: {
           isInt: {
             msg: 'The "qaPrice" value must be an integer.',
