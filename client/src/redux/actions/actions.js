@@ -3,7 +3,7 @@ import axios from "axios";
 export const FILTERS="FILTERS";
 export const ORDER="ORDER";
 export const RESET="RESET";
-
+export const LOADINGLOCALS="LOADINGLOCALS"
 //////////actions////////////////////////////
 
 //filter
@@ -61,7 +61,21 @@ export const reset=()=>{
     payload:""
   }
 }
+/// loading locals
+export const loadingLocals=async()=>{
+try {
+  const response=await axios.get("http://localhost:3001/locals")
+return {
+    type:LOADINGLOCALS,
+    payload:response.data
+  }
+} catch (error) {
+  console.log(error.message)
+}
 
+
+  
+}
 
 
 
