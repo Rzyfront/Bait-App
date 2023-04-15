@@ -1,4 +1,5 @@
 const { DataTypes } = require('sequelize');
+const { isAppropriate } = require('../helpers/badWords');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -10,38 +11,33 @@ module.exports = (sequelize) => {
         autoIncrement: true,
       },
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(50),
         allowNull: false,
         validate: {
           len: {
-            args: [3],
-            msg: 'El título debe tener al menos 3 caracteres.',
+            args: [3, 50],
+            msg: 'Title must be between 3 and 50 characters long.',
           },
           is: {
-            args: /^[a-zA-Z\s]*$/,
-            msg: 'El título solo debe contener letras y espacios.',
+            args: /^[a-zA-Z0-9ñÑ\s]*$/i,
+            msg: 'Title can only contain letters, numbers, and spaces.',
           },
         },
       },
       comment: {
-        type: DataTypes.STRING,
-        allowNull: true,
+        type: DataTypes.STRING(700),
+        allowNull: false,
         validate: {
-          isAppropriate(value) {
-            const inappropriateWords = ['boludo', 'idiota', 'hijo de puta', 'negro', 'estúpido', 'estúpida'];
-            const words = value.toLowerCase().split(' ');
-
-            const foundInappropriateWord = words.some((word) => inappropriateWords.includes(word));
-
-            if (foundInappropriateWord) {
-              throw new Error('El comentario contiene palabras inapropiadas.');
+          len: {
+            args: [1, 700],
+            msg: 'Comment must be between 1 and 700 characters long.',
+          },
+          containsBadWords(value) {
+            if (isAppropriate(value)) {
+              throw new Error('Comment contains inappropriate language.');
             }
           },
         },
-      },
-      photoTicket: {
-        type: DataTypes.STRING,
-        allowNull: true,
       },
       verified: {
         type: DataTypes.BOOLEAN,
@@ -50,18 +46,54 @@ module.exports = (sequelize) => {
       food: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        validate: {
+          isInt: {
+            msg: 'The "food" value must be an integer.',
+          },
+          max: {
+            args: 5,
+            msg: 'The maximum allowed value for "food" is 5.',
+          },
+        },
       },
       service: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        validate: {
+          isInt: {
+            msg: 'The "service" value must be an integer.',
+          },
+          max: {
+            args: 5,
+            msg: 'The maximum allowed value for "service" is 5.',
+          },
+        },
       },
       environment: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        validate: {
+          isInt: {
+            msg: 'The "environment" value must be an integer.',
+          },
+          max: {
+            args: 5,
+            msg: 'The maximum allowed value for "environment" is 5.',
+          },
+        },
       },
       qaPrice: {
         type: DataTypes.INTEGER,
         allowNull: true,
+        validate: {
+          isInt: {
+            msg: 'The "qaPrice" value must be an integer.',
+          },
+          max: {
+            args: 5,
+            msg: 'The maximum allowed value for "qaPrice" is 5.',
+          },
+        },
       },
     },
   );

@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
 
   try {
     const review = await Review.findByPk(reviewId, {
-      attributes: ['id', 'title', 'comment', 'photoTicket', 'verified', 'food', 'service', 'environment', 'qaPrice', 'LocalId'],
+      attributes: ['id', 'title', 'comment', 'verified', 'food', 'service', 'environment', 'qaPrice', 'LocalId'],
       where: { verified: true },
     });
 
@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
     let ratingCount = 0;
 
     Object.entries(ratings).forEach(([key, value]) => {
-      if (value !== null) {
+      if (value !== null || value > 0) {
         filteredRatings[key] = value;
         totalRating += value;
         ratingCount += 1;
