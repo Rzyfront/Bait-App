@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100vh;
+    height: 120vh;
     background-color: rgba(var(--bg-primary), 0.2);
     backdrop-filter: blur(3px);
     z-index: 999;
@@ -79,18 +79,18 @@
     background-color: var(--bg-tertiary);
     border-radius: 40px;
 }
-.ReviewsForm .Container .Left h1 {
+.ReviewsForm .Container .Left h2 {
     font-family: var(--title);
-    font-size: 3rem;
+    font-size: 2rem;
     text-align:start;
     color:var(--prymary);
 }
 .ReviewsForm .Container .Left p {
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 10px;
+    font-weight: 500;
     color: var(--prymary);
     font-family: var(--text);
-    padding: 10px;
+    padding: 0px;
 }
 
 .ReviewsForm .Container .Left .RatingInput{
@@ -99,7 +99,17 @@
     gap: 10px;
 }
 .ReviewsForm .Container .Left .RatingInput h5{
-    font-size: 25px;
+    font-size: 20px;
+    font-family: var(--subtitle);
+    color: var(--prymary);
+}
+.ReviewsForm .Container .Left .RatingInput p{
+    font-size: 10px;
+    font-family: var(--subtitle);
+    color: var(--prymary);
+}
+.ReviewsForm .Container .Left .RatingInput h2{
+    font-size: 15px;
     font-family: var(--subtitle);
     color: var(--prymary);
 }
@@ -109,7 +119,7 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 10px;
+    gap: 30px;
 }
 
 .Container .Rigth form .TitleReview .Title{

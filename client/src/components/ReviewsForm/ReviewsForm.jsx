@@ -10,7 +10,7 @@ import { useState } from "react";
 import "./ReviewsForm.css";
 
 // eslint-disable-next-line
-const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+/* const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
 export const validate = (inputs) => {
   let errors = {};
@@ -22,20 +22,34 @@ export const validate = (inputs) => {
     errors.message = "Se requiere un mensaje";
   }
   return errors;
-};
+}; */
 
 function ReviewsForm({ setToggleModal2 }) {
-  const [calification, setCalification] = useState(0);
+  const [calculateAverage, setcalculateAverage] = useState(0);
+  const [calificationFood, setCalificationFood] = useState(0);
+  const [calificationService, setCalificationService] = useState(0);
+  const [calificationEnvironment, setCalificationEnvironment] = useState(0);
+  const [calificationQaPrice, setCalificationQaPrice] = useState(0);
   const [inputs, setInputs] = useState({
-    name: "",
-    score: "",
-    message: "",
+    title: "",
+    rating: "",
+    comment: "",
+    image: {}, 
+    food: "", 
+    service: "",
+    enviroment: "",
+    qaPrice:"",
   });
 
   const [errors, setErrors] = useState({
-    name: "",
-    score: "",
-    message: "",
+    title: "",
+    rating: "",
+    comment: "",
+    image: {}, 
+    food: "", 
+    service: "",
+    enviroment: "",
+    qaPrice:"",
   });
 
   const handleChange = (event) => {
@@ -57,18 +71,34 @@ function ReviewsForm({ setToggleModal2 }) {
     if (!Object.values(errors).length) {
       alert("Datos completos");
       setInputs({
-        name: "",
-        score: "",
-        message: "",
+        title: "",
+        rating: "",
+        comment: "",
+        image: {}, 
+        food: "", 
+        service: "",
+        enviroment: "",
+        qaPrice:"",
       });
       setErrors({
-        name: "",
-        score: "",
-        message: "",
+        title: "",
+        rating: "",
+        comment: "",
+        image: {}, 
+        food: "", 
+        service: "",
+        enviroment: "",
+        qaPrice:"",
       });
     } else {
       alert("Debe llenar todos los campos");
     }
+    const calculateAverage=() => {
+      const total = calificationFood + calificationService + calificationEnvironment + calificationQaPrice;
+      // Cálculo del promedio
+      const average = total / 4;
+      return average;
+    } 
   };
 
   return (
@@ -92,7 +122,7 @@ function ReviewsForm({ setToggleModal2 }) {
         <div className="Left">
           <>
             <div className="Decorator"></div>
-            <h1 className="Title">Deja aqui tu Reseña</h1>
+            <h2 className="Title">Deja aqui tu Reseña</h2>
           </>
 
           <p>
@@ -104,12 +134,56 @@ function ReviewsForm({ setToggleModal2 }) {
           </p>
           <div className="RatingInput">
             <h5>Calificación:</h5>
-            {/* Al hacer submit setear el stado calificacion en el Input */}
-            <RatingStar
+            {/* Al hacer submit setear el stado calificacion en el Input */}     
+            {/* <RatingStar
               name="Rating"
               style={{ maxWidth: 180 }}
-              value={calification}
-              onChange={setCalification}
+              value={calculateAverage()}
+              onChange={setcalculateAverage}
+              isRequired
+            /> */}
+          </div>
+          <div className="RatingInput">
+            <h2>Comida:</h2>
+            {/* Al hacer submit setear el stado calificacion-food en el Input */}
+            <RatingStar
+              name="food"
+              style={{ maxWidth: 180 }}
+              value={calificationFood}
+              onChange={setCalificationFood}
+              isRequired
+            />
+          </div>
+          <div className="RatingInput">
+            <h2>Servicio:</h2>
+            {/* Al hacer submit setear el stado calificacion-service en el Input */}
+            <RatingStar
+              name="service"
+              style={{ maxWidth: 180 }}
+              value={calificationService}
+              onChange={setCalificationService}
+              isRequired
+            />
+          </div>
+          <div className="RatingInput">
+            <h2>Ambiente:</h2>
+            {/* Al hacer submit setear el stado calificacion-food en el Input */}
+            <RatingStar
+              name="enviroment"
+              style={{ maxWidth: 180 }}
+              value={calificationEnvironment}
+              onChange={setCalificationEnvironment}
+              isRequired
+            />
+          </div>
+          <div className="RatingInput">
+            <h2>Relacion Precio-Calidad:</h2>
+            {/* Al hacer submit setear el stado calificacion-qaPrice en el Input */}
+            <RatingStar
+              name="qaPrice"
+              style={{ maxWidth: 180 }}
+              value={calificationQaPrice}
+              onChange={setCalificationQaPrice}
               isRequired
             />
           </div>
@@ -120,7 +194,7 @@ function ReviewsForm({ setToggleModal2 }) {
               <input
                 className="Title"
                 onChange={handleChange}
-                value={inputs.Title}
+                value={inputs.title}
                 type="text"
                 name="Title"
                 placeholder="Escribe un titulo para tu reseña..."
@@ -132,9 +206,9 @@ function ReviewsForm({ setToggleModal2 }) {
                 rows="5"
                 className="Message"
                 onChange={handleChange}
-                value={inputs.message}
+                value={inputs.comment}
                 type="text"
-                name="message"
+                name="comment"
                 placeholder="Cuentanos tu experiencia en este lugar..."
               />
               {errors.message && <p className="danger">{errors.message}</p>}
