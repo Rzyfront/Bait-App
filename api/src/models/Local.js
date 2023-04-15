@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
     email: DataTypes.STRING,
     location: {
       type: DataTypes.STRING,
-      unique: true,
+      // unique: true,
       allowNull: false,
     },
     schedule: DataTypes.STRING,
