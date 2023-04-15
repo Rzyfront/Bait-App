@@ -24,7 +24,7 @@ module.exports = (req, res, next) => {
       verifiedTypeOf(characteristics, 'object');
       console.log(Object.keys(characteristics));
       if (!Object.keys(characteristics).every((e) => allCharacteristics.includes(e))
-      || !Object.values(characteristics).every((e) => typeof e === 'boolean')) { throw new Error('bab data into characteristics'); }
+      || !Object.values(characteristics).every((e) => typeof e === 'boolean')) { throw new Error('bad data into characteristics'); }
     }
 
     if (images) verifiedTypeOf(images, 'object', 'images');
