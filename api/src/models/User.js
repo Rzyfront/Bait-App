@@ -29,6 +29,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     location: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -37,9 +41,13 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('verified', 'unVerified', 'suspended'),
       defaultValue: 'unVerified',
     },
-    isActive:{
-      type:DataTypes.BOOLEAN,
-      default:true
-    }
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'owner', 'user'),
+      defaultValue: 'user',
+    },
   });
 };
