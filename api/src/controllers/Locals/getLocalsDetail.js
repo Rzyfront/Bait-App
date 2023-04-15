@@ -1,5 +1,5 @@
 const {
-  Local, Characteristics, Menu, Review,
+  Local, Characteristics, Menu, Review, Image,
 } = require('../../db');
 const { columnsToGetCharacteristics } = require('../../helpers/allCharacteristics');
 
@@ -9,7 +9,9 @@ module.exports = async (req, res) => {
       include: [{
         model: Characteristics,
         attributes: columnsToGetCharacteristics,
-      }, { model: Menu }, { model: Review }],
+      }, { model: Menu },
+      { model: Review },
+      { model: Image }],
     });
     res.status(200).json({ locals, success: true });
   } catch (error) {
