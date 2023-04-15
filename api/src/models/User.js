@@ -29,6 +29,10 @@ module.exports = (sequelize) => {
       allowNull: false,
       unique: true,
     },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     location: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -39,7 +43,11 @@ module.exports = (sequelize) => {
     },
     isActive: {
       type: DataTypes.BOOLEAN,
-      default: true,
+      defaultValue: true,
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'owner', 'user'),
+      defaultValue: 'user',
     },
   });
 };
