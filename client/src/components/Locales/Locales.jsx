@@ -2,9 +2,11 @@ import React from "react";
 import "./Locales.css";
 import { useState } from "react";
 // eslint-disable-next-line
-
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 import { useUploadImage } from "../../hooks/useUploadImage";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { createLocal } from "../../redux/actions/actions";
 
 export const validate = (inputs) => {
   let errors = {};
@@ -23,30 +25,36 @@ export const validate = (inputs) => {
   if (!inputs.phone) {
     errors.phone = "Ingrese un numero de telefono valido";
   }
-  if (!inputs.categories) {
-    errors.categories = "Seleccione una o mas categorias que ofrece el Local";
+
+  if (inputs.schedule.length === 0) {
+    errors.schedule = "Seleccione fecha";
   }
-  if (!inputs.schedule) {
-    errors.schedule = "Seleccione que dias ofrece servicio el Local";
-  }
-  if (!inputs.turns) {
-    errors.turns = "Seleccione en que turnos ofrece servicio el Local";
-  }
+
   return errors;
 };
 
 function Locales() {
   let { image, loading, handleChangeimage } = useUploadImage();
+  const dispatch = useDispatch();
+
   const [inputs, setInputs] = useState({
     location: "",
     name: "",
     imagen: "",
     email: "",
     phone: "",
-    categories: [],
-    schedule: [],
-    turns: [],
+    schedule: "",
   });
+
+  useEffect(() => {
+    setInputs({ ...inputs, imagen: image });
+    setErrors(
+      validate({
+        ...inputs,
+        imagen: image,
+      })
+    );
+  }, [image]);
 
   const [chekinputs, setChekInputs] = useState({
     wifi: false,
@@ -65,9 +73,7 @@ function Locales() {
     imagen: "",
     email: "",
     phone: "",
-    categories: [],
-    schedule: [],
-    turns: [],
+    schedule: "",
   });
 
   const handleChange = (event) => {
@@ -75,27 +81,27 @@ function Locales() {
       ...inputs,
       [event.target.name]: event.target.value,
     });
-    console.log(inputs);
+
     setErrors(
       validate({
         ...inputs,
         [event.target.name]: event.target.value,
       })
     );
+    console.log(errors);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!Object.values(errors).length) {
       alert("Datos completos");
+      dispatch(createLocal(inputs, chekinputs));
       setInputs({
         location: "",
         name: "",
         imagen: "",
         email: "",
         phone: "",
-        categories: [],
-        schedule: [],
-        turns: [],
+        schedule: "",
       });
       setErrors({
         location: "",
@@ -103,9 +109,17 @@ function Locales() {
         imagen: "",
         email: "",
         phone: "",
-        categories: [],
-        schedule: [],
-        turns: [],
+        schedule: "",
+      });
+      setChekInputs({
+        wifi: false,
+        parking_lot: false,
+        outdoor_seating: false,
+        live_music: false,
+        table_service: false,
+        big_group: false,
+        work_friendly: false,
+        pet_friendly: false,
       });
     } else {
       alert("Debe llenar todos los campos");
@@ -160,7 +174,7 @@ function Locales() {
             onChange={handleSelect}
             value={inputs.location}
           >
-            <option value="value2" selected>
+            <option value="value2" defaultValue>
               Selecciona
             </option>
             <option value="Cordoba">Cordoba</option>
@@ -177,7 +191,16 @@ function Locales() {
             name="email"
             placeholder="Escribe tu email..."
           />
-          {errors.email && <p className="danger">{errors.email}</p>}
+          <hr />
+          <label>Horario: </label>
+          <input
+            onChange={handleChange}
+            value={inputs.schedule}
+            type="text"
+            name="schedule"
+            placeholder="Escribe tu email..."
+          />
+          {errors.email && <p className="danger">{errors.schedule}</p>}
           <hr />
           <label>Telefono: </label>
           <input
@@ -191,7 +214,7 @@ function Locales() {
           />
           {errors.message && <p className="danger">{errors.phone}</p>}
           <hr />
-          <label for="imagen">Imagenes</label>
+          <label htmlFor="imagen">Imagenes</label>
           <input
             type="file"
             name="imagen"
@@ -215,7 +238,7 @@ function Locales() {
               className="LocalesImage"
             />
           )}
-          <label>Tipos de Comida: </label>
+          {/* <label>Tipos de Comida: </label> */}
           {/* <select
             id="category-select"
             multiple
@@ -237,7 +260,7 @@ function Locales() {
           </select> */}
           <hr />
           <legend>Caracteristicas:</legend>
-          <label for="wifi">
+          <label htmlFor="wifi">
             <input
               type="checkbox"
               multiple
@@ -248,7 +271,7 @@ function Locales() {
             />
             Wifi
           </label>
-          <label for="parking_lot">
+          <label htmlFor="parking_lot">
             <input
               type="checkbox"
               name="parking_lot"
@@ -258,7 +281,7 @@ function Locales() {
             />
             Parqueadero
           </label>
-          <label for="outdoor_seating">
+          <label htmlFor="outdoor_seating">
             <input
               type="checkbox"
               name="outdoor_seating"
@@ -268,7 +291,7 @@ function Locales() {
             />
             Asientos exteriores
           </label>
-          <label for="live_music">
+          <label htmlFor="live_music">
             <input
               type="checkbox"
               name="live_music"
@@ -278,7 +301,7 @@ function Locales() {
             />
             Musica
           </label>
-          <label for="table_service">
+          <label htmlFor="table_service">
             <input
               type="checkbox"
               name="table_service"
@@ -288,7 +311,7 @@ function Locales() {
             />
             servicio de mesa
           </label>
-          <label for="family_style">
+          <label htmlFor="family_style">
             <input
               type="checkbox"
               name="family_style"
@@ -298,7 +321,7 @@ function Locales() {
             />
             Estilo familiar
           </label>
-          <label for="romantic">
+          <label htmlFor="romantic">
             <input
               type="checkbox"
               name="romantic"
@@ -308,7 +331,7 @@ function Locales() {
             />
             Estilo romantico
           </label>
-          <label for="big_group">
+          <label htmlFor="big_group">
             <input
               type="checkbox"
               name="big_group"
@@ -318,7 +341,7 @@ function Locales() {
             />
             Grupos grandes
           </label>
-          <label for="work_friendly">
+          <label htmlFor="work_friendly">
             <input
               type="checkbox"
               name="work_friendly"
@@ -328,7 +351,7 @@ function Locales() {
             />
             Ambiente relajante
           </label>
-          <label for="pet_friendly">
+          <label htmlFor="pet_friendly">
             <input
               type="checkbox"
               name="pet_friendly"

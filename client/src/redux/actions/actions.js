@@ -1,3 +1,4 @@
+import axios from "axios";
 //////names/////////////
 export const FILTERS="FILTERS";
 export const ORDER="ORDER";
@@ -63,3 +64,30 @@ export const reset=()=>{
 
 
 
+
+export const createLocal=async(inputs, chekinputs)=>{
+        try{
+    await axios.post("http://localhost:3001/locals",{
+    "name":inputs.name, 
+    "location":inputs.location, 
+    "schedule":inputs.schedule,
+    "email":inputs.email,
+    "images":inputs.imagen  ,
+    "characteristics":{
+			"wifi": chekinputs.wifi,
+			"parking_lot": chekinputs.parking_lot,
+			"outdoor_seating": chekinputs.outdoor_seating,
+			"live_music": chekinputs.live_music,
+			"table_service": chekinputs.table_service,
+			"family_style": chekinputs.family_style,
+			"romantic": chekinputs.romantic,
+			"big_group": chekinputs.big_group,
+			"work_friendly": chekinputs.work_friendly,
+			"pet_friendly": chekinputs.pet_friendly
+		}
+    })
+        }catch(error){
+            console.log(error.message)
+        }
+}
+    
