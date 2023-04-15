@@ -1,14 +1,25 @@
-@font-face {
-    font-family: 'prueba';
-    src: url('fonts/goldplay-bold.otf') format('truetype');
-    font-style: normal;
-    font-weight: normal;
-  }
-
-*{
-    font-family: "prueba";
+.Landing{
+    position: relative;
+    width: 100%;
+    height: calc(100vh);
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
+
+
+
+
+/* 
+.Landing .QueComer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
 .container{
     display: flex;
     justify-content: space-around;
@@ -48,7 +59,6 @@
     font-size: 3.5em;
     text-align: center;
     color: black;
-    margin-top: 20vh;
     opacity:0;
     scale:.6;
     animation: aparecer .6s ease-in-out forwards;
@@ -89,4 +99,4 @@
 
 option:first-child{
     color: var(--secondary)
-}
+} */
