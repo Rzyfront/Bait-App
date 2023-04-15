@@ -15,7 +15,12 @@ module.exports = (sequelize) => {
       type: DataTypes.ENUM('verified', 'unVerified', 'suspended'),
       defaultValue: 'unVerified',
     },
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: true,
+      },
+    },
     location: {
       type: DataTypes.STRING,
       // unique: true,
