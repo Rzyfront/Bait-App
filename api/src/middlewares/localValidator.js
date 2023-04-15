@@ -7,16 +7,16 @@ module.exports = (req, res, next) => {
   } = req.body;
 
   try {
-    if (name) verifiedTypeOf(name, 'string');
+    if (name) verifiedTypeOf(name, 'string', 'name');
     else throw new Error('Incomplete data');
 
-    if (location) verifiedTypeOf(location, 'string');
+    if (location) verifiedTypeOf(location, 'string', 'location');
     else throw new Error('Incomplete data');
 
-    if (schedule) verifiedTypeOf(schedule, 'string');
+    if (schedule) verifiedTypeOf(schedule, 'string', 'schedule');
 
     if (email) {
-      verifiedTypeOf(email, 'string');
+      verifiedTypeOf(email, 'string', 'email');
       if (!isEmail(email)) throw new Error('bad email format');
     }
 
@@ -27,7 +27,7 @@ module.exports = (req, res, next) => {
       || !Object.values(characteristics).every((e) => typeof e === 'boolean')) { throw new Error('bab data into characteristics'); }
     }
 
-    if (images) verifiedTypeOf(images, 'object');
+    if (images) verifiedTypeOf(images, 'object', 'images');
 
     return next();
   } catch (err) {
