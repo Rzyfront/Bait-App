@@ -3,11 +3,12 @@ import "./Search_home.css";
 import { MdOutlineRestaurant } from "react-icons/md";
 import { BiMap } from "react-icons/bi";
 import { BiSearchAlt } from "react-icons/bi";
-
-import { useDispatch, useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { searchByQuery } from "../../../redux/actions/actions";
 function Search_home() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     input: "",
     map: "",
@@ -22,6 +23,7 @@ function Search_home() {
   const search_datas = (e) => {
     e.preventDefault();
     dispatch(searchByQuery(data));
+    navigate("/home");
     console.log("lo busco");
   };
   return (

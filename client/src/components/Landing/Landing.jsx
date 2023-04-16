@@ -3,7 +3,7 @@ import ImgSlide1 from "../../assets/Slide1Landing.webp";
 import ImgSlide2 from "../../assets/Slide2Landing.webp";
 import ImgSlide3 from "../../assets/Slide3Landing.webp";
 import "@coreui/coreui/dist/css/coreui.min.css";
-import { CCarousel, CCarouselItem, CImage } from "@coreui/react";
+import { CCarousel, CCarouselItem } from "@coreui/react";
 import "./Landing.css";
 import { Link } from "react-router-dom";
 
@@ -30,12 +30,12 @@ const Landing = () => {
                 <button>Encuentralo!</button>
               </Link>
             </div>
-            <img src={ImgSlide2} alt="ImgSlide1" />
+            <img src={ImgSlide1} alt="ImgSlide1" />
           </div>
         </CCarouselItem>
         <CCarouselItem className="CarrouselItem">
           <div className="SlideItem2">
-            <img src={ImgSlide1} alt="ImgSlide1" />
+            <img src={ImgSlide2} alt="ImgSlide1" />
             <div className="SecondTitle">
               <h2>Cuentanos tus experiencias</h2>
               <h3>
