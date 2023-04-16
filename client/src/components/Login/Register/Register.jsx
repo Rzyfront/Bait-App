@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
 import LoginErrors from "../LoginErros";
+import { TfiClose } from "react-icons/tfi";
 
 const Register = ({ setToggleLogin }) => {
 
     const passRef = useRef();
     const formRef = useRef();
     const [message, setMessage] = useState(false);
+    const [login, setLogin] = useState(true);
 
     const [errorsRegister, setErrorsRegister] = useState({
         name: "",
@@ -28,7 +30,7 @@ const Register = ({ setToggleLogin }) => {
         console.log(errorsRegister);
     };
 
-    const [dataRegister, setDataRegister] = React.useState({
+    const [dataRegister, setDataRegister] = useState({
         name: "",
         lastname: "MiPapa",
         age: "25",
@@ -75,8 +77,10 @@ const Register = ({ setToggleLogin }) => {
         }
     };
     return(
+       
         <>
-            <div className={`login ${!login && "scale-up-bottom"}`}>
+        
+            <div className={`login ${!login && "scale-up-bottom"}`}>  
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
