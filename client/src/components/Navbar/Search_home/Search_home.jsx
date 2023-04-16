@@ -44,7 +44,7 @@ function Search_home() {
       </div>
       <div className="botton" onClick={search_datas}>
         <h4>Buscar</h4>
-        <BiSearchAlt />
+        <BiSearchAlt className="SearchIcon" />
       </div>
     </div>
   );

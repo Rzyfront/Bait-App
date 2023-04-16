@@ -1,72 +1,69 @@
-import { useState } from "react";
 import { Navbar } from "../components";
+import ImgSlide1 from "../../assets/Slide1Landing.webp";
+import ImgSlide2 from "../../assets/Slide2Landing.webp";
+import ImgSlide3 from "../../assets/Slide3Landing.webp";
+import "@coreui/coreui/dist/css/coreui.min.css";
+import { CCarousel, CCarouselItem, CImage } from "@coreui/react";
 import "./Landing.css";
 import { Link } from "react-router-dom";
 
 const Landing = () => {
-  // const [x, setX] = useState(true);
-
   return (
-    <div className="Landing">
-      <h2>Landing en construccion</h2>
-      <h3>Vuelve Pronto</h3>
-      <Link to="/home">
-        <button>Ir a Home</button>
-      </Link>
-      {/* {x ? (
-        <div className="QueComer">
-          <h2>Bienvenido</h2>
-          <h3 className="title">¿Que quieres comer hoy?</h3>
-          <div className="container">
-            <div onClick={() => setX(!x)} className="icon-container">
-              <img className="icon" src="./img/icons/sushi.png" />
-              <p className="text-icon">SUSHI</p>
+    <div className="Landing animated-element">
+      <Navbar />
+      {/* HAY QUE REFACTORIZAR EL CARROUSEL USANDO EL COMPONENTE ADECUADO PARA QUE AUTOCAMBIE DE SLIDE */}
+      <CCarousel
+        className="Carrousel"
+        controls
+        transition="crossfade"
+        interval={3000}
+        indicators={true}
+      >
+        <CCarouselItem className="CarrouselItem">
+          <div className="SlideItem1">
+            <div className="FirstTitle">
+              <h1>
+                Bienvenido a <span>Bait</span>
+              </h1>
+              <h2>Encuentra el mejor sitio para vivir experiencias</h2>
+              <Link to="/home">
+                <button>Encuentralo!</button>
+              </Link>
             </div>
-            <div onClick={() => setX(!x)} className="icon-container">
-              <img className="icon" src="./img/icons/meat.png" />
-              <p className="text-icon">MEAT</p>
-            </div>
-            <div onClick={() => setX(!x)} className="icon-container">
-              <img className="icon" src="./img/icons/fish.png" />
-              <p className="text-icon">FISH</p>
-            </div>
-            <div onClick={() => setX(!x)} className="icon-container">
-              <img className="icon" src="./img/icons/soup.png" />
-              <p className="text-icon">SOUP</p>
-            </div>
-            <div onClick={() => setX(!x)} className="icon-container">
-              <img className="icon" src="./img/icons/pizza.png" />
-              <p className="text-icon">PIZZA</p>
+            <img src={ImgSlide2} alt="ImgSlide1" />
+          </div>
+        </CCarouselItem>
+        <CCarouselItem className="CarrouselItem">
+          <div className="SlideItem2">
+            <img src={ImgSlide1} alt="ImgSlide1" />
+            <div className="SecondTitle">
+              <h2>Cuentanos tus experiencias</h2>
+              <h3>
+                <span>Reseña</span> los lugares que has visitado y consigue
+                promociones exclusivas
+              </h3>
+              <Link to="/home">
+                <button>Reseñar</button>
+              </Link>
             </div>
           </div>
-          <p className="saltar" onClick={() => setX(!x)}>
-            Aun no lo se
-          </p>
-        </div>
-      ) : (
-        <div className="DondeComer">
-          <h2 className="title">¿Donde estas?</h2>
-          <div className="select-container">
-            <select
-              name="select"
-              className="select"
-              onChange={() => alert("Change")}
-            >
-              <option value="value2" selected>
-                Selecciona
-              </option>
-              <option value="value1">Cordoba</option>
-              <option value="value2">Buenos Aires</option>
-              <option value="value3">Corrientes</option>
-            </select>
+        </CCarouselItem>
+        <CCarouselItem className="CarrouselItem">
+          <div className="SlideItem3">
+            <div className="ThirdTitle">
+              <h2>Reserva ahora</h2>
+              <h3>
+                <span>Agenda</span> tu <span>visita</span> y verifica las
+                reseñas para tener una mejor eleccion.
+              </h3>
+              <Link to="/home">
+                <button>Ver sitios</button>
+              </Link>
+            </div>
+            <img src={ImgSlide3} alt="ImgSlide1" />
           </div>
-          <Link to="/home">
-            <p className="saltar" onClick={() => setX(!x)}>
-              Prefiero no decirlo
-            </p>
-          </Link>
-        </div>
-      )} */}
+        </CCarouselItem>
+      </CCarousel>
     </div>
   );
 };
