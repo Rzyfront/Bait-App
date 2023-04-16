@@ -67,6 +67,8 @@ function Locales() {
     big_group: false,
     work_friendly: false,
     pet_friendly: false,
+    family_style: false,
+    romantic: false,
   });
 
   const [errors, setErrors] = useState({
@@ -96,33 +98,34 @@ function Locales() {
     event.preventDefault();
     if (!Object.values(errors).length) {
       alert("Datos completos");
+      console.log(inputs, chekinputs);
       dispatch(createLocal(inputs, chekinputs));
-      setInputs({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
-      });
-      setErrors({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
-      });
-      setChekInputs({
-        wifi: false,
-        parking_lot: false,
-        outdoor_seating: false,
-        live_music: false,
-        table_service: false,
-        big_group: false,
-        work_friendly: false,
-        pet_friendly: false,
-      });
+      // setInputs({
+      //   location: "",
+      //   name: "",
+      //   imagen: "",
+      //   email: "",
+      //   phone: "",
+      //   schedule: "",
+      // });
+      // setErrors({
+      //   location: "",
+      //   name: "",
+      //   imagen: "",
+      //   email: "",
+      //   phone: "",
+      //   schedule: "",
+      // });
+      // setChekInputs({
+      //   wifi: false,
+      //   parking_lot: false,
+      //   outdoor_seating: false,
+      //   live_music: false,
+      //   table_service: false,
+      //   big_group: false,
+      //   work_friendly: false,
+      //   pet_friendly: false,
+      // });
     } else {
       alert("Debe llenar todos los campos");
     }
