@@ -19,7 +19,7 @@ const sendVerificationEmail = (id, userEmail) => {
     from: email,
     to: userEmail,
     html: `<h1>Verifica tu email</h1>
-      <a href="http://localhost:3001/users/verified?token=${tokenEmail}">verifica tu email</a>`,
+      <a href="http://localhost:3001/user/verified?token=${tokenEmail}">verifica tu email</a>`,
   });
 };
 
