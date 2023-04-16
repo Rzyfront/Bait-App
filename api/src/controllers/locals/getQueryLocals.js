@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
     where.name = { [Op.iLike]: `%${name}%` };
   }
   if (location) {
-    where.location = { [Op.iLike]: `%${name}%` };
+    where.location = { [Op.iLike]: `%${location}%` };
   }
   if (order) {
     if (order === 'ASC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'ASC']];
