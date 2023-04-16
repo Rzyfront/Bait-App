@@ -1,6 +1,13 @@
 import { handleRegister, sendRegister } from "../helpers";
+import { useRef, useState } from "react";
 
-export const Register = () => {
+export const Register = ({ setToggleLogin }) => {
+
+    const passRef = useRef();
+    const formRef = useRef();
+    const [message, setMessage] = useState(false);
+
+    
 
     return(
         <>

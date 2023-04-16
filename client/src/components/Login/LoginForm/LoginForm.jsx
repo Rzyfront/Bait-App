@@ -1,6 +1,13 @@
-import { handleInput, handleRegister, handleLogin } from "./helpers";
+import { handleInput, handleRegister, handleLogin } from "../helpers";
+import { TfiClose } from "react-icons/tfi";
+import { useRef, useState } from "react";
 
-export const LoginForm = () => {
+export const LoginForm = ({ setToggleLogin, fn }) => {
+    const titleRef = useRef();
+    const passRef = useRef();
+    const imgRef = useRef();
+    const [message, setMessage] = useState(false);
+    const [form, setForm] = useState({});
 
     return(
         <>

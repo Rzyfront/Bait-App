@@ -1,43 +1,14 @@
-import { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { TfiClose } from "react-icons/tfi";
+import { useState, useEffect } from "react";
 import "./Login.css";
-import { useDispatch } from "react-redux";
 import Register from './Register/Register';
 import LoginForm from "./LoginForm/LoginForm";
-import { handleInput, handleRegister, sendRegister, handleLogin } from "./helpers";
+
 
 const Login = ({ setToggleLogin }) => {
-  const dispatch = useDispatch();
   const [animation, setAnimation] = useState(false);
   const [ojo, setOjo] = useState(false);
   const [login, setLogin] = useState(true);
-  const titleRef = useRef();
-  const formRef = useRef();
-  const passRef = useRef();
-  const imgRef = useRef();
-  const [message, setMessage] = useState(false);
-  const [form, setForm] = useState({});
-
-  const [dataRegister, setDataRegister] = useState({
-    name: "",
-    lastname: "MiPapa",
-    age: "25",
-    phoneNumber: "",
-    email: "",
-    password: "",
-    password2: "",
-    location: "Buenos Aires",
-    verified: "true",
-    isActive: "true",
-    role: "user",
-  });
-  const [errorsRegister, setErrorsRegister] = useState({
-    name: "",
-    phoneNumber: "",
-    password: "",
-  });
-
+  
   useEffect(() => {
     setDataRegister({
       ...dataRegister,
@@ -63,10 +34,10 @@ const Login = ({ setToggleLogin }) => {
   return (
     <div className={`LoginContainer ${animation && "scale-up-tr"}`}>
       {login ? (
-        <LoginForm/>
+        <LoginForm setToggleLogin={setToggleLogin} fn={fn}/>
         
       ) : (
-          <Register/>
+          <Register setToggleLogin={setToggleLogin}/>
       )}
     </div>
   );

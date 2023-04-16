@@ -1,11 +1,19 @@
 import LoginErrors from "./LoginErros";
 import { createUser } from "../../redux/actions/actions";
+import React from "react";
 
 export const handleInput = (e) => {
   const property = e.target.name;
   const value = e.target.value;
   setForm({ ...form, [property]: value });
 };
+
+
+const [errorsRegister, setErrorsRegister] = React.useState({
+    name: "",
+    phoneNumber: "",
+    password: "",
+  });
 
 export const handleRegister = (event) => {
   setDataRegister({
@@ -21,6 +29,20 @@ export const handleRegister = (event) => {
 
   console.log(errorsRegister);
 };
+
+const [dataRegister, setDataRegister] = React.useState({
+    name: "",
+    lastname: "MiPapa",
+    age: "25",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    password2: "",
+    location: "Buenos Aires",
+    verified: "true",
+    isActive: "true",
+    role: "user",
+  });
 
 export const sendRegister = (event) => {
     event.preventDefault();
