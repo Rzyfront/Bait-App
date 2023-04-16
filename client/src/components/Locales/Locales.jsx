@@ -235,7 +235,10 @@ function Locales() {
           ></input>
           <hr />
           {image ? (
-            <img src={image} alt="imagen" className="LocalesImage" />
+            <img src={image} 
+            alt="imagen" 
+            className="LocalesImage" 
+            />
           ) : loading === true ? (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
@@ -247,6 +250,8 @@ function Locales() {
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
               alt="image default"
               className="LocalesImage"
+              width="60px"
+              height="60px"
             />
           )}
           {/* <label>Tipos de Comida: </label> */}
