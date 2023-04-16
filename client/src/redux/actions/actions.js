@@ -61,7 +61,7 @@ export const reset=()=>{
     payload:""
   }
 }
-/// loading locals
+/// loadinglocals
 export const loadingLocals=async()=>{
 try {
   const response=await axios.get("http://localhost:3001/locals")
@@ -76,7 +76,25 @@ return {
 
   
 }
-
+/// Create user
+export const createUser=async(inputs)=>{
+try {
+  await axios.post("http://localhost:3001/users",{
+    "name":inputs.name,
+    "lastname":inputs.lastname,
+    "age":inputs.age,
+    "phoneNumber":inputs.phoneNumber,
+    "email":inputs.email,
+    "password":inputs.password,
+    "location":inputs.location,
+    "verified":inputs.verified,
+    "isActive":inputs.isActive,
+    "role":inputs.role
+  })
+} catch (error) {
+  console.log(error.message)
+}
+}
 
 
 export const createLocal=async(inputs, chekinputs)=>{
