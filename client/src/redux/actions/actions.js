@@ -122,4 +122,3 @@ export const createLocal=async(inputs, chekinputs)=>{
             console.log(error.message)
         }
 }
-    

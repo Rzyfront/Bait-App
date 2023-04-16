@@ -3,7 +3,7 @@ const { User } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const { userId } = req.params;
-    console.log(userId);
+  
     if (!userId) {
       res.status(404).send({ message: 'Usuario no encontrado' });
       return;
