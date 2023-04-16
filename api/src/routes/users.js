@@ -6,7 +6,7 @@ const postUser = require('../controllers/users/postUser');
 const deleteUser = require('../controllers/users/deleteUser');
 const modifyUser = require('../controllers/users/putUser');
 const putInactiveUser = require('../controllers/users/putInactiveUser');
-const verifiyUser = require('../controllers/users/verifiyUser');
+const verifiyUser = require('../controllers/users/verifyUser');
 
 userRoutes.get('/', getUsers)
   .get('/verified', verifiyUser)
