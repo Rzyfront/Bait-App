@@ -26,7 +26,7 @@ export const reset = () => {
 export const loadingLocals = () => {
   return async dispatch => {
     try {
-      const response = await axios.get("http://localhost:3001/locals");
+      const response = await axios.get("/locals");
       dispatch({
         type: LOADINGLOCALS,
         payload: response.data.locals
@@ -48,7 +48,7 @@ export const loadingLocals = () => {
 /// Create user
 export const createUser=(inputs)=>{
 return async(dispatch)=>{
-await axios.post("http://localhost:3001/users",{
+await axios.post("/users",{
     "name":inputs.name,
     "lastname":inputs.lastname,
     "age":inputs.age,
@@ -63,13 +63,24 @@ await axios.post("http://localhost:3001/users",{
 }
 }
 
+//Detail id
+export const DetailLocal=(id)=>{
+  return async dispatch=>{
+    try {
+      await axios.get("")
+      
+    } catch (error) {
+      
+    }
+  }
 
+}
 
 //correguir imagen cuando este listo la ruta
 export const createLocal=(inputs, chekinputs)=>{
    return async dispatch => {
         try{
-    await axios.post("http://localhost:3001/locals",{
+    await axios.post("/locals",{
     "name":inputs.name, 
     "location":inputs.location, 
     "schedule":inputs.schedule,
@@ -139,7 +150,7 @@ export const searchByQuery = (data) => {
   const { input, map } = data;
   return async (dispatch) => {
     try {
-      let response = await axios.get(`http://localhost:3001/locals?name=${input}&location=${map}`);
+      let response = await axios.get(`/locals?name=${input}&location=${map}`);
       let info = response.data.locals;
       return dispatch({ type: SEARCH_BY_QUERY, payload: info })
     } catch (error) {
