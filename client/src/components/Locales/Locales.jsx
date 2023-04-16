@@ -253,8 +253,6 @@ function Locales() {
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
               alt="image default"
               className="LocalesImage"
-              width="60px"
-              height="60px"
             />
           )}
           {/* <label>Tipos de Comida: </label> */}
