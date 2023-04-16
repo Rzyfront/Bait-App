@@ -164,10 +164,10 @@
 }
 
 .ReviewsForm .Container .Rigth form .ImgGroup{
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .ReviewsForm .Container .Rigth form .ImgGroup .LoadImg {
     position: absolute;

@@ -2,22 +2,27 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 230px;
     height: 290px;
     color: var(--prymary);
     background-color: var(--bg-primary);
     margin: 10px;
     padding:10px 2px;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 1px;
     text-align: left;
+    transition: 0.3s;
+}
+.Card:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 4px;
+    transform: scale(1.01);
 }
 
 .Card .imgCard{
-    width: 200px;
-    height: 180px;
-    border-radius: 10px;
+    width: 210px;
+    height: 150px;
+    border-radius: 5px;
     align-self: center;
     background-color: var(--bg-primary);
 }
@@ -25,19 +30,25 @@
 .Card .infoCard{
     display: flex;
     flex-direction: column;
-    gap: 2px;
     width: 210px;
     height: 80px;
     padding: 5px 0px;
     background-color: var(--bg-primary);
 }
 
-.Card .RatingGroup{
+.Card .infoCard h2 {
+    font-size: 20px;
+    font-family: var(--subtitle);
+}
+
+.Card .infoCard .RatingGroup{
     display: flex;
+    align-items: center;
 }
 
 .Card .RatingGroup .Rating {
     font-family: var(--text);
+    padding-top: 5px;
 } 
 
 .Card .LocationGroup{
