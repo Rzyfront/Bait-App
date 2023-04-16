@@ -65,7 +65,7 @@ await axios.post("http://localhost:3001/users",{
 
 
 
-
+//correguir imagen cuando este listo la ruta
 export const createLocal=(inputs, chekinputs)=>{
    return async dispatch => {
         try{
@@ -74,7 +74,7 @@ export const createLocal=(inputs, chekinputs)=>{
     "location":inputs.location, 
     "schedule":inputs.schedule,
     "email":inputs.email,
-    "images":inputs.imagen  ,
+    "images":[{id:1}],
     "characteristics":{
 			"wifi": chekinputs.wifi,
 			"parking_lot": chekinputs.parking_lot,
