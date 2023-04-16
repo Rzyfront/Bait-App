@@ -2,7 +2,7 @@ import { handleInput, handleRegister, handleLogin } from "../helpers";
 import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 
-export const LoginForm = ({ setToggleLogin, fn }) => {
+ const LoginForm = ({ setToggleLogin, fn }) => {
     const titleRef = useRef();
     const passRef = useRef();
     const imgRef = useRef();
@@ -79,3 +79,5 @@ export const LoginForm = ({ setToggleLogin, fn }) => {
         </>
     )
 }
+
+export default LoginForm

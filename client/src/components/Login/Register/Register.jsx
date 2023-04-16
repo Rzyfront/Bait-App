@@ -1,7 +1,7 @@
 import { handleRegister, sendRegister } from "../helpers";
 import { useRef, useState } from "react";
 
-export const Register = ({ setToggleLogin }) => {
+const Register = ({ setToggleLogin }) => {
 
     const passRef = useRef();
     const formRef = useRef();
@@ -90,3 +90,5 @@ export const Register = ({ setToggleLogin }) => {
     )
 
 }
+
+export default Register
