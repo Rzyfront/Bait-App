@@ -1,13 +1,40 @@
-import { handleInput, handleRegister, handleLogin } from "../helpers";
 import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 
-export const LoginForm = ({ setToggleLogin, fn }) => {
+
+const LoginForm = ({ setToggleLogin, fn }) => {
     const titleRef = useRef();
     const passRef = useRef();
     const imgRef = useRef();
     const [message, setMessage] = useState(false);
     const [form, setForm] = useState({});
+    
+    const handleInput = (e) => {
+        const property = e.target.name;
+        const value = e.target.value;
+        setForm({ ...form, [property]: value });
+    };
+
+    const handleRegister = (event) => {
+        setDataRegister({
+            ...dataRegister,
+            [event.target.name]: event.target.value,
+        });
+        setErrorsRegister(
+            LoginErrors({
+                ...dataRegister,
+                [event.target.name]: event.target.value,
+            })
+        );
+
+        console.log(errorsRegister);
+    };
+
+
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+    }
 
     return(
         <>
@@ -79,3 +106,5 @@ export const LoginForm = ({ setToggleLogin, fn }) => {
         </>
     )
 }
+
+export default LoginForm;
