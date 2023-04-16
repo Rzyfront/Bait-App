@@ -2,6 +2,9 @@ const {
     verifiedTypeOf, verifiedExists, verifiedExistsTypeLength, isEmail,
 } = require('../helpers/validations');
 
+const {User} = require("../db");
+const { Op } = require('sequelize');
+
 const verifyPost = (req, res, next) => {
 
 try {
@@ -46,4 +49,23 @@ try {
    
 };
 
-module.exports = {verifyPost}
+const verifyDelete = async(req,res,next)=>{
+    try  {
+        const { userId } = req.params
+
+        if (typeof Number(userId) != "number") throw new Error(`Must provide the Id (number) of the user that you want to delete`);
+
+       
+        const idExist = await User.findByPk(userId);
+  
+       if (!idExist) throw Error (`User ${id} does not exist on our DataBase, Please select another Id`)
+        
+     
+        next()
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message });
+    }
+ }
+
+
+module.exports = { verifyPost, verifyDelete }

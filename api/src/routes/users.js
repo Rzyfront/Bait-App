@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { verifyPost } = require("./../middlewares/userMiddlewares")
+const { verifyPost,verifyDelete } = require("./../middlewares/userMiddlewares")
 const userRoutes = Router();
 const getUsers = require('../controllers/users/getUsers');
 const postUser = require('../controllers/users/postUser');
@@ -8,9 +8,10 @@ const modifyUser = require('../controllers/users/putUser');
 const putInactiveUser = require('../controllers/users/putInactiveUser');
 
 userRoutes.get('/', getUsers)
+  .delete('/:userId', verifyDelete, deleteUser)
   .get('/:userId', getUsers)
-    .post('/', verifyPost, postUser)
-  .delete('/:userId', deleteUser)
+  .post('/', verifyPost, postUser)
+
   .put('/:userId', modifyUser)
   .put('/inactive/:userId', putInactiveUser);
 
