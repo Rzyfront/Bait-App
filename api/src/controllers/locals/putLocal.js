@@ -1,11 +1,11 @@
-const { Characteristics } = require('../../db');
+const { Characteristic } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
     name, location, schedule, email, characteristics,
   } = req.body;
   try {
-    await Characteristics.update(characteristics, { where: { id: req.local.id } });
+    await Characteristic.update(characteristics, { where: { id: req.local.id } });
     const updateLocal = await req.local.update({
       name, location, schedule, email,
     });
