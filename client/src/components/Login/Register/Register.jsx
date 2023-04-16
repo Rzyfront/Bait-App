@@ -1,5 +1,6 @@
-import { handleRegister, sendRegister } from "../helpers";
 import { useRef, useState } from "react";
+import { createUser } from "../../../redux/actions/actions";
+import LoginErrors from "../LoginErros";
 
 const Register = ({ setToggleLogin }) => {
 
@@ -7,8 +8,72 @@ const Register = ({ setToggleLogin }) => {
     const formRef = useRef();
     const [message, setMessage] = useState(false);
 
-    
+    const [errorsRegister, setErrorsRegister] = useState({
+        name: "",
+        phoneNumber: "",
+        password: "",
+    });
+    const handleRegister = (event) => {
+        setDataRegister({
+            ...dataRegister,
+            [event.target.name]: event.target.value,
+        });
+        setErrorsRegister(
+            LoginErrors({
+                ...dataRegister,
+                [event.target.name]: event.target.value,
+            })
+        );
 
+        console.log(errorsRegister);
+    };
+
+    const [dataRegister, setDataRegister] = React.useState({
+        name: "",
+        lastname: "MiPapa",
+        age: "25",
+        phoneNumber: "",
+        email: "",
+        password: "",
+        password2: "",
+        location: "Buenos Aires",
+        verified: "true",
+        isActive: "true",
+        role: "user",
+    });
+
+    const sendRegister = (event) => {
+        event.preventDefault();
+        if (!Object.values(errorsRegister).length) {
+            dispatch(createUser(dataRegister));
+            setDataRegister({
+                name: "",
+                lastname: "MiPapa",
+                age: "25",
+                phoneNumber: "",
+                email: "",
+                password: "",
+                password2: "",
+                location: "Buenos Aires",
+                verified: "true",
+                isActive: "true",
+                role: "user",
+            });
+            setErrorsRegister({
+                name: "",
+                phoneNumber: "",
+                password: "",
+            });
+        } else {
+            alert(
+                errorsRegister.name +
+                "\n" +
+                errorsRegister.password +
+                "\n" +
+                errorsRegister.phoneNumber
+            );
+        }
+    };
     return(
         <>
             <div className={`login ${!login && "scale-up-bottom"}`}>
@@ -91,4 +156,4 @@ const Register = ({ setToggleLogin }) => {
 
 }
 
-export default Register
+export default Register;
