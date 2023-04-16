@@ -59,36 +59,45 @@ export const reset = () => {
   };
 };
 /// loadinglocals
-export const loadingLocals = async () => {
-  try {
-    const response = await axios.get("http://localhost:3001/locals");
-    return {
-      type: LOADINGLOCALS,
-      payload: response.data,
-    };
-  } catch (error) {
-    console.log(error.message);
-  }
+export const loadingLocals = () => {
+  return async dispatch => {
+    try {
+      const response = await axios.get("http://localhost:3001/locals");
+      dispatch({
+        type: LOADINGLOCALS,
+        payload: response.data.locals
+      });
+    } catch (error) {
+      console.log(error.message);
+      // Dispatch an error action if needed
+      dispatch({
+        type: LOADINGLOCALS_ERROR,
+        payload: error.message
+      });
+    }
+  };
 };
+
+
+  
+
 /// Create user
-export const createUser = async (inputs) => {
-  try {
-    await axios.post("http://localhost:3001/users", {
-      name: inputs.name,
-      lastname: inputs.lastname,
-      age: inputs.age,
-      phoneNumber: inputs.phoneNumber,
-      email: inputs.email,
-      password: inputs.password,
-      location: inputs.location,
-      verified: inputs.verified,
-      isActive: inputs.isActive,
-      role: inputs.role,
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
+export const createUser=(inputs)=>{
+return async(dispatch)=>{
+await axios.post("http://localhost:3001/users",{
+    "name":inputs.name,
+    "lastname":inputs.lastname,
+    "age":inputs.age,
+    "phoneNumber":inputs.phoneNumber,
+    "email":inputs.email,
+    "password":inputs.password,
+    "location":inputs.location,
+    "verified":inputs.verified,
+    "isActive":inputs.isActive,
+    "role":inputs.role
+})
+}
+}
 
 export const createLocal = async (inputs, chekinputs) => {
   try {
@@ -125,6 +134,10 @@ export const searchByQuery = (data) => {
       return dispatch({ type: SEARCH_BY_QUERY, payload: info })
     } catch (error) {
       console.log(error.message)
+      dispatch({
+        type: LOADINGLOCALS_ERROR,
+        payload: error.message
+      });
     }
   };
 };

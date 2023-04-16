@@ -4,10 +4,19 @@ import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import "./Card.css";
 
-function Card({ Location, Rating, Name, Image, Price }) {
+function Card({
+  id,
+  Name,
+  Rating,
+  location,
+  verified,
+  schedule,
+  Characteristic,
+  Images,
+}) {
   return (
     <div className="Card">
-      <img src={Image} alt={Name} className="imgCard" />
+      <img src={Images} alt={Name} className="imgCard" />
       <div className="infoCard">
         <h2 className="placeName">{Name || "No name"}</h2>
         {Rating && (
@@ -22,7 +31,7 @@ function Card({ Location, Rating, Name, Image, Price }) {
             <GoLocation />
           </div>
         )}
-        {Price && <p className="Price">${Price}</p>}
+        {/* {Price && <p className="Price">${Price}</p>} */}
       </div>
     </div>
   );
