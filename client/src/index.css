@@ -5,8 +5,10 @@
 }
 
 a{
-  text-decoration: none;
-  color: var(--primary);
+  all: unset;
+}
+a:hover {
+  all: unset;
 }
 
 @font-face {
@@ -43,6 +45,20 @@ a{
    /* Scrollbar Color */
    --bg-opac:#5958581a;
    --bg-thumb:#34343452;
+}
+
+@keyframes example {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.animated-element {
+  animation: example 0.6s;
 }
 
 /* Webkit (Chrome, Safari, Opera) */

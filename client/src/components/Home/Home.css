@@ -1,10 +1,7 @@
-*{
-        margin: 0;
-        padding: 0;
-}
-.home{
+.Home{
 background-color: var(--bg-primary);
 }
+
 .cards_home{
         width: 90%;
         display: flex;
