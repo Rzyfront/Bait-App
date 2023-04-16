@@ -14,7 +14,7 @@ import { useState } from "react";
 import "./Profile.css";
 
 function Profile() {
-  const [toogleModal, setToggleModal] = useState("Menu");
+  const [toogleModal, setToggleModal] = useState("Reviews");
   const [toogleModal2, setToggleModal2] = useState(false);
   const ListMenu = [
     { Name: "Pollo Teriyaky", Price: 200, Image: imgComida, Rating: 3 },
@@ -83,7 +83,7 @@ function Profile() {
   };
   return (
     <div className="Profile">
-      {toogleModal2 && <ReviewsForm />}
+      {toogleModal2 && <ReviewsForm setToggleModal2={setToggleModal2} />}
       <div className="ProfileInfo">
         <img src={Image} alt={Name} className="ImageProfile" />
         <div className="Decorator"></div>

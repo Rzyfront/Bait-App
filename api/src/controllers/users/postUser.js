@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const { User } = require('../../db');
+const { sendVerificationEmail } = require('../../config/nodemailer/nodemailer-config');
 
 module.exports = async (req, res) => {
   const {
@@ -23,11 +23,11 @@ module.exports = async (req, res) => {
       location,
       password: passwordHash,
     });
-    const token = jwt.sign({ email: newUser.email, id: newUser.id }, process.env.SECRET_KEY);
+    sendVerificationEmail(newUser.id, newUser.email);
     res
       .status(201)
-      .json({ newUser, token });
+      .json({ success: true, message: 'Email send' });
   } catch (error) {
-    res.status(404).json(`Failed to create user:  ${error.message}`);
+    res.status(404).json({ message: `Failed to create user:  ${error.message}`, success: false });
   }
 };

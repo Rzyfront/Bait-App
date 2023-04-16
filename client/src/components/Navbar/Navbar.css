@@ -1,35 +1,47 @@
-*{
-    padding: 0;
-    margin: 0;
-}
+
 .all_navbar{
     color: var(--primary);
-    width: 90%;
-    margin: auto;
-  
+    width: 100%;
+    height: 60px;
+    position: relative;
     display: flex;
-    gap: 20px;
-  
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+    box-shadow:0px 1px 1px rgba(0, 0, 0, 0.156);
 }
-.nav_ico{
-    display: flex;
-    text-align: center;
 
+.all_navbar .Logo:hover{
+    transform: scale(1.1);
+    filter: drop-shadow(0px 0px 1px rgba(17, 17, 17, 0.642))
 }
-.ico{
-    width: 50px;
-   
-}
-.titule{
-    margin: auto;
-}
-.search{
-    
-    background: rgb(184, 11, 11);
-}
-.nav_login{
+
+
+.UserGroup .nav_login{
     display: flex;
-    font-size: 1rem;
     gap: 3px;
-    margin: auto;
+    align-items: center;
+}
+
+.UserGroup:hover .nav_login{
+    transform: scale(1.1);
+    transition: 0.2s;
+    
+}
+.UserGroup .nav_login .UserIcon {
+    font-size: 20px;
+}
+.UserGroup .nav_login .LogIn {
+    padding-top: 5px;
+    font-size: 18px;
+    font-family: var(--title);
+    font-weight: 100;
+}
+.UserGroup:hover .nav_login .LogIn {
+    color: var(--secondary);
+    transition: 0.2s;
+}
+.UserGroup:hover .nav_login svg {
+    color: var(--secondary);
+    transition: 0.1s;
 }
