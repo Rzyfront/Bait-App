@@ -33,7 +33,7 @@ const Navbar = () => {
               setToggleLogin(true);
             }}
           >
-            <FaUserCircle />
+            <FaUserCircle className="UserIcon" />
             <h4 className="LogIn">Inicia sesión </h4>
           </div>
         ) : (

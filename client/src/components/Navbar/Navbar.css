@@ -19,7 +19,6 @@
 
 .UserGroup .nav_login{
     display: flex;
-    font-size: 1rem;
     gap: 3px;
     align-items: center;
 }
@@ -29,7 +28,12 @@
     transition: 0.2s;
     
 }
+.UserGroup .nav_login .UserIcon {
+    font-size: 20px;
+}
 .UserGroup .nav_login .LogIn {
+    padding-top: 5px;
+    font-size: 18px;
     font-family: var(--title);
     font-weight: 100;
 }
