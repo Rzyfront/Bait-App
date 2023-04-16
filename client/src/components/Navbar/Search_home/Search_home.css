@@ -5,11 +5,11 @@
     display: flex;
     color: var(--primary);
 }
-.searchs{
+.search_home .searchs{
     display: flex;
     width: 100%;
 }
-.search_home .input_Eat{
+.search_home .searchs .input_Eat{
     display: flex;
     width: 80%;
     border-radius: 0 0 0 5px;
@@ -24,7 +24,7 @@
     transform: scale(1.3);
 }
 
-.search_home .input_Location {
+.search_home .searchs .input_Location {
     display: flex;
     width: 80%;
     border-bottom: 1px solid black;
@@ -53,32 +53,42 @@
     box-shadow: none;
 }
 
-.icosearch{
+.search_home .searchs .icosearch{
+    transition: 0.3s;
     margin: auto ;
 }
 .search_home .botton{
     background: var(--btn-primary);
-    text-align: center;
-    color: var(--tertiary);
-    font-family: var(--subtitle);
-    font-weight: 100;
-    width: 80px;
-    padding: 5px;
+    width: 100px;
+    height: 35px;
     border-radius:  0 5px 5px 0 ;
     display: flex;
     align-items: center;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.468);
+    justify-content: center;
     transition: 0.5s;
 }
 .search_home .botton h4{
-    color: var(--tertiary);
+    color: var(--primary);
     font-family: var(--subtitle);
+    font-size: 18px;
+    font-weight:400;
+    margin-top: 7px;
+}
+.search_home .botton .SearchIcon {
+    color: var(--primary);
+    font-family: var(--subtitle);
+    font-size: 18px;
     font-weight: 100;
 
 }
-.botton:hover{
-    cursor: pointer;
+.search_home .botton:hover{
     background:var(--bg-secondary);
+}
+.search_home .botton:hover h4{
+    color: var(--tertiary);
+}
+.search_home .botton:hover .SearchIcon {
+    color: var(--tertiary);
 }
 .botton:active{
     box-shadow: none;

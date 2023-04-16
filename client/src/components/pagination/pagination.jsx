@@ -24,7 +24,7 @@ const Pagination = ({ length_data, position, handlepage }) => {
         className={position === i ? "pagination_on" : "pagination_off"}
         onClick={() => onpage(i)}
       >
-        <h1>{i}</h1>
+        <h1>{i + 1}</h1>
       </div>
     );
   }

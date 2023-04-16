@@ -3,7 +3,7 @@ import axios from "axios";
 export const FILTERS="FILTERS";
 export const ORDER="ORDER";
 export const RESET="RESET";
-
+export const LOADINGLOCALS="LOADINGLOCALS"
 //////////actions////////////////////////////
 
 //filter
@@ -61,8 +61,40 @@ export const reset=()=>{
     payload:""
   }
 }
+/// loadinglocals
+export const loadingLocals=async()=>{
+try {
+  const response=await axios.get("http://localhost:3001/locals")
+return {
+    type:LOADINGLOCALS,
+    payload:response.data
+  }
+} catch (error) {
+  console.log(error.message)
+}
 
 
+  
+}
+/// Create user
+export const createUser=async(inputs)=>{
+try {
+  await axios.post("http://localhost:3001/users",{
+    "name":inputs.name,
+    "lastname":inputs.lastname,
+    "age":inputs.age,
+    "phoneNumber":inputs.phoneNumber,
+    "email":inputs.email,
+    "password":inputs.password,
+    "location":inputs.location,
+    "verified":inputs.verified,
+    "isActive":inputs.isActive,
+    "role":inputs.role
+  })
+} catch (error) {
+  console.log(error.message)
+}
+}
 
 
 export const createLocal=async(inputs, chekinputs)=>{

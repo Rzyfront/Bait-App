@@ -164,10 +164,10 @@
 }
 
 .ReviewsForm .Container .Rigth form .ImgGroup{
-position: relative;
-display: flex;
-align-items: center;
-justify-content: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .ReviewsForm .Container .Rigth form .ImgGroup .LoadImg {
     position: absolute;
@@ -190,4 +190,9 @@ justify-content: center;
     background-color: var(--bg-secondary);
     color: var(--bg-primary);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.imagenDefault{
+    width: 200px;
+    height: 200px;
 }

@@ -3,7 +3,7 @@ import { Filters, Navbar, Cards, Footer } from "../components";
 
 const Home = () => {
   return (
-    <div className="home">
+    <div className="Home animated-element">
       <Navbar />
       <div className="home_filters">
         <Filters />

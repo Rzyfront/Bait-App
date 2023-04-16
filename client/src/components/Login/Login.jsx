@@ -2,8 +2,12 @@ import { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { TfiClose } from "react-icons/tfi";
 import "./Login.css";
+import LoginErrors from "./LoginErros";
+import { useDispatch } from "react-redux";
+import { createUser } from "../../redux/actions/actions";
 
 const Login = ({ setToggleLogin }) => {
+  const dispatch = useDispatch();
   const [animation, setAnimation] = useState(false);
   const [ojo, setOjo] = useState(false);
   const [login, setLogin] = useState(true);
@@ -13,6 +17,32 @@ const Login = ({ setToggleLogin }) => {
   const imgRef = useRef();
   const [message, setMessage] = useState(false);
   const [form, setForm] = useState({});
+
+  const [dataRegister, setDataRegister] = useState({
+    name: "",
+    lastname: "MiPapa",
+    age: "25",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    password2: "",
+    location: "Buenos Aires",
+    verified: "true",
+    isActive: "true",
+    role: "user",
+  });
+  const [errorsRegister, setErrorsRegister] = useState({
+    name: "",
+    phoneNumber: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    setDataRegister({
+      ...dataRegister,
+      email: `${Math.random().toString(36).substring(7)}@gmail.com`,
+    });
+  }, []);
 
   useEffect(() => {
     setAnimation(true);
@@ -35,6 +65,54 @@ const Login = ({ setToggleLogin }) => {
     setForm({ ...form, [property]: value });
   };
 
+  const handleRegister = (event) => {
+    setDataRegister({
+      ...dataRegister,
+      [event.target.name]: event.target.value,
+    });
+    setErrorsRegister(
+      LoginErrors({
+        ...dataRegister,
+        [event.target.name]: event.target.value,
+      })
+    );
+
+    console.log(errorsRegister);
+  };
+
+  const sendRegister = (event) => {
+    event.preventDefault();
+    if (!Object.values(errorsRegister).length) {
+      dispatch(createUser(dataRegister));
+      setDataRegister({
+        name: "",
+        lastname: "MiPapa",
+        age: "25",
+        phoneNumber: "",
+        email: "",
+        password: "",
+        password2: "",
+        location: "Buenos Aires",
+        verified: "true",
+        isActive: "true",
+        role: "user",
+      });
+      setErrorsRegister({
+        name: "",
+        phoneNumber: "",
+        password: "",
+      });
+    } else {
+      alert(
+        errorsRegister.name +
+          "\n" +
+          errorsRegister.password +
+          "\n" +
+          errorsRegister.phoneNumber
+      );
+    }
+  };
+
   return (
     <div className={`LoginContainer ${animation && "scale-up-tr"}`}>
       {login ? (
@@ -55,9 +133,9 @@ const Login = ({ setToggleLogin }) => {
                 <input
                   className="input"
                   type="text"
-                  name="username"
-                  value={form.username}
-                  onChange={handleInput}
+                  name="name"
+                  value={dataRegister.name}
+                  onChange={handleRegister}
                   autoComplete="off"
                   placeholder="Usuario"
                 ></input>
@@ -120,37 +198,37 @@ const Login = ({ setToggleLogin }) => {
                 <input
                   className="input"
                   type="text"
-                  name="User"
-                  value={form.User}
-                  onChange={handleInput}
+                  name="name"
+                  value={dataRegister.name}
+                  onChange={handleRegister}
                   autoComplete="off"
                   placeholder="Usuario"
                 ></input>
                 <input
                   className="input"
                   type="number"
-                  name="Tel"
-                  value={form.Tel}
-                  onChange={handleInput}
+                  name="phoneNumber"
+                  value={dataRegister.phoneNumber}
+                  onChange={handleRegister}
                   autoComplete="off"
                   placeholder="Telefono"
                 ></input>
                 <input
                   className="input"
                   type="password"
-                  name="Password"
-                  value={form.Password}
-                  onChange={handleInput}
+                  name="password"
+                  value={dataRegister.password}
+                  onChange={handleRegister}
                   autoComplete="off"
                   placeholder="Contraseña"
                 ></input>
                 <div className="PasswordGroup">
                   <input
                     type="password"
-                    name="Password2"
+                    name="password2"
                     autoComplete="off"
-                    value={form.Password2}
-                    onChange={handleInput}
+                    value={dataRegister.paswword2}
+                    onChange={handleRegister}
                     className="input"
                     placeholder="Repetir contraseña"
                     ref={passRef}
@@ -164,7 +242,9 @@ const Login = ({ setToggleLogin }) => {
                     width="20px"
                   ></img> */}
                 </div>
-                <button className="button">Registrarme</button>
+                <button className="button" onClick={sendRegister}>
+                  Registrarme
+                </button>
 
                 <div className="registrarme" onClick={() => setLogin(!login)}>
                   <p>¿Ya tienes cuenta?</p>

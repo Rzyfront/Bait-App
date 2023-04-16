@@ -1,55 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import BaitLogo from "../../assets/BaitLogo.png";
-import ImageEmpy from "../../assets/ImageEmpy.jpg";
+
 import { TfiClose } from "react-icons/tfi";
 import { FaPaperPlane } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./ReviewsForm.css";
-
-// eslint-disable-next-line
-/* const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-
-export const validate = (inputs) => {
-  let errors = {};
-
-  if (!regexEmail.test(inputs.email)) {
-    errors.email = "Debe ser un correo electronico";
-  }
-  if (!inputs.message) {
-    errors.message = "Se requiere un mensaje";
-  }
-  return errors;
-}; */
+import { useUploadImage } from "../../hooks/useUploadImage";
 
 function ReviewsForm({ setToggleModal2 }) {
+  const { image, loading, handleChangeimage } = useUploadImage();
+
   const [calculateAverage, setcalculateAverage] = useState(0);
   const [calificationFood, setCalificationFood] = useState(0);
   const [calificationService, setCalificationService] = useState(0);
   const [calificationEnvironment, setCalificationEnvironment] = useState(0);
   const [calificationQaPrice, setCalificationQaPrice] = useState(0);
+
+  useEffect(() => {
+    setcalculateAverage(
+      (calificationFood +
+        calificationQaPrice +
+        calificationEnvironment +
+        calificationService) /
+        4
+    );
+  }, [
+    calificationFood,
+    calificationQaPrice,
+    calificationEnvironment,
+    calificationService,
+  ]);
+  useEffect(() => {
+    setInputs({ ...inputs, image: image });
+  }, [image]);
+
   const [inputs, setInputs] = useState({
     title: "",
     rating: "",
     comment: "",
-    image: {}, 
-    food: "", 
+    image: "",
+    food: "",
     service: "",
     enviroment: "",
-    qaPrice:"",
+    qaPrice: "",
   });
 
   const [errors, setErrors] = useState({
     title: "",
     rating: "",
     comment: "",
-    image: {}, 
-    food: "", 
+    image: "",
+    food: "",
     service: "",
     enviroment: "",
-    qaPrice:"",
+    qaPrice: "",
   });
 
   const handleChange = (event) => {
@@ -74,31 +81,29 @@ function ReviewsForm({ setToggleModal2 }) {
         title: "",
         rating: "",
         comment: "",
-        image: {}, 
-        food: "", 
+        image: {},
+        food: "",
         service: "",
         enviroment: "",
-        qaPrice:"",
+        qaPrice: "",
       });
       setErrors({
         title: "",
         rating: "",
         comment: "",
-        image: {}, 
-        food: "", 
+        image: {},
+        food: "",
         service: "",
         enviroment: "",
-        qaPrice:"",
+        qaPrice: "",
       });
     } else {
       alert("Debe llenar todos los campos");
     }
-    const calculateAverage=() => {
-      const total = calificationFood + calificationService + calificationEnvironment + calificationQaPrice;
-      // Cálculo del promedio
-      const average = total / 4;
-      return average;
-    } 
+  };
+
+  const handleImage = (e) => {
+    handleChangeimage(e);
   };
 
   return (
@@ -134,21 +139,20 @@ function ReviewsForm({ setToggleModal2 }) {
           </p>
           <div className="RatingInput">
             <h5>Calificación:</h5>
-           {/* Al hacer submit setear el stado calificacion en el Input */}     
-          {/*  <RatingStar
+
+            <RatingStar
               name="Rating"
-              style={{ maxWidth: 180 }}
+              style={{ maxWidth: 150 }}
               value={calculateAverage}
-              onChange={setcalculateAverage}
-              isRequired
-            />   */}
+              readOnly
+            />
           </div>
           <div className="RatingInput">
             <h2>Comida:</h2>
             {/* Al hacer submit setear el stado calificacion-food en el Input */}
             <RatingStar
               name="food"
-              style={{ maxWidth: 180 }}
+              style={{ maxWidth: 150 }}
               value={calificationFood}
               onChange={setCalificationFood}
               isRequired
@@ -159,7 +163,7 @@ function ReviewsForm({ setToggleModal2 }) {
             {/* Al hacer submit setear el stado calificacion-service en el Input */}
             <RatingStar
               name="service"
-              style={{ maxWidth: 180 }}
+              style={{ maxWidth: 150 }}
               value={calificationService}
               onChange={setCalificationService}
               isRequired
@@ -170,7 +174,7 @@ function ReviewsForm({ setToggleModal2 }) {
             {/* Al hacer submit setear el stado calificacion-food en el Input */}
             <RatingStar
               name="enviroment"
-              style={{ maxWidth: 180 }}
+              style={{ maxWidth: 150 }}
               value={calificationEnvironment}
               onChange={setCalificationEnvironment}
               isRequired
@@ -181,7 +185,7 @@ function ReviewsForm({ setToggleModal2 }) {
             {/* Al hacer submit setear el stado calificacion-qaPrice en el Input */}
             <RatingStar
               name="qaPrice"
-              style={{ maxWidth: 180 }}
+              style={{ maxWidth: 150 }}
               value={calificationQaPrice}
               onChange={setCalificationQaPrice}
               isRequired
@@ -196,7 +200,7 @@ function ReviewsForm({ setToggleModal2 }) {
                 onChange={handleChange}
                 value={inputs.title}
                 type="text"
-                name="Title"
+                name="title"
                 placeholder="Escribe un titulo para tu reseña..."
               />
               {errors.name && <p className="danger">{errors.name}</p>}
@@ -217,11 +221,24 @@ function ReviewsForm({ setToggleModal2 }) {
               <input
                 className="LoadImg"
                 type="file"
-                name="Image"
-                id="image"
                 placeholder="Sube una foto de tu visita"
+                onChange={handleImage}
               ></input>
-              <img src={ImageEmpy} alt="" width="280px" />
+              {image ? (
+                <img src={image} alt="imagen" className="imagenDefault" />
+              ) : loading === true ? (
+                <img
+                  src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
+                  alt="cargando"
+                  className="imagenDefault"
+                />
+              ) : (
+                <img
+                  src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
+                  alt="image default"
+                  className="imagenDefault"
+                />
+              )}
             </div>
             <button type="submit">
               Enviar <FaPaperPlane />
