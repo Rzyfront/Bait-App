@@ -7,7 +7,7 @@ import LoginForm from "./LoginForm/LoginForm";
 const Login = ({ setToggleLogin }) => {
   const [animation, setAnimation] = useState(false);
   const [ojo, setOjo] = useState(false);
-  // const [login, setLogin] = useState(true);   ---- parece que este componente no usa este estado
+  const [login, setLogin] = useState(true);  
   
   useEffect(() => {
     setDataRegister({

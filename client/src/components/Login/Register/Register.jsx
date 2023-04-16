@@ -32,16 +32,16 @@ const Register = ({ setToggleLogin }) => {
 
     const [dataRegister, setDataRegister] = useState({
         name: "",
-        lastname: "MiPapa",
-        age: "25",
+        lastname: "",
+        age: "",
         phoneNumber: "",
         email: "",
         password: "",
         password2: "",
-        location: "Buenos Aires",
-        verified: "true",
-        isActive: "true",
-        role: "user",
+        location: "",
+        verified: "",
+        isActive: "",
+        role: "",
     });
 
     const sendRegister = (event) => {
@@ -50,16 +50,16 @@ const Register = ({ setToggleLogin }) => {
             dispatch(createUser(dataRegister));
             setDataRegister({
                 name: "",
-                lastname: "MiPapa",
-                age: "25",
+                lastname: "",
+                age: "",
                 phoneNumber: "",
                 email: "",
                 password: "",
                 password2: "",
-                location: "Buenos Aires",
-                verified: "true",
-                isActive: "true",
-                role: "user",
+                location: "",
+                verified: "",
+                isActive: "",
+                role: "",
             });
             setErrorsRegister({
                 name: "",

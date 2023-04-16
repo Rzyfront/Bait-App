@@ -8,6 +8,7 @@ const LoginForm = ({ setToggleLogin, fn }) => {
     const imgRef = useRef();
     const [message, setMessage] = useState(false);
     const [form, setForm] = useState({});
+   
     
     const handleInput = (e) => {
         const property = e.target.name;
