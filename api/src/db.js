@@ -19,11 +19,11 @@ for (const key in MODELS) {//eslint-disable-line
 
 // DEFINE RELATIONS
 const {
-  User, Local, Image, Dish, Menu, Review, Characteristics,
+  User, Local, Image, Dish, Menu, Review, Characteristic,
 } = sequelize.models;
 
 Image.belongsTo(Review);
-Review.hasMany(Image);
+Review.hasOne(Image);
 
 Review.belongsTo(Local);
 Local.hasMany(Review);
@@ -43,8 +43,8 @@ Dish.hasOne(Image);
 Menu.belongsTo(Local);
 Local.hasOne(Menu);
 
-Local.hasOne(Characteristics, { onDelete: 'CASCADE' });
-Characteristics.belongsTo(Local, { onDelete: 'CASCADE' });
+Local.hasOne(Characteristic, { onDelete: 'CASCADE' });
+Characteristic.belongsTo(Local, { onDelete: 'CASCADE' });
 
 module.exports = {
   ...sequelize.models,
