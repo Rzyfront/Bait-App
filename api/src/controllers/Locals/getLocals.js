@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
           attributes: [],
         },
       ],
-      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified'],
+      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule'],
       order: req.order,
       group: ['Local.id', 'Images.id', 'Characteristic.id'],
     });
