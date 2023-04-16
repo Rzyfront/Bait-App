@@ -3,7 +3,7 @@ const {
 } = require('../helpers/validations');
 
 const {User} = require("../db");
-const { Op } = require('sequelize');
+
 
 const verifyPost = (req, res, next) => {
 
