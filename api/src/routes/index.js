@@ -13,7 +13,7 @@ mainRouter.use('/reviews', reviewsRoute);
 mainRouter.use('/images', imageRoute);
 mainRouter.use('/administrator', administratorRoute);
 mainRouter.use('/dishes', dishesRouter);
-mainRouter.use('/users', userRoutes);
+mainRouter.use('/user', userRoutes);
 mainRouter.use('/menu', menuRouter);
 mainRouter.use('/login', loginRoute);
 

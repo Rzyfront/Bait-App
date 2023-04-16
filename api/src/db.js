@@ -1,5 +1,7 @@
 require('dotenv').config();
+
 const { Sequelize } = require('sequelize');
+
 const MODELS = require('./models/index');
 
 const sequelize = new Sequelize(
@@ -27,6 +29,9 @@ Review.hasOne(Image);
 
 Review.belongsTo(Local);
 Local.hasMany(Review);
+
+Review.belongsTo(User);
+User.hasMany(Review);
 
 Image.belongsTo(Local);
 Local.hasMany(Image);

@@ -14,6 +14,7 @@ module.exports = async (req, res) => {
       title, comment, verified, food, environment, service, qaPrice, rating,
     });
     await local.addReview(newReview.id);
+    await newReview.setUser(req.userId);
     await newReview.setImage(image.id);
     await newReview.save();
     return res.status(201).json({ success: true, review: newReview });

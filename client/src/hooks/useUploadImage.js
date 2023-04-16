@@ -5,7 +5,7 @@ export const useUploadImage=()=>{
     const [image, setImage] = useState()
     const [loading, setLoading] = useState(false)
 
-    const handleChange =(event)=>{
+    const handleChangeimage =(event)=>{
         const  file = event.target.files[0]
         const reader = new FileReader()
         reader.onload = (e)=>{
@@ -21,5 +21,5 @@ export const useUploadImage=()=>{
         }
         reader.readAsDataURL(file)
     }
-    return {image,loading,handleChange}
+    return {image,loading,handleChangeimage}
 }
