@@ -42,7 +42,7 @@ function Locales() {
   const [inputs, setInputs] = useState({
     location: "",
     name: "",
-    imagen: "",
+    imagen: [],
     email: "",
     phone: "",
     schedule: "",
@@ -53,7 +53,7 @@ function Locales() {
     setErrors(
       validate({
         ...inputs,
-        imagen: image,
+        imagen: [image],
       })
     );
   }, [image]);

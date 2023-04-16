@@ -17,11 +17,12 @@
     "cloudinary": "1.35.0",
     "dotenv": "16.0.3",
     "express": "4.18.2",
-    "googleapis": "^117.0.0",
     "firebase-admin": "^11.6.0",
+    "googleapis": "^117.0.0",
     "jsonwebtoken": "9.0.0",
     "morgan": "^1.10.0",
     "node-fetch": "^3.3.1",
+    "nodemailer": "^6.9.1",
     "pg": "8.10.0",
     "pg-hstore": "2.3.4",
     "sequelize": "6.31.0"
