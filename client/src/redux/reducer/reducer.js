@@ -1,4 +1,4 @@
-import { ORDER, RESET,LOADINGLOCALS } from "../actions/actions";
+import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY } from "../actions/actions";
 
 const initialState={
     cards:[],
@@ -6,18 +6,15 @@ reset:[]
 }
 
 //action paginate
-const paginate=(data)=>{
+const paginate = (data) => {
   const size = 6;
   let newarray = [];
-    for (var i = 0; i < data.length; i += size) {
-      const oneDate = data.slice(i, i + size);
-      newarray.push(oneDate);
-    }
-    return newarray
-}
-
-
-
+  for (var i = 0; i < data.length; i += size) {
+    const oneDate = data.slice(i, i + size);
+    newarray.push(oneDate);
+  }
+  return newarray;
+};
 
 
 const rootReducer=(state=initialState ,{type,payload})=>{
@@ -37,12 +34,16 @@ const rootReducer=(state=initialState ,{type,payload})=>{
     case  RESET:
       return{
         ...state,
-        cards:state.reset
+        cards: state.reset,
+      };
+    case SEARCH_BY_QUERY:
+      return {
+        ...state,
+        cards: paginate(payload)
       }
 
-
-           default:
-            return{...state}
-     }
-}
+    default:
+      return { ...state };
+  }
+};
 export default rootReducer;

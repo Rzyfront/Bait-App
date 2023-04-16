@@ -1,66 +1,27 @@
 import axios from "axios";
 //////names/////////////
-export const FILTERS="FILTERS";
-export const ORDER="ORDER";
-export const RESET="RESET";
-export const LOADINGLOCALS="LOADINGLOCALS"
+export const FILTERS = "FILTERS";
+export const ORDER = "ORDER";
+export const RESET = "RESET";
+export const LOADINGLOCALS = "LOADINGLOCALS";
+export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
 //////////actions////////////////////////////
 
 //filter
-export const filter=()=>{
-    // const datapaginada=paginado(data)
-    return {
-        type:FILTERS,
-        payload:data
-    }
-}
-//order
-export const order=(data,actions)=>{
-   const datas= data.flat()
-    switch (actions) {
-      case "best":
-        for (let j = 0; j < datas.length; j++) {
-          for (let i = 0; i < datas.length - 1; i++) {
-            if (datas[i + 1].Rating > datas[i].Rating) {
-              const auxiliar = datas[i];
-              datas[i] = datas[i + 1];
-              datas[i + 1] = auxiliar;
-            }
-          }
-        }
-    return {
-        type:ORDER,
-        payload:datas
-    }
-      case "A-Z":
-        const az = datas.sort((a, b) => a.Name.localeCompare(b.Name));
-        return{
-            type:ORDER,
-            payload:az
-        }
-      case "Z-A":
-         const za = datas.sort((a, b) => b.Name.localeCompare(a.Name));
-        return{
-            type:ORDER,
-            payload:za
-        }
-    
+export const filter = () => {
+  // const datapaginada=paginado(data)
+  return {
+    type: FILTERS,
+    payload: data,
+  };
+};
 
-
-      default:
-        break;
-    }
-
-
-   //adgorithm aordering
-     
-}
-export const reset=()=>{
-  return{
-    type:RESET,
-    payload:""
-  }
-}
+export const reset = () => {
+  return {
+    type: RESET,
+    payload: "",
+  };
+};
 /// loadinglocals
 export const loadingLocals = () => {
   return async dispatch => {
@@ -103,6 +64,8 @@ await axios.post("http://localhost:3001/users",{
 }
 
 
+
+
 export const createLocal=(inputs, chekinputs)=>{
    return async dispatch => {
         try{
@@ -130,3 +93,62 @@ export const createLocal=(inputs, chekinputs)=>{
         }
       }     
 }
+
+
+
+
+
+//order and filters
+export const order = (data, actions) => {
+  console.log(data)
+  const datas = data.flat();
+  switch (actions) {
+    case "best":
+      for (let j = 0; j < datas.length; j++) {
+        for (let i = 0; i < datas.length - 1; i++) {
+          if (datas[i + 1].rating > datas[i].rating) {
+            const auxiliar = datas[i];
+            datas[i] = datas[i + 1];
+            datas[i + 1] = auxiliar;
+          }
+        }
+      }
+      return {
+        type: ORDER,
+        payload: datas,
+      };
+    case "A-Z":
+      const az = datas.sort((a, b) => a.name.localeCompare(b.name));
+      return {
+        type: ORDER,
+        payload: az,
+      };
+    case "Z-A":
+      const za = datas.sort((a, b) => b.name.localeCompare(a.name));
+      return {
+        type: ORDER,
+        payload: za,
+      };
+
+    default:
+      break;
+  }
+  //adgorithm aordering
+};
+export const searchByQuery = (data) => {
+  const { input, map } = data;
+  return async (dispatch) => {
+    try {
+      let response = await axios.get(`http://localhost:3001/locals?name=${input}&location=${map}`);
+      let info = response.data.locals;
+      return dispatch({ type: SEARCH_BY_QUERY, payload: info })
+    } catch (error) {
+      console.log(error.message)
+      dispatch({
+        type: LOADINGLOCALS_ERROR,
+        payload: error.message
+      });
+    }
+  };
+};
+
