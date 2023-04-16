@@ -1,13 +1,9 @@
+import axios from "axios";
 //////names/////////////
-import axios from 'axios';
 export const FILTERS="FILTERS";
 export const ORDER="ORDER";
 export const RESET="RESET";
-export const GET_REV_DETAIL = 'GET_REV_DETAIL';
-export const POST_REV = 'POST_REV';
-export const UPDATE_REVIEW = 'UPDATE_REVIEW';
-export const DELETE_REVIEW = 'DELETE_REVIEW';
-
+export const LOADINGLOCALS="LOADINGLOCALS"
 //////////actions////////////////////////////
 
 //filter
@@ -59,16 +55,23 @@ export const order=(data,actions)=>{
    //adgorithm aordering
      
 }
-
 export const reset=()=>{
   return{
     type:RESET,
     payload:""
   }
 }
-
-export const getRevDetail = () => {
-
+/// loadinglocals
+export const loadingLocals=async()=>{
+try {
+  const response=await axios.get("http://localhost:3001/locals")
+return {
+    type:LOADINGLOCALS,
+    payload:response.data
+  }
+} catch (error) {
+  console.log(error.message)
 }
+
 
 
