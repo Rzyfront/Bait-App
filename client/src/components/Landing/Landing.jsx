@@ -1,3 +1,4 @@
+
 import { Navbar } from "../components";
 import ImgSlide1 from "../../assets/Slide1Landing.webp";
 import ImgSlide2 from "../../assets/Slide2Landing.webp";

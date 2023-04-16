@@ -1,8 +1,9 @@
-import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY } from "../actions/actions";
+import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY, DETAIL } from "../actions/actions";
 
 const initialState={
-    cards:[],
-reset:[]
+cards:[],
+reset:[],
+detail:[]
 }
 
 //action paginate
@@ -41,9 +42,16 @@ const rootReducer=(state=initialState ,{type,payload})=>{
         ...state,
         cards: paginate(payload)
       }
-
+    case DETAIL:
+      return{
+        ...state,
+        detail:payload
+      }
     default:
       return { ...state };
   }
 };
+
+
+
 export default rootReducer;

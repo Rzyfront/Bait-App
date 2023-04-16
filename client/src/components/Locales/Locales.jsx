@@ -1,6 +1,8 @@
 import React from "react";
 import "./Locales.css";
 import { useState } from "react";
+import BaitLogo from "../../assets/BaitLogo.png";
+import { Link } from "react-router-dom";
 // eslint-disable-next-line
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 import { useUploadImage } from "../../hooks/useUploadImage";
@@ -157,6 +159,15 @@ function Locales() {
   return (
     <div className="locales">
       <div className="locales_data">
+        <Link to="/home" className="LinkLogo">
+          <img
+            src={BaitLogo}
+            alt="Bait"
+            className="Logo"
+            width="60px"
+            height="60px"
+          />
+        </Link>
         <h1>Crea un nuevo Local</h1>
         <form onSubmit={handleSubmit}>
           <label>Nombre Local: </label>
@@ -217,17 +228,27 @@ function Locales() {
           />
           {errors.message && <p className="danger">{errors.phone}</p>}
           <hr />
-          <label htmlFor="imagen">Imagenes</label>
+          <label className="imagen" htmlFor="imagen">
+            Imagenes
+          </label>
           <input
             type="file"
             name="imagen"
-            accept="image/*"
+            accept="image/png,image/jpeg,image/jpg,image/gif"
             // multiple
             onChange={handleChangeimages}
           ></input>
           <hr />
-          {image ? (
-            <img src={image} alt="imagen" className="LocalesImage" />
+
+          {image.length ? (
+            image.map((image, i) => (
+              <img
+                key={i}
+                src={image.url}
+                alt="imagen"
+                className="LocalesImage"
+              />
+            ))
           ) : loading === true ? (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"

@@ -40,7 +40,7 @@ function Cards() {
               index
             ) => {
               return (
-                <Link to="/profile" key={index}>
+                <Link to={`/profile/${id}`} key={index}>
                   <Card
                     id={id}
                     Name={name}

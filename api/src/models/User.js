@@ -17,12 +17,9 @@ module.exports = (sequelize) => {
     },
     age: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
     phone_number: {
       type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -35,7 +32,6 @@ module.exports = (sequelize) => {
     },
     location: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     verified: {
       type: DataTypes.ENUM('verified', 'unVerified', 'suspended'),
@@ -48,6 +44,10 @@ module.exports = (sequelize) => {
     role: {
       type: DataTypes.ENUM('admin', 'owner', 'user'),
       defaultValue: 'user',
+    },
+    isGoogleUser: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   });
 };

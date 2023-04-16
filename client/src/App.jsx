@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/createplace" element={<Locales />} />
         <Route path="/answers" element={<Answers />} />
         <Route exact path="/" element={<Landing />} />

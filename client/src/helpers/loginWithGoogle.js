@@ -1,44 +1,39 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { app } from '../config/firebase-config'
+import { signInWithPopup, signOut } from 'firebase/auth'
+import { auth, googleProvider } from '../config/firebase-config'
 import axios from 'axios'
 
-export const loginWithGoogle = () => {
+export const signInWithGoogle = async () => {
   console.log('google authentication')
-  const provider = new GoogleAuthProvider()
-  const auth = getAuth()
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      const credential = GoogleAuthProvider.credentialFromResult(result)
-      const token = credential.accessToken
-      // The signed-in user info.
-      //   console.log(typeof token)
-      try {
-        axios
-          .get('http://localhost:3001/login/google', {
-            headers: {
-              Authorization: 'Bearer ' + token,
-              'Content-Type': 'application/json',
-            },
-          })
-          .then((res) => console.log(res.data))
-      } catch (error) {
-        console.log(error)
+  try {
+    const user = await signInWithPopup(auth, googleProvider)
+    const { firstName, lastName } = user._tokenResponse
+    const { email, phoneNumber, photoURL, emailVerified } = user.user
+    await axios
+      .post('http://localhost:3001/user/google', {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        photoURL,
+        emailVerified,
+      })
+      .then((res) =>{
+        if(res.data.token) return window.localStorage.setItem('token', res.data.token)
+        window.alert(res.data.message)
       }
+        )
+  } catch (error) {
+    console.log(error)
+  }
+}
+export const logOut = () => {
+  window.localStorage.removeItem('token')
+  signOut(auth)
+}
 
-      const user = result.user
-      //   console.log(user)
-      // IdP data available using getAdditionalUserInfo(result)
-      // ...
-    })
-    .catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code
-      const errorMessage = error.message
-      // The email of the user's account used.
-      const email = error.customData.email
-      // The AuthCredential type that was used.
-      const credential = GoogleAuthProvider.credentialFromError(error)
-      // ...
-    })
+export const loginWithGoogle = async () => {
+  const { user } = await signInWithPopup(auth, googleProvider)
+  await axios
+    .post('http://localhost:3001/login/google', { email: user.email })
+    .then((res) => window.localStorage.setItem('token', res.data.token))
 }

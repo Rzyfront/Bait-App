@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { GoLocation } from "react-icons/go";
@@ -12,9 +12,36 @@ import Rimg from "../../assets/Reviewphoto.jpg";
 import { Menu, Navbar, Reviews, ReviewsForm } from "../components";
 import { useState } from "react";
 import "./Profile.css";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { DetailLocal } from "../../redux/actions/actions";
 
 function Profile() {
-  const [toogleModal, setToggleModal] = useState("Reviews");
+  const [average, setAverage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { locals } = useSelector((state) => state.detail);
+
+  let { id } = useParams();
+  useEffect(() => {
+    dispatch(DetailLocal(id));
+  }, [id]);
+
+  useEffect(() => {
+    if (locals) {
+      let suma = 0;
+      locals.Reviews.forEach((data) => {
+        suma += data.rating;
+      });
+      suma = suma / locals.Reviews.length;
+      setAverage(suma);
+      if (locals.Reviews.length === 0) {
+        setAverage(0);
+      }
+    }
+  }, [locals]);
+
+  const [toogleModal, setToggleModal] = useState("ReviewsLocal");
   const [toogleModal2, setToggleModal2] = useState(false);
   const ListMenu = [
     { Name: "Pollo Teriyaky", Price: 200, Image: imgComida, Rating: 3 },
@@ -76,10 +103,7 @@ function Profile() {
     Name: "La Grandeza",
     Image: img,
     Rating: 3.8,
-    Location: "Cordoba",
-    Schedule: "8am-12pm",
     Tel: [123214352, 453424324],
-    Email: "sdasdasda@grupo5pf.com",
   };
   return (
     <>
@@ -101,7 +125,7 @@ function Profile() {
             </div>
             <div className="ScheduleGroup">
               <h3>Horario:</h3>
-              <p className="Schedule">{Schedule}</p>
+              <p className="Schedule">{locals.schedule}</p>
             </div>
             <div className="TelGroup">
               <h3>Tel:</h3>
@@ -111,7 +135,7 @@ function Profile() {
             </div>
             <div className="EmailGroup">
               <h3>E-mail:</h3>
-              <p>{Email}</p>
+              <p>{locals.email}</p>
             </div>
             <div className="Options">
               <div className="Reservar">
@@ -121,7 +145,7 @@ function Profile() {
               <div
                 className="VerReseña"
                 onClick={() => {
-                  setToggleModal("Reviews");
+                  setToggleModal("ReviewsLocal");
                 }}
               >
                 <p>Ver Reseñas</p>
@@ -152,14 +176,16 @@ function Profile() {
                 <GiMeal />
               </div>
             </div>
-            <div></div>
           </div>
         </div>
+
         <div className="ContainerSelection">
           {(toogleModal === "Menu" || !toogleModal) && (
             <Menu ListMenu={ListMenu} />
           )}
-          {toogleModal === "Reviews" && <Reviews ReviewsList={ReviewsList} />}
+          {locals && toogleModal === "ReviewsLocal" && (
+            <ReviewsLocal ReviewsList={locals.Reviews} />
+          )}
         </div>
       </div>
     </>
