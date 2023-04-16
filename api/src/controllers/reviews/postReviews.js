@@ -1,8 +1,6 @@
-const jwt = require('jsonwebtoken');
 const { Review, Local } = require('../../db');
 
 module.exports = async (req, res) => {
-  const token = req.get('authorization');
   const {
     title, comment, verified, food, image, environment, service, qaPrice,
   } = req.body;
@@ -12,12 +10,11 @@ module.exports = async (req, res) => {
     if (!local) throw new Error('Local not found');
 
     const rating = (food + environment + service + qaPrice) / 4;
-    const userId = jwt.verify(token.split(' ')[1], process.env.SECRET_KEY).id;
     const newReview = await Review.create({
       title, comment, verified, food, environment, service, qaPrice, rating,
     });
     await local.addReview(newReview.id);
-    await newReview.setUser(userId);
+    await newReview.setUser(req.userId);
     await newReview.setImage(image.id);
     await newReview.save();
     return res.status(201).json({ success: true, review: newReview });
