@@ -25,10 +25,11 @@ function Card({
             <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating} />
           </div>
         )}
-        {Location && (
+        {location && (
           <div className="LocationGroup">
-            <p className="Location">{Location}</p>
+            <p className="Location"></p>
             <GoLocation />
+            {location}
           </div>
         )}
         {/* {Price && <p className="Price">${Price}</p>} */}

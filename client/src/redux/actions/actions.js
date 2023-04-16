@@ -103,7 +103,8 @@ await axios.post("http://localhost:3001/users",{
 }
 
 
-export const createLocal=async(inputs, chekinputs)=>{
+export const createLocal=(inputs, chekinputs)=>{
+   return async dispatch => {
         try{
     await axios.post("http://localhost:3001/locals",{
     "name":inputs.name, 
@@ -127,4 +128,5 @@ export const createLocal=async(inputs, chekinputs)=>{
         }catch(error){
             console.log(error.message)
         }
+      }     
 }

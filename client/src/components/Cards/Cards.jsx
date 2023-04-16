@@ -45,7 +45,7 @@ function Cards() {
                       id={id}
                       Name={name}
                       Rating={rating}
-                      Location={location}
+                      location={location}
                       verified={verified}
                       schedule={schedule}
                       Characteristic={Characteristic}
