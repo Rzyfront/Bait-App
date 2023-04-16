@@ -1,12 +1,14 @@
+import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
 import LoginErrors from "../LoginErros";
 
-const Register = ({ setToggleLogin }) => {
+const Register = ({ setToggleLogin, loginRegister }) => {
 
     const passRef = useRef();
     const formRef = useRef();
     const [message, setMessage] = useState(false);
+    
 
     const [errorsRegister, setErrorsRegister] = useState({
         name: "",
@@ -28,7 +30,7 @@ const Register = ({ setToggleLogin }) => {
         console.log(errorsRegister);
     };
 
-    const [dataRegister, setDataRegister] = React.useState({
+    const [dataRegister, setDataRegister] = useState({
         name: "",
         lastname: "MiPapa",
         age: "25",
@@ -76,7 +78,7 @@ const Register = ({ setToggleLogin }) => {
     };
     return(
         <>
-            <div className={`login ${!login && "scale-up-bottom"}`}>
+            <div className={`login ${!loginRegister && "scale-up-bottom"}`}>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
@@ -140,15 +142,15 @@ const Register = ({ setToggleLogin }) => {
                                 Registrarme
                             </button>
 
-                            <div className="registrarme" onClick={() => setLogin(!login)}>
+                            <div className="registrarme" onClick={() => loginRegister()}>
                                 <p>¿Ya tienes cuenta?</p>
-                                <h5>Inicia sesion</h5>
+                                <h5>Inicia sesión</h5>
                             </div>
                         </form>
                     </div>
                 </div>
                 {message && (
-                    <h3 className="invalid">Los datos ingresados no son validos</h3>
+                    <h3 className="invalid">Los datos ingresados no son válidos</h3>
                 )}
             </div>
         </>
