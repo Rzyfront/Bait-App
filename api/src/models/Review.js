@@ -95,6 +95,9 @@ module.exports = (sequelize) => {
           },
         },
       },
+      rating: {
+        type: DataTypes.FLOAT,
+      },
     },
   );
 };
