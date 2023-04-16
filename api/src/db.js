@@ -30,6 +30,9 @@ Review.hasOne(Image);
 Review.belongsTo(Local);
 Local.hasMany(Review);
 
+Review.belongsTo(User);
+User.hasMany(Review);
+
 Image.belongsTo(Local);
 Local.hasMany(Image);
 

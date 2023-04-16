@@ -74,4 +74,51 @@ return {
 }
 
 
+  
+}
+/// Create user
+export const createUser=async(inputs)=>{
+try {
+  await axios.post("http://localhost:3001/users",{
+    "name":inputs.name,
+    "lastname":inputs.lastname,
+    "age":inputs.age,
+    "phoneNumber":inputs.phoneNumber,
+    "email":inputs.email,
+    "password":inputs.password,
+    "location":inputs.location,
+    "verified":inputs.verified,
+    "isActive":inputs.isActive,
+    "role":inputs.role
+  })
+} catch (error) {
+  console.log(error.message)
+}
+}
 
+
+export const createLocal=async(inputs, chekinputs)=>{
+        try{
+    await axios.post("http://localhost:3001/locals",{
+    "name":inputs.name, 
+    "location":inputs.location, 
+    "schedule":inputs.schedule,
+    "email":inputs.email,
+    "images":inputs.imagen  ,
+    "characteristics":{
+			"wifi": chekinputs.wifi,
+			"parking_lot": chekinputs.parking_lot,
+			"outdoor_seating": chekinputs.outdoor_seating,
+			"live_music": chekinputs.live_music,
+			"table_service": chekinputs.table_service,
+			"family_style": chekinputs.family_style,
+			"romantic": chekinputs.romantic,
+			"big_group": chekinputs.big_group,
+			"work_friendly": chekinputs.work_friendly,
+			"pet_friendly": chekinputs.pet_friendly
+		}
+    })
+        }catch(error){
+            console.log(error.message)
+        }
+}
