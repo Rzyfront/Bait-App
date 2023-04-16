@@ -1,16 +1,21 @@
-// const { Op } = require('sequelize');
-const { setQueryName, setQueryLocation } = require('../../helpers/querySetterLocal');
+const { Op, fn, col } = require('sequelize');
 
 module.exports = (req, res, next) => {
-  const { name, location, ...characteristics } = req.query; // eslint-disable-line
+  const { name, location, order,...characteristics } = req.query; // eslint-disable-line
   const where = {};
+  let reqOrder = [];
   if (name) {
-    where.name = setQueryName(name);
+    where.name = { [Op.iLike]: `%${name}%` };
   }
   if (location) {
-    where.location = setQueryLocation(location);
+    where.location = { [Op.iLike]: `%${name}%` };
+  }
+  if (order) {
+    if (order === 'ASC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'ASC']];
+    else if (order === 'DESC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'DESC']];
   }
   req.characteristics = characteristics;
+  req.order = reqOrder;
   req.where = where;
   next();
 };

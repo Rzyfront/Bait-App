@@ -9,8 +9,9 @@ module.exports = async (req, res) => {
     const local = await Local.findByPk(localId);
     if (!local) throw new Error('Local not found');
 
+    const rating = (food + environment + service + qaPrice) / 4;
     const newReview = await Review.create({
-      title, comment, verified, food, environment, service, qaPrice,
+      title, comment, verified, food, environment, service, qaPrice, rating,
     });
     await local.addReview(newReview.id);
     await newReview.setImage(image.id);
