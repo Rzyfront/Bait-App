@@ -1,3 +1,8 @@
+.containerCardsall{
+    width: 100%;
+    display: block;
+
+}
 .ContainerCards{
     display: flex;
     flex-wrap: wrap;
@@ -7,10 +12,4 @@
     width: 100%;
     color: var(--primary);
     background-color: var(--bg-primary);
-
-}
-.containerCardsall{
-    width: 100%;
-    display: block;
-
 }

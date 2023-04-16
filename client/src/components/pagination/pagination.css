@@ -5,9 +5,11 @@
 .pagination_off{
     color: var(--primary);
 }
+
 .pagination_off:hover{
     cursor: pointer;
 }
+
 .containerPagination{
     width: 100%;
     display: flex;
@@ -15,9 +17,11 @@
     justify-content: center;
     gap: 5px;
 }
+
 .paginationIcon{
     font-size: 1.5rem;
 }
+
 .paginationIcon:hover{
     cursor: pointer;
 }

@@ -1,5 +1,5 @@
 const {
-  Local, Characteristics, Menu, Review, Image,
+  Local, Characteristic, Menu, Review, Image,
 } = require('../../db');
 const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
   try {
     const locals = await Local.findByPk(req.local.id, {
       include: [{
-        model: Characteristics,
+        model: Characteristic,
         attributes: allCharacteristics,
       }, { model: Menu },
       { model: Review },

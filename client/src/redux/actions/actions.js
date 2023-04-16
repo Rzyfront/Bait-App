@@ -1,13 +1,9 @@
+import axios from "axios";
 //////names/////////////
-import axios from 'axios';
 export const FILTERS="FILTERS";
 export const ORDER="ORDER";
 export const RESET="RESET";
-export const GET_REV_DETAIL = 'GET_REV_DETAIL';
-export const POST_REV = 'POST_REV';
-export const UPDATE_REVIEW = 'UPDATE_REVIEW';
-export const DELETE_REVIEW = 'DELETE_REVIEW';
-
+export const LOADINGLOCALS="LOADINGLOCALS"
 //////////actions////////////////////////////
 
 //filter
@@ -59,16 +55,70 @@ export const order=(data,actions)=>{
    //adgorithm aordering
      
 }
-
 export const reset=()=>{
   return{
     type:RESET,
     payload:""
   }
 }
-
-export const getRevDetail = () => {
-
+/// loadinglocals
+export const loadingLocals=async()=>{
+try {
+  const response=await axios.get("http://localhost:3001/locals")
+return {
+    type:LOADINGLOCALS,
+    payload:response.data
+  }
+} catch (error) {
+  console.log(error.message)
 }
 
 
+  
+}
+/// Create user
+export const createUser=async(inputs)=>{
+try {
+  await axios.post("http://localhost:3001/users",{
+    "name":inputs.name,
+    "lastname":inputs.lastname,
+    "age":inputs.age,
+    "phoneNumber":inputs.phoneNumber,
+    "email":inputs.email,
+    "password":inputs.password,
+    "location":inputs.location,
+    "verified":inputs.verified,
+    "isActive":inputs.isActive,
+    "role":inputs.role
+  })
+} catch (error) {
+  console.log(error.message)
+}
+}
+
+
+export const createLocal=async(inputs, chekinputs)=>{
+        try{
+    await axios.post("http://localhost:3001/locals",{
+    "name":inputs.name, 
+    "location":inputs.location, 
+    "schedule":inputs.schedule,
+    "email":inputs.email,
+    "images":inputs.imagen  ,
+    "characteristics":{
+			"wifi": chekinputs.wifi,
+			"parking_lot": chekinputs.parking_lot,
+			"outdoor_seating": chekinputs.outdoor_seating,
+			"live_music": chekinputs.live_music,
+			"table_service": chekinputs.table_service,
+			"family_style": chekinputs.family_style,
+			"romantic": chekinputs.romantic,
+			"big_group": chekinputs.big_group,
+			"work_friendly": chekinputs.work_friendly,
+			"pet_friendly": chekinputs.pet_friendly
+		}
+    })
+        }catch(error){
+            console.log(error.message)
+        }
+}

@@ -28,6 +28,8 @@ const Filters = () => {
     if (filterState === true) {
       handlecafication();
     }
+    console.log(e.target.value);
+    setSelectOrder(e.target.value);
     dispatch(order(ContainerCards, e.target.value));
   };
 
@@ -61,7 +63,7 @@ const Filters = () => {
       <select
         className="filter_calification"
         onChange={handleSelect}
-        value={setSelectOrder}
+        value={selectOrder}
       >
         <option value="" disabled>
           Ordenar por

@@ -6,12 +6,13 @@ const postUser = require('../controllers/users/postUser');
 const deleteUser = require('../controllers/users/deleteUser');
 const modifyUser = require('../controllers/users/putUser');
 const putInactiveUser = require('../controllers/users/putInactiveUser');
+const verifiyUser = require('../controllers/users/verifyUser');
 
 userRoutes.get('/', getUsers)
-  .delete('/:userId', verifyDelete, deleteUser)
-  .get('/:userId', getUsers)
+  .get('/verified', verifiyUser)
+.get('/:userId', getUsers)
   .post('/', verifyPost, postUser)
-
+  .delete('/:userId', verifyDelete, deleteUser)
   .put('/:userId', modifyUser)
   .put('/inactive/:userId', putInactiveUser);
 
