@@ -16,10 +16,10 @@ const sendVerificationEmail = (id, userEmail) => {
   const tokenEmail = jwt.sign({ id, verified: 'verified' }, process.env.SECRET_KEY_2);
   transporter.sendMail({
     subject: 'Verifica tu Email de Bait!!',
-    from: process.env.EMAIL_BAIT,
+    from: email,
     to: userEmail,
-    html: `<h1>Email recibed</h1>
-      <a href="http://localhost:3001/users/verified?token=${tokenEmail}&verified=true">verifica tu email</a>`,
+    html: `<h1>Verifica tu email</h1>
+      <a href="http://localhost:3001/users/verified?token=${tokenEmail}">verifica tu email</a>`,
   });
 };
 

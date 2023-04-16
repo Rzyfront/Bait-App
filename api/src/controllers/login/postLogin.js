@@ -12,10 +12,13 @@ module.exports = async (req, res) => {
     const pass = await bcrypt.compare(password, user.password);
     if (!pass) throw new Error('Password or email incorrect');
 
+    if (user.verified !== 'verified') throw new Error('Verify your email address');
+
     const token = jwt.sign({
       email: user.email,
       id: user.id,
       role: user.role,
+      verified: user.verified,
     }, process.env.SECRET_KEY);
 
     res.status(200).send({ user, token });
