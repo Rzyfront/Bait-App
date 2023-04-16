@@ -3,7 +3,8 @@ import axios from "axios";
 export const FILTERS="FILTERS";
 export const ORDER="ORDER";
 export const RESET="RESET";
-export const LOADINGLOCALS="LOADINGLOCALS"
+export const LOADINGLOCALS="LOADINGLOCALS";
+export const LOGIN = 'LOGIN';
 //////////actions////////////////////////////
 
 //filter
@@ -121,4 +122,14 @@ export const createLocal=async(inputs, chekinputs)=>{
         }catch(error){
             console.log(error.message)
         }
+}
+
+export const logIn = (credentials) => {
+  return async (dispatch) => {
+    const res = await axios.post("http://localhost:3001/login", credentials);
+    return dispatch({
+      type: LOGIN,
+      payload: res.data
+    })
+  }
 }

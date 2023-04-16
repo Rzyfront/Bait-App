@@ -7,14 +7,18 @@ import LoginForm from "./LoginForm/LoginForm";
 const Login = ({ setToggleLogin }) => {
   const [animation, setAnimation] = useState(false);
   const [ojo, setOjo] = useState(false);
-  const [login, setLogin] = useState(true);  
+  const [login, setLogin] = useState(true);
+
+  const loginRegister = () => {
+    setLogin(!login)
+  }
   
-  useEffect(() => {
-    setDataRegister({
-      ...dataRegister,
-      email: `${Math.random().toString(36).substring(7)}@gmail.com`,
-    });
-  }, []);
+  // useEffect(() => {
+  //   setDataRegister({
+  //     ...dataRegister,
+  //     email: `${Math.random().toString(36).substring(7)}@gmail.com`,
+  //   });
+  // }, []);
 
   useEffect(() => {
     setAnimation(true);
@@ -34,10 +38,10 @@ const Login = ({ setToggleLogin }) => {
   return (
     <div className={`LoginContainer ${animation && "scale-up-tr"}`}>
       {login ? (
-        <LoginForm setToggleLogin={setToggleLogin} fn={fn}/>
+        <LoginForm setToggleLogin={setToggleLogin} fn={fn} loginRegister={loginRegister}/>
         
       ) : (
-          <Register setToggleLogin={setToggleLogin}/>
+          <Register setToggleLogin={setToggleLogin} loginRegister={loginRegister} />
       )}
     </div>
   );

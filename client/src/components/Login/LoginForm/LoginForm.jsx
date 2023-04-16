@@ -1,8 +1,11 @@
 import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../../redux/actions/actions";
 
 
-const LoginForm = ({ setToggleLogin, fn }) => {
+const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
+    const dispatch = useDispatch();
     const titleRef = useRef();
     const passRef = useRef();
     const imgRef = useRef();
@@ -10,31 +13,11 @@ const LoginForm = ({ setToggleLogin, fn }) => {
     const [form, setForm] = useState({});
    
     
-    const handleInput = (e) => {
-        const property = e.target.name;
-        const value = e.target.value;
-        setForm({ ...form, [property]: value });
-    };
-
-    const handleRegister = (event) => {
-        setDataRegister({
-            ...dataRegister,
-            [event.target.name]: event.target.value,
-        });
-        setErrorsRegister(
-            LoginErrors({
-                ...dataRegister,
-                [event.target.name]: event.target.value,
-            })
-        );
-
-        console.log(errorsRegister);
-    };
-
-
+    
 
     const handleLogin = (e) => {
         e.preventDefault();
+        dispatch(logIn())
     }
 
     return(
@@ -51,14 +34,14 @@ const LoginForm = ({ setToggleLogin, fn }) => {
                     <h3 className="Sesion">sesión</h3>
                 </div>
                 <div className="formulario">
-                    <div className="container" ref={formRef}>
+                    <div className="container">
                         <form autoComplete="off" className="form">
                             <input
                                 className="input"
                                 type="text"
                                 name="name"
-                                value={dataRegister.name}
-                                onChange={handleRegister}
+                                value="name"
+                                // onChange={handleRegister}
                                 autoComplete="off"
                                 placeholder="Usuario"
                             ></input>
@@ -68,7 +51,7 @@ const LoginForm = ({ setToggleLogin, fn }) => {
                                     name="password"
                                     autoComplete="off"
                                     value={form.password}
-                                    onChange={handleInput}
+                                    // onChange={handleInput}
                                     className="input"
                                     placeholder="Contraseña"
                                     ref={passRef}
@@ -93,7 +76,7 @@ const LoginForm = ({ setToggleLogin, fn }) => {
                                 <span className="texto">Entra con Google</span>
                             </div>
 
-                            <div className="registrarme" onClick={() => setLogin(!login)}>
+                            <div className="registrarme" onClick={() => loginRegister()}>
                                 <p>¿Aún no tienes cuenta?</p>
                                 <h5>Regístrate</h5>
                             </div>
