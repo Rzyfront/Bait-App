@@ -134,14 +134,14 @@ function ReviewsForm({ setToggleModal2 }) {
           </p>
           <div className="RatingInput">
             <h5>Calificación:</h5>
-            {/* Al hacer submit setear el stado calificacion en el Input */}     
-            {/* <RatingStar
+           {/* Al hacer submit setear el stado calificacion en el Input */}     
+          {/*  <RatingStar
               name="Rating"
               style={{ maxWidth: 180 }}
-              value={calculateAverage()}
+              value={calculateAverage}
               onChange={setcalculateAverage}
               isRequired
-            /> */}
+            />   */}
           </div>
           <div className="RatingInput">
             <h2>Comida:</h2>

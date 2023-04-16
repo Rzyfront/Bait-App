@@ -1,6 +1,8 @@
 import React from "react";
 import "./Locales.css";
 import { useState } from "react";
+import BaitLogo from "../../assets/BaitLogo.png";
+import { Link } from "react-router-dom";
 // eslint-disable-next-line
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 import { useUploadImage } from "../../hooks/useUploadImage";
@@ -154,6 +156,15 @@ function Locales() {
   return (
     <div className="locales">
       <div className="locales_data">
+      <Link to="/home" className="LinkLogo">
+          <img
+            src={BaitLogo}
+            alt="Bait"
+            className="Logo"
+            width="60px"
+            height="60px"
+          />
+        </Link>
         <h1>Crea un nuevo Local</h1>
         <form onSubmit={handleSubmit}>
           <label>Nombre Local: </label>
