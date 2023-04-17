@@ -2,9 +2,10 @@ import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
 import { validation} from "../validation";
+import { useDispatch } from "react-redux";
 
 const Register = ({ setToggleLogin, loginRegister }) => {
-
+     const dispatch = useDispatch()   
     const passRef = useRef();
     const formRef = useRef();
     const [message, setMessage] = useState(false);
@@ -46,6 +47,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
 
     const sendRegister = (event) => {
         event.preventDefault();
+        console.log(dataRegister);
         if (!Object.values(errorsRegister).length) {
             dispatch(createUser(dataRegister));
             setDataRegister({
@@ -62,11 +64,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                 role: "",
             });
             alert("Usario creado")
-            setErrorsRegister({
-                name: "",
-                phone_number: "",
-                password: "",
-            });
+            setErrorsRegister({});
         } else {
             alert(
                 errorsRegister.name +
@@ -103,12 +101,21 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                             ></input>
                             <input
                                 className="input"
+                                type="text"
+                                name="lastname"
+                                value={dataRegister.lastname}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="Apellido"
+                            ></input>
+                            <input
+                                className="input"
                                 type="number"
                                 name="age"
                                 value={dataRegister.age}
                                 onChange={handleRegister}
                                 autoComplete="off"
-                                placeholder="Apellido"
+                                placeholder="Edad"
                             ></input>
                             <input
                                 className="input"
@@ -126,7 +133,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                                 value={dataRegister.email}
                                 onChange={handleRegister}
                                 autoComplete="off"
-                                placeholder="edad"
+                                placeholder="Email"
                             ></input>  <input
                                 className="input"
                                 type="text"
