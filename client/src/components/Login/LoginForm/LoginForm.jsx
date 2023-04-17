@@ -1,25 +1,49 @@
 import { TfiClose } from "react-icons/tfi";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../redux/actions/actions";
+import validation from "../validation"
 
 
 const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
     const dispatch = useDispatch();
-    const titleRef = useRef();
-    const passRef = useRef();
     const imgRef = useRef();
     const [message, setMessage] = useState(false);
-    const [form, setForm] = useState({});
-    
-    
+
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setUser({
+            ...user,
+            [name]: value
+        });
+
+        setErrors(validation({
+            ...user,
+            [name]: value
+        }));
+    }
 
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(logIn())
+
+        console.log('entro')
+        if (Object.entries(errors).length === 0) return dispatch(logIn(user));
+        alert("Invalid data");
     }
 
-    return(
+    useEffect(() => {
+
+    }, [user])
+
+    return (
         <>
             <div className="login">
                 <TfiClose
@@ -28,7 +52,7 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                         setToggleLogin(false);
                     }}
                 />
-                <div className="title" ref={titleRef}>
+                <div className="title">
                     <h3 className="Iniciar">Iniciar</h3>
                     <h3 className="Sesion">sesión</h3>
                 </div>
@@ -38,9 +62,9 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                             <input
                                 className="input"
                                 type="text"
-                                name="name"
-                                value="name"
-                                // onChange={handleRegister}
+                                name="email"
+                                value={user.email}
+                                onChange={handleChange}
                                 autoComplete="off"
                                 placeholder="Usuario"
                             ></input>
@@ -49,11 +73,10 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                                     type="password"
                                     name="password"
                                     autoComplete="off"
-                                    value={form.password}
-                                    // onChange={handleInput}
+                                    value={user.password}
+                                    onChange={handleChange}
                                     className="input"
                                     placeholder="Contraseña"
-                                    ref={passRef}
                                 ></input>
                                 <img
                                     alt="img"
@@ -64,7 +87,7 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                                     width="20px"
                                 ></img>
                             </div>
-                            <button className="button" onSubmit={handleLogin}>Ingresar</button>
+                            <button className="button" type="submit" onSubmit={handleLogin}>Ingresar</button>
                             <div className="loginwith">
                                 <img
                                     alt="img"

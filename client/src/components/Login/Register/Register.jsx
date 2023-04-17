@@ -1,14 +1,14 @@
 import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
-import LoginErrors from "../LoginErros";
+import LoginErrors from "../validation";
 
 const Register = ({ setToggleLogin, loginRegister }) => {
 
     const passRef = useRef();
     const formRef = useRef();
     const [message, setMessage] = useState(false);
-    
+
 
     const [errorsRegister, setErrorsRegister] = useState({
         name: "",
@@ -76,7 +76,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
             );
         }
     };
-    return(
+    return (
         <>
             <div className={`login ${!loginRegister && "scale-up-bottom"}`}>
                 <TfiClose
