@@ -13,6 +13,7 @@ export const useUploadImage=()=>{
             axios.post('/images',{image:e.target.result})
             .then(res=>{
                 setImage([...image, res.data.image])
+                console.log(res.data)
             }).catch(err=>{
                 console.log(err);
             }).finally(()=>{

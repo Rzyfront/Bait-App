@@ -6,6 +6,8 @@ export const RESET = "RESET";
 export const LOADINGLOCALS = "LOADINGLOCALS";
 export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
 export const DETAIL="DETAIL"
+export const LOGIN = 'LOGIN';
+
 //////////actions////////////////////////////
 
 //filter
@@ -166,3 +168,15 @@ export const searchByQuery = (data) => {
   };
 };
 
+
+
+export const logIn = (credentials) => {
+  console.log('haciendo dispatch')
+  return async (dispatch) => {
+    const res = await axios.post("/login", credentials);
+    return dispatch({
+      type: LOGIN,
+      payload: res.data
+    })
+  }
+}
