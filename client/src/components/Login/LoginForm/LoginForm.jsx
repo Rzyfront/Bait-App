@@ -123,3 +123,4 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
 }
 
 export default LoginForm;
+

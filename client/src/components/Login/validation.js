@@ -9,9 +9,9 @@ export const validation = (data) => {
 
     if(data.name.length > 20) errors.name = "Nombre muy grande";
 
-    if(data.phoneNumber.length !== 10){
-        errors.phoneNumber = "Ingresa un número de teléfono válido"
-    }
+    // if(data.phoneNumber !== 10){
+    //     errors.phoneNumber = "Ingresa un número de teléfono válido"
+    // }
     if(data.password !== data.password2){
         errors.password = "Las contraseñas deben coincidir"
     }
