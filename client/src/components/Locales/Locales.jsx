@@ -159,7 +159,7 @@ function Locales() {
   return (
     <div className="locales">
       <div className="locales_data">
-      <Link to="/home" className="LinkLogo">
+        <Link to="/home" className="LinkLogo">
           <img
             src={BaitLogo}
             alt="Bait"
@@ -181,7 +181,7 @@ function Locales() {
           />
           {errors.name && <p className="danger">{errors.name}</p>}
           <hr />
-          <label>Ubicacion:  </label>
+          <label>Ubicacion: </label>
           <select
             name="location"
             className="location"
@@ -228,20 +228,27 @@ function Locales() {
           />
           {errors.message && <p className="danger">{errors.phone}</p>}
           <hr />
-          <label className="imagen" htmlFor="imagen">Imagenes</label>
+          <label className="imagen" htmlFor="imagen">
+            Imagenes
+          </label>
           <input
             type="file"
             name="imagen"
-            accept="image/*"
+            accept="image/png,image/jpeg,image/jpg,image/gif"
             // multiple
             onChange={handleChangeimages}
           ></input>
           <hr />
-          {image ? (
-            <img src={image} 
-            alt="imagen" 
-            className="LocalesImage" 
-            />
+
+          {image.length ? (
+            image.map((image, i) => (
+              <img
+                key={i}
+                src={image.url}
+                alt="imagen"
+                className="LocalesImage"
+              />
+            ))
           ) : loading === true ? (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
