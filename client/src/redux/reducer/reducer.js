@@ -1,4 +1,4 @@
-import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY, DETAIL } from "../actions/actions";
+import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY, DETAIL,CREATE_USER } from "../actions/actions";
 
 const initialState={
 cards:[],
@@ -47,16 +47,16 @@ const rootReducer=(state=initialState ,{type,payload})=>{
         ...state,
         detail:payload
       }
-    default:
-      return { ...state };
-  }
-};
-
       case CREATE_USER:
         return {
           ...state,
           createdUserMessage:payload
         }
+    default:
+      return { ...state };
+  }
+};
+
       
 
 
