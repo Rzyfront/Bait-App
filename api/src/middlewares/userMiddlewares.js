@@ -17,10 +17,10 @@ try {
         password } = req.body
 
     //Name 
-    verifiedExistsTypeLength(name, 'string', 50, 'name');
+    verifiedExistsTypeLength(name, 'string', 10, 'name');
 
     //lastName
-    verifiedExistsTypeLength(lastname, 'string', 50, 'lastName');
+    verifiedExistsTypeLength(lastname, 'string', 10, 'lastName');
 
     //age 
     verifiedExists(age, 'age')
