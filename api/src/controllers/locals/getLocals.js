@@ -6,6 +6,8 @@ const {
 const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
 module.exports = async (req, res) => {
+  const { numPage } = req.params;
+  const page = numPage || 1;
   try {
     const { count, rows } = await Local.findAndCountAll({
       where: req.where,
@@ -26,8 +28,8 @@ module.exports = async (req, res) => {
       ],
       attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule'],
       order: req.order,
-      limit: 10,
-      offset: 0,
+      limit: page * 10,
+      offset: (page - 1) * 10,
       group: ['Local.id', 'Images.id', 'Characteristic.id'],
       subQuery: false,
     });

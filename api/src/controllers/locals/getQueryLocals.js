@@ -1,7 +1,9 @@
 const { Op, fn, col } = require('sequelize');
 
 module.exports = (req, res, next) => {
-  const { name, location, order,...characteristics } = req.query; // eslint-disable-line
+  const {
+    name, location, order, page, ...characteristics
+  } = req.query;
   const where = {};
   let reqOrder = [];
   if (name) {
