@@ -3,6 +3,7 @@ import "./Locales.css";
 import { useState } from "react";
 import BaitLogo from "../../assets/BaitLogo.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // eslint-disable-next-line
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 import { useUploadImage } from "../../hooks/useUploadImage";
@@ -35,10 +36,12 @@ export const validate = (inputs) => {
   return errors;
 };
 
+
+
 function Locales() {
   let { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [inputs, setInputs] = useState({
     location: "",
     name: "",
@@ -156,8 +159,17 @@ function Locales() {
     }
     console.log(chekinputs);
   };
+
+  const handleBack = ()=>{
+    navigate("/home")
+  }
   return (
     <div className="locales">
+      <div>
+        <button onClick={handleBack}>
+          Regresar
+        </button>
+      </div>
       <div className="locales_data">
         <Link to="/home" className="LinkLogo">
           <img
