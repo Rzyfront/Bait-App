@@ -181,7 +181,7 @@ function Locales() {
           />
           {errors.name && <p className="danger">{errors.name}</p>}
           <hr />
-          <label>Ubicacion: </label>
+          <label>Ubicacion:  </label>
           <select
             name="location"
             className="location"
@@ -228,7 +228,7 @@ function Locales() {
           />
           {errors.message && <p className="danger">{errors.phone}</p>}
           <hr />
-          <label htmlFor="imagen">Imagenes</label>
+          <label className="imagen" htmlFor="imagen">Imagenes</label>
           <input
             type="file"
             name="imagen"
