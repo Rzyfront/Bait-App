@@ -12,7 +12,12 @@
     border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
-  
+  .locales_data h1 {
+    font-size: 50px;
+    color: var(--primary);
+    font-family: var(--title);
+    font-weight: 700;
+  }
   .form-container {
     margin-top: 20px;
   }
@@ -22,7 +27,7 @@
     margin-bottom: 5px;
     font-weight: bold;
   }
-
+  
   .LocalesImage{
     height: 200px;
     width: 200px;
