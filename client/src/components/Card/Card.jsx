@@ -1,4 +1,3 @@
-import React from "react";
 import { GoLocation } from "react-icons/go";
 import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
@@ -13,10 +12,19 @@ function Card({
   schedule,
   Characteristic,
   Images,
+  Price,
 }) {
   return (
     <div className="Card">
-      <img src={Images} alt={Name} className="imgCard" />
+      {Images.length > 0 ? (
+        <img src={Images[0].url} alt={Name} className="imgCard" />
+      ) : (
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Restaurant_in_The_Mus%C3%A9e_d%27Orsay.jpg"
+          alt="imagen defaul"
+          className="imgCard"
+        />
+      )}
       <div className="infoCard">
         <h2 className="placeName">{Name || "No name"}</h2>
         {Rating && (
@@ -32,7 +40,7 @@ function Card({
             {location}
           </div>
         )}
-        {/* {Price && <p className="Price">${Price}</p>} */}
+        {Price && <p className="Price">${Price}</p>}
       </div>
     </div>
   );

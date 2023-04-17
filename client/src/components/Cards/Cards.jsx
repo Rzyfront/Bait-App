@@ -15,6 +15,7 @@ function Cards() {
   //reset filters or search
   useEffect(() => {
     setnavegation(0);
+    console.log(ContainerCards);
   }, [ContainerCards]);
 
   const handlepage = (data) => {
@@ -49,7 +50,7 @@ function Cards() {
                     verified={verified}
                     schedule={schedule}
                     Characteristic={Characteristic}
-                    Images={img}
+                    Images={Images}
                   />
                 </Link>
               );

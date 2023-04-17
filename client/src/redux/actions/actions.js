@@ -83,6 +83,16 @@ export const DetailLocal=(id)=>{
 
 //correguir imagen cuando este listo la ruta
 export const createLocal=(inputs, chekinputs)=>{
+
+
+  let images=[]
+ inputs.imagen.forEach(data=>{
+   images.push({id:data.id})
+ })
+
+
+
+
    return async dispatch => {
         try{
     await axios.post("/locals",{
@@ -90,7 +100,7 @@ export const createLocal=(inputs, chekinputs)=>{
     "location":inputs.location, 
     "schedule":inputs.schedule,
     "email":inputs.email,
-    "images":[{id:1}],
+    "images":images,
     "characteristics":{
 			"wifi": chekinputs.wifi,
 			"parking_lot": chekinputs.parking_lot,
