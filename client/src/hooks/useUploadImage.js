@@ -2,7 +2,7 @@ import axios from 'axios';
 import {useState}from 'react'
 
 export const useUploadImage=()=>{
-    const [image, setImage] = useState()
+    const [image, setImage] = useState([])
     const [loading, setLoading] = useState(false)
 
     const handleChangeimage =(event)=>{
@@ -12,7 +12,7 @@ export const useUploadImage=()=>{
             setLoading(true)
             axios.post('http://localhost:3001/images',{image:e.target.result})
             .then(res=>{
-                setImage(res.data.image.url)
+                setImage([...image, res.data.image])
             }).catch(err=>{
                 console.log(err);
             }).finally(()=>{
