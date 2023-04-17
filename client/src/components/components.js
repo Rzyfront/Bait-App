@@ -9,7 +9,7 @@ export { default as Navbar } from './Navbar/Navbar';
 // export { default as Pagination } from './Pagination/Pagination';
 export { default as Profile } from './Profile/Profile';
 // export { default as Register } from './Register/Register';
-export { default as Reviews } from './Reviews/Reviews';
+export { default as ReviewsLocal } from './Reviews/Reviews';
 export { default as ReviewsForm } from './ReviewsForm/ReviewsForm';
 export { default as Footer } from './Footer/Footer';
 export { default as Filters } from './Filters/Filters';

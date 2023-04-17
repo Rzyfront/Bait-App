@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import { GoLocation } from "react-icons/go";
@@ -9,12 +9,40 @@ import { GiMeal } from "react-icons/gi";
 import img from "../../assets/restaurante.jpg";
 import imgComida from "../../assets/comida.jpg";
 import Rimg from "../../assets/Reviewphoto.jpg";
-import { Menu, Reviews, ReviewsForm } from "../components";
+
+import { Menu, ReviewsLocal, ReviewsForm } from "../components";
 import { useState } from "react";
 import "./Profile.css";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { DetailLocal } from "../../redux/actions/actions";
 
 function Profile() {
-  const [toogleModal, setToggleModal] = useState("Reviews");
+  const [average, setAverage] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const { locals } = useSelector((state) => state.detail);
+
+  let { id } = useParams();
+  useEffect(() => {
+    dispatch(DetailLocal(id));
+  }, [id]);
+
+  useEffect(() => {
+    if (locals) {
+      let suma = 0;
+      locals.Reviews.forEach((data) => {
+        suma += data.rating;
+      });
+      suma = suma / locals.Reviews.length;
+      setAverage(suma);
+      if (locals.Reviews.length === 0) {
+        setAverage(0);
+      }
+    }
+  }, [locals]);
+
+  const [toogleModal, setToggleModal] = useState("ReviewsLocal");
   const [toogleModal2, setToggleModal2] = useState(false);
   const ListMenu = [
     { Name: "Pollo Teriyaky", Price: 200, Image: imgComida, Rating: 3 },
@@ -76,88 +104,92 @@ function Profile() {
     Name: "La Grandeza",
     Image: img,
     Rating: 3.8,
-    Location: "Cordoba",
-    Schedule: "8am-12pm",
     Tel: [123214352, 453424324],
-    Email: "sdasdasda@grupo5pf.com",
   };
   return (
     <div className="Profile">
       {toogleModal2 && <ReviewsForm setToggleModal2={setToggleModal2} />}
-      <div className="ProfileInfo">
-        <img src={Image} alt={Name} className="ImageProfile" />
-        <div className="Decorator"></div>
-        <div className="Info">
-          <h2>{Name}</h2>
-          <div className="RatingGroup">
-            <h3>Rating:</h3>
-            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating} />
-          </div>
-          <div className="LocationGroup">
-            <h3 className="Location">{Location}</h3>
-            <GoLocation />
-          </div>
-          <div className="ScheduleGroup">
-            <h3>Horario:</h3>
-            <p className="Schedule">{Schedule}</p>
-          </div>
-          <div className="TelGroup">
-            <h3>Tel:</h3>
-            {Tel.map((t, i) => {
-              return <p key={i}>{t} |</p>;
-            })}
-          </div>
-          <div className="EmailGroup">
-            <h3>E-mail:</h3>
-            <p>{Email}</p>
-          </div>
-          <div className="Options">
-            <div className="Reservar">
-              <p>Reservar</p>
-              <BsCalendar3 />
+      {locals ? (
+        <div className="ProfileInfo">
+          <img src={Image} alt={locals.name} className="ImageProfile" />
+          <div className="Decorator"></div>
+          <div className="Info">
+            <h2>{locals.name}</h2>
+            <div className="RatingGroup">
+              <h3>Rating:</h3>
+              <RatingStar readOnly style={{ maxWidth: 100 }} value={average} />
             </div>
-            <div
-              className="VerReseña"
-              onClick={() => {
-                setToggleModal("Reviews");
-              }}
-            >
-              <p>Ver Reseñas</p>
-              <TfiCommentAlt />
+            <div className="LocationGroup">
+              <h3 className="Location">{locals.location}</h3>
+              <GoLocation />
             </div>
-            <div
-              className="HacerReseña"
-              onClick={
-                toogleModal2
-                  ? () => {
-                      setToggleModal2(false);
-                    }
-                  : () => {
-                      setToggleModal2(true);
-                    }
-              }
-            >
-              <p>Hacer Reseña</p>
-              <TfiPencilAlt />
+            <div className="ScheduleGroup">
+              <h3>Horario:</h3>
+              <p className="Schedule">{locals.schedule}</p>
             </div>
-            <div
-              className="VerMenu"
-              onClick={() => {
-                setToggleModal("Menu");
-              }}
-            >
-              <p>Ver Menu</p>
-              <GiMeal />
+            <div className="TelGroup">
+              <h3>Tel:</h3>
+              {Tel.map((t, i) => {
+                return <p key={i}>{t} |</p>;
+              })}
             </div>
+            <div className="EmailGroup">
+              <h3>E-mail:</h3>
+              <p>{locals.email}</p>
+            </div>
+            <div className="Options">
+              <div className="Reservar">
+                <p>Reservar</p>
+                <BsCalendar3 />
+              </div>
+              <div
+                className="VerReseña"
+                onClick={() => {
+                  setToggleModal("ReviewsLocal");
+                }}
+              >
+                <p>Ver Reseñas</p>
+                <TfiCommentAlt />
+              </div>
+              <div
+                className="HacerReseña"
+                onClick={
+                  toogleModal2
+                    ? () => {
+                        setToggleModal2(false);
+                      }
+                    : () => {
+                        setToggleModal2(true);
+                      }
+                }
+              >
+                <p>Hacer Reseña</p>
+                <TfiPencilAlt />
+              </div>
+              <div
+                className="VerMenu"
+                onClick={() => {
+                  setToggleModal("Menu");
+                }}
+              >
+                <p>Ver Menu</p>
+                <GiMeal />
+              </div>
+            </div>
+            <div></div>
           </div>
-          <div></div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
+
       <div className="ContainerSelection">
         {(toogleModal === "Menu" || !toogleModal) && (
           <Menu ListMenu={ListMenu} />
         )}
-        {toogleModal === "Reviews" && <Reviews ReviewsList={ReviewsList} />}
+        {locals && toogleModal === "ReviewsLocal" && (
+          <ReviewsLocal ReviewsList={locals.Reviews} />
+        )}
       </div>
     </div>
   );

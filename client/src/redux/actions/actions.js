@@ -5,6 +5,7 @@ export const ORDER = "ORDER";
 export const RESET = "RESET";
 export const LOADINGLOCALS = "LOADINGLOCALS";
 export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
+export const DETAIL="DETAIL"
 //////////actions////////////////////////////
 
 //filter
@@ -67,13 +68,15 @@ await axios.post("/users",{
 export const DetailLocal=(id)=>{
   return async dispatch=>{
     try {
-      await axios.get("")
-      
+    const datos =await axios.get(`/locals/${id}`)
+    dispatch({
+        type: DETAIL,
+        payload: datos.data
+      });
     } catch (error) {
-      
+      console.log(error.message)
     }
   }
-
 }
 
 //correguir imagen cuando este listo la ruta
