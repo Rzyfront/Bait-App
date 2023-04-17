@@ -2,18 +2,32 @@ import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
 import LoginErrors from "../LoginErros";
-import { TfiClose } from "react-icons/tfi";
+
 
 const Register = ({ setToggleLogin, loginRegister }) => {
 
     const passRef = useRef();
     const formRef = useRef();
     const [message, setMessage] = useState(false);
+
+    const [dataRegister, setDataRegister] = useState({
+        name: "",
+        lastname: "",
+        age: "",
+        phone_number: "",
+        email: "",
+        password: "",
+        password2: "",
+        location: "",
+        verified: "",
+        isActive: "",
+        role: "",
+    });
     
 
     const [errorsRegister, setErrorsRegister] = useState({
         name: "",
-        phoneNumber: "",
+        phone_number: "",
         password: "",
     });
     const handleRegister = (event) => {
@@ -31,19 +45,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
         console.log(errorsRegister);
     };
 
-    const [dataRegister, setDataRegister] = useState({
-        name: "",
-        lastname: "",
-        age: "",
-        phoneNumber: "",
-        email: "",
-        password: "",
-        password2: "",
-        location: "",
-        verified: "",
-        isActive: "",
-        role: "",
-    });
+
 
     const sendRegister = (event) => {
         event.preventDefault();
@@ -53,7 +55,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                 name: "",
                 lastname: "",
                 age: "",
-                phoneNumber: "",
+                phone_number: "",
                 email: "",
                 password: "",
                 password2: "",
@@ -64,7 +66,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
             });
             setErrorsRegister({
                 name: "",
-                phoneNumber: "",
+                phone_number: "",
                 password: "",
             });
         } else {
@@ -73,7 +75,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                 "\n" +
                 errorsRegister.password +
                 "\n" +
-                errorsRegister.phoneNumber
+                errorsRegister.phone_number
             );
         }
     };
@@ -105,8 +107,8 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                             <input
                                 className="input"
                                 type="number"
-                                name="phoneNumber"
-                                value={dataRegister.phoneNumber}
+                                name="phone_number"
+                                value={dataRegister.phone_number}
                                 onChange={handleRegister}
                                 autoComplete="off"
                                 placeholder="Telefono"

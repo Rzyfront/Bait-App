@@ -80,11 +80,11 @@ return {
 /// Create user
 export const createUser=async(inputs)=>{
 try {
-  await axios.post("http://localhost:3001/users",{
+  await axios.post("http://localhost:3001/user",{
     "name":inputs.name,
     "lastname":inputs.lastname,
     "age":inputs.age,
-    "phoneNumber":inputs.phoneNumber,
+    "phoneNumber":inputs.phone_Number,
     "email":inputs.email,
     "password":inputs.password,
     "location":inputs.location,
