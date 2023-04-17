@@ -1,9 +1,9 @@
 const loginRoute = require('express').Router();
-const getLoginGoogle = require('../controllers/login/getLoginGoogle');
+const postLoginGoogle = require('../controllers/login/postLoginGoogle');
 const postLogin = require('../controllers/login/postLogin');
 // const userExtractor = require('../middlewares/userExtractor');
 
-loginRoute.get('/google', getLoginGoogle);
+loginRoute.post('/google', postLoginGoogle);
 loginRoute.post('/', postLogin);
 
 module.exports = loginRoute;

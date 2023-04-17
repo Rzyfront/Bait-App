@@ -51,6 +51,9 @@ Local.hasOne(Menu);
 Local.hasOne(Characteristic, { onDelete: 'CASCADE' });
 Characteristic.belongsTo(Local, { onDelete: 'CASCADE' });
 
+Image.belongsTo(User);
+User.hasOne(Image);
+
 module.exports = {
   ...sequelize.models,
   db: sequelize,

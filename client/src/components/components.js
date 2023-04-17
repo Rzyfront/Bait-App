@@ -13,3 +13,4 @@ export { default as Reviews } from './Reviews/Reviews';
 export { default as ReviewsForm } from './ReviewsForm/ReviewsForm';
 export { default as Footer } from './Footer/Footer';
 export { default as Filters } from './Filters/Filters';
+export { default as Answers } from './Answers/Answers';

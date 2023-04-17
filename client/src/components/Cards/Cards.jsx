@@ -15,6 +15,7 @@ function Cards() {
   //reset filters or search
   useEffect(() => {
     setnavegation(0);
+    console.log(ContainerCards);
   }, [ContainerCards]);
 
   const handlepage = (data) => {
@@ -24,18 +25,43 @@ function Cards() {
   return (
     <div className="containerCardsall">
       <div className="ContainerCards">
-        {ContainerCards[navegation].map(({ Name, Rating, Location }, index) => {
-          return (
-            <Link to="/profile" key={index}>
-              <Card
-                Name={Name}
-                Rating={Rating}
-                Location={Location}
-                Image={img}
-              />
-            </Link>
-          );
-        })}
+        {ContainerCards.length > 0 ? (
+          ContainerCards[navegation].map(
+            (
+              {
+                name,
+                rating,
+                location,
+                verified,
+                schedule,
+                id,
+                Characteristic,
+                Images,
+              },
+              index
+            ) => {
+              return (
+                <Link to={`/profile/${id}`} key={index}>
+                  <Card
+                    id={id}
+                    Name={name}
+                    Rating={rating}
+                    location={location}
+                    verified={verified}
+                    schedule={schedule}
+                    Characteristic={Characteristic}
+                    Images={Images}
+                  />
+                </Link>
+              );
+            }
+          )
+        ) : (
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/6195/6195678.png"
+            alt="noImage"
+          />
+        )}
       </div>
       {ContainerCards.length === 0 ? (
         <div></div>

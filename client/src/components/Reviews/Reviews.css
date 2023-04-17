@@ -1,6 +1,6 @@
 .Reviews{
-    width: 98%;
-    height: 95%;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -41,8 +41,13 @@
     width: 90%;
     height: 300px;
     border-radius: 10px;
+    transition: 0.3s;
     background-color: var(--bg-primary);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.Reviews-List .ReviewCard:hover {
+    transform: scale(1.02);
 }
 
 .Reviews-List .ReviewCard .LeftInfo{
@@ -109,6 +114,6 @@
     font-size: 15px;
     color: var(--primary);
     font-family: var(--text);
-    font-weight: 300;
+    font-weight: 400;
     padding: 10px;
 }

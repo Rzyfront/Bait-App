@@ -34,8 +34,8 @@ function ReviewsForm({ setToggleModal2 }) {
     calificationService,
   ]);
   useEffect(() => {
-    setInputs({ ...inputs, image: image });
-  }, [image]);
+    setInputs({ ...inputs, image: image[image.length-1] });
+  }, [image.length]);
 
   const [inputs, setInputs] = useState({
     title: "",
@@ -125,10 +125,10 @@ function ReviewsForm({ setToggleModal2 }) {
           }}
         />
         <div className="Left">
-          <>
+          <div className="TitleReviewForm">
             <div className="Decorator"></div>
             <h2 className="Title">Deja aqui tu Reseña</h2>
-          </>
+          </div>
 
           <p>
             Tu opinión es vital. Ayuda a otros usuarios a tomar decisiones
@@ -147,49 +147,52 @@ function ReviewsForm({ setToggleModal2 }) {
               readOnly
             />
           </div>
-          <div className="RatingInput">
-            <h2>Comida:</h2>
-            {/* Al hacer submit setear el stado calificacion-food en el Input */}
-            <RatingStar
-              name="food"
-              style={{ maxWidth: 150 }}
-              value={calificationFood}
-              onChange={setCalificationFood}
-              isRequired
-            />
-          </div>
-          <div className="RatingInput">
-            <h2>Servicio:</h2>
-            {/* Al hacer submit setear el stado calificacion-service en el Input */}
-            <RatingStar
-              name="service"
-              style={{ maxWidth: 150 }}
-              value={calificationService}
-              onChange={setCalificationService}
-              isRequired
-            />
-          </div>
-          <div className="RatingInput">
-            <h2>Ambiente:</h2>
-            {/* Al hacer submit setear el stado calificacion-food en el Input */}
-            <RatingStar
-              name="enviroment"
-              style={{ maxWidth: 150 }}
-              value={calificationEnvironment}
-              onChange={setCalificationEnvironment}
-              isRequired
-            />
-          </div>
-          <div className="RatingInput">
-            <h2>Relacion Precio-Calidad:</h2>
-            {/* Al hacer submit setear el stado calificacion-qaPrice en el Input */}
-            <RatingStar
-              name="qaPrice"
-              style={{ maxWidth: 150 }}
-              value={calificationQaPrice}
-              onChange={setCalificationQaPrice}
-              isRequired
-            />
+          <div className="AdicionalRatings">
+            <div className="RatingInput">
+              <h2>Calidad-Precio:</h2>
+              {/* Al hacer submit setear el stado calificacion-qaPrice en el Input */}
+              <RatingStar
+                name="qaPrice"
+                style={{ maxWidth: 100 }}
+                value={calificationQaPrice}
+                onChange={setCalificationQaPrice}
+                isRequired
+              />
+            </div>
+            <div className="RatingInput">
+              <h2>Ambiente:</h2>
+              {/* Al hacer submit setear el stado calificacion-food en el Input */}
+              <RatingStar
+                name="enviroment"
+                style={{ maxWidth: 100 }}
+                value={calificationEnvironment}
+                onChange={setCalificationEnvironment}
+                isRequired
+              />
+            </div>
+
+            <div className="RatingInput">
+              <h2>Servicio:</h2>
+              {/* Al hacer submit setear el stado calificacion-service en el Input */}
+              <RatingStar
+                name="service"
+                style={{ maxWidth: 100 }}
+                value={calificationService}
+                onChange={setCalificationService}
+                isRequired
+              />
+            </div>
+            <div className="RatingInput">
+              <h2>Comida:</h2>
+              {/* Al hacer submit setear el stado calificacion-food en el Input */}
+              <RatingStar
+                name="food"
+                style={{ maxWidth: 100 }}
+                value={calificationFood}
+                onChange={setCalificationFood}
+                isRequired
+              />
+            </div>
           </div>
         </div>
         <div className="Rigth">
@@ -222,10 +225,11 @@ function ReviewsForm({ setToggleModal2 }) {
                 className="LoadImg"
                 type="file"
                 placeholder="Sube una foto de tu visita"
+                accept="image/png,image/jpeg,image/jpg,image/gif"
                 onChange={handleImage}
               ></input>
-              {image ? (
-                <img src={image} alt="imagen" className="imagenDefault" />
+              {image.length ? (
+                <img src={image[image.length-1].url} alt="imagen" className="imagenDefault" />
               ) : loading === true ? (
                 <img
                   src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
