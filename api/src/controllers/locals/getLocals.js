@@ -7,7 +7,7 @@ const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
 module.exports = async (req, res) => {
   try {
-    const locals = await Local.findAll({
+    const { count, rows } = await Local.findAndCountAll({
       where: req.where,
       include: [
         {
@@ -15,7 +15,10 @@ module.exports = async (req, res) => {
           attributes: allCharacteristics,
           where: req.characteristics,
         },
-        { model: Image, attributes: ['url'] },
+        {
+          model: Image,
+          attributes: ['url'],
+        },
         {
           model: Review,
           attributes: [],
@@ -23,9 +26,12 @@ module.exports = async (req, res) => {
       ],
       attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule'],
       order: req.order,
+      limit: 10,
+      offset: 0,
       group: ['Local.id', 'Images.id', 'Characteristic.id'],
+      subQuery: false,
     });
-    res.status(200).json({ locals, success: true });
+    res.status(200).json({ count: count.length, locals: rows, success: true });
   } catch (error) {
     console.log(error);
     res.status(404).json({ success: false, message: error.message });

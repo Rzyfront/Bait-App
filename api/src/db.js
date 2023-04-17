@@ -28,7 +28,7 @@ Image.belongsTo(Review);
 Review.hasOne(Image);
 
 Review.belongsTo(Local);
-Local.hasMany(Review);
+Local.hasMany(Review, { foreignKey: 'LocalId' });
 
 Review.belongsTo(User);
 User.hasMany(Review);
