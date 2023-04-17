@@ -33,7 +33,10 @@ module.exports = async (req, res) => {
       group: ['Local.id', 'Images.id', 'Characteristic.id'],
       subQuery: false,
     });
-    res.status(200).json({ count: count.length, locals: rows, success: true });
+    const totalPages = Math.ceil(count.length / 10);
+    res.status(200).json({
+      success: true, count: count.length, totalPages, locals: rows,
+    });
   } catch (error) {
     console.log(error);
     res.status(404).json({ success: false, message: error.message });
