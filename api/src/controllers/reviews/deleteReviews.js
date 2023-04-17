@@ -5,12 +5,12 @@ module.exports = async (req, res) => {
     const { reviewId } = req.params;
     const deletedReview = await Review.findByPk(reviewId);
     if (!deletedReview) {
-      return res.status(404).json({ message: 'Review not found' });
+      return res.status(404).json({ success: false, message: 'Review not found' });
     }
     deletedReview.destroy();
     deletedReview.save();
-    return res.status(204).json({ message: 'Review successfully deleted' });
+    return res.status(201).json({ success: true, deletedReview });
   } catch (err) {
-    return res.status(500).json({ message: err.message });
+    return res.status(400).json({ success: false, message: err.message });
   }
 };

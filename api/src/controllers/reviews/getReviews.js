@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
     });
 
     if (!localReviews) {
-      return res.status(404).json({ error: 'Not found' });
+      return res.status(404).json({ success: false, message: 'Not found' });
     }
 
     // const ratings = {
@@ -42,6 +42,6 @@ module.exports = async (req, res) => {
     return res.status(200).json({ reviews: localReviews.Reviews, success: true });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: 'Internal server error' });
+    return res.status(500).json({ error: 'Internal server error', success: false });
   }
 };
