@@ -10,12 +10,12 @@ function Menu({ ListMenu }) {
         <div className="Decorator"></div>
       </div>
       <div className="Menu-List">
-        {ListMenu.map(({ Name, Image, Price, Rating }, index) => {
+        {ListMenu.map(({ name, Images, Price, Rating }, index) => {
           return (
             <Card
               key={index}
-              Name={Name}
-              Image={Image}
+              name={name}
+              Images={Images}
               Price={Price}
               Rating={Rating}
             />

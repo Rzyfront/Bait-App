@@ -3,7 +3,6 @@
     height: 100vh;
     display: flex;
     background-color:var(--bg-primary);
-    gap: 2.5%;
     position: relative;
 }
 
@@ -11,44 +10,48 @@
     width: 350px;
     height: 100vh;
     background-color: var(--bg-primary);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px;
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 5px;
     align-items: center;
 }
 
 .Profile .ContainerSelection{
-    width: calc(95% - 350px);
+    width: calc(100% - 350px);
     height: 100vh;
     background-color: var(--bg-primary);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px;
 }
 
 .ProfileInfo .ImageProfile{
     width: 300px;
-    height: 250px;
+    height: 230px;
+    padding-top: 5px;
+    border-radius:10px;
 
 }
 
 .ProfileInfo .Info{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 300px;
-    height: calc(100vh - 300px);
+    height: calc(100vh - 250px);
     overflow: auto;
-    margin: 20px 0px;
-    gap: 10px;
+    margin: 5px 0px;
+    gap: 5px;
 }
 
 .ProfileInfo .Info h2{
     font-size: 35px;
     font-weight: 700;
     font-family: var(--title);
+    color: var(--primary);
 }
 
-.ProfileInfo.Info h3{
-    font-size: 20px;
+.ProfileInfo .Info h3{
+    font-size: 16px;
     font-weight: 700;
     font-family: var(--subtitle);
 }
@@ -63,7 +66,7 @@
 .ProfileInfo .Decorator{
     width: 90%;
     height: 3px;
-    margin-top: 15px;
+    margin-top: 8px;
     background-color: var(--bg-tertiary);
     border-radius: 10px;
 }
@@ -98,6 +101,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    
 }
 
 .Options{
@@ -107,6 +111,7 @@
     align-items: center ;
     justify-content: center;
     gap: 5px;
+    margin-top: 1px;
 }
 
 .Options div{

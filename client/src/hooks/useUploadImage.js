@@ -10,9 +10,10 @@ export const useUploadImage=()=>{
         const reader = new FileReader()
         reader.onload = (e)=>{
             setLoading(true)
-            axios.post('http://localhost:3001/images',{image:e.target.result})
+            axios.post('/images',{image:e.target.result})
             .then(res=>{
                 setImage([...image, res.data.image])
+               
             }).catch(err=>{
                 console.log(err);
             }).finally(()=>{

@@ -72,7 +72,6 @@
     font-family: var(--subtitle);
     font-size: 18px;
     font-weight:400;
-    margin-top: 7px;
 }
 .search_home .botton .SearchIcon {
     color: var(--primary);

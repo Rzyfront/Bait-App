@@ -1,3 +1,93 @@
-.LocalesImage{
+.locales {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .locales_data {
+    background-color: var(--bg-primary);
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .locales_data h1 {
+    font-size: 50px;
+    color: var(--primary);
+    font-family: var(--title);
+    font-weight: 700;
+  }
+  .form-container {
+    margin-top: 20px;
+  }
+  
+  .form-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .LocalesImage{
+    height: 200px;
     width: 200px;
+  }
+
+  .form-container input,
+  .form-container select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .form-container input[type="submit"] {
+    background-color: var(--bg-secundary);
+    color: var(--bg-primary);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .form-container input[type="submit"]:hover {
+    background-color: var(--bg-primary);
+  }
+  
+  .danger {
+    color: var(--bg-optional1);
+    font-size: var(--subtitle);
+  }
+  
+  .LinkLogo {
+    text-decoration: none;
+    color:var(--bg-primary);
+  }
+  
+  .Logo {
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+  .danger {
+  color: var(--bg-optional2);
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Estilos para los campos con errores */
+.input-error {
+  border: 1px solid var(--bg-optional2);
+}
+
+/* Estilos para los campos con errores en el formulario */
+.form-error {
+  border: 1px solid var(--bg-optional2);
+}
+
+/* Estilos para los mensajes de éxito */
+.success {
+  color:var(--bg-optional1);
+  font-size: 14px;
+  margin-top: 5px;
 }

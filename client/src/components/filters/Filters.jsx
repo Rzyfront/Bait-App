@@ -1,5 +1,6 @@
-import "./filters.css";
-import { HiOutlineStar } from "react-icons/hi";
+import "./Filters.css";
+import { MdAddBusiness } from "react-icons/md";
+import { Link } from "react-router-dom";
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { order, reset } from "../../redux/actions/actions";
@@ -34,19 +35,32 @@ const Filters = () => {
   };
 
   return (
-    <div className="filters">
-      <div
-        className={
-          filterState === false
-            ? "filter_calification"
-            : "filter_calification_on"
-        }
-        onClick={handlecafication}
-      >
-        <HiOutlineStar />
-        <h3>Mejor calificacion</h3>
-      </div>
-      {/* <div
+    <div className="Filters">
+      <Link to="/createplace">
+        <div className="AddPlace">
+          <h2 className="AddPlace_Text">Inscribe tu sitio</h2> <MdAddBusiness />
+        </div>
+      </Link>
+
+      <div className="FiltersGroup">
+        <div
+          className={filterState === false ? "FilterOff" : "FilterOn"}
+          onClick={handlecafication}
+        >
+          <h3>Mejor calificacion</h3>
+        </div>
+        {/* <select
+          className="RatingOrder"
+          onChange={handleSelect}
+          value={selectOrder}
+        >
+          <option value="" disabled>
+            Ordena por Rating
+          </option>
+          <option value={"mayor"}>Mayor rating</option>
+          <option value={"menor"}>Menor rating</option>
+        </select> */}
+        {/* <div
         className="filter_calification"
         onClick={() => handlecalification("opentype")}
       >
@@ -60,17 +74,18 @@ const Filters = () => {
         )}
       </div> */}
 
-      <select
-        className="filter_calification"
-        onChange={handleSelect}
-        value={selectOrder}
-      >
-        <option value="" disabled>
-          Ordenar por
-        </option>
-        <option value={"A-Z"}>A-Z</option>
-        <option value={"Z-A"}>Z-A</option>
-      </select>
+        <select
+          className="AlphaOrder"
+          onChange={handleSelect}
+          value={selectOrder}
+        >
+          <option value="" disabled>
+            Ordena Alfabeticamente
+          </option>
+          <option value={"A-Z"}>A-Z</option>
+          <option value={"Z-A"}>Z-A</option>
+        </select>
+      </div>
     </div>
   );
 };
