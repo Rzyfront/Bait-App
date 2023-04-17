@@ -3,8 +3,10 @@ import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
 import { validation} from "../validation";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Register = ({ setToggleLogin, loginRegister }) => {
+    const navigate = useNavigate()
      const dispatch = useDispatch()   
     const passRef = useRef();
     const formRef = useRef();
@@ -64,6 +66,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                 role: "",
             });
             alert("Usario creado")
+            navigate("/home")
             setErrorsRegister({});
         } else {
             alert(

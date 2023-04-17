@@ -1,4 +1,4 @@
-import { ORDER, RESET } from "../actions/actions";
+import { ORDER, RESET,CREATE_USER } from "../actions/actions";
 
 const initialState={
     cards:[[ { Name: "Mc Donalls", Location: "Buenos Aires", Rating: 4.2 },
@@ -49,6 +49,7 @@ const initialState={
     reset:[],
     error: null,
     success: null,
+    createdUserMessage : ""
 }
 
 //action paginate
@@ -78,6 +79,13 @@ const rootReducer=(state=initialState ,{type,payload})=>{
       ...state,
       cards:state.reset
     }
+
+      case CREATE_USER:
+        return {
+          ...state,
+          createdUserMessage:payload
+        }
+      
 
 
           default:
