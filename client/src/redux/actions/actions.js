@@ -5,6 +5,8 @@ export const ORDER="ORDER";
 export const RESET="RESET";
 export const LOADINGLOCALS="LOADINGLOCALS";
 export const LOGIN = 'LOGIN';
+export const CREATE_USER = 'CREATE_USER';
+
 
 //////////actions////////////////////////////
 
@@ -79,23 +81,30 @@ return {
   
 }
 /// Create user
-export const createUser=async(inputs)=>{
-try {
-  await axios.post("http://localhost:3001/users",{
-    "name":inputs.name,
-    "lastname":inputs.lastname,
-    "age":inputs.age,
-    "phoneNumber":inputs.phoneNumber,
-    "email":inputs.email,
-    "password":inputs.password,
-    "location":inputs.location,
-    "verified":inputs.verified,
-    "isActive":inputs.isActive,
-    "role":inputs.role
-  })
-} catch (error) {
-  console.log(error.message)
-}
+export const createUser=({name,lastname,age,phone_number,email,password,location,verified,isActive,role})=>{
+
+  return async(dispatch)=>{
+    try {
+       await axios.post("http://localhost:3001/user", {
+        name,
+        lastname,
+        age,
+        phone_number,
+        email,
+        password,
+        location,
+        verified,
+        isActive,
+        role
+      })
+      return dispatch({ type: CREATE_USER, payload: "Usuario Creado Correctamente" })
+
+      console.log("Usuario Creado mi vale");
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
 }
 
 

@@ -1,7 +1,8 @@
 import React from "react";
 import "./App.css";
-import { Landing, Home, Profile, Locales } from "./components/components.js";
+import { Landing, Home, Profile, Locales,Register } from "./components/components.js";
 import { Routes, Route } from "react-router-dom";
+
 
 function App() {
   return (
