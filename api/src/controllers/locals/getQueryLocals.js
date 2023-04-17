@@ -13,8 +13,10 @@ module.exports = (req, res, next) => {
     where.location = { [Op.iLike]: `%${location}%` };
   }
   if (order) {
-    if (order === 'ASC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'ASC']];
-    else if (order === 'DESC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'DESC']];
+    if (order === 'ratingASC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'ASC']];
+    else if (order === 'ratingDESC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'DESC']];
+    else if (order === 'nameASC') reqOrder = [['name', 'ASC']];
+    else if (order === 'nameDESC') reqOrder = [['name', 'DESC']];
   }
   req.characteristics = characteristics;
   req.order = reqOrder;
