@@ -1,7 +1,7 @@
 import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
-import LoginErrors from "../validation";
+import { validation} from "../validation";
 
 const Register = ({ setToggleLogin, loginRegister }) => {
 
@@ -21,13 +21,13 @@ const Register = ({ setToggleLogin, loginRegister }) => {
             [event.target.name]: event.target.value,
         });
         setErrorsRegister(
-            LoginErrors({
+            validation({
                 ...dataRegister,
                 [event.target.name]: event.target.value,
             })
         );
 
-        console.log(errorsRegister);
+        // console.log(errorsRegister);
     };
 
     const [dataRegister, setDataRegister] = useState({
