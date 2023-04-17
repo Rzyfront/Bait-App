@@ -34,8 +34,8 @@ function ReviewsForm({ setToggleModal2 }) {
     calificationService,
   ]);
   useEffect(() => {
-    setInputs({ ...inputs, image: image });
-  }, [image]);
+    setInputs({ ...inputs, image: image[image.length-1] });
+  }, [image.length]);
 
   const [inputs, setInputs] = useState({
     title: "",
@@ -222,10 +222,11 @@ function ReviewsForm({ setToggleModal2 }) {
                 className="LoadImg"
                 type="file"
                 placeholder="Sube una foto de tu visita"
+                accept="image/png,image/jpeg,image/jpg,image/gif"
                 onChange={handleImage}
               ></input>
-              {image ? (
-                <img src={image} alt="imagen" className="imagenDefault" />
+              {image.length ? (
+                <img src={image[image.length-1].url} alt="imagen" className="imagenDefault" />
               ) : loading === true ? (
                 <img
                   src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"

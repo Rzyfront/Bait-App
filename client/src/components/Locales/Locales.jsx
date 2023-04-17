@@ -218,13 +218,14 @@ function Locales() {
           <input
             type="file"
             name="imagen"
-            accept="image/*"
+            accept="image/png,image/jpeg,image/jpg,image/gif"
             // multiple
             onChange={handleChangeimages}
           ></input>
           <hr />
-          {image ? (
-            <img src={image} alt="imagen" className="LocalesImage" />
+          {image.length ? (
+            image.map((image, i) =>
+            <img key={i} src={image.url} alt="imagen" className="LocalesImage" />)
           ) : loading === true ? (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
