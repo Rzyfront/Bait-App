@@ -85,7 +85,7 @@ try {
     "name":inputs.name,
     "lastname":inputs.lastname,
     "age":inputs.age,
-    "phoneNumber":inputs.phone_Number,
+    "phoneNumber":inputs.phone_number,
     "email":inputs.email,
     "password":inputs.password,
     "location":inputs.location,

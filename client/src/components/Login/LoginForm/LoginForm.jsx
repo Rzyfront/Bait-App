@@ -9,13 +9,6 @@ import { loginWithGoogle } from "../../../helpers/loginWithGoogle";
 const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
     const dispatch = useDispatch();
     const imgRef = useRef();
-<<<<<<< HEAD
-    const [message, setMessage] = useState(false);
-    const [form, setForm] = useState({});
-   
-    
-    
-=======
     const passRef = useRef();
     // const [message, setMessage] = useState(false);
     console.log(fn);
@@ -40,7 +33,6 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
         }));
         console.log(errors);
     }
->>>>>>> b0191554dc6f6d6bacbda9a8d10cff83592d66d1
 
     const handleLogin = (e) => {
         e.preventDefault();

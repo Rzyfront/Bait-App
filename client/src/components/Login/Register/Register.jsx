@@ -8,7 +8,19 @@ const Register = ({ setToggleLogin, loginRegister }) => {
     const passRef = useRef();
     const formRef = useRef();
     const [message, setMessage] = useState(false);
-    
+    const[dataRegister, setDataRegister] = useState({
+        name: "",
+        lastname: "",
+        age: "",
+        phone_number: "",
+        email: "",
+        password: "",
+        password2: "",
+        location: "",
+        verified: "",
+        isActive: "",
+        role: "",
+    })
 
     const [errorsRegister, setErrorsRegister] = useState({
         name: "",
@@ -49,6 +61,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                 isActive: "",
                 role: "",
             });
+            alert("Usario creado")
             setErrorsRegister({
                 name: "",
                 phone_number: "",
@@ -86,16 +99,42 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                                 value={dataRegister.name}
                                 onChange={handleRegister}
                                 autoComplete="off"
-                                placeholder="Usuario"
+                                placeholder="Nombre"
                             ></input>
                             <input
                                 className="input"
                                 type="number"
+                                name="age"
+                                value={dataRegister.age}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="Apellido"
+                            ></input>
+                            <input
+                                className="input"
+                                type="text"
                                 name="phone_number"
                                 value={dataRegister.phone_number}
                                 onChange={handleRegister}
                                 autoComplete="off"
                                 placeholder="Telefono"
+                            ></input>
+                            <input
+                                className="input"
+                                type="text"
+                                name="email"
+                                value={dataRegister.email}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="edad"
+                            ></input>  <input
+                                className="input"
+                                type="text"
+                                name="location"
+                                value={dataRegister.location}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="Ciudad"
                             ></input>
                             <input
                                 className="input"
@@ -111,7 +150,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                                     type="password"
                                     name="password2"
                                     autoComplete="off"
-                                    value={dataRegister.paswword2}
+                                    value={dataRegister.password2}
                                     onChange={handleRegister}
                                     className="input"
                                     placeholder="Repetir contraseña"
