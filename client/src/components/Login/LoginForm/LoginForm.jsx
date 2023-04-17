@@ -1,26 +1,63 @@
 import { TfiClose } from "react-icons/tfi";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { logIn } from "../../../redux/actions/actions";
+import { validationLogin } from "../validation";
+import { loginWithGoogle } from "../../../helpers/loginWithGoogle";
 
 
 const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
     const dispatch = useDispatch();
-    const titleRef = useRef();
-    const passRef = useRef();
     const imgRef = useRef();
+<<<<<<< HEAD
     const [message, setMessage] = useState(false);
     const [form, setForm] = useState({});
    
     
     
+=======
+    const passRef = useRef();
+    // const [message, setMessage] = useState(false);
+    console.log(fn);
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
+    });
+
+    const [errors, setErrors] = useState({});
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setUser({
+            ...user,
+            [name]: value
+        });
+
+        setErrors(validationLogin({
+            ...user,
+            [name]: value
+        }));
+        console.log(errors);
+    }
+>>>>>>> b0191554dc6f6d6bacbda9a8d10cff83592d66d1
 
     const handleLogin = (e) => {
         e.preventDefault();
-        dispatch(logIn())
+        console.log('bye');
+        if (Object.entries(errors).length === 0) return dispatch(logIn(user));
+        alert("Invalid data");
+        setUser({
+            email: '',
+            password: ''
+        })
     }
 
-    return(
+    useEffect(() => {
+
+    }, [])
+
+    return (
         <>
             <div className="login">
                 <TfiClose
@@ -29,29 +66,30 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                         setToggleLogin(false);
                     }}
                 />
-                <div className="title" ref={titleRef}>
+                <div className="title">
                     <h3 className="Iniciar">Iniciar</h3>
                     <h3 className="Sesion">sesión</h3>
                 </div>
                 <div className="formulario">
                     <div className="container">
-                        <form autoComplete="off" className="form">
+                        <form autoComplete="off" className="form" onSubmit={handleLogin}>
                             <input
                                 className="input"
                                 type="text"
-                                name="name"
-                                value="name"
-                                // onChange={handleRegister}
+                                name="email"
+                                value={user.email}
+                                onChange={handleChange}
                                 autoComplete="off"
                                 placeholder="Usuario"
                             ></input>
+                            {errors.email && <span>{errors.email}</span>}
                             <div className="PasswordGroup">
                                 <input
                                     type="password"
                                     name="password"
                                     autoComplete="off"
-                                    value={form.password}
-                                    // onChange={handleInput}
+                                    value={user.password}
+                                    onChange={handleChange}
                                     className="input"
                                     placeholder="Contraseña"
                                     ref={passRef}
@@ -59,13 +97,14 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                                 <img
                                     alt="img"
                                     ref={imgRef}
-                                    onClick={fn}
+                                    onClick={() => fn()}
                                     className="ojo"
                                     src="./img/icons/abrir-ojo.png"
                                     width="20px"
-                                ></img>
+                                    ></img>
+                                {errors.password && <span>{errors.password}</span>}
                             </div>
-                            <button className="button" onSubmit={handleLogin}>Ingresar</button>
+                            <button className="button" type="submit">Ingresar</button>
                             <div className="loginwith">
                                 <img
                                     alt="img"
@@ -73,7 +112,7 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                                     className="google"
                                     width="30px"
                                 ></img>
-                                <span className="texto">Entra con Google</span>
+                                <span className="texto" onClick={() => loginWithGoogle()}>Entra con Google</span>
                             </div>
 
                             <div className="registrarme" onClick={() => loginRegister()}>
@@ -83,9 +122,9 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                         </form>
                     </div>
                 </div>
-                {message && (
+                {/* {message && (
                     <h3 className="invalid">Los datos ingresados no son válidos</h3>
-                )}
+                )} */}
             </div>
         </>
     )

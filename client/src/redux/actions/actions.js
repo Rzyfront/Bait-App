@@ -5,6 +5,7 @@ export const ORDER="ORDER";
 export const RESET="RESET";
 export const LOADINGLOCALS="LOADINGLOCALS";
 export const LOGIN = 'LOGIN';
+
 //////////actions////////////////////////////
 
 //filter
@@ -125,6 +126,7 @@ export const createLocal=async(inputs, chekinputs)=>{
 }
 
 export const logIn = (credentials) => {
+  console.log('haciendo dispatch')
   return async (dispatch) => {
     const res = await axios.post("http://localhost:3001/login", credentials);
     return dispatch({
