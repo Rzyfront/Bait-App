@@ -129,7 +129,9 @@ function Profile() {
     <>
       <Navbar />
       <div className="Profile">
-        {toogleModal2 && <ReviewsForm setToggleModal2={setToggleModal2} />}
+        {toogleModal2 && (
+          <ReviewsForm setToggleModal2={setToggleModal2} id={id} />
+        )}
         {locals && (
           <div className="ProfileInfo">
             {locals.Images.length ? (

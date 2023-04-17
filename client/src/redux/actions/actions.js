@@ -7,7 +7,7 @@ export const LOADINGLOCALS = "LOADINGLOCALS";
 export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
 export const DETAIL="DETAIL"
 export const LOGIN = 'LOGIN';
-
+export const COMENTARIE="COMENTARIE"
 //////////actions////////////////////////////
 
 //filter
@@ -83,16 +83,10 @@ export const DetailLocal=(id)=>{
 
 //correguir imagen cuando este listo la ruta
 export const createLocal=(inputs, chekinputs)=>{
-
-
   let images=[]
  inputs.imagen.forEach(data=>{
    images.push({id:data.id})
  })
-
-
-
-
    return async dispatch => {
         try{
     await axios.post("/locals",{
@@ -189,4 +183,30 @@ export const logIn = (credentials) => {
       payload: res.data
     })
   }
+}
+
+export const comentarie=(calificationFood,
+          calificationQaPrice,
+          calificationEnvironment,
+          calificationService,
+          calculateAverage, inputs,id)=>{
+
+ return async dispatch => {
+        try{
+    await axios.post(`/reviews/${id}`,{
+    title: inputs.title,
+    rating: calculateAverage,
+    comment: inputs.comment,
+    image: inputs.image,
+    food: calificationFood,
+    service: calificationService,
+    environment: calificationEnvironment,
+    qaPrice: calificationQaPrice,
+		})
+        }catch(error){
+            console.log(error)
+        }
+      }  
+
+
 }

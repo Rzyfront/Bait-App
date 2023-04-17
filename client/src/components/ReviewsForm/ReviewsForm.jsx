@@ -9,8 +9,11 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./ReviewsForm.css";
 import { useUploadImage } from "../../hooks/useUploadImage";
+import { useDispatch } from "react-redux";
+import { comentarie } from "../../redux/actions/actions";
 
-function ReviewsForm({ setToggleModal2 }) {
+function ReviewsForm({ setToggleModal2, id }) {
+  const dispatch = useDispatch();
   const { image, loading, handleChangeimage } = useUploadImage();
 
   const [calculateAverage, setcalculateAverage] = useState(0);
@@ -33,30 +36,20 @@ function ReviewsForm({ setToggleModal2 }) {
     calificationEnvironment,
     calificationService,
   ]);
-  useEffect(() => {
-    setInputs({ ...inputs, image: image[image.length-1] });
-  }, [image.length]);
-
   const [inputs, setInputs] = useState({
     title: "",
-    rating: "",
     comment: "",
-    image: "",
-    food: "",
-    service: "",
-    enviroment: "",
-    qaPrice: "",
+    image: {},
   });
+
+  useEffect(() => {
+    setInputs({ ...inputs, image: image[image.length - 1] });
+  }, [image.length]);
 
   const [errors, setErrors] = useState({
     title: "",
-    rating: "",
     comment: "",
-    image: "",
-    food: "",
-    service: "",
-    enviroment: "",
-    qaPrice: "",
+    image: {},
   });
 
   const handleChange = (event) => {
@@ -65,39 +58,47 @@ function ReviewsForm({ setToggleModal2 }) {
       [event.target.name]: event.target.value,
     });
 
-    setErrors(
-      validate({
-        ...inputs,
-        [event.target.name]: event.target.value,
-      })
-    );
+    console.log(inputs);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!Object.values(errors).length) {
-      alert("Datos completos");
-      setInputs({
-        title: "",
-        rating: "",
-        comment: "",
-        image: {},
-        food: "",
-        service: "",
-        enviroment: "",
-        qaPrice: "",
-      });
-      setErrors({
-        title: "",
-        rating: "",
-        comment: "",
-        image: {},
-        food: "",
-        service: "",
-        enviroment: "",
-        qaPrice: "",
-      });
-    } else {
+    if (inputs.comment.length > 0 && inputs.title.length > 0) {
+      dispatch(
+        comentarie(
+          calificationFood,
+          calificationQaPrice,
+          calificationEnvironment,
+          calificationService,
+          calculateAverage,
+          inputs,
+          id
+        )
+      );
+    }
+    // if (!Object.values(errors).length) {
+    //   alert("Datos completos");
+    //   setInputs({
+    //     title: "",
+    //     rating: "",
+    //     comment: "",
+    //     image: {},
+    //     food: "",
+    //     service: "",
+    //     enviroment: "",
+    //     qaPrice: "",
+    //   });
+    //   setErrors({
+    //     title: "",
+    //     rating: "",
+    //     comment: "",
+    //     image: {},
+    //     food: "",
+    //     service: "",
+    //     enviroment: "",
+    //     qaPrice: "",
+    //   });
+    else {
       alert("Debe llenar todos los campos");
     }
   };
@@ -229,7 +230,11 @@ function ReviewsForm({ setToggleModal2 }) {
                 onChange={handleImage}
               ></input>
               {image.length ? (
-                <img src={image[image.length-1].url} alt="imagen" className="imagenDefault" />
+                <img
+                  src={image[image.length - 1].url}
+                  alt="imagen"
+                  className="imagenDefault"
+                />
               ) : loading === true ? (
                 <img
                   src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
@@ -244,7 +249,7 @@ function ReviewsForm({ setToggleModal2 }) {
                 />
               )}
             </div>
-            <button type="submit">
+            <button type="submit" onClick={handleSubmit}>
               Enviar <FaPaperPlane />
             </button>
           </form>
