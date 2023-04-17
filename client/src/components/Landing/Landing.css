@@ -1,0 +1,356 @@
+.Landing{
+    position: relative;
+    width: 100%;
+    height: calc(100vh);
+    background-color: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.Landing .Carrousel{
+    width: 100%;
+    height: calc(100vh - 50px);
+    padding: 0;
+    margin: 0;
+}
+
+.Landing .Carrousel .CarrouselItem{
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 50px);
+    padding: 0;
+    margin: 0;
+}   
+
+.Landing .Carrousel .CarrouselItem .SlideItem1 img,
+.Landing .Carrousel .CarrouselItem .SlideItem2 img,
+.Landing .Carrousel .CarrouselItem .SlideItem3 img{
+    position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -5;
+}
+
+/*! Slide 1 */
+
+.Landing .Carrousel .CarrouselItem .SlideItem1{
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+        /* ff 3.6+ */
+            background: -moz-linear-gradient(90deg, rgba(244, 244, 244, 1) 0%, rgba(244, 244, 244, 0.71) 26%, rgba(255, 255, 255, 0) 100%);
+        
+            /* safari 5.1+,chrome 10+ */
+            background: -webkit-linear-gradient(90deg, rgba(244, 244, 244, 1) 0%, rgba(244, 244, 244, 0.71) 26%, rgba(255, 255, 255, 0) 100%);
+        
+            /* opera 11.10+ */
+            background: -o-linear-gradient(90deg, rgba(244, 244, 244, 1) 0%, rgba(244, 244, 244, 0.71) 26%, rgba(255, 255, 255, 0) 100%);
+        
+            /* ie 6-9 */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#F4F4F4', GradientType=0);
+        
+            /* ie 10+ */
+            background: -ms-linear-gradient(90deg, rgba(244, 244, 244, 1) 0%, rgba(244, 244, 244, 0.71) 26%, rgba(255, 255, 255, 0) 100%);
+        
+            /* global 94%+ browsers support */
+            background: linear-gradient(90deg, rgba(244, 244, 244, 1) 0%, rgba(244, 244, 244, 0.71) 26%, rgba(255, 255, 255, 0) 100%);
+}
+
+.CarrouselItem .SlideItem1 .FirstTitle{
+    position: relative;
+    width: 500px;
+    height: calc(100vh - 50px);
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 50px;
+    margin-left: 50px;
+}
+
+.SlideItem1 .FirstTitle h1{
+    font-size: 60px;
+    color: var(--primary);
+    font-family: var(--title);
+}
+.SlideItem1 .FirstTitle span {
+    color: var(--secondary);
+}
+
+.SlideItem1 .FirstTitle h2 {
+    font-size: 30px;
+    font-family: var(--subtitle);
+    text-align: center;
+}
+
+.SlideItem1 .FirstTitle button {
+    font-size: 20px;
+    font-family: var(--text);
+    border: none;
+    width: 200px;
+    height: 50px;
+    background-color: var(--bg-tertiary);
+    border-radius: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+    
+}
+
+.SlideItem1 .FirstTitle button:hover {
+    color: var(--secondary);
+    background-color: var(--bg-secondary);  
+}
+
+.SlideItem1 .FirstTitle a {
+    align-self: center;
+}
+/*! Slide 2 */
+.Landing .Carrousel .CarrouselItem .SlideItem2 {
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* ff 3.6+ */
+        background: -moz-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(244, 244, 244, 0.71) 86%, rgba(244, 244, 244, 1) 100%);
+    
+        /* safari 5.1+,chrome 10+ */
+        background: -webkit-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(244, 244, 244, 0.71) 86%, rgba(244, 244, 244, 1) 100%);
+    
+        /* opera 11.10+ */
+        background: -o-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(244, 244, 244, 0.71) 86%, rgba(244, 244, 244, 1) 100%);
+    
+        /* ie 6-9 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F4F4F4', endColorstr='#FFFFFF', GradientType=0);
+    
+        /* ie 10+ */
+        background: -ms-linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(244, 244, 244, 0.71) 86%, rgba(244, 244, 244, 1) 100%);
+    
+        /* global 94%+ browsers support */
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(244, 244, 244, 0.71) 86%, rgba(244, 244, 244, 1) 100%);
+   }
+
+.CarrouselItem .SlideItem2 .SecondTitle {
+    position: relative;
+    width: 500px;
+    height: calc(100vh - 50px);
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 50px;
+    margin-right: 50px;
+    text-align: center;
+}
+
+.SlideItem2 .SecondTitle h2 {
+    font-size: 60px;
+    color: var(--primary);
+    font-family: var(--title);
+}
+
+.SlideItem2 .SecondTitle span {
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.SlideItem2 .SecondTitle h3 {
+    font-size: 30px;
+    font-family: var(--subtitle);
+}
+
+.SlideItem2 .SecondTitle button {
+    font-size: 20px;
+    font-family: var(--text);
+    border: none;
+    width: 200px;
+    height: 50px;
+    align-self: center;
+    background-color: var(--bg-tertiary);
+    border-radius: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.SlideItem2 .SecondTitle button:hover {
+    color: var(--secondary);
+    background-color: var(--bg-secondary);
+}
+
+.SlideItem2 .SecondTitle a {
+    align-self: center;
+}
+
+/*! Slide 3 */
+
+.Landing .Carrousel .CarrouselItem .SlideItem3 {
+    width: 100%;
+    height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* ff 3.6+ */
+        background: -moz-linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.78) 50%, rgba(0, 0, 0, 0) 100%);
+    
+        /* safari 5.1+,chrome 10+ */
+        background: -webkit-linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.78) 50%, rgba(0, 0, 0, 0) 100%);
+    
+        /* opera 11.10+ */
+        background: -o-linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.78) 50%, rgba(0, 0, 0, 0) 100%);
+    
+        /* ie 6-9 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#000000', GradientType=0);
+    
+        /* ie 10+ */
+        background: -ms-linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.78) 50%, rgba(0, 0, 0, 0) 100%);
+    
+        /* global 94%+ browsers support */
+        background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.78) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+.CarrouselItem .SlideItem3 .ThirdTitle {
+    position: relative;
+    width: 700px;
+    height: calc(100vh - 50px);
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    text-align: center;
+}
+
+.SlideItem3 .ThirdTitle h2 {
+    font-size: 60px;
+    color: var(--primary);
+    font-family: var(--title);
+}
+
+.SlideItem3 .ThirdTitle span {
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.SlideItem3 .ThirdTitle h3 {
+    font-size: 30px;
+    font-family: var(--subtitle);
+}
+
+.SlideItem3 .ThirdTitle button {
+    font-size: 20px;
+    font-family: var(--text);
+    border: none;
+    width: 200px;
+    height: 50px;
+    align-self: center;
+    background-color: var(--bg-tertiary);
+    border-radius: 10px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.SlideItem3 .ThirdTitle button:hover {
+    color: var(--secondary);
+    background-color: var(--bg-secondary);
+}
+
+
+
+
+/* 
+.Landing .QueComer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.container{
+    display: flex;
+    justify-content: space-around;
+    width: 70vw;
+    margin-left: 15vw;
+}
+
+.icon-container{
+    background-color: rgb(214, 214, 214);
+    padding: 15px 30px;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.icon-container:hover{
+    background-color: var(--secondary);
+    scale: 1.05;
+    cursor:pointer;
+}
+
+.icon-container:hover .icon{
+    scale:1.15;
+}
+
+.text-icon{
+    color: black;
+    margin: 0;
+    text-align: center;
+}
+
+.icon{
+    width: 50px;
+    transition: .3s;
+}
+
+.title{
+    font-size: 3.5em;
+    text-align: center;
+    color: black;
+    opacity:0;
+    scale:.6;
+    animation: aparecer .6s ease-in-out forwards;
+}
+
+@keyframes aparecer{
+    70%{
+        scale:1.1;
+
+    }
+    100%{
+        scale:1;
+        opacity: 1;
+    }
+}
+
+.saltar{
+    text-align: center;
+    margin-top: 10vh;
+    font-size: .9em;
+    color: var(--primary);
+    cursor:pointer
+}
+
+.select-container{
+    text-align: center;
+}
+
+.select{
+    height: 50px;
+    width: 200px;
+    text-align: center;
+    font-size: 1.4em;
+    border: 0;
+    outline: 0;
+    cursor:pointer;
+}
+
+option:first-child{
+    color: var(--secondary)
+} */

@@ -1,0 +1,31 @@
+const { DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
+  sequelize.define('Local', {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    verified: {
+      type: DataTypes.ENUM('verified', 'unVerified', 'suspended'),
+      defaultValue: 'unVerified',
+    },
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+        isEmail: true,
+      },
+    },
+    location: {
+      type: DataTypes.STRING,
+      // unique: true,
+      allowNull: false,
+    },
+    schedule: DataTypes.STRING,
+  });
+};

@@ -1,0 +1,206 @@
+.ReviewsForm{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 120vh;
+    background-color: rgba(var(--bg-primary), 0.2);
+    backdrop-filter: blur(3px);
+    z-index: 999;
+}
+
+@keyframes aparecer{
+    70%{
+        scale:1.1;
+
+    }
+    100%{
+        scale:1;
+        opacity: 1;
+    }
+}
+.ReviewsForm .Container{
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 750px;
+    height: 450px;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    padding: 10px;
+    position: relative;
+}
+
+.ReviewsForm .Container a{
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    transition: 0.3s;
+}
+
+.ReviewsForm .Container a:hover {
+    transform: scale(1.1);
+}
+
+.ReviewsForm .Container .CloseIcon{
+    position: absolute;
+    font-size: 1.3rem;
+    top: 25px;
+    right: 25px;
+    transition: 0.3s;
+    color: var(--prymary);
+}
+.ReviewsForm .Container .CloseIcon:hover {
+    transform: scale(1.3);
+    color: var(--bg-tertiary);
+}
+.ReviewsForm .Container .Left{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 10px;
+    width: 50%;
+    height: 400px;
+    padding: 15px;
+    opacity: 0;
+    animation: aparecer .6s ease-in-out forwards;
+}
+.ReviewsForm .Container .Rigth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    width: 50%;
+    height: 400px;
+}
+
+.ReviewsForm .Container .TitleReviewForm{
+    margin-top: 10px;
+}
+.ReviewsForm .Container .Left .Decorator{
+    width: 100%;
+    height: 5px;
+    background-color: var(--bg-tertiary);
+    border-radius: 40px;
+}
+.ReviewsForm .Container .Left h2 {
+    font-family: var(--title);
+    font-size: 2rem;
+    text-align:start;
+    color:var(--prymary);
+}
+.ReviewsForm .Container .Left p {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--prymary);
+    font-family: var(--text);
+    padding: 0px;
+}
+
+.ReviewsForm .Container .Left .RatingInput{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.ReviewsForm .Container .Left .RatingInput h5{
+    font-size: 20px;
+    font-family: var(--subtitle);
+    color: var(--prymary);
+}
+.ReviewsForm .Container .Left .RatingInput p{
+    font-size: 10px;
+    font-family: var(--subtitle);
+    color: var(--prymary);
+}
+.ReviewsForm .Container .Left .RatingInput h2{
+    font-size: 15px;
+    font-family: var(--subtitle);
+    color: var(--prymary);
+}
+
+.ReviewsForm .Container .Rigth form{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 10px;
+}
+
+.Container .Rigth form .TitleReview .Title{
+    width: 330px;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 0 0 5px 5px;
+    font-size: 15px;
+    font-family: var(--text);
+    background-color: var(--bg-primary);
+    border-left: 1px solid var(--bg-secondary);
+    border-bottom: 1px solid var(--bg-secondary);
+    transition: 0.3s;
+}
+.Container .Rigth form .TitleReview .Title:hover {
+    border-radius: 0 0 15px 10px;
+    border-left: 2px solid var(--bg-secondary);
+    border-bottom: 2px solid var(--bg-secondary);
+}
+
+.Container .Rigth form .Comment .Message {
+    width: 330px;
+    height:60px;
+    resize: none;
+    padding: 5px;
+    border: none;
+    outline: none;
+    border-radius: 0 0 5px 5px;
+    font-size: 15px;
+    font-family: var(--text);
+    background-color: var(--bg-primary);
+    border-left: 1px solid var(--bg-secondary);
+    border-bottom: 1px solid var(--bg-secondary);
+    transition: 0.3s;
+}
+
+.Container .Rigth form .Comment .Message:hover {
+    border-radius: 0 0 15px 10px;
+    border-left: 2px solid var(--bg-secondary);
+    border-bottom: 2px solid var(--bg-secondary);
+}
+
+.ReviewsForm .Container .Rigth form .ImgGroup{
+    position: relative;
+    width: 330px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ReviewsForm .Container .Rigth form .ImgGroup .LoadImg {
+    position: absolute;
+    
+}
+
+.Container .Rigth form button{
+    width: 330px;
+    padding: 2px;
+    font-size: 15px;
+    font-family: var(--subtitle);
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--bg-tertiary);
+    transition: 0.3s;
+}
+
+.Container .Rigth form button:hover {
+    background-color: var(--bg-secondary);
+    color: var(--bg-primary);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.ImgGroup .imagenDefault{
+    width: 200px;
+    height: 200px;
+}
