@@ -28,7 +28,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
         calificationQaPrice +
         calificationEnvironment +
         calificationService) /
-      4
+        4
     );
   }, [
     calificationFood,

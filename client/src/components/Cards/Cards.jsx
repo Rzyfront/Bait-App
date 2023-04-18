@@ -1,47 +1,58 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import Card from '../Card/Card';
 import './Cards.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
-// Temporal IMG!!!!
-// import img from '../../assets/restaurante.jpg';
+import { homepage, searchByQuery } from '../../redux/actions/actions';
 
 function Cards () {
-  // controller navegation
-  const [navegation, setnavegation] = useState(0);
-  // carts data
-  const ContainerCards = useSelector((state) => state.cards);
-  // reset filters or search
+  const location = useLocation();
+
+  // params consulta
+  // obtener los valores de los parametros de consulta
+  const queryParams = new URLSearchParams(location.search);
+  const name = queryParams.get('name');
+  const city = queryParams.get('city');
+
+  const { locals, totalPages } = useSelector((state) => state.cards);
+  const pagine = useParams();
+  const dispatch = useDispatch();
+  // navegation
+  const [navegation, setnavegation] = useState(pagine.id);
+  // actualiza pagina
   useEffect(() => {
-    setnavegation(0);
-    console.log(ContainerCards);
-  }, [ContainerCards]);
-
-  const handlepage = (data) => {
-    setnavegation(data);
-  };
-
+    if (name || city) {
+      dispatch(searchByQuery(name, city));
+      setnavegation(pagine.id);
+    } else {
+      dispatch(homepage(pagine.id));
+      setnavegation('', '');
+    }
+  }, [pagine]);
+  // controller navegation
+  useEffect(() => {
+    setnavegation(pagine.id);
+  }, [totalPages]);
   return (
     <div className="containerCardsall">
       <div className="ContainerCards">
-        {ContainerCards.length > 0
-          ? (
-              ContainerCards[navegation].map(
-                (
-                  {
-                    name,
-                    rating,
-                    location,
-                    verified,
-                    schedule,
-                    id,
-                    Characteristic,
-                    Images
-                  },
-                  index
-                ) => {
-                  return (
+        {locals &&
+          locals.map(
+            (
+              {
+                name,
+                rating,
+                location,
+                verified,
+                schedule,
+                id,
+                Characteristic,
+                Images
+              },
+              index
+            ) => {
+              return (
                 <Link to={`/profile/${id}`} key={index}>
                   <Card
                     id={id}
@@ -54,30 +65,12 @@ function Cards () {
                     Images={Images}
                   />
                 </Link>
-                  );
-                }
-              )
-            )
-          : (
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/6195/6195678.png"
-            alt="noImage"
-          />
-            )}
-      </div>
-      {ContainerCards.length === 0
-        ? (
-        <div></div>
-          )
-        : (
-        <Pagination
-          length_data={ContainerCards.length}
-          position={navegation}
-          handlepage={handlepage}
-        />
+              );
+            }
           )}
+      </div>
+      {totalPages && <Pagination totalPages={totalPages} />}
     </div>
   );
 }
-
 export default Cards;

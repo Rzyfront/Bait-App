@@ -1,17 +1,15 @@
-import axios from 'axios';
-/// ///names/////////////
-export const FILTERS = 'FILTERS';
-export const ORDER = 'ORDER';
-export const RESET = 'RESET';
-export const LOADINGLOCALS = 'LOADINGLOCALS';
-export const SEARCH_BY_QUERY = 'SEARCH_BY_QUERY';
-export const DETAIL = 'DETAIL';
+import axios from "axios";
+//////names/////////////
+export const ORDER = "ORDER";
+export const RESET = "RESET";
+export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
+export const DETAIL="DETAIL"
 export const LOGIN = 'LOGIN';
+export const COMENTARIE="COMENTARIE"
 export const CREATE_USER = 'CREATE_USER';
-export const COMENTARIE = 'COMENTARIE';
+export const HOMEPAGE="HOMEPAGE"
 
-/// ///////actions////////////////////////////
-
+//////////actions////////////////////////////
 export const reset = () => {
   return {
     type: RESET,
@@ -19,19 +17,6 @@ export const reset = () => {
   };
 };
 /// loadinglocals
-export const loadingLocals = () => {
-  return async dispatch => {
-    try {
-      const response = await axios.get('/locals');
-      dispatch({
-        type: LOADINGLOCALS,
-        payload: response.data.locals
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
 
 /// Create user
 export const createUser = ({ name, lastname, age, phone_number, email, password, location, verified, isActive, role }) => {
@@ -54,12 +39,11 @@ export const createUser = ({ name, lastname, age, phone_number, email, password,
       console.log(error);
       console.log(error.message);
     }
-  };
-};
-
-// Detail id
-export const DetailLocal = (id) => {
-  return async dispatch => {
+  }
+}
+//Detail id
+export const DetailLocal=(id)=>{
+  return async dispatch=>{
     try {
       const datos = await axios.get(`/locals/${id}`);
       dispatch({
@@ -72,41 +56,40 @@ export const DetailLocal = (id) => {
   };
 };
 
-// correguir imagen cuando este listo la ruta
-export const createLocal = (inputs, chekinputs) => {
-  const images = [];
-  inputs.imagen.forEach(data => {
-    images.push({ id: data.id });
-  });
-
-  return async (dispatch) => {
-    try {
-      await axios.post('/locals', {
-        name: inputs.name,
-        location: inputs.location,
-        schedule: inputs.schedule,
-        email: inputs.email,
-        images,
-        characteristics: {
-          wifi: chekinputs.wifi,
-          parking_lot: chekinputs.parking_lot,
-          outdoor_seating: chekinputs.outdoor_seating,
-          live_music: chekinputs.live_music,
-          table_service: chekinputs.table_service,
-          family_style: chekinputs.family_style,
-          romantic: chekinputs.romantic,
-          big_group: chekinputs.big_group,
-          work_friendly: chekinputs.work_friendly,
-          pet_friendly: chekinputs.pet_friendly
+//correguir imagen cuando este listo la ruta
+export const createLocal=(inputs, chekinputs)=>{
+  let images=[]
+ inputs.imagen.forEach(data=>{
+   images.push({id:data.id})
+ })
+   return async dispatch => {
+        try{
+    await axios.post("/locals",{
+    "name":inputs.name, 
+    "location":inputs.location, 
+    "schedule":inputs.schedule,
+    "email":inputs.email,
+    "images":images,
+    "characteristics":{
+			"wifi": chekinputs.wifi,
+			"parking_lot": chekinputs.parking_lot,
+			"outdoor_seating": chekinputs.outdoor_seating,
+			"live_music": chekinputs.live_music,
+			"table_service": chekinputs.table_service,
+			"family_style": chekinputs.family_style,
+			"romantic": chekinputs.romantic,
+			"big_group": chekinputs.big_group,
+			"work_friendly": chekinputs.work_friendly,
+			"pet_friendly": chekinputs.pet_friendly
+		}
+    })
+    }catch(error){
+            console.log(error.message)
         }
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
+      }
+}
 
-// order and filters
+//order and filters and cards
 export const order = (data, actions) => {
   console.log(data);
   const datas = data.flat();
@@ -143,15 +126,14 @@ export const order = (data, actions) => {
   }
   // adgorithm aordering
 };
-export const searchByQuery = (data) => {
-  const { input, map } = data;
+export const searchByQuery = (name,city) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/locals?name=${input}&location=${map}`);
-      const info = response.data.locals;
-      return dispatch({ type: SEARCH_BY_QUERY, payload: info });
+      let response = await axios.get(`/locals?name=${name}&location=${city}`);
+      let info = response.data;
+      return dispatch({ type: SEARCH_BY_QUERY, payload: info })
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
     }
   };
 };
@@ -163,29 +145,47 @@ export const logIn = (credentials) => {
     return dispatch({
       type: LOGIN,
       payload: res.data
-    });
-  };
-};
+    })
+  }
+}
 
-export const comentarie = (calificationFood,
-  calificationQaPrice,
-  calificationEnvironment,
-  calificationService,
-  calculateAverage, inputs, id) => {
+export const comentarie=(calificationFood,
+          calificationQaPrice,
+          calificationEnvironment,
+          calificationService,
+          calculateAverage, inputs,id)=>{
+
+ return async dispatch => {
+        try{
+    await axios.post(`/reviews/${id}`,{
+    title: inputs.title,
+    rating: calculateAverage,
+    comment: inputs.comment,
+    image: inputs.image,
+    food: calificationFood,
+    service: calificationService,
+    environment: calificationEnvironment,
+    qaPrice: calificationQaPrice,
+		})
+        }catch(error){
+            console.log(error)
+        }
+      }  
+
+
+}
+//// home pages
+export const homepage=(id)=>{
   return async dispatch => {
     try {
-      await axios.post(`/reviews/${id}`, {
-        title: inputs.title,
-        rating: calculateAverage,
-        comment: inputs.comment,
-        image: inputs.image,
-        food: calificationFood,
-        service: calificationService,
-        environment: calificationEnvironment,
-        qaPrice: calificationQaPrice
+      const response = await axios.get(`/locals/page/${id}`);
+      dispatch({
+        type: HOMEPAGE,
+        payload: response.data
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.message); 
+      };
     }
-  };
-};
+  }
+
