@@ -10,6 +10,7 @@ const getQueryLocals = require('../controllers/locals/getQueryLocals');
 // const userExtractor = require('../middlewares/userExtractor');
 
 localsRoute.get('/', getQueryLocals, getLocals);
+localsRoute.get('/page/:numPage', getQueryLocals, getLocals);
 localsRoute.param('localId', paramLocal);
 // localsRoute.post('/', userExtractor, postLocal);
 localsRoute.post('/', localValidator, postLocal);
