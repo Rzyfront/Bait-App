@@ -7,7 +7,6 @@ const menuRouter = require('./menu');
 const reviewsRoute = require('./reviews');
 const userRoutes = require('./users');
 const loginRoute = require('./login');
-const paymentsRoute = require('./payments');
 
 mainRouter.use('/locals', localsRoute)
   .use('/reviews', reviewsRoute)
@@ -16,8 +15,7 @@ mainRouter.use('/locals', localsRoute)
   .use('/dishes', dishesRouter)
   .use('/user', userRoutes)
   .use('/menu', menuRouter)
-  .use('/login', loginRoute)
-  .use('/payments', paymentsRoute);
+  .use('/login', loginRoute);
 
 mainRouter.get('/', (req, res) => {
   res.send('Hello World!');
