@@ -1,4 +1,3 @@
-// const { Op } = require('sequelize');
 const { fn, col } = require('sequelize');
 const {
   Local, Characteristic, Image, Review,
