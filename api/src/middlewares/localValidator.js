@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
 
     if (characteristics) {
       verifiedTypeOf(characteristics, 'object');
-      console.log(Object.keys(characteristics));
+      // console.log(Object.keys(characteristics));
       if (!Object.keys(characteristics).every((e) => allCharacteristics.includes(e))
       || !Object.values(characteristics).every((e) => typeof e === 'boolean')) { throw new Error('bad data into characteristics'); }
     }
