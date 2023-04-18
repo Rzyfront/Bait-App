@@ -1,15 +1,15 @@
-import axios from "axios";
-//////names/////////////
-export const ORDER = "ORDER";
-export const RESET = "RESET";
-export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
-export const DETAIL="DETAIL"
+import axios from 'axios';
+/// ///names/////////////
+export const ORDER = 'ORDER';
+export const RESET = 'RESET';
+export const SEARCH_BY_QUERY = 'SEARCH_BY_QUERY';
+export const DETAIL = 'DETAIL';
 export const LOGIN = 'LOGIN';
-export const COMENTARIE="COMENTARIE"
+export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
-export const HOMEPAGE="HOMEPAGE"
+export const HOMEPAGE = 'HOMEPAGE';
 
-//////////actions////////////////////////////
+/// ///////actions////////////////////////////
 export const reset = () => {
   return {
     type: RESET,
@@ -39,11 +39,11 @@ export const createUser = ({ name, lastname, age, phone_number, email, password,
       console.log(error);
       console.log(error.message);
     }
-  }
-}
-//Detail id
-export const DetailLocal=(id)=>{
-  return async dispatch=>{
+  };
+};
+// Detail id
+export const DetailLocal = (id) => {
+  return async dispatch => {
     try {
       const datos = await axios.get(`/locals/${id}`);
       dispatch({
@@ -56,40 +56,40 @@ export const DetailLocal=(id)=>{
   };
 };
 
-//correguir imagen cuando este listo la ruta
-export const createLocal=(inputs, chekinputs)=>{
-  let images=[]
- inputs.imagen.forEach(data=>{
-   images.push({id:data.id})
- })
-   return async dispatch => {
-        try{
-    await axios.post("/locals",{
-    "name":inputs.name, 
-    "location":inputs.location, 
-    "schedule":inputs.schedule,
-    "email":inputs.email,
-    "images":images,
-    "characteristics":{
-			"wifi": chekinputs.wifi,
-			"parking_lot": chekinputs.parking_lot,
-			"outdoor_seating": chekinputs.outdoor_seating,
-			"live_music": chekinputs.live_music,
-			"table_service": chekinputs.table_service,
-			"family_style": chekinputs.family_style,
-			"romantic": chekinputs.romantic,
-			"big_group": chekinputs.big_group,
-			"work_friendly": chekinputs.work_friendly,
-			"pet_friendly": chekinputs.pet_friendly
-		}
-    })
-    }catch(error){
-            console.log(error.message)
+// correguir imagen cuando este listo la ruta
+export const createLocal = (inputs, chekinputs) => {
+  const images = [];
+  inputs.imagen.forEach(data => {
+    images.push({ id: data.id });
+  });
+  return async dispatch => {
+    try {
+      await axios.post('/locals', {
+        name: inputs.name,
+        location: inputs.location,
+        schedule: inputs.schedule,
+        email: inputs.email,
+        images,
+        characteristics: {
+          wifi: chekinputs.wifi,
+          parking_lot: chekinputs.parking_lot,
+          outdoor_seating: chekinputs.outdoor_seating,
+          live_music: chekinputs.live_music,
+          table_service: chekinputs.table_service,
+          family_style: chekinputs.family_style,
+          romantic: chekinputs.romantic,
+          big_group: chekinputs.big_group,
+          work_friendly: chekinputs.work_friendly,
+          pet_friendly: chekinputs.pet_friendly
         }
-      }
-}
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
 
-//order and filters and cards
+// order and filters and cards
 export const order = (data, actions) => {
   console.log(data);
   const datas = data.flat();
@@ -126,14 +126,14 @@ export const order = (data, actions) => {
   }
   // adgorithm aordering
 };
-export const searchByQuery = (name,city) => {
+export const searchByQuery = (name, city) => {
   return async (dispatch) => {
     try {
-      let response = await axios.get(`/locals?name=${name}&location=${city}`);
-      let info = response.data;
-      return dispatch({ type: SEARCH_BY_QUERY, payload: info })
+      const response = await axios.get(`/locals?name=${name}&location=${city}`);
+      const info = response.data;
+      return dispatch({ type: SEARCH_BY_QUERY, payload: info });
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
   };
 };
@@ -145,37 +145,36 @@ export const logIn = (credentials) => {
     return dispatch({
       type: LOGIN,
       payload: res.data
-    })
-  }
-}
+    });
+  };
+};
 
-export const comentarie=(calificationFood,
-          calificationQaPrice,
-          calificationEnvironment,
-          calificationService,
-          calculateAverage, inputs,id)=>{
-
- return async dispatch => {
-        try{
-    await axios.post(`/reviews/${id}`,{
-    title: inputs.title,
-    rating: calculateAverage,
-    comment: inputs.comment,
-    image: inputs.image,
-    food: calificationFood,
-    service: calificationService,
-    environment: calificationEnvironment,
-    qaPrice: calificationQaPrice,
-		})
-        }catch(error){
-            console.log(error)
+export const comentarie = (calificationFood, calificationQaPrice, calificationEnvironment, calificationService, calculateAverage, inputs, id, token) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/reviews/${id}`, {
+        title: inputs.title,
+        rating: calculateAverage,
+        comment: inputs.comment,
+        image: inputs.image,
+        food: calificationFood,
+        service: calificationService,
+        environment: calificationEnvironment,
+        qaPrice: calificationQaPrice
+      }, {
+        headers: {
+          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1YW5jYW1pbG8xNDc4QGdtYWlsLmNvbSIsImlkIjoxLCJyb2xlIjoidXNlciIsInZlcmlmaWVkIjoidmVyaWZpZWQiLCJpYXQiOjE2ODE4NDQ1NTV9.EhvevCRgCT38ujSsKwOJTvrQbX8knXalLItzj71HJto', // Aquí agregas tu header personalizado
+          'Content-Type': 'application/json' // También puedes agregar otros headers estándar
         }
-      }  
-
-
-}
-//// home pages
-export const homepage=(id)=>{
+      });
+      console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+/// / home pages
+export const homepage = (id) => {
   return async dispatch => {
     try {
       const response = await axios.get(`/locals/page/${id}`);
@@ -184,8 +183,7 @@ export const homepage=(id)=>{
         payload: response.data
       });
     } catch (error) {
-      console.log(error.message); 
-      };
-    }
-  }
-
+      console.log(error.message);
+    };
+  };
+};

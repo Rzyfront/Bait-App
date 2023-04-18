@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { useEffect, useState } from 'react';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
@@ -36,6 +38,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
     calificationEnvironment,
     calificationService
   ]);
+
   const [inputs, setInputs] = useState({
     title: '',
     comment: '',
@@ -45,12 +48,6 @@ function ReviewsForm ({ setToggleModal2, id }) {
   useEffect(() => {
     setInputs({ ...inputs, image: image[image.length - 1] });
   }, [image.length]);
-
-  const [errors, setErrors] = useState({
-    title: '',
-    comment: '',
-    image: {}
-  });
 
   const handleChange = (event) => {
     setInputs({
@@ -75,31 +72,9 @@ function ReviewsForm ({ setToggleModal2, id }) {
           id
         )
       );
-    }
-    // if (!Object.values(errors).length) {
-    //   alert("Datos completos");
-    //   setInputs({
-    //     title: "",
-    //     rating: "",
-    //     comment: "",
-    //     image: {},
-    //     food: "",
-    //     service: "",
-    //     enviroment: "",
-    //     qaPrice: "",
-    //   });
-    //   setErrors({
-    //     title: "",
-    //     rating: "",
-    //     comment: "",
-    //     image: {},
-    //     food: "",
-    //     service: "",
-    //     enviroment: "",
-    //     qaPrice: "",
-    //   });
-    else {
-      alert('Debe llenar todos los campos');
+      alert('ya se envio');
+    } else {
+      alert('no se puede');
     }
   };
 
@@ -107,8 +82,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
     handleChangeimage(e);
   };
 
-  return (
-    <div className="ReviewsForm">
+  return (<div className="ReviewsForm">
       <div className="Container">
         <Link to="/home" className="LinkLogo">
           <img
@@ -207,7 +181,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
                 name="title"
                 placeholder="Escribe un titulo para tu reseña..."
               />
-              {errors.name && <p className="danger">{errors.name}</p>}
+
             </div>
             <div className="Comment">
               <textarea
@@ -219,7 +193,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
                 name="comment"
                 placeholder="Cuentanos tu experiencia en este lugar..."
               />
-              {errors.message && <p className="danger">{errors.message}</p>}
+
             </div>
             <div className="ImgGroup">
               <input
