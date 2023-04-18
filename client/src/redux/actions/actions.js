@@ -8,6 +8,9 @@ export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
 export const DETAIL="DETAIL"
 export const LOGIN = 'LOGIN';
 export const COMENTARIE="COMENTARIE"
+export const CREATE_USER = 'CREATE_USER';
+
+
 //////////actions////////////////////////////
 
 //filter
@@ -49,21 +52,30 @@ export const loadingLocals = () => {
   
 
 /// Create user
-export const createUser=(inputs)=>{
-return async(dispatch)=>{
-await axios.post("/users",{
-    "name":inputs.name,
-    "lastname":inputs.lastname,
-    "age":inputs.age,
-    "phoneNumber":inputs.phoneNumber,
-    "email":inputs.email,
-    "password":inputs.password,
-    "location":inputs.location,
-    "verified":inputs.verified,
-    "isActive":inputs.isActive,
-    "role":inputs.role
-})
-}
+export const createUser=({name,lastname,age,phone_number,email,password,location,verified,isActive,role})=>{
+
+  return async(dispatch)=>{
+    try {
+       await axios.post("http://localhost:3001/user", {
+        name,
+        lastname,
+        age:Number(age),
+        phone_number,
+        email,
+        password,
+        location,
+        verified,
+        isActive,
+        role
+      })
+      return dispatch({ type: CREATE_USER, payload: "Usuario Creado Correctamente" })
+
+      console.log("Usuario Creado mi vale");
+    } catch (error) {
+      console.log(error)
+      console.log(error.message)
+    }
+  }
 }
 
 //Detail id

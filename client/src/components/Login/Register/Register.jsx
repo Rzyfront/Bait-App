@@ -2,17 +2,32 @@ import { TfiClose } from "react-icons/tfi";
 import { useRef, useState } from "react";
 import { createUser } from "../../../redux/actions/actions";
 import { validation} from "../validation";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Register = ({ setToggleLogin, loginRegister }) => {
-
+    const navigate = useNavigate()
+     const dispatch = useDispatch()   
     const passRef = useRef();
     const formRef = useRef();
     const [message, setMessage] = useState(false);
-
+    const[dataRegister, setDataRegister] = useState({
+        name: "",
+        lastname: "",
+        age: "",
+        phone_number: "",
+        email: "",
+        password: "",
+        password2: "",
+        location: "",
+        verified: "",
+        isActive: "",
+        role: "",
+    })
 
     const [errorsRegister, setErrorsRegister] = useState({
         name: "",
-        phoneNumber: "",
+        phone_number: "",
         password: "",
     });
     const handleRegister = (event) => {
@@ -30,53 +45,40 @@ const Register = ({ setToggleLogin, loginRegister }) => {
         // console.log(errorsRegister);
     };
 
-    const [dataRegister, setDataRegister] = useState({
-        name: "",
-        lastname: "MiPapa",
-        age: "25",
-        phoneNumber: "",
-        email: "",
-        password: "",
-        password2: "",
-        location: "Buenos Aires",
-        verified: "true",
-        isActive: "true",
-        role: "user",
-    });
+
 
     const sendRegister = (event) => {
         event.preventDefault();
+        console.log(dataRegister);
         if (!Object.values(errorsRegister).length) {
             dispatch(createUser(dataRegister));
             setDataRegister({
                 name: "",
-                lastname: "MiPapa",
-                age: "25",
-                phoneNumber: "",
+                lastname: "",
+                age: "",
+                phone_number: "",
                 email: "",
                 password: "",
                 password2: "",
-                location: "Buenos Aires",
-                verified: "true",
-                isActive: "true",
-                role: "user",
+                location: "",
+                verified: "",
+                isActive: "",
+                role: "",
             });
-            setErrorsRegister({
-                name: "",
-                phoneNumber: "",
-                password: "",
-            });
+            alert("Usario creado")
+            navigate("/home")
+            setErrorsRegister({});
         } else {
             alert(
                 errorsRegister.name +
                 "\n" +
                 errorsRegister.password +
                 "\n" +
-                errorsRegister.phoneNumber
+                errorsRegister.phone_number
             );
         }
     };
-    return (
+    return(
         <>
             <div className={`login ${!loginRegister && "scale-up-bottom"}`}>
                 <TfiClose
@@ -98,16 +100,51 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                                 value={dataRegister.name}
                                 onChange={handleRegister}
                                 autoComplete="off"
-                                placeholder="Usuario"
+                                placeholder="Nombre"
+                            ></input>
+                            <input
+                                className="input"
+                                type="text"
+                                name="lastname"
+                                value={dataRegister.lastname}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="Apellido"
                             ></input>
                             <input
                                 className="input"
                                 type="number"
-                                name="phoneNumber"
-                                value={dataRegister.phoneNumber}
+                                name="age"
+                                value={dataRegister.age}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="Edad"
+                            ></input>
+                            <input
+                                className="input"
+                                type="text"
+                                name="phone_number"
+                                value={dataRegister.phone_number}
                                 onChange={handleRegister}
                                 autoComplete="off"
                                 placeholder="Telefono"
+                            ></input>
+                            <input
+                                className="input"
+                                type="text"
+                                name="email"
+                                value={dataRegister.email}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="Email"
+                            ></input>  <input
+                                className="input"
+                                type="text"
+                                name="location"
+                                value={dataRegister.location}
+                                onChange={handleRegister}
+                                autoComplete="off"
+                                placeholder="Ciudad"
                             ></input>
                             <input
                                 className="input"
@@ -123,7 +160,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                                     type="password"
                                     name="password2"
                                     autoComplete="off"
-                                    value={dataRegister.paswword2}
+                                    value={dataRegister.password2}
                                     onChange={handleRegister}
                                     className="input"
                                     placeholder="Repetir contraseña"
