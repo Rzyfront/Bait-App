@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const bcrypt = require('bcrypt');
 const { User } = require('../../db');
 const { sendVerificationEmail } = require('../../config/nodemailer/nodemailer-config');

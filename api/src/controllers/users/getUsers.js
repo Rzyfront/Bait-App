@@ -10,8 +10,8 @@ module.exports = async (req, res) => {
     }
     const users = await User.findAll();
     // sino lo que hace es traer todos los usuarios que esten en la DB
-    return res.status(200).json(users);
+    return res.status(200).json({ users, success: true });
   } catch (error) {
-    return res.status(404).json(error.message);
+    return res.status(404).json({ success: false, message: error.message });
   }
 };
