@@ -2,7 +2,7 @@ const { Op, fn, col } = require('sequelize');
 
 module.exports = (req, res, next) => {
   const {
-    name, location, order, page, ...characteristics
+    name, location, order, page, verified, ...characteristics
   } = req.query;
   const where = {};
   let reqOrder = [];
@@ -19,6 +19,7 @@ module.exports = (req, res, next) => {
     else if (order === 'nameDESC') reqOrder = [['name', 'DESC']];
   }
   req.characteristics = characteristics;
+  req.reviews = { verified: verified ?? true };
   req.order = reqOrder;
   req.where = where;
   next();
