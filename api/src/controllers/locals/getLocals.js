@@ -24,6 +24,8 @@ module.exports = async (req, res) => {
         {
           model: Review,
           attributes: [],
+          where: req.reviews,
+          required: false,
         },
       ],
       attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule'],
