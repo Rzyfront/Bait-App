@@ -2,10 +2,14 @@ import "./Home.css";
 import { Filters, Navbar, Cards, Footer } from "../components";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { loadingLocals } from "../../redux/actions/actions";
+import { homepage, loadingLocals } from "../../redux/actions/actions";
+import { useParams } from "react-router-dom";
+
 const Home = () => {
+  let { id } = useParams();
   const dispatch = useDispatch();
   //initial Home
+
   useEffect(() => {
     dispatch(loadingLocals());
   }, []);

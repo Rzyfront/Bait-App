@@ -9,7 +9,7 @@ export const DETAIL="DETAIL"
 export const LOGIN = 'LOGIN';
 export const COMENTARIE="COMENTARIE"
 export const CREATE_USER = 'CREATE_USER';
-
+export const HOMEPAGE="HOMEPAGE"
 
 //////////actions////////////////////////////
 
@@ -222,3 +222,20 @@ export const comentarie=(calificationFood,
 
 
 }
+
+
+//// home pages
+export const homepage=(id)=>{
+  return async dispatch => {
+    try {
+      const response = await axios.get(`/locals/page/${id}`);
+      dispatch({
+        type: HOMEPAGE,
+        payload: response.data
+      });
+    } catch (error) {
+      console.log(error.message); 
+      };
+    }
+  }
+

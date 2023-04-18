@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <div className="all_navbar">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to="/home">
+      <Link to="/home/1">
         <img
           src={BaitLogo}
           alt="Bait"

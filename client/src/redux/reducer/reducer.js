@@ -1,4 +1,5 @@
-import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY, DETAIL,CREATE_USER } from "../actions/actions";
+import { useDispatch } from "react-redux";
+import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY, DETAIL,CREATE_USER, HOMEPAGE } from "../actions/actions";
 
 const initialState={
 cards:[],
@@ -52,6 +53,12 @@ const rootReducer=(state=initialState ,{type,payload})=>{
           ...state,
           createdUserMessage:payload
         }
+      case HOMEPAGE:{
+        return {
+          ...state,
+          cards:payload
+        }
+      }
     default:
       return { ...state };
   }
