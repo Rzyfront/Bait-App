@@ -4,16 +4,12 @@ import { MdOutlineRestaurant } from "react-icons/md";
 import { BiMap } from "react-icons/bi";
 import { BiSearchAlt } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { searchByQuery } from "../../../redux/actions/actions";
 function Search_home() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [data, setData] = useState({
     input: "",
     map: "",
   });
-
   const handleinputs = (e) => {
     setData({
       ...data,
@@ -22,9 +18,7 @@ function Search_home() {
   };
   const search_datas = (e) => {
     e.preventDefault();
-    dispatch(searchByQuery(data));
-    navigate("/home");
-    console.log("lo busco");
+    navigate(`/home/1?name=${data.input}&city=${data.map}`);
   };
   return (
     <div className="search_home">

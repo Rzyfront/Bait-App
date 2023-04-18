@@ -1,37 +1,19 @@
-import { useDispatch } from "react-redux";
-import { ORDER, RESET,LOADINGLOCALS, SEARCH_BY_QUERY, DETAIL,CREATE_USER, HOMEPAGE } from "../actions/actions";
+
+import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL,CREATE_USER, HOMEPAGE } from "../actions/actions";
 
 const initialState={
 cards:[],
 reset:[],
 detail:[]
 }
-
-//action paginate
-const paginate = (data) => {
-  const size = 6;
-  let newarray = [];
-  for (var i = 0; i < data.length; i += size) {
-    const oneDate = data.slice(i, i + size);
-    newarray.push(oneDate);
-  }
-  return newarray;
-};
-
-
 const rootReducer=(state=initialState ,{type,payload})=>{
      switch (type) {
-      case LOADINGLOCALS:
-      
-        return{...state,
-          cards:paginate(payload)
-        }
+ 
    case ORDER:
     return{
         ...state,
         reset:state.cards,
-        cards:paginate(payload)
-      
+        cards:payload  
     }
     case  RESET:
       return{
@@ -41,7 +23,7 @@ const rootReducer=(state=initialState ,{type,payload})=>{
     case SEARCH_BY_QUERY:
       return {
         ...state,
-        cards: paginate(payload)
+        cards: payload
       }
     case DETAIL:
       return{

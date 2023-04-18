@@ -11,7 +11,7 @@ const Navbar = () => {
   return (
     <div className="all_navbar">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to="/home/1">
+      <Link to={`/home/1?name=&city=`}>
         <img
           src={BaitLogo}
           alt="Bait"
@@ -20,11 +20,9 @@ const Navbar = () => {
           height="45px"
         />
       </Link>
-
       <div className="SearchBar">
         <Search_home />
       </div>
-
       <div className="UserGroup">
         {user === false ? (
           <div
