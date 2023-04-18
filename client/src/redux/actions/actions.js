@@ -58,7 +58,7 @@ export const createUser=({name,lastname,age,phone_number,email,password,location
        await axios.post("http://localhost:3001/user", {
         name,
         lastname,
-        age,
+        age:Number(age),
         phone_number,
         email,
         password,
@@ -71,6 +71,7 @@ export const createUser=({name,lastname,age,phone_number,email,password,location
 
       console.log("Usuario Creado mi vale");
     } catch (error) {
+      console.log(error)
       console.log(error.message)
     }
   }
