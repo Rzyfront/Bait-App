@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import "./Reviews.css";
-import { Rating as RatingStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
+import { useEffect } from 'react';
+import './Reviews.css';
+import { Rating as RatingStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
 
-function Reviews({ ReviewsList }) {
+function Reviews ({ ReviewsList }) {
   useEffect(() => {
     console.log(ReviewsList);
   }, []);
@@ -18,7 +18,7 @@ function Reviews({ ReviewsList }) {
           return (
             <div key={index} className="ReviewCard">
               <div className="LeftInfo">
-                <h3>{"pedro"}</h3>
+                <h3>{'pedro'}</h3>
                 <div className="RatingGroup">
                   <h4>Rating:</h4>
                   <RatingStar
@@ -35,7 +35,7 @@ function Reviews({ ReviewsList }) {
               <div className="RigthImg">
                 <img
                   src={
-                    "https://i.pinimg.com/474x/d9/6a/1d/d96a1d3e6315ed8e92c892fdd769f9b1.jpg"
+                    'https://i.pinimg.com/474x/d9/6a/1d/d96a1d3e6315ed8e92c892fdd769f9b1.jpg'
                   }
                   alt="default"
                 />

@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import "./pagination.css";
-import { FcPrevious } from "react-icons/fc";
-import { FcNext } from "react-icons/fc";
+import { useEffect, useState } from 'react';
+import './pagination.css';
+import { FcPrevious, FcNext } from 'react-icons/fc';
+
 const Pagination = ({ length_data, position, handlepage }) => {
   const numbers = [];
   const [limit, setLimit] = useState(0);
@@ -21,7 +21,7 @@ const Pagination = ({ length_data, position, handlepage }) => {
     numbers.push(
       <div
         key={i}
-        className={position === i ? "pagination_on" : "pagination_off"}
+        className={position === i ? 'pagination_on' : 'pagination_off'}
         onClick={() => onpage(i)}
       >
         <h1>{i + 1}</h1>
@@ -30,23 +30,27 @@ const Pagination = ({ length_data, position, handlepage }) => {
   }
   return (
     <div className="containerPagination">
-      {position > 0 ? (
+      {position > 0
+        ? (
         <FcPrevious
           onClick={() => onpage(position - 1)}
           className="paginationIcon"
         />
-      ) : (
+          )
+        : (
         <div> </div>
-      )}
+          )}
       {numbers}
-      {position === length_data - 1 ? (
+      {position === length_data - 1
+        ? (
         <div> </div>
-      ) : (
+          )
+        : (
         <FcNext
           onClick={() => onpage(position + 1)}
           className="paginationIcon"
         />
-      )}
+          )}
     </div>
   );
 };

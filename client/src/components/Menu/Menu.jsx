@@ -1,8 +1,7 @@
-import React from "react";
-import "./Menu.css";
-import Card from "../Card/Card";
+import './Menu.css';
+import Card from '../Card/Card';
 
-function Menu({ ListMenu }) {
+function Menu ({ ListMenu }) {
   return (
     <div className="Menu">
       <div className="TitleGroup">

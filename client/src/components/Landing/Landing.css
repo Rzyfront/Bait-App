@@ -89,6 +89,7 @@
     font-size: 30px;
     font-family: var(--subtitle);
     text-align: center;
+    /* font-weight: 300; */
 }
 
 .SlideItem1 .FirstTitle button {

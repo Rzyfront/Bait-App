@@ -1,61 +1,70 @@
-import { TfiClose } from "react-icons/tfi";
-import { useRef, useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { logIn } from "../../../redux/actions/actions";
-import { validationLogin } from "../validation";
-import { loginWithGoogle } from "../../../helpers/loginWithGoogle";
+import { TfiClose } from 'react-icons/tfi';
+import { useRef, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { logIn } from '../../../redux/actions/actions';
+import { validationLogin } from '../validation';
+import { loginWithGoogle } from '../../../helpers/loginWithGoogle';
 
+const LoginForm = ({ setToggleLogin, loginRegister }) => {
+  const dispatch = useDispatch();
+  const [ojo, setOjo] = useState(false);
+  const imgRef = useRef();
+  const passRef = useRef();
 
-const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
-    const dispatch = useDispatch();
-    const imgRef = useRef();
-    const passRef = useRef();
-    // const [message, setMessage] = useState(false);
-    console.log(fn);
-    const [user, setUser] = useState({
-        email: '',
-        password: ''
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+
+    setUser({
+      ...user,
+      [name]: value
     });
 
-    const [errors, setErrors] = useState({});
+    setErrors(validationLogin({
+      ...user,
+      [name]: value
+    }));
+    console.log(errors);
+  };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-
-        setUser({
-            ...user,
-            [name]: value
-        });
-
-        setErrors(validationLogin({
-            ...user,
-            [name]: value
-        }));
-        console.log(errors);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    console.log('bye');
+    if (Object.entries(errors).length === 0) return dispatch(logIn(user));
+    alert('Invalid data');
+    setUser({
+      email: '',
+      password: ''
+    });
+  };
+  const fn = () => {
+    if (!ojo) {
+      passRef.current.type = 'text';
+      imgRef.current.src = './img/icons/cerrar-ojo.png';
+      setOjo(true);
+    } else {
+      passRef.current.type = 'password';
+      imgRef.current.src = './img/icons/abrir-ojo.png';
+      setOjo(false);
     }
+  };
+  useEffect(() => {
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        console.log('bye');
-        if (Object.entries(errors).length === 0) return dispatch(logIn(user));
-        alert("Invalid data");
-        setUser({
-            email: '',
-            password: ''
-        })
-    }
+  }, []);
 
-    useEffect(() => {
-
-    }, [])
-
-    return (
+  return (
         <>
             <div className="login">
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
-                        setToggleLogin(false);
+                      setToggleLogin(false);
                     }}
                 />
                 <div className="title">
@@ -114,13 +123,9 @@ const LoginForm = ({ setToggleLogin, fn, loginRegister }) => {
                         </form>
                     </div>
                 </div>
-                {/* {message && (
-                    <h3 className="invalid">Los datos ingresados no son válidos</h3>
-                )} */}
             </div>
         </>
-    )
-}
+  );
+};
 
 export default LoginForm;
-

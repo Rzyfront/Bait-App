@@ -1,12 +1,12 @@
 
-import { Navbar } from "../components";
-import ImgSlide1 from "../../assets/Slide1Landing.webp";
-import ImgSlide2 from "../../assets/Slide2Landing.webp";
-import ImgSlide3 from "../../assets/Slide3Landing.webp";
-import "@coreui/coreui/dist/css/coreui.min.css";
-import { CCarousel, CCarouselItem } from "@coreui/react";
-import "./Landing.css";
-import { Link } from "react-router-dom";
+import { Navbar } from '../components';
+import ImgSlide1 from '../../assets/Slide1Landing.webp';
+import ImgSlide2 from '../../assets/Slide2Landing.webp';
+import ImgSlide3 from '../../assets/Slide3Landing.webp';
+import '@coreui/coreui/dist/css/coreui.min.css';
+import { CCarousel, CCarouselItem } from '@coreui/react';
+import './Landing.css';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
@@ -28,7 +28,7 @@ const Landing = () => {
               </h1>
               <h2>Encuentra el mejor sitio para vivir experiencias</h2>
               <Link to="/home">
-                <button>Encuentralo!</button>
+                <button>¡Encuéntralo!</button>
               </Link>
             </div>
             <img src={ImgSlide1} alt="ImgSlide1" />
@@ -38,7 +38,7 @@ const Landing = () => {
           <div className="SlideItem2">
             <img src={ImgSlide2} alt="ImgSlide1" />
             <div className="SecondTitle">
-              <h2>Cuentanos tus experiencias</h2>
+              <h2>Cuéntanos tus experiencias</h2>
               <h3>
                 <span>Reseña</span> los lugares que has visitado y consigue
                 promociones exclusivas
@@ -55,7 +55,7 @@ const Landing = () => {
               <h2>Reserva ahora</h2>
               <h3>
                 <span>Agenda</span> tu <span>visita</span> y verifica las
-                reseñas para tener una mejor eleccion.
+                reseñas para tener una mejor elección.
               </h3>
               <Link to="/home">
                 <button>Ver sitios</button>

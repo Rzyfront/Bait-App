@@ -1,51 +1,51 @@
-import React from "react";
-import "./Locales.css";
-import { useState } from "react";
-import BaitLogo from "../../assets/BaitLogo.png";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import './Locales.css';
+
+import BaitLogo from '../../assets/BaitLogo.png';
+import { Link } from 'react-router-dom';
+import { useUploadImage } from '../../hooks/useUploadImage';
+
+import { useDispatch } from 'react-redux';
+import { createLocal } from '../../redux/actions/actions';
 // eslint-disable-next-line
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-import { useUploadImage } from "../../hooks/useUploadImage";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { createLocal } from "../../redux/actions/actions";
 
 export const validate = (inputs) => {
-  let errors = {};
+  const errors = {};
   if (!inputs.location) {
-    errors.location = "Seleccione una opcion";
+    errors.location = 'Seleccione una opcion';
   }
   if (!inputs.name) {
-    errors.name = "Se requiere un nombre";
+    errors.name = 'Se requiere un nombre';
   }
   if (!regexEmail.test(inputs.email)) {
-    errors.email = "Debe ser un correo electronico";
+    errors.email = 'Debe ser un correo electronico';
   }
   if (!inputs.imagen) {
-    errors.imagen = "Se requiere cargar una o mas imagenes del Local";
+    errors.imagen = 'Se requiere cargar una o mas imagenes del Local';
   }
   if (!inputs.phone) {
-    errors.phone = "Ingrese un numero de telefono valido";
+    errors.phone = 'Ingrese un numero de telefono valido';
   }
 
   if (inputs.schedule.length === 0) {
-    errors.schedule = "Seleccione fecha";
+    errors.schedule = 'Seleccione fecha';
   }
 
   return errors;
 };
 
-function Locales() {
-  let { image, loading, handleChangeimage } = useUploadImage();
+function Locales () {
+  const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
 
   const [inputs, setInputs] = useState({
-    location: "",
-    name: "",
+    location: '',
+    name: '',
     imagen: [],
-    email: "",
-    phone: "",
-    schedule: "",
+    email: '',
+    phone: '',
+    schedule: ''
   });
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function Locales() {
     setErrors(
       validate({
         ...inputs,
-        imagen: [image],
+        imagen: [image]
       })
     );
   }, [image]);
@@ -69,28 +69,28 @@ function Locales() {
     work_friendly: false,
     pet_friendly: false,
     family_style: false,
-    romantic: false,
+    romantic: false
   });
 
   const [errors, setErrors] = useState({
-    location: "",
-    name: "",
-    imagen: "",
-    email: "",
-    phone: "",
-    schedule: "",
+    location: '',
+    name: '',
+    imagen: '',
+    email: '',
+    phone: '',
+    schedule: ''
   });
 
   const handleChange = (event) => {
     setInputs({
       ...inputs,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
 
     setErrors(
       validate({
         ...inputs,
-        [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value
       })
     );
     console.log(errors);
@@ -98,23 +98,23 @@ function Locales() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!Object.values(errors).length) {
-      alert("Datos completos");
+      alert('Datos completos');
       dispatch(createLocal(inputs, chekinputs));
       setInputs({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
+        location: '',
+        name: '',
+        imagen: '',
+        email: '',
+        phone: '',
+        schedule: ''
       });
       setErrors({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
+        location: '',
+        name: '',
+        imagen: '',
+        email: '',
+        phone: '',
+        schedule: ''
       });
       setChekInputs({
         wifi: false,
@@ -124,10 +124,10 @@ function Locales() {
         table_service: false,
         big_group: false,
         work_friendly: false,
-        pet_friendly: false,
+        pet_friendly: false
       });
     } else {
-      alert("Debe llenar todos los campos");
+      alert('Debe llenar todos los campos');
     }
   };
 
@@ -138,18 +138,18 @@ function Locales() {
   const handleSelect = (event) => {
     setInputs({
       ...inputs,
-      location: event.target.value,
+      location: event.target.value
     });
     setErrors(
       validate({
         ...inputs,
-        location: event.target.value,
+        location: event.target.value
       })
     );
   };
 
   const handleCheck = (e) => {
-    if (e.target.value === "false") {
+    if (e.target.value === 'false') {
       setChekInputs({ ...chekinputs, [e.target.name]: true });
     } else {
       setChekInputs({ ...chekinputs, [e.target.name]: false });
@@ -240,28 +240,32 @@ function Locales() {
           ></input>
           <hr />
 
-          {image.length ? (
-            image.map((image, i) => (
+          {image.length
+            ? (
+                image.map((image, i) => (
               <img
                 key={i}
                 src={image.url}
                 alt="imagen"
                 className="LocalesImage"
               />
-            ))
-          ) : loading === true ? (
+                ))
+              )
+            : loading === true
+              ? (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
               alt="cargando"
               className="LocalesImage"
             />
-          ) : (
+                )
+              : (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
               alt="image default"
               className="LocalesImage"
             />
-          )}
+                )}
           {/* <label>Tipos de Comida: </label> */}
           {/* <select
             id="category-select"

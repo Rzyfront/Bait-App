@@ -1,11 +1,11 @@
-import "./Home.css";
-import { Filters, Navbar, Cards, Footer } from "../components";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadingLocals } from "../../redux/actions/actions";
+import './Home.css';
+import { Filters, Navbar, Cards, Footer } from '../components';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { loadingLocals } from '../../redux/actions/actions';
 const Home = () => {
   const dispatch = useDispatch();
-  //initial Home
+  // initial Home
   useEffect(() => {
     dispatch(loadingLocals());
   }, []);

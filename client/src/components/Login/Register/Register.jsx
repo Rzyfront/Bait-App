@@ -1,90 +1,87 @@
-import { TfiClose } from "react-icons/tfi";
-import { useRef, useState } from "react";
-import { createUser } from "../../../redux/actions/actions";
-import { validation} from "../validation";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { TfiClose } from 'react-icons/tfi';
+import { useRef, useState } from 'react';
+import { createUser } from '../../../redux/actions/actions';
+import { validation } from '../validation';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Register = ({ setToggleLogin, loginRegister }) => {
-    const navigate = useNavigate()
-     const dispatch = useDispatch()   
-    const passRef = useRef();
-    const formRef = useRef();
-    const [message, setMessage] = useState(false);
-    const[dataRegister, setDataRegister] = useState({
-        name: "",
-        lastname: "",
-        age: "",
-        phone_number: "",
-        email: "",
-        password: "",
-        password2: "",
-        location: "",
-        verified: "",
-        isActive: "",
-        role: "",
-    })
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const passRef = useRef();
+  const formRef = useRef();
+  const [dataRegister, setDataRegister] = useState({
+    name: '',
+    lastname: '',
+    age: '',
+    phone_number: '',
+    email: '',
+    password: '',
+    password2: '',
+    location: '',
+    verified: '',
+    isActive: '',
+    role: ''
+  });
 
-    const [errorsRegister, setErrorsRegister] = useState({
-        name: "",
-        phone_number: "",
-        password: "",
+  const [errorsRegister, setErrorsRegister] = useState({
+    name: '',
+    phone_number: '',
+    password: ''
+  });
+  const handleRegister = (event) => {
+    setDataRegister({
+      ...dataRegister,
+      [event.target.name]: event.target.value
     });
-    const handleRegister = (event) => {
-        setDataRegister({
-            ...dataRegister,
-            [event.target.name]: event.target.value,
-        });
-        setErrorsRegister(
-            validation({
-                ...dataRegister,
-                [event.target.name]: event.target.value,
-            })
-        );
+    setErrorsRegister(
+      validation({
+        ...dataRegister,
+        [event.target.name]: event.target.value
+      })
+    );
 
-        // console.log(errorsRegister);
-    };
+    // console.log(errorsRegister);
+  };
 
-
-
-    const sendRegister = (event) => {
-        event.preventDefault();
-        console.log(dataRegister);
-        if (!Object.values(errorsRegister).length) {
-            dispatch(createUser(dataRegister));
-            setDataRegister({
-                name: "",
-                lastname: "",
-                age: "",
-                phone_number: "",
-                email: "",
-                password: "",
-                password2: "",
-                location: "",
-                verified: "",
-                isActive: "",
-                role: "",
-            });
-            alert("Usario creado")
-            navigate("/home")
-            setErrorsRegister({});
-        } else {
-            alert(
-                errorsRegister.name +
-                "\n" +
+  const sendRegister = (event) => {
+    event.preventDefault();
+    console.log(dataRegister);
+    if (!Object.values(errorsRegister).length) {
+      dispatch(createUser(dataRegister));
+      setDataRegister({
+        name: '',
+        lastname: '',
+        age: '',
+        phone_number: '',
+        email: '',
+        password: '',
+        password2: '',
+        location: '',
+        verified: '',
+        isActive: '',
+        role: ''
+      });
+      alert('Usario creado');
+      navigate('/home');
+      setErrorsRegister({});
+    } else {
+      alert(
+        errorsRegister.name +
+                '\n' +
                 errorsRegister.password +
-                "\n" +
+                '\n' +
                 errorsRegister.phone_number
-            );
-        }
-    };
-    return(
+      );
+    }
+  };
+  return (
         <>
-            <div className={`login ${!loginRegister && "scale-up-bottom"}`}>
+            <div className={`login ${!loginRegister && 'scale-up-bottom'}`}>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
-                        setToggleLogin(false);
+                      setToggleLogin(false);
                     }}
                 />
 
@@ -186,13 +183,9 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                         </form>
                     </div>
                 </div>
-                {message && (
-                    <h3 className="invalid">Los datos ingresados no son válidos</h3>
-                )}
             </div>
         </>
-    )
-
-}
+  );
+};
 
 export default Register;
