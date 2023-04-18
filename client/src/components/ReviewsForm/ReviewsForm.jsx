@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { Rating as RatingStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
-import BaitLogo from "../../assets/BaitLogo.png";
+import { useEffect, useState } from 'react';
+import { Rating as RatingStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
+import BaitLogo from '../../assets/BaitLogo.png';
 
-import { TfiClose } from "react-icons/tfi";
-import { FaPaperPlane } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { TfiClose } from 'react-icons/tfi';
+import { FaPaperPlane } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
-import "./ReviewsForm.css";
-import { useUploadImage } from "../../hooks/useUploadImage";
-import { useDispatch } from "react-redux";
-import { comentarie } from "../../redux/actions/actions";
+import './ReviewsForm.css';
+import { useUploadImage } from '../../hooks/useUploadImage';
+import { useDispatch } from 'react-redux';
+import { comentarie } from '../../redux/actions/actions';
 
-function ReviewsForm({ setToggleModal2, id }) {
+function ReviewsForm ({ setToggleModal2, id }) {
   const dispatch = useDispatch();
   const { image, loading, handleChangeimage } = useUploadImage();
 
@@ -34,12 +34,12 @@ function ReviewsForm({ setToggleModal2, id }) {
     calificationFood,
     calificationQaPrice,
     calificationEnvironment,
-    calificationService,
+    calificationService
   ]);
   const [inputs, setInputs] = useState({
-    title: "",
-    comment: "",
-    image: {},
+    title: '',
+    comment: '',
+    image: {}
   });
 
   useEffect(() => {
@@ -47,15 +47,15 @@ function ReviewsForm({ setToggleModal2, id }) {
   }, [image.length]);
 
   const [errors, setErrors] = useState({
-    title: "",
-    comment: "",
-    image: {},
+    title: '',
+    comment: '',
+    image: {}
   });
 
   const handleChange = (event) => {
     setInputs({
       ...inputs,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
 
     console.log(inputs);
@@ -99,7 +99,7 @@ function ReviewsForm({ setToggleModal2, id }) {
     //     qaPrice: "",
     //   });
     else {
-      alert("Debe llenar todos los campos");
+      alert('Debe llenar todos los campos');
     }
   };
 
@@ -229,25 +229,29 @@ function ReviewsForm({ setToggleModal2, id }) {
                 accept="image/png,image/jpeg,image/jpg,image/gif"
                 onChange={handleImage}
               ></input>
-              {image.length ? (
+              {image.length
+                ? (
                 <img
                   src={image[image.length - 1].url}
                   alt="imagen"
                   className="imagenDefault"
                 />
-              ) : loading === true ? (
+                  )
+                : loading === true
+                  ? (
                 <img
                   src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
                   alt="cargando"
                   className="imagenDefault"
                 />
-              ) : (
+                    )
+                  : (
                 <img
                   src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
                   alt="image default"
                   className="imagenDefault"
                 />
-              )}
+                    )}
             </div>
             <button type="submit" onClick={handleSubmit}>
               Enviar <FaPaperPlane />

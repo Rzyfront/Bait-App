@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
-import Card from "../Card/Card";
-import "./Cards.css";
-import { useDispatch, useSelector } from "react-redux";
-import Pagination from "../pagination/pagination";
-import { homepage, searchByQuery } from "../../redux/actions/actions";
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useParams } from 'react-router-dom';
+import Card from '../Card/Card';
+import './Cards.css';
+import { useDispatch, useSelector } from 'react-redux';
+import Pagination from '../pagination/pagination';
+import { homepage, searchByQuery } from '../../redux/actions/actions';
 
-function Cards() {
+function Cards () {
   const location = useLocation();
 
-  //params consulta
+  // params consulta
   // obtener los valores de los parametros de consulta
   const queryParams = new URLSearchParams(location.search);
-  let name = queryParams.get("name");
-  let city = queryParams.get("city");
+  const name = queryParams.get('name');
+  const city = queryParams.get('city');
 
   const { locals, totalPages } = useSelector((state) => state.cards);
-  let pagine = useParams();
+  const pagine = useParams();
   const dispatch = useDispatch();
-  //navegation
+  // navegation
   const [navegation, setnavegation] = useState(pagine.id);
-  //actualiza pagina
+  // actualiza pagina
   useEffect(() => {
     if (name || city) {
       dispatch(searchByQuery(name, city));
       setnavegation(pagine.id);
     } else {
       dispatch(homepage(pagine.id));
-      setnavegation("", "");
+      setnavegation('', '');
     }
   }, [pagine]);
-  //controller navegation
+  // controller navegation
   useEffect(() => {
     setnavegation(pagine.id);
   }, [totalPages]);
@@ -48,7 +48,7 @@ function Cards() {
                 schedule,
                 id,
                 Characteristic,
-                Images,
+                Images
               },
               index
             ) => {

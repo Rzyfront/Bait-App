@@ -1,19 +1,19 @@
-import { useState } from "react";
-import "./Search_home.css";
-import { MdOutlineRestaurant } from "react-icons/md";
-import { BiMap, BiSearchAlt } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import './Search_home.css';
+import { MdOutlineRestaurant } from 'react-icons/md';
+import { BiMap, BiSearchAlt } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
 
-function SearchHome() {
+function SearchHome () {
   const navigate = useNavigate();
   const [data, setData] = useState({
-    input: "",
-    map: "",
+    input: '',
+    map: ''
   });
   const handleinputs = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
   const searchDatas = (e) => {
