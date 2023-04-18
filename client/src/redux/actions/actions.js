@@ -13,20 +13,19 @@ export const HOMEPAGE="HOMEPAGE"
 export const reset = () => {
   return {
     type: RESET,
-    payload: "",
+    payload: ''
   };
 };
 /// loadinglocals
 
 /// Create user
-export const createUser=({name,lastname,age,phone_number,email,password,location,verified,isActive,role})=>{
-
-  return async(dispatch)=>{
+export const createUser = ({ name, lastname, age, phone_number, email, password, location, verified, isActive, role }) => {
+  return async (dispatch) => {
     try {
-       await axios.post("http://localhost:3001/user", {
+      await axios.post('http://localhost:3001/user', {
         name,
         lastname,
-        age:Number(age),
+        age: Number(age),
         phone_number,
         email,
         password,
@@ -34,13 +33,11 @@ export const createUser=({name,lastname,age,phone_number,email,password,location
         verified,
         isActive,
         role
-      })
-      return dispatch({ type: CREATE_USER, payload: "Usuario Creado Correctamente" })
-
-      console.log("Usuario Creado mi vale");
+      });
+      return dispatch({ type: CREATE_USER, payload: 'Usuario Creado Correctamente' });
     } catch (error) {
-      console.log(error)
-      console.log(error.message)
+      console.log(error);
+      console.log(error.message);
     }
   }
 }
@@ -48,16 +45,16 @@ export const createUser=({name,lastname,age,phone_number,email,password,location
 export const DetailLocal=(id)=>{
   return async dispatch=>{
     try {
-    const datos =await axios.get(`/locals/${id}`)
-    dispatch({
+      const datos = await axios.get(`/locals/${id}`);
+      dispatch({
         type: DETAIL,
         payload: datos.data
       });
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
     }
-  }
-}
+  };
+};
 
 //correguir imagen cuando este listo la ruta
 export const createLocal=(inputs, chekinputs)=>{
@@ -86,18 +83,18 @@ export const createLocal=(inputs, chekinputs)=>{
 			"pet_friendly": chekinputs.pet_friendly
 		}
     })
-        }catch(error){
+    }catch(error){
             console.log(error.message)
         }
-      }     
+      }
 }
 
 //order and filters and cards
 export const order = (data, actions) => {
-  console.log(data)
+  console.log(data);
   const datas = data.flat();
   switch (actions) {
-    case "best":
+    case 'best':
       for (let j = 0; j < datas.length; j++) {
         for (let i = 0; i < datas.length - 1; i++) {
           if (datas[i + 1].rating > datas[i].rating) {
@@ -109,25 +106,25 @@ export const order = (data, actions) => {
       }
       return {
         type: ORDER,
-        payload: datas,
+        payload: datas
       };
-    case "A-Z":
+    case 'A-Z':
       const az = datas.sort((a, b) => a.name.localeCompare(b.name));
       return {
         type: ORDER,
-        payload: az,
+        payload: az
       };
-    case "Z-A":
+    case 'Z-A':
       const za = datas.sort((a, b) => b.name.localeCompare(a.name));
       return {
         type: ORDER,
-        payload: za,
+        payload: za
       };
 
     default:
       break;
   }
-  //adgorithm aordering
+  // adgorithm aordering
 };
 export const searchByQuery = (name,city) => {
   return async (dispatch) => {
@@ -141,12 +138,10 @@ export const searchByQuery = (name,city) => {
   };
 };
 
-
-
 export const logIn = (credentials) => {
-  console.log('haciendo dispatch')
+  console.log('haciendo dispatch');
   return async (dispatch) => {
-    const res = await axios.post("/login", credentials);
+    const res = await axios.post('/login', credentials);
     return dispatch({
       type: LOGIN,
       payload: res.data

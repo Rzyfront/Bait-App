@@ -8,7 +8,6 @@ detail:[]
 }
 const rootReducer=(state=initialState ,{type,payload})=>{
      switch (type) {
- 
    case ORDER:
     return{
         ...state,

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
 import BaitLogo from "../../assets/BaitLogo.png";
@@ -6,7 +6,7 @@ import BaitLogo from "../../assets/BaitLogo.png";
 import { TfiClose } from "react-icons/tfi";
 import { FaPaperPlane } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+
 import "./ReviewsForm.css";
 import { useUploadImage } from "../../hooks/useUploadImage";
 import { useDispatch } from "react-redux";

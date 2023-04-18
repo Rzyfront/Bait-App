@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./Reviews.css";
 import { Rating as RatingStar } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
