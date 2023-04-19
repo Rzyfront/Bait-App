@@ -1,13 +1,16 @@
 const administratorRoute = require('express').Router();
 const getAdministrators = require('../controllers/administrator/getAdministrators');
-const updateAdministrator = require('../controllers/administrator/updateAdministrator');
+const putCreateAdmin = require('../controllers/administrator/putCreateAdmin');
 const deleteAdministrator = require('../controllers/administrator/deleteAdministrator');
 const changeRole = require('../controllers/administrator/changeRole');
-const { verifyPost, verifyDelete } = require('../middlewares/userMiddlewares');
+const userExtractor = require('../middlewares/userExtractor');
+const { verifyDelete } = require('../middlewares/userMiddlewares');
+const { isSuperAdmin, isAdmin } = require('../middlewares/validateRole');
 
-administratorRoute.get('/', getAdministrators);
-administratorRoute.put('/', verifyPost, updateAdministrator);
-administratorRoute.delete('/', verifyDelete, deleteAdministrator);
-administratorRoute.patch('/role/:userId', changeRole);
+administratorRoute
+  .get('/', userExtractor, getAdministrators)
+  .put('/:userId', userExtractor, isSuperAdmin, putCreateAdmin)
+  .delete('/:userId', userExtractor, verifyDelete, deleteAdministrator)
+  .patch('/role/:userId', userExtractor, isAdmin, changeRole);
 
 module.exports = administratorRoute;
