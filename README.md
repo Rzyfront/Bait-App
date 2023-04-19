@@ -1,4 +1,4 @@
-# Application Title
+# BAIT API
 
 BaitApp: aquí podrás encontrar el mejor restaurante de tu localidad.
 
