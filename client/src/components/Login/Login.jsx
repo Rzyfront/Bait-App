@@ -23,7 +23,7 @@ const Login = ({ setToggleLogin }) => {
 
           )
         : (
-          <Register setToggleLogin={setToggleLogin} loginRegister={loginRegister} />
+          <Register setToggleLogin={setToggleLogin} loginRegister={loginRegister} login={login} />
           )}
     </div>
   );

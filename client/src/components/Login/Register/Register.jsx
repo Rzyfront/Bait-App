@@ -5,7 +5,7 @@ import { validation } from '../validation';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const Register = ({ setToggleLogin, loginRegister }) => {
+const Register = ({ setToggleLogin, loginRegister, login }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const passRef = useRef();
@@ -77,7 +77,7 @@ const Register = ({ setToggleLogin, loginRegister }) => {
   };
   return (
         <>
-            <div className={`login ${!loginRegister && 'scale-up-bottom'}`}>
+            <div className={`${!login && 'register scale-up-bottom'}`}>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
@@ -163,14 +163,6 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                                     placeholder="Repetir contraseña"
                                     ref={passRef}
                                 ></input>
-                                {/* <img
-                    alt="img"
-                    ref={imgRef}
-                    onClick={fn}
-                    className="ojo"
-                    src="./img/icons/abrir-ojo.png"
-                    width="20px"
-                  ></img> */}
                             </div>
                             <button className="button" onClick={sendRegister}>
                                 Registrarme
