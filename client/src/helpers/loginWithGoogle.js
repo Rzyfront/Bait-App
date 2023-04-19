@@ -9,7 +9,7 @@ export const signInWithGoogle = async () => {
     const { firstName, lastName } = user._tokenResponse;
     const { email, phoneNumber, photoURL, emailVerified } = user.user;
     await axios
-      .post('http://localhost:3001/user/google', {
+      .post('/user/google', {
         firstName,
         lastName,
         email,
@@ -18,8 +18,11 @@ export const signInWithGoogle = async () => {
         emailVerified
       })
       .then((res) => {
-        if (res.data.token) return window.localStorage.setItem('token', res.data.token);
-        window.alert(res.data.message);
+        console.log(res.data);
+        if (res.data.token) {
+          window.alert(res.data.message);
+          return window.localStorage.setItem('token', res.data.token);
+        };
       }
       );
   } catch (error) {
@@ -33,7 +36,15 @@ export const logOut = () => {
 
 export const loginWithGoogle = async () => {
   const { user } = await signInWithPopup(auth, googleProvider);
+  const data = {
+    name: user.displayName.split(' ').at(0),
+    lastname: user.displayName.split(' ').at(1),
+    email: user.email,
+    verified: user.emailVerified
+  };
+  console.log(data);
   await axios
-    .post('http://localhost:3001/login/google', { email: user.email })
-    .then((res) => window.localStorage.setItem('token', res.data.token));
+    .post('/login/google', { email: user.email })
+    .then((res) => window.localStorage.setItem('user', JSON.stringify({ user: data, token: res.data.token })));
 };
+//

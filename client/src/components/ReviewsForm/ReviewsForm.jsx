@@ -17,7 +17,9 @@ function ReviewsForm ({ setToggleModal2, id }) {
   const [userToken, setDataUser] = useState('');
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
+    const data = JSON.parse(localStorage.getItem('user'));
     setDataUser(token);
+    console.log(data);
   }, []);
 
   const dispatch = useDispatch();
