@@ -1,11 +1,10 @@
-import "./Footer.css";
-import { Link } from "react-router-dom";
-import { AiFillInstagram } from "react-icons/ai";
-import { FaFacebookSquare } from "react-icons/fa";
-import { FaTwitterSquare } from "react-icons/fa";
-import { FaYoutubeSquare } from "react-icons/fa";
-import { IoLogoTiktok } from "react-icons/io5";
-import { useState } from "react";
+import './Footer.css';
+import { Link } from 'react-router-dom';
+import { AiFillInstagram } from 'react-icons/ai';
+import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
+import { IoLogoTiktok } from 'react-icons/io5';
+import { useState } from 'react';
+
 const Footer = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showCookies, setShowCookies] = useState(false);

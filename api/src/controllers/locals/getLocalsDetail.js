@@ -10,7 +10,10 @@ module.exports = async (req, res) => {
         model: Characteristic,
         attributes: allCharacteristics,
       }, { model: Menu },
-      { model: Review },
+      {
+        model: Review,
+        include: [{ model: Image, attributes: ['url'] }],
+      },
       { model: Image }],
     });
     res.status(200).json({ locals, success: true });
