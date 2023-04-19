@@ -1,9 +1,11 @@
+const { User } = require('../../db');
+
 module.exports = async (req, res) => {
   try {
-    // En la autentificacion se debe colocar en el middleware al usuario en req.user
-    await req.user.destroy();
-    return res.status(204).send();
+    const adminDeleted = await User.findByPk(req.userId);
+    await adminDeleted.destroy();
+    return res.status(201).json({ success: true, adminDeleted });
   } catch (err) {
-    return res.status(500).send(err.message);
+    return res.status(400).json({ success: false, message: err.message });
   }
 };
