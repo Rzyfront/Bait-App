@@ -1,4 +1,5 @@
 import { TfiClose } from 'react-icons/tfi';
+import { FcGoogle } from 'react-icons/fc';
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../redux/actions/actions';
@@ -107,12 +108,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                             </div>
                             <button className="button" type="submit">Ingresar</button>
                             <div className="loginwith">
-                                <img
-                                    alt="img"
-                                    src="./img/icons/google.png"
-                                    className="google"
-                                    width="30px"
-                                ></img>
+                                <FcGoogle className='google'/>
                                 <span className="texto" onClick={() => loginWithGoogle()}>Entra con Google</span>
                             </div>
 
