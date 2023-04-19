@@ -5,6 +5,13 @@ BaitApp: aquí podrás encontrar el mejor restaurante de tu localidad.
 ## Table of Contents
 
 - [Installation](#installation)
+- [Usage](#usage)
+- [Examples](#examples)
+- [Contributing](#contributing)
+- [License](#license)
+- [Support](#support)
+- [Acknowledgments](#acknowledgments)
+
 ## Installation
 
 To install and run this application, you will need to have [Node.js](https://nodejs.org/) installed on your computer. Once you have Node.js installed, you can follow these steps to set up the application:
@@ -25,33 +32,17 @@ npm install
 
 The application should now be running at http://localhost:5173/
 
-- [Usage](#usage)
 ## Usage
 
 To use this application, follow these steps:
 
-1. Open your web browser and navigate to [http://localhost:3000](http://localhost:3000).
-2. On the home page, you will see a form where you can enter your name and email address.
-3. Fill in the form and click the "Submit" button.
-4. The application will validate your input and display a success message if the input is valid, or an error message if the input is invalid.
-5. To view a list of all submitted entries, click the "View Entries" button on the home page.
-6. On the entries page, you will see a table that displays all submitted entries, including the name, email address, and submission date.
+1. Open your web browser and navigate to [http://localhost:5173/](http://localhost:5173/).
+2. On the landing page, you will see a carousel with our service. Click on thee buttons to be redirected to our home.
+3. On the home page you can check the highest rated restaurants/bar/cafés. Use the search engine and filters.
+4. Sign in to be a user or publish your restaurant. Use the dashboard to give roles of admins to users. Validate reviews to allow them be shown on the website. 
+
 
 You can also interact with the application programmatically by making API requests. For more information on the API endpoints and request/response formats, refer to the [API documentation](docs/api.md).
-
-- [Examples](#examples)
-- [Contributing](#contributing)
-- [License](#license)
-- [Support](#support)
-- [Acknowledgments](#acknowledgments)
-
-## Installation
-
-Step-by-step instructions on how to install and set up your application, including any dependencies or prerequisites that users may need to install first.
-
-## Usage
-
-Detailed instructions on how to use your application, including any commands, options, or configuration settings that users may need to know.
 
 ## Examples
 
