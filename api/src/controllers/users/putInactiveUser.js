@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     if (!userId) {
       return res.status(404).json({ success: false, message: 'User ID not found' });
     }
-    const user = await User.findOne({ where: { id: userId } });
+    const user = await User.findByPk(userId);
 
     if (!user) {
       return res.status(404).json({ success: false, message: 'User ID not found' });
