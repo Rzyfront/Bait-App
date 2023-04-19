@@ -142,6 +142,8 @@ export const logIn = (credentials) => {
   console.log('haciendo dispatch');
   return async (dispatch) => {
     const res = await axios.post('/login', credentials);
+    localStorage.setItem('user', JSON.stringify(res.data));
+    console.log(res.data);
     return dispatch({
       type: LOGIN,
       payload: res.data
@@ -163,7 +165,7 @@ export const comentarie = (calificationFood, calificationQaPrice, calificationEn
         qaPrice: calificationQaPrice
       }, {
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1YW5jYW1pbG8xNDc4QGdtYWlsLmNvbSIsImlkIjoxLCJyb2xlIjoidXNlciIsInZlcmlmaWVkIjoidmVyaWZpZWQiLCJpYXQiOjE2ODE4NDQ1NTV9.EhvevCRgCT38ujSsKwOJTvrQbX8knXalLItzj71HJto', // Aquí agregas tu header personalizado
+          Authorization: `Bearer ${token}`, // Aquí agregas tu header personalizado
           'Content-Type': 'application/json' // También puedes agregar otros headers estándar
         }
       });

@@ -1,12 +1,8 @@
-import { useEffect } from 'react';
 import './Reviews.css';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 
 function Reviews ({ ReviewsList }) {
-  useEffect(() => {
-    console.log(ReviewsList);
-  }, []);
   return (
     <div className="Reviews">
       <div className="TitleGroup">

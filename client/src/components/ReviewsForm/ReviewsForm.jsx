@@ -14,6 +14,11 @@ import { useDispatch } from 'react-redux';
 import { comentarie } from '../../redux/actions/actions';
 
 function ReviewsForm ({ setToggleModal2, id }) {
+  useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    console.log(token);
+  }, []);
+
   const dispatch = useDispatch();
   const { image, loading, handleChangeimage } = useUploadImage();
 
@@ -68,7 +73,8 @@ function ReviewsForm ({ setToggleModal2, id }) {
           calificationService,
           calculateAverage,
           inputs,
-          id
+          id,
+          token
         )
       );
       alert('ya se envio');
