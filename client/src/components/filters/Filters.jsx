@@ -1,23 +1,23 @@
-import "./Filters.css";
-import { MdAddBusiness } from "react-icons/md";
-import { Link } from "react-router-dom";
+import './Filters.css';
+import { MdAddBusiness } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 // import { TbToolsKitchen2 } from "react-icons/tb";
-import { useDispatch, useSelector } from "react-redux";
-import { order, reset } from "../../redux/actions/actions";
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { order, reset } from '../../redux/actions/actions';
+import { useState } from 'react';
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = () => {
   const [filterState, setFilterState] = useState(false);
-  const [selectOrder, setSelectOrder] = useState("");
+  const [selectOrder, setSelectOrder] = useState('');
   const dispatch = useDispatch();
   const ContainerCards = useSelector((state) => state.cards);
 
   const handlecafication = () => {
-    if (selectOrder !== "") {
-      setSelectOrder("");
+    if (selectOrder !== '') {
+      setSelectOrder('');
     }
     if (filterState === false) {
-      dispatch(order(ContainerCards, "best"));
+      dispatch(order(ContainerCards, 'best'));
       setFilterState(true);
     } else {
       dispatch(reset());
@@ -44,7 +44,7 @@ const Filters = () => {
 
       <div className="FiltersGroup">
         <div
-          className={filterState === false ? "FilterOff" : "FilterOn"}
+          className={filterState === false ? 'FilterOff' : 'FilterOn'}
           onClick={handlecafication}
         >
           <h3>Mejor calificacion</h3>
@@ -82,8 +82,8 @@ const Filters = () => {
           <option value="" disabled>
             Ordena Alfabeticamente
           </option>
-          <option value={"A-Z"}>A-Z</option>
-          <option value={"Z-A"}>Z-A</option>
+          <option value={'A-Z'}>A-Z</option>
+          <option value={'Z-A'}>Z-A</option>
         </select>
       </div>
     </div>

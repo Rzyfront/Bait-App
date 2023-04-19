@@ -1,51 +1,51 @@
-import React from "react";
-import "./Locales.css";
-import { useState } from "react";
-import BaitLogo from "../../assets/BaitLogo.png";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import './Locales.css';
+
+import BaitLogo from '../../assets/LogoBait.svg';
+import { Link } from 'react-router-dom';
+import { useUploadImage } from '../../hooks/useUploadImage';
+
+import { useDispatch } from 'react-redux';
+import { createLocal } from '../../redux/actions/actions';
 // eslint-disable-next-line
 const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-import { useUploadImage } from "../../hooks/useUploadImage";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { createLocal } from "../../redux/actions/actions";
 
 export const validate = (inputs) => {
-  let errors = {};
+  const errors = {};
   if (!inputs.location) {
-    errors.location = "Seleccione una opcion";
+    errors.location = 'Seleccione una opcion';
   }
   if (!inputs.name) {
-    errors.name = "Se requiere un nombre";
+    errors.name = 'Se requiere un nombre';
   }
   if (!regexEmail.test(inputs.email)) {
-    errors.email = "Debe ser un correo electronico";
+    errors.email = 'Debe ser un correo electronico';
   }
   if (!inputs.imagen) {
-    errors.imagen = "Se requiere cargar una o mas imagenes del Local";
+    errors.imagen = 'Se requiere cargar una o mas imagenes del Local';
   }
   if (!inputs.phone) {
-    errors.phone = "Ingrese un numero de telefono valido";
+    errors.phone = 'Ingrese un numero de telefono valido';
   }
 
   if (inputs.schedule.length === 0) {
-    errors.schedule = "Seleccione fecha";
+    errors.schedule = 'Seleccione fecha';
   }
 
   return errors;
 };
 
-function Locales() {
-  let { image, loading, handleChangeimage } = useUploadImage();
+function Locales () {
+  const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
-
+  const [termsAndConditions, setTemsAndConditions] = useState(true);
   const [inputs, setInputs] = useState({
-    location: "",
-    name: "",
+    location: '',
+    name: '',
     imagen: [],
-    email: "",
-    phone: "",
-    schedule: "",
+    email: '',
+    phone: '',
+    schedule: ''
   });
 
   useEffect(() => {
@@ -54,7 +54,7 @@ function Locales() {
     setErrors(
       validate({
         ...inputs,
-        imagen: [image],
+        imagen: [image]
       })
     );
   }, [image]);
@@ -69,28 +69,28 @@ function Locales() {
     work_friendly: false,
     pet_friendly: false,
     family_style: false,
-    romantic: false,
+    romantic: false
   });
 
   const [errors, setErrors] = useState({
-    location: "",
-    name: "",
-    imagen: "",
-    email: "",
-    phone: "",
-    schedule: "",
+    location: '',
+    name: '',
+    imagen: '',
+    email: '',
+    phone: '',
+    schedule: ''
   });
 
   const handleChange = (event) => {
     setInputs({
       ...inputs,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
 
     setErrors(
       validate({
         ...inputs,
-        [event.target.name]: event.target.value,
+        [event.target.name]: event.target.value
       })
     );
     console.log(errors);
@@ -98,23 +98,23 @@ function Locales() {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!Object.values(errors).length) {
-      alert("Datos completos");
+      alert('Datos completos');
       dispatch(createLocal(inputs, chekinputs));
       setInputs({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
+        location: '',
+        name: '',
+        imagen: '',
+        email: '',
+        phone: '',
+        schedule: ''
       });
       setErrors({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
+        location: '',
+        name: '',
+        imagen: '',
+        email: '',
+        phone: '',
+        schedule: ''
       });
       setChekInputs({
         wifi: false,
@@ -124,10 +124,10 @@ function Locales() {
         table_service: false,
         big_group: false,
         work_friendly: false,
-        pet_friendly: false,
+        pet_friendly: false
       });
     } else {
-      alert("Debe llenar todos los campos");
+      alert('Debe llenar todos los campos');
     }
   };
 
@@ -138,18 +138,18 @@ function Locales() {
   const handleSelect = (event) => {
     setInputs({
       ...inputs,
-      location: event.target.value,
+      location: event.target.value
     });
     setErrors(
       validate({
         ...inputs,
-        location: event.target.value,
+        location: event.target.value
       })
     );
   };
 
   const handleCheck = (e) => {
-    if (e.target.value === "false") {
+    if (e.target.value === 'false') {
       setChekInputs({ ...chekinputs, [e.target.name]: true });
     } else {
       setChekInputs({ ...chekinputs, [e.target.name]: false });
@@ -157,9 +157,47 @@ function Locales() {
     console.log(chekinputs);
   };
   return (
-    <div className="locales">
-      <div className="locales_data">
-        <Link to="/home" className="LinkLogo">
+    <div className="locales animated-element">
+      { termsAndConditions
+        ? <div className='termAndConditions animated-element'>
+           <Link to="/home/1?name=&city=" className="LinkLogo">
+          <img
+            src={BaitLogo}
+            alt="Bait"
+            className="Logo"
+            width="60px"
+            height="60px"
+          />
+        </Link>
+            <h2 >Terminos y <span>Condiciones</span></h2>
+            <p>Bienvenido a Bait, la plataforma que permite a los usuarios buscar, reservar y reseñar locales y restaurantes. Al utilizar nuestra aplicación móvil, aceptas los siguientes términos y condiciones:</p>
+
+<p>Registro de usuario: Para utilizar nuestros servicios, debes registrarte como usuario en nuestra aplicación móvil. Debes proporcionar información precisa y actualizada al registrarte. Si descubrimos que has proporcionado información falsa o inexacta, podemos suspender o cerrar tu cuenta.</p>
+
+<p>Publicación de locales y restaurantes: Bait permite a los dueños de locales y restaurantes publicar información sobre sus negocios en nuestra plataforma. La información proporcionada debe ser precisa y actualizada. Nos reservamos el derecho de rechazar cualquier publicación que no cumpla con nuestros estándares de calidad.</p>
+
+<p>Reservas y pagos: Bait actúa como intermediario en la reserva de locales y restaurantes. Los usuarios pueden hacer reservas a través de nuestra plataforma y pagar por adelantado. Bait se quedará con un porcentaje acordado de cada reserva realizada a través de nuestra aplicación móvil.</p>
+
+<p>Reseñas: Los usuarios pueden escribir reseñas sobre los locales y restaurantes en nuestra plataforma. Bait no se hace responsable del contenido de las reseñas, ya que son responsabilidad exclusiva de los usuarios que las escriben. Nos reservamos el derecho de eliminar cualquier reseña que consideremos inapropiada o que no cumpla con nuestros estándares de calidad.</p>
+
+<p>Planes premium: Los dueños de locales y restaurantes pueden pagar un plan premium para tener más visibilidad en nuestra aplicación móvil. Los planes premium incluyen opciones como destacar su negocio en los resultados de búsqueda y tener acceso a estadísticas detalladas sobre sus reservas.</p>
+
+<p>Propiedad intelectual: Todos los derechos de propiedad intelectual de nuestra aplicación móvil y su contenido son propiedad exclusiva de Bait. No está permitido copiar, modificar, distribuir o reproducir cualquier parte de nuestra aplicación móvil sin nuestro permiso.</p>
+
+<p>Limitación de responsabilidad: Bait no se hace responsable de los daños o perjuicios que puedan surgir del uso de nuestra aplicación móvil, incluyendo, entre otros, la pérdida de datos, la interrupción del servicio o la falta de disponibilidad de nuestra aplicación móvil.</p>
+
+<p>Modificaciones de los términos y condiciones: Bait se reserva el derecho de modificar estos términos y condiciones en cualquier momento. Las modificaciones serán efectivas una vez que se publiquen en nuestra aplicación móvil.</p>
+
+<p>Ley aplicable y jurisdicción: Estos términos y condiciones se rigen por las leyes del país donde se encuentra Bait. Cualquier disputa relacionada con estos términos y condiciones será resuelta por los tribunales competentes en el lugar donde se encuentra Bait.</p>
+            <div className='termsButtons'>
+              <button className='Ok' onClick={() => setTemsAndConditions(false)}>Aceptar</button>
+                <Link to="/home/1?name=&city=">
+              <button className='No' >Rechazar</button>
+              </Link>
+            </div>
+      </div>
+        : <div className="locales_data animated-element">
+        <Link to="/home/1?name=&city=" className="LinkLogo">
           <img
             src={BaitLogo}
             alt="Bait"
@@ -240,28 +278,32 @@ function Locales() {
           ></input>
           <hr />
 
-          {image.length ? (
-            image.map((image, i) => (
+          {image.length
+            ? (
+                image.map((image, i) => (
               <img
                 key={i}
                 src={image.url}
                 alt="imagen"
                 className="LocalesImage"
               />
-            ))
-          ) : loading === true ? (
+                ))
+              )
+            : loading === true
+              ? (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
               alt="cargando"
               className="LocalesImage"
             />
-          ) : (
+                )
+              : (
             <img
               src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
               alt="image default"
               className="LocalesImage"
             />
-          )}
+                )}
           {/* <label>Tipos de Comida: </label> */}
           {/* <select
             id="category-select"
@@ -389,7 +431,7 @@ function Locales() {
 
           <button type="submit"> ENVIAR</button>
         </form>
-      </div>
+      </div>}
     </div>
   );
 }

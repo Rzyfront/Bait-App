@@ -1,16 +1,78 @@
 .locales {
-    max-width: 600px;
+      max-width: 600px;
+      height: fit-content;
     margin: 0 auto;
     padding: 20px;
     flex-direction: column;
     align-items: center;
   }
+
+ 
+  .locales .termAndConditions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .locales .termAndConditions .Logo {
+    width: 130px;
+    transition: 0.3s;
+  }
+
+  .locales .termAndConditions .Logo:hover {
+    transform: scale(1.1);
+    
+  }
+
+  .locales .termAndConditions h2{
+    padding: 20px;
+    color: var(--primary);
+  }
+
+  .locales .termAndConditions h2 span{
+    color: var(--secondary);
+  }
+
+  .locales .termAndConditions .termsButtons{
+    display: flex;
+    gap: 30px;
+  }
+ .locales .termAndConditions button{
+      width: 140px;
+      height: 35px;
+      border-radius: 20px;
+      border: none;
+      font-size: 15px;
+      font-family: var(--subtitle);
+      background-color: var(--bg-secondary);
+      color: var(--tertiary);
+      transition: 0.3s;
+ }  
+
+ 
   
+.locales .termAndConditions .Ok:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--tertiary);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.locales .termAndConditions .No:hover {
+  background-color: var(--optional2);
+  color: var(--tertiary);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
   .locales_data {
     background-color: var(--bg-primary);
     padding: 20px;
     border-radius: 30px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .locales .locales_data .Logo{
+    width: 130px;
   }
   .locales_data h1 {
     font-size: 50px;
@@ -65,10 +127,7 @@
     color:var(--bg-primary);
   }
   
-  .Logo {
-    margin-top: 15px;
-    margin-left: 15px;
-  }
+
   .danger {
   color: var(--bg-optional2);
   font-size: 14px;

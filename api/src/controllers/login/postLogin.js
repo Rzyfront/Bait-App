@@ -7,7 +7,6 @@ module.exports = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ where: { email } });
-    console.log(user);
     if (!user) throw new Error('Password or email incorrect');
 
     const pass = await bcrypt.compare(password, user.password);

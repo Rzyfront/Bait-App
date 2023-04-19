@@ -1,30 +1,24 @@
-import { useState } from "react";
-import "./Search_home.css";
-import { MdOutlineRestaurant } from "react-icons/md";
-import { BiMap } from "react-icons/bi";
-import { BiSearchAlt } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { searchByQuery } from "../../../redux/actions/actions";
-function Search_home() {
-  const dispatch = useDispatch();
+import { useState } from 'react';
+import './Search_home.css';
+import { MdOutlineRestaurant } from 'react-icons/md';
+import { BiMap, BiSearchAlt } from 'react-icons/bi';
+import { useNavigate } from 'react-router-dom';
+
+function SearchHome () {
   const navigate = useNavigate();
   const [data, setData] = useState({
-    input: "",
-    map: "",
+    input: '',
+    map: ''
   });
-
   const handleinputs = (e) => {
     setData({
       ...data,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
-  const search_datas = (e) => {
+  const searchDatas = (e) => {
     e.preventDefault();
-    dispatch(searchByQuery(data));
-    navigate("/home");
-    console.log("lo busco");
+    navigate(`/home/1?name=${data.input}&city=${data.map}`);
   };
   return (
     <div className="search_home">
@@ -50,11 +44,11 @@ function Search_home() {
           />
         </div>
       </div>
-      <div className="botton" onClick={search_datas}>
+      <div className="botton" onClick={searchDatas}>
         <h4>Buscar</h4>
         <BiSearchAlt className="SearchIcon" />
       </div>
     </div>
   );
 }
-export default Search_home;
+export default SearchHome;
