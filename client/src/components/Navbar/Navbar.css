@@ -11,6 +11,11 @@
     box-shadow:0px 1px 1px rgba(0, 0, 0, 0.156);
 }
 
+.all_navbar .Logo{
+width: 130px;
+margin: 0;
+}
+
 .all_navbar .Logo:hover{
     transform: scale(1.1);
     filter: drop-shadow(0px 0px 1px rgba(17, 17, 17, 0.642))

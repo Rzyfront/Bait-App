@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './Navbar.css';
-import BaitLogo from '../../assets/BaitLogo.png';
+import BaitLogo from '../../assets/LogoBait.svg';
 import SearchHome from './SearchHome/SearchHome';
 import { Link } from 'react-router-dom';
 import { Login } from '../components';
@@ -31,8 +31,6 @@ const Navbar = () => {
           src={BaitLogo}
           alt="Bait"
           className="Logo"
-          width="40px"
-          height="45px"
         />
       </Link>
       <div className="SearchBar">
