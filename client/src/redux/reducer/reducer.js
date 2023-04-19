@@ -4,8 +4,7 @@ import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE } from '..
 const initialState = {
   cards: [],
   reset: [],
-  detail: [],
-  user: []
+  detail: []
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {

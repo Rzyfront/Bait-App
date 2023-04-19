@@ -45,6 +45,9 @@ export const loginWithGoogle = async () => {
   console.log(data);
   await axios
     .post('/login/google', { email: user.email })
-    .then((res) => window.localStorage.setItem('user', JSON.stringify({ user: data, token: res.data.token })));
+    .then((res) => {
+      window.localStorage.setItem('user', JSON.stringify({ user: data, token: res.data.token }));
+      location.reload();
+    });
 };
 //
