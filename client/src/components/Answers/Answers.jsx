@@ -1,6 +1,4 @@
-import React from "react";
-
-function Answers() {
+function Answers () {
   return <div>Answers</div>;
 }
 
