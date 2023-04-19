@@ -1,5 +1,5 @@
-import "./Home.css";
-import { Filters, Navbar, Cards, Footer } from "../components";
+import './Home.css';
+import { Filters, Navbar, Cards, Footer } from '../components';
 
 const Home = () => {
   return (
