@@ -1,4 +1,7 @@
 import { TfiClose } from 'react-icons/tfi';
+import { FcGoogle } from 'react-icons/fc';
+import ojoAbierto from '../../../assets/abrir-ojo.png';
+import ojoCerrado from '../../../assets/cerrar-ojo.png';
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../redux/actions/actions';
@@ -8,7 +11,6 @@ import { loginWithGoogle } from '../../../helpers/loginWithGoogle';
 const LoginForm = ({ setToggleLogin, loginRegister }) => {
   const dispatch = useDispatch();
   const [ojo, setOjo] = useState(false);
-  const imgRef = useRef();
   const passRef = useRef();
 
   const [user, setUser] = useState({
@@ -46,11 +48,9 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
   const fn = () => {
     if (!ojo) {
       passRef.current.type = 'text';
-      imgRef.current.src = './img/icons/cerrar-ojo.png';
       setOjo(true);
     } else {
       passRef.current.type = 'password';
-      imgRef.current.src = './img/icons/abrir-ojo.png';
       setOjo(false);
     }
   };
@@ -97,22 +97,16 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                 ></input>
                                 <img
                                     alt="img"
-                                    ref={imgRef}
                                     onClick={() => fn()}
                                     className="ojo"
-                                    src="./img/icons/abrir-ojo.png"
+                                    src={`${ojo ? ojoAbierto : ojoCerrado}`}
                                     width="20px"
                                     ></img>
                                 {errors.password && <span>{errors.password}</span>}
                             </div>
                             <button className="button" type="submit">Ingresar</button>
                             <div className="loginwith">
-                                <img
-                                    alt="img"
-                                    src="./img/icons/google.png"
-                                    className="google"
-                                    width="30px"
-                                ></img>
+                                <FcGoogle className='google'/>
                                 <span className="texto" onClick={() => loginWithGoogle()}>Entra con Google</span>
                             </div>
 

@@ -4,7 +4,6 @@ export const ORDER = 'ORDER';
 export const RESET = 'RESET';
 export const SEARCH_BY_QUERY = 'SEARCH_BY_QUERY';
 export const DETAIL = 'DETAIL';
-export const LOGIN = 'LOGIN';
 export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
@@ -141,15 +140,17 @@ export const searchByQuery = (name, city) => {
 export const logIn = (credentials) => {
   console.log('haciendo dispatch');
   return async (dispatch) => {
-    const res = await axios.post('/login', credentials);
-    return dispatch({
-      type: LOGIN,
-      payload: res.data
-    });
+    try {
+      const res = await axios.post('/login', credentials);
+      localStorage.setItem('user', JSON.stringify(res.data));
+      location.reload();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };
 
-export const comentarie = (calificationFood, calificationQaPrice, calificationEnvironment, calificationService, calculateAverage, inputs, id, token) => {
+export const comentarie = (calificationFood, calificationQaPrice, calificationEnvironment, calificationService, calculateAverage, inputs, id, userToken) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`/reviews/${id}`, {
@@ -163,7 +164,7 @@ export const comentarie = (calificationFood, calificationQaPrice, calificationEn
         qaPrice: calificationQaPrice
       }, {
         headers: {
-          Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Imp1YW5jYW1pbG8xNDc4QGdtYWlsLmNvbSIsImlkIjoxLCJyb2xlIjoidXNlciIsInZlcmlmaWVkIjoidmVyaWZpZWQiLCJpYXQiOjE2ODE4NDQ1NTV9.EhvevCRgCT38ujSsKwOJTvrQbX8knXalLItzj71HJto', // Aquí agregas tu header personalizado
+          Authorization: `Bearer ${userToken}`, // Aquí agregas tu header personalizado
           'Content-Type': 'application/json' // También puedes agregar otros headers estándar
         }
       });

@@ -10,7 +10,7 @@ const putInactiveUser = require('../controllers/users/putInactiveUser');
 const verifiyUser = require('../controllers/users/verifyUser');
 const postUserWithGoogle = require('../controllers/users/postUserWithGoogle');
 
-userRoutes.get('/', getUsers)
+userRoutes
   .get('/verified', verifiyUser)
   .post('/google', postUserWithGoogle)
   .get('/:userId', getUsers)

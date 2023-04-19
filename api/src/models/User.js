@@ -42,7 +42,7 @@ module.exports = (sequelize) => {
       defaultValue: true,
     },
     role: {
-      type: DataTypes.ENUM('admin', 'owner', 'user'),
+      type: DataTypes.ENUM('admin', 'owner', 'user', 'superAdmin'),
       defaultValue: 'user',
     },
     isGoogleUser: {
