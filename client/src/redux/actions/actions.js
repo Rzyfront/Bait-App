@@ -151,7 +151,7 @@ export const logIn = (credentials) => {
   };
 };
 
-export const comentarie = (calificationFood, calificationQaPrice, calificationEnvironment, calificationService, calculateAverage, inputs, id, token) => {
+export const comentarie = (calificationFood, calificationQaPrice, calificationEnvironment, calificationService, calculateAverage, inputs, id, userToken) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`/reviews/${id}`, {
@@ -165,7 +165,7 @@ export const comentarie = (calificationFood, calificationQaPrice, calificationEn
         qaPrice: calificationQaPrice
       }, {
         headers: {
-          Authorization: `Bearer ${token}`, // Aquí agregas tu header personalizado
+          Authorization: `Bearer ${userToken}`, // Aquí agregas tu header personalizado
           'Content-Type': 'application/json' // También puedes agregar otros headers estándar
         }
       });

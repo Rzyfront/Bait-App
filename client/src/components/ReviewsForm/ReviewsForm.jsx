@@ -14,9 +14,10 @@ import { useDispatch } from 'react-redux';
 import { comentarie } from '../../redux/actions/actions';
 
 function ReviewsForm ({ setToggleModal2, id }) {
+  const [userToken, setDataUser] = useState('');
   useEffect(() => {
     const { token } = JSON.parse(localStorage.getItem('user'));
-    console.log(token);
+    setDataUser(token);
   }, []);
 
   const dispatch = useDispatch();
@@ -74,10 +75,11 @@ function ReviewsForm ({ setToggleModal2, id }) {
           calculateAverage,
           inputs,
           id,
-          token
+          userToken
         )
       );
       alert('ya se envio');
+      location.reload();
     } else {
       alert('no se puede');
     }
