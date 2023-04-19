@@ -5,12 +5,12 @@ const deleteAdministrator = require('../controllers/administrator/deleteAdminist
 const changeRole = require('../controllers/administrator/changeRole');
 const userExtractor = require('../middlewares/userExtractor');
 const { verifyDelete } = require('../middlewares/userMiddlewares');
-const { isSuperAdmin } = require('../middlewares/validateRole');
+const { isSuperAdmin, isAdmin } = require('../middlewares/validateRole');
 
 administratorRoute
   .get('/', userExtractor, getAdministrators)
   .put('/:userId', userExtractor, isSuperAdmin, putCreateAdmin)
-  .delete('/', userExtractor, verifyDelete, deleteAdministrator)
-  .patch('/role/:userId', userExtractor, changeRole);
+  .delete('/:userId', userExtractor, verifyDelete, deleteAdministrator)
+  .patch('/role/:userId', userExtractor, isAdmin, changeRole);
 
 module.exports = administratorRoute;
