@@ -46,7 +46,7 @@ You can also interact with the application programmatically by making API reques
 
 ## Examples
 
-Examples of your application in action, including screenshots, gifs, or videos that showcase its key features and functionality.
+Examples of your application in action, including screenshots, gifs, or videos that showcase its key features and functionality. (Cuando esté más bonito lo hacemos)
 
 ## Contributing
 
