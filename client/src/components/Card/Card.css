@@ -17,6 +17,7 @@
 .Card:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 4px;
     transform: scale(1.01);
+    cursor :pointer;
 }
 
 .Card .imgCard{

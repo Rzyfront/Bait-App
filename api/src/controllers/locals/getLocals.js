@@ -1,4 +1,3 @@
-// const { Op } = require('sequelize');
 const { fn, col } = require('sequelize');
 const {
   Local, Characteristic, Image, Review,
@@ -24,6 +23,8 @@ module.exports = async (req, res) => {
         {
           model: Review,
           attributes: [],
+          where: req.reviews,
+          required: false,
         },
       ],
       attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule'],

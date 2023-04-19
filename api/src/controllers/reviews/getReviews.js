@@ -2,12 +2,16 @@ const { Review, Local, Image } = require('../../db');
 
 module.exports = async (req, res) => {
   const { localId } = req.params;
+  const { verified } = req.query;
+
+  const isVerified = verified ?? true;
 
   try {
     const localReviews = await Local.findByPk(localId, {
       include: [{
         model: Review,
-        include: [{ model: Image, attributes: ['url'] }],
+          include: [{ model: Image, attributes: ['url'] }],
+          where: { verified: isVerified },
       }],
     });
 
