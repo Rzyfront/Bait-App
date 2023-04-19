@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Navbar.css';
 import BaitLogo from '../../assets/BaitLogo.png';
 import SearchHome from './SearchHome/SearchHome';
@@ -8,6 +8,21 @@ import { FaUserCircle } from 'react-icons/fa';
 const Navbar = () => {
   const [toogleLogin, setToggleLogin] = useState(false);
   const [user, setUser] = useState(false);
+  const data = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(() => {
+    if (data && data.user) {
+      setUser(true);
+    } else {
+      setUser(false);
+    }
+  }, [data]);
+
+  const close = () => {
+    localStorage.clear();
+    setUser(false);
+  };
+
   return (
     <div className="all_navbar">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
@@ -37,9 +52,9 @@ const Navbar = () => {
           </div>
             )
           : (
-          <div className="nav_login">
+          <div className="nav_login" onClick={close}>
             <FaUserCircle />
-            Mi perfil
+            {data.user.name}
           </div>
             )}
       </div>
