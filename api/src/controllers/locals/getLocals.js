@@ -1,6 +1,6 @@
 const { fn, col } = require('sequelize');
 const {
-  Local, Characteristic, Image, Review,
+  Local, Characteristic, Image, Review, Menu,
 } = require('../../db');
 const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
@@ -26,8 +26,14 @@ module.exports = async (req, res) => {
           where: req.reviews,
           required: false,
         },
+        {
+          model: Menu,
+          // attributes: [],
+          where: { type: req.menu },
+          required: false,
+        },
       ],
-      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule'],
+      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule', 'UserId', 'specialty'],
       order: req.order,
       limit: page * 10,
       offset: (page - 1) * 10,

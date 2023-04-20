@@ -2,12 +2,12 @@ const { User } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
-    const administrators = await User.findAll({
+    const users = await User.findAll({
       where: {
-        role: 'admin',
+        verified: 'suspended',
       },
     });
-    return res.status(200).json({ administrators, success: true });
+    return res.status(200).json({ users, success: true });
   } catch (err) {
     return res.status(404).json({ message: err.message, success: false });
   }
