@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
         },
         {
           model: Menu,
-          attributes: [],
+          // attributes: [],
           where: { type: req.menu },
           required: false,
         },
