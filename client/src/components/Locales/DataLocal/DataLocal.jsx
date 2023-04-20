@@ -1,6 +1,7 @@
 export default function DataLocal ({ handleChange, inputs, errors, handleSelect }) {
   return (
         <>
+          <p>Datos requeridos<span style={{ color: 'red', fontWeight: 'bolder' }}>*</span></p>
             <label>Nombre Local: </label>
             <input
                 className='name'
@@ -9,25 +10,27 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 type='text'
                 name='name'
                 placeholder='Escribe el nombre del Local...'
-            />
+                required
+            /><span style={{ color: 'red', fontWeight: 'bolder' }}>*</span>
             {errors.name && <p className='danger'>{errors.name}</p>}
             <hr />
-            <label>Ubicacion: </label>
+            <label>Ubicación: </label>
             <select
                 name='location'
                 className='location'
                 onChange={handleSelect}
                 value={inputs.location}
+                required
             >
                 <option value='value2' defaultValue>
                     Selecciona
                 </option>
-                <option value='Cordoba'>Cordoba</option>
+                <option value='Cordoba'>Córdoba</option>
                 <option value='Buenos Aires'>Buenos Aires</option>
                 <option value='Corrientes'>Corrientes</option>
-            </select>
+          </select><span style={{ color: 'red', fontWeight: 'bolder' }}>*</span>
             <hr />
-            <label>Correo Electronico: </label>
+            <label>Correo Electrónico: </label>
             <input
                 className='correo'
                 onChange={handleChange}
@@ -36,6 +39,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 name='email'
                 placeholder='Escribe tu email...'
             />
+          {errors.email && <p className='danger'>{errors.email}</p>}
             <hr />
             <label>Horario: </label>
             <input
@@ -43,9 +47,8 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 value={inputs.schedule}
                 type='text'
                 name='schedule'
-                placeholder='Escribe tu email...'
             />
-            {errors.email && <p className='danger'>{errors.schedule}</p>}
+            {errors.schedule && <p className='danger'>{errors.schedule}</p>}
             <hr />
             <label>Telefono: </label>
             <input
@@ -55,9 +58,9 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 type='tel'
                 name='phone'
                 pattern='[0-9]{10}'
-                placeholder='Escribe tu numero de telefono...'
+                placeholder='Escribe tu número de teléfono...'
             />
-            {errors.message && <p className='danger'>{errors.phone}</p>}
+            {errors.phone && <p className='danger'>{errors.phone}</p>}
             <hr />
         </>
   );

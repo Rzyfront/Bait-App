@@ -98,7 +98,7 @@ function Locales () {
         pet_friendly: false
       });
     } else {
-      alert('Debe llenar todos los campos');
+      // alert('Debe llenar todos los campos');
     }
   };
 
