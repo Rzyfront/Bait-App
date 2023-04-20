@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
         where: { verified: verified ?? true },
         required: false,
       },
-      { model: Image }],
+      { model: Image, attributes: ['url'] }],
     });
     res.status(200).json({ locals, success: true });
   } catch (error) {

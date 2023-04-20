@@ -46,7 +46,7 @@ Image.belongsTo(Dish);
 Dish.hasOne(Image);
 
 Menu.belongsTo(Local);
-Local.hasOne(Menu);
+Local.hasMany(Menu);
 
 Local.hasOne(Characteristic, { onDelete: 'CASCADE' });
 Characteristic.belongsTo(Local, { onDelete: 'CASCADE' });

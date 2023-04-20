@@ -56,7 +56,7 @@ const verifyDelete = async (req, res, next) => {
     const idExist = await User.findByPk(userId);
 
     if (!idExist) throw Error(`User ${userId} does not exist on our DataBase, Please select another Id`);
-
+    req.userToModify = idExist;
     next();
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });

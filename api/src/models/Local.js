@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
       // unique: true,
       allowNull: false,
     },
+    specialty: {
+      type: DataTypes.STRING(50),
+      allowNull: false,
+    },
     schedule: DataTypes.STRING,
   });
 };
