@@ -8,9 +8,11 @@ const getLocalsDetail = require('../controllers/locals/getLocalsDetail');
 const localValidator = require('../middlewares/localValidator');
 const getQueryLocals = require('../controllers/locals/getQueryLocals');
 const userExtractor = require('../middlewares/userExtractor');
+const getLocalsName = require('../controllers/locals/getLocalsName');
 
 localsRoute.get('/', getQueryLocals, getLocals);
 localsRoute.get('/page/:numPage', getQueryLocals, getLocals);
+localsRoute.get('/search-by-name', getLocalsName);
 localsRoute.param('localId', paramLocal);
 localsRoute.post('/', userExtractor, localValidator, postLocal);
 localsRoute.get('/:localId', getLocalsDetail);
