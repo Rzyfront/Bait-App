@@ -3,9 +3,10 @@ const { Local, Menu } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const { localId } = req.params;
+    const { type } = req.body;
     const local = await Local.findByPk(localId);
     if (!local) throw new Error('Local not found');
-    const newMenu = await Menu.create({});
+    const newMenu = await Menu.create({ type });
     await local.setMenu(newMenu.id);
     res.status(201).json({ success: true, local });
   } catch (error) {

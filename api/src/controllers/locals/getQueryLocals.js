@@ -2,7 +2,7 @@ const { Op, fn, col } = require('sequelize');
 
 module.exports = (req, res, next) => {
   const {
-    name, location, order, page, verified, speciality, menu, ...characteristics
+    name, location, order, page, verified, specialty, menu, ...characteristics
   } = req.query;
   const where = {};
   let reqOrder = [];
@@ -18,8 +18,8 @@ module.exports = (req, res, next) => {
     else if (order === 'nameASC') reqOrder = [['name', 'ASC']];
     else if (order === 'nameDESC') reqOrder = [['name', 'DESC']];
   }
-  if (speciality) {
-    where.speciality = { [Op.iLike]: `%${speciality}%` };
+  if (specialty) {
+    where.specialty = { [Op.iLike]: `%${specialty}%` };
   }
   if (menu) {
     req.menu = menu;
