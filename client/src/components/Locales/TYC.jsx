@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-export default function TYC ({ src, setTerms }) {
+export default function TYC ({ src, handleClick }) {
   return (
         <>
           <div className='termAndConditions animated-element'>
@@ -33,7 +33,7 @@ export default function TYC ({ src, setTerms }) {
 
               <p>Ley aplicable y jurisdicción: Estos términos y condiciones se rigen por las leyes del país donde se encuentra Bait. Cualquier disputa relacionada con estos términos y condiciones será resuelta por los tribunales competentes en el lugar donde se encuentra Bait.</p>
               <div className='termsButtons'>
-                  <button className='Ok' onClick={() => setTerms(false)}>Aceptar</button>
+                  <button className='Ok' onClick={handleClick}>Aceptar</button>
                   <Link to='/home/1?name=&city='>
                       <button className='No' >Rechazar</button>
                   </Link>

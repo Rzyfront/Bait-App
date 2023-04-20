@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Locales.css';
 
 import BaitLogo from '../../assets/LogoBait.svg';
@@ -15,7 +15,8 @@ import DataLocal from './DataLocal/DataLocal';
 function Locales () {
   const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
-  const [termsAndConditions, setTermsAndConditions] = useState(true);
+  const [termsAndConditions, setTemsAndConditions] = useState(true);
+  const targetRef = useRef(null);
   const [inputs, setInputs] = useState({
     location: '',
     name: '',
@@ -125,10 +126,16 @@ function Locales () {
       setChekInputs({ ...chekinputs, [e.target.name]: false });
     }
   };
+
+  function handleClick () {
+    setTemsAndConditions(false);
+    targetRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
     <div className='locales animated-element'>
       { termsAndConditions
-        ? <TYC src={BaitLogo} setTerms={setTermsAndConditions}/>
+        ? <TYC src={BaitLogo} handleClick={handleClick}/>
         : <div className='locales_data animated-element'>
         <Link to='/home/1?name=&city=' className='LinkLogo'>
           <img

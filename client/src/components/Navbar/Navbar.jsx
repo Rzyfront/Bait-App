@@ -24,7 +24,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="all_navbar">
+    <div className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
       <Link to={'/home/1?name=&city='}>
         <img
