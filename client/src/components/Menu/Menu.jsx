@@ -3,7 +3,7 @@ import Card from '../Card/Card';
 
 function Menu ({ ListMenu }) {
   return (
-    <div className="Menu">
+    <div className="Menu animated-element">
       <div className="TitleGroup">
         <h2 className="Menu-Title">Menu</h2>
         <div className="Decorator"></div>

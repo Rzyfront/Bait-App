@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Locales.css';
 
 import BaitLogo from '../../assets/LogoBait.svg';
@@ -39,6 +39,7 @@ function Locales () {
   const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
   const [termsAndConditions, setTemsAndConditions] = useState(true);
+  const targetRef = useRef(null);
   const [inputs, setInputs] = useState({
     location: '',
     name: '',
@@ -156,6 +157,12 @@ function Locales () {
     }
     console.log(chekinputs);
   };
+
+  function handleClick () {
+    setTemsAndConditions(false);
+    targetRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+
   return (
     <div className="locales animated-element">
       { termsAndConditions
@@ -190,15 +197,19 @@ function Locales () {
 
 <p>Ley aplicable y jurisdicción: Estos términos y condiciones se rigen por las leyes del país donde se encuentra Bait. Cualquier disputa relacionada con estos términos y condiciones será resuelta por los tribunales competentes en el lugar donde se encuentra Bait.</p>
             <div className='termsButtons'>
-              <button className='Ok' onClick={() => setTemsAndConditions(false)}>Aceptar</button>
+              <button className='Ok' onClick={handleClick}>Aceptar</button>
+
                 <Link to="/home/1?name=&city=">
+
               <button className='No' >Rechazar</button>
               </Link>
             </div>
       </div>
-        : <div className="locales_data animated-element">
+        : <div className={`locales_data ${!termsAndConditions && 'animated-element'} `}>
         <Link to="/home/1?name=&city=" className="LinkLogo">
           <img
+            id='logo-data-create'
+            ref={targetRef}
             src={BaitLogo}
             alt="Bait"
             className="Logo"

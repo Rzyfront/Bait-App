@@ -1,10 +1,11 @@
 .locales {
-      max-width: 600px;
-      height: fit-content;
-    margin: 0 auto;
-    padding: 20px;
+    overflow: hidden;
+    max-width: 100%;  
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 100vh;
   }
 
  
@@ -12,8 +13,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    padding: 30px;
     gap: 10px;
+    overflow: auto;
+    width: 650px;
+    height: 100vh;
   }
   .locales .termAndConditions .Logo {
     width: 130px;
@@ -64,74 +69,81 @@
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-  .locales_data {
-    background-color: var(--bg-primary);
-    padding: 20px;
-    border-radius: 30px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+.locales .locales_data {
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  height: 100vh;
+  width: 650px;
+  background-color: var(--bg-primary);
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .locales .locales_data .Logo{
-    width: 130px;
-  }
-  .locales_data h1 {
-    font-size: 50px;
-    color: var(--primary);
-    font-family: var(--title);
-    font-weight: 700;
-  }
-  .form-container {
-    margin-top: 20px;
-  }
-  
-  .form-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  .LocalesImage{
-    height: 200px;
-    width: 200px;
-  }
+.locales .locales_data .Logo{
+  width: 130px;
+}
+.locales_data h1 {
+  font-size: 50px;
+  color: var(--primary);
+  font-family: var(--title);
+  font-weight: 700;
+}
+.form-container {
+  margin-top: 20px;
+}
 
-  .form-container input,
-  .form-container select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .form-container input[type="submit"] {
-    background-color: var(--bg-secundary);
-    color: var(--bg-primary);
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .form-container input[type="submit"]:hover {
-    background-color: var(--bg-primary);
-  }
-  
-  .danger {
-    color: var(--bg-optional1);
-    font-size: var(--subtitle);
-  }
-  
-  .LinkLogo {
-    text-decoration: none;
-    color:var(--bg-primary);
-  }
-  
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
 
-  .danger {
-  color: var(--bg-optional2);
-  font-size: 14px;
+.LocalesImage{
+  height: 200px;
+  width: 200px;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 8px;
   margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-container input[type="submit"] {
+  background-color: var(--bg-secundary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+  background-color: var(--bg-primary);
+}
+
+.danger {
+  color: var(--bg-optional1);
+  font-size: var(--subtitle);
+}
+
+.LinkLogo {
+  text-decoration: none;
+  color:var(--bg-primary);
+}
+
+
+.danger {
+color: var(--bg-optional2);
+font-size: 14px;
+margin-top: 5px;
 }
 
 /* Estilos para los campos con errores */
