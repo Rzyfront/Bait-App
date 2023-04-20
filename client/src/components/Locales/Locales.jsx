@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './Locales.css';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import { Link } from 'react-router-dom';
 import { useUploadImage } from '../../hooks/useUploadImage';
@@ -69,7 +70,9 @@ function Locales () {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (!Object.values(errors).length) {
-      alert('Datos completos');
+      toast.success('Tu sitio ha sido creado satisfactoriamente!', {
+        position: toast.POSITION.TOP_CENTER
+      });
       dispatch(createLocal(inputs, chekinputs));
       setInputs({
         location: '',
@@ -98,7 +101,11 @@ function Locales () {
         pet_friendly: false
       });
     } else {
-      // alert('Debe llenar todos los campos');
+      dispatch(createLocal(inputs, chekinputs));
+      console.log(errors);
+      toast.error('Debes completar los campos correctamente', {
+        position: toast.POSITION.TOP_CENTER
+      });
     }
   };
 
@@ -129,7 +136,7 @@ function Locales () {
 
   function handleClick () {
     setTemsAndConditions(false);
-    targetRef.current.scrollIntoView({ behavior: 'smooth' });
+    // targetRef.current.scrollIntoView({ behavior: 'smooth' });
   }
 
   return (
@@ -217,6 +224,7 @@ function Locales () {
           <hr />
 
           <button type='submit'> ENVIAR</button>
+          <ToastContainer/>
         </form>
       </div>}
     </div>

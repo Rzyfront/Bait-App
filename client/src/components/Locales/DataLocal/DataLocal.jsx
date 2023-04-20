@@ -20,7 +20,6 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 className='location'
                 onChange={handleSelect}
                 value={inputs.location}
-                required
             >
                 <option value='value2' defaultValue>
                     Selecciona

@@ -1,4 +1,8 @@
-import { isEmail, verifiedExists, verifiedLength } from '../../helpers/validations';
+import {
+  isEmail,
+  verifiedExists,
+  verifiedLength
+} from '../../helpers/validations';
 
 export const validateForm = (data) => {
   const errors = {};
@@ -8,9 +12,13 @@ export const validateForm = (data) => {
 
   if (data.phone) errors.phone = verifiedLength(data.phone, 20, 'El teléfono');
 
-  if (data.location) errors.location = verifiedExists(errors.location, 'location');
+  if (data.location) {
+    errors.location = verifiedExists(data.location, 'location');
+  }
 
-  if (!data.schedule) errors.schedule = verifiedExists(data.schedule, 'El horario');
+  if (!data.schedule) {
+    errors.schedule = verifiedExists(data.schedule, 'El horario');
+  }
 
   return errors;
 };
