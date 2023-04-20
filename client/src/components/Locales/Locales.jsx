@@ -26,18 +26,8 @@ function Locales () {
     schedule: ''
   });
   const [errors, setErrors] = useState({
+
   });
-
-  useEffect(() => {
-    setInputs({ ...inputs, imagen: image });
-
-    setErrors(
-      validateForm({
-        ...inputs,
-        imagen: [image]
-      })
-    );
-  }, [image]);
 
   const [chekinputs, setChekInputs] = useState({
     wifi: false,
@@ -80,12 +70,6 @@ function Locales () {
         schedule: ''
       });
       setErrors({
-        location: '',
-        name: '',
-        imagen: '',
-        email: '',
-        phone: '',
-        schedule: ''
       });
       setChekInputs({
         wifi: false,
@@ -98,7 +82,7 @@ function Locales () {
         pet_friendly: false
       });
     } else {
-      // alert('Debe llenar todos los campos');
+      console.log(errors);
     }
   };
 
@@ -131,6 +115,16 @@ function Locales () {
     setTemsAndConditions(false);
     targetRef.current.scrollIntoView({ behavior: 'smooth' });
   }
+  useEffect(() => {
+    setInputs({ ...inputs, imagen: image });
+
+    setErrors(
+      validateForm({
+        ...inputs,
+        imagen: [image]
+      })
+    );
+  }, [image]);
 
   return (
     <div className='locales animated-element'>
@@ -215,7 +209,6 @@ function Locales () {
           <hr />
           <Chars handleCheck = {handleCheck } chekinputs = {chekinputs}/>
           <hr />
-
           <button type='submit'> ENVIAR</button>
         </form>
       </div>}

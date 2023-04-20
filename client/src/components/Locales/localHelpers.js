@@ -2,15 +2,29 @@ import { isEmail, verifiedExists, verifiedLength } from '../../helpers/validatio
 
 export const validateForm = (data) => {
   const errors = {};
-  if (data.name) errors.name = verifiedLength(data.name, 30, 'El nombre');
+  if (data.name) {
+    const result = verifiedLength(data.name, 30, 'El nombre');
+    result && (errors.name = result);
+  }
 
-  if (data.email) errors.email = isEmail(data.email);
+  if (data.email) {
+    const result = isEmail(data.email);
+    result && (errors.email = result);
+  }
 
-  if (data.phone) errors.phone = verifiedLength(data.phone, 20, 'El teléfono');
+  if (data.phone) {
+    const result = verifiedLength(data.phone, 20, 'El teléfono');
+    result && (errors.phone = result);
+  }
 
-  if (data.location) errors.location = verifiedExists(errors.location, 'location');
+  if (data.location) {
+    const result = verifiedExists(data.location, 'location');
+    result && (errors.location = result);
+  }
 
-  if (!data.schedule) errors.schedule = verifiedExists(data.schedule, 'El horario');
-
+  if (!data.schedule) {
+    const result = verifiedExists(data.schedule, 'El horario');
+    result && (errors.schedule = result);
+  }
   return errors;
 };
