@@ -41,7 +41,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                     checked={chekinputs.live_music}
                     onChange={handleCheck}
                 />
-                Musica
+                Música
             </label>
             <label htmlFor='table_service'>
                 <input
@@ -71,7 +71,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                     checked={chekinputs.romantic}
                     onChange={handleCheck}
                 />
-                Estilo romantico
+                Estilo romántico
             </label>
             <label htmlFor='big_group'>
                 <input
