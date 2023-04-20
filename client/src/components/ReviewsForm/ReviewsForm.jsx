@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import BaitLogo from '../../assets/BaitLogo.png';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { TfiClose } from 'react-icons/tfi';
 import { FaPaperPlane } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -48,30 +49,27 @@ function ReviewsForm ({ setToggleModal2, id }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    if (!Object.entries(errors).length) {
-      if (inputs.comment.length >= 3 && inputs.title.length > 0) {
-        dispatch(
-          comentarie(
-            calificationFood,
-            calificationQaPrice,
-            calificationEnvironment,
-            calificationService,
-            calculateAverage,
-            inputs,
-            id,
-            userToken
-          )
-        );
-        setInputs({
-          title: '',
-          comment: '',
-          image: {}
-        });
-        location.reload();
-      }
+    if (inputs.comment.length > 0 && inputs.title.length > 0) {
+      dispatch(
+        comentarie(
+          calificationFood,
+          calificationQaPrice,
+          calificationEnvironment,
+          calificationService,
+          calculateAverage,
+          inputs,
+          id,
+          userToken
+        )
+      );
+      toast.success('¡Gracias por tu Opinion!', {
+        position: toast.POSITION.TOP_CENTER
+      });
+      location.reload();
     } else {
-      alert('Completa la información.');
+      toast.error('¡La reseña no cumple con las normal de Bait!', {
+        position: toast.POSITION.TOP_CENTER
+      });
     }
   };
 
@@ -104,9 +102,10 @@ function ReviewsForm ({ setToggleModal2, id }) {
     calificationService
   ]);
 
-  return (<div className='ReviewsForm animated-element'>
-      <div className='Container'>
-        <Link to='/home' className='LinkLogo'>
+  return (<div className="ReviewsForm animated-element">
+      <div className="Container">
+        <ToastContainer className="notify"/>
+        <Link to="/home" className="LinkLogo">
           <img
             src={BaitLogo}
             alt='Bait'
