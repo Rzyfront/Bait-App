@@ -59,7 +59,7 @@ export const DetailLocal = (id) => {
 export const DetailUser = (id) => {
   return async dispatch => {
     try {
-      const datos = await axios.get(`/locals/${id}`);
+      const datos = await axios.get(`/user/${id}`);
       dispatch({
         type: DETAIL,
         payload: datos.data
