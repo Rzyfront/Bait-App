@@ -26,7 +26,7 @@ function Profile () {
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
-
+  console.log(locals);
   useEffect(() => {
     if (locals) {
       let suma = 0;
