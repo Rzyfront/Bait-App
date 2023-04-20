@@ -55,6 +55,21 @@ export const DetailLocal = (id) => {
   };
 };
 
+// Detail User
+export const DetailUser = (id) => {
+  return async dispatch => {
+    try {
+      const datos = await axios.get(`/locals/${id}`);
+      dispatch({
+        type: DETAIL,
+        payload: datos.data
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 // correguir imagen cuando este listo la ruta
 export const createLocal = (inputs, chekinputs) => {
   const images = [];
