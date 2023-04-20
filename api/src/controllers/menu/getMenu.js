@@ -3,7 +3,13 @@ const { Menu, Dish, Image } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const { menuId } = req.params;
-    const menu = await Menu.findByPk(menuId, { include: [{ model: Dish, include: Image }] });
+    const menu = await Menu.findByPk(menuId, {
+      include: [
+        {
+          model: Dish,
+          include: Image,
+        }],
+    });
     if (!menu) throw new Error('Menu not found');
     res.status(200).json({ success: true, menu });
   } catch (error) {
