@@ -75,17 +75,17 @@ export const DetailLocal = (id) => {
 
 // correguir imagen cuando este listo la ruta
 export const createLocal = (inputs, chekinputs) => {
-
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
-      email: inputs.email,
-      images: inputs.images,
-      location: inputs.location,
-      name: inputs.name,
-      phone: inputs.phone,
-      schedule: inputs.schedule,
-        characteristics:   chekinputs
+        email: inputs.email,
+        images: inputs.images,
+        location: inputs.location,
+        name: inputs.name,
+        phone: inputs.phone,
+        schedule: inputs.schedule,
+        specialty: inputs.specialty,
+        characteristics: chekinputs
       });
       if (response.status === 201) {
         dispatch({

@@ -24,7 +24,8 @@ function Locales () {
     images: [],
     email: '',
     phone: '',
-    schedule: ''
+    schedule: '',
+    specialty: ''
   });
   const [errors, setErrors] = useState({
 
@@ -68,7 +69,8 @@ function Locales () {
         images: '',
         email: '',
         phone: '',
-        schedule: ''
+        schedule: '',
+        specialty: ''
       });
       setErrors({
       });
@@ -90,14 +92,15 @@ function Locales () {
   };
 
   const handleSelect = (event) => {
+    const { name, value } = event.target;
     setInputs({
       ...inputs,
-      location: event.target.value
+      [name]: value
     });
     setErrors(
       validateForm({
         ...inputs,
-        location: event.target.value
+        [name]: value
       })
     );
   };
@@ -113,25 +116,20 @@ function Locales () {
     // targetRef.current.scrollIntoView({ behavior: 'smooth' });
   }
   useEffect(() => {
-   if(image.length)
-   {
-   let data=image.map((data) => {
-      return {id:data.id}
-    });
+    if (image.length) {
+      const data = image.map((data) => {
+        return { id: data.id };
+      });
 
-    setInputs({ ...inputs, images: data });
+      setInputs({ ...inputs, images: data });
 
-
-    setErrors(
-      validateForm({
-        ...inputs,
-        images: [data]
-      })
-    );
-
-   }
-
-    
+      setErrors(
+        validateForm({
+          ...inputs,
+          images: [data]
+        })
+      );
+    }
   }, [image]);
 
   success && toast.success('¡Local creado satisfactoriamente!', {
@@ -200,7 +198,7 @@ function Locales () {
                 )}
 
           <hr />
-          <Chars handleCheck = {handleCheck } chekinputs = {chekinputs}/>
+          <Chars handleCheck = {handleCheck} chekinputs = {chekinputs}/>
           <hr />
           <button type='submit'> ENVIAR</button>
           <ToastContainer/>
