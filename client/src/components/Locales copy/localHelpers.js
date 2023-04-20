@@ -6,7 +6,6 @@ import {
 
 export const validateForm = (data) => {
   const errors = {};
-  if (!Object.keys(data).length) errors.rule = 'No puede estar vacío';
   if (data.name) {
     const result = verifiedLength(data.name, 30, 'El nombre');
     result && (errors.name = result);

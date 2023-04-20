@@ -7,6 +7,10 @@ export const DETAIL = 'DETAIL';
 export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
+export const SUCCESS = 'SUCCESS';
+export const ERROR = 'ERROR';
+export const SUCCESS_RESET = 'SUCCESS_RESET';
+export const ERROR_RESET = 'ERROR_RESET';
 
 /// ///////actions////////////////////////////
 export const reset = () => {
@@ -18,7 +22,18 @@ export const reset = () => {
 /// loadinglocals
 
 /// Create user
-export const createUser = ({ name, lastname, age, phone_number, email, password, location, verified, isActive, role }) => {
+export const createUser = ({
+  name,
+  lastname,
+  age,
+  phone_number,
+  email,
+  password,
+  location,
+  verified,
+  isActive,
+  role
+}) => {
   return async (dispatch) => {
     try {
       await axios.post('http://localhost:3001/user', {
@@ -33,7 +48,10 @@ export const createUser = ({ name, lastname, age, phone_number, email, password,
         isActive,
         role
       });
-      return dispatch({ type: CREATE_USER, payload: 'Usuario Creado Correctamente' });
+      return dispatch({
+        type: CREATE_USER,
+        payload: 'Usuario Creado Correctamente'
+      });
     } catch (error) {
       console.log(error);
       console.log(error.message);
@@ -42,7 +60,7 @@ export const createUser = ({ name, lastname, age, phone_number, email, password,
 };
 // Detail id
 export const DetailLocal = (id) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const datos = await axios.get(`/locals/${id}`);
       dispatch({
@@ -58,16 +76,13 @@ export const DetailLocal = (id) => {
 // correguir imagen cuando este listo la ruta
 export const createLocal = (inputs, chekinputs) => {
   const images = [];
-  inputs.imagen.forEach(data => {
+  inputs.imagen.forEach((data) => {
     images.push({ id: data.id });
   });
-  return async dispatch => {
+  return async (dispatch) => {
     try {
-      await axios.post('/locals', {
-        name: inputs.name,
-        location: inputs.location,
-        schedule: inputs.schedule,
-        email: inputs.email,
+      const response = await axios.post('/locals', {
+        inputs,
         images,
         characteristics: {
           wifi: chekinputs.wifi,
@@ -82,8 +97,28 @@ export const createLocal = (inputs, chekinputs) => {
           pet_friendly: chekinputs.pet_friendly
         }
       });
+      if (response.status === 201) {
+        dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+        setTimeout(() => {
+          dispatch({
+            type: SUCCESS_RESET
+          });
+        }, 3000);
+      }
     } catch (error) {
-      console.log(error.message);
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 5 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
     }
   };
 };
@@ -150,24 +185,37 @@ export const logIn = (credentials) => {
   };
 };
 
-export const comentarie = (calificationFood, calificationQaPrice, calificationEnvironment, calificationService, calculateAverage, inputs, id, userToken) => {
+export const comentarie = (
+  calificationFood,
+  calificationQaPrice,
+  calificationEnvironment,
+  calificationService,
+  calculateAverage,
+  inputs,
+  id,
+  userToken
+) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`/reviews/${id}`, {
-        title: inputs.title,
-        rating: calculateAverage,
-        comment: inputs.comment,
-        image: inputs.image,
-        food: calificationFood,
-        service: calificationService,
-        environment: calificationEnvironment,
-        qaPrice: calificationQaPrice
-      }, {
-        headers: {
-          Authorization: `Bearer ${userToken}`, // Aquí agregas tu header personalizado
-          'Content-Type': 'application/json' // También puedes agregar otros headers estándar
+      const response = await axios.post(
+        `/reviews/${id}`,
+        {
+          title: inputs.title,
+          rating: calculateAverage,
+          comment: inputs.comment,
+          image: inputs.image,
+          food: calificationFood,
+          service: calificationService,
+          environment: calificationEnvironment,
+          qaPrice: calificationQaPrice
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${userToken}`, // Aquí agregas tu header personalizado
+            'Content-Type': 'application/json' // También puedes agregar otros headers estándar
+          }
         }
-      });
+      );
       console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
     } catch (error) {
       console.log(error);
@@ -176,7 +224,7 @@ export const comentarie = (calificationFood, calificationQaPrice, calificationEn
 };
 /// / home pages
 export const homepage = (id) => {
-  return async dispatch => {
+  return async (dispatch) => {
     try {
       const response = await axios.get(`/locals/page/${id}`);
       dispatch({
@@ -185,6 +233,6 @@ export const homepage = (id) => {
       });
     } catch (error) {
       console.log(error.message);
-    };
+    }
   };
 };

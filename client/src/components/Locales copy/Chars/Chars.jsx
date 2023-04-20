@@ -6,7 +6,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     multiple
-                    value={!chekinputs.wifi}
+                    value={chekinputs.wifi}
                     onChange={handleCheck}
                     name='wifi'
                     checked={chekinputs.wifi}
@@ -17,7 +17,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='parking_lot'
-                    value={!chekinputs.parking_lot}
+                    value={chekinputs.parking_lot}
                     checked={chekinputs.parking_lot}
                     onChange={handleCheck}
                 />
@@ -27,7 +27,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='outdoor_seating'
-                    value={!chekinputs.outdoor_seating}
+                    value={chekinputs.outdoor_seating}
                     checked={chekinputs.outdoor_seating}
                     onChange={handleCheck}
                 />
@@ -37,7 +37,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='live_music'
-                    value={!chekinputs.live_music}
+                    value={chekinputs.live_music}
                     checked={chekinputs.live_music}
                     onChange={handleCheck}
                 />
@@ -47,7 +47,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='table_service'
-                    value={!chekinputs.table_service}
+                    value={chekinputs.table_service}
                     checked={chekinputs.table_service}
                     onChange={handleCheck}
                 />
@@ -57,7 +57,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='family_style'
-                    value={!chekinputs.family_style}
+                    value={chekinputs.family_style}
                     checked={chekinputs.family_style}
                     onChange={handleCheck}
                 />
@@ -67,7 +67,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='romantic'
-                    value={!chekinputs.romantic}
+                    value={chekinputs.romantic}
                     checked={chekinputs.romantic}
                     onChange={handleCheck}
                 />
@@ -77,7 +77,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='big_group'
-                    value={!chekinputs.big_group}
+                    value={chekinputs.big_group}
                     checked={chekinputs.big_group}
                     onChange={handleCheck}
                 />
@@ -87,7 +87,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='work_friendly'
-                    value={!chekinputs.work_friendly}
+                    value={chekinputs.work_friendly}
                     checked={chekinputs.work_friendly}
                     onChange={handleCheck}
                 />
@@ -97,7 +97,7 @@ export default function Chars ({ handleCheck, chekinputs }) {
                 <input
                     type='checkbox'
                     name='pet_friendly'
-                    value={!chekinputs.pet_friendly}
+                    value={chekinputs.pet_friendly}
                     checked={chekinputs.pet_friendly}
                     onChange={handleCheck}
                 />
