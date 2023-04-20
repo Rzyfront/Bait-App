@@ -14,6 +14,7 @@ const deleteReview = require('../controllers/administrator/deleteReview');
 
 administratorRoute
   .get('/', isAdmin, setQueryUsers, getUsers)
+  .get('/page/:numPage', isAdmin, setQueryUsers, getUsers)
   .get('/', isAdmin, getSupendedUsers)
   .put('/createAdmin/:userId', isSuperAdmin, putCreateAdmin)
   .delete('/:userId', verifyDelete, deleteAdministrator)
