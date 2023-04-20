@@ -14,10 +14,9 @@ function Userprofile () {
   }, [id]);
 
   const { name, lastName, Image, location, phone, email } = {
-    Name: 'La Grandeza',
-    Image: img,
-    Rating: 3.8,
-    Tel: [123214352, 453424324]
+    name: '',
+    Image: '',
+    phone: []
   };
   return (
     <>
