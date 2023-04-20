@@ -9,6 +9,7 @@ import {
   About,
   DataTreatment
 } from './components/components.js';
+import Mapdata from './components/Map/Map';
 
 import { Routes, Route } from 'react-router-dom';
 function App () {
@@ -21,6 +22,7 @@ function App () {
         <Route path="/answers" element={<Answers />} />
         <Route path="/about" element={<About />} />
         <Route path="/dataTreatment" element={<DataTreatment />} />
+        <Route path='/map' element={<Mapdata/>} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </div>

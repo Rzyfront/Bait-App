@@ -24,6 +24,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
+/client/src/components/Map
 package-lock.json
 .env
