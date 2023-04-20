@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     const administrators = await User.findAll({
       where: {
-        role: 'admin',
+        verified: 'suspended',
       },
     });
     return res.status(200).json({ administrators, success: true });

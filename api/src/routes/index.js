@@ -3,19 +3,20 @@ const administratorRoute = require('./administrator');
 const dishesRouter = require('./dishes');
 const imageRoute = require('./images');
 const localsRoute = require('./locals');
+const loginRoute = require('./login');
 const menuRouter = require('./menu');
 const reviewsRoute = require('./reviews');
+const userExtractor = require('../middlewares/userExtractor');
 const userRoutes = require('./users');
-const loginRoute = require('./login');
 
 mainRouter.use('/locals', localsRoute)
-  .use('/reviews', reviewsRoute)
+  .use('/login', loginRoute)
   .use('/images', imageRoute)
-  .use('/administrator', administratorRoute)
+  .use('/reviews', reviewsRoute)
+  .use('/administrator', userExtractor, administratorRoute)
   .use('/dishes', dishesRouter)
   .use('/user', userRoutes)
-  .use('/menu', menuRouter)
-  .use('/login', loginRoute);
+  .use('/menu', menuRouter);
 
 mainRouter.get('/', (req, res) => {
   res.send('Hello World!');
