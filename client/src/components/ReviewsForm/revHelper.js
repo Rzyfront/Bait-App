@@ -7,4 +7,5 @@ export default function validate (data) {
     const result = isAppropriate(data.comment);
     result && (errors.comment = result);
   }
+  return errors;
 }

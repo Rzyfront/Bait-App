@@ -21,7 +21,7 @@ export const verifiedExistsTypeLength = (input, type, length, key) => {
   verifiedLength(input, length, key);
 };
 
-const badWords = ['boludo', 'idiota', 'hijo de puta', 'estupido', 'estupida', 'imbecil', 'estúpido', 'estúpida', 'imbécil', 'mierda', 'cabrón', 'cabron'];
+const badWords = ['boludo', 'idiota', 'hijo de puta', 'estupido', 'estupida', 'imbecil', 'estúpido', 'estúpida', 'imbécil', 'mierda', 'cabrón', 'cabron', 'cabrona', 'desgraciado', 'desgraciada'];
 
 export const isAppropriate = (value) => {
   const words = value.toLowerCase().split(' ');
@@ -29,6 +29,6 @@ export const isAppropriate = (value) => {
   const foundBadWord = words.some((word) => badWords.includes(word.toLowerCase()));
 
   if (foundBadWord) {
-    return 'Comment contains inappropriate words.';
+    return 'El comentario contiene palabras inapropiadas.';
   }
 };

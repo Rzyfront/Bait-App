@@ -63,11 +63,15 @@ function ReviewsForm ({ setToggleModal2, id }) {
             userToken
           )
         );
-        alert('ya se envio');
+        setInputs({
+          title: '',
+          comment: '',
+          image: {}
+        });
         location.reload();
       }
     } else {
-      alert('no se puede');
+      alert('Completa la información.');
     }
   };
 
@@ -189,7 +193,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
           </div>
         </div>
         <div className='Rigth'>
-          <form onSubmit={handleSubmit}>
+          <form>
             <div className='TitleReview'>
               <input
                 className='Title'
@@ -198,6 +202,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
                 type='text'
                 name='title'
                 placeholder='Escribe un titulo para tu reseña...'
+                required
               />
 
             </div>
@@ -209,7 +214,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
                 value={inputs.comment}
                 type='text'
                 name='comment'
-                placeholder='Cuentanos tu experiencia en este lugar...'
+                placeholder='Cuéntanos tu experiencia en este lugar...'
               />
             {errors.comment && <p className='danger'>{errors.comment}</p>}
             </div>
