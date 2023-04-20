@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     const { reviewId } = req.params;
     const review = await Review.findByPk(reviewId);
     if (!review) throw new Error('Review not Found');
-    review.virified = true;
+    review.verified = true;
     await review.save();
     res.status(201).json({ success: true, review });
   } catch (error) {
