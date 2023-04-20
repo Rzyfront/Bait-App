@@ -4,12 +4,12 @@ module.exports = async (req, res) => {
   try {
     const { where } = req;
     const user = await User.findAll({
-      where: where.email ?? {},
+      where: where.user ?? {},
       include: [
         { model: Image, attributes: ['url'] },
         {
           model: Review,
-          where: where.verified ?? {},
+          where: where.review ?? {},
           required: false,
         },
       ],

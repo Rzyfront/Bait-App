@@ -9,9 +9,6 @@ const modifyUser = require('../controllers/users/putUser');
 const putInactiveUser = require('../controllers/users/putInactiveUser');
 const verifiyUser = require('../controllers/users/verifyUser');
 const postUserWithGoogle = require('../controllers/users/postUserWithGoogle');
-const patchSupendUser = require('../controllers/users/patchSupendUser');
-const userExtractor = require('../middlewares/userExtractor');
-const { isAdmin } = require('../middlewares/validateRole');
 
 userRoutes
   .get('/verified', verifiyUser)
@@ -20,7 +17,6 @@ userRoutes
   .post('/', verifyPost, postUser)
   .delete('/:userId', verifyDelete, deleteUser)
   .put('/:userId', modifyUser)
-  .put('/inactive/:userId', putInactiveUser)
-  .patch('/suspend/:userId', userExtractor, isAdmin, patchSupendUser);
+  .put('/inactive/:userId', putInactiveUser);
 
 module.exports = userRoutes;

@@ -7,12 +7,17 @@ const userExtractor = require('../middlewares/userExtractor');
 const getUsers = require('../controllers/administrator/getUsers');
 const { verifyDelete } = require('../middlewares/userMiddlewares');
 const { isSuperAdmin, isAdmin } = require('../middlewares/validateRole');
+const patchSupendUser = require('../controllers/administrator/patchSupendUser');
+const usersTest = require('../helpers/usersTest');
+const setQueryUsers = require('../middlewares/setQueryUsers');
 
 administratorRoute
-  .get('/', userExtractor, isAdmin, getUsers)
+  .get('/', userExtractor, isAdmin, setQueryUsers, getUsers)
   // .get('/', userExtractor, getAdministrators)
-  .put('/:userId', userExtractor, isSuperAdmin, putCreateAdmin)
+  .put('/createAdmin/:userId', userExtractor, isSuperAdmin, putCreateAdmin)
   .delete('/:userId', userExtractor, verifyDelete, deleteAdministrator)
-  .patch('/role/:userId', userExtractor, isAdmin, changeRole);
+  .patch('/role/:userId', userExtractor, isAdmin, changeRole)
+  .patch('/suspend/:userId', userExtractor, isAdmin, patchSupendUser)
+  .post('/test', userExtractor, isSuperAdmin, usersTest);
 
 module.exports = administratorRoute;
