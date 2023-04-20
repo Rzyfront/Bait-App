@@ -1,0 +1,164 @@
+.locales {
+    overflow: hidden;
+    max-width: 100%;  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+
+ 
+  .locales .termAndConditions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 30px;
+    gap: 10px;
+    overflow: auto;
+    width: 650px;
+    height: 100vh;
+  }
+  .locales .termAndConditions .Logo {
+    width: 130px;
+    transition: 0.3s;
+  }
+
+  .locales .termAndConditions .Logo:hover {
+    transform: scale(1.1);
+    
+  }
+
+  .locales .termAndConditions h2{
+    padding: 20px;
+    color: var(--primary);
+  }
+
+  .locales .termAndConditions h2 span{
+    color: var(--secondary);
+  }
+
+  .locales .termAndConditions .termsButtons{
+    display: flex;
+    gap: 30px;
+  }
+ .locales .termAndConditions button{
+      width: 140px;
+      height: 35px;
+      border-radius: 20px;
+      border: none;
+      font-size: 15px;
+      font-family: var(--subtitle);
+      background-color: var(--bg-secondary);
+      color: var(--tertiary);
+      transition: 0.3s;
+ }  
+
+ 
+  
+.locales .termAndConditions .Ok:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--tertiary);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.locales .termAndConditions .No:hover {
+  background-color: var(--optional2);
+  color: var(--tertiary);
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.locales .locales_data {
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  height: 100vh;
+  width: 650px;
+  background-color: var(--bg-primary);
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.locales .locales_data .Logo{
+  width: 130px;
+}
+.locales_data h1 {
+  font-size: 50px;
+  color: var(--primary);
+  font-family: var(--title);
+  font-weight: 700;
+}
+.form-container {
+  margin-top: 20px;
+}
+
+.form-container label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.LocalesImage{
+  height: 200px;
+  width: 200px;
+}
+
+.form-container input,
+.form-container select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-container input[type="submit"] {
+  background-color: var(--bg-secundary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+  background-color: var(--bg-primary);
+}
+
+.danger {
+  color: var(--bg-optional1);
+  font-size: var(--subtitle);
+}
+
+.LinkLogo {
+  text-decoration: none;
+  color:var(--bg-primary);
+}
+
+
+.danger {
+color: var(--bg-optional2);
+font-size: 14px;
+margin-top: 5px;
+}
+
+/* Estilos para los campos con errores */
+.input-error {
+  border: 1px solid var(--bg-optional2);
+}
+
+/* Estilos para los campos con errores en el formulario */
+.form-error {
+  border: 1px solid var(--bg-optional2);
+}
+
+/* Estilos para los mensajes de éxito */
+.success {
+  color:var(--bg-optional1);
+  font-size: 14px;
+  margin-top: 5px;
+}
