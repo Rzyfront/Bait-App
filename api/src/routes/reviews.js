@@ -6,7 +6,7 @@ const updateReviews = require('../controllers/reviews/updateReviews');
 const deleteReviews = require('../controllers/reviews/deleteReviews');
 const userExtractor = require('../middlewares/userExtractor');
 const unverifiedreviews = require("../controllers/reviews/unverifiedReviews")
-reviewsRoute.get('/unverifiedreviews', unverifiedreviews);
+reviewsRoute.get('/unverifiedreviews',unverifiedreviews);
 reviewsRoute.get('/:localId', getReviews);
 
 reviewsRoute.post('/:localId', revValidator, userExtractor, postReviews);

@@ -1,7 +1,8 @@
-const {Review} = require("../../db")
+const {Review,User} = require("../../db")
 
 module.exports  =async(req,res)=>{
     try {
+        
         const unverifiedOnes = await Review.findAll({where:{verified:false}})
 
         console.log(unverifiedOnes)
