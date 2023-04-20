@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
           model: Review,
           where: where.review ?? {},
           required: false,
+          include: [{ model: Image, attributes: ['url'] }],
         },
       ],
     });

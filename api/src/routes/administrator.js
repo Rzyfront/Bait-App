@@ -10,6 +10,7 @@ const patchSupendUser = require('../controllers/administrator/patchSupendUser');
 const usersTest = require('../helpers/usersTest');
 const setQueryUsers = require('../middlewares/setQueryUsers');
 const putAssignLocal = require('../controllers/administrator/putAssignLocal');
+const deleteReview = require('../controllers/administrator/deleteReview');
 
 administratorRoute
   .get('/', isAdmin, setQueryUsers, getUsers)
@@ -19,6 +20,7 @@ administratorRoute
   .patch('/role/:userId', isAdmin, changeRole)
   .patch('/suspend/:userId', isAdmin, patchSupendUser)
   .put('/assignLocal', isAdmin, putAssignLocal)
+  .delete('/review/:reviewId', isAdmin, deleteReview)
   .post('/test', isSuperAdmin, usersTest);
 
 module.exports = administratorRoute;
