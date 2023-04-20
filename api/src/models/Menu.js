@@ -8,13 +8,20 @@ module.exports = (sequelize) => {
       autoIncrement: true,
       allowNull: false,
     },
-    // dishId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   references: {
-    //     model: 'Dish',
-    //     key: 'id',
-    //   },
-    // },
+    type: {
+      type: DataTypes.ENUM(
+        'Entradas',
+        'Sopas y cremas',
+        'Ensaladas',
+        'Platos principales',
+        'Acompañamientos',
+        'Postres',
+        'Dieta Vegana',
+        'Dieta Gluten Free',
+        'Varios',
+      ),
+      defaultValue: 'Varios',
+      allowNull: false,
+    },
   });
 };

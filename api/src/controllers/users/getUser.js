@@ -3,13 +3,11 @@ const { User, Image, Review } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const { userId } = req.params;
-    const { verified } = req.query;
     const user = await User.findByPk(userId, {
       include: [
         { model: Image, attributes: ['url'] },
         {
           model: Review,
-          where: { verified: verified ?? true },
           required: false,
         },
       ],
