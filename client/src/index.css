@@ -31,9 +31,12 @@ h6{
 
 :root {
   /* Fonts */
-  --title:'Lobster Two', 'goldplay';
+  --title: 'Montserrat', sans-serif;
+  --subtitle: 'Montserrat', sans-serif;
+  --text: 'Montserrat', sans-serif;
+  /* --title:'Lobster Two', 'goldplay';
   --subtitle:'Roboto','goldplay',sans-serif;
-  --text: 'Montserrat',sans-serif;
+  --text: 'Montserrat',sans-serif; */
 
   /* Color text */
   --primary: #343434;

@@ -1,16 +1,28 @@
-import React, { useEffect } from "react";
-import { Rating as RatingStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
-import BaitLogo from "../../assets/BaitLogo.png";
 
-import { TfiClose } from "react-icons/tfi";
-import { FaPaperPlane } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import "./ReviewsForm.css";
-import { useUploadImage } from "../../hooks/useUploadImage";
+import { useEffect, useState } from 'react';
+import { Rating as RatingStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
+import BaitLogo from '../../assets/BaitLogo.png';
 
-function ReviewsForm({ setToggleModal2 }) {
+import { TfiClose } from 'react-icons/tfi';
+import { FaPaperPlane } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+
+import './ReviewsForm.css';
+import { useUploadImage } from '../../hooks/useUploadImage';
+import { useDispatch } from 'react-redux';
+import { comentarie } from '../../redux/actions/actions';
+
+function ReviewsForm ({ setToggleModal2, id }) {
+  const [userToken, setDataUser] = useState('');
+  useEffect(() => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    const data = JSON.parse(localStorage.getItem('user'));
+    setDataUser(token);
+    console.log(data);
+  }, []);
+
+  const dispatch = useDispatch();
   const { image, loading, handleChangeimage } = useUploadImage();
 
   const [calculateAverage, setcalculateAverage] = useState(0);
@@ -31,74 +43,47 @@ function ReviewsForm({ setToggleModal2 }) {
     calificationFood,
     calificationQaPrice,
     calificationEnvironment,
-    calificationService,
+    calificationService
   ]);
-  useEffect(() => {
-    setInputs({ ...inputs, image: image[image.length-1] });
-  }, [image.length]);
 
   const [inputs, setInputs] = useState({
-    title: "",
-    rating: "",
-    comment: "",
-    image: "",
-    food: "",
-    service: "",
-    enviroment: "",
-    qaPrice: "",
+    title: '',
+    comment: '',
+    image: {}
   });
 
-  const [errors, setErrors] = useState({
-    title: "",
-    rating: "",
-    comment: "",
-    image: "",
-    food: "",
-    service: "",
-    enviroment: "",
-    qaPrice: "",
-  });
+  useEffect(() => {
+    setInputs({ ...inputs, image: image[image.length - 1] });
+  }, [image.length]);
 
   const handleChange = (event) => {
     setInputs({
       ...inputs,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
 
-    setErrors(
-      validate({
-        ...inputs,
-        [event.target.name]: event.target.value,
-      })
-    );
+    console.log(inputs);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (!Object.values(errors).length) {
-      alert("Datos completos");
-      setInputs({
-        title: "",
-        rating: "",
-        comment: "",
-        image: {},
-        food: "",
-        service: "",
-        enviroment: "",
-        qaPrice: "",
-      });
-      setErrors({
-        title: "",
-        rating: "",
-        comment: "",
-        image: {},
-        food: "",
-        service: "",
-        enviroment: "",
-        qaPrice: "",
-      });
+    if (inputs.comment.length > 0 && inputs.title.length > 0) {
+      dispatch(
+        comentarie(
+          calificationFood,
+          calificationQaPrice,
+          calificationEnvironment,
+          calificationService,
+          calculateAverage,
+          inputs,
+          id,
+          userToken
+        )
+      );
+      alert('ya se envio');
+      location.reload();
     } else {
-      alert("Debe llenar todos los campos");
+      alert('no se puede');
     }
   };
 
@@ -106,8 +91,7 @@ function ReviewsForm({ setToggleModal2 }) {
     handleChangeimage(e);
   };
 
-  return (
-    <div className="ReviewsForm">
+  return (<div className="ReviewsForm animated-element">
       <div className="Container">
         <Link to="/home" className="LinkLogo">
           <img
@@ -206,7 +190,7 @@ function ReviewsForm({ setToggleModal2 }) {
                 name="title"
                 placeholder="Escribe un titulo para tu reseña..."
               />
-              {errors.name && <p className="danger">{errors.name}</p>}
+
             </div>
             <div className="Comment">
               <textarea
@@ -218,7 +202,7 @@ function ReviewsForm({ setToggleModal2 }) {
                 name="comment"
                 placeholder="Cuentanos tu experiencia en este lugar..."
               />
-              {errors.message && <p className="danger">{errors.message}</p>}
+
             </div>
             <div className="ImgGroup">
               <input
@@ -228,23 +212,31 @@ function ReviewsForm({ setToggleModal2 }) {
                 accept="image/png,image/jpeg,image/jpg,image/gif"
                 onChange={handleImage}
               ></input>
-              {image.length ? (
-                <img src={image[image.length-1].url} alt="imagen" className="imagenDefault" />
-              ) : loading === true ? (
+              {image.length
+                ? (
+                <img
+                  src={image[image.length - 1].url}
+                  alt="imagen"
+                  className="imagenDefault"
+                />
+                  )
+                : loading === true
+                  ? (
                 <img
                   src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
                   alt="cargando"
                   className="imagenDefault"
                 />
-              ) : (
+                    )
+                  : (
                 <img
                   src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
                   alt="image default"
                   className="imagenDefault"
                 />
-              )}
+                    )}
             </div>
-            <button type="submit">
+            <button type="submit" onClick={handleSubmit}>
               Enviar <FaPaperPlane />
             </button>
           </form>

@@ -8,14 +8,14 @@ const reviewsRoute = require('./reviews');
 const userRoutes = require('./users');
 const loginRoute = require('./login');
 
-mainRouter.use('/locals', localsRoute);
-mainRouter.use('/reviews', reviewsRoute);
-mainRouter.use('/images', imageRoute);
-mainRouter.use('/administrator', administratorRoute);
-mainRouter.use('/dishes', dishesRouter);
-mainRouter.use('/user', userRoutes);
-mainRouter.use('/menu', menuRouter);
-mainRouter.use('/login', loginRoute);
+mainRouter.use('/locals', localsRoute)
+  .use('/reviews', reviewsRoute)
+  .use('/images', imageRoute)
+  .use('/administrator', administratorRoute)
+  .use('/dishes', dishesRouter)
+  .use('/user', userRoutes)
+  .use('/menu', menuRouter)
+  .use('/login', loginRoute);
 
 mainRouter.get('/', (req, res) => {
   res.send('Hello World!');

@@ -1,0 +1,74 @@
+.DataTreatment-Component {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    padding: 30px;
+}
+
+.DataTreatment-Component .DataTreatment-Container {
+    width: 700px;
+    height: 100vh;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+    text-align: center;
+}
+
+.DataTreatment-Component .DataTreatment-Container .BaitLogo {
+    width: 130px;
+    transition: 0.3s;
+}
+
+.DataTreatment-Component .DataTreatment-Container .BaitLogo:hover {
+    transform: scale(1.1);
+}
+
+.DataTreatment-Component .DataTreatment-Container .Title {
+    font-size: 40px;
+    font-family: var(--title);
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.DataTreatment-Component .DataTreatment-Container .Title span {
+    color: var(--secondary);
+}
+
+
+
+.DataTreatment-Component .DataTreatment-Container p {
+    font-size: 15px;
+    font-family: var(--text);
+    font-weight: 400;
+    color: var(--primary);
+}
+.DataTreatment-Component .DataTreatment-Container p span {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.DataTreatment-Component .DataTreatment-Container button {
+    width: 140px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-family: var(--subtitle);
+    background-color: var(--bg-secondary);
+    color: var(--tertiary);
+    transition: 0.3s;
+}
+
+.DataTreatment-Component .DataTreatment-Container button:hover {
+    background-color: var(--bg-tertiary);
+    color: var(--tertiary);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+        rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}

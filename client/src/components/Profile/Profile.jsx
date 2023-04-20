@@ -1,28 +1,28 @@
-import React, { useEffect } from "react";
-import { Rating as RatingStar } from "@smastrom/react-rating";
-import "@smastrom/react-rating/style.css";
-import { GoLocation } from "react-icons/go";
-import { BsCalendar3 } from "react-icons/bs";
-import { TfiCommentAlt } from "react-icons/tfi";
-import { TfiPencilAlt } from "react-icons/tfi";
-import { GiMeal } from "react-icons/gi";
-import img from "../../assets/restaurante.jpg";
-import imgComida from "../../assets/comida.jpg";
-import Rimg from "../../assets/Reviewphoto.jpg";
-import { Menu, Navbar, Reviews, ReviewsForm } from "../components";
-import { useState } from "react";
-import "./Profile.css";
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { DetailLocal } from "../../redux/actions/actions";
+import { useEffect, useState } from 'react';
+import { Rating as RatingStar } from '@smastrom/react-rating';
+import '@smastrom/react-rating/style.css';
+import { GoLocation } from 'react-icons/go';
+import { BsCalendar3 } from 'react-icons/bs';
+import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
 
-function Profile() {
+import { GiMeal } from 'react-icons/gi';
+import img from '../../assets/restaurante.jpg';
+import imgComida from '../../assets/comida.jpg';
+import Rimg from '../../assets/Reviewphoto.jpg';
+import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
+
+import './Profile.css';
+import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { DetailLocal } from '../../redux/actions/actions';
+
+function Profile () {
   const [average, setAverage] = useState(0);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { locals } = useSelector((state) => state.detail);
 
-  let { id } = useParams();
+  const { id } = useParams();
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
@@ -41,106 +41,110 @@ function Profile() {
     }
   }, [locals]);
 
-  const [toogleModal, setToggleModal] = useState("ReviewsLocal");
+  const [toogleModal, setToggleModal] = useState('ReviewsLocal');
   const [toogleModal2, setToggleModal2] = useState(false);
   const ListMenu = [
     {
-      name: "Pollo Teriyaky",
+      name: 'Pollo Teriyaky',
       Price: 200,
       Images: [{ url: imgComida }],
-      Rating: 3,
+      Rating: 3
     },
-    { name: "Milanesa", Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-    { name: "Lomo asado", Price: 600, Images: [{ url: imgComida }], Rating: 3 },
+    { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
+    { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
     {
-      name: "Pasta italiana",
+      name: 'Pasta italiana',
       Price: 150,
       Images: [{ url: imgComida }],
-      Rating: 3,
+      Rating: 3
     },
     {
-      name: "Pollo Teriyaky",
+      name: 'Pollo Teriyaky',
       Price: 200,
       Images: [{ url: imgComida }],
-      Rating: 3,
+      Rating: 3
     },
-    { name: "Milanesa", Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-    { name: "Lomo asado", Price: 600, Images: [{ url: imgComida }], Rating: 3 },
+    { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
+    { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
     {
-      name: "Pasta italiana",
+      name: 'Pasta italiana',
       Price: 150,
       Images: [{ url: imgComida }],
-      Rating: 3,
-    },
+      Rating: 3
+    }
   ];
 
   const ReviewsList = [
     {
-      User: "Rafael Martinez",
+      User: 'Rafael Martinez',
       Rating: 1,
       Images: [Rimg],
       Opinion:
-        "Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.",
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
     },
     {
-      User: "Rafael Martinez",
+      User: 'Rafael Martinez',
       Rating: 1,
       Images: [Rimg],
       Opinion:
-        "Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.",
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
     },
     {
-      User: "Rafael Martinez",
+      User: 'Rafael Martinez',
       Rating: 1,
       Images: [Rimg],
       Opinion:
-        "Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.",
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
     },
     {
-      User: "Rafael Martinez",
+      User: 'Rafael Martinez',
       Rating: 1,
       Images: [Rimg],
       Opinion:
-        "Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.",
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
     },
     {
-      User: "Rafael Martinez",
+      User: 'Rafael Martinez',
       Rating: 1,
       Images: [Rimg],
       Opinion:
-        "Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.",
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
     },
     {
-      User: "Rafael Martinez",
+      User: 'Rafael Martinez',
       Rating: 1,
       Images: [Rimg],
       Opinion:
-        "Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.",
-    },
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
+    }
   ];
 
   const { Name, Image, Rating, Location, Schedule, Tel, Email } = {
-    Name: "La Grandeza",
+    Name: 'La Grandeza',
     Image: img,
     Rating: 3.8,
-    Tel: [123214352, 453424324],
+    Tel: [123214352, 453424324]
   };
   return (
     <>
       <Navbar />
-      <div className="Profile">
-        {toogleModal2 && <ReviewsForm setToggleModal2={setToggleModal2} />}
+      <div className="Profile animated-element">
+        {toogleModal2 && (
+          <ReviewsForm setToggleModal2={setToggleModal2} id={id} />
+        )}
         {locals && (
           <div className="ProfileInfo">
-            {locals.Images.length ? (
+            {locals.Images.length
+              ? (
               <img
                 src={locals.Images[0].url}
                 alt={Name}
                 className="ImageProfile"
               />
-            ) : (
+                )
+              : (
               <img src={Image} alt={Name} className="ImageProfile" />
-            )}
+                )}
 
             <div className="Decorator"></div>
             <div className="Info">
@@ -179,7 +183,7 @@ function Profile() {
                 <div
                   className="VerReseña"
                   onClick={() => {
-                    setToggleModal("ReviewsLocal");
+                    setToggleModal('ReviewsLocal');
                   }}
                 >
                   <p>Ver Reseñas</p>
@@ -203,7 +207,7 @@ function Profile() {
                 <div
                   className="VerMenu"
                   onClick={() => {
-                    setToggleModal("Menu");
+                    setToggleModal('Menu');
                   }}
                 >
                   <p>Ver Menu</p>
@@ -215,10 +219,10 @@ function Profile() {
         )}
 
         <div className="ContainerSelection">
-          {(toogleModal === "Menu" || !toogleModal) && (
+          {(toogleModal === 'Menu' || !toogleModal) && (
             <Menu ListMenu={ListMenu} />
           )}
-          {locals && toogleModal === "ReviewsLocal" && (
+          {locals && toogleModal === 'ReviewsLocal' && (
             <Reviews ReviewsList={locals.Reviews} />
           )}
         </div>

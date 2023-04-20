@@ -11,6 +11,12 @@
     box-shadow:0px 1px 1px rgba(0, 0, 0, 0.156);
 }
 
+.all_navbar .Logo{
+width: 130px;
+margin: 0;
+transition: 0.3s;
+}
+
 .all_navbar .Logo:hover{
     transform: scale(1.1);
     filter: drop-shadow(0px 0px 1px rgba(17, 17, 17, 0.642))
@@ -34,7 +40,7 @@
 .UserGroup .nav_login .LogIn {
     font-size: 18px;
     font-family: var(--title);
-    font-weight: 100;
+    font-weight: 300;
 }
 .UserGroup:hover .nav_login .LogIn {
     color: var(--secondary);

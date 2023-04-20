@@ -1,5 +1,8 @@
 .Home{
 background-color: var(--bg-primary);
+overflow:auto;
+width: 100%;
+height: 100vh;
 }
 
 .cards_home{
