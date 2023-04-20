@@ -12,9 +12,10 @@ module.exports = async (req, res) => {
       where: {
         id: userId, // actualiza el registro del usuario
       },
+      attributes: ['id', 'name', 'lastname', 'age', 'location', 'phone_number', 'email'],
     });
 
-    return res.status(201).json({ success: true, local: updateUser });
+    return res.status(201).json({ success: true, updateUser });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
   }
