@@ -1,4 +1,4 @@
-const { Local, User, Images } = require('../../db');// eslint-disable-line
+const { Local, User } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
