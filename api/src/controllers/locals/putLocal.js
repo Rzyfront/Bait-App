@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
     name, location, schedule, email, characteristics,
   } = req.body;
   try {
+    if (req.userId !== req.local.UserId) throw new Error('The user is not the owner of the locale');
     await Characteristic.update(characteristics, { where: { id: req.local.id } });
     const updateLocal = await req.local.update({
       name, location, schedule, email,

@@ -8,13 +8,14 @@ const getLocalsDetail = require('../controllers/locals/getLocalsDetail');
 const localValidator = require('../middlewares/localValidator');
 const getQueryLocals = require('../controllers/locals/getQueryLocals');
 const userExtractor = require('../middlewares/userExtractor');
+const { isOwner } = require('../middlewares/validateRole');
 
 localsRoute.get('/', getQueryLocals, getLocals);
 localsRoute.get('/page/:numPage', getQueryLocals, getLocals);
 localsRoute.param('localId', paramLocal);
 localsRoute.post('/', userExtractor, localValidator, postLocal);
 localsRoute.get('/:localId', getLocalsDetail);
-localsRoute.put('/:localId', localValidator, putLocal);
+localsRoute.put('/:localId', userExtractor, isOwner, localValidator, putLocal);
 localsRoute.delete('/:localId', deleteLocal);
 
 module.exports = localsRoute;
