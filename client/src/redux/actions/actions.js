@@ -7,6 +7,10 @@ export const DETAIL = 'DETAIL';
 export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
+export const SUCCESS = 'SUCCESS';
+export const ERROR = 'ERROR';
+export const SUCCESS_RESET = 'SUCCESS_RESET';
+export const ERROR_RESET = 'ERROR_RESET';
 
 /// ///////actions////////////////////////////
 export const reset = () => {
@@ -72,17 +76,13 @@ export const DetailLocal = (id) => {
 // correguir imagen cuando este listo la ruta
 export const createLocal = (inputs, chekinputs) => {
   const images = [];
-  console.log('inputs', inputs);
   inputs.imagen.forEach((data) => {
     images.push({ id: data.id });
   });
   return async (dispatch) => {
     try {
-      await axios.post('/locals', {
-        name: inputs.name,
-        location: inputs.location,
-        schedule: inputs.schedule,
-        email: inputs.email,
+      const response = await axios.post('/locals', {
+        inputs,
         images,
         characteristics: {
           wifi: chekinputs.wifi,
@@ -97,8 +97,28 @@ export const createLocal = (inputs, chekinputs) => {
           pet_friendly: chekinputs.pet_friendly
         }
       });
+      if (response.status === 201) {
+        dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+        setTimeout(() => {
+          dispatch({
+            type: SUCCESS_RESET
+          });
+        }, 3000);
+      }
     } catch (error) {
-      console.log(error.message);
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 5 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
     }
   };
 };
