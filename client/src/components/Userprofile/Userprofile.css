@@ -1,0 +1,69 @@
+.Userprofile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.userInfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.UserImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.Decorator {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 2px;
+    width: 70%;
+    background-color: gray;
+}
+
+.Info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.AgeGroup {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.Age {
+    margin-right: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.TelGroup,
+.EmailGroup,
+.LocationGroup {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+p {
+    margin: 0;
+}
+
+.ContainerSelection {
+    margin-top: 50px;
+}
