@@ -1,5 +1,6 @@
 import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
+import { RiRefreshFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,11 +37,18 @@ const Filters = () => {
 
   return (
     <div className="Filters">
-      <Link to="/createplace">
+      <div className='Left-Home-Buttons'>
+        <Link to="/createplace">
         <div className="AddPlace">
           <h2 className="AddPlace_Text">Inscribe tu sitio</h2> <MdAddBusiness />
         </div>
       </Link>
+      <Link to="/home/1?name=&city=">
+        <div className="ResetHome">
+          <RiRefreshFill />
+        </div>
+      </Link>
+      </div>
 
       <div className="FiltersGroup">
         <div

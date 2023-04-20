@@ -36,6 +36,7 @@ function Cards () {
   }, [totalPages]);
   return (
     <div className="containerCardsall">
+      {totalPages && <Pagination totalPages={totalPages} />}
       <div className="ContainerCards">
         {locals &&
           locals.map(

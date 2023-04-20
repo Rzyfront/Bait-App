@@ -91,7 +91,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
     handleChangeimage(e);
   };
 
-  return (<div className="ReviewsForm">
+  return (<div className="ReviewsForm animated-element">
       <div className="Container">
         <Link to="/home" className="LinkLogo">
           <img

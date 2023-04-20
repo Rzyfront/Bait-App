@@ -5,18 +5,22 @@ import {
   Home,
   Profile,
   Locales,
-  Answers
+  Answers,
+  About,
+  DataTreatment
 } from './components/components.js';
 
 import { Routes, Route } from 'react-router-dom';
 function App () {
   return (
-    <div className="App">
+    <div className="App animated-element">
       <Routes>
         <Route path="/home/:id" element={<Home />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/createplace" element={<Locales />} />
         <Route path="/answers" element={<Answers />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/dataTreatment" element={<DataTreatment />} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </div>

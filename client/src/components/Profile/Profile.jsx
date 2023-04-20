@@ -128,7 +128,7 @@ function Profile () {
   return (
     <>
       <Navbar />
-      <div className="Profile">
+      <div className="Profile animated-element">
         {toogleModal2 && (
           <ReviewsForm setToggleModal2={setToggleModal2} id={id} />
         )}
