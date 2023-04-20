@@ -1,5 +1,7 @@
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+console.log('entrando al validador');
+
 export const isEmail = (input) => {
   if (!emailRegex.test(input)) return 'Inserta un email válido';
 };

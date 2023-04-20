@@ -18,9 +18,11 @@
     "firebase": "^9.19.1",
     "jest": "^27.5.1",
     "jquery": "^3.6.4",
+    "leaflet": "^1.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
+    "react-leaflet": "^4.2.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -30,6 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@types/leaflet": "^1.9.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^3.1.0",

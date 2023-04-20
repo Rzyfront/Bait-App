@@ -7,6 +7,10 @@ export const DETAIL = 'DETAIL';
 export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
+export const SUCCESS = 'SUCCESS';
+export const ERROR = 'ERROR';
+export const SUCCESS_RESET = 'SUCCESS_RESET';
+export const ERROR_RESET = 'ERROR_RESET';
 
 /// ///////actions////////////////////////////
 export const reset = () => {
@@ -71,35 +75,40 @@ export const DetailLocal = (id) => {
 
 // correguir imagen cuando este listo la ruta
 export const createLocal = (inputs, chekinputs) => {
-  const images = [];
-  console.log(inputs);
-  console.log('holisssssssssssssssssssssssssss');
-  inputs.imagen.forEach((data) => {
-    images.push({ id: data.id });
-  });
+
   return async (dispatch) => {
     try {
-      await axios.post('/locals', {
-        name: inputs.name,
-        location: inputs.location,
-        schedule: inputs.schedule,
-        email: inputs.email,
-        images,
-        characteristics: {
-          wifi: chekinputs.wifi,
-          parking_lot: chekinputs.parking_lot,
-          outdoor_seating: chekinputs.outdoor_seating,
-          live_music: chekinputs.live_music,
-          table_service: chekinputs.table_service,
-          family_style: chekinputs.family_style,
-          romantic: chekinputs.romantic,
-          big_group: chekinputs.big_group,
-          work_friendly: chekinputs.work_friendly,
-          pet_friendly: chekinputs.pet_friendly
-        }
+      const response = await axios.post('/locals', {
+      email: inputs.email,
+      images: inputs.images,
+      location: inputs.location,
+      name: inputs.name,
+      phone: inputs.phone,
+      schedule: inputs.schedule,
+        characteristics:   chekinputs
       });
+      if (response.status === 201) {
+        dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+        setTimeout(() => {
+          dispatch({
+            type: SUCCESS_RESET
+          });
+        }, 3000);
+      }
     } catch (error) {
-      console.log(error.message);
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 5 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
     }
   };
 };

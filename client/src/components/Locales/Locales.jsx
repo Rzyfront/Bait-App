@@ -6,7 +6,7 @@ import BaitLogo from '../../assets/LogoBait.svg';
 import { Link } from 'react-router-dom';
 import { useUploadImage } from '../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { createLocal } from '../../redux/actions/actions';
 import { validateForm } from './localHelpers';
 import TYC from './TYC';
@@ -15,13 +15,13 @@ import DataLocal from './DataLocal/DataLocal';
 
 function Locales () {
   const { image, loading, handleChangeimage } = useUploadImage();
+  const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
   const [termsAndConditions, setTemsAndConditions] = useState(true);
-  // const targetRef = useRef(null);
   const [inputs, setInputs] = useState({
     location: '',
     name: '',
-    imagen: [],
+    images: [],
     email: '',
     phone: '',
     schedule: ''
@@ -59,15 +59,13 @@ function Locales () {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(errors);
     if (!Object.values(errors).length) {
-      toast.success('¡Local creado satisfactoriamente!', {
-        position: toast.POSITION.TOP_CENTER
-      });
       dispatch(createLocal(inputs, chekinputs));
       setInputs({
         location: '',
         name: '',
-        imagen: '',
+        images: '',
         email: '',
         phone: '',
         schedule: ''
@@ -83,10 +81,6 @@ function Locales () {
         big_group: false,
         work_friendly: false,
         pet_friendly: false
-      });
-    } else {
-      toast.error('¡Completa los campos!', {
-        position: toast.POSITION.TOP_CENTER
       });
     }
   };
@@ -109,11 +103,9 @@ function Locales () {
   };
 
   const handleCheck = (e) => {
-    if (e.target.value === 'false') {
-      setChekInputs({ ...chekinputs, [e.target.name]: true });
-    } else {
-      setChekInputs({ ...chekinputs, [e.target.name]: false });
-    }
+    console.log(e.target.value);
+    const { name } = e.target;
+    setChekInputs({ ...chekinputs, [name]: true });
   };
 
   function handleClick () {
@@ -121,15 +113,34 @@ function Locales () {
     // targetRef.current.scrollIntoView({ behavior: 'smooth' });
   }
   useEffect(() => {
-    setInputs({ ...inputs, imagen: image });
+   if(image.length)
+   {
+   let data=image.map((data) => {
+      return {id:data.id}
+    });
+
+    setInputs({ ...inputs, images: data });
+
 
     setErrors(
       validateForm({
         ...inputs,
-        imagen: [image]
+        images: [data]
       })
     );
+
+   }
+
+    
   }, [image]);
+
+  success && toast.success('¡Local creado satisfactoriamente!', {
+    position: toast.POSITION.TOP_CENTER
+  });
+
+  error && toast.error('Falló al crear el local', {
+    position: toast.POSITION.TOP_CENTER
+  });
 
   return (
     <div className='locales animated-element'>
