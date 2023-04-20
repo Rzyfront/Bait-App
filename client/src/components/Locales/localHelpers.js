@@ -5,6 +5,7 @@ import {
 } from '../../helpers/validations';
 
 export const validateForm = (data) => {
+  console.log('validando');
   const errors = {};
   if (data.name) {
     const result = verifiedLength(data.name, 30, 'El nombre');

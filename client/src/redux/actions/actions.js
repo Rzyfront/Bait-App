@@ -72,8 +72,7 @@ export const DetailLocal = (id) => {
 // correguir imagen cuando este listo la ruta
 export const createLocal = (inputs, chekinputs) => {
   const images = [];
-  console.log(inputs);
-  console.log('holisssssssssssssssssssssssssss');
+  console.log('inputs', inputs);
   inputs.imagen.forEach((data) => {
     images.push({ id: data.id });
   });

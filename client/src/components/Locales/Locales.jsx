@@ -59,6 +59,7 @@ function Locales () {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(errors);
     if (!Object.values(errors).length) {
       toast.success('¡Local creado satisfactoriamente!', {
         position: toast.POSITION.TOP_CENTER

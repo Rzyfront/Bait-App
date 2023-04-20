@@ -12,6 +12,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
           value={inputs.name}
           type='text'
           name='name'
+          required
           />
             {/* <input
                 className='name'
@@ -30,7 +31,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 className='location'
                 onChange={handleSelect}
                 value={inputs.location}
-
+                required
             >
                 <option value='value2' defaultValue>
                     Selecciona
@@ -58,10 +59,11 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 value={inputs.schedule}
                 type='text'
                 name='schedule'
+                required
             />
             {errors.schedule && <p className='danger'>{errors.schedule}</p>}
             <hr />
-            <label>Telefono: </label>
+            <label>Teléfono: </label>
             <input
                 className='telefono'
                 onChange={handleChange}
@@ -70,6 +72,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 name='phone'
                 pattern='[0-9]{10}'
                 placeholder='Escribe tu número de teléfono...'
+                required
             />
             {errors.phone && <p className='danger'>{errors.phone}</p>}
             <hr />
