@@ -14,6 +14,7 @@
 .all_navbar .Logo{
 width: 130px;
 margin: 0;
+transition: 0.3s;
 }
 
 .all_navbar .Logo:hover{
@@ -39,7 +40,7 @@ margin: 0;
 .UserGroup .nav_login .LogIn {
     font-size: 18px;
     font-family: var(--title);
-    font-weight: 100;
+    font-weight: 300;
 }
 .UserGroup:hover .nav_login .LogIn {
     color: var(--secondary);

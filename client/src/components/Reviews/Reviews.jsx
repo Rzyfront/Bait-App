@@ -4,7 +4,7 @@ import '@smastrom/react-rating/style.css';
 
 function Reviews ({ ReviewsList }) {
   return (
-    <div className="Reviews">
+    <div className="Reviews animated-element">
       <div className="TitleGroup">
         <h2 className="Reviews-Title">Reviews</h2>
         <div className="Decorator"></div>
