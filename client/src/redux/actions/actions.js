@@ -75,27 +75,17 @@ export const DetailLocal = (id) => {
 
 // correguir imagen cuando este listo la ruta
 export const createLocal = (inputs, chekinputs) => {
-  const images = [];
-  inputs.imagen.forEach((data) => {
-    images.push({ id: data.id });
-  });
+
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
-        inputs,
-        images,
-        characteristics: {
-          wifi: chekinputs.wifi,
-          parking_lot: chekinputs.parking_lot,
-          outdoor_seating: chekinputs.outdoor_seating,
-          live_music: chekinputs.live_music,
-          table_service: chekinputs.table_service,
-          family_style: chekinputs.family_style,
-          romantic: chekinputs.romantic,
-          big_group: chekinputs.big_group,
-          work_friendly: chekinputs.work_friendly,
-          pet_friendly: chekinputs.pet_friendly
-        }
+      email: inputs.email,
+      images: inputs.images,
+      location: inputs.location,
+      name: inputs.name,
+      phone: inputs.phone,
+      schedule: inputs.schedule,
+        characteristics:   chekinputs
       });
       if (response.status === 201) {
         dispatch({

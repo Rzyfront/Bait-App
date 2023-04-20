@@ -18,11 +18,10 @@ function Locales () {
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
   const [termsAndConditions, setTemsAndConditions] = useState(true);
-  // const targetRef = useRef(null);
   const [inputs, setInputs] = useState({
     location: '',
     name: '',
-    imagen: [],
+    images: [],
     email: '',
     phone: '',
     schedule: ''
@@ -66,7 +65,7 @@ function Locales () {
       setInputs({
         location: '',
         name: '',
-        imagen: '',
+        images: '',
         email: '',
         phone: '',
         schedule: ''
@@ -105,7 +104,6 @@ function Locales () {
 
   const handleCheck = (e) => {
     console.log(e.target.value);
-
     const { name } = e.target;
     setChekInputs({ ...chekinputs, [name]: true });
   };
@@ -115,14 +113,25 @@ function Locales () {
     // targetRef.current.scrollIntoView({ behavior: 'smooth' });
   }
   useEffect(() => {
-    setInputs({ ...inputs, imagen: image });
+   if(image.length)
+   {
+   let data=image.map((data) => {
+      return {id:data.id}
+    });
+
+    setInputs({ ...inputs, images: data });
+
 
     setErrors(
       validateForm({
         ...inputs,
-        imagen: [image]
+        images: [data]
       })
     );
+
+   }
+
+    
   }, [image]);
 
   success && toast.success('¡Local creado satisfactoriamente!', {
