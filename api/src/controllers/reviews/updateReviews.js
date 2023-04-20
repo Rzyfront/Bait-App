@@ -8,9 +8,10 @@ module.exports = async (req, res) => {
   try {
     const updReview = await Review.findByPk(reviewId);
 
+    const rating = (food + environment + service + qaPrice) / 4;
     // Update the review with the new information
     await updReview.update({
-      title, comment, verified, food, environment, service, qaPrice,
+      title, comment, verified, food, environment, service, qaPrice, rating,
     });
     await updReview.setImage(image.id);
     return res.status(200).json({ success: true, review: updReview });
