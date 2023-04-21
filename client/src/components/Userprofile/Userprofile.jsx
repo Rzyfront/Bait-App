@@ -1,7 +1,7 @@
 import './Userprofile.css';
 import { useEffect } from 'react';
 import { Reviews, Navbar } from '../components';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailUser } from '../../redux/actions/actions';
 
@@ -18,6 +18,8 @@ function Userprofile () {
     Image: '',
     phone: []
   };
+
+  // if (!isAuthenticated) {  //history.push('/login'); // <-- Redirige a la página de inicio de sesión si no está autenticado //}
   return (
     <>
     <Navbar />
