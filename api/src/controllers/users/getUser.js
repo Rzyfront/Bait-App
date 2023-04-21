@@ -4,6 +4,7 @@ module.exports = async (req, res) => {
   try {
     const { userId } = req.params;
     const user = await User.findByPk(userId, {
+      attributes: ['id', 'name', 'lastname', 'age', 'location'],
       include: [
         { model: Image, attributes: ['url'] },
         {
