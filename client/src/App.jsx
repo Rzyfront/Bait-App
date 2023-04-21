@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react';
 import './App.css';
 import {
   Landing,
@@ -10,9 +11,22 @@ import {
   DataTreatment
 } from './components/components.js';
 import Mapdata from './components/Map/Map';
-
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkUser } from './redux/actions/actions';
+
 function App () {
+const dispatch=useDispatch()
+let user=useSelector((state) => state.user);
+//login 
+useEffect(()=>{
+  console.log(localStorage.getItem('token'))
+if(user&&localStorage.getItem('token') !== null)
+{
+  dispatch(checkUser())
+}
+},[])
+
   return (
     <div className="App animated-element">
       <Routes>

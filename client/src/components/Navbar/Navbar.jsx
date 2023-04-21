@@ -5,22 +5,26 @@ import SearchHome from './SearchHome/SearchHome';
 import { Link } from 'react-router-dom';
 import { Login } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
-const Navbar = () => {
-  const [toogleLogin, setToggleLogin] = useState(false);
-  const [user, setUser] = useState(false);
-  const data = JSON.parse(localStorage.getItem('user'));
+import { useDispatch, useSelector } from 'react-redux';
+import { ResetUser } from '../../redux/actions/actions';
 
+const Navbar = () => {
+  const dispatch=useDispatch()
+  let dataUser=useSelector((state) => state.user);
+  let [data,setdata]=useState()
+  const [toogleLogin, setToggleLogin] = useState(false);
   useEffect(() => {
-    if (data && data.user) {
-      setUser(true);
-    } else {
-      setUser(false);
-    }
-  }, [data]);
+  setdata(dataUser)
+  }, [dataUser]);
+
+
+
+
+
 
   const close = () => {
     localStorage.clear();
-    setUser(false);
+    dispatch(ResetUser());
   };
 
   return (
@@ -37,22 +41,22 @@ const Navbar = () => {
         <SearchHome />
       </div>
       <div className="UserGroup">
-        {user === false
-          ? (
+        {JSON.stringify(dataUser)=='{}'? (
           <div
             className="nav_login"
             onClick={() => {
               setToggleLogin(true);
-            }}
+            }} 
           >
-            <FaUserCircle className="UserIcon" />
-            <h4 className="LogIn">Inicia sesión </h4>
+            <FaUserCircle className="UserIcon"  />
+            <h4 className="LogIn"> inicia</h4>
           </div>
             )
           : (
-          <div className="nav_login" onClick={close}>
+          <div className="nav_login"  onClick={close} 
+          >
             <FaUserCircle />
-            {data.user.name}
+            {dataUser.user.name}
           </div>
             )}
       </div>
