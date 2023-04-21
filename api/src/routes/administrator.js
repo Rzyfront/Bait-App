@@ -1,16 +1,17 @@
 const administratorRoute = require('express').Router();
-const getSupendedUsers = require('../controllers/administrator/getSupendedUsers');
-const putCreateAdmin = require('../controllers/administrator/putCreateAdmin');
-const deleteAdministrator = require('../controllers/administrator/deleteAdministrator');
-const changeRole = require('../controllers/administrator/changeRole');
-const getUsers = require('../controllers/administrator/getUsers');
-const { verifyDelete } = require('../middlewares/userMiddlewares');
 const { isSuperAdmin, isAdmin } = require('../middlewares/validateRole');
-const patchSupendUser = require('../controllers/administrator/patchSupendUser');
-const usersTest = require('../helpers/usersTest');
-const setQueryUsers = require('../middlewares/setQueryUsers');
-const putAssignLocal = require('../controllers/administrator/putAssignLocal');
+const { verifyDelete } = require('../middlewares/userMiddlewares');
+const changeRole = require('../controllers/administrator/changeRole');
+const deleteAdministrator = require('../controllers/administrator/deleteAdministrator');
 const deleteReview = require('../controllers/administrator/deleteReview');
+const getSupendedUsers = require('../controllers/administrator/getSupendedUsers');
+const getUsers = require('../controllers/administrator/getUsers');
+const patchReviewVerify = require('../controllers/administrator/patchReviewVerify');
+const patchSupendUser = require('../controllers/administrator/patchSupendUser');
+const putAssignLocal = require('../controllers/administrator/putAssignLocal');
+const putCreateAdmin = require('../controllers/administrator/putCreateAdmin');
+const setQueryUsers = require('../middlewares/setQueryUsers');
+const usersTest = require('../helpers/usersTest');
 
 administratorRoute
   .get('/', isAdmin, setQueryUsers, getUsers)
@@ -18,6 +19,7 @@ administratorRoute
   .get('/', isAdmin, getSupendedUsers)
   .put('/createAdmin/:userId', isSuperAdmin, putCreateAdmin)
   .delete('/:userId', verifyDelete, deleteAdministrator)
+  .patch('/review/:reviewId', isAdmin, patchReviewVerify)
   .patch('/role/:userId', isAdmin, changeRole)
   .patch('/suspend/:userId', isAdmin, patchSupendUser)
   .put('/assignLocal', isAdmin, putAssignLocal)
