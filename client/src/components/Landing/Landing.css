@@ -15,14 +15,14 @@
     padding: 0;
     margin: 0;
 }
-
+/* 
 .Landing .Carrousel .CarrouselItem{
     position: relative;
     width: 100%;
     height: calc(100vh - 50px);
     padding: 0;
     margin: 0;
-}   
+}    */
 
 .Landing .Carrousel .CarrouselItem .SlideItem1 img,
 .Landing .Carrousel .CarrouselItem .SlideItem2 img,
@@ -33,7 +33,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: -5;
+        z-index: -9;
 }
 
 /*! Slide 1 */
@@ -83,7 +83,7 @@
     text-align: center;
     font-weight: 600;
     text-shadow:  2px 2px 4px rgb(66, 66, 66);
-    letter-spacing: -0.2rem;
+   
 }
 .SlideItem1 .FirstTitle span {
     color: var(--secondary);
@@ -164,6 +164,7 @@
     color: var(--primary);
     font-family: var(--title);
     font-weight: 600;
+    text-shadow: 2px 2px 4px rgb(66, 66, 66);
 }
 
 .SlideItem2 .SecondTitle span {
@@ -244,6 +245,7 @@
     color: var(--primary);
     font-family: var(--title);
     font-weight: 600;
+    text-shadow: 2px 2px 4px rgb(66, 66, 66);
 }
 
 .SlideItem3 .ThirdTitle span {

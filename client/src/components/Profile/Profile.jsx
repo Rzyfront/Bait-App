@@ -8,7 +8,6 @@ import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
 import { GiMeal } from 'react-icons/gi';
 import img from '../../assets/restaurante.jpg';
 import imgComida from '../../assets/comida.jpg';
-import Rimg from '../../assets/Reviewphoto.jpg';
 import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
 
 import './Profile.css';
@@ -18,7 +17,7 @@ import { DetailLocal } from '../../redux/actions/actions';
 
 function Profile () {
   const [average, setAverage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { locals } = useSelector((state) => state.detail);
 
@@ -74,61 +73,11 @@ function Profile () {
     }
   ];
 
-  const ReviewsList = [
-    {
-      User: 'Rafael Martinez',
-      Rating: 1,
-      Images: [Rimg],
-      Opinion:
-        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
-    },
-    {
-      User: 'Rafael Martinez',
-      Rating: 1,
-      Images: [Rimg],
-      Opinion:
-        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
-    },
-    {
-      User: 'Rafael Martinez',
-      Rating: 1,
-      Images: [Rimg],
-      Opinion:
-        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
-    },
-    {
-      User: 'Rafael Martinez',
-      Rating: 1,
-      Images: [Rimg],
-      Opinion:
-        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
-    },
-    {
-      User: 'Rafael Martinez',
-      Rating: 1,
-      Images: [Rimg],
-      Opinion:
-        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
-    },
-    {
-      User: 'Rafael Martinez',
-      Rating: 1,
-      Images: [Rimg],
-      Opinion:
-        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
-    }
-  ];
-
-  const { Name, Image, Rating, Location, Schedule, Tel, Email } = {
-    Name: 'La Grandeza',
-    Image: img,
-    Rating: 3.8,
-    Tel: [123214352, 453424324]
-  };
   return (
     <>
       <Navbar />
       <div className="Profile animated-element">
+
         {toogleModal2 && (
           <ReviewsForm setToggleModal2={setToggleModal2} id={id} />
         )}
@@ -138,12 +87,12 @@ function Profile () {
               ? (
               <img
                 src={locals.Images[0].url}
-                alt={Name}
+                alt={locals.name}
                 className="ImageProfile"
               />
                 )
               : (
-              <img src={Image} alt={Name} className="ImageProfile" />
+              <img src={img} alt={locals.name} className="ImageProfile" />
                 )}
 
             <div className="Decorator"></div>
@@ -167,9 +116,7 @@ function Profile () {
               </div>
               <div className="TelGroup">
                 <h3>Tel:</h3>
-                {Tel.map((t, i) => {
-                  return <p key={i}>{t} |</p>;
-                })}
+                <p>{locals.phone}</p>
               </div>
               <div className="EmailGroup">
                 <h3>E-mail:</h3>
