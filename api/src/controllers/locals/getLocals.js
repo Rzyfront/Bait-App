@@ -40,7 +40,7 @@ module.exports = async (req, res) => {
       group: ['Local.id', 'Images.id', 'Characteristic.id', 'Menus.id'],
       subQuery: false,
     });
-    const totalPages = Math.ceil(count.length / 10);
+    const totalPages = Math.ceil((count.length - 1) / 10);
     res.status(200).json({
       success: true, count: count.length - 1, totalPages, locals: rows,
     });

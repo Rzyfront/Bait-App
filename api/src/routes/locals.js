@@ -11,13 +11,14 @@ const userExtractor = require('../middlewares/userExtractor');
 const getLocalsName = require('../controllers/locals/getLocalsName');
 const { isOwner } = require('../middlewares/validateRole');
 
-localsRoute.get('/', getQueryLocals, getLocals);
-localsRoute.get('/page/:numPage', getQueryLocals, getLocals);
-localsRoute.get('/search-by-name', getLocalsName);
-localsRoute.param('localId', paramLocal);
-localsRoute.post('/', userExtractor, localValidator, postLocal);
-localsRoute.get('/:localId', getLocalsDetail);
-localsRoute.put('/:localId', userExtractor, isOwner, localValidator, putLocal);
-localsRoute.delete('/:localId', deleteLocal);
+localsRoute
+  .get('/', getQueryLocals, getLocals)
+  .get('/page/:numPage', getQueryLocals, getLocals)
+  .get('/search-by-name', getLocalsName)
+  .param('localId', paramLocal)
+  .post('/', userExtractor, localValidator, postLocal)
+  .get('/:localId', getLocalsDetail)
+  .put('/:localId', userExtractor, isOwner, localValidator, putLocal)
+  .delete('/:localId', deleteLocal);
 
 module.exports = localsRoute;
