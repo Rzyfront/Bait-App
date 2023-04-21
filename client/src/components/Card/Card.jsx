@@ -2,6 +2,7 @@ import { GoLocation } from 'react-icons/go';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import './Card.css';
+import { useLocation } from 'react-router-dom';
 
 function Card ({
   id,
@@ -14,6 +15,7 @@ function Card ({
   Images,
   Price
 }) {
+  const pathlocation = useLocation();
   return (
     <div className="Card animated-element">
       {Images.length > 0
@@ -29,20 +31,27 @@ function Card ({
           )}
       <div className="infoCard">
         <h2 className="placeName">{Name || 'No name'}</h2>
-        {Rating && (
+
           <div className="RatingGroup">
             <p className="Rating">Rating: </p>
-            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating} />
+            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 5} />
           </div>
-        )}
+
         {location && (
           <div className="LocationGroup">
             <p className="Location"></p>
-            <GoLocation />
             {location}
+            <GoLocation />
           </div>
         )}
         {Price && <p className="Price">${Price}</p>}
+        {
+        pathlocation.pathname.includes('/home') &&
+        <div className='Card-Tags'>
+          <div className='Tag-Type'><p>Vegana</p></div>
+          <div className='Tag-Charact'><p>Pet</p></div>
+        </div>
+        }
       </div>
     </div>
   );

@@ -19,10 +19,6 @@ const Users = () => {
     id: 3,
     name: 'Edgar',
     user: 'edgarrios'
-  }, {
-    id: 3,
-    name: 'Edgar',
-    user: 'edgarrios'
   }];
 
   const userBan = () => {

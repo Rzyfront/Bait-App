@@ -19,10 +19,6 @@ const Restaurantes = () => {
     id: 3,
     name: 'Doña Claudia',
     user: 'Verificado'
-  }, {
-    id: 3,
-    name: 'Starbucks',
-    user: 'No verificado'
   }];
   const deleteRestaurant = () => {
     swal({
