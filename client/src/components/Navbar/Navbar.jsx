@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {  useState } from 'react';
 import './Navbar.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import SearchHome from './SearchHome/SearchHome';
@@ -7,20 +7,12 @@ import { Login } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
-
+import DropdownUser from './DropdownUser/DropdownUser';
 const Navbar = () => {
   const dispatch=useDispatch()
   let dataUser=useSelector((state) => state.user);
-  let [data,setdata]=useState()
+  let [barra,setbarra]=useState(false)
   const [toogleLogin, setToggleLogin] = useState(false);
-  useEffect(() => {
-  setdata(dataUser)
-  }, [dataUser]);
-
-
-
-
-
 
   const close = () => {
     localStorage.clear();
@@ -53,10 +45,13 @@ const Navbar = () => {
           </div>
             )
           : (
-          <div className="nav_login"  onClick={close} 
+          <div className="nav_login"  onClick={()=>setbarra(true)} 
           >
             <FaUserCircle />
             {dataUser.user.name}
+            {barra===true&&
+          ""
+            }
           </div>
             )}
       </div>
