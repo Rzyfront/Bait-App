@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { Input } from '@nextui-org/react';
+import { Input, Textarea } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import './DishForm.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { postDish } from '../../../redux/actions/actions';
 
 const DishForm = () => {
-  const { menuId } = useParams();
+  const { menu } = useSelector(state => state);
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
   const [dish, setDish] = useState({
@@ -31,13 +32,24 @@ const DishForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postDish(dish));
+    dispatch(postDish(menu.id, dish));
+    success && toast.success('Se agregó el plato', {
+      position: toast.POSITION.TOP_CENTER
+    });
   };
+
+  error && toast.error('Falló al crear el menu', {
+    position: toast.POSITION.TOP_CENTER
+  });
   return (
-        <div>
+    <>
+      <h2>Agrega un producto</h2>
+    <div className='Dish-Form-Container'>
+        <ToastContainer/>
+        <div className='dishColumn'>
               <Input
                   underlined
-                  labelPlaceholder="Nombre del plato o bebida"
+                  labelPlaceholder="Nombre producto"
                   color="dark"
                   className='name'
                   onChange={handleChange}
@@ -62,6 +74,7 @@ const DishForm = () => {
                     <option value='fitness'>fitness</option>
                     <option value='na'>No aplica</option>
                 </select>
+
               <Input
                   underlined
                   labelPlaceholder="Ingredients"
@@ -73,6 +86,8 @@ const DishForm = () => {
                   name='ingredients'
                   required
               />
+      </div>
+      <div className='dishColumn'>
               <Input
                   underlined
                   labelPlaceholder="Price"
@@ -81,11 +96,24 @@ const DishForm = () => {
                   onChange={handleChange}
                   value={dish.price}
                   type='number'
-                  name='proce'
+                  name='price'
                   required
               />
-            <button type={handleSubmit}>Agregar producto</button>
+                <Textarea
+                  underlined
+                  labelPlaceholder="Descripción"
+                  color="dark"
+                  className='type'
+                  onChange={handleChange}
+                  value={dish.description}
+                  type='text'
+                  name='description'
+                  required
+              />
+      </div>
         </div>
+            <button onClick={handleSubmit} className='btnDish'>Agregar producto</button>
+        </>
   );
 };
 
