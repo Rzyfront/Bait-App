@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import './App.css';
 import {
@@ -37,9 +36,9 @@ function App () {
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />
         <Route path='/dataTreatment' element={<DataTreatment />} />
-        <Route path='/map' element={<Mapdata/>} />
-        <Route path='/dashboard' element={<Dashboard/>} />
-        <Route path='/menu' element={<MenuForm/>} />
+        <Route path='/map' element={<Mapdata />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/menu' element={<MenuForm />} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>
