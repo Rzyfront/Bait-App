@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
 import { postMenu } from '../../redux/actions/actions';
 import DishForm from './DishForm/DishForm';
+import './MenuForm.css';
 
 const MenuForm = () => {
   const { localId } = useParams();
@@ -30,9 +31,9 @@ const MenuForm = () => {
   };
 
   return (
-        <div>
-            <form>
-                <label>Selecciona la sección del menú</label>
+        <div className='Menu-Form-Container'>
+            <form className='Menu-Form'>
+              <label>Selecciona la sección del menú</label>
               <select
                   name='type'
                   className='type'

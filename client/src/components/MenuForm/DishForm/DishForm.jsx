@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Input } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { postDish } from '../../redux/actions/actions';
+import { postDish } from '../../../redux/actions/actions';
 
 const DishForm = () => {
   const { menuId } = useParams();
