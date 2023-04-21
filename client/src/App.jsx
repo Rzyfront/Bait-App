@@ -17,16 +17,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
 
 function App () {
-const dispatch=useDispatch()
-let user=useSelector((state) => state.user);
-//login 
-useEffect(()=>{
-  console.log(localStorage.getItem('token'))
-if(user&&localStorage.getItem('token') !== null)
-{
-  dispatch(checkUser())
-}
-},[])
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  // login
+  useEffect(() => {
+    console.log(localStorage.getItem('token'));
+    if (user && localStorage.getItem('token') !== null) {
+      dispatch(checkUser());
+    }
+  }, []);
 
   return (
     <div className="App animated-element">
