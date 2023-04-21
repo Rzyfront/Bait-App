@@ -23,7 +23,6 @@ module.exports = (sequelize) => {
     },
     location: {
       type: DataTypes.STRING,
-      // unique: true,
       allowNull: false,
     },
     lat: {
