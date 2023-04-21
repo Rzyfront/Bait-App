@@ -3,12 +3,14 @@ import './Navbar.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import SearchHome from './SearchHome/SearchHome';
 import { Link } from 'react-router-dom';
-import { Login } from '../components';
+import { Login, DropdownUser } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
+
 const Navbar = () => {
   const [toogleLogin, setToggleLogin] = useState(false);
   const [user, setUser] = useState(false);
   const data = JSON.parse(localStorage.getItem('user'));
+  const [dropDownUser, setDropDownUser] = useState(false);
 
   useEffect(() => {
     if (data && data.user) {
@@ -40,7 +42,7 @@ const Navbar = () => {
         {user === false
           ? (
           <div
-            className="nav_login"
+            className="nav_login LogInGroup"
             onClick={() => {
               setToggleLogin(true);
             }}
@@ -50,9 +52,15 @@ const Navbar = () => {
           </div>
             )
           : (
-          <div className="nav_login" onClick={close}>
+          <div className="nav_login UserMenuGroupx" onClick={dropDownUser
+            ? setDropDownUser(false)
+            : setDropDownUser(true)}>
             <FaUserCircle />
             {data.user.name}
+            {dropDownUser && <DropdownUser
+              dropDownUser={dropDownUser}
+              setDropDownUser={setDropDownUser}
+            />}
           </div>
             )}
       </div>

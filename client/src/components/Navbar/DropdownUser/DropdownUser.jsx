@@ -1,5 +1,6 @@
 import { RiUserLine, RiSettingsLine, RiLogoutCircleLine } from 'react-icons/ri';
 import { useState } from 'react';
+import './DropdownUser.css';
 
 const DropdownUser = ({ showUserDropdown }) => {
   const [toggleDrop, setToggleDrop] = useState(showUserDropdown());
