@@ -3,7 +3,8 @@
     height: 500px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    overflow: scroll;
 }
 
 .Dish-Form-Container .Menu-Form {
@@ -11,5 +12,15 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
+}
+
+.dishColumn{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.btnDish{
+    position: absolute;
+    bottom: 30px;
 }
