@@ -1,16 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
 import { postMenu } from '../../redux/actions/actions';
 import DishForm from './DishForm/DishForm';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './MenuForm.css';
 
 const MenuForm = () => {
+  const { localId } = useParams();
   const dispatch = useDispatch();
-  const { success, error } = useSelector;
-  const [showDish, setShowDish] = useState(false);
-
+  const { success, error } = useSelector(state => state);
+  const [showDish, setShowDish] = useState(true);
   success && setShowDish(true);
+  success && toast.success('Se agregó la sección', {
+    position: toast.POSITION.TOP_CENTER
+  });
+
+  error && toast.error('Falló al crear el menu', {
+    position: toast.POSITION.TOP_CENTER
+  });
   const [menu, setMenu] = useState({
     type: ''
   });
@@ -23,15 +33,21 @@ const MenuForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (menu.name !== '') {
-      dispatch(postMenu(menu));
+    console.log(menu);
+    if (menu.type !== '') {
+      dispatch(postMenu(1, menu));
     }
   };
+  useEffect({
+    
+  })
 
   return (
         <div className='Menu-Form-Container'>
+          <ToastContainer />
+          <h2>Agrega tu menú</h2>
             <form className='Menu-Form'>
-              <label>Selecciona la sección del menú</label>
+              <label>Sección</label>
               <select
                   name='type'
                   className='type'
@@ -48,10 +64,10 @@ const MenuForm = () => {
                       </option>
                   ))}
               </select>
-              <button type='submit' onClick={handleSubmit}></button>
-              {
+              <button type='submit' onClick={handleSubmit}>Agregar</button>
+              {/* {
                 showDish && <DishForm/>
-              }
+              } */}
             </form>
         </div>
   );

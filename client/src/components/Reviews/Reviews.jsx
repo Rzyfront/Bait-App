@@ -7,7 +7,14 @@ function Reviews ({ ReviewsList }) {
     <div className='Reviews animated-element'>
       <div className='TitleGroup'>
         <h2 className='Reviews-Title'>Reviews</h2>
-        <div className='Decorator'></div>
+        <div>
+          <select name="" id="">
+            <option value="1" defaultValue >Ordena</option>
+            <option value="1">Mejores reseñas</option>
+            <option value="2">Peores Reseñas</option>
+
+          </select>
+        </div>
       </div>
       <div className='Reviews-List'>
         {ReviewsList.map(({ User, rating, Image, comment, title }, index) => {
@@ -33,7 +40,7 @@ function Reviews ({ ReviewsList }) {
                   ? <img src={Image.url} alt='ImageDatabase'/>
                   : <img
                   src={
-                    'https://i.pinimg.com/474x/d9/6a/1d/d96a1d3e6315ed8e92c892fdd769f9b1.jpg'
+                    'https://img.freepik.com/vector-premium/icono-marco-fotos-foto-vacia-blanco-vector-sobre-fondo-transparente-aislado-eps-10_399089-1290.jpg'
                   }
                   alt='default'
                 /> }

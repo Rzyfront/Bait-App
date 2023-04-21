@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Input } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import './DishForm.css';
 import { postDish } from '../../../redux/actions/actions';
 
 const DishForm = () => {
+  const { menuId } = useParams();
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
   const [dish, setDish] = useState({
@@ -33,7 +35,6 @@ const DishForm = () => {
   };
   return (
         <div>
-            <form onSubmit={handleSubmit}>
               <Input
                   underlined
                   labelPlaceholder="Nombre del plato o bebida"
@@ -84,7 +85,6 @@ const DishForm = () => {
                   required
               />
             <button type={handleSubmit}>Agregar producto</button>
-            </form>
         </div>
   );
 };

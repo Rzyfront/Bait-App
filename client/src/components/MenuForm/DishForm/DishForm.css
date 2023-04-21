@@ -1,13 +1,15 @@
-.Menu-Form-Container{
+.Dish-Form-Container {
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;  
-}
-
-.Menu-Form-Container .Menu-Form{
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.Dish-Form-Container .Menu-Form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     gap: 20px;
 }
