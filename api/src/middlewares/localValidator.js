@@ -1,9 +1,9 @@
 const { allCharacteristics } = require('../helpers/allCharacteristics');
-const { isEmail, verifiedTypeOf } = require('../helpers/validations');
+const { /* isEmail, */ verifiedTypeOf, verifiedExistsTypeLength } = require('../helpers/validations');
 
 module.exports = (req, res, next) => {
   const {
-    name, location, schedule, email, characteristics, images,
+    name, location, schedule, /* email, */ characteristics, images, specialty,
   } = req.body;
 
   try {
@@ -15,10 +15,10 @@ module.exports = (req, res, next) => {
 
     if (schedule) verifiedTypeOf(schedule, 'string', 'schedule');
 
-    if (email) {
-      verifiedTypeOf(email, 'string', 'email');
-      if (!isEmail(email)) throw new Error('bad email format');
-    }
+    // if (email) {
+    //   verifiedTypeOf(email, 'string', 'email');
+    //   if (!isEmail(email)) throw new Error('bad email format');
+    // }
 
     if (characteristics) {
       verifiedTypeOf(characteristics, 'object');
@@ -29,6 +29,8 @@ module.exports = (req, res, next) => {
 
     if (images) verifiedTypeOf(images, 'object', 'images');
 
+    // SPECIALTY
+    verifiedExistsTypeLength(specialty, 'string', 50, 'specialty');
     return next();
   } catch (err) {
     return res.status(404).json({ success: false, message: err.message });

@@ -1,41 +1,50 @@
+import { Input } from '@nextui-org/react';
+import { specialties } from '../../../helpers/specialties';
+
 export default function DataLocal ({ handleChange, inputs, errors, handleSelect }) {
   return (
-        <>
-            <label>Nombre Local: </label>
-            <input
+    <>
+            <p>Datos requeridos<span style={{ color: 'red', fontWeight: 'bolder' }}>*</span></p>
+            <Input
+                underlined
+                labelPlaceholder="Nombre del Local"
+                color="dark"
                 className='name'
                 onChange={handleChange}
                 value={inputs.name}
                 type='text'
                 name='name'
-                placeholder='Escribe el nombre del Local...'
+                required
             />
             {errors.name && <p className='danger'>{errors.name}</p>}
             <hr />
-            <label>Ubicacion: </label>
+            <label>Ubicación: </label>
             <select
                 name='location'
                 className='location'
                 onChange={handleSelect}
                 value={inputs.location}
+                required
             >
                 <option value='value2' defaultValue>
                     Selecciona
                 </option>
-                <option value='Cordoba'>Cordoba</option>
+                <option value='Cordoba'>Córdoba</option>
                 <option value='Buenos Aires'>Buenos Aires</option>
                 <option value='Corrientes'>Corrientes</option>
-            </select>
+            </select><span style={{ color: 'red', fontWeight: 'bolder' }}>*</span>
             <hr />
-            <label>Correo Electronico: </label>
-            <input
+            <Input
+                underlined
+                labelPlaceholder="Correo Electrónico"
+                color="dark"
                 className='correo'
                 onChange={handleChange}
                 value={inputs.email}
                 type='text'
                 name='email'
-                placeholder='Escribe tu email...'
             />
+            {errors.email && <p className='danger'>{errors.email}</p>}
             <hr />
             <label>Horario: </label>
             <input
@@ -43,11 +52,11 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 value={inputs.schedule}
                 type='text'
                 name='schedule'
-                placeholder='Escribe tu email...'
+                required
             />
-            {errors.email && <p className='danger'>{errors.schedule}</p>}
+            {errors.schedule && <p className='danger'>{errors.schedule}</p>}
             <hr />
-            <label>Telefono: </label>
+            <label>Teléfono: </label>
             <input
                 className='telefono'
                 onChange={handleChange}
@@ -55,9 +64,45 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 type='tel'
                 name='phone'
                 pattern='[0-9]{10}'
-                placeholder='Escribe tu numero de telefono...'
+                placeholder='Escribe tu número de teléfono...'
+                required
             />
-            {errors.message && <p className='danger'>{errors.phone}</p>}
+            {errors.phone && <p className='danger'>{errors.phone}</p>}
+            <hr />
+            <label>Especialidad: </label>
+            <select
+                name='specialty'
+                className='specialty'
+                onChange={handleSelect}
+                value={inputs.specialty}
+                required
+            >
+                <option value='value2' defaultValue>
+                    Selecciona
+                </option>
+                {specialties.map(specialty => (
+                    <option key={specialty} value={specialty}>
+                        {specialty}
+                    </option>
+                ))}
+                {/* <option value='Otro'>Otro</option> */}
+            </select><span style={{ color: 'red', fontWeight: 'bolder' }}>*</span>
+            {/* {inputs.specialty === 'Otro' && (
+                <>
+                    <Input
+                        underlined
+                        labelPlaceholder="Especialidad"
+                        color="dark"
+                        className='other-specialty'
+                        onChange={handleChange}
+                        value={inputs.otherSpecialty}
+                        type='text'
+                        name='otherSpecialty'
+                        required
+                    />
+                    <br />
+                </>
+            )} */}
             <hr />
         </>
   );

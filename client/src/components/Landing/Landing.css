@@ -82,9 +82,12 @@
     font-family: var(--title);
     text-align: center;
     font-weight: 600;
+    text-shadow:  2px 2px 4px rgb(66, 66, 66);
+    letter-spacing: -0.2rem;
 }
 .SlideItem1 .FirstTitle span {
     color: var(--secondary);
+    
 }
 
 .SlideItem1 .FirstTitle h2 {

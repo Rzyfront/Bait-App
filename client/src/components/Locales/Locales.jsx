@@ -1,11 +1,12 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import './Locales.css';
-
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import { Link } from 'react-router-dom';
 import { useUploadImage } from '../../hooks/useUploadImage';
-
-import { useDispatch } from 'react-redux';
+import { Loading } from '@nextui-org/react';
+import { useDispatch, useSelector } from 'react-redux';
 import { createLocal } from '../../redux/actions/actions';
 import { validateForm } from './localHelpers';
 import TYC from './TYC';
@@ -14,30 +15,21 @@ import DataLocal from './DataLocal/DataLocal';
 
 function Locales () {
   const { image, loading, handleChangeimage } = useUploadImage();
+  const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
   const [termsAndConditions, setTemsAndConditions] = useState(true);
-  const targetRef = useRef(null);
   const [inputs, setInputs] = useState({
     location: '',
     name: '',
-    imagen: [],
+    images: [],
     email: '',
     phone: '',
-    schedule: ''
+    schedule: '',
+    specialty: ''
   });
   const [errors, setErrors] = useState({
+
   });
-
-  useEffect(() => {
-    setInputs({ ...inputs, imagen: image });
-
-    setErrors(
-      validateForm({
-        ...inputs,
-        imagen: [image]
-      })
-    );
-  }, [image]);
 
   const [chekinputs, setChekInputs] = useState({
     wifi: false,
@@ -68,24 +60,19 @@ function Locales () {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log(errors);
     if (!Object.values(errors).length) {
-      alert('Datos completos');
       dispatch(createLocal(inputs, chekinputs));
       setInputs({
         location: '',
         name: '',
-        imagen: '',
+        images: '',
         email: '',
         phone: '',
-        schedule: ''
+        schedule: '',
+        specialty: ''
       });
       setErrors({
-        location: '',
-        name: '',
-        imagen: '',
-        email: '',
-        phone: '',
-        schedule: ''
       });
       setChekInputs({
         wifi: false,
@@ -97,8 +84,6 @@ function Locales () {
         work_friendly: false,
         pet_friendly: false
       });
-    } else {
-      alert('Debe llenar todos los campos');
     }
   };
 
@@ -107,30 +92,53 @@ function Locales () {
   };
 
   const handleSelect = (event) => {
+    const { name, value } = event.target;
     setInputs({
       ...inputs,
-      location: event.target.value
+      [name]: value
     });
     setErrors(
       validateForm({
         ...inputs,
-        location: event.target.value
+        [name]: value
       })
     );
   };
 
   const handleCheck = (e) => {
-    if (e.target.value === 'false') {
-      setChekInputs({ ...chekinputs, [e.target.name]: true });
-    } else {
-      setChekInputs({ ...chekinputs, [e.target.name]: false });
-    }
+    console.log(e.target.value);
+    const { name } = e.target;
+    setChekInputs({ ...chekinputs, [name]: true });
   };
 
   function handleClick () {
     setTemsAndConditions(false);
-    targetRef.current.scrollIntoView({ behavior: 'smooth' });
+    // targetRef.current.scrollIntoView({ behavior: 'smooth' });
   }
+  useEffect(() => {
+    if (image.length) {
+      const data = image.map((data) => {
+        return { id: data.id };
+      });
+
+      setInputs({ ...inputs, images: data });
+
+      setErrors(
+        validateForm({
+          ...inputs,
+          images: [data]
+        })
+      );
+    }
+  }, [image]);
+
+  success && toast.success('¡Local creado satisfactoriamente!', {
+    position: toast.POSITION.TOP_CENTER
+  });
+
+  error && toast.error('Falló al crear el local', {
+    position: toast.POSITION.TOP_CENTER
+  });
 
   return (
     <div className='locales animated-element'>
@@ -179,11 +187,7 @@ function Locales () {
               )
             : loading === true
               ? (
-            <img
-              src='https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif'
-              alt='cargando'
-              className='LocalesImage'
-            />
+            <Loading color="primary"/>
                 )
               : (
             <img
@@ -192,31 +196,12 @@ function Locales () {
               className='LocalesImage'
             />
                 )}
-          {/* <label>Tipos de Comida: </label> */}
-          {/* <select
-            id='category-select'
-            multiple
-            name='checkbox'
-            className='checkbox'
-            onChange={() => alert('Change')}
-          >
-            <option value='value1'>Comida Italiana</option>
-            <option value='value1'>Comida Japonesa</option>
-            <option value='value2'>Comida Vegana</option>
-            <option value='value3'>Comida China</option>
-            <option value='value4'>Comida Mediterranea</option>
-            <option value='value5'>Comida de Mar</option>
-            <option value='value6'>Desayunos</option>
-            <option value='value7'>Bar y Bedidas</option>
-            <option value='value8'>Heladeria</option>
-            <option value='value9'>Postres</option>
-            <option value='value10'>Panaderia</option>
-          </select> */}
-          <hr />
-          <Chars handleCheck = {handleCheck } chekinputs = {chekinputs}/>
-          <hr />
 
+          <hr />
+          <Chars handleCheck = {handleCheck} chekinputs = {chekinputs}/>
+          <hr />
           <button type='submit'> ENVIAR</button>
+          <ToastContainer/>
         </form>
       </div>}
     </div>

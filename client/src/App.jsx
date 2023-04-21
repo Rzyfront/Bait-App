@@ -7,8 +7,10 @@ import {
   Locales,
   Answers,
   About,
-  DataTreatment
+  DataTreatment,
+  Dashboard
 } from './components/components.js';
+import Mapdata from './components/Map/Map';
 
 import { Routes, Route } from 'react-router-dom';
 function App () {
@@ -21,6 +23,8 @@ function App () {
         <Route path="/answers" element={<Answers />} />
         <Route path="/about" element={<About />} />
         <Route path="/dataTreatment" element={<DataTreatment />} />
+        <Route path='/map' element={<Mapdata/>} />
+        <Route path='/dashboard' element={<Dashboard/>} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </div>
