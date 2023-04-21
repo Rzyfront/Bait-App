@@ -6,6 +6,7 @@ module.exports = (req, res, next) => {
   } = req.query;
   const where = {};
   let reqOrder = [];
+  req.menu = {};
   if (name) {
     where.name = { [Op.iLike]: `%${name}%` };
   }
@@ -22,7 +23,7 @@ module.exports = (req, res, next) => {
     where.specialty = { [Op.iLike]: `%${specialty}%` };
   }
   if (menu) {
-    req.menu = menu;
+    req.menu = { type: menu };
   }
 
   req.characteristics = characteristics;
