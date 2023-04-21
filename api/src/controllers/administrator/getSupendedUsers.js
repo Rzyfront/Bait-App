@@ -3,6 +3,7 @@ const { User } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const users = await User.findAll({
+      attributes: ['id', 'name', 'lastname', 'age', 'location', 'verified'],
       where: {
         verified: 'suspended',
       },
