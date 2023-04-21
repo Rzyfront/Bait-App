@@ -1,4 +1,4 @@
-const { Local, Characteristic } = require('../../db');
+const { Characteristic } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
@@ -9,8 +9,13 @@ module.exports = async (req, res) => {
     await Characteristic.update(characteristics, { where: { id: req.local.id } });
     const updateLocal = await req.local.update({
       name, location, schedule, email,
-    }, { returning: ['id', 'name', 'location', 'specialty'] });
-    const local = await Local.findByPk(updateLocal.id, { attributes: ['id', 'name', 'location', 'specialty'] });
+    });
+    const local = {
+      id: updateLocal.id,
+      name: updateLocal.name,
+      location: updateLocal.location,
+      specialty: updateLocal.specialty,
+    };
     return res.status(201).json({ success: true, local });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
