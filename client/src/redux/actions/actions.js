@@ -229,14 +229,17 @@ export const homepage = (id) => {
   };
 };
 
-export const postMenu = (localId, { type }) => {
+export const postMenu = (localId, menu) => {
+  console.log(localId, menu);
   return async (dispatch) => {
     try {
-      const response = await axios.post(`/menu/${localId}`, type);
+      const response = await axios.post(`/menu/${localId}`, menu);
+      console.log(response.data);
       if (response.status === 201) {
-        return {
-          type: SUCCESS
-        };
+        return dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
       }
     } catch (error) {
       dispatch({

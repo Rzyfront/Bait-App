@@ -7,7 +7,7 @@ const initialState = {
   detail: [],
   success: null,
   error: '',
-  user:{}
+  user: {}
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -64,16 +64,16 @@ const rootReducer = (state = initialState, { type, payload }) => {
       };
 
     case CHECKUSER:
-      return{
+      return {
         ...state,
-        user:payload
-      }
+        user: payload
+      };
     case RESETUSER:
-    return{
-      ...state,
-      user:{}
-    }
-    
+      return {
+        ...state,
+        user: {}
+      };
+
     default:
       return { ...state };
   }
