@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { Input } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { postDish } from '../../redux/actions/actions';
+import { postDish } from '../../../redux/actions/actions';
 
 const DishForm = () => {
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
-  const { }
   const [dish, setDish] = useState({
     name: '',
     type: '',

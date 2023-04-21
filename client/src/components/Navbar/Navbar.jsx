@@ -1,21 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Navbar.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import SearchHome from './SearchHome/SearchHome';
 import { Link } from 'react-router-dom';
-import { Login } from '../components';
+import { Login, DropdownUser } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
-
 const Navbar = () => {
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user);
-  const [data, setdata] = useState();
+  const [barra, setbarra] = useState(false);
   const [toogleLogin, setToggleLogin] = useState(false);
-  useEffect(() => {
-    setdata(dataUser);
-  }, [dataUser]);
 
   const close = () => {
     localStorage.clear();
@@ -36,10 +32,10 @@ const Navbar = () => {
         <SearchHome />
       </div>
       <div className="UserGroup">
-        {JSON.stringify(dataUser) == '{}'
+        {JSON.stringify(dataUser) === '{}'
           ? (
           <div
-            className="nav_login"
+            className="nav_login LogInGroup"
             onClick={() => {
               setToggleLogin(true);
             }}
@@ -49,10 +45,18 @@ const Navbar = () => {
           </div>
             )
           : (
-          <div className="nav_login" onClick={close}
+          <div className="nav_login" onClick={barra
+            ? () => {
+                setbarra(false);
+              }
+            : () => {
+                setbarra(true);
+              }}
           >
             <FaUserCircle />
             {dataUser.user.name}
+            {barra && <DropdownUser close={close}/>
+            }
           </div>
             )}
       </div>
