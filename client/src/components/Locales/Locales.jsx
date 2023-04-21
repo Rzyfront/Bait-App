@@ -3,7 +3,7 @@ import './Locales.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BaitLogo from '../../assets/LogoBait.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUploadImage } from '../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -14,9 +14,7 @@ import Chars from './Chars/Chars';
 import DataLocal from './DataLocal/DataLocal';
 
 function Locales () {
-
-  
-  
+  const Navigate = useNavigate();
   const { image, loading, handleChangeimage } = useUploadImage();
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -66,6 +64,9 @@ function Locales () {
     console.log(errors);
     if (!Object.values(errors).length) {
       dispatch(createLocal(inputs));
+      setTimeout(() => {
+        Navigate('/home/1?name=&city=');
+      }, 3000);
       // setInputs({
       //   location: '',
       //   name: '',
@@ -136,11 +137,13 @@ function Locales () {
   }, [image]);
 
   success && toast.success('¡Local creado satisfactoriamente!', {
-    position: toast.POSITION.TOP_CENTER
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000
   });
 
   error && toast.error('Falló al crear el local', {
-    position: toast.POSITION.TOP_CENTER
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000
   });
 
   return (
@@ -175,7 +178,6 @@ function Locales () {
             // multiple
             onChange={handleChangeimages}
           ></input>
-          <hr />
 
           {image.length
             ? (
@@ -200,11 +202,10 @@ function Locales () {
             />
                 )}
 
-          <hr />
           <Chars handleCheck = {handleCheck} chekinputs = {chekinputs}/>
-          <hr />
+
           <button type='submit'> ENVIAR</button>
-          <ToastContainer/>
+          <ToastContainer theme='colored'/>
         </form>
       </div>}
     </div>

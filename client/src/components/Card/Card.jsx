@@ -15,7 +15,7 @@ function Card ({
   Price
 }) {
   return (
-    <div className="Card">
+    <div className="Card animated-element">
       {Images.length > 0
         ? (
         <img src={Images[0].url} alt={Name} className="imgCard" />

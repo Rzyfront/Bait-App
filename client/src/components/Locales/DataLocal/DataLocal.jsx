@@ -4,7 +4,7 @@ import { specialties } from '../../../helpers/specialties';
 export default function DataLocal ({ handleChange, inputs, errors, handleSelect }) {
   return (
     <>
-            <p>Datos requeridos<span style={{ color: 'red', fontWeight: 'bolder' }}>*</span></p>
+
             <Input
                 underlined
                 labelPlaceholder="Nombre del Local"
@@ -17,8 +17,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 required
             />
             {errors.name && <p className='danger'>{errors.name}</p>}
-            <hr />
-            <label>Ubicación: </label>
+
             <select
                 name='location'
                 className='location'
@@ -27,13 +26,13 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 required
             >
                 <option value='value2' defaultValue>
-                    Selecciona
+                    Ubicacion
                 </option>
                 <option value='Cordoba'>Córdoba</option>
                 <option value='Buenos Aires'>Buenos Aires</option>
                 <option value='Corrientes'>Corrientes</option>
-            </select><span style={{ color: 'red', fontWeight: 'bolder' }}>*</span>
-            <hr />
+            </select>
+
             <Input
                 underlined
                 labelPlaceholder="Correo Electrónico"
@@ -45,19 +44,37 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 name='email'
             />
             {errors.email && <p className='danger'>{errors.email}</p>}
-            <hr />
-            <label>Horario: </label>
-            <input
+
+            <Input
+                underlined
+                labelPlaceholder="Horario"
+                color="dark"
+                className='horario'
+                onChange={handleChange}
+                value={inputs.schedule}
+                type='text'
+                name='schedule'
+            />
+            {/* <input
                 onChange={handleChange}
                 value={inputs.schedule}
                 type='text'
                 name='schedule'
                 required
-            />
+            /> */}
             {errors.schedule && <p className='danger'>{errors.schedule}</p>}
-            <hr />
-            <label>Teléfono: </label>
-            <input
+
+            <Input
+                underlined
+                labelPlaceholder="Telefono"
+                color="dark"
+                className='telefono'
+                onChange={handleChange}
+                value={inputs.phone}
+                type='number'
+                name='phone'
+            />
+            {/* <input
                 className='telefono'
                 onChange={handleChange}
                 value={inputs.phone}
@@ -66,10 +83,9 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 pattern='[0-9]{10}'
                 placeholder='Escribe tu número de teléfono...'
                 required
-            />
+            /> */}
             {errors.phone && <p className='danger'>{errors.phone}</p>}
-            <hr />
-            <label>Especialidad: </label>
+
             <select
                 name='specialty'
                 className='specialty'
@@ -78,7 +94,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 required
             >
                 <option value='value2' defaultValue>
-                    Selecciona
+                    Especialidad
                 </option>
                 {specialties.map(specialty => (
                     <option key={specialty} value={specialty}>
@@ -86,7 +102,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                     </option>
                 ))}
                 {/* <option value='Otro'>Otro</option> */}
-            </select><span style={{ color: 'red', fontWeight: 'bolder' }}>*</span>
+            </select>
             {/* {inputs.specialty === 'Otro' && (
                 <>
                     <Input
@@ -103,7 +119,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                     <br />
                 </>
             )} */}
-            <hr />
+
         </>
   );
 }

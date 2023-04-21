@@ -79,7 +79,7 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
   return (
         <>
             <div className={`${!login && 'register scale-up-bottom'}`}>
-              <ToastContainer className="notify" theme="dark"/>
+              <ToastContainer className="notify" theme="colored"/>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
