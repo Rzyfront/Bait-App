@@ -42,13 +42,10 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
         [event.target.name]: event.target.value
       })
     );
-
-    // console.log(errorsRegister);
   };
 
   const sendRegister = (event) => {
     event.preventDefault();
-    console.log(dataRegister);
     if (!Object.values(errorsRegister).length) {
       dispatch(createUser(dataRegister));
       setDataRegister({
@@ -64,10 +61,10 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
         isActive: '',
         role: ''
       });
-      toast.success('¡Local creado satisfactoriamente!', {
+      toast.success('¡Ac satisfactoriamente!', {
         position: toast.POSITION.TOP_CENTER
       });
-      navigate('/home');
+      navigate('/home/1?name=&city=');
       setErrorsRegister({});
     } else {
       toast.error(errorsRegister.name +
@@ -82,7 +79,7 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
   return (
         <>
             <div className={`${!login && 'register scale-up-bottom'}`}>
-              <ToastContainer className="notify"/>
+              <ToastContainer className="notify" theme="dark"/>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
