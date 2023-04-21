@@ -8,7 +8,8 @@ import {
   Locales,
   Answers,
   About,
-  DataTreatment
+  DataTreatment,
+  Dashboard
 } from './components/components.js';
 import Mapdata from './components/Map/Map';
 import { Routes, Route } from 'react-router-dom';
@@ -38,6 +39,7 @@ if(user&&localStorage.getItem('token') !== null)
         <Route path="/about" element={<About />} />
         <Route path="/dataTreatment" element={<DataTreatment />} />
         <Route path='/map' element={<Mapdata/>} />
+        <Route path='/dashboard' element={<Dashboard/>} />
         <Route exact path="/" element={<Landing />} />
       </Routes>
     </div>
