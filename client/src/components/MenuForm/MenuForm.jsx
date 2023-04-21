@@ -39,8 +39,8 @@ const MenuForm = () => {
     }
   };
   useEffect({
-    
-  })
+
+  });
 
   return (
         <div className='Menu-Form-Container'>
