@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
 
     // if (!localReviews.length) throw new Error('Not found');
 
-    const totalPages = Math.ceil(count.length / 10);
+    const totalPages = Math.ceil(count / 10);
     return res.status(200).json({
       totalPages, count, success: true, reviews: rows,
     });
