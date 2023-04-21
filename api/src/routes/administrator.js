@@ -13,12 +13,13 @@ const putCreateAdmin = require('../controllers/administrator/putCreateAdmin');
 const setQueryUsers = require('../middlewares/setQueryUsers');
 const usersTest = require('../helpers/usersTest');
 const getReviews = require('../controllers/reviews/getReviews');
+const setReviewQuery = require('../middlewares/setReviewQuery');
 
 administratorRoute
   .get('/', isAdmin, setQueryUsers, getAllUsers)
   .get('/page/:numPage', isAdmin, setQueryUsers, getAllUsers)
   .get('/', isAdmin, getSupendedUsers)
-  .get('/reviews', isAdmin, getReviews)
+  .get('/reviews', isAdmin, setReviewQuery, getReviews)
   .put('/createAdmin/:userId', isSuperAdmin, putCreateAdmin)
   .delete('/:userId', verifyDelete, deleteAdministrator)
   .patch('/review/:reviewId', isAdmin, patchReviewVerify)
