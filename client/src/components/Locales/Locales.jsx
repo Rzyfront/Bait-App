@@ -14,6 +14,9 @@ import Chars from './Chars/Chars';
 import DataLocal from './DataLocal/DataLocal';
 
 function Locales () {
+
+  
+  
   const { image, loading, handleChangeimage } = useUploadImage();
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
@@ -62,28 +65,28 @@ function Locales () {
     event.preventDefault();
     console.log(errors);
     if (!Object.values(errors).length) {
-      dispatch(createLocal(inputs, chekinputs));
-      setInputs({
-        location: '',
-        name: '',
-        images: '',
-        email: '',
-        phone: '',
-        schedule: '',
-        specialty: ''
-      });
-      setErrors({
-      });
-      setChekInputs({
-        wifi: false,
-        parking_lot: false,
-        outdoor_seating: false,
-        live_music: false,
-        table_service: false,
-        big_group: false,
-        work_friendly: false,
-        pet_friendly: false
-      });
+      dispatch(createLocal(inputs));
+      // setInputs({
+      //   location: '',
+      //   name: '',
+      //   images: '',
+      //   email: '',
+      //   phone: '',
+      //   schedule: '',
+      //   specialty: ''
+      // });
+      // setErrors({
+      // });
+      // setChekInputs({
+      //   wifi: false,
+      //   parking_lot: false,
+      //   outdoor_seating: false,
+      //   live_music: false,
+      //   table_service: false,
+      //   big_group: false,
+      //   work_friendly: false,
+      //   pet_friendly: false
+      // });
     }
   };
 
