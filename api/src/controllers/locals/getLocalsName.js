@@ -6,9 +6,11 @@ module.exports = async (req, res) => {
   try {
     const locals = await Local.findAll({
       where: { name: { [Op.iLike]: `%${name}%` } },
+      attributes: ['name'],
     });
+    const data = locals.map((el) => el.name);
     res.status(200).json({
-      success: true, locals,
+      success: true, data,
     });
   } catch (error) {
     res.status(404).json({ success: false, message: error.message });
