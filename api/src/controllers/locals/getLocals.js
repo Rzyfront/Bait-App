@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
       ],
       attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'verified', 'schedule', 'UserId', 'specialty', 'lat', 'lng'],
       order: req.order,
-      limit: page * 10,
+      limit: 10,
       offset: (page - 1) * 10,
       group: ['Local.id', 'Images.id', 'Characteristic.id', 'Menus.id'],
       subQuery: false,
