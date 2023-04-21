@@ -83,7 +83,9 @@ export const createLocal = (inputs) => {
       const response = await axios.post('/locals', {
         email: inputs.email,
         images: inputs.images,
-        location: inputs.location,
+        location: inputs.location.location,
+        lat:inputs.location.lat,
+        lng:inputs.location.lng,
         name: inputs.name,
         // phone: inputs.phone,
         schedule: inputs.schedule,
