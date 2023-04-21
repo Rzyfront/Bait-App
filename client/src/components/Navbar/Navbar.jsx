@@ -7,7 +7,6 @@ import { Login } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
-import DropdownUser from './DropdownUser/DropdownUser';
 const Navbar = () => {
   const dispatch=useDispatch()
   let dataUser=useSelector((state) => state.user);
