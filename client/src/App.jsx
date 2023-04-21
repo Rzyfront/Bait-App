@@ -15,6 +15,10 @@ import DishForm from './components/MenuForm/DishForm/DishForm';
 import Mapdata from './components/Map/Map';
 
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkUser } from './redux/actions/actions';
+
+
 function App () {
   return (
     <div className='App animated-element'>
