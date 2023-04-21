@@ -33,7 +33,7 @@ module.exports = async (req, res) => {
           required: false,
         },
       ],
-      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'specialty'/* , 'verified', 'schedule', 'UserId', 'lat', 'lng' */],
+      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'specialty', 'verified', 'schedule', 'UserId', 'lat', 'lng'],
       order: req.order,
       limit: 10,
       offset: (page - 1) * 10,
