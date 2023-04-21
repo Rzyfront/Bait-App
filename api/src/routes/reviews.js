@@ -5,9 +5,10 @@ const postReviews = require('../controllers/reviews/postReviews');
 const updateReviews = require('../controllers/reviews/updateReviews');
 const deleteReviews = require('../controllers/reviews/deleteReviews');
 const userExtractor = require('../middlewares/userExtractor');
+const setReviewQuery = require('../middlewares/setReviewQuery');
 
 reviewsRoute
-  .get('/:localId', getReviews)
+  .get('/:localId', setReviewQuery, getReviews)
   .post('/:localId', revValidator, userExtractor, postReviews)
   .put('/:reviewId', revValidator, userExtractor, updateReviews)
   .delete('/:reviewId', userExtractor, deleteReviews);

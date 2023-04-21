@@ -1,17 +1,12 @@
 const { Review, Image, User } = require('../../db');
 
 module.exports = async (req, res) => {
-  const { localId } = req.params;
-  const { verified, page } = req.query;
+  const { page } = req.query;
   const pages = page ?? 1;
-  const isVerified = verified ?? 'verified';
 
   try {
     const { count, rows } = await Review.findAndCountAll({
-      where: {
-        LocalId: localId,
-        verified: isVerified,
-      },
+      where: req.where,
       include: [{
         model: User,
         attributes: ['name', 'lastname', 'id'],

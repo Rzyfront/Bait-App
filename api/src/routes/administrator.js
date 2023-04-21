@@ -5,18 +5,20 @@ const changeRole = require('../controllers/administrator/changeRole');
 const deleteAdministrator = require('../controllers/administrator/deleteAdministrator');
 const deleteReview = require('../controllers/administrator/deleteReview');
 const getSupendedUsers = require('../controllers/administrator/getSupendedUsers');
-const getUsers = require('../controllers/administrator/getUsers');
+const getAllUsers = require('../controllers/administrator/getAllUsers');
 const patchReviewVerify = require('../controllers/administrator/patchReviewVerify');
 const patchSupendUser = require('../controllers/administrator/patchSupendUser');
 const putAssignLocal = require('../controllers/administrator/putAssignLocal');
 const putCreateAdmin = require('../controllers/administrator/putCreateAdmin');
 const setQueryUsers = require('../middlewares/setQueryUsers');
 const usersTest = require('../helpers/usersTest');
+const getReviews = require('../controllers/reviews/getReviews');
 
 administratorRoute
-  .get('/', isAdmin, setQueryUsers, getUsers)
-  .get('/page/:numPage', isAdmin, setQueryUsers, getUsers)
+  .get('/', isAdmin, setQueryUsers, getAllUsers)
+  .get('/page/:numPage', isAdmin, setQueryUsers, getAllUsers)
   .get('/', isAdmin, getSupendedUsers)
+  .get('/review', isAdmin, getReviews)
   .put('/createAdmin/:userId', isSuperAdmin, putCreateAdmin)
   .delete('/:userId', verifyDelete, deleteAdministrator)
   .patch('/review/:reviewId', isAdmin, patchReviewVerify)
