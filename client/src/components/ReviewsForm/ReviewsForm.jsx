@@ -16,7 +16,7 @@ import { comentarie } from '../../redux/actions/actions';
 import validate from './revHelper';
 
 function ReviewsForm ({ setToggleModal2, id }) {
-  const [userToken, setDataUser] = useState('');
+  // const [userToken, setDataUser] = useState('');
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
@@ -58,8 +58,8 @@ function ReviewsForm ({ setToggleModal2, id }) {
           calificationService,
           calculateAverage,
           inputs,
-          id,
-          userToken
+          id
+          // userToken
         )
       );
       toast.success('¡Gracias por tu Opinion!', {
@@ -80,12 +80,11 @@ function ReviewsForm ({ setToggleModal2, id }) {
     setInputs({ ...inputs, image: image[image.length - 1] });
   }, [image.length]);
 
-  useEffect(() => {
-    const { token } = JSON.parse(localStorage.getItem('user'));
-    const data = JSON.parse(localStorage.getItem('user'));
-    setDataUser(token);
-    console.log(data);
-  }, []);
+  // useEffect(() => {
+  //   const { token } = JSON.parse(localStorage.getItem('user'));
+  //   const data = JSON.parse(localStorage.getItem('user'));
+  //   setDataUser(token);
+  // }, []);
 
   useEffect(() => {
     setcalculateAverage(
@@ -129,19 +128,9 @@ function ReviewsForm ({ setToggleModal2, id }) {
           <p>
             Tu opinión es vital. Ayuda a otros usuarios a tomar decisiones
             informadas. Al hacerlo, brindas retroalimentación valiosa a los
-            dueños del lugar para mejorar su servicio. ¡Además, algunos lugares
-            ofrecen beneficios exclusivos a quienes dejan reseñas! ¡Comparte tu
-            opinión hoy!
+            dueños del lugar para mejorar su servicio.
           </p>
           <div className='RatingInput'>
-            <h5>Calificación:</h5>
-
-            <RatingStar
-              name='Rating'
-              style={{ maxWidth: 150 }}
-              value={calculateAverage}
-              readOnly
-            />
           </div>
           <div className='AdicionalRatings'>
             <div className='RatingInput'>
@@ -190,6 +179,16 @@ function ReviewsForm ({ setToggleModal2, id }) {
               />
             </div>
           </div>
+             <div className='Total-Rating'>
+               <h5>Calificación:</h5>
+
+              <RatingStar
+                name='Rating'
+                style={{ maxWidth: 150 }}
+                value={calculateAverage}
+                readOnly
+              />
+             </div>
         </div>
         <div className='Rigth'>
           <form>

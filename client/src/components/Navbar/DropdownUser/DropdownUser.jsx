@@ -1,31 +1,34 @@
 import { RiUserLine, RiSettingsLine, RiLogoutCircleLine } from 'react-icons/ri';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const DropdownUser = ({ showUserDropdown }) => {
-  const [toggleDrop, setToggleDrop] = useState(showUserDropdown());
-
+const DropdownUser = ({ close }) => {
   return (
-        <div className="dropdown">
-            {toggleDrop && (
+          <div className='dropDown-Container'>
+
                 <ul className="dropdown-menu">
                     <li>
-                        <a href="/perfil">
+                        <Link to="">
                             <RiUserLine /> Perfil
-                        </a>
+                        </Link>
                     </li>
                     <li>
-                        <a href="/configuraciones">
+                        <Link to="">
                             <RiSettingsLine /> Configuraciones
-                        </a>
+                        </Link>
                     </li>
-                    <li>
-                        <a href="/logout" onClick={() => setToggleDrop(false)}>
+                     <li>
+                        <Link to="/dashboard">
+                            DashBoard Admin
+                        </Link>
+                    </li>
+                    <li onClick={() => close()}>
+
                             <RiLogoutCircleLine /> Cerrar sesión
-                        </a>
+
                     </li>
                 </ul>
-            )}
-        </div>
+            </div>
+
   );
 };
 
