@@ -15,9 +15,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    ingredients: {
-      type: DataTypes.STRING,
-    },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,

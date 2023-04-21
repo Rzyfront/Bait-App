@@ -23,4 +23,16 @@ const sendVerificationEmail = (id, userEmail) => {
   });
 };
 
-module.exports = { sendVerificationEmail };
+const sendReviewRejected = (userEmail, comment) => {
+  transporter.sendMail({
+    subject: 'Review rechazada',
+    from: email,
+    to: userEmail,
+    html: `<h1>Tu review:</h1>
+      <p >${comment}</p>
+      <h1>Fue rechazada</h1>
+      `,
+  });
+};
+
+module.exports = { sendVerificationEmail, sendReviewRejected };
