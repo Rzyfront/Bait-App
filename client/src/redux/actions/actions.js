@@ -158,7 +158,7 @@ export const logIn = (credentials) => {
   return async (dispatch) => {
     try {
       const res = await axios.post('/login', credentials);
-      localStorage.setItem('user', JSON.stringify(res.data));
+      localStorage.setItem('token', res.data.token);
       location.reload();
     } catch (error) {
       console.log(error.message);

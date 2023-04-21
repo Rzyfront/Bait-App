@@ -10,7 +10,13 @@ module.exports = async (req, res) => {
     const updateLocal = await req.local.update({
       name, location, schedule, email,
     });
-    return res.status(201).json({ success: true, local: updateLocal });
+    const local = {
+      id: updateLocal.id,
+      name: updateLocal.name,
+      location: updateLocal.location,
+      specialty: updateLocal.specialty,
+    };
+    return res.status(201).json({ success: true, local });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
   }
