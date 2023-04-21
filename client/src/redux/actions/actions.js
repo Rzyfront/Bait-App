@@ -11,7 +11,8 @@ export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
 export const SUCCESS_RESET = 'SUCCESS_RESET';
 export const ERROR_RESET = 'ERROR_RESET';
-
+export const POST_MENU = 'POST_MENU';
+export const POST_DISH = 'POST_DISH'
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -103,7 +104,7 @@ export const createLocal = (inputs, chekinputs) => {
         type: ERROR,
         payload: error.message
       });
-      // set error state to null after 5 seconds
+      // set error state to null after 3 seconds
       setTimeout(() => {
         dispatch({
           type: ERROR_RESET
@@ -221,8 +222,61 @@ export const homepage = (id) => {
         type: HOMEPAGE,
         payload: response.data
       });
+      setTimeout(() => {
+        dispatch({
+          type: SUCCESS_RESET
+        });
+      }, 3000);
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const postMenu = (localId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/menu/${localId}`);
+      if (response.status === 201) {
+        return {
+          type: SUCCESS
+        };
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+
+export const postDish = (menuId, dish) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/menu/${menuId}`, dish);
+      if (response.status === 201) {
+        return {
+          type: SUCCESS
+        };
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
     }
   };
 };

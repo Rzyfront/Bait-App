@@ -1,8 +1,15 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { foodTypes } from '../../helpers/foodTypes';
+import { postMenu } from '../../redux/actions/actions';
+import DishForm from './DishForm/DishForm';
 
 const MenuForm = () => {
+  const dispatch = useDispatch();
+  const { success, error } = useSelector;
+  const [ showDish, setShowDish ] = useState(false);
+
+  success && setShowDish(true);
   const [menu, setMenu] = useState({
     type: ''
   });
@@ -13,6 +20,13 @@ const MenuForm = () => {
     });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (menu.name !== '') {
+      dispatch(postMenu(menu));
+    }
+  };
+
   return (
         <div>
             <form>
@@ -21,7 +35,7 @@ const MenuForm = () => {
                   name='type'
                   className='type'
                   onChange={handleSelect}
-                  value={inputs.type}
+                  value={menu.type}
                   required
               >
                   <option value='value2' defaultValue>
@@ -32,8 +46,11 @@ const MenuForm = () => {
                           {type}
                       </option>
                   ))}
-                  {/* <option value='Otro'>Otro</option> */}
               </select>
+              <button type='submit' onClick={handleSubmit}></button>
+              {
+                showDish && <DishForm/>
+              }
             </form>
         </div>
   );
