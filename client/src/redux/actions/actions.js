@@ -229,10 +229,10 @@ export const homepage = (id) => {
   };
 };
 
-export const postMenu = (localId) => {
+export const postMenu = (localId, { type }) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`/menu/${localId}`);
+      const response = await axios.post(`/menu/${localId}`, type);
       if (response.status === 201) {
         return {
           type: SUCCESS

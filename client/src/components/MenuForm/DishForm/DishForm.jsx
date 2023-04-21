@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import { postDish } from '../../redux/actions/actions';
 
 const DishForm = () => {
+  const { menuId } = useParams();
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
-  const { }
   const [dish, setDish] = useState({
     name: '',
     type: '',

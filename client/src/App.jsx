@@ -1,5 +1,4 @@
 
-import { useEffect } from 'react';
 import './App.css';
 import {
   Landing,
@@ -9,25 +8,14 @@ import {
   Answers,
   About,
   DataTreatment,
-  Dashboard,
-  MenuForm
+  Dashboard
 } from './components/components.js';
+import MenuForm from './components/MenuForm/MenuForm';
+import DishForm from './components/MenuForm/DishForm/DishForm';
 import Mapdata from './components/Map/Map';
+
 import { Routes, Route } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkUser } from './redux/actions/actions';
-
 function App () {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  // login
-  useEffect(() => {
-    console.log(localStorage.getItem('token'));
-    if (user && localStorage.getItem('token') !== null) {
-      dispatch(checkUser());
-    }
-  }, []);
-
   return (
     <div className='App animated-element'>
       <Routes>
@@ -39,7 +27,8 @@ function App () {
         <Route path='/dataTreatment' element={<DataTreatment />} />
         <Route path='/map' element={<Mapdata/>} />
         <Route path='/dashboard' element={<Dashboard/>} />
-        <Route path='/menu' element={<MenuForm/>} />
+        <Route path='/menu/:localId' element={<MenuForm/>} />
+        <Route path='/dish/:menuId' element={DishForm} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

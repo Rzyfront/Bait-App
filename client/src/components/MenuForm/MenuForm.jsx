@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
 import { postMenu } from '../../redux/actions/actions';
 import DishForm from './DishForm/DishForm';
 
 const MenuForm = () => {
+  const { localId } = useParams();
   const dispatch = useDispatch();
   const { success, error } = useSelector;
-  const [ showDish, setShowDish ] = useState(false);
+  const [showDish, setShowDish] = useState(false);
 
   success && setShowDish(true);
   const [menu, setMenu] = useState({
@@ -22,8 +24,8 @@ const MenuForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (menu.name !== '') {
-      dispatch(postMenu(menu));
+    if (menu.type !== '') {
+      dispatch(postMenu(localId, menu));
     }
   };
 
