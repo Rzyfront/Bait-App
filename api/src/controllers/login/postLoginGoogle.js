@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
     const { email } = req.body;
     const user = await User.findOne({ where: { email } });
     if (!user) throw new Error('User not found');
+    if (!user.isGoogleUser) throw new Error('User is not Google');
     const token = jwt.sign({
       email: user.email,
       id: user.id,
