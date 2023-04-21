@@ -18,7 +18,7 @@ administratorRoute
   .get('/', isAdmin, setQueryUsers, getAllUsers)
   .get('/page/:numPage', isAdmin, setQueryUsers, getAllUsers)
   .get('/', isAdmin, getSupendedUsers)
-  .get('/review', isAdmin, getReviews)
+  .get('/reviews', isAdmin, getReviews)
   .put('/createAdmin/:userId', isSuperAdmin, putCreateAdmin)
   .delete('/:userId', verifyDelete, deleteAdministrator)
   .patch('/review/:reviewId', isAdmin, patchReviewVerify)
