@@ -84,7 +84,6 @@ function ReviewsForm ({ setToggleModal2, id }) {
     const { token } = JSON.parse(localStorage.getItem('user'));
     const data = JSON.parse(localStorage.getItem('user'));
     setDataUser(token);
-    console.log(data);
   }, []);
 
   useEffect(() => {

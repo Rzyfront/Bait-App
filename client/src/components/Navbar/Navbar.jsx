@@ -5,24 +5,24 @@ import SearchHome from './SearchHome/SearchHome';
 import { Link } from 'react-router-dom';
 import { Login, DropdownUser } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { ResetUser } from '../../redux/actions/actions';
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.user);
+  const [data, setdata] = useState();
   const [toogleLogin, setToggleLogin] = useState(false);
-  const [user, setUser] = useState(false);
-  const data = JSON.parse(localStorage.getItem('user'));
+  // const [user, setUser] = useState(false);
+  // const data = JSON.parse(localStorage.getItem('user'));
   const [dropDownUser, setDropDownUser] = useState(false);
-
   useEffect(() => {
-    if (data && data.user) {
-      setUser(true);
-    } else {
-      setUser(false);
-    }
-  }, [data]);
+    setdata(dataUser);
+  }, [dataUser]);
 
   const close = () => {
     localStorage.clear();
-    setUser(false);
+    dispatch(ResetUser());
   };
 
   return (
@@ -39,7 +39,7 @@ const Navbar = () => {
         <SearchHome />
       </div>
       <div className="UserGroup">
-        {user === false
+        {JSON.stringify(dataUser) === '{}'
           ? (
           <div
             className="nav_login LogInGroup"
@@ -48,18 +48,19 @@ const Navbar = () => {
             }}
           >
             <FaUserCircle className="UserIcon" />
-            <h4 className="LogIn">Inicia sesión </h4>
+            <h4 className="LogIn"> inicia</h4>
           </div>
             )
           : (
           <div className="nav_login UserMenuGroupx" onClick={dropDownUser
             ? setDropDownUser(false)
             : setDropDownUser(true)}>
+
             <FaUserCircle />
-            {data.user.name}
+            {dataUser.user.name}
             {dropDownUser && <DropdownUser
-              dropDownUser={dropDownUser}
-              setDropDownUser={setDropDownUser}
+            dropDownUser={dropDownUser}
+            setDropDownUser={setDropDownUser}
             />}
           </div>
             )}
