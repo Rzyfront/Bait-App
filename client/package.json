@@ -20,6 +20,7 @@
     "jest": "^27.5.1",
     "jquery": "^3.6.4",
     "leaflet": "^1.9.3",
+    "leaflet-control-geocoder": "^2.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",

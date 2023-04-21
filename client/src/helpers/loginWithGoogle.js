@@ -46,7 +46,7 @@ export const loginWithGoogle = async () => {
   await axios
     .post('/login/google', { email: user.email })
     .then((res) => {
-      window.localStorage.setItem('user', JSON.stringify({ user: data, token: res.data.token }));
+      window.localStorage.setItem('token', res.data.token);
       location.reload();
     });
 };
