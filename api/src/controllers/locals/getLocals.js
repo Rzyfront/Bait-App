@@ -28,8 +28,8 @@ module.exports = async (req, res) => {
         },
         {
           model: Menu,
-          // attributes: [],
-          where: { type: req.menu },
+          attributes: ['type'],
+          where: req.menu,
           required: false,
         },
       ],
@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
       order: req.order,
       limit: page * 10,
       offset: (page - 1) * 10,
-      group: ['Local.id', 'Images.id', 'Characteristic.id'],
+      group: ['Local.id', 'Images.id', 'Characteristic.id', 'Menus.id'],
       subQuery: false,
     });
     const totalPages = Math.ceil(count.length / 10);
