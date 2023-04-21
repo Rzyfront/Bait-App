@@ -42,7 +42,7 @@ module.exports = async (req, res) => {
     });
     const totalPages = Math.ceil(count.length / 10);
     res.status(200).json({
-      success: true, count: count.length, totalPages, locals: rows,
+      success: true, count: count.length - 1, totalPages, locals: rows,
     });
   } catch (error) {
     console.log(error);
