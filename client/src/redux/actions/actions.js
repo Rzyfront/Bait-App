@@ -11,8 +11,10 @@ export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
 export const SUCCESS_RESET = 'SUCCESS_RESET';
 export const ERROR_RESET = 'ERROR_RESET';
-export const CHECKUSER="CHEKUSER";
-export const RESETUSER="RESETUSER";
+export const POST_MENU = 'POST_MENU';
+export const POST_DISH = 'POST_DISH';
+export const CHECKUSER = 'CHEKUSER';
+export const RESETUSER = 'RESETUSER';
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -85,7 +87,7 @@ export const createLocal = (inputs) => {
         name: inputs.name,
         // phone: inputs.phone,
         schedule: inputs.schedule,
-        specialty: inputs.specialty,
+        specialty: inputs.specialty
         // characteristics: chekinputs
       });
       if (response.status === 201) {
@@ -100,12 +102,12 @@ export const createLocal = (inputs) => {
         }, 3000);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
       dispatch({
         type: ERROR,
         payload: error.message
       });
-      // set error state to null after 5 seconds
+      // set error state to null after 3 seconds
       setTimeout(() => {
         dispatch({
           type: ERROR_RESET
@@ -165,7 +167,6 @@ export const searchByQuery = (name, city) => {
 };
 
 export const logIn = (credentials) => {
-
   return async (dispatch) => {
     try {
       const res = await axios.post('/login', credentials);
@@ -184,7 +185,7 @@ export const comentarie = (
   calificationService,
   calculateAverage,
   inputs,
-  id,
+  id
 
 ) => {
   return async (dispatch) => {
@@ -200,7 +201,7 @@ export const comentarie = (
           service: calificationService,
           environment: calificationEnvironment,
           qaPrice: calificationQaPrice
-        },
+        }
       );
       console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
     } catch (error) {
@@ -217,31 +218,83 @@ export const homepage = (id) => {
         type: HOMEPAGE,
         payload: response.data
       });
+      setTimeout(() => {
+        dispatch({
+          type: SUCCESS_RESET
+        });
+      }, 3000);
     } catch (error) {
       console.log(error.message);
     }
   };
 };
 
-export const checkUser=()=>{
+export const postMenu = (localId) => {
   return async (dispatch) => {
     try {
-      const res = await axios.get('/login')
-      console.log(res.data)
+      const response = await axios.post(`/menu/${localId}`);
+      if (response.status === 201) {
+        return {
+          type: SUCCESS
+        };
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+
+export const postDish = (menuId, dish) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/menu/${menuId}`, dish);
+      if (response.status === 201) {
+        return {
+          type: SUCCESS
+        };
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+export const checkUser = () => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get('/login');
+      console.log(res.data);
       dispatch({
         type: CHECKUSER,
         payload: res.data
       });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-}
-}
-export const ResetUser=()=>{
+  };
+};
+export const ResetUser = () => {
   return async (dispatch) => {
     dispatch({
       type: RESETUSER,
-      payload: ""
+      payload: ''
     });
-  }
-}
+  };
+};

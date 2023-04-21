@@ -35,9 +35,10 @@ function Cards () {
     setnavegation(pagine.id);
   }, [totalPages]);
   return (
-    <div className="containerCardsall">
+    <div className="containerCardsall animated-element">
+      <div>
       {totalPages && <Pagination totalPages={totalPages} />}
-      <div className="ContainerCards">
+      <div className="ContainerCards animated-element">
         {locals &&
           locals.map(
             (
@@ -70,7 +71,7 @@ function Cards () {
             }
           )}
       </div>
-      {totalPages && <Pagination totalPages={totalPages} />}
+      </div>
     </div>
   );
 }

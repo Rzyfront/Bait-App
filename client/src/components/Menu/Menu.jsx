@@ -3,12 +3,12 @@ import Card from '../Card/Card';
 
 function Menu ({ ListMenu }) {
   return (
-    <div className="Menu animated-element">
-      <div className="TitleGroup">
-        <h2 className="Menu-Title">Menu</h2>
-        <div className="Decorator"></div>
+    <div className='Menu animated-element'>
+      <div className='TitleGroup'>
+        <h2 className='Menu-Title'>Menu</h2>
+        <div className='Decorator'></div>
       </div>
-      <div className="Menu-List">
+      <div className='Menu-List'>
         {ListMenu.map(({ name, Images, Price, Rating }, index) => {
           return (
             <Card

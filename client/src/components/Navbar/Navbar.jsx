@@ -2,12 +2,13 @@ import { useState } from 'react';
 import './Navbar.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import SearchHome from './SearchHome/SearchHome';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Login, DropdownUser } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
 const Navbar = () => {
+  const location = useLocation();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user);
   const [barra, setbarra] = useState(false);
@@ -21,7 +22,7 @@ const Navbar = () => {
   return (
     <div className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to={'/home/1?name=&city='}>
+      <Link to={`${location.pathname !== '/' ? '/' : '/home/1?name=&city='}`}>
         <img
           src={BaitLogo}
           alt="Bait"
@@ -55,7 +56,11 @@ const Navbar = () => {
           >
             <FaUserCircle />
             {dataUser.user.name}
-            {barra && <DropdownUser close={close}/>
+            {barra &&
+            (<div className={`dropDown ${barra && 'scale-up-ver-top'}`}>
+              <DropdownUser close={close}/>
+            </div>
+            )
             }
           </div>
             )}
