@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
       }, { model: Menu },
       {
         model: Review,
-        where: { verified: verified ?? true },
+        where: { verified: verified ?? 'verified' },
         required: false,
       },
       { model: Image, attributes: ['url'] }],
