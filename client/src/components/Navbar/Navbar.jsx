@@ -9,18 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
 
 const Navbar = () => {
-  const dispatch=useDispatch()
-  let dataUser=useSelector((state) => state.user);
-  let [data,setdata]=useState()
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.user);
+  const [data, setdata] = useState();
   const [toogleLogin, setToggleLogin] = useState(false);
   useEffect(() => {
-  setdata(dataUser)
+    setdata(dataUser);
   }, [dataUser]);
-
-
-
-
-
 
   const close = () => {
     localStorage.clear();
@@ -41,19 +36,20 @@ const Navbar = () => {
         <SearchHome />
       </div>
       <div className="UserGroup">
-        {JSON.stringify(dataUser)=='{}'? (
+        {JSON.stringify(dataUser) == '{}'
+          ? (
           <div
             className="nav_login"
             onClick={() => {
               setToggleLogin(true);
-            }} 
+            }}
           >
-            <FaUserCircle className="UserIcon"  />
+            <FaUserCircle className="UserIcon" />
             <h4 className="LogIn"> inicia</h4>
           </div>
             )
           : (
-          <div className="nav_login"  onClick={close} 
+          <div className="nav_login" onClick={close}
           >
             <FaUserCircle />
             {dataUser.user.name}
