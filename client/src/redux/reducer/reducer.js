@@ -1,10 +1,13 @@
 
-import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE } from '../actions/actions';
+import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE, SUCCESS, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER } from '../actions/actions';
 
 const initialState = {
   cards: [],
   reset: [],
-  detail: []
+  detail: [],
+  success: null,
+  error: '',
+  user: {}
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -34,12 +37,43 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         createdUserMessage: payload
       };
-    case HOMEPAGE:{
+    case HOMEPAGE:
       return {
         ...state,
         cards: payload
       };
-    }
+    case SUCCESS:
+      return {
+        ...state,
+        success: payload
+      };
+    case SUCCESS_RESET:
+      return {
+        ...state,
+        success: null
+      };
+    case ERROR:
+      return {
+        ...state,
+        error: payload
+      };
+    case ERROR_RESET:
+      return {
+        ...state,
+        error: null
+      };
+
+    case CHECKUSER:
+      return {
+        ...state,
+        user: payload
+      };
+    case RESETUSER:
+      return {
+        ...state,
+        user: {}
+      };
+
     default:
       return { ...state };
   }

@@ -4,7 +4,7 @@ const {
 const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
 module.exports = async (req, res) => {
-  const { verified } = req.query;
+  // const { verified } = req.query;
   try {
     const locals = await Local.findByPk(req.local.id, {
       attributes: {
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
       }, { model: Menu },
       {
         model: Review,
-        where: { verified: verified ?? true },
+        // where: { verified: verified ?? true },
         required: false,
       },
       { model: Image, attributes: ['url'] }],

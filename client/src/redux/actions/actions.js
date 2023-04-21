@@ -7,7 +7,14 @@ export const DETAIL = 'DETAIL';
 export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
-
+export const SUCCESS = 'SUCCESS';
+export const ERROR = 'ERROR';
+export const SUCCESS_RESET = 'SUCCESS_RESET';
+export const ERROR_RESET = 'ERROR_RESET';
+export const POST_MENU = 'POST_MENU';
+export const POST_DISH = 'POST_DISH';
+export const CHECKUSER = 'CHEKUSER';
+export const RESETUSER = 'RESETUSER';
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -70,36 +77,42 @@ export const DetailLocal = (id) => {
 };
 
 // correguir imagen cuando este listo la ruta
-export const createLocal = (inputs, chekinputs) => {
-  const images = [];
-  console.log(inputs);
-  console.log('holisssssssssssssssssssssssssss');
-  inputs.imagen.forEach((data) => {
-    images.push({ id: data.id });
-  });
+export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
-      await axios.post('/locals', {
-        name: inputs.name,
-        location: inputs.location,
-        schedule: inputs.schedule,
+      const response = await axios.post('/locals', {
         email: inputs.email,
-        images,
-        characteristics: {
-          wifi: chekinputs.wifi,
-          parking_lot: chekinputs.parking_lot,
-          outdoor_seating: chekinputs.outdoor_seating,
-          live_music: chekinputs.live_music,
-          table_service: chekinputs.table_service,
-          family_style: chekinputs.family_style,
-          romantic: chekinputs.romantic,
-          big_group: chekinputs.big_group,
-          work_friendly: chekinputs.work_friendly,
-          pet_friendly: chekinputs.pet_friendly
-        }
+        images: inputs.images,
+        location: inputs.location,
+        name: inputs.name,
+        // phone: inputs.phone,
+        schedule: inputs.schedule,
+        specialty: inputs.specialty
+        // characteristics: chekinputs
       });
+      if (response.status === 201) {
+        dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+        setTimeout(() => {
+          dispatch({
+            type: SUCCESS_RESET
+          });
+        }, 3000);
+      }
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
     }
   };
 };
@@ -154,7 +167,6 @@ export const searchByQuery = (name, city) => {
 };
 
 export const logIn = (credentials) => {
-  console.log('haciendo dispatch');
   return async (dispatch) => {
     try {
       const res = await axios.post('/login', credentials);
@@ -173,8 +185,8 @@ export const comentarie = (
   calificationService,
   calculateAverage,
   inputs,
-  id,
-  userToken
+  id
+
 ) => {
   return async (dispatch) => {
     try {
@@ -189,12 +201,6 @@ export const comentarie = (
           service: calificationService,
           environment: calificationEnvironment,
           qaPrice: calificationQaPrice
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`, // Aquí agregas tu header personalizado
-            'Content-Type': 'application/json' // También puedes agregar otros headers estándar
-          }
         }
       );
       console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
@@ -212,8 +218,86 @@ export const homepage = (id) => {
         type: HOMEPAGE,
         payload: response.data
       });
+      setTimeout(() => {
+        dispatch({
+          type: SUCCESS_RESET
+        });
+      }, 3000);
     } catch (error) {
       console.log(error.message);
     }
+  };
+};
+
+export const postMenu = (localId, menu) => {
+  console.log(localId, menu);
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/menu/${localId}`, menu);
+      console.log(response.data);
+      if (response.status === 201) {
+        return dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+
+export const postDish = (menuId, dish) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/menu/${menuId}`, dish);
+      if (response.status === 201) {
+        return {
+          type: SUCCESS
+        };
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+export const checkUser = () => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get('/login');
+      console.log(res.data);
+      dispatch({
+        type: CHECKUSER,
+        payload: res.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const ResetUser = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: RESETUSER,
+      payload: ''
+    });
   };
 };

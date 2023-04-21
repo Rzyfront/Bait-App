@@ -1,4 +1,4 @@
-import 'UserProfile.css';
+import './UserProfile.css';
 import { useEffect } from 'react';
 import { Reviews, Navbar } from '../components';
 import { useParams } from 'react-router-dom';

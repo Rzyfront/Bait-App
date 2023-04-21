@@ -1,13 +1,15 @@
 .ReviewsForm{
     position: absolute;
     display: flex;
+    top: 0;
+    left: 0;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 120vh;
+    height: calc(100vh - 60px);
     background-color: rgba(var(--bg-primary), 0.2);
-    backdrop-filter: blur(3px);
-    z-index: 999;
+    backdrop-filter: blur(2px);
+    z-index: 10;
 }
 
 @keyframes aparecer{
@@ -110,8 +112,9 @@
     font-family: var(--subtitle);
     color: var(--prymary);
 }
-.ReviewsForm .Container .Left .RatingInput p{
-    font-size: 10px;
+.ReviewsForm .Container .Left p{
+    font-size: 15px;
+    padding: 5px;
     font-family: var(--subtitle);
     color: var(--prymary);
 }
@@ -120,7 +123,21 @@
     font-family: var(--subtitle);
     color: var(--prymary);
 }
+.ReviewsForm .Container .Left .Total-Rating{
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    width:100%;
+    padding: 0 30px;
+}
 
+.ReviewsForm .Container .Left .AdicionalRatings{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding:0 40px;
+    align-items:end ;
+}
 .ReviewsForm .Container .Rigth form{
     display: flex;
     flex-direction: column;

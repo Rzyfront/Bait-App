@@ -2,6 +2,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 a{
@@ -116,4 +117,10 @@ h6{
 *::-moz-scrollbar-thumb {
   background-color: var(--bg-thumb);
   border-radius: 15px;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
