@@ -1,9 +1,9 @@
 const { allCharacteristics } = require('../helpers/allCharacteristics');
-const { /* isEmail, */ verifiedTypeOf, verifiedExistsTypeLength } = require('../helpers/validations');
+const { /* isEmail, */ verifiedTypeOf, verifiedExistsTypeLength, verifiedExists } = require('../helpers/validations');
 
 module.exports = (req, res, next) => {
   const {
-    name, location, schedule, /* email, */ characteristics, images, specialty,
+    name, location, schedule, /* email, */ characteristics, images, specialty, lat, lng,
   } = req.body;
 
   try {
@@ -12,6 +12,9 @@ module.exports = (req, res, next) => {
 
     if (location) verifiedTypeOf(location, 'string', 'location');
     else throw new Error('Incomplete data');
+
+    verifiedExists(lat, 'lat');
+    verifiedExists(lng, 'lng');
 
     if (schedule) verifiedTypeOf(schedule, 'string', 'schedule');
 

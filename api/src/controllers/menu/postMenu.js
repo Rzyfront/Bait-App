@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     const local = await Local.findByPk(localId);
     if (!local) throw new Error('Local not found');
     const newMenu = await Menu.create({ type });
-    await local.setMenu(newMenu.id);
+    await local.addMenu(newMenu.id);
     res.status(201).json({ success: true, local });
   } catch (error) {
     res.status(400).json({ succes: false, message: error.message });
