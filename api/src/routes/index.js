@@ -9,7 +9,8 @@ const reviewsRoute = require('./reviews');
 const userExtractor = require('../middlewares/userExtractor');
 const userRoutes = require('./users');
 
-mainRouter.use('/locals', localsRoute)
+mainRouter
+  .use('/locals', localsRoute)
   .use('/login', loginRoute)
   .use('/images', imageRoute)
   .use('/reviews', reviewsRoute)

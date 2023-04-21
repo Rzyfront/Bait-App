@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import axios from 'axios';
 // axios default
 axios.defaults.baseURL = 'http://localhost:3001';
+axios.defaults.headers.common['Authorization'] = `Bearer ${window.localStorage.getItem('token')}`;
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <BrowserRouter>

@@ -11,7 +11,14 @@ module.exports = async (req, res) => {
     await local.setUser(user.id);
     local.verified = 'verified';
     await local.save();
-    res.status(201).json({ success: true, local });
+    const localData = {
+      id: local.id,
+      name: local.name,
+      location: local.location,
+      specialty: local.specialty,
+      userId: local.UserId,
+    };
+    res.status(201).json({ success: true, local: localData });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
   }

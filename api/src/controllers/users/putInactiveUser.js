@@ -12,7 +12,11 @@ module.exports = async (req, res) => {
       return res.status(404).json({ success: false, message: 'User ID not found' });
     }
     const updateUser = await user.update({ isActive: false });
-    return res.status(201).json({ success: true, local: updateUser });
+    const userData = {
+      id: updateUser.id,
+      isActive: updateUser.isActive,
+    };
+    return res.status(201).json({ success: true, user: userData });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
   }

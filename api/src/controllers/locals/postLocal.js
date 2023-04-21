@@ -12,7 +12,13 @@ module.exports = async (req, res) => {
     await newLocal.createCharacteristic(characteristics);
     await newLocal.addImages(images.map((image) => image.id));
     await user.addLocal(newLocal);
-    return res.status(201).json({ success: true, local: newLocal });
+    const local = {
+      id: newLocal.id,
+      name: newLocal.name,
+      location: newLocal.location,
+      specialty: newLocal.specialty,
+    };
+    return res.status(201).json({ success: true, local });
   } catch (error) {
     return res.status(400).json({ message: error.message, success: false });
   }
