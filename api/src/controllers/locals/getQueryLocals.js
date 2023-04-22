@@ -26,7 +26,8 @@ module.exports = (req, res, next) => {
     req.menu = { type: menu };
   }
 
-  req.characteristics = characteristics;
+  req.characteristics = JSON.parse(characteristics.characteristics);
+  console.log(req.characteristics);
   req.reviews = { verified: verified ?? true };
   req.order = reqOrder;
   req.where = where;

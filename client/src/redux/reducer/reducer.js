@@ -1,5 +1,5 @@
 
-import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE, SUCCESS, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER } from '../actions/actions';
+import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE, SUCCESS, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER, SEARCH_BY_FILTERS } from '../actions/actions';
 
 const initialState = {
   cards: [],
@@ -7,20 +7,21 @@ const initialState = {
   detail: [],
   success: null,
   error: '',
-  user: {}
+  user: {},
+  filters: {},
+  totalPages: ''
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ORDER:
       return {
         ...state,
-        reset: state.cards,
-        cards: payload
+        filters: payload
       };
     case RESET:
       return {
         ...state,
-        cards: state.reset
+        cards: { ...state, cards: { ...state.cards, filters: payload } }
       };
     case SEARCH_BY_QUERY:
       return {
@@ -73,7 +74,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         user: {}
       };
-
+    case SEARCH_BY_FILTERS:
+      return {
+        ...state,
+        cards: payload.locals,
+        filters: payload.filters,
+        totalPages: payload.totalPages
+      };
     default:
       return { ...state };
   }

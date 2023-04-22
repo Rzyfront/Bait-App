@@ -15,11 +15,13 @@ export const POST_MENU = 'POST_MENU';
 export const POST_DISH = 'POST_DISH';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
+export const SEARCH_BY_FILTERS = 'SEARCH_BY_FILTERS';
+export const SAVE_FILTERS = 'SAVE_FILTERS';
 /// ///////actions////////////////////////////
-export const reset = () => {
+export const reset = (filter) => {
   return {
     type: RESET,
-    payload: ''
+    payload: filter
   };
 };
 /// loadinglocals
@@ -157,9 +159,50 @@ export const order = (data, actions) => {
 export const searchByQuery = (name, city) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/locals?name=${name}&location=${city}`);
+      const response = await axios.get(`?name=${name}&location=${city}`);
+      // order 'ratingASC' 'ratingDESC' 'nameASC' 'nameDESC'
+      // specialty
+      // menu
+      /* 'Entradas',
+        'Sopas y cremas',
+        'Ensaladas',
+        'Platos principales',
+        'Acompañamientos',
+        'Postres',
+        'Dieta Vegana',
+        'Dieta Gluten Free',
+        'Varios',
+      */
       const info = response.data;
       return dispatch({ type: SEARCH_BY_QUERY, payload: info });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const searchByFilters = (filter) => {
+  console.log(filter);
+  const {
+    name = '',
+    city = '',
+    specialty,
+    characteristics,
+    rating,
+    alphabet = 'nameASC',
+    page
+  } = filter;
+  return async (dispatch) => {
+    try {
+      console.log(page);
+      let character = {};
+      if (characteristics) character = { [characteristics]: true };
+      const response = await axios.get(
+        `/locals/page/${page ?? 1}?name=${name}&location=${city}&specialty=${/* specialty */ ''}&order=${rating ?? alphabet}&characteristics=${JSON.stringify(character)}`);
+      const info = response.data;
+      console.log(info);
+      info.filters = filter;
+      return dispatch({ type: SEARCH_BY_FILTERS, payload: info });
     } catch (error) {
       console.log(error.message);
     }

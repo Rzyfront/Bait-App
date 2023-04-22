@@ -1,43 +1,27 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Card from '../Card/Card';
 import './Cards.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Pagination from '../pagination/pagination';
-import { homepage, searchByQuery } from '../../redux/actions/actions';
+import { useEffect } from 'react';
+import { searchByFilters } from '../../redux/actions/actions';
 
 function Cards () {
-  const location = useLocation();
-
-  // params consulta
-  // obtener los valores de los parametros de consulta
-  const queryParams = new URLSearchParams(location.search);
-  const name = queryParams.get('name');
-  const city = queryParams.get('city');
-
-  const { locals, totalPages } = useSelector((state) => state.cards);
-  const pagine = useParams();
   const dispatch = useDispatch();
-  // navegation
-  const [navegation, setnavegation] = useState(pagine.id);
-  // actualiza pagina
-  useEffect(() => {
-    if (name || city) {
-      dispatch(searchByQuery(name, city));
-      setnavegation(pagine.id);
-    } else {
-      dispatch(homepage(pagine.id));
-      setnavegation('', '');
-    }
-  }, [pagine]);
-  // controller navegation
-  useEffect(() => {
-    setnavegation(pagine.id);
-  }, [totalPages]);
+  const { id } = useParams();
+  const { cards, totalPages, filters = {} } = useSelector((state) => state);
+  const locals = cards;
+  useEffect(
+    () => {
+      filters.page = Number(id);
+      dispatch(searchByFilters(filters));
+    }, [id]
+  );
+
   return (
     <div className="containerCardsall animated-element">
       <div>
-      {totalPages && <Pagination totalPages={totalPages} />}
+      {totalPages && <Pagination totalPages={totalPages} filters={filters} />}
       <div className="ContainerCards animated-element">
         {locals &&
           locals.map(
