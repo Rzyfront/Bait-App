@@ -45,7 +45,7 @@
     font-size: 1rem;
     font-family: var(--subtitle);
     background: var(--bg-primary);
-    font-weight: 100;
+    font-weight: 400;
 
 }
 .search_home .searchs input:focus {
@@ -59,7 +59,7 @@
 }
 .search_home .botton{
     background: var(--btn-primary);
-    width: 100px;
+    width: 120px;
     height: 35px;
     border-radius:  0 5px 5px 0 ;
     display: flex;

@@ -2,6 +2,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 a{
@@ -31,9 +32,12 @@ h6{
 
 :root {
   /* Fonts */
-  --title:'Lobster Two', 'goldplay';
+  --title: 'Montserrat', sans-serif;
+  --subtitle: 'Montserrat', sans-serif;
+  --text: 'Montserrat', sans-serif;
+  /* --title:'Lobster Two', 'goldplay';
   --subtitle:'Roboto','goldplay',sans-serif;
-  --text: 'Montserrat',sans-serif;
+  --text: 'Montserrat',sans-serif; */
 
   /* Color text */
   --primary: #343434;
@@ -113,4 +117,10 @@ h6{
 *::-moz-scrollbar-thumb {
   background-color: var(--bg-thumb);
   border-radius: 15px;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

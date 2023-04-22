@@ -1,0 +1,95 @@
+.Answers-Component{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    overflow: auto;
+    background-color: var(--bg-primary);
+}
+
+.Answers-Component .Answers-Container{
+    width: 60%;
+    padding: 30px;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    box-shadow: 0px 3px 5px var(--primary);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: capitalize;
+    gap: 25px;
+
+}
+
+.Answers-Component .Answers-Container .Bait_Logo{
+    width: 130px;
+    transition: 0.3s;
+}
+
+.Answers-Component .Answers-Container .Bait_Logo:hover {
+   transform: scale(1.1);
+    filter: drop-shadow(0px 0px 1px rgba(17, 17, 17, 0.642))
+}
+
+.Answers-Component .Answers-Container .Title{
+    font-size: 40px;
+    color: var(--primary);
+    font-weight: 600;
+    font-family: var(--title);
+    padding-bottom: 20px;
+}
+
+.Answers-Component .Answers-Container .Title span{
+    color: var(--secondary);
+}
+
+.Answers-Component .Answers-Container p{
+    padding:0px 20px;
+    color: var(--primary);
+    font-size: 15px;
+    font-family: var(--text);
+    font-weight: 400;
+}
+
+.Answers-Component .Answers-Container p span {
+    color: var(--secondary);
+    font-weight: 600;
+    font-style: italic;
+}
+
+.Answers-Component .Answers-Container .Header-Answers{
+    font-weight: 500;
+}
+
+.Answers-Component .Answers-Container .Answer-Buttons{
+    display: flex;
+    gap: 30px;
+}
+
+.Answers-Component .Answers-Container .Answer-Buttons .Answers-Entendido,
+.Answers-Component .Answers-Container .Answer-Buttons .Answers-Volver{
+    width: 140px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    font-size: 15px;
+    font-family: var(--subtitle);
+    background-color: var(--bg-secondary);
+    color: var(--tertiary);
+    transition: 0.3s;
+}
+
+.Answers-Component .Answers-Container .Answer-Buttons .Answers-Entendido:hover{
+ background-color: var(--bg-tertiary);
+ color: var(--tertiary);
+ box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+ rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.Answers-Component .Answers-Container .Answer-Buttons .Answers-Volver:hover {
+    background-color: var(--optional2);
+    color: var(--tertiary);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}

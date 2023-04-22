@@ -1,0 +1,290 @@
+.options{
+    /* background-color: red; */
+    height: 100vh;
+    width: 85vw;
+    text-align: center;
+    
+}
+
+.container{
+    display:flex;
+    flex-direction: row;
+    height: 100vh;
+    animation: example 0.6s;
+}
+
+.containerUserCard{
+    margin-top: 50px;
+}
+
+.userIcon{
+    margin-left: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+.userCard{
+    margin-left: 10%;
+    margin-top: 20px;
+    width: 80%;
+    padding: 10px 0px;
+    border-radius: 15px;
+    background-color: rgb(225, 225, 225);
+    display: flex;
+    /* gap:100px */
+    transition:.3s;
+}
+
+
+.usernames{
+    font-size: .9em;
+    /* margin-left: -20px; */
+}
+
+.correo{
+    margin-left: 100px;
+}
+
+.nameAndUser{
+    text-align: left;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.button{
+    position: absolute;
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--btn-primary);
+    color: white;
+    margin-left: 700px;
+    height: 40px;
+    margin-top: 3px;
+    padding: 0px 10px;
+    transition: .3s;
+}
+
+.buttonExaminar{
+    position: absolute;
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--btn-primary);
+    color: white;
+    margin-left: 800px;
+    height: 40px;
+    margin-top: 3px;
+    padding: 0px 10px;
+    transition: .3s;
+}
+
+.role{
+    margin-top: 10px;
+    position: absolute;
+    margin-left: 300px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+.button:hover ~ .roles{
+    opacity: 1;
+}
+
+.buscador{
+    background-color: transparent;
+    font-size: 1.3em;
+    border:0;
+    text-align: center;
+    margin-top: 30px;
+    height: 30px;
+    width: 300px;
+}
+
+.buscador:focus{
+    outline: 0;
+}
+
+.nameSection{
+    margin-top: 20px;
+    color: var(--secondary)
+}
+
+.roles{
+    position: absolute;
+    height: 50px;
+    width: 84px;
+    background-color: rgb(255, 255, 255);
+    margin-left:700px;
+    margin-top: 40px;
+    opacity:0;
+    transition: .2s;
+}
+
+.banButton{
+    position: absolute;
+    border: 0;
+    border-radius: 10px;
+    background-color: var(--optional2);
+    color: white;
+    margin-left: 800px;
+    height: 40px;
+    margin-top: 3px;
+    padding: 0px 10px
+}
+
+.filtro{
+    background-color: transparent;
+    border: 0;
+}
+
+.titleAndStars{
+    position: absolute;
+    text-align: left;
+    margin-left: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* RESEÑAS REVIEW */
+
+.reseña{
+    width: 60%;
+}
+
+.tituloReseña{
+ margin-top: 15px;
+}
+
+.contentReseña{
+    font-size: 1.1em;
+    padding: 20px 120px;
+}
+
+.fotos{
+    width: 70%;
+    border-radius: 30px;
+    border: 3px solid rgb(67, 153, 200);
+}
+
+.interactuar{
+margin-top: 70px;
+}
+
+.botonAccept{
+    border: 0;
+    background-color: var(--optional1);
+    color:white;
+    font-size: 1.1em;
+    padding: 10px 50px;
+    border-radius: 10px;
+}
+
+.botonDenied{
+    margin-left: 100px;
+    border: 0;
+    background-color: var(--optional2);
+    color:white;
+    font-size: 1.1em;
+    padding: 10px 50px;
+    border-radius: 10px;
+}
+
+.containerReview{
+    margin-top: 50px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 800px){
+    .options{
+        margin-top: 100px;
+    }
+    .nameSection{
+        width: 100vw;
+    }
+    .buscador{
+        margin-left: 15vw;
+    }
+    .role{
+        margin-left: -100px;
+        margin-top: 0px;
+        position: relative;
+        display: inline;
+        height: 50px;
+    }
+    .nameAndUser{
+        width: 270px;
+    }
+    .button{
+        margin-top: 50px;
+        position: static;
+        margin-left: -135px;
+        display: block;
+    }
+    .banButton{
+        display: block;
+        margin-top: 50px;
+        position: relative;
+        margin-left: 20px;
+    }
+    .userCard{
+        height: 120px;
+        width: 80vw;
+    }
+    .reseña .userCard{
+        height: 70px;
+        width: 85vw;
+    }
+    .titleAndStars{
+        position: relative;
+        margin:0;
+        margin-left: -80px;
+        width: 200px;
+    }
+    .buttonExaminar{
+        margin-top: 50px;
+        position: static;
+        margin-left: -205px;
+        display: block;
+    }
+    .reseña .titleAndStars{
+        display: none;
+        margin-left: -100px;
+    }
+    .tituloReseña{
+        display: none;
+    }
+    .contentReseña{
+        margin-top: -20px;
+        font-size: 1em;
+        width: 100vw;
+        padding:0 100px;
+        display: block;
+    }
+    .containerReview{
+        flex-direction: column-reverse;
+    }
+    .interactuar{
+        margin-top: 30px;
+        display: flex;
+        flex-direction: row;
+        margin-left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    .botonAccept{
+        margin:0;
+    }
+    .botonDenied{
+        margin:0;
+        margin-left: 20px;
+    }
+    .pruebas{
+        margin-left:80px;
+        margin-bottom: 50px;
+    }
+}
