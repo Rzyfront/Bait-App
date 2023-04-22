@@ -4,17 +4,21 @@ import '@smastrom/react-rating/style.css';
 import { GoLocation } from 'react-icons/go';
 import { BsCalendar3 } from 'react-icons/bs';
 import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
+
 import { GiMeal } from 'react-icons/gi';
 import img from '../../assets/restaurante.jpg';
 import imgComida from '../../assets/comida.jpg';
+import Rimg from '../../assets/Reviewphoto.jpg';
 import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
+
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DetailLocal } from '../../redux/actions/local';
+import { DetailLocal } from '../../redux/actions/actions';
+
 function Profile () {
   const [average, setAverage] = useState(0);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { locals } = useSelector((state) => state.detail);
 
@@ -22,7 +26,7 @@ function Profile () {
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
-  console.log(locals);
+
   useEffect(() => {
     if (locals) {
       let suma = 0;
@@ -70,11 +74,61 @@ function Profile () {
     }
   ];
 
+  const ReviewsList = [
+    {
+      User: 'Rafael Martinez',
+      Rating: 1,
+      Images: [Rimg],
+      Opinion:
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
+    },
+    {
+      User: 'Rafael Martinez',
+      Rating: 1,
+      Images: [Rimg],
+      Opinion:
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
+    },
+    {
+      User: 'Rafael Martinez',
+      Rating: 1,
+      Images: [Rimg],
+      Opinion:
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
+    },
+    {
+      User: 'Rafael Martinez',
+      Rating: 1,
+      Images: [Rimg],
+      Opinion:
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
+    },
+    {
+      User: 'Rafael Martinez',
+      Rating: 1,
+      Images: [Rimg],
+      Opinion:
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
+    },
+    {
+      User: 'Rafael Martinez',
+      Rating: 1,
+      Images: [Rimg],
+      Opinion:
+        'Esas papas estabas mas cauchudas que un neumatico te tractomula, y la carne mas dura un bloque de cemento reforzado con acero de una tonelada y media.'
+    }
+  ];
+
+  const { Name, Image, Rating, Location, Schedule, Tel, Email } = {
+    Name: 'La Grandeza',
+    Image: img,
+    Rating: 3.8,
+    Tel: [123214352, 453424324]
+  };
   return (
     <>
       <Navbar />
-      <div className="Profile animated-element">
-
+      <div className="Profile">
         {toogleModal2 && (
           <ReviewsForm setToggleModal2={setToggleModal2} id={id} />
         )}
@@ -84,12 +138,12 @@ function Profile () {
               ? (
               <img
                 src={locals.Images[0].url}
-                alt={locals.name}
+                alt={Name}
                 className="ImageProfile"
               />
                 )
               : (
-              <img src={img} alt={locals.name} className="ImageProfile" />
+              <img src={Image} alt={Name} className="ImageProfile" />
                 )}
 
             <div className="Decorator"></div>
@@ -113,7 +167,9 @@ function Profile () {
               </div>
               <div className="TelGroup">
                 <h3>Tel:</h3>
-                <p>{locals.phone}</p>
+                {Tel.map((t, i) => {
+                  return <p key={i}>{t} |</p>;
+                })}
               </div>
               <div className="EmailGroup">
                 <h3>E-mail:</h3>

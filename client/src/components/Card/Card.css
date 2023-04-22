@@ -10,12 +10,12 @@
     margin: 10px;
     padding:10px 2px;
     border-radius: 5px;
-    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 1px;
     text-align: left;
     transition: 0.3s;
 }
 .Card:hover {
-    box-shadow: rgba(0, 0, 0, 0.37) 0px 2px 4px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 4px;
     transform: scale(1.01);
 }
 
@@ -30,9 +30,8 @@
 .Card .infoCard{
     display: flex;
     flex-direction: column;
-    overflow: hidden;
     width: 210px;
-    height: 100%;
+    height: 80px;
     padding: 5px 0px;
     background-color: var(--bg-primary);
 }
@@ -54,38 +53,9 @@
 
 .Card .LocationGroup{
     display: flex;
-    align-items: center;
-    
+    gap: 5px;
 }
 
 .Card .Price{
  font-family: var(--text);
-}
-
-.Card .infoCard .Card-Tags{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-
-.Card .infoCard .Card-Tags .Tag-Type,
-.Card .infoCard .Card-Tags .Tag-Charact{
-    height: 22px;
-    width:max-content;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 1px;
-}
-
-.Card .infoCard .Card-Tags .Tag-Type p,
-.Card .infoCard .Card-Tags .Tag-Charact p {
-    color: var(--tertiary);
-    font-weight: bold;
-    margin: 0 5px;
-}
-.Card .infoCard .Card-Tags .Tag-Charact{
-    background-color: var(--bg-tertiary);
-}
-.Card .infoCard .Card-Tags .Tag-Type {
-    background-color: var(--optional1);
 }

@@ -7,11 +7,6 @@
    padding: 0 20px;
 }
 
-.Filters .Left-Home-Buttons{
-    display: flex;
-    gap: 10px;
-}
-
 .Filters .AddPlace{
     display: flex;
     align-items: center;
@@ -35,33 +30,12 @@
 }
 
 .Filters .AddPlace .AddPlace_Text {
-    font-size: 17px;
+    font-size: 20px;
     font-family: var(--subtitle);
-    font-weight: 200;
+    font-weight: 300;
     
 }
 
-.Filters .ResetHome{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 23px;
-    color: var(--tertiary);
-    width: 50px;
-    height: 40px;
-    border: none;
-    background-color: var(--btn-secondary);
-    border-radius: 7px;
-    gap: 5px;
-    padding: 7px;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.Filters .ResetHome:hover {
-    background-color: var(--btn-primary);
-    box-shadow: rgba(0, 0, 0, 0.347) 0px 1px 4px;
-}
 .Filters .FiltersGroup{
     display: flex;
     gap: 10px;
@@ -102,7 +76,7 @@
     align-items: center;
     justify-content: center;
     color: var(--tertiary);
-    width: 160px;
+    width: 140px;
     height: 40px;
     border: none;
     background-color: var(--btn-secondary);
@@ -117,7 +91,7 @@
     align-items: center;
     justify-content: center;
     color: var(--tertiary);
-    width: 160px;
+    width: 140px;
     height: 40px;
     border: none;
     background-color: var(--btn-primary);
@@ -130,7 +104,5 @@
 
 .Filters .FiltersGroup .FilterOff h3,
 .Filters .FiltersGroup .FilterOn h3{
-    font-size: 17px;
-    font-weight: 200;
-    font-family: var(--subtitle);
+    font-size: 15px;
 }

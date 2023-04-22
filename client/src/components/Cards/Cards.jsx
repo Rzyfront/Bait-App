@@ -4,8 +4,8 @@ import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
-import { homepage } from '../../redux/actions/actions';
-import { searchByQuery } from '../../redux/actions/cards';
+import { homepage, searchByQuery } from '../../redux/actions/actions';
+
 function Cards () {
   const location = useLocation();
 
@@ -35,10 +35,8 @@ function Cards () {
     setnavegation(pagine.id);
   }, [totalPages]);
   return (
-    <div className="containerCardsall animated-element">
-      <div>
-      {totalPages && <Pagination totalPages={totalPages} />}
-      <div className="ContainerCards animated-element">
+    <div className="containerCardsall">
+      <div className="ContainerCards">
         {locals &&
           locals.map(
             (
@@ -71,7 +69,7 @@ function Cards () {
             }
           )}
       </div>
-      </div>
+      {totalPages && <Pagination totalPages={totalPages} />}
     </div>
   );
 }

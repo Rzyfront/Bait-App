@@ -15,14 +15,14 @@
     padding: 0;
     margin: 0;
 }
-/* 
+
 .Landing .Carrousel .CarrouselItem{
     position: relative;
     width: 100%;
     height: calc(100vh - 50px);
     padding: 0;
     margin: 0;
-}    */
+}   
 
 .Landing .Carrousel .CarrouselItem .SlideItem1 img,
 .Landing .Carrousel .CarrouselItem .SlideItem2 img,
@@ -33,7 +33,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: -9;
+        z-index: -5;
 }
 
 /*! Slide 1 */
@@ -71,30 +71,24 @@
     gap: 20px;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 50px;
     margin-left: 50px;
 }
 
 .SlideItem1 .FirstTitle h1{
-    font-size: 40px;
+    font-size: 60px;
     color: var(--primary);
     font-family: var(--title);
-    text-align: center;
-    font-weight: 600;
-    text-shadow:  2px 2px 4px rgb(66, 66, 66);
-   
 }
 .SlideItem1 .FirstTitle span {
     color: var(--secondary);
-    
 }
 
 .SlideItem1 .FirstTitle h2 {
-    font-size: 25px;
+    font-size: 30px;
     font-family: var(--subtitle);
     text-align: center;
-    font-weight: 300;
     /* font-weight: 300; */
 }
 
@@ -160,11 +154,9 @@
 }
 
 .SlideItem2 .SecondTitle h2 {
-    font-size: 40px;
+    font-size: 60px;
     color: var(--primary);
     font-family: var(--title);
-    font-weight: 600;
-    text-shadow: 2px 2px 4px rgb(66, 66, 66);
 }
 
 .SlideItem2 .SecondTitle span {
@@ -173,9 +165,8 @@
 }
 
 .SlideItem2 .SecondTitle h3 {
-    font-size: 25px;
+    font-size: 30px;
     font-family: var(--subtitle);
-    font-weight: 300;
 }
 
 .SlideItem2 .SecondTitle button {
@@ -244,19 +235,16 @@
     font-size: 60px;
     color: var(--primary);
     font-family: var(--title);
-    font-weight: 600;
-    text-shadow: 2px 2px 4px rgb(66, 66, 66);
 }
 
 .SlideItem3 .ThirdTitle span {
-    font-weight: 500;
+    font-weight: 700;
     color: var(--secondary);
 }
 
 .SlideItem3 .ThirdTitle h3 {
     font-size: 30px;
     font-family: var(--subtitle);
-    font-weight: 300;
 }
 
 .SlideItem3 .ThirdTitle button {

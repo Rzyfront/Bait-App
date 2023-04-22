@@ -14,34 +14,35 @@ const Pagination = ({ totalPages, position }) => {
     numbers.push(
       <div
         key={i}
-        className={`paginatioNumbers animated-pagination ${Number(id) === i + 1 ? 'pagination_on' : 'pagination_off'}`}
+        className={Number(id) === i + 1 ? 'pagination_on' : 'pagination_off'}
       >
         <Link to={`/home/${i + 1}?name=${name}&city=${city}`}>
-          <p>{i + 1}</p>
+          <h1>{i + 1}</h1>
         </Link>
       </div>
     );
   }
   return (
     <div className="containerPagination">
-      <div className='paginatioNumbersGroup'>
-      {(Number(id) > 1) &&
-        (
+      {Number(id) > 1
+        ? (
         <Link to={`/home/${Number(id) - 1}?name=${name}&city=${city}`}>
           <FcPrevious className="paginationIcon" />
         </Link>
-        )}
-        {numbers}
-      {Number(id) === totalPages
-        ? (
-          <div> </div>
           )
         : (
-            <Link to={`/home/${Number(id) + 1}?name=${name}&city=${city}`}>
+        <div> </div>
+          )}
+      {numbers}
+      {Number(id) === totalPages
+        ? (
+        <div> </div>
+          )
+        : (
+        <Link to={`/home/${Number(id) + 1}?name=${name}&city=${city}`}>
           <FcNext className="paginationIcon" />
         </Link>
           )}
-          </div>
     </div>
   );
 };

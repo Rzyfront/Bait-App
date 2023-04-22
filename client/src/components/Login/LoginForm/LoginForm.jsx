@@ -2,8 +2,6 @@ import { TfiClose } from 'react-icons/tfi';
 import { FcGoogle } from 'react-icons/fc';
 import ojoAbierto from '../../../assets/abrir-ojo.png';
 import ojoCerrado from '../../../assets/cerrar-ojo.png';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn } from '../../../redux/actions/actions';
@@ -40,13 +38,8 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
   const handleLogin = (e) => {
     e.preventDefault();
     console.log('bye');
-    if (Object.entries(errors).length === 0) {
-      dispatch(logIn(user));
-      return;
-    }
-    toast.error('¡Completa los campos!', {
-      position: toast.POSITION.TOP_CENTER
-    });
+    if (Object.entries(errors).length === 0) return dispatch(logIn(user));
+    alert('Invalid data');
     setUser({
       email: '',
       password: ''
@@ -68,7 +61,6 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
   return (
         <>
             <div className="login">
-              <ToastContainer className="notify" theme='colored'/>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
@@ -91,7 +83,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                 autoComplete="off"
                                 placeholder="Usuario"
                             ></input>
-
+                            {errors.email && <span>{errors.email}</span>}
                             <div className="PasswordGroup">
                                 <input
                                     type="password"
@@ -110,7 +102,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                     src={`${ojo ? ojoAbierto : ojoCerrado}`}
                                     width="20px"
                                     ></img>
-
+                                {errors.password && <span>{errors.password}</span>}
                             </div>
                             <button className="button" type="submit">Ingresar</button>
                             <div className="loginwith">
@@ -121,8 +113,6 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                             <div className="registrarme" onClick={() => loginRegister()}>
                                 <p>¿Aún no tienes cuenta?</p>
                                 <h5>Regístrate</h5>
-                                {errors.email && <span>{errors.email}</span>}
-                                {errors.password && <span>{errors.password}</span>}
                             </div>
                         </form>
                     </div>

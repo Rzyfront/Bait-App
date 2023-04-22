@@ -2,8 +2,6 @@ import { TfiClose } from 'react-icons/tfi';
 import { useRef, useState } from 'react';
 import { createUser } from '../../../redux/actions/actions';
 import { validation } from '../validation';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -42,10 +40,13 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
         [event.target.name]: event.target.value
       })
     );
+
+    // console.log(errorsRegister);
   };
 
   const sendRegister = (event) => {
     event.preventDefault();
+    console.log(dataRegister);
     if (!Object.values(errorsRegister).length) {
       dispatch(createUser(dataRegister));
       setDataRegister({
@@ -61,25 +62,22 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
         isActive: '',
         role: ''
       });
-      toast.success('¡Ac satisfactoriamente!', {
-        position: toast.POSITION.TOP_CENTER
-      });
-      navigate('/home/1?name=&city=');
+      alert('Usario creado');
+      navigate('/home');
       setErrorsRegister({});
     } else {
-      toast.error(errorsRegister.name +
+      alert(
+        errorsRegister.name +
                 '\n' +
                 errorsRegister.password +
                 '\n' +
-                errorsRegister.phone_number, {
-        position: toast.POSITION.TOP_CENTER
-      });
+                errorsRegister.phone_number
+      );
     }
   };
   return (
         <>
             <div className={`${!login && 'register scale-up-bottom'}`}>
-              <ToastContainer className="notify" theme="colored"/>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {

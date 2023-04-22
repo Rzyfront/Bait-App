@@ -1,16 +1,19 @@
 .containerCardsall{
     width: 100%;
     display: block;
-    height: calc(100vh - 100px);
+    height: 100%;
+ 
+
 }
 .ContainerCards{
     display: flex;
     flex-wrap: wrap;
+    /* overflow-y: auto; */
     justify-content: center;
     align-items: center;
-    overflow: auto;
     width: 100%;
-    height: calc(100vh - 150px);
+    height: 100%;
+ 
     color: var(--primary);
     background-color: var(--bg-primary);
 }

@@ -36,7 +36,7 @@ const Footer = () => {
         <div className="InfoFooter1">
           <ul>
             <li>
-              <Link to="/about">Sobre Nosotros</Link>
+              <Link to="/">Sobre Nosotros</Link>
             </li>
             <li>
               <a href="mailto:baitdevs2023@gmail.com">Contactanos</a>
@@ -95,15 +95,23 @@ const Footer = () => {
         <div className="InfoFooter4">
           <ul>
             <li>
-              <Link to="/answers">Q&A</Link>
+              <Link to="/Answers">Q&A</Link>
             </li>
-            <li>
-               <Link to="/datatreatment">Tratamiento de Datos</Link>
+            <li
+              onClick={
+                showTerms ? () => setShowTerms(false) : () => setShowTerms(true)
+              }
+            >
+              Tratamiento de Datos
             </li>
-            <li>
-               <Link to="/createplace">
+            <li
+              onClick={
+                showCookies
+                  ? () => setShowCookies(false)
+                  : () => setShowCookies(true)
+              }
+            >
               Trabaja con nosotros
-              </Link>
             </li>
           </ul>
         </div>

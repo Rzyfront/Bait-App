@@ -4,13 +4,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
 }
 
 .Reviews .Reviews-Title {
-    font-size: 30px;
-    padding-right: 20px;
-    border-right: 1px solid var(--primary);
+    font-size: 60px;
     font-family: var(--title);
 }
 
@@ -24,17 +21,12 @@
     gap: 15px;
 }
 
- .Reviews .TitleGroup {
-    position: relative;
-    z-index: 99;
+.TitleGroup {
     width: 100%;
-    height: 10%;
-    padding: 0 20px;
+    height: 20%;
     display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
 .TitleGroup .Decorator {
@@ -89,28 +81,27 @@
 
 .ReviewCard .LeftInfo h3{
     font-size: 25px;
-    width: fit-content;
     color: var(--primary);
     font-family: var(--title);
     font-weight: 700;
     border-bottom: 2px solid var(--bg-tertiary);
-    border-radius: 0 0 0 10px;
+    border-radius: 0 0 10px 0;
 
 }
 
 
 .ReviewCard .LeftInfo .RatingGroup h4 {
-    font-size: 15px;
+    font-size: 18px;
     color: var(--primary);
     font-family: var(--subtitle);
-    font-weight: 600;
+    font-weight: 700;
 
 }
 .ReviewCard .LeftInfo .OpinionGroup h4 {
-    font-size: 15px;
+    font-size: 18px;
     color: var(--primary);
     font-family: var(--subtitle);
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .ReviewCard .LeftInfo .OpinionGroup {
