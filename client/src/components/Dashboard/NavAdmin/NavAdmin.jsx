@@ -3,7 +3,7 @@ import LogoBait from '../../../assets/LogoBait.svg';
 import { FaUserFriends } from 'react-icons/fa';
 import { MdOutlineRestaurantMenu, MdReviews } from 'react-icons/md';
 import { BiExit } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const NavAdmin = ({ fn, section }) => {
   const navigate = useNavigate();
@@ -11,7 +11,9 @@ const NavAdmin = ({ fn, section }) => {
   return (
     <nav className={style.nav}>
         <div className={style.profile}>
+           <Link to='/home/1?name=&city='>
             <img src={LogoBait} className={style.img}></img>
+            </Link>
             <p className={style.username}>ADMINISTRACION</p>
         </div>
         <ul className={style.ul}>

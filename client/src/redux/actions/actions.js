@@ -11,7 +11,10 @@ export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
 export const SUCCESS_RESET = 'SUCCESS_RESET';
 export const ERROR_RESET = 'ERROR_RESET';
-
+export const POST_MENU = 'POST_MENU';
+export const POST_DISH = 'POST_DISH';
+export const CHECKUSER = 'CHEKUSER';
+export const RESETUSER = 'RESETUSER';
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -89,7 +92,7 @@ export const DetailUser = (id) => {
 };
 
 // correguir imagen cuando este listo la ruta
-export const createLocal = (inputs, chekinputs) => {
+export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
@@ -97,10 +100,10 @@ export const createLocal = (inputs, chekinputs) => {
         images: inputs.images,
         location: inputs.location,
         name: inputs.name,
-        phone: inputs.phone,
+        // phone: inputs.phone,
         schedule: inputs.schedule,
-        specialty: inputs.specialty,
-        characteristics: chekinputs
+        specialty: inputs.specialty
+        // characteristics: chekinputs
       });
       if (response.status === 201) {
         dispatch({
@@ -114,11 +117,12 @@ export const createLocal = (inputs, chekinputs) => {
         }, 3000);
       }
     } catch (error) {
+      console.log(error);
       dispatch({
         type: ERROR,
         payload: error.message
       });
-      // set error state to null after 5 seconds
+      // set error state to null after 3 seconds
       setTimeout(() => {
         dispatch({
           type: ERROR_RESET
@@ -178,11 +182,10 @@ export const searchByQuery = (name, city) => {
 };
 
 export const logIn = (credentials) => {
-  console.log('haciendo dispatch');
   return async (dispatch) => {
     try {
       const res = await axios.post('/login', credentials);
-      localStorage.setItem('user', JSON.stringify(res.data));
+      localStorage.setItem('token', res.data.token);
       location.reload();
     } catch (error) {
       console.log(error.message);
@@ -197,8 +200,8 @@ export const comentarie = (
   calificationService,
   calculateAverage,
   inputs,
-  id,
-  userToken
+  id
+
 ) => {
   return async (dispatch) => {
     try {
@@ -213,12 +216,6 @@ export const comentarie = (
           service: calificationService,
           environment: calificationEnvironment,
           qaPrice: calificationQaPrice
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${userToken}`, // Aquí agregas tu header personalizado
-            'Content-Type': 'application/json' // También puedes agregar otros headers estándar
-          }
         }
       );
       console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
@@ -236,8 +233,86 @@ export const homepage = (id) => {
         type: HOMEPAGE,
         payload: response.data
       });
+      setTimeout(() => {
+        dispatch({
+          type: SUCCESS_RESET
+        });
+      }, 3000);
     } catch (error) {
       console.log(error.message);
     }
+  };
+};
+
+export const postMenu = (localId, menu) => {
+  console.log(localId, menu);
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/menu/${localId}`, menu);
+      console.log(response.data);
+      if (response.status === 201) {
+        return dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+
+export const postDish = (menuId, dish) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/menu/${menuId}`, dish);
+      if (response.status === 201) {
+        return {
+          type: SUCCESS
+        };
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+export const checkUser = () => {
+  return async (dispatch) => {
+    try {
+      const res = await axios.get('/login');
+      console.log(res.data);
+      dispatch({
+        type: CHECKUSER,
+        payload: res.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const ResetUser = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: RESETUSER,
+      payload: ''
+    });
   };
 };

@@ -1,12 +1,14 @@
 
-import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE, SUCCESS, ERROR, SUCCESS_RESET, ERROR_RESET } from '../actions/actions';
-
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER } from '../actions/actions';
+import { SEARCH_BY_QUERY } from '../actions/cards';
+import { DETAIL, SUCCESS } from '../actions/local';
 const initialState = {
   cards: [],
   reset: [],
   detail: [],
   success: null,
-  error: ''
+  error: '',
+  user: {}
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -61,6 +63,18 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         error: null
       };
+
+    case CHECKUSER:
+      return {
+        ...state,
+        user: payload
+      };
+    case RESETUSER:
+      return {
+        ...state,
+        user: {}
+      };
+
     default:
       return { ...state };
   }

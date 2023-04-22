@@ -12,7 +12,6 @@ function Userprofile () {
   useEffect(() => {
     dispatch(DetailUser(id));
   }, [id]);
-
   const { name, lastName, Image, location, phone, email } = {
     name: '',
     Image: '',

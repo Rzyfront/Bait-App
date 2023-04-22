@@ -1,32 +1,28 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Navbar.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import SearchHome from './SearchHome/SearchHome';
-import { Link } from 'react-router-dom';
-import { Login } from '../components';
+import { Link, useLocation } from 'react-router-dom';
+import { Login, DropdownUser } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { ResetUser } from '../../redux/actions/actions';
 const Navbar = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.user);
+  const [barra, setbarra] = useState(false);
   const [toogleLogin, setToggleLogin] = useState(false);
-  const [user, setUser] = useState(false);
-  const data = JSON.parse(localStorage.getItem('user'));
-
-  useEffect(() => {
-    if (data && data.user) {
-      setUser(true);
-    } else {
-      setUser(false);
-    }
-  }, [data]);
 
   const close = () => {
     localStorage.clear();
-    setUser(false);
+    dispatch(ResetUser());
   };
 
   return (
     <div className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to={'/home/1?name=&city='}>
+      <Link to={`${location.pathname !== '/' ? '/' : '/home/1?name=&city='}`}>
         <img
           src={BaitLogo}
           alt="Bait"
@@ -37,22 +33,35 @@ const Navbar = () => {
         <SearchHome />
       </div>
       <div className="UserGroup">
-        {user === false
+        {JSON.stringify(dataUser) === '{}'
           ? (
           <div
-            className="nav_login"
+            className="nav_login LogInGroup"
             onClick={() => {
               setToggleLogin(true);
             }}
           >
             <FaUserCircle className="UserIcon" />
-            <h4 className="LogIn">Inicia sesión </h4>
+            <h4 className="LogIn"> inicia</h4>
           </div>
             )
           : (
-          <div className="nav_login" onClick={close}>
+          <div className="nav_login" onClick={barra
+            ? () => {
+                setbarra(false);
+              }
+            : () => {
+                setbarra(true);
+              }}
+          >
             <FaUserCircle />
-            {data.user.name}
+            {dataUser.user.name}
+            {barra &&
+            (<div className={`dropDown ${barra && 'scale-up-ver-top'}`}>
+              <DropdownUser close={close}/>
+            </div>
+            )
+            }
           </div>
             )}
       </div>

@@ -17,4 +17,6 @@ export { default as Answers } from './Footer/Answers/Answers';
 export { default as About } from './Footer/About/About';
 export { default as Dashboard } from './Dashboard/Dashboard';
 export { default as DataTreatment } from './Footer/DataTreatment/DataTreatment';
+export { default as DropdownUser } from './Navbar/DropdownUser/DropdownUser';
+export { default as MenuForm } from './MenuForm/MenuForm';
 export { default as Userprofile } from './Userprofile/Userprofile';
