@@ -19,7 +19,7 @@ userRoutes
   .get('/:userId', getUser)
   .post('/', verifyPost, postUser)
   .delete('/:userId', verifyDelete, deleteUser)
-  .put('/', userExtractor, modifyUser)
+  .put('/:userId', userExtractor, modifyUser)
   .put('/changePassword', userExtractor, changePassword)
   .put('/inactive/:userId', putInactiveUser);
 
