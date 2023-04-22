@@ -1,5 +1,20 @@
 
-import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE, SUCCESS, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER, SEARCH_BY_FILTERS } from '../actions/actions';
+import {
+  ORDER,
+  RESET,
+  CREATE_USER,
+  HOMEPAGE,
+  CHECKUSER,
+  RESETUSER,
+  POST_MENU,
+  ERROR_DISH,
+  SUCCESS_DISH,
+  SUCCESS_MENU,
+  ERROR_MENU,
+  SEARCH_BY_FILTERS
+} from '../actions/actions';
+import { SEARCH_BY_QUERY } from '../actions/cards';
+import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 
 const initialState = {
   cards: [],
@@ -9,7 +24,13 @@ const initialState = {
   error: '',
   user: {},
   filters: {},
-  totalPages: ''
+  totalPages: '',
+  successMenu: null,
+  errorMenu: '',
+  successDish: null,
+  errorDish: '',
+  newMenu: {},
+  menu: []
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -48,22 +69,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         success: payload
       };
-    case SUCCESS_RESET:
-      return {
-        ...state,
-        success: null
-      };
     case ERROR:
       return {
         ...state,
         error: payload
       };
-    case ERROR_RESET:
-      return {
-        ...state,
-        error: null
-      };
-
     case CHECKUSER:
       return {
         ...state,
@@ -80,6 +90,32 @@ const rootReducer = (state = initialState, { type, payload }) => {
         cards: payload.locals,
         filters: payload.filters,
         totalPages: payload.totalPages
+      };
+    case POST_MENU:
+      return {
+        ...state,
+        newMenu: payload
+      };
+    case SUCCESS_MENU:
+      return {
+        ...state,
+        successMenu: payload
+      };
+    case ERROR_MENU:
+      return {
+        ...state,
+        errorMenu: payload
+      };
+    case SUCCESS_DISH:
+      return {
+        ...state,
+        successDish: payload
+      };
+    case ERROR_DISH:
+      return {
+        ...state,
+        errorDish: payload
+
       };
     default:
       return { ...state };

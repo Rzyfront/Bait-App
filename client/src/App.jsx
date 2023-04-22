@@ -11,7 +11,7 @@ import {
   Dashboard,
   MenuForm
 } from './components/components.js';
-import Mapdata from './components/Map/Map';
+import LocalsDatabasic from './components/Locales/LocalsDatabasic';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
@@ -21,7 +21,6 @@ function App () {
   const user = useSelector((state) => state.user);
   // login
   useEffect(() => {
-    console.log(localStorage.getItem('token'));
     if (user && localStorage.getItem('token') !== null) {
       dispatch(checkUser());
     }
@@ -36,9 +35,9 @@ function App () {
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />
         <Route path='/dataTreatment' element={<DataTreatment />} />
-        <Route path='/map' element={<Mapdata />} />
+        <Route path='/map' element={<LocalsDatabasic />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/menu' element={<MenuForm />} />
+        <Route path='/menu/:id' element={<MenuForm />} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

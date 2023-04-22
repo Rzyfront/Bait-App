@@ -27,8 +27,7 @@ module.exports = (req, res, next) => {
   }
 
   req.characteristics = JSON.parse(characteristics.characteristics);
-  console.log(req.characteristics);
-  req.reviews = { verified: verified ?? true };
+  req.reviews = { verified: verified ?? 'verified' };
   req.order = reqOrder;
   req.where = where;
   next();

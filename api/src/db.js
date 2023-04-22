@@ -40,7 +40,7 @@ Local.belongsTo(User);
 User.hasMany(Local);
 
 Dish.belongsTo(Menu);
-Menu.hasMany(Dish);
+Menu.hasMany(Dish, { onDelete: 'CASCADE' });
 
 Image.belongsTo(Dish);
 Dish.hasOne(Image);

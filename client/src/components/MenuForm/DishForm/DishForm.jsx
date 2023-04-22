@@ -1,14 +1,17 @@
-import { useState } from 'react';
-import { Input } from '@nextui-org/react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import './DishForm.css';
-import { postDish } from '../../../redux/actions/actions';
+import { useEffect, useState } from 'react';
 
-const DishForm = () => {
-  const { menuId } = useParams();
-  const { success, error } = useSelector(state => state);
+import { useDispatch } from 'react-redux';
+import { useUploadImage } from '../../../hooks/useUploadImage';
+import './DishForm.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { postDish } from '../../../redux/actions/actions';
+import Inputs from './Inputs/Inputs';
+
+const DishForm = ({ menuId }) => {
+  const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
+  const [ title, setTile ] = useState(false);
   const [dish, setDish] = useState({
     name: '',
     type: '',
@@ -19,73 +22,64 @@ const DishForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setDish({
+      ...dish,
       [name]: value
     });
   };
   const handleSelect = (event) => {
     const { name, value } = event.target;
     setDish({
+      ...dish,
       [name]: value
     });
   };
 
+  const handleChangeimages = (event) => {
+    handleChangeimage(event);
+  };
+
+  useEffect(() => {
+    if (image.length) {
+      setDish({ ...dish, image: image[0] });
+    }
+  }, [image]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postDish(dish));
+    dispatch(postDish(menuId, dish)).then(() => {
+      toast.success('Producto agregado', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+      setDish({
+        name: '',
+        type: '',
+        ingredients: '',
+        price: '',
+        description: ''
+      });
+      setTile(true);
+    }).catch(() => {
+      toast.error('Error al agregar', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+    });
   };
+
   return (
-        <div>
-              <Input
-                  underlined
-                  labelPlaceholder="Nombre del plato o bebida"
-                  color="dark"
-                  className='name'
-                  onChange={handleChange}
-                  value={dish.name}
-                  type='text'
-                  name='name'
-                  required
-              />
-              {/* {errors.name && <p className='danger'>{errors.name}</p>} */}
-                <select
-                    name='type'
-                    className='type'
-                    onChange={handleSelect}
-                    value={dish.type}
-                    required
-                >
-                    <option value='value2' defaultValue>Selecciona</option>
-                    <option value='comun'>Común</option>
-                    <option value='glutenFree'>Gluten free</option>
-                    <option value='diabetic'>Apto para diabéticos</option>
-                    <option value='vegan'>Vegano</option>
-                    <option value='fitness'>fitness</option>
-                    <option value='na'>No aplica</option>
-                </select>
-              <Input
-                  underlined
-                  labelPlaceholder="Ingredients"
-                  color="dark"
-                  className='type'
-                  onChange={handleChange}
-                  value={dish.ingredients}
-                  type='text'
-                  name='ingredients'
-                  required
-              />
-              <Input
-                  underlined
-                  labelPlaceholder="Price"
-                  color="dark"
-                  className='type'
-                  onChange={handleChange}
-                  value={dish.price}
-                  type='number'
-                  name='proce'
-                  required
-              />
-            <button type={handleSubmit}>Agregar producto</button>
-        </div>
+    <>
+      <ToastContainer />
+      { title ? <h2>Agrega otro producto</h2> : <h2>Agrega un producto</h2 >
+}
+            <Inputs
+              handleChange={handleChange}
+              handleChangeimages={handleChangeimages}
+              handleSelect={handleSelect}
+              dish={dish}
+            />
+            <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
+        </>
   );
 };
 
