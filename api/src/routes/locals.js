@@ -10,11 +10,13 @@ const getQueryLocals = require('../controllers/locals/getQueryLocals');
 const userExtractor = require('../middlewares/userExtractor');
 const getLocalsName = require('../controllers/locals/getLocalsName');
 const { isOwner } = require('../middlewares/validateRole');
+const getSpecialties = require('../controllers/locals/getSpecialties');
 
 localsRoute
   .get('/', getQueryLocals, getLocals)
   .get('/page/:numPage', getQueryLocals, getLocals)
   .get('/search-by-name', getLocalsName)
+  .get('/specialties', getSpecialties)
   .param('localId', paramLocal)
   .post('/', userExtractor, localValidator, postLocal)
   .get('/:localId', getLocalsDetail)
