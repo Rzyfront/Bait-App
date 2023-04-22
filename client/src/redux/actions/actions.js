@@ -15,6 +15,7 @@ export const POST_MENU = 'POST_MENU';
 export const POST_DISH = 'POST_DISH';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
+export const DETAIL_USER = "DETAIL_USER"
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {

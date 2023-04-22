@@ -9,7 +9,8 @@ import {
   About,
   DataTreatment,
   Dashboard,
-  MenuForm
+  MenuForm,
+  Userprofile
 } from './components/components.js';
 import Mapdata from './components/Map/Map';
 import { Routes, Route } from 'react-router-dom';
@@ -38,6 +39,7 @@ function App () {
         <Route path='/dataTreatment' element={<DataTreatment />} />
         <Route path='/map' element={<Mapdata />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/userprofile' element={<Userprofile />} />
         <Route path='/menu' element={<MenuForm />} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
