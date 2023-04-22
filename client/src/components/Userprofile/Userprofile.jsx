@@ -8,13 +8,12 @@ import  "./Userprofile.css"
 
 function Userprofile () {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.user);
-  
-  // useEffect(() => {
-  //   dispatch(DetailUser(id));
-  // }, [id]);
-  console.log(user);
- 
+  const { users } = useSelector((state) => state.detail);
+  const { id } = useParams();
+  useEffect(() => {
+    dispatch(DetailUser(id));
+  }, [id]);
+
   const { name, lastName, Image, location, phone, email } = {
     name: '',
     Image: '',
@@ -70,18 +69,3 @@ function Userprofile () {
 }
 
 export default Userprofile;
-
-// {
-//   user.image.length
-//   ? (
-//     <img
-//       src={user.Images[0].url}
-//       className="UserImage"
-//     />
-//   )
-//   : (
-//     <img src={Image} className="userImage" />
-//   )
-// }
-
-// {

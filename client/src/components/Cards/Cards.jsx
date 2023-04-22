@@ -4,8 +4,8 @@ import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
-import { homepage, searchByQuery } from '../../redux/actions/actions';
-
+import { homepage } from '../../redux/actions/actions';
+import { searchByQuery } from '../../redux/actions/cards';
 function Cards () {
   const location = useLocation();
 
