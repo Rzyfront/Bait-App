@@ -40,8 +40,8 @@ module.exports = (sequelize) => {
         },
       },
       verified: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
+        type: DataTypes.ENUM('verified', 'unVerified', 'archived'),
+        defaultValue: 'unVerified',
       },
       food: {
         type: DataTypes.INTEGER,

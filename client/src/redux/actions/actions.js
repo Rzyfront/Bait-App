@@ -5,11 +5,12 @@ export const RESET = 'RESET';
 export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
-export const ERROR = 'ERROR';
-export const SUCCESS_RESET = 'SUCCESS_RESET';
-export const ERROR_RESET = 'ERROR_RESET';
+export const SUCCESS_MENU = 'SUCCESS_MENU';
+export const ERROR_MENU = 'ERROR_MENU';
 export const POST_MENU = 'POST_MENU';
 export const POST_DISH = 'POST_DISH';
+export const SUCCESS_DISH = 'SUCCESS_DISH';
+export const ERROR_DISH = 'ERROR_DISH';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
 /// ///////actions////////////////////////////
@@ -143,11 +144,6 @@ export const homepage = (id) => {
         type: HOMEPAGE,
         payload: response.data
       });
-      setTimeout(() => {
-        dispatch({
-          type: SUCCESS_RESET
-        });
-      }, 3000);
     } catch (error) {
       console.log(error.message);
     }
@@ -158,57 +154,45 @@ export const postMenu = (localId, menu) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`/menu/${localId}`, menu);
-      console.log(response.data);
       if (response.status === 201) {
         dispatch({
-          type: SUCCESS,
+          type: SUCCESS_MENU,
           payload: response.data.success
         });
         dispatch({
           type: POST_MENU,
-          payload: { ...response.data.menu, ...response.data.local.id }
+          payload: response.data.menu
         });
       }
     } catch (error) {
       dispatch({
-        type: ERROR,
+        type: ERROR_MENU,
         payload: error.message
-      }, 3000);
-      // set error state to null after 3 seconds
-      setTimeout(() => {
-        dispatch({
-          type: ERROR_RESET
-        });
-      }, 3000);
+      });
     }
   };
 };
 
 export const postDish = (menuId, dish) => {
+  dish = {
+    ...dish,
+    price: Number(dish.price)
+  };
+  console.log(dish);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/dishes/${menuId}`, dish);
       if (response.status === 201) {
         dispatch({
-          type: SUCCESS,
+          type: SUCCESS_DISH,
           payload: response.data.success
-        });
-        dispatch({
-          type: POST_DISH,
-          payload: response.data
         });
       }
     } catch (error) {
       dispatch({
-        type: ERROR,
+        type: ERROR_DISH,
         payload: error.message
       });
-      // set error state to null after 3 seconds
-      setTimeout(() => {
-        dispatch({
-          type: ERROR_RESET
-        });
-      }, 3000);
     }
   };
 };
