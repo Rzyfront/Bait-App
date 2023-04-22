@@ -82,7 +82,7 @@ export const searchByFilters = (filter) => {
     specialty,
     characteristics,
     rating,
-    alphabet = 'nameASC',
+    alphabet,
     page
   } = filter;
   return async (dispatch) => {
@@ -91,7 +91,7 @@ export const searchByFilters = (filter) => {
       let character = {};
       if (characteristics) character = { [characteristics]: true };
       const response = await axios.get(
-        `/locals/page/${page ?? 1}?name=${name}&location=${city}&specialty=${/* specialty */ ''}&order=${rating ?? alphabet}&characteristics=${JSON.stringify(character)}`);
+        `/locals/page/${page ?? 1}?name=${name}&location=${city}&specialty=${/* specialty */ ''}&order=${rating || alphabet}&characteristics=${JSON.stringify(character)}`);
       const info = response.data;
       console.log(info);
       info.filters = filter;

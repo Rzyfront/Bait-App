@@ -26,14 +26,17 @@ const Filters = () => {
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
-    if (name === 'rating') setFilters({ ...filters, alphabet: '', [name]: value });
-    if (name === 'alphabet') setFilters({ ...filters, rating: '', [name]: value });
-    else setFilters({ ...filters, [name]: value });
+    if (name === 'rating') {
+      setFilters({ ...filters, alphabet: '', [name]: value });
+    } else if (name === 'alphabet') {
+      setFilters({ ...filters, rating: '', [name]: value });
+    } else { setFilters({ ...filters, [name]: value }); };
     navigate('/home/1');
   };
 
   const onRefresh = () => {
     navigate('/home/1');
+    console.log(filters);
     setFilters(filterState);
   };
 
