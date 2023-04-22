@@ -14,51 +14,48 @@ import Mapdata from '../Map/Mapdata';
 import SearchMap from '../Map/SearchMap/Searchmap';
 import { createLocal } from '../../redux/actions/local';
 function LocalsDatabasic () {
-  // map controllers
-  const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
-  const [statemap, setStatemap] = useState(false);
-  const [mapSearch, setMapsearch] = useState('');
-  const handleMap = (e) => {
-    setMapsearch(e.target.value);
-  };
-  const handleBoton = () => {
-    setStatemap(false);
-  };
-  const searchCity = async () => {
-    const data = await SearchMap(mapSearch);
-    if (data) {
-      setMapcenter(data);
-      setStatemap(true);
-    } else {
-      toast.error('No existe esta ciudad', {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000
-      });
-    }
-  };
-  const handlemapdatas = (information) => {
-    console.log(information);
-    const data = {
-      lat: information.location.y,
-      lng: information.location.x,
-      location: information.address
-        .LongLabel
-    };
-    setInputs({
-      ...inputs,
-      location: data
-    });
+  //map controllers
+  const [Mapcenter,setMapcenter]=useState([40.574215, -105.08333])
+  const [statemap,setStatemap]=useState(false)
+  const [mapSearch,setMapsearch]=useState("")
+  const handleMap=(e)=>{
+    setMapsearch(e.target.value)
+      }
+  const handleBoton=()=>{
+    setStatemap(false)
+  }
+const searchCity=async()=>{
+        const data=await SearchMap(mapSearch)
+        if(data)
+        {
+          setMapcenter(data)
+          setStatemap(true)
+        }else{
+          toast.error('No existe esta ciudad', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000
+          });
+        }
+      }   
+const handlemapdatas=(information)=>{
+  console.log(information)
+  const data={lat:information.location.y ,lng:information.location.x ,location:information.address
+    .LongLabel
+  } 
+  setInputs({...inputs,
+    location:data})
 
-    console.log(inputs);
-  };
+    console.log(inputs)
+}
 
-  /// /
+////
   const Navigate = useNavigate();
-
+  
   const { image, loading, handleChangeimage } = useUploadImage();
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
   const [termsAndConditions, setTemsAndConditions] = useState(true);
+
 
   const [inputs, setInputs] = useState({
     location: '',
@@ -136,6 +133,8 @@ function LocalsDatabasic () {
     );
   };
 
+  
+
   function handleClick () {
     setTemsAndConditions(false);
     // targetRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -167,6 +166,10 @@ function LocalsDatabasic () {
     autoClose: 2000
   });
 
+  
+
+
+
   return (
     <div className='locales animated-element'>
       { termsAndConditions
@@ -193,8 +196,10 @@ function LocalsDatabasic () {
              handleMap={handleMap}
           />
            <div className='MapSize'>
-            <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas}/>
+            <Mapdata Mapcenter={Mapcenter}   statemap={statemap} handleBoton={handleBoton}  handlemapdatas={handlemapdatas}/>
             </div>
+
+
 
           <label className='imagen' htmlFor='imagen'>
             Imágenes
@@ -206,7 +211,7 @@ function LocalsDatabasic () {
             // multiple
             onChange={handleChangeimages}
           ></input>
-
+         
           {image.length
             ? (
                 image.map((image, i) => (
@@ -229,6 +234,8 @@ function LocalsDatabasic () {
               className='LocalesImage'
             />
                 )}
+
+        
 
           <button type='submit'> ENVIAR</button>
           <ToastContainer theme='colored'/>

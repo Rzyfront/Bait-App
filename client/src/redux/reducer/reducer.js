@@ -1,20 +1,16 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU } from '../actions/actions';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER, POST_DISH, POST_MENU } from '../actions/actions';
 import { SEARCH_BY_QUERY } from '../actions/cards';
-import { DETAIL, SUCCESS, ERROR } from '../actions/local';
+import { DETAIL, SUCCESS } from '../actions/local';
 const initialState = {
   cards: [],
   reset: [],
   detail: [],
   success: null,
   error: '',
-  successMenu: null,
-  errorMenu: '',
-  successDish: null,
-  errorDish: '',
   user: {},
-  newMenu: {},
-  menu: []
+  menu: [],
+  dish: []
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -54,11 +50,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         success: payload
       };
+    case SUCCESS_RESET:
+      return {
+        ...state,
+        success: null
+      };
     case ERROR:
       return {
         ...state,
         error: payload
       };
+    case ERROR_RESET:
+      return {
+        ...state,
+        error: null
+      };
+
     case CHECKUSER:
       return {
         ...state,
@@ -72,28 +79,14 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case POST_MENU:
       return {
         ...state,
-        newMenu: payload
+        menu: [...state.menu, payload]
       };
-    case SUCCESS_MENU:
+    case POST_DISH:
       return {
         ...state,
-        successMenu: payload
+        dish: [...state.dish, payload]
       };
-    case ERROR_MENU:
-      return {
-        ...state,
-        errorMenu: payload
-      };
-    case SUCCESS_DISH:
-      return {
-        ...state,
-        successDish: payload
-      };
-    case ERROR_DISH:
-      return {
-        ...state,
-        errorDish: payload
-      };
+
     default:
       return { ...state };
   }

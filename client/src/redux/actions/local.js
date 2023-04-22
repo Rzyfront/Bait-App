@@ -1,6 +1,5 @@
 import axios from 'axios';
 export const SUCCESS = 'SUCCESS';
-export const ERROR = 'ERROR';
 export const DETAIL = 'DETAIL';
 export const createLocal = (inputs) => {
   return async (dispatch) => {
@@ -22,6 +21,11 @@ export const createLocal = (inputs) => {
           type: SUCCESS,
           payload: response.data.success
         });
+        setTimeout(() => {
+          dispatch({
+            type: SUCCESS_RESET
+          });
+        }, 3000);
       }
     } catch (error) {
       console.log(error);
@@ -29,6 +33,12 @@ export const createLocal = (inputs) => {
         type: ERROR,
         payload: error.message
       });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
     }
   };
 };

@@ -11,9 +11,12 @@ import './MenuForm.css';
 const MenuForm = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { successMenu, newMenu } = useSelector(state => state);
+  const { success, error } = useSelector(state => state);
   const [showDish, setShowDish] = useState(false);
 
+  error && toast.error('Falló al crear el menu', {
+    position: toast.POSITION.TOP_CENTER
+  });
   const [menu, setMenu] = useState({
     type: ''
   });
@@ -28,33 +31,23 @@ const MenuForm = () => {
     e.preventDefault();
 
     if (menu.type !== '') {
-      dispatch(postMenu(id, menu)).then(() => {
-        toast.success('Se agregó la sección', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 2000
-        });
-        setShowDish(true);
-      }).catch(() => {
-        toast.error('Falló al crear', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 2000
-        });
+      dispatch(postMenu(id, menu));
+      toast.success('Se agregó la sección', {
+        position: toast.POSITION.TOP_CENTER
       });
     }
   };
 
   useEffect(() => {
-    if (successMenu) {
-      setShowDish(true);
-    }
-  }, [successMenu]);
+    setShowDish(success);
+  }, [success]);
 
   return (
         <div className='Menu-Form-Container'>
           <ToastContainer />
-          { !successMenu && (
+          { !success && (
             <>
-              <h2>Agrega una sección</h2>
+              <h2>Agrega tu menú</h2>
               <form className='Menu-Form'>
                 <label>Sección</label>
                 <select
@@ -64,7 +57,7 @@ const MenuForm = () => {
                   value={menu.type}
                   required
                 >
-                  <option value='defaultValue' defaultValue>
+                  <option value='value2' defaultValue>
                     Selecciona
                   </option>
                   {foodTypes.map(type => (
@@ -78,7 +71,7 @@ const MenuForm = () => {
             </>
           )}
           {
-           showDish && <DishForm menuId={newMenu?.id}/>
+            showDish && <DishForm/>
           }
 
         </div>
