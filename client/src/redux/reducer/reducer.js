@@ -1,5 +1,5 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE,  ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER } from '../actions/actions';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER } from '../actions/actions';
 import { SEARCH_BY_QUERY } from '../actions/cards';
 import { DETAIL, SUCCESS } from '../actions/local';
 const initialState = {
