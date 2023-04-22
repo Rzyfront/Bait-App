@@ -20,7 +20,8 @@ localsRoute
   .param('localId', paramLocal)
   .post('/', userExtractor, localValidator, postLocal)
   .get('/:localId', getLocalsDetail)
+  // .get('/:localId/menu', getMenusLocal)
   .put('/:localId', userExtractor, isOwner, localValidator, putLocal)
-  .delete('/:localId', deleteLocal);
+  .delete('/:localId', userExtractor, isOwner, deleteLocal);
 
 module.exports = localsRoute;

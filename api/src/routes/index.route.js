@@ -1,13 +1,13 @@
 const mainRouter = require('express').Router();
-const administratorRoute = require('./administrator');
-const dishesRouter = require('./dishes');
-const imageRoute = require('./images');
-const localsRoute = require('./locals');
-const loginRoute = require('./login');
+const administratorRoute = require('./administrator.route');
+const dishesRouter = require('./dishes.route');
+const imageRoute = require('./images.route');
+const localsRoute = require('./locals.route');
+const loginRoute = require('./login.route');
 const menuRouter = require('./menu');
-const reviewsRoute = require('./reviews');
+const reviewsRoute = require('./reviews.route');
 const userExtractor = require('../middlewares/userExtractor');
-const userRoutes = require('./users');
+const userRoutes = require('./users.route');
 
 mainRouter
   .use('/locals', localsRoute)

@@ -2,7 +2,7 @@ const express = require('express')();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');//eslint-disable-line
-const mainRouter = require('./routes/index');
+const mainRouter = require('./routes/index.route');
 
 express.use(cors('*'));
 express.use(morgan('dev'));
