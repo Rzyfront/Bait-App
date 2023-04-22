@@ -160,16 +160,20 @@ export const postMenu = (localId, menu) => {
       const response = await axios.post(`/menu/${localId}`, menu);
       console.log(response.data);
       if (response.status === 201) {
-        return dispatch({
+        dispatch({
           type: SUCCESS,
           payload: response.data.success
+        });
+        dispatch({
+          type: POST_MENU,
+          payload: { ...response.data.menu, ...response.data.local.id }
         });
       }
     } catch (error) {
       dispatch({
         type: ERROR,
         payload: error.message
-      });
+      }, 3000);
       // set error state to null after 3 seconds
       setTimeout(() => {
         dispatch({
@@ -183,11 +187,16 @@ export const postMenu = (localId, menu) => {
 export const postDish = (menuId, dish) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`/menu/${menuId}`, dish);
+      const response = await axios.post(`/dishes/${menuId}`, dish);
       if (response.status === 201) {
-        return {
-          type: SUCCESS
-        };
+        dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+        dispatch({
+          type: POST_DISH,
+          payload: response.data
+        });
       }
     } catch (error) {
       dispatch({
