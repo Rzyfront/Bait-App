@@ -1,6 +1,7 @@
 
-import { ORDER, RESET, SEARCH_BY_QUERY, DETAIL, CREATE_USER, HOMEPAGE, SUCCESS, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER, POST_MENU, POST_DISH } from '../actions/actions';
-
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER, POST_DISH, POST_MENU } from '../actions/actions';
+import { SEARCH_BY_QUERY } from '../actions/cards';
+import { DETAIL, SUCCESS } from '../actions/local';
 const initialState = {
   cards: [],
   reset: [],
