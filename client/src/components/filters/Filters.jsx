@@ -2,6 +2,7 @@ import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
+import Select from 'react-select';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
 import { order, reset } from '../../redux/actions/actions';
@@ -12,6 +13,20 @@ const Filters = () => {
   const [selectOrder, setSelectOrder] = useState('');
   const dispatch = useDispatch();
   const ContainerCards = useSelector((state) => state.cards);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const Caracteristicaslist = [
+    { value: 'wifi', label: 'Wifi' },
+    { value: 'parking_lot', label: 'Parqueadero' },
+    { value: 'outdoor_seating', label: 'Asientos exteriores' },
+    { value: 'live_music', label: 'Musica' },
+    { value: 'table_service', label: 'Servicio a Mesa' },
+    { value: 'big_group', label: 'Grupos grandes' },
+    { value: 'work_friendly', label: 'Amigable' },
+    { value: 'pet_friendly', label: 'Mascotas' },
+    { value: 'family_style', label: 'Familiar' },
+    { value: 'romantic', label: 'Romantico' }
+  ];
 
   const handlecafication = () => {
     if (selectOrder !== '') {
@@ -33,6 +48,11 @@ const Filters = () => {
     console.log(e.target.value);
     setSelectOrder(e.target.value);
     dispatch(order(ContainerCards, e.target.value));
+  };
+
+  const handleMultiSelectChange = (selectedOptions) => {
+    setSelectedOptions(selectedOptions);
+    console.log(selectedOptions);
   };
 
   return (
@@ -73,7 +93,14 @@ const Filters = () => {
           <option value={'mayor'}>Italiana</option>
           <option value={'mayor'}>Peruana</option>
         </select>
-        <select
+
+        <Select
+          value={selectedOptions}
+          onChange={handleMultiSelectChange}
+          options={Caracteristicaslist}
+          isMulti
+        />
+        {/* <select
           className="Caracteristics"
           onChange={handleSelect}
           value={selectOrder}
@@ -88,7 +115,7 @@ const Filters = () => {
           <option value={'menor'}>Romantico</option>
           <option value={'menor'}>Familiar</option>
           <option value={'menor'}>Exteriores</option>
-        </select>
+        </select> */}
         <select
           className="RatingOrder"
           onChange={handleSelect}
