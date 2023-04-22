@@ -27,7 +27,7 @@ module.exports = (req, res, next) => {
   }
 
   req.characteristics = characteristics;
-  req.reviews = { verified: verified ?? true };
+  req.reviews = { verified: verified ?? 'verified' };
   req.order = reqOrder;
   req.where = where;
   next();

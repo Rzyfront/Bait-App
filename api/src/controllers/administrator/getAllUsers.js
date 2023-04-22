@@ -1,4 +1,4 @@
-const { User, Image, Review } = require('../../db'); // eslint-disable-line
+const { User, Image } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
@@ -7,15 +7,9 @@ module.exports = async (req, res) => {
     const page = numPage || 1;
     const { count, rows } = await User.findAndCountAll({
       where: where.user ?? {},
-      attributes: ['id', 'name', 'lastname', 'age', 'location', 'phone_number', 'email'],
+      attributes: ['id', 'name', 'lastname', 'age', 'role', 'location', 'phone_number', 'email'],
       include: [
         { model: Image, attributes: ['url'] },
-        // {
-        //   model: Review,
-        //   where: where.review ?? {},
-        //   required: false,
-        //   include: [{ model: Image, attributes: ['url'] }],
-        // },
       ],
       limit: page * 10,
       offset: (page - 1) * 10,
