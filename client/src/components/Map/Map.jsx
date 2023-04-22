@@ -1,5 +1,4 @@
 import './Map.css';
-
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useState } from 'react';
@@ -33,7 +32,7 @@ function Mapdata () {
 
   return <div className='mapas'>
 
- <MapContainer center={position} zoom={13} scrollWheelZoom={false} className='tamaño'>
+    <MapContainer center={position} zoom={13} scrollWheelZoom={false} style={{ width: '100%', height: '500px' }}>
       <TileLayer
        url={MAP_LAYER_URL}
        attribution={MAP_LAYER_ATTRIBUTION}
