@@ -237,7 +237,7 @@ export const postMenu = (localId, menu) => {
         });
         dispatch({
           type: POST_MENU,
-          payload: response.data.local
+          payload: { ...response.data.menu, ...response.data.local.id }
         });
       }
     } catch (error) {
@@ -257,7 +257,6 @@ export const postMenu = (localId, menu) => {
 
 export const postDish = (menuId, dish) => {
   return async (dispatch) => {
-    console.log('entra');
     try {
       const response = await axios.post(`/dishes/${menuId}`, dish);
       if (response.status === 201) {

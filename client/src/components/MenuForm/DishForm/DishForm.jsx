@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Input, Textarea } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useUploadImage } from '../../../hooks/useUploadImage';
 import './DishForm.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +10,8 @@ import { postDish } from '../../../redux/actions/actions';
 const DishForm = () => {
   const { menu } = useSelector(state => state);
   const { success, error } = useSelector(state => state);
+  const { image, loading, handleChangeimage } = useUploadImage();
+  console.log(menu);
   const dispatch = useDispatch();
   const [dish, setDish] = useState({
     name: '',
@@ -32,10 +35,10 @@ const DishForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postDish(menu.id, dish));
-    success && toast.success('Se agregó el plato', {
-      position: toast.POSITION.TOP_CENTER
-    });
+    dispatch(postDish(menu.id, { image, dish }));
+  };
+  const handleChangeimages = (event) => {
+    handleChangeimage(event);
   };
 
   error && toast.error('Falló al crear el menu', {
@@ -110,6 +113,12 @@ const DishForm = () => {
                   name='description'
                   required
               />
+          <input
+            type='file'
+            name='image'
+            accept='image/png,image/jpeg,image/jpg,image/gif'
+            onChange={handleChangeimages}
+          ></input>
       </div>
         </div>
             <button onClick={handleSubmit} className='btnDish'>Agregar producto</button>
