@@ -2,9 +2,12 @@ import axios from 'axios';
 /// ///names/////////////
 export const ORDER = 'ORDER';
 export const RESET = 'RESET';
+export const SEARCH_BY_QUERY = 'SEARCH_BY_QUERY';
+export const DETAIL = 'DETAIL';
 export const COMENTARIE = 'COMENTARIE';
 export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
+export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
 export const SUCCESS_RESET = 'SUCCESS_RESET';
 export const ERROR_RESET = 'ERROR_RESET';
@@ -19,6 +22,8 @@ export const reset = () => {
     payload: ''
   };
 };
+/// loadinglocals
+
 /// Create user
 export const createUser = ({
   name,
@@ -56,8 +61,65 @@ export const createUser = ({
     }
   };
 };
+// Detail id
+export const DetailLocal = (id) => {
+  return async (dispatch) => {
+    try {
+      const datos = await axios.get(`/locals/${id}`);
+      dispatch({
+        type: DETAIL,
+        payload: datos.data
+      });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+// correguir imagen cuando este listo la ruta
+export const createLocal = (inputs) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/locals', {
+        email: inputs.email,
+        images: inputs.images,
+        location: inputs.location,
+        name: inputs.name,
+        // phone: inputs.phone,
+        schedule: inputs.schedule,
+        specialty: inputs.specialty
+        // characteristics: chekinputs
+      });
+      if (response.status === 201) {
+        dispatch({
+          type: SUCCESS,
+          payload: response.data.success
+        });
+        setTimeout(() => {
+          dispatch({
+            type: SUCCESS_RESET
+          });
+        }, 3000);
+      }
+    } catch (error) {
+      console.log(error);
+      dispatch({
+        type: ERROR,
+        payload: error.message
+      });
+      // set error state to null after 3 seconds
+      setTimeout(() => {
+        dispatch({
+          type: ERROR_RESET
+        });
+      }, 3000);
+    }
+  };
+};
+
 // order and filters and cards
 export const order = (data, actions) => {
+  console.log(data);
   const datas = data.flat();
   switch (actions) {
     case 'best':
@@ -92,6 +154,18 @@ export const order = (data, actions) => {
   }
   // adgorithm aordering
 };
+export const searchByQuery = (name, city) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/locals?name=${name}&location=${city}`);
+      const info = response.data;
+      return dispatch({ type: SEARCH_BY_QUERY, payload: info });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
 export const logIn = (credentials) => {
   return async (dispatch) => {
     try {
@@ -103,6 +177,7 @@ export const logIn = (credentials) => {
     }
   };
 };
+
 export const comentarie = (
   calificationFood,
   calificationQaPrice,
@@ -153,6 +228,7 @@ export const homepage = (id) => {
     }
   };
 };
+
 export const postMenu = (localId, menu) => {
   console.log(localId, menu);
   return async (dispatch) => {

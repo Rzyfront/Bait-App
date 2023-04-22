@@ -4,14 +4,17 @@ import '@smastrom/react-rating/style.css';
 import { GoLocation } from 'react-icons/go';
 import { BsCalendar3 } from 'react-icons/bs';
 import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
+
 import { GiMeal } from 'react-icons/gi';
 import img from '../../assets/restaurante.jpg';
 import imgComida from '../../assets/comida.jpg';
 import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
+
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DetailLocal } from '../../redux/actions/local';
+import { DetailLocal } from '../../redux/actions/actions';
+
 function Profile () {
   const [average, setAverage] = useState(0);
   // const [loading, setLoading] = useState(false);
