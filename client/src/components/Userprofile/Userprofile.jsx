@@ -1,7 +1,7 @@
 import './Userprofile.css';
 import { useEffect } from 'react';
 import { Reviews, Navbar } from '../components';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailUser } from '../../redux/actions/actions';
 
