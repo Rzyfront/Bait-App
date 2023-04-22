@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
 import { homepage } from '../../redux/actions/actions';
 import { searchByQuery } from '../../redux/actions/cards';
+import MapHome from '../Map/Map';
 function Cards () {
   const location = useLocation();
 
@@ -39,6 +40,7 @@ function Cards () {
       <div>
       {totalPages && <Pagination totalPages={totalPages} />}
       <div className="ContainerCards animated-element">
+          <div className='widthcards'>
         {locals &&
           locals.map(
             (
@@ -70,6 +72,10 @@ function Cards () {
               );
             }
           )}
+          </div>
+          <div className='widthmap'>
+            <MapHome className="mapsize"/>
+          </div>
       </div>
       </div>
     </div>
