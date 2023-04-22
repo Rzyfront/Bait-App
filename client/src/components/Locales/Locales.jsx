@@ -7,12 +7,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUploadImage } from '../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { createLocal } from '../../redux/actions/actions';
 import { validateForm } from './localHelpers';
 import TYC from './TYC';
 import Chars from './Chars/Chars';
 import DataLocal from './DataLocal/DataLocal';
-
+import { createLocal } from '../../redux/actions/local';
 function Locales () {
   const Navigate = useNavigate();
   const { image, loading, handleChangeimage } = useUploadImage();

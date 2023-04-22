@@ -5,7 +5,7 @@ const {
 module.exports = (req, res, next) => {
   try {
     const {
-      name, type, ingredients, price, description, image,
+      name, type, price, description, image,
     } = req.body;
 
     // NAME
@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
     verifiedTypeOf(price, 'number', 'price');
 
     // INGREDIENTS
-    verifiedExistsTypeLength(ingredients, 'string', 200, 'ingredients');
+    // verifiedExistsTypeLength(ingredients, 'string', 200, 'ingredients');
 
     // DESCRIPTION
     verifiedExistsTypeLength(description, 'string', 500, 'description');
@@ -32,7 +32,7 @@ module.exports = (req, res, next) => {
     verifiedTypeOf(image.url, 'string', 'image.url');
 
     req.dish = {
-      name, type, ingredients, price, description, image,
+      name, type, price, description, image,
     };
 
     next();

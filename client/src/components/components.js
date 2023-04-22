@@ -21,3 +21,4 @@ export { default as DataTreatment } from './Footer/DataTreatment/DataTreatment';
 export { default as DropdownUser } from './Navbar/DropdownUser/DropdownUser';
 export { default as MenuForm } from './MenuForm/MenuForm';
 export { default as ToggleMenuNavbar } from './Navbar/ToggleMenuNavbar/toggleMenuNavbar';
+export { default as DishForm } from './MenuForm/DishForm/DishForm';

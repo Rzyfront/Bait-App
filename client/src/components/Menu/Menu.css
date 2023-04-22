@@ -1,4 +1,4 @@
-.Menu{
+.Menu {
     width: 98%;
     height: 95%;
     display: flex;
@@ -6,11 +6,11 @@
     align-items: center;
 }
 
-.Menu .Menu-Title{
+.Menu .Menu-Title {
     font-size: 60px;
 }
 
-.Menu .Menu-List{
+.Menu .Menu-List {
     width: 98%;
     height: 80%;
     display: flex;
@@ -32,4 +32,17 @@
     height: 3px;
     background-color: var(--bg-tertiary);
     border-radius: 10px;
+}
+
+.menuBtn {
+    align-self: flex-end;
+    border: none;
+    position: absolute;
+    right: 10px;
+}
+
+.menuBtn:hover {
+    align-self: flex-end;
+    border-bottom: 2px solid var(--btn-primary);
+    
 }
