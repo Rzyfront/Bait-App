@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useUploadImage } from '../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch } from 'react-redux';
-import { createLocal } from '../../redux/actions/local';
+import { createLocal } from '../../redux/actions/actions';
 import { validateForm } from './localHelpers';
 import TYC from './TYC';
 import Chars from './Chars/Chars';
