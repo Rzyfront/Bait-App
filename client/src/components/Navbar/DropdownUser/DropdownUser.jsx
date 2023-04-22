@@ -7,7 +7,7 @@ const DropdownUser = ({ close }) => {
 
                 <ul className="dropdown-menu">
                     <li>
-                        <Link to="">
+                        <Link to="/profile/:1">
                             <RiUserLine /> Perfil
                         </Link>
                     </li>
