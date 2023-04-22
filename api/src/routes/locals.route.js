@@ -1,24 +1,30 @@
 const localsRoute = require('express').Router();
-const deleteLocal = require('../controllers/locals/deleteLocal');
-const getLocals = require('../controllers/locals/getLocals');
-const getLocalsDetail = require('../controllers/locals/getLocalsDetail');
-const getLocalsName = require('../controllers/locals/getLocalsName');
-const getMenu = require('../controllers/menu/getMenu');
-const getMenuDetail = require('../controllers/menu/getMenuDetail');
-const getQueryLocals = require('../controllers/locals/getQueryLocals');
-const getSpecialties = require('../controllers/locals/getSpecialties');
-const localValidator = require('../middlewares/localValidator');
-const paramLocal = require('../controllers/locals/paramLocal');
-const postLocal = require('../controllers/locals/postLocal');
-const postMenu = require('../controllers/menu/postMenu');
-const putLocal = require('../controllers/locals/putLocal');
-const userExtractor = require('../middlewares/userExtractor');
+const {
+  setQueryLocals,
+  localValidator,
+  userExtractor,
+} = require('../middlewares');
+const {
+  getMenu,
+  getMenuDetail,
+  postMenu,
+} = require('../controllers/menu');
+const {
+  deleteLocal,
+  getLocals,
+  getLocalsDetail,
+  getLocalsName,
+  getSpecialties,
+  paramLocal,
+  postLocal,
+  putLocal,
+} = require('../controllers/locals');
 const { isOwner, isTheOwnerOrAdmin } = require('../middlewares/validateRole');
 
 localsRoute
-  .get('/', getQueryLocals, getLocals)
+  .get('/', setQueryLocals, getLocals)
   .get('/menu/:menuId', getMenuDetail)
-  .get('/page/:numPage', getQueryLocals, getLocals)
+  .get('/page/:numPage', setQueryLocals, getLocals)
   .get('/search-by-name', getLocalsName)
   .get('/specialties', getSpecialties)
   .param('localId', paramLocal)

@@ -1,19 +1,23 @@
 const administratorRoute = require('express').Router();
 const { isSuperAdmin, isAdmin } = require('../middlewares/validateRole');
 const { verifyDelete } = require('../middlewares/userMiddlewares');
-const changeRole = require('../controllers/administrator/changeRole');
-const deleteAdministrator = require('../controllers/administrator/deleteAdministrator');
-const deleteReview = require('../controllers/administrator/deleteReview');
-const getSupendedUsers = require('../controllers/administrator/getSupendedUsers');
-const getAllUsers = require('../controllers/administrator/getAllUsers');
-const patchReviewVerify = require('../controllers/administrator/patchReviewVerify');
-const patchSupendUser = require('../controllers/administrator/patchSupendUser');
-const putAssignLocal = require('../controllers/administrator/putAssignLocal');
-const putCreateAdmin = require('../controllers/administrator/putCreateAdmin');
-const setQueryUsers = require('../middlewares/setQueryUsers');
+
 const usersTest = require('../helpers/usersTest');
-const getReviews = require('../controllers/reviews/getReviews');
-const setReviewQuery = require('../middlewares/setReviewQuery');
+
+const { setQueryUsers, setReviewQuery } = require('../middlewares');
+
+const { getReviews } = require('../controllers/reviews');
+const {
+  changeRole,
+  deleteAdministrator,
+  deleteReview,
+  getAllUsers,
+  getSupendedUsers,
+  patchReviewVerify,
+  patchSupendUser,
+  putAssignLocal,
+  putCreateAdmin,
+} = require('../controllers/administrator');
 
 administratorRoute
   .get('/', isAdmin, setQueryUsers, getAllUsers)

@@ -1,11 +1,15 @@
 const reviewsRoute = require('express').Router();
-const revValidator = require('../middlewares/revValidator');
-const getReviews = require('../controllers/reviews/getReviews');
-const postReviews = require('../controllers/reviews/postReviews');
-const updateReviews = require('../controllers/reviews/updateReviews');
-const deleteReviews = require('../controllers/reviews/deleteReviews');
-const userExtractor = require('../middlewares/userExtractor');
-const setReviewQuery = require('../middlewares/setReviewQuery');
+const {
+  revValidator,
+  userExtractor,
+  setReviewQuery,
+} = require('../middlewares');
+const {
+  deleteReviews,
+  getReviews,
+  postReviews,
+  updateReviews,
+} = require('../controllers/reviews');
 
 reviewsRoute
   .get('/:localId', setReviewQuery, getReviews)

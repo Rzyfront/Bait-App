@@ -1,11 +1,13 @@
 const loginRoute = require('express').Router();
-const postLoginGoogle = require('../controllers/login/postLoginGoogle');
-const postLogin = require('../controllers/login/postLogin');
-const userExtractor = require('../middlewares/userExtractor');
-const getUser = require('../controllers/login/getUser');
+const { userExtractor } = require('../middlewares');
+const {
+  getMyUser,
+  postLogin,
+  postLoginGoogle,
+} = require('../controllers/login');
 
 loginRoute
-  .get('/', userExtractor, getUser)
+  .get('/', userExtractor, getMyUser)
   .post('/google', postLoginGoogle)
   .post('/', postLogin);
 

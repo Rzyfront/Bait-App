@@ -1,8 +1,8 @@
 const imageRoute = require('express').Router();
-const getImages = require('../controllers/images/getImages');
-const postImages = require('../controllers/images/postImages');
+const { getImages, postImages } = require('../controllers/images');
 
-imageRoute.get('/', getImages);
-imageRoute.post('/', postImages);
+imageRoute
+  .get('/', getImages)
+  .post('/', postImages);
 
 module.exports = imageRoute;
