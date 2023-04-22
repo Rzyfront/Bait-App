@@ -22,7 +22,6 @@ function App () {
   const user = useSelector((state) => state.user);
   // login
   useEffect(() => {
-    console.log(localStorage.getItem('token'));
     if (user && localStorage.getItem('token') !== null) {
       dispatch(checkUser());
     }
@@ -39,8 +38,7 @@ function App () {
         <Route path='/dataTreatment' element={<DataTreatment />} />
         <Route path='/map' element={<Mapdata />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/menu' element={<MenuForm />} />
-        <Route path='/' element={<MenuForm />} />
+        <Route path='/menu/:id' element={<MenuForm />} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>
