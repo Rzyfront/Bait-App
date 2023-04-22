@@ -1,23 +1,35 @@
 import './Reviews.css';
+import { useEffect, useState } from 'react';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
+import { getReviews } from '../../redux/actions/actions';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Reviews ({ ReviewsList }) {
+function Reviews ({ localId }) {
+  const dispatch = useDispatch();
+  const { reviews } = useSelector(state => state);
+  let [page, setPage] = useState();
+
+  useEffect(() => {
+    dispatch(getReviews(localId, page));
+  }, [page]);
+
   return (
     <div className='Reviews animated-element'>
       <div className='TitleGroup'>
         <h2 className='Reviews-Title'>Reviews</h2>
         <div>
-          <select name="" id="">
-            <option value="1" defaultValue >Ordena</option>
-            <option value="1">Mejores reseñas</option>
-            <option value="2">Peores Reseñas</option>
+          <select name='' id=''>
+            <option value='1' defaultValue >Ordena</option>
+            <option value='1'>Mayor puntuación</option>
+            <option value='2'>Menor puntuación</option>
 
           </select>
+          <button onClick={() => setPage(page++)}>Cargar más</button>
         </div>
       </div>
       <div className='Reviews-List'>
-        {ReviewsList.map(({ User, rating, Image, comment, title }, index) => {
+        {reviews.map(({ User, rating, Image, comment, title }, index) => {
           return (
             <div key={index} className='ReviewCard'>
               <div className='LeftInfo'>
@@ -31,7 +43,7 @@ function Reviews ({ ReviewsList }) {
                   />
                 </div>
                 <div className='OpinionGroup'>
-                  <h4>Opinion:</h4>
+                  <h4>Opinión:</h4>
                   <p>{comment}</p>
                 </div>
               </div>
