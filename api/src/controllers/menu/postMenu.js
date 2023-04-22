@@ -1,11 +1,10 @@
-const { Local, Menu } = require('../../db');
+const { Menu } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
-    const { localId } = req.params;
     const { type } = req.body;
-    const local = await Local.findByPk(localId);
-    if (!local) throw new Error('Local not found');
+    const { local } = req;
+
     const newMenu = await Menu.create({ type });
     await local.addMenu(newMenu.id);
     res.status(201).json({ success: true, local, menu: newMenu });

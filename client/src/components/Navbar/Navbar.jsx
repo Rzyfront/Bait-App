@@ -31,9 +31,9 @@ const Navbar = () => {
           className="Logo"
         />
       </Link>
-      <div className="SearchBar">
+
         <SearchHome />
-      </div>
+
       <div className="UserGroup">
         {JSON.stringify(dataUser) === '{}'
           ? (
@@ -44,7 +44,7 @@ const Navbar = () => {
             }}
           >
             <FaUserCircle className="UserIcon" />
-            <h4 className="LogIn"> inicia</h4>
+            <h4 className="LogIn"> Iniciar Sesion</h4>
           </div>
             )
           : (

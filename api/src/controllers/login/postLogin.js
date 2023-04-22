@@ -12,7 +12,8 @@ module.exports = async (req, res) => {
     const pass = await bcrypt.compare(password, user.password);
     if (!pass) throw new Error('Password or email incorrect');
 
-    if (user.verified !== 'verified') throw new Error('Verify your email address');
+    if (user.verified === 'unVerified') throw new Error('Verify your email address');
+    if (user.verified === 'suspended') throw new Error('Your account has been suspended');
 
     const token = jwt.sign({
       email: user.email,
