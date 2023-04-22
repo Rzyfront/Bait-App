@@ -2,14 +2,12 @@ const { Characteristic } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    name, location, schedule, email, characteristics, lat, lng,
+    name, location, schedule, email, characteristics, lat, lng, specialty,
   } = req.body;
-  const { userId, role } = req;
   try {
-    if (userId !== req.local.UserId || role !== 'admin' || role !== 'superAdmin') throw new Error('The user is not the owner of the locale');
     await Characteristic.update(characteristics, { where: { id: req.local.id } });
     const updateLocal = await req.local.update({
-      name, location, schedule, email, lat, lng,
+      name, location, schedule, email, lat, lng, specialty,
     });
     const local = {
       id: updateLocal.id,

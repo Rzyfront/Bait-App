@@ -4,7 +4,7 @@ const dishesRouter = require('./dishes.route');
 const imageRoute = require('./images.route');
 const localsRoute = require('./locals.route');
 const loginRoute = require('./login.route');
-const menuRouter = require('./menu');
+// const menuRouter = require('./menu');
 const reviewsRoute = require('./reviews.route');
 const userExtractor = require('../middlewares/userExtractor');
 const userRoutes = require('./users.route');
@@ -16,8 +16,8 @@ mainRouter
   .use('/reviews', reviewsRoute)
   .use('/administrator', userExtractor, administratorRoute)
   .use('/dishes', dishesRouter)
-  .use('/user', userRoutes)
-  .use('/menu', menuRouter);
+  .use('/user', userRoutes);
+// .use('/menu', menuRouter);
 
 mainRouter.get('/', (req, res) => {
   res.send('Hello World!');
