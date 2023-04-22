@@ -7,6 +7,9 @@ module.exports = async (req, res) => {
   // const { verified } = req.query;
   try {
     const locals = await Local.findByPk(req.local.id, {
+      attributes: {
+        exclude: ['email', 'createdAt', 'updatedAt'],
+      },
       include: [{
         model: Characteristic,
         attributes: allCharacteristics,

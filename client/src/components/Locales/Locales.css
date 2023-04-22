@@ -207,3 +207,8 @@ margin-top: 5px;
   font-size: 14px;
   margin-top: 5px;
 }
+.MapSize{
+  width: 400px;
+  height: 300px;
+  border: solid 2px black;
+}

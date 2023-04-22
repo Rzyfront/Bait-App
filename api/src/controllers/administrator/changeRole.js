@@ -11,7 +11,12 @@ module.exports = async (req, res) => {
     if (!updateUser) throw new Error('User not found');
     updateUser.role = role;
     await updateUser.save();
-    return res.status(201).json({ success: true, updateUser });
+    const user = {
+      id: updateUser.id,
+      role: updateUser.role,
+      verified: updateUser.verified,
+    };
+    return res.status(201).json({ success: true, user });
   } catch (err) {
     return res.status(400).json({ message: err.message, success: false });
   }

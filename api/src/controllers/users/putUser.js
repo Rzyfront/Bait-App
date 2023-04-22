@@ -22,7 +22,17 @@ module.exports = async (req, res) => {
     updateUser.setImage(image.id);
     await updateUser.save();
 
-    return res.status(201).json({ success: true, user: updateUser });
+    const user = {
+      id: updateUser.id,
+      name: updateUser.name,
+      lastname: updateUser.lastname,
+      age: updateUser.age,
+      location: updateUser.location,
+      phone_number: updateUser.phone_number,
+      email: updateUser.email,
+    };
+
+    return res.status(201).json({ success: true, user });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
   }
