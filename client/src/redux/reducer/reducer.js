@@ -1,5 +1,5 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU } from '../actions/actions';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU } from '../actions/actions';
 import { SEARCH_BY_QUERY } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 const initialState = {
@@ -68,6 +68,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: {}
+      };
+    case GET_MENU:
+      return {
+        ...state,
+        menu: payload
       };
     case POST_MENU:
       return {

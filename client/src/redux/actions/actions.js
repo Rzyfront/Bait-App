@@ -13,6 +13,7 @@ export const SUCCESS_DISH = 'SUCCESS_DISH';
 export const ERROR_DISH = 'ERROR_DISH';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
+export const GET_MENU = 'GET_MENU';
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -196,6 +197,30 @@ export const postDish = (menuId, dish) => {
     }
   };
 };
+
+export const getMenu = (localId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`/menu/${localId}`);
+      if (response.status === 201) {
+        dispatch({
+          type: SUCCESS_MENU,
+          payload: response.data.success
+        });
+        dispatch({
+          type: GET_MENU,
+          payload: response.data
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR_MENU,
+        payload: error.message
+      });
+    }
+  };
+}
+
 export const checkUser = () => {
   return async (dispatch) => {
     try {
