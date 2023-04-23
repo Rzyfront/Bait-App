@@ -13,9 +13,18 @@ import DatabasicLocal from './DataLocal/DatabasicLocal';
 import Mapdata from '../Map/Mapdata';
 import SearchMap from '../Map/SearchMap/Searchmap';
 import { createLocal } from '../../redux/actions/local';
+
 function LocalsDatabasic () {
-  // map controllers
+  const positionMap = useSelector((state) => state.ubication);
   const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
+
+  // map controllers
+  useEffect(() => {
+    if (Mapcenter[0] !== positionMap.lat && Mapcenter[1] !== positionMap.lng) {
+      setMapcenter([positionMap.lat, positionMap.lng]);
+    }
+  }, [positionMap]);
+
   const [statemap, setStatemap] = useState(false);
   const [mapSearch, setMapsearch] = useState('');
   const handleMap = (e) => {
