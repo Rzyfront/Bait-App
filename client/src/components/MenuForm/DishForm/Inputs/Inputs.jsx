@@ -1,6 +1,6 @@
 import { Input, Textarea } from '@nextui-org/react';
-
-const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish }) => {
+import '../DishForm.css';
+const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image }) => {
   return (
         <>
             <div className='Dish-Form-Container'>
@@ -64,6 +64,13 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish }) => {
                         accept='image/png,image/jpeg,image/jpg,image/gif'
                         onChange={handleChangeimages}
                     ></input>
+                    {image.length
+                      ? <img src={image[image.length - 1].url} alt="foto" className='photosize' />
+                      : <img src='https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png' alt="photo default"
+                          className='photosize'
+
+                      />
+                    }
                 </div>
             </div>
         </>

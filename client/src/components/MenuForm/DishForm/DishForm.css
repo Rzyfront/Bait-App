@@ -14,13 +14,18 @@
     flex-direction: column;
 }
 
-.dishColumn{
+.dishColumn {
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-.btnDish{
+.btnDish {
     position: absolute;
     bottom: 30px;
+}
+
+.photosize {
+    width: 300px;
+    height: 300px;
 }
