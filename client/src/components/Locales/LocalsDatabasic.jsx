@@ -168,7 +168,7 @@ function LocalsDatabasic () {
   });
 
   return (
-    <div className='locales animated-element'>
+    <div className='Create-Locals-Form animated-element'>
       { termsAndConditions
         ? <TYC src={BaitLogo} handleClick={handleClick}/>
         : <div className='locales_data animated-element'>
@@ -230,7 +230,7 @@ function LocalsDatabasic () {
             />
                 )}
 
-          <button type='submit'> ENVIAR</button>
+          <button type='submit' className='Send-Locals'> ENVIAR</button>
           <ToastContainer theme='colored'/>
         </form>
       </div>}
