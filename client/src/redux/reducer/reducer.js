@@ -15,7 +15,8 @@ const initialState = {
   user: {},
   newMenu: {},
   menu: [],
-  reviews: []
+  reviews: [],
+  ubication: { lat: '', lng: '', city: 'buenos aires' }
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import {
   Landing,
@@ -15,8 +15,10 @@ import LocalsDatabasic from './components/Locales/LocalsDatabasic';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
+import { ubicationPagine } from './redux/actions/ubication';
 
 function App () {
+  const [ubication, setubication] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   // login
@@ -24,7 +26,20 @@ function App () {
     if (user && localStorage.getItem('token') !== null) {
       dispatch(checkUser());
     }
+    if (ubication === false) {
+      navigator.geolocation.getCurrentPosition(onUbicacionConcedida, onError);
+    }
+    setubication(true);
   }, []);
+
+  function onUbicacionConcedida (posicion) {
+    const { latitude, longitude } = posicion.coords;
+    console.log(latitude, longitude);
+    setubication(true);
+  }
+  function onError (error) {
+    console.error(error);
+  }
 
   return (
     <div className='App animated-element'>
