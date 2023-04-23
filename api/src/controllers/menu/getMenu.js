@@ -1,11 +1,9 @@
 const { Menu, Dish, Image } = require('../../db');
 
 module.exports = async (req, res) => {
-  console.log('acá');
-  const { localId } = req.params;
   try {
     const menu = await Menu.findAll({
-      where: { LocalId: localId },
+      where: { LocalId: req.local.id },
       include: [
         {
           model: Dish,

@@ -3,27 +3,17 @@ import axios from 'axios';
 export const ORDER = 'ORDER';
 export const RESET = 'RESET';
 export const COMENTARIE = 'COMENTARIE';
+export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
-
-// ACTION TYPES MENU - DISH
 export const SUCCESS_MENU = 'SUCCESS_MENU';
 export const ERROR_MENU = 'ERROR_MENU';
-export const GET_MENU = 'GET_MENU';
 export const POST_MENU = 'POST_MENU';
 export const POST_DISH = 'POST_DISH';
 export const SUCCESS_DISH = 'SUCCESS_DISH';
 export const ERROR_DISH = 'ERROR_DISH';
-export const PUT_DISH = 'PUT_DISH';
-export const DELETE_DISH = 'DELETE_DISH';
-export const SUCCESS_DEL_DISH = 'SUCCESS_DEL_DISH';
-export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
-
-// ACTION TYPES USER
-export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-
-// ACTION TYPES REVIEWS
+export const GET_MENU = 'GET_MENU';
 export const GET_REVIEWS = 'GET_REVIEWS';
 /// ///////actions////////////////////////////
 export const reset = () => {
@@ -161,14 +151,11 @@ export const homepage = (id) => {
     }
   };
 };
-
-/* ACTION GENERATORS MENU DISHES */
-
 export const postMenu = (localId, menu) => {
+  console.log(localId, menu);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/menu/${localId}`, menu);
-      console.log(response);
       if (response.status === 201) {
         dispatch({
           type: SUCCESS_MENU,
@@ -184,7 +171,6 @@ export const postMenu = (localId, menu) => {
         type: ERROR_MENU,
         payload: error.message
       });
-      console.log(error);
     }
   };
 };
@@ -212,29 +198,11 @@ export const postDish = (menuId, dish) => {
     }
   };
 };
-export const deleteDish = (dishId) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.delete(`/dishes/${dishId}`);
-      if (response.status === 200) {
-        dispatch({
-          type: SUCCESS_DEL_DISH,
-          payload: response.data.success
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: ERROR_DEL_DISH,
-        payload: error.message
-      });
-    }
-  };
-};
 
 export const getMenu = (localId) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`locals/${localId}/menu`);
+      const response = await axios(`/menu/${localId}`);
       if (response.status === 200) {
         dispatch({
           type: SUCCESS_MENU,
@@ -242,7 +210,7 @@ export const getMenu = (localId) => {
         });
         dispatch({
           type: GET_MENU,
-          payload: response.data.menu
+          payload: response.data
         });
       }
     } catch (error) {
@@ -254,7 +222,6 @@ export const getMenu = (localId) => {
   };
 };
 
-// USER ACTION GENERATORS
 export const checkUser = () => {
   return async (dispatch) => {
     try {
@@ -277,7 +244,7 @@ export const ResetUser = () => {
     });
   };
 };
-// REVIEWS ACTION GENERATORS
+
 export const getReviews = (localId, page = 1) => {
   return async (dispatch) => {
     try {
