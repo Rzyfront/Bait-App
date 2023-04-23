@@ -32,11 +32,13 @@ function Cards () {
       setnavegation('', '');
     }
   }, [pagine]);
-  
+
   // controller navegation
   useEffect(() => {
     setnavegation(pagine.id);
   }, [totalPages]);
+  // controller map
+
   return (
     <div className="containerCardsall animated-element">
       <div>
@@ -54,23 +56,21 @@ function Cards () {
                 schedule,
                 id,
                 Characteristic,
-                Images
+                Images,
+                lat,
+                lng
               },
               index
             ) => {
-              return (
-                <Link to={`/profile/${id}`} key={index}>
-                  <Card
-                    id={id}
-                    Name={name}
-                    Rating={rating}
-                    location={location}
-                    verified={verified}
-                    schedule={schedule}
+              return (<Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
                     Characteristic={Characteristic}
                     Images={Images}
+                    location={location}
+                    key={index}
+                    lat={lat}
+                    lng={lng}
                   />
-                </Link>
+
               );
             }
           )}

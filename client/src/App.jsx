@@ -16,6 +16,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
 import { ubicationPagine } from './redux/actions/ubication';
+import reverseGeoCoding from './components/Map/SearchMap/reverseGeocoding';
 
 function App () {
   const [ubication, setubication] = useState(false);
@@ -32,11 +33,12 @@ function App () {
     setubication(true);
   }, []);
 
-  function onUbicacionConcedida (posicion) {
+  const onUbicacionConcedida = async (posicion) => {
     const { latitude, longitude } = posicion.coords;
-    console.log(latitude, longitude);
+    const data = await reverseGeoCoding(longitude, latitude);
+    dispatch(ubicationPagine({ lat: data.location.y, lng: data.location.x, city: data.address.City }));
     setubication(true);
-  }
+  };
   function onError (error) {
     console.error(error);
   }

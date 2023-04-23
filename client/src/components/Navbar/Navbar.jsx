@@ -8,12 +8,14 @@ import { Login, DropdownUser } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
+
 const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user);
   const [barra, setbarra] = useState(false);
   const [toogleLogin, setToggleLogin] = useState(false);
+  const ubication = useSelector((state) => state.ubication);
 
   const close = () => {
     localStorage.clear();
@@ -23,7 +25,7 @@ const Navbar = () => {
   return (
     <div className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to={`${location.pathname !== '/' ? '/' : '/home/1?name=&city='}`}>
+      <Link to={`${location.pathname !== '/' ? '/' : `/home/1?name=&city=${ubication.city}`}`}>
         <img
           src={BaitLogo}
           alt="Bait"
