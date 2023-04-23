@@ -23,12 +23,12 @@ const isOwner = (req, res, next) => {
 };
 
 const isTheOwnerOrAdmin = (req, res, next) => {
-  const { role, userId, local } = req;
+  const { userId, local } = req;
   try {
-    if (userId !== local.UserId && (role !== 'admin' || role !== 'superAdmin')) throw new Error();
+    if (userId !== local.UserId) throw new Error('Only the owner of the local can modify a local.');
     next();
   } catch (error) {
-    res.status(401).json({ message: 'Only an admin or the owner of the local can modify a local.', success: false });
+    res.status(401).json({ message: error.message, success: false });
   }
 };
 

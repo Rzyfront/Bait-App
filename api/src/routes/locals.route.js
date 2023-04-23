@@ -8,6 +8,7 @@ const {
   getMenu,
   getMenuDetail,
   postMenu,
+  deleteMenu,
 } = require('../controllers/menu');
 const {
   deleteLocal,
@@ -24,6 +25,7 @@ const { isOwner, isTheOwnerOrAdmin } = require('../middlewares/validateRole');
 localsRoute
   .get('/', setQueryLocals, getLocals)
   .get('/menu/:menuId', getMenuDetail)
+  .delete('/menu/:menuId', isOwner, deleteMenu)
   .get('/page/:numPage', setQueryLocals, getLocals)
   .get('/search-by-name', getLocalsName)
   .get('/specialties', getSpecialties)
