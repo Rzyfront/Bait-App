@@ -60,6 +60,18 @@ h6{
    /* Scrollbar Color */
    --bg-opac:#5958581a;
    --bg-thumb:#34343452;
+
+   /* Z-Index */
+   --alto-1: 1000; /* Login */
+   --alto-2: 2000;
+   --alto-3: 3000;
+   --alto-4: 4000;
+   --alto-5: 5000;
+   --bajo-1: -1000;
+   --bajo-2: -2000;
+   --bajo-3: -3000;
+   --bajo-4: -4000;
+   --bajo-5: -5000; /* Img Landing */
 }
 
 @keyframes example {

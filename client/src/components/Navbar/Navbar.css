@@ -16,6 +16,12 @@ width: 130px;
 margin: 0;
 transition: 0.3s;
 }
+.all_navbar .Logo-Small {
+    width: 100px;
+    margin: 0;
+    transition: 0.3s;
+    display: none;
+}
 
 .all_navbar .Logo:hover{
     transform: scale(1.1);
@@ -47,11 +53,7 @@ transition: 0.3s;
     align-items: center;
 }
 
-.UserGroup:hover .nav_login{
-    transform: scale(1.1);
-    transition: 0.2s;
-    
-}
+
 .UserGroup .nav_login .UserIcon {
     font-size: 20px;
 }
@@ -73,22 +75,39 @@ transition: 0.3s;
     position: relative;
 }
 
-.UserGroup .nav_login .dropDown {
-    position: absolute;
-    top: 40px;
-    right: 0;
-    z-index: 999;
-    transition: 0.3s;
+.UserGroup .nav_login .Name-User-bar {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--primary);
+    font-family: var(--title);
 }
-.UserGroup .nav_login .dropDown .dropDown-Container{
+
+.UserGroup .nav_login .DropDown-Component {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: var(--alto-5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 2s;
+}
+.UserGroup .nav_login .DropDown-Component .dropDown-Container{
 background-color: var(--bg-primary);
 width: 150px;
 height: 140px;
 border-radius: 10px;
 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+position: absolute;
+z-index: var(--alto-4);
+top: 40px;
+right: 0px;
+transition: 2s;
 }
 
-.UserGroup .nav_login .dropDown .dropDown-Container .dropdown-menu{
+.UserGroup .nav_login .DropDown-Component .dropDown-Container .dropdown-menu{
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
@@ -100,14 +119,18 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background-color: var(--bg-primary)
 }
 
-.UserGroup .nav_login .dropDown .dropDown-Container .dropdown-menu li{
+.UserGroup .nav_login .DropDown-Component .dropDown-Container .dropdown-menu li{
     font-size: 15px;
     transition: 0.3s;
 }
-.UserGroup .nav_login .dropDown .dropDown-Container .dropdown-menu li:hover {
+.UserGroup .nav_login .DropDown-Component .dropDown-Container .dropdown-menu li:hover {
     border-bottom: 1px solid var(--bg-tertiary);
     border-radius: 5px;
 }
+
+
+
+
 
 /*! Menu Modal */
 
@@ -178,7 +201,21 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 @media screen and (max-width:750px) {
 
     .all_navbar .Logo {
-            width: 90px;
+        display: none;
+    }
+
+    .all_navbar .Logo-Small {
+        display: flex;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+.UserGroup .nav_login .Name-User-bar {
+    display: none;
+}
+
+    .all_navbar {
+        padding: 5px 8px;
     }
 
 
@@ -188,11 +225,6 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
 @media screen and (max-width:570px) {
 
-    .all_navbar .UserGroup .toggleMenuNavbar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
          .UserGroup .nav_login .LogIn {
              font-size: 13px;
          }
