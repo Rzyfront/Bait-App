@@ -77,7 +77,7 @@ const DishForm = ({ menuId }) => {
               handleChangeimages={handleChangeimages}
               handleSelect={handleSelect}
               dish={dish}
-        image={image}
+            image={image}
             />
             <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
         </>
