@@ -100,16 +100,16 @@
 @media screen and (max-width:900px){
 
 .search_home {
-        width: 365px;
+        width: 500px;
         
 }
 
  .search_home .searchs {
-     width: 78%;
+     width: 85%;
  }
 
 .search_home .botton {
-    width: 22%;
+    width: 15%;
 
 }
 
@@ -119,11 +119,11 @@
 }
 
  .search_home .searchs .input_Location {
-     width: 50%;
+     width: 60%;
  }
 
  .search_home .searchs .input_Eat {
-     width: 50%;
+     width: 60%;
  }
 
 }
@@ -133,28 +133,32 @@
 @media screen and (max-width:750px) {
 
     .search_home {
-        width: 260px;
-       
+        width: 420px;
+
     }
 
     .search_home .searchs {
-        width: 90%;
+        width: 85%;
     }
 
+    .search_home .botton {
+        width: 15%;
 
+    }
+
+    .search_home .searchs .input_Location {
+        width: 50%;
+    }
+
+    .search_home .searchs .input_Eat {
+        width: 50%;
+    }
 
 
     .search_home .botton h4 {
         display: none;
     }
 
-    .search_home .searchs .input_Location {
-        display: none;
-    }
-
-    .search_home .searchs .input_Eat {
-        width: 100%;
-    }
 
 }
 
@@ -163,8 +167,32 @@
 @media screen and (max-width:570px) {
 
     .search_home {
-          display: none;
+        width: 240px;
+
     }
-   
+
+    .search_home .searchs {
+        width: 85%;
+    }
+
+    .search_home .botton {
+        width: 15%;
+
+    }
+
+    .search_home .searchs .input_Location {
+        width: 40%;
+        padding-left: 10px;
+    }
+
+    .search_home .searchs .input_Eat {
+        width: 60%;
+        padding: 0 10px;
+    }
+
+
+    .search_home .botton h4 {
+        display: none;
+    }
 
 }

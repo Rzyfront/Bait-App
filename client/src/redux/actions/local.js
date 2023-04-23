@@ -1,14 +1,15 @@
 import axios from 'axios';
+import eliminarTildes from '../../hooks/eliminarTildes.';
 export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
-export const DETAIL = 'DETAIL';
+export const DETAIL = 'DETAIL'; ;
 export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
         email: inputs.email,
         images: inputs.images,
-        location: inputs.location.location,
+        location: eliminarTildes(inputs.location.location),
         lat: inputs.location.lat,
         lng: inputs.location.lng,
         name: inputs.name,

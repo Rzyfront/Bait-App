@@ -6,6 +6,7 @@ import Pagination from '../pagination/pagination';
 import { useEffect } from 'react';
 import { searchByFilters } from '../../redux/actions/actions';
 
+
 function Cards () {
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -18,11 +19,13 @@ function Cards () {
     }, [id]
   );
 
+
   return (
     <div className="containerCardsall animated-element">
       <div>
       {totalPages && <Pagination totalPages={totalPages} filters={filters} />}
       <div className="ContainerCards animated-element">
+          <div className='widthcards'>
         {locals &&
           locals.map(
             (
@@ -34,26 +37,28 @@ function Cards () {
                 schedule,
                 id,
                 Characteristic,
-                Images
+                Images,
+                lat,
+                lng
               },
               index
             ) => {
-              return (
-                <Link to={`/profile/${id}`} key={index}>
-                  <Card
-                    id={id}
-                    Name={name}
-                    Rating={rating}
-                    location={location}
-                    verified={verified}
-                    schedule={schedule}
+              return (<Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
                     Characteristic={Characteristic}
                     Images={Images}
+                    location={location}
+                    key={index}
+                    lat={lat}
+                    lng={lng}
                   />
-                </Link>
+
               );
             }
           )}
+          </div>
+          <div className='widthmap'>
+            <MapHouse className="mapsize"/>
+          </div>
       </div>
       </div>
     </div>
