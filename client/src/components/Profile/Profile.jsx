@@ -12,6 +12,7 @@ import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailLocal } from '../../redux/actions/local';
+
 function Profile () {
   const [average, setAverage] = useState(0);
   // const [loading, setLoading] = useState(false);
