@@ -1,4 +1,4 @@
-.locales {
+.Create-Locals-Form {
     overflow: auto;
     max-width: 100%;  
     display: flex;
@@ -9,7 +9,7 @@
   }
 
  
-  .locales .termAndConditions{
+  .Create-Locals-Form .termAndConditions{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,30 +20,30 @@
     height: 100vh;
     
   }
-  .locales .termAndConditions .Logo {
+  .Create-Locals-Form .termAndConditions .Logo {
     width: 130px;
     transition: 0.3s;
   }
 
-  .locales .termAndConditions .Logo:hover {
+  .Create-Locals-Form .termAndConditions .Logo:hover {
     transform: scale(1.1);
     
   }
 
-  .locales .termAndConditions h2{
+  .Create-Locals-Form .termAndConditions h2{
     padding: 20px;
     color: var(--primary);
   }
 
-  .locales .termAndConditions h2 span{
+  .Create-Locals-Form .termAndConditions h2 span{
     color: var(--secondary);
   }
 
-  .locales .termAndConditions .termsButtons{
+  .Create-Locals-Form .termAndConditions .termsButtons{
     display: flex;
     gap: 30px;
   }
- .locales .termAndConditions button{
+ .Create-Locals-Form .termAndConditions button{
       width: 140px;
       height: 35px;
       border-radius: 20px;
@@ -58,19 +58,19 @@
 
  
   
-.locales .termAndConditions .Ok:hover {
+.Create-Locals-Form .termAndConditions .Ok:hover {
   background-color: var(--bg-tertiary);
   color: var(--tertiary);
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-.locales .termAndConditions .No:hover {
+.Create-Locals-Form .termAndConditions .No:hover {
   background-color: var(--optional2);
   color: var(--tertiary);
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-.locales .locales_data {
+.Create-Locals-Form .locales_data {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -81,7 +81,7 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.locales .locales_data form{
+.Create-Locals-Form .locales_data form{
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -90,7 +90,7 @@
   
 }
 
-.locales .locales_data form select{
+.Create-Locals-Form .locales_data form select{
   background-color: var(--bg-primary);
   border: none;
   outline: none;
@@ -100,7 +100,7 @@
   transition: 0.3s;
 }
 
-.locales .locales_data form select option {
+.Create-Locals-Form .locales_data form select option {
   background-color: var(--bg-primary);
     border: none;
     outline: none;
@@ -110,12 +110,12 @@
     transition: 0.3s;
 }
 
-.locales .locales_data form select:hover {
+.Create-Locals-Form .locales_data form select:hover {
   opacity: 0.9;
   border-radius: 5px;
 }
 
-.locales .locales_data form button {
+.Create-Locals-Form .locales_data form .Send-Locals {
   padding: 10px;
   background-color: var(--btn-primary);
   border-radius: 20px;
@@ -123,11 +123,11 @@
   transition: 0.3s;
 }
 
-.locales .locales_data form button:hover {
+.Create-Locals-Form .locales_data form button:hover {
 background-color: var(--btn-secondary);
 }
 
-.locales .locales_data .Logo{
+.Create-Locals-Form .locales_data .Logo{
   width: 130px;
 }
 .locales_data h1 {

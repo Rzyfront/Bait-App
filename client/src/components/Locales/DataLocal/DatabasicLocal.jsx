@@ -1,11 +1,9 @@
 import { Button, Input } from '@nextui-org/react';
 import { specialties } from '../../../helpers/specialties';
-import { useState } from 'react';
-useState
-export default function DatabasicLocal ({ handleChange, inputs, errors, handleSelect, searchCity,mapSearch,handleMap}) {
+export default function DatabasicLocal ({ handleChange, inputs, errors, handleSelect, searchCity, mapSearch, handleMap }) {
   return (
     <>
-  
+
             <Input
                 underlined
                 labelPlaceholder="Nombre del Local"
@@ -18,11 +16,6 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 required
             />
             {errors.name && <p className='danger'>{errors.name}</p>}
-
-
-           
-         
-
 
             <Input
                 underlined
@@ -56,7 +49,6 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
             /> */}
             {errors.schedule && <p className='danger'>{errors.schedule}</p>}
 
-           
             {errors.phone && <p className='danger'>{errors.phone}</p>}
 
             <select
@@ -87,7 +79,6 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 required
             />
             <Button onPress={searchCity}>Buscar Ciudad</Button>
-            
 
         </>
   );
