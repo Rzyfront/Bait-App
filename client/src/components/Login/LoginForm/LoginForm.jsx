@@ -67,7 +67,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
 
   return (
         <>
-            <div className="login">
+            <div className="login" onClick={(e) => e.stopPropagation()}>
               <ToastContainer className="notify" theme='colored'/>
                 <TfiClose
                     className="CloseIcon"

@@ -78,7 +78,7 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
   };
   return (
         <>
-            <div className={`${!login && 'register scale-up-bottom'}`}>
+            <div className={`${!login && 'register scale-up-bottom'}`} onClick={(e) => e.stopPropagation()}>
               <ToastContainer className="notify" theme="colored"/>
                 <TfiClose
                     className="CloseIcon"

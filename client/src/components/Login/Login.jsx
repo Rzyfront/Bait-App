@@ -16,7 +16,7 @@ const Login = ({ setToggleLogin }) => {
   });
 
   return (
-    <div className={`LoginContainer ${animation && 'scale-up-tr'}`}>
+    <div className={`LoginContainer ${animation && 'scale-up-tr'}`} onClick={() => setToggleLogin(false)}>
       {login
         ? (
         <LoginForm setToggleLogin={setToggleLogin} loginRegister={loginRegister}/>
