@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
       location,
       password: passwordHash,
     });
-    sendVerificationEmail(newUser.id, newUser.email);
+    sendVerificationEmail(newUser.id, newUser.email, newUser.name);
     res
       .status(201)
       .json({ success: true, message: 'Email send' });

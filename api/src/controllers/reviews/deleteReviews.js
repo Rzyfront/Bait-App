@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
       );
     }
     deletedReview.destroy();
-    deletedReview.save();
+    await deletedReview.save();
     return res.status(201).json({ success: true, deletedReview });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });

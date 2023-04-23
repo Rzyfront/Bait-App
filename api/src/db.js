@@ -7,9 +7,13 @@ const MODELS = require('./models/index');
 const sequelize = new Sequelize(
   process.env.DB_URL,
   {
-
     logging: false, // set to console.log to see the raw SQL queries
     native: false, // lets Sequelize know we can use pg-native for ~30% more speed
+    // dialectOptions: {
+    //   ssl: {
+    //     required: true,
+    //   },
+    // },
   },
 );
 
@@ -40,13 +44,16 @@ Local.belongsTo(User);
 User.hasMany(Local);
 
 Dish.belongsTo(Menu);
-Menu.hasMany(Dish);
+Menu.hasMany(Dish, { onDelete: 'CASCADE' });
 
 Image.belongsTo(Dish);
 Dish.hasOne(Image);
 
 Menu.belongsTo(Local);
 Local.hasMany(Menu);
+
+Image.belongsTo(Menu);
+Menu.hasOne(Image);
 
 Local.hasOne(Characteristic, { onDelete: 'CASCADE' });
 Characteristic.belongsTo(Local, { onDelete: 'CASCADE' });
