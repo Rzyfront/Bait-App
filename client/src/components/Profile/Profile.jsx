@@ -6,7 +6,7 @@ import { BsCalendar3 } from 'react-icons/bs';
 import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
 import { GiMeal } from 'react-icons/gi';
 import img from '../../assets/restaurante.jpg';
-import { getMenu } from '../../redux/actions/actions';
+import imgComida from '../../assets/comida.jpg';
 import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
@@ -21,42 +21,39 @@ function Profile () {
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
-  useEffect(() => {
-    dispatch(getMenu(id));
-  }, []);
 
   const [toogleModal, setToggleModal] = useState('ReviewsLocal');
   const [toogleModal2, setToggleModal2] = useState(false);
-  // const ListMenu = [
-  //   {
-  //     name: 'Pollo Teriyaky',
-  //     Price: 200,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   },
-  //   { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-  //   { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
-  //   {
-  //     name: 'Pasta italiana',
-  //     Price: 150,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   },
-  //   {
-  //     name: 'Pollo Teriyaky',
-  //     Price: 200,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   },
-  //   { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-  //   { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
-  //   {
-  //     name: 'Pasta italiana',
-  //     Price: 150,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   }
-  // ];
+  const ListMenu = [
+    {
+      name: 'Pollo Teriyaky',
+      Price: 200,
+      Images: [{ url: imgComida }],
+      Rating: 3
+    },
+    { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
+    { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
+    {
+      name: 'Pasta italiana',
+      Price: 150,
+      Images: [{ url: imgComida }],
+      Rating: 3
+    },
+    {
+      name: 'Pollo Teriyaky',
+      Price: 200,
+      Images: [{ url: imgComida }],
+      Rating: 3
+    },
+    { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
+    { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
+    {
+      name: 'Pasta italiana',
+      Price: 150,
+      Images: [{ url: imgComida }],
+      Rating: 3
+    }
+  ];
 
   return (
     <>
@@ -152,7 +149,7 @@ function Profile () {
 
         <div className="ContainerSelection">
           {(toogleModal === 'Menu' || !toogleModal) && (
-            <Menu />
+            <Menu ListMenu={ListMenu} />
           )}
           {reviews && toogleModal === 'ReviewsLocal' && (
             <Reviews localId={detail.id} />
