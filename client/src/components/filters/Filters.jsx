@@ -7,7 +7,7 @@ import Select from 'react-select';
 import { useDispatch } from 'react-redux';
 import { searchByFilters } from '../../redux/actions/actions';
 import { useState, useEffect } from 'react';
-import { specialties } from '../../helpers/specialties';
+import axios from 'axios';
 
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = () => {
@@ -19,8 +19,10 @@ const Filters = () => {
     rating: '',
     alphabet: ''
   };
+
   const [filters, setFilters] = useState(filterState);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [special, setSpecial] = useState([]);
 
   const Caracteristicaslist = [
     { value: 'wifi', label: 'Wifi' },
@@ -34,6 +36,12 @@ const Filters = () => {
     { value: 'family_style', label: 'Familiar' },
     { value: 'romantic', label: 'Romantico' }
   ];
+
+  useEffect(() => {
+    axios.get('/locals/specialties')
+      .then(res => setSpecial(res.data.allSpecialties.map(e => e.specialty)))
+      .catch(err => console.log(err));
+  }, []);
 
   useEffect(() => {
     dispatch(searchByFilters(filters));
@@ -82,7 +90,7 @@ const Filters = () => {
           value={filters.specialty}
         >
           <option value="" disabled> Tipo de comida </option>
-          {specialties.map((spe, i) => <option key={i} value={spe}>{spe}</option>)}
+          {special?.map((spe, i) => <option key={i} value={spe}>{spe}</option>)}
         </select>
 
         <Select
