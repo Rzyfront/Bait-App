@@ -65,7 +65,7 @@ function Profile () {
         )}
         {detail && (
           <div className="ProfileInfo">
-            {detail.Images.length
+            {detail?.Images?.length
               ? (
               <img
                 src={detail.Images[0].url}
