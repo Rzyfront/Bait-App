@@ -1,18 +1,17 @@
-import { useState } from 'react';
-import { Input, Textarea } from '@nextui-org/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+
+import { useDispatch } from 'react-redux';
 import { useUploadImage } from '../../../hooks/useUploadImage';
 import './DishForm.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postDish } from '../../../redux/actions/actions';
+import Inputs from './Inputs/Inputs';
 
-const DishForm = () => {
-  const { menu } = useSelector(state => state);
-  const { success, error } = useSelector(state => state);
+const DishForm = ({ menuId }) => {
   const { image, loading, handleChangeimage } = useUploadImage();
-  console.log(menu);
   const dispatch = useDispatch();
+  const [title, setTile] = useState(false);
   const [dish, setDish] = useState({
     name: '',
     type: '',
@@ -23,105 +22,64 @@ const DishForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setDish({
+      ...dish,
       [name]: value
     });
   };
   const handleSelect = (event) => {
     const { name, value } = event.target;
     setDish({
+      ...dish,
       [name]: value
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(postDish(menu.id, { image, dish }));
-  };
   const handleChangeimages = (event) => {
     handleChangeimage(event);
   };
 
-  error && toast.error('Falló al crear el menu', {
-    position: toast.POSITION.TOP_CENTER
-  });
+  useEffect(() => {
+    if (image.length) {
+      setDish({ ...dish, image: image[0] });
+    }
+  }, [image]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postDish(menuId, dish)).then(() => {
+      toast.success('Producto agregado', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+      setDish({
+        name: '',
+        type: '',
+        ingredients: '',
+        price: '',
+        description: ''
+      });
+      setTile(true);
+    }).catch(() => {
+      toast.error('Error al agregar', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+    });
+  };
+
   return (
     <>
-      <h2>Agrega un producto</h2>
-    <div className='Dish-Form-Container'>
-        <ToastContainer/>
-        <div className='dishColumn'>
-              <Input
-                  underlined
-                  labelPlaceholder="Nombre producto"
-                  color="dark"
-                  className='name'
-                  onChange={handleChange}
-                  value={dish.name}
-                  type='text'
-                  name='name'
-                  required
-              />
-              {/* {errors.name && <p className='danger'>{errors.name}</p>} */}
-                <select
-                    name='type'
-                    className='type'
-                    onChange={handleSelect}
-                    value={dish.type}
-                    required
-                >
-                    <option value='value2' defaultValue>Selecciona</option>
-                    <option value='comun'>Común</option>
-                    <option value='glutenFree'>Gluten free</option>
-                    <option value='diabetic'>Apto para diabéticos</option>
-                    <option value='vegan'>Vegano</option>
-                    <option value='fitness'>fitness</option>
-                    <option value='na'>No aplica</option>
-                </select>
-
-              <Input
-                  underlined
-                  labelPlaceholder="Ingredients"
-                  color="dark"
-                  className='type'
-                  onChange={handleChange}
-                  value={dish.ingredients}
-                  type='text'
-                  name='ingredients'
-                  required
-              />
-      </div>
-      <div className='dishColumn'>
-              <Input
-                  underlined
-                  labelPlaceholder="Price"
-                  color="dark"
-                  className='type'
-                  onChange={handleChange}
-                  value={dish.price}
-                  type='number'
-                  name='price'
-                  required
-              />
-                <Textarea
-                  underlined
-                  labelPlaceholder="Descripción"
-                  color="dark"
-                  className='type'
-                  onChange={handleChange}
-                  value={dish.description}
-                  type='text'
-                  name='description'
-                  required
-              />
-          <input
-            type='file'
-            name='image'
-            accept='image/png,image/jpeg,image/jpg,image/gif'
-            onChange={handleChangeimages}
-          ></input>
-      </div>
-        </div>
-            <button onClick={handleSubmit} className='btnDish'>Agregar producto</button>
+      <ToastContainer />
+      { title ? <h2>Agrega otro producto</h2> : <h2>Agrega un producto</h2 >
+}
+            <Inputs
+              handleChange={handleChange}
+              handleChangeimages={handleChangeimages}
+              handleSelect={handleSelect}
+              dish={dish}
+            image={image}
+            />
+            <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
         </>
   );
 };

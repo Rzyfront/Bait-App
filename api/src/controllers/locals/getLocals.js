@@ -28,19 +28,19 @@ module.exports = async (req, res) => {
         },
         {
           model: Menu,
-          attributes: ['type'],
+          attributes: [],
           where: req.menu,
           required: false,
         },
       ],
-      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'specialty'/* , 'verified', 'schedule', 'UserId', 'lat', 'lng' */],
+      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'specialty', 'verified', 'schedule', 'UserId', 'lat', 'lng'],
       order: req.order,
       limit: 10,
       offset: (page - 1) * 10,
       group: ['Local.id', 'Images.id', 'Characteristic.id', 'Menus.id'],
       subQuery: false,
     });
-    const totalPages = Math.ceil(count.length / 10);
+    const totalPages = Math.ceil((count.length - 1) / 10);
     res.status(200).json({
       success: true, count: count.length - 1, totalPages, locals: rows,
     });

@@ -12,7 +12,7 @@ export default function TYC ({ src, handleClick }) {
                       height='60px'
                   />
               </Link>
-              <h2 >Terminos y <span>Condiciones</span></h2>
+              <h2 >Términos y <span>Condiciones</span></h2>
               <p>Bienvenido a Bait, la plataforma que permite a los usuarios buscar, reservar y reseñar locales y restaurantes. Al utilizar nuestra aplicación móvil, aceptas los siguientes términos y condiciones:</p>
 
               <p>Registro de usuario: Para utilizar nuestros servicios, debes registrarte como usuario en nuestra aplicación móvil. Debes proporcionar información precisa y actualizada al registrarte. Si descubrimos que has proporcionado información falsa o inexacta, podemos suspender o cerrar tu cuenta.</p>

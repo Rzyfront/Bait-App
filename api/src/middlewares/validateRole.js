@@ -22,4 +22,16 @@ const isOwner = (req, res, next) => {
   return res.status(401).json({ message: 'Unauthorized', success: false });
 };
 
-module.exports = { isAdmin, isSuperAdmin, isOwner };
+const isTheOwnerOrAdmin = (req, res, next) => {
+  const { role, userId, local } = req;
+  try {
+    if (userId !== local.UserId && (role !== 'admin' || role !== 'superAdmin')) throw new Error();
+    next();
+  } catch (error) {
+    res.status(401).json({ message: 'Only an admin or the owner of the local can modify a local.', success: false });
+  }
+};
+
+module.exports = {
+  isAdmin, isSuperAdmin, isOwner, isTheOwnerOrAdmin,
+};

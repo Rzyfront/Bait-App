@@ -1,19 +1,34 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, ERROR, SUCCESS_RESET, ERROR_RESET, CHECKUSER, RESETUSER, POST_DISH, POST_MENU } from '../actions/actions';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS } from '../actions/actions';
 import { SEARCH_BY_QUERY } from '../actions/cards';
-import { DETAIL, SUCCESS } from '../actions/local';
+import { DETAIL, SUCCESS, ERROR } from '../actions/local';
+import { FOCO, UBICATIONDATA } from '../actions/ubication';
+
 const initialState = {
   cards: [],
   reset: [],
   detail: [],
   success: null,
   error: '',
+  successMenu: null,
+  errorMenu: '',
+  successDish: null,
+  errorDish: '',
   user: {},
+  newMenu: {},
   menu: [],
-  dish: []
+  reviews: [],
+  ubication: { lat: 40.56684898238947, lng: -34.60762000391614, city: 'buenos aires' },
+  foco: { lat: null, lng: null }
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case UBICATIONDATA:
+      return {
+        ...state,
+        ubication: payload
+      };
+
     case ORDER:
       return {
         ...state,
@@ -50,22 +65,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         success: payload
       };
-    case SUCCESS_RESET:
-      return {
-        ...state,
-        success: null
-      };
     case ERROR:
       return {
         ...state,
         error: payload
       };
-    case ERROR_RESET:
-      return {
-        ...state,
-        error: null
-      };
-
     case CHECKUSER:
       return {
         ...state,
@@ -76,15 +80,46 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         user: {}
       };
+    case GET_MENU:
+      return {
+        ...state,
+        menu: payload
+      };
     case POST_MENU:
       return {
         ...state,
-        menu: [...state.menu, payload]
+        newMenu: payload
       };
-    case POST_DISH:
+    case SUCCESS_MENU:
       return {
         ...state,
-        dish: [...state.dish, payload]
+        successMenu: payload
+      };
+    case ERROR_MENU:
+      return {
+        ...state,
+        errorMenu: payload
+      };
+    case SUCCESS_DISH:
+      return {
+        ...state,
+        successDish: payload
+      };
+    case ERROR_DISH:
+      return {
+        ...state,
+        errorDish: payload
+      };
+
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: [...state.reviews, payload]
+      };
+    case FOCO:
+      return {
+        ...state,
+        foco: payload
       };
 
     default:

@@ -13,7 +13,50 @@ import DatabasicLocal from './DataLocal/DatabasicLocal';
 import Mapdata from '../Map/Mapdata';
 import SearchMap from '../Map/SearchMap/Searchmap';
 import { createLocal } from '../../redux/actions/local';
+
 function LocalsDatabasic () {
+  const positionMap = useSelector((state) => state.ubication);
+  const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
+
+  // map controllers
+  useEffect(() => {
+    if (Mapcenter[0] !== positionMap.lat && Mapcenter[1] !== positionMap.lng) {
+      setMapcenter([positionMap.lat, positionMap.lng]);
+    }
+  }, [positionMap]);
+
+  const [statemap, setStatemap] = useState(false);
+  const [mapSearch, setMapsearch] = useState('');
+  const handleMap = (e) => {
+    setMapsearch(e.target.value);
+  };
+  const handleBoton = () => {
+    setStatemap(false);
+  };
+  const searchCity = async () => {
+    const data = await SearchMap(mapSearch);
+    if (data) {
+      setMapcenter(data);
+      setStatemap(true);
+    } else {
+      toast.error('No existe esta ciudad', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+    }
+  };
+  const handlemapdatas = (information) => {
+    console.log(information);
+    const data = {
+      lat: information.location.y,
+      lng: information.location.x,
+      location: information.address
+        .LongLabel
+    };
+    setInputs({
+      ...inputs,
+      location: data
+    });
   // map controllers
   const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
   const [statemap, setStatemap] = useState(false);
@@ -168,7 +211,7 @@ function LocalsDatabasic () {
   });
 
   return (
-    <div className='locales animated-element'>
+    <div className='Create-Locals-Form animated-element'>
       { termsAndConditions
         ? <TYC src={BaitLogo} handleClick={handleClick}/>
         : <div className='locales_data animated-element'>
@@ -230,7 +273,7 @@ function LocalsDatabasic () {
             />
                 )}
 
-          <button type='submit'> ENVIAR</button>
+          <button type='submit' className='Send-Locals'> ENVIAR</button>
           <ToastContainer theme='colored'/>
         </form>
       </div>}

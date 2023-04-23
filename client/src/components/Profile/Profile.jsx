@@ -7,7 +7,7 @@ import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
 
 import { GiMeal } from 'react-icons/gi';
 import img from '../../assets/restaurante.jpg';
-import imgComida from '../../assets/comida.jpg';
+import { getMenu } from '../../redux/actions/actions';
 import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
 
 import './Profile.css';
@@ -15,63 +15,51 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailLocal } from '../../redux/actions/actions';
 
+
 function Profile () {
-  const [average, setAverage] = useState(0);
-  // const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const { locals } = useSelector((state) => state.detail);
+  const { detail, reviews } = useSelector(state => state);
 
   const { id } = useParams();
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
-  console.log(locals);
   useEffect(() => {
-    if (locals) {
-      let suma = 0;
-      locals.Reviews.forEach((data) => {
-        suma += data.rating;
-      });
-      suma = suma / locals.Reviews.length;
-      setAverage(suma);
-      if (locals.Reviews.length === 0) {
-        setAverage(0);
-      }
-    }
-  }, [locals]);
+    dispatch(getMenu(id));
+  }, []);
 
   const [toogleModal, setToggleModal] = useState('ReviewsLocal');
   const [toogleModal2, setToggleModal2] = useState(false);
-  const ListMenu = [
-    {
-      name: 'Pollo Teriyaky',
-      Price: 200,
-      Images: [{ url: imgComida }],
-      Rating: 3
-    },
-    { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-    { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
-    {
-      name: 'Pasta italiana',
-      Price: 150,
-      Images: [{ url: imgComida }],
-      Rating: 3
-    },
-    {
-      name: 'Pollo Teriyaky',
-      Price: 200,
-      Images: [{ url: imgComida }],
-      Rating: 3
-    },
-    { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-    { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
-    {
-      name: 'Pasta italiana',
-      Price: 150,
-      Images: [{ url: imgComida }],
-      Rating: 3
-    }
-  ];
+  // const ListMenu = [
+  //   {
+  //     name: 'Pollo Teriyaky',
+  //     Price: 200,
+  //     Images: [{ url: imgComida }],
+  //     Rating: 3
+  //   },
+  //   { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
+  //   { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
+  //   {
+  //     name: 'Pasta italiana',
+  //     Price: 150,
+  //     Images: [{ url: imgComida }],
+  //     Rating: 3
+  //   },
+  //   {
+  //     name: 'Pollo Teriyaky',
+  //     Price: 200,
+  //     Images: [{ url: imgComida }],
+  //     Rating: 3
+  //   },
+  //   { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
+  //   { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
+  //   {
+  //     name: 'Pasta italiana',
+  //     Price: 150,
+  //     Images: [{ url: imgComida }],
+  //     Rating: 3
+  //   }
+  // ];
 
   return (
     <>
@@ -81,46 +69,46 @@ function Profile () {
         {toogleModal2 && (
           <ReviewsForm setToggleModal2={setToggleModal2} id={id} />
         )}
-        {locals && (
+        {detail && (
           <div className="ProfileInfo">
-            {locals.Images.length
+            {detail?.Images?.length
               ? (
               <img
-                src={locals.Images[0].url}
-                alt={locals.name}
+                src={detail.Images[0].url}
+                alt={detail.name}
                 className="ImageProfile"
               />
                 )
               : (
-              <img src={img} alt={locals.name} className="ImageProfile" />
+              <img src={img} alt={detail.name} className="ImageProfile" />
                 )}
 
             <div className="Decorator"></div>
             <div className="Info">
-              <h2>{locals.name}</h2>
+              <h2>{detail.name}</h2>
               <div className="RatingGroup">
                 <h3>Rating:</h3>
                 <RatingStar
                   readOnly
                   style={{ maxWidth: 100 }}
-                  value={average}
+                  value={detail.rating}
                 />
               </div>
               <div className="LocationGroup">
-                <h3 className="Location">{locals.location}</h3>
+                <h3 className="Location">{detail.location}</h3>
                 <GoLocation />
               </div>
               <div className="ScheduleGroup">
                 <h3>Horario:</h3>
-                <p className="Schedule">{locals.schedule}</p>
+                <p className="Schedule">{detail.schedule}</p>
               </div>
               <div className="TelGroup">
                 <h3>Tel:</h3>
-                <p>{locals.phone}</p>
+                <p>{detail.phone}</p>
               </div>
               <div className="EmailGroup">
                 <h3>E-mail:</h3>
-                <p>{locals.email}</p>
+                <p>{detail.email}</p>
               </div>
               <div className="Options">
                 <div className="Reservar">
@@ -167,10 +155,10 @@ function Profile () {
 
         <div className="ContainerSelection">
           {(toogleModal === 'Menu' || !toogleModal) && (
-            <Menu ListMenu={ListMenu} />
+            <Menu />
           )}
-          {locals && toogleModal === 'ReviewsLocal' && (
-            <Reviews ReviewsList={locals.Reviews} />
+          {reviews && toogleModal === 'ReviewsLocal' && (
+            <Reviews localId={detail.id} />
           )}
         </div>
       </div>

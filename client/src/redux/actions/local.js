@@ -1,13 +1,15 @@
 import axios from 'axios';
+import eliminarTildes from '../../hooks/eliminarTildes.';
 export const SUCCESS = 'SUCCESS';
-export const DETAIL = 'DETAIL';
+export const ERROR = 'ERROR';
+export const DETAIL = 'DETAIL'; ;
 export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
         email: inputs.email,
         images: inputs.images,
-        location: inputs.location.location,
+        location: eliminarTildes(inputs.location.location),
         lat: inputs.location.lat,
         lng: inputs.location.lng,
         name: inputs.name,
@@ -21,11 +23,6 @@ export const createLocal = (inputs) => {
           type: SUCCESS,
           payload: response.data.success
         });
-        setTimeout(() => {
-          dispatch({
-            type: SUCCESS_RESET
-          });
-        }, 3000);
       }
     } catch (error) {
       console.log(error);
@@ -33,12 +30,6 @@ export const createLocal = (inputs) => {
         type: ERROR,
         payload: error.message
       });
-      // set error state to null after 3 seconds
-      setTimeout(() => {
-        dispatch({
-          type: ERROR_RESET
-        });
-      }, 3000);
     }
   };
 };
@@ -46,9 +37,10 @@ export const DetailLocal = (id) => {
   return async (dispatch) => {
     try {
       const datos = await axios.get(`/locals/${id}`);
+      console.log(datos);
       dispatch({
         type: DETAIL,
-        payload: datos.data
+        payload: datos.data.locals
       });
     } catch (error) {
       console.log(error.message);
