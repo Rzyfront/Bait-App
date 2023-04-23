@@ -34,17 +34,6 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish }) => {
                         <option value='na'>No aplica</option>
                     </select>
 
-                    <Input
-                        underlined
-                        labelPlaceholder="Ingredients"
-                        color="dark"
-                        className='type'
-                        onChange={handleChange}
-                        value={dish.ingredients}
-                        type='text'
-                        name='ingredients'
-                        required
-                    />
                 </div>
                 <div className='dishColumn'>
                     <Input
