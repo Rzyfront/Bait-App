@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
     const rating = (food + environment + service + qaPrice) / 4;
     const newReview = await Review.create({
-      title, comment, food, environment, service, qaPrice, rating,
+      title, comment, food, environment, service, qaPrice, rating, verified: req.verified ?? 'unVeified',
     });
     await local.addReview(newReview.id);
     await newReview.setUser(req.userId);
