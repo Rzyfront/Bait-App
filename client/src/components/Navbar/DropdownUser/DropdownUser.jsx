@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 const DropdownUser = ({ close }) => {
   return (
-          <div className='dropDown-Container'>
+          <div className='DropDown-Component'>
 
-                <ul className="dropdown-menu">
+                <div className='dropDown-Container'>
+                    <ul className="dropdown-menu">
                     <li>
                         <Link to="">
                             <RiUserLine /> Perfil
@@ -27,6 +28,7 @@ const DropdownUser = ({ close }) => {
 
                     </li>
                 </ul>
+                </div>
             </div>
 
   );
