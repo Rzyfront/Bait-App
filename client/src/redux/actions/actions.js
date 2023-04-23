@@ -13,6 +13,8 @@ export const SUCCESS_DISH = 'SUCCESS_DISH';
 export const ERROR_DISH = 'ERROR_DISH';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
+export const GET_MENU = 'GET_MENU';
+export const GET_REVIEWS = 'GET_REVIEWS';
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -196,6 +198,30 @@ export const postDish = (menuId, dish) => {
     }
   };
 };
+
+export const getMenu = (localId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`/menu/${localId}`);
+      if (response.status === 200) {
+        dispatch({
+          type: SUCCESS_MENU,
+          payload: response.data.success
+        });
+        dispatch({
+          type: GET_MENU,
+          payload: response.data
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR_MENU,
+        payload: error.message
+      });
+    }
+  };
+};
+
 export const checkUser = () => {
   return async (dispatch) => {
     try {
@@ -216,5 +242,21 @@ export const ResetUser = () => {
       type: RESETUSER,
       payload: ''
     });
+  };
+};
+
+export const getReviews = (localId, page = 1) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`/reviews/${localId}?page=${page}`);
+      if (response.status === 200) {
+        dispatch({
+          type: GET_REVIEWS,
+          payload: response.data.reviews
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };

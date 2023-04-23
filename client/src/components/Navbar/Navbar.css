@@ -24,8 +24,23 @@ transition: 0.3s;
 
 .all_navbar .UserGroup{
     position: relative;
+    display: flex;
+    gap: 20px;
 }
 
+.all_navbar .UserGroup .toggleMenuNavbar{
+    display: none;
+    position: relative;
+}
+
+.all_navbar .UserGroup .toggleMenuNavbar .toggleMenuNavbar-close{
+    font-size: 25px;
+    transition: 0.3s;
+}
+
+.all_navbar .UserGroup .toggleMenuNavbar .toggleMenuNavbar-close:hover {
+    transform: scale(1.1);
+}
 .UserGroup .nav_login{
     display: flex;
     gap: 3px;
@@ -143,4 +158,43 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         -webkit-transform-origin: 100% 0%;
         transform-origin: 100% 0%;
     }
+}
+
+
+/*! Resposive 900px */
+
+@media screen and (max-width:900px) {
+    .all_navbar .Logo {
+            width: 110px;
+        }
+    .UserGroup .nav_login .LogIn {
+        font-size: 15px;
+    }
+
+}
+
+/*! Responsive 750px */
+
+@media screen and (max-width:750px) {
+
+    .all_navbar .Logo {
+            width: 90px;
+    }
+
+
+}
+
+/*! Responsive 570px */
+
+@media screen and (max-width:570px) {
+
+    .all_navbar .UserGroup .toggleMenuNavbar {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+         .UserGroup .nav_login .LogIn {
+             font-size: 13px;
+         }
+
 }
