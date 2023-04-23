@@ -11,7 +11,7 @@ import Inputs from './Inputs/Inputs';
 const DishForm = ({ menuId }) => {
   const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
-  const [ title, setTile ] = useState(false);
+  const [title, setTile] = useState(false);
   const [dish, setDish] = useState({
     name: '',
     type: '',
@@ -77,6 +77,7 @@ const DishForm = ({ menuId }) => {
               handleChangeimages={handleChangeimages}
               handleSelect={handleSelect}
               dish={dish}
+        image={image}
             />
             <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
         </>
