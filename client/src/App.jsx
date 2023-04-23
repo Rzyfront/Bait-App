@@ -39,6 +39,7 @@ function App () {
         <Route path='/map' element={<Mapdata />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/menu/:id' element={<MenuForm />} />
+        <Route path='/user/:id' element={<Userprofile/>} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>
