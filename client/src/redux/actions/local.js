@@ -36,9 +36,10 @@ export const DetailLocal = (id) => {
   return async (dispatch) => {
     try {
       const datos = await axios.get(`/locals/${id}`);
+      console.log(datos);
       dispatch({
         type: DETAIL,
-        payload: datos.data
+        payload: datos.data.locals
       });
     } catch (error) {
       console.log(error.message);

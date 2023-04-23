@@ -1,18 +1,4 @@
-
-import {
-  ORDER,
-  RESET,
-  CREATE_USER,
-  HOMEPAGE,
-  CHECKUSER,
-  RESETUSER,
-  POST_MENU,
-  ERROR_DISH,
-  SUCCESS_DISH,
-  SUCCESS_MENU,
-  ERROR_MENU,
-  SEARCH_BY_FILTERS
-} from '../actions/actions';
+import { ORDER, SEARCH_BY_FILTERS, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS } from '../actions/actions';
 import { SEARCH_BY_QUERY } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 
@@ -30,7 +16,8 @@ const initialState = {
   successDish: null,
   errorDish: '',
   newMenu: {},
-  menu: []
+  menu: [],
+  reviews: []
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -91,6 +78,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         filters: payload.filters,
         totalPages: payload.totalPages
       };
+    case GET_MENU:
+      return {
+        ...state,
+        menu: payload
+      };
     case POST_MENU:
       return {
         ...state,
@@ -116,6 +108,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         errorDish: payload
 
+      };
+    case GET_REVIEWS:
+      return {
+        ...state,
+        reviews: [...state.reviews, payload]
       };
     default:
       return { ...state };
