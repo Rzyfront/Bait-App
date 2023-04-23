@@ -2,11 +2,12 @@ import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
+import Select from 'react-select';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useDispatch } from 'react-redux';
 import { searchByFilters } from '../../redux/actions/actions';
 import { useState, useEffect } from 'react';
-import { specialties, allCharacteristics } from '../../helpers/fieldsOfSearch';
+import { specialties } from '../../helpers/specialties';
 
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = () => {
@@ -14,11 +15,25 @@ const Filters = () => {
   const navigate = useNavigate();
   const filterState = {
     specialty: '',
-    characteristics: '',
+    characteristics: [],
     rating: '',
     alphabet: ''
   };
   const [filters, setFilters] = useState(filterState);
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const Caracteristicaslist = [
+    { value: 'wifi', label: 'Wifi' },
+    { value: 'parking_lot', label: 'Parqueadero' },
+    { value: 'outdoor_seating', label: 'Asientos exteriores' },
+    { value: 'live_music', label: 'Musica' },
+    { value: 'table_service', label: 'Servicio a Mesa' },
+    { value: 'big_group', label: 'Grupos grandes' },
+    { value: 'work_friendly', label: 'Amigable' },
+    { value: 'pet_friendly', label: 'Mascotas' },
+    { value: 'family_style', label: 'Familiar' },
+    { value: 'romantic', label: 'Romantico' }
+  ];
 
   useEffect(() => {
     dispatch(searchByFilters(filters));
@@ -38,6 +53,11 @@ const Filters = () => {
     navigate('/home/1');
     console.log(filters);
     setFilters(filterState);
+  };
+
+  const handleMultiSelectChange = (selectedOptions) => {
+    setSelectedOptions(selectedOptions);
+    setFilters({ ...filters, characteristics: selectedOptions.map(e => e.value) });
   };
 
   return (
@@ -65,17 +85,12 @@ const Filters = () => {
           {specialties.map((spe, i) => <option key={i} value={spe}>{spe}</option>)}
         </select>
 
-        <select
-          name = "characteristics"
-          className="Caracteristics"
-          onChange={handleFilters}
-          value={filters.characteristics}
-        >
-          <option value="" disabled>
-            Caracteristicas adicionales
-          </option>
-          {allCharacteristics.map((char, i) => <option key={i} value={char[0]}>{char[1]}</option>)}
-        </select>
+        <Select
+          value={selectedOptions}
+          onChange={handleMultiSelectChange}
+          options={Caracteristicaslist}
+          isMulti
+  />
 
         <select
           name = "rating"

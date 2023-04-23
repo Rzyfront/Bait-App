@@ -75,7 +75,6 @@ export const searchByQuery = (name, city) => {
 };
 
 export const searchByFilters = (filter) => {
-  console.log(filter);
   const {
     name = '',
     city = '',
@@ -87,13 +86,15 @@ export const searchByFilters = (filter) => {
   } = filter;
   return async (dispatch) => {
     try {
-      console.log(page);
-      let character = {};
-      if (characteristics) character = { [characteristics]: true };
+      const character = {};
+      if (characteristics.length) {
+        for (const element of characteristics) {
+          character[element] = true;
+        }
+      };
       const response = await axios.get(
         `/locals/page/${page ?? 1}?name=${name}&location=${city}&specialty=${/* specialty */ ''}&order=${rating || alphabet}&characteristics=${JSON.stringify(character)}`);
       const info = response.data;
-      console.log(info);
       info.filters = filter;
       return dispatch({ type: SEARCH_BY_FILTERS, payload: info });
     } catch (error) {
