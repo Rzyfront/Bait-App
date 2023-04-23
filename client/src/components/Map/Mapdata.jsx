@@ -3,19 +3,11 @@ import 'leaflet/dist/leaflet.css';
 import { useEffect } from 'react';
 import myIcon from './Icono';
 import L from 'leaflet';
+import reverseGeoCoding from './SearchMap/reverseGeocoding';
 // const MAPCENTERDEFAULT = [40.574215, -105.08333];
 const MAP_LAYER_ATTRIBUTION = '&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors';
 const MAP_LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const GEOCODE_URL = 'https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=';
-
 function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
-  // data information
-
-  const reverseGeoCoding = async (lng, lat) => {
-    const data = await (await fetch(GEOCODE_URL + `${lng},${lat}`)).json();
-    return data;
-  };
-
   // actions map
   function MyComponent () {
     const map = useMapEvents({
