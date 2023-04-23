@@ -3,8 +3,9 @@ import './Navbar.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import SearchHome from './SearchHome/SearchHome';
 import { Link, useLocation } from 'react-router-dom';
-import { Login, DropdownUser } from '../components';
+import { Login, DropdownUser, ToggleMenuNavbar } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
+import { BiMenu, BiMenuAltRight } from 'react-icons/bi';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
 const Navbar = () => {
@@ -13,6 +14,7 @@ const Navbar = () => {
   const dataUser = useSelector((state) => state.user);
   const [barra, setbarra] = useState(false);
   const [toogleLogin, setToggleLogin] = useState(false);
+  const [toggleMenuR, setToggleMenuR] = useState(false);
 
   const close = () => {
     localStorage.clear();
@@ -29,9 +31,9 @@ const Navbar = () => {
           className="Logo"
         />
       </Link>
-      <div className="SearchBar">
+
         <SearchHome />
-      </div>
+
       <div className="UserGroup">
         {JSON.stringify(dataUser) === '{}'
           ? (
@@ -42,7 +44,7 @@ const Navbar = () => {
             }}
           >
             <FaUserCircle className="UserIcon" />
-            <h4 className="LogIn"> inicia</h4>
+            <h4 className="LogIn"> Iniciar Sesion</h4>
           </div>
             )
           : (
@@ -64,6 +66,15 @@ const Navbar = () => {
             }
           </div>
             )}
+            <div className='toggleMenuNavbar'>
+             {toggleMenuR
+               ? (<>
+               <BiMenuAltRight className='toggleMenuNavbar-close' onClick={() => setToggleMenuR(false)}/>
+                  <ToggleMenuNavbar/>
+                  </>
+                 )
+               : <BiMenu className='toggleMenuNavbar-close' onClick={() => setToggleMenuR(true)}/>}
+            </div>
       </div>
     </div>
   );
