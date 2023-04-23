@@ -137,16 +137,16 @@ function Locales () {
 
   success && toast.success('¡Local creado satisfactoriamente!', {
     position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000
+    autoClose: 1000
   });
 
   error && toast.error('Falló al crear el local', {
     position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000
+    autoClose: 1000
   });
 
   return (
-    <div className='locales animated-element'>
+    <div className='Create-Locals-Form animated-element'>
       { termsAndConditions
         ? <TYC src={BaitLogo} handleClick={handleClick}/>
         : <div className='locales_data animated-element'>
@@ -203,7 +203,7 @@ function Locales () {
 
           <Chars handleCheck = {handleCheck} chekinputs = {chekinputs}/>
 
-          <button type='submit'> ENVIAR</button>
+          <button type='submit' className='Send-Locals'> ENVIAR</button>
           <ToastContainer theme='colored'/>
         </form>
       </div>}
