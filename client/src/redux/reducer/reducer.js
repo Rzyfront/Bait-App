@@ -2,6 +2,8 @@
 import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS } from '../actions/actions';
 import { SEARCH_BY_QUERY } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
+import { FOCO, UBICATIONDATA } from '../actions/ubication';
+
 const initialState = {
   cards: [],
   reset: [],
@@ -16,10 +18,17 @@ const initialState = {
   newMenu: {},
   menu: [],
   reviews: [],
-  ubication: { lat: '', lng: '', city: 'buenos aires' }
+  ubication: { lat: 40.56684898238947, lng: -34.60762000391614, city: 'buenos aires' },
+  foco: { lat: null, lng: null }
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case UBICATIONDATA:
+      return {
+        ...state,
+        ubication: payload
+      };
+
     case ORDER:
       return {
         ...state,
@@ -107,6 +116,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         reviews: [...state.reviews, payload]
       };
+    case FOCO:
+      return {
+        ...state,
+        foco: payload
+      };
+
     default:
       return { ...state };
   }

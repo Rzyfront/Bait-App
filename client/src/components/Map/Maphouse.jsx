@@ -3,16 +3,40 @@ import 'leaflet/dist/leaflet.css';
 import { useSelector } from 'react-redux';
 import { AiFillCar } from 'react-icons/ai';
 import './Map.css';
-
 import myIcon from './Icono';
-const MAPCENTERDEFAULT = [40.574215, -105.08333];
+import { useEffect, useState } from 'react';
+
 const MAP_LAYER_ATTRIBUTION = '&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors';
 const MAP_LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
-function MapHouse ({ Mapcenter }) {
+function MapHouse () {
   const { locals } = useSelector((state) => state.cards);
 
-  return (<MapContainer center={MAPCENTERDEFAULT} zoom={14} scrollWheelZoom={false} style={{ width: '100%', height: '100%' }} >
+  const city = useSelector((state) => state.ubication);
+  const foco = useSelector((state) => state.foco);
+
+  const [mCity, setMcity] = useState(city);
+  const [mfoco, setmfoco] = useState(foco);
+
+  function MyComponent () {
+    const map = useMapEvents({});
+
+    useEffect(() => {
+      if (mfoco !== foco) {
+        setmfoco(foco);
+        map.flyTo([foco.lat, foco.lng], 18);
+      }
+    }, [foco]);
+    useEffect(() => {
+      if (mCity !== city) {
+        setMcity(city);
+        map.setView([city.lat, city.lng], 12);
+      }
+    }, [city]);
+    return null;
+  }
+
+  return (<MapContainer center={[mCity.lat, mCity.lng]} zoom={12} scrollWheelZoom={false} style={{ width: '100%', height: '100%' }} >
         <TileLayer
             url={MAP_LAYER_URL}
             attribution={MAP_LAYER_ATTRIBUTION}
@@ -32,7 +56,7 @@ function MapHouse ({ Mapcenter }) {
            </Marker>;
        })
        }
-
+      <MyComponent />
     </MapContainer>);
 }
 export default MapHouse;
