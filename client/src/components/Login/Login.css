@@ -9,11 +9,12 @@
     justify-content: center;
     align-items: center;
     transition: 0.3s;
+    backdrop-filter: blur(3px);
 }
 
-.LoginContainer:hover{
+/* .LoginContainer:hover{
 backdrop-filter: blur(3px);
-}
+} */
 
 .LoginContainer .login{
     position: relative;
@@ -26,7 +27,7 @@ backdrop-filter: blur(3px);
     justify-content: space-evenly;  
     background-color: white; 
     box-shadow: rgba(0, 0, 0, 0.338) 0px 3px 8px;
-    opacity: 0;
+    opacity: 1;
     transition: 0.3s;
 }
 
@@ -41,7 +42,7 @@ backdrop-filter: blur(3px);
     justify-content: space-evenly;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.338) 0px 3px 8px;
-    opacity: 0;
+    opacity: 1;
     transition: 1s;
 }
 
@@ -302,6 +303,17 @@ transition: 0.3s;
     animation: aparecer .4s ease-in-out forwards
 }
 
+.login .formulario .Input-Email-Group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.login .Message-Ux-Nubecita{
+    color: var(--optional2);
+    z-index: var(--alto-5);
+}
 
 /* 
 .container{
