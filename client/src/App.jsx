@@ -9,7 +9,8 @@ import {
   About,
   DataTreatment,
   Dashboard,
-  MenuForm
+  MenuForm,
+  Userprofile
 } from './components/components.js';
 import LocalsDatabasic from './components/Locales/LocalsDatabasic';
 import { Routes, Route } from 'react-router-dom';
@@ -54,6 +55,8 @@ function App () {
         <Route path='/dataTreatment' element={<DataTreatment />} />
         <Route path='/map' element={<LocalsDatabasic />} />
         <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/userprofile' element={<Userprofile />} />
+        <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
