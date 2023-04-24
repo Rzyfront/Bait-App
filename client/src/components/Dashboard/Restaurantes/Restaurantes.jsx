@@ -1,6 +1,6 @@
 import style from '../Dashboard.module.css';
 import Paginado from '../Paginado/Paginado';
-import swal from '@sweetalert/with-react';
+//import swal from '@sweetalert/with-react';
 
 const Restaurantes = () => {
   const locales = [{
@@ -21,26 +21,26 @@ const Restaurantes = () => {
     user: 'Verificado'
   }];
   const deleteRestaurant = () => {
-    swal({
-      title: 'Estas seguro?',
-      text: 'Una vez eliminado no podras recuperarlo',
-      icon: 'warning',
-      buttons: true,
-      dangerMode: true
-    })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal('Eliminado con exito', {
-            icon: 'success'
-          });
-        }
-      });
+    // swal({
+    //   title: 'Estas seguro?',
+    //   text: 'Una vez eliminado no podras recuperarlo',
+    //   icon: 'warning',
+    //   buttons: true,
+    //   dangerMode: true
+    // })
+    //   .then((willDelete) => {
+    //     if (willDelete) {
+    //       swal('Eliminado con exito', {
+    //         icon: 'success'
+    //       });
+    //     }
+    //   });
   };
 
   const verifyRestaurant = (e) => {
-    swal(`${e.target.name} ha sido verificado exitosamente`, {
-      icon: 'success'
-    });
+    // swal(`${e.target.name} ha sido verificado exitosamente`, {
+    //   icon: 'success'
+    // });
   };
 
   return (
