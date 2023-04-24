@@ -4,17 +4,15 @@ import { MdOutlineRestaurant } from 'react-icons/md';
 import { BiMap, BiSearchAlt } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ubicationPagine } from '../../../redux/actions/ubication';
-import SearchMap from '../../Map/SearchMap/Searchmap';
 import { saveInfoSearchHome } from '../../../redux/actions/cards';
 
 function SearchHome () {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { searchName, ubication } = useSelector(state => state);
+  const { searchName } = useSelector(state => state);
   const [data, setData] = useState({
     input: searchName,
-    map: ubication.city
+    map: ''
   });
   const handleinputs = (e) => {
     setData({
@@ -25,11 +23,7 @@ function SearchHome () {
 
   const searchDatas = async (e) => {
     e.preventDefault();
-    console.log(`/home/1?name=${data.input}&city=${data.map}`);
     navigate(`/home/1?name=${data.input}&city=${data.map}`);
-    const position = await SearchMap(data.map);
-    console.log({ lat: position[0], lng: position[1], city: data.map });
-    dispatch(ubicationPagine({ lat: position[0], lng: position[1], city: data.map }));
   };
 
   useEffect(

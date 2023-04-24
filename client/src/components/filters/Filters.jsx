@@ -25,7 +25,7 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
   const [filters, setFilters] = useState(initialFilter);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [special, setSpecial] = useState([]);
-
+  console.log(filters, selectedOptions, special);
   const Caracteristicaslist = [
     { value: 'wifi', label: 'Wifi' },
     { value: 'parking_lot', label: 'Parqueadero' },
@@ -51,6 +51,7 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
 
   useEffect(() => {
     setFilters(initialFilter);
+    console.log(searchName, initialFilter);
     navigate(path(1, searchName, ubication.city, initialFilter));
     setSelectedOptions([]);
   }, [searchName, ubication]);

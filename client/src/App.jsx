@@ -37,7 +37,7 @@ function App () {
   const onUbicacionConcedida = async (posicion) => {
     const { latitude, longitude } = posicion.coords;
     const data = await reverseGeoCoding(longitude, latitude);
-    dispatch(ubicationPagine({ lat: data.location.y, lng: data.location.x, city: data.address.City }));
+    dispatch(ubicationPagine({ lat: data.location.y, lng: data.location.x, city: data.address.City, gps: true }));
     setubication(true);
   };
   function onError (error) {
