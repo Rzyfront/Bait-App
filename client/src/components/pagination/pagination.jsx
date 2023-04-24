@@ -1,8 +1,9 @@
 import './pagination.css';
 import { FcPrevious, FcNext } from 'react-icons/fc';
+import { path } from '../../helpers/path';
 
 import { Link, useParams } from 'react-router-dom';
-const Pagination = ({ totalPages, position }) => {
+const Pagination = ({ totalPages, filters }) => {
   // params consulta
   // obtener los valores de los parametros de consulta
   const queryParams = new URLSearchParams(location.search);
@@ -12,37 +13,35 @@ const Pagination = ({ totalPages, position }) => {
   const { id } = useParams();
   for (let i = 0; i < totalPages; i++) {
     numbers.push(
+      <Link to={`${path(i + 1, name, city, filters)}`} key={i}>
       <div
-        key={i}
-        className={Number(id) === i + 1 ? 'pagination_on' : 'pagination_off'}
+        className={`paginatioNumbers animated-pagination ${Number(id) === i + 1 ? 'pagination_on' : 'pagination_off'}`}
       >
-        <Link to={`/home/${i + 1}?name=${name}&city=${city}`}>
-          <h1>{i + 1}</h1>
-        </Link>
+          <p>{i + 1}</p>
       </div>
+        </Link>
     );
   }
   return (
     <div className="containerPagination">
-      {Number(id) > 1
-        ? (
-        <Link to={`/home/${Number(id) - 1}?name=${name}&city=${city}`}>
+      <div className='paginatioNumbersGroup'>
+      {(Number(id) > 1) &&
+        (
+        <Link to={`${path(Number(id) - 1, name, city, filters)}`}>
           <FcPrevious className="paginationIcon" />
         </Link>
-          )
-        : (
-        <div> </div>
-          )}
-      {numbers}
+        )}
+        {numbers}
       {Number(id) === totalPages
         ? (
-        <div> </div>
+          <div> </div>
           )
         : (
-        <Link to={`/home/${Number(id) + 1}?name=${name}&city=${city}`}>
+            <Link to={`${path(Number(id) + 1, name, city, filters)}`}>
           <FcNext className="paginationIcon" />
         </Link>
           )}
+          </div>
     </div>
   );
 };

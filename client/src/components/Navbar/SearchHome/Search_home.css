@@ -11,7 +11,7 @@
 }
 .search_home .searchs .input_Eat{
     display: flex;
-    width: 80%;
+    width: 50%;
     border-radius: 0 0 0 5px;
     border-bottom: 1px solid black;
     background: var(--bg-primary);
@@ -26,7 +26,7 @@
 
 .search_home .searchs .input_Location {
     display: flex;
-    width: 80%;
+    width: 50%;
     border-bottom: 1px solid black;
     background: var(--bg-primary);
     height: 100%;
@@ -37,7 +37,7 @@
     transform: scale(1.3);
 }
 .search_home .searchs input{
-    height: 100%;
+    height: 90%;
     text-decoration: none;
     border: none;
     outline: none;
@@ -45,7 +45,7 @@
     font-size: 1rem;
     font-family: var(--subtitle);
     background: var(--bg-primary);
-    font-weight: 100;
+    font-weight: 400;
 
 }
 .search_home .searchs input:focus {
@@ -56,10 +56,11 @@
 .search_home .searchs .icosearch{
     transition: 0.3s;
     margin: auto ;
+    width: 10%;
 }
 .search_home .botton{
     background: var(--btn-primary);
-    width: 100px;
+    width: 120px;
     height: 35px;
     border-radius:  0 5px 5px 0 ;
     display: flex;
@@ -91,5 +92,107 @@
 }
 .botton:active{
     box-shadow: none;
+
+}
+
+/*! Resposive 900px */
+
+@media screen and (max-width:900px){
+
+.search_home {
+        width: 500px;
+        
+}
+
+ .search_home .searchs {
+     width: 85%;
+ }
+
+.search_home .botton {
+    width: 15%;
+
+}
+
+.search_home .botton h4 {
+    font-size: 15px;
+
+}
+
+ .search_home .searchs .input_Location {
+     width: 60%;
+ }
+
+ .search_home .searchs .input_Eat {
+     width: 60%;
+ }
+
+}
+
+/*! Responsive 750px */
+
+@media screen and (max-width:750px) {
+
+    .search_home {
+        width: 420px;
+
+    }
+
+    .search_home .searchs {
+        width: 85%;
+    }
+
+    .search_home .botton {
+        width: 15%;
+
+    }
+
+    .search_home .searchs .input_Location {
+        width: 50%;
+    }
+
+    .search_home .searchs .input_Eat {
+        width: 50%;
+    }
+
+
+    .search_home .botton h4 {
+        display: none;
+    }
+
+
+}
+
+/*! Responsive 570px */
+
+@media screen and (max-width:570px) {
+
+    .search_home {
+        width: 240px;
+
+    }
+
+    .search_home .searchs {
+        width: 85%;
+    }
+
+    .search_home .botton {
+        width: 15%;
+
+    }
+
+    .search_home .searchs .input_Location {
+        width: 40%;
+        padding-left: 10px;
+    }
+
+    .search_home .searchs .input_Eat {
+        width: 60%;
+        padding: 0 10px;
+    }
+
+
+    .search_home .botton h4 {
+        display: none;
+    }
 
 }
