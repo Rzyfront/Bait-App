@@ -22,13 +22,10 @@ export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-<<<<<<< HEAD
 export const DETAIL_USER = "DETAIL_USER"
-=======
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
->>>>>>> 38b73d62208dc890c3307ea959e9a89aaed98dd0
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -283,9 +280,12 @@ export const ResetUser = () => {
 };
 // REVIEWS ACTION GENERATORS
 export const getReviews = (localId, page = 1) => {
+
   return async (dispatch) => {
+    
     try {
       const response = await axios(`/reviews/${localId}?page=${page}`);
+      
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
@@ -293,7 +293,7 @@ export const getReviews = (localId, page = 1) => {
         });
       }
     } catch (error) {
-      console.log(error.message);
+    
     }
   };
 };
