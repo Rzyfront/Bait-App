@@ -3,20 +3,28 @@ import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
 import FilterGroup from './FilterGroup/FilterGroup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // import { TbToolsKitchen2 } from "react-icons/tb";
-import { useDispatch, useSelector } from 'react-redux';
-import { order, reset } from '../../redux/actions/actions';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { path } from '../../helpers/path';
+import { useSelector } from 'react-redux';
+
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
   const [toggleFilterModal, setToggleFilterModal] = useState(false);
-  const [filterState, setFilterState] = useState(false);
-  const [selectOrder, setSelectOrder] = useState('');
-  const dispatch = useDispatch();
-  const ContainerCards = useSelector((state) => state.cards);
+  const navigate = useNavigate();
+  const { searchName, ubication } = useSelector((state) => state);
+  const initialFilter = {
+    specialty: '',
+    characteristics: [],
+    rating: '',
+    alphabet: ''
+  };
+  const [filters, setFilters] = useState(initialFilter);
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [special, setSpecial] = useState([]);
 
   const Caracteristicaslist = [
     { value: 'wifi', label: 'Wifi' },
@@ -31,31 +39,40 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
     { value: 'romantic', label: 'Romantico' }
   ];
 
-  const handlecafication = () => {
-    if (selectOrder !== '') {
-      setSelectOrder('');
-    }
-    if (filterState === false) {
-      dispatch(order(ContainerCards, 'best'));
-      setFilterState(true);
-    } else {
-      dispatch(reset());
-      setFilterState(false);
-    }
+  useEffect(() => {
+    axios.get('/locals/specialties')
+      .then(res => setSpecial(res.data.allSpecialties.map(e => e.specialty)))
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    navigate(path(1, searchName, ubication.city, filters));
+  }, [filters]);
+
+  useEffect(() => {
+    setFilters(initialFilter);
+    navigate(path(1, searchName, ubication.city, initialFilter));
+    setSelectedOptions([]);
+  }, [searchName, ubication]);
+
+  const handleFilters = (e) => {
+    const { name, value } = e.target;
+    if (name === 'rating') {
+      setFilters({ ...filters, alphabet: '', [name]: value });
+    } else if (name === 'alphabet') {
+      setFilters({ ...filters, rating: '', [name]: value });
+    } else { setFilters({ ...filters, [name]: value }); };
   };
 
-  const handleSelect = (e) => {
-    if (filterState === true) {
-      handlecafication();
-    }
-    console.log(e.target.value);
-    setSelectOrder(e.target.value);
-    dispatch(order(ContainerCards, e.target.value));
+  const onRefresh = () => {
+    setSelectedOptions([]);
+    navigate(path(1, searchName, ubication.city, initialFilter));
+    setFilters(initialFilter);
   };
 
   const handleMultiSelectChange = (selectedOptions) => {
     setSelectedOptions(selectedOptions);
-    console.log(selectedOptions);
+    setFilters({ ...filters, characteristics: selectedOptions.map(e => e.value) });
   };
 
   return (
@@ -66,20 +83,19 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
           <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
         </div>
       </Link>
-      <Link to="/home/1?name=&city=">
-        <div className="ResetHome">
+        <div className="ResetHome" onClick={onRefresh}>
           <RiRefreshFill />
         </div>
-      </Link>
       </div>
 
       <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
-      handleSelect={handleSelect}
-      selectOrder={selectOrder}
       toggleMapMenu={toggleMapMenu}
       setToggleMapMenu={setToggleMapMenu}
+      handleFilters = {handleFilters}
+      filters = {filters}
+      special = {special}
       />
 
       <div className='ToggleFilterButton' onClick={toggleFilterModal
@@ -89,10 +105,10 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
         {toggleFilterModal && <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
-      handleSelect={handleSelect}
-      selectOrder={selectOrder}
       toggleMapMenu={toggleMapMenu}
       setToggleMapMenu={setToggleMapMenu}
+      handleFilters = {handleFilters}
+      filters = {filters}
       />}
       </div>
     </div>
