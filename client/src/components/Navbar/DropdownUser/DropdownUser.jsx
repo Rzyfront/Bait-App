@@ -1,14 +1,16 @@
+import { useEffect } from 'react';
 import { RiUserLine, RiSettingsLine, RiLogoutCircleLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 
-const DropdownUser = ({ close }) => {
+const DropdownUser = ({ close, toggleMenuUser }) => {
+  useEffect(() => {}, [toggleMenuUser]);
   return (
-          <div className='DropDown-Component'>
+          <div className={`DropDown-Component ${toggleMenuUser && 'scale-up-tr'}`}>
 
                 <div className='dropDown-Container'>
                     <ul className="dropdown-menu">
                     <li>
-                        <Link to="">
+                        <Link to="/userprofile">
                             <RiUserLine /> Perfil
                         </Link>
                     </li>

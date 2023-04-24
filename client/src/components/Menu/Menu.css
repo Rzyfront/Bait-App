@@ -20,7 +20,7 @@
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
-    overflow: auto;
+    overflow: scroll;
 }
 
 .TitleGroup {

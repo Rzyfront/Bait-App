@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import Card from '../Card/Card';
 import './Cards.css';
@@ -8,8 +8,9 @@ import { homepage } from '../../redux/actions/actions';
 import { searchByQuery } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
-function Cards () {
+function Cards ({ toggleMapMenu }) {
   const location = useLocation();
+  const [outAnimation, setOutAnimation] = useState(false);
 
   // params consulta
   // obtener los valores de los parametros de consulta
@@ -31,11 +32,13 @@ function Cards () {
     }
   }, [pagine]);
 
+  useEffect(() => {}, [toggleMapMenu]);
+
   return (
     <div className="containerCardsall animated-element">
-      <div>
-      {totalPages ? <Pagination totalPages={totalPages}/> : ''}
+
       <div className="ContainerCards animated-element">
+      {totalPages ? <Pagination totalPages={totalPages} /> : ''}
           <div className='widthcards'>
         {locals &&
           locals.map(
@@ -54,7 +57,8 @@ function Cards () {
               },
               index
             ) => {
-              return (<Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
+              return (
+              <Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
                     Characteristic={Characteristic}
                     Images={Images}
                     location={location}
@@ -67,12 +71,21 @@ function Cards () {
             }
           )}
           </div>
-          <div className='widthmap'>
-            <MapHouse className="mapsize"/>
-          </div>
       </div>
+      {toggleMapMenu
+        ? <div className={'widthmap scale-up-tr'}>
+        <MapHouse className="mapsize"/>
+        {() => setOutAnimation(false) }
       </div>
-    </div>
+        : <div className={`widthmap scale-down-tr ${outAnimation && 'none-display'}`}>
+        <MapHouse className="mapsize"/>
+        {setTimeout(() => {
+          setOutAnimation(true);
+        }, 200)}
+        </div>
+        }
+      </div>
+
   );
 }
 export default Cards;

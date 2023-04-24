@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getMenu, deleteDish, putDish } from '../../redux/actions/actions';
+import { getMenu, deleteDish } from '../../redux/actions/actions';
 
 function Menu () {
   const { id } = useParams();
@@ -45,7 +45,7 @@ function Menu () {
   };
 
   const reqPutDish = (dishId) => {
-    dispatch(putDish(dishId));
+    window.open(`/updateDish/${dishId}`, '_blank');
   };
 
   useEffect(() => {

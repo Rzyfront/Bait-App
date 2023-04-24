@@ -24,7 +24,6 @@ const { isOwner, isTheOwnerOrAdmin } = require('../middlewares/validateRole');
 
 localsRoute
   .get('/', setQueryLocals, getLocals)
-  .get('/:localId/menu', getMenu)
   .get('/menu/:menuId', getMenuDetail)
   .delete('/menu/:menuId', isOwner, deleteMenu)
   .get('/page/:numPage', setQueryLocals, getLocals)
@@ -32,6 +31,7 @@ localsRoute
   .get('/specialties', getSpecialties)
   .param('localId', paramLocal)
   .post('/', userExtractor, localValidator, postLocal)
+  .get('/:localId/menu', getMenu)
   .get('/:localId', getLocalsDetail)
   .post('/:localId/menu', userExtractor, isOwner, isTheOwnerOrAdmin, postMenu)
   .put('/:localId', userExtractor, isOwner, isTheOwnerOrAdmin, localValidator, putLocal)

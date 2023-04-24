@@ -125,23 +125,19 @@ export const comentarie = (
   calculateAverage,
   inputs,
   id
-
 ) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `/reviews/${id}`,
-        {
-          title: inputs.title,
-          rating: calculateAverage,
-          comment: inputs.comment,
-          image: inputs.image,
-          food: calificationFood,
-          service: calificationService,
-          environment: calificationEnvironment,
-          qaPrice: calificationQaPrice
-        }
-      );
+      const response = await axios.post(`/reviews/${id}`, {
+        title: inputs.title,
+        rating: calculateAverage,
+        comment: inputs.comment,
+        image: inputs.image,
+        food: calificationFood,
+        service: calificationService,
+        environment: calificationEnvironment,
+        qaPrice: calificationQaPrice
+      });
       console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
     } catch (error) {
       console.log(error);
@@ -168,8 +164,7 @@ export const homepage = (id) => {
 export const postMenu = (localId, menu) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`/menu/${localId}`, menu);
-      console.log(response);
+      const response = await axios.post(`/locals/${localId}/menu`, menu);
       if (response.status === 201) {
         dispatch({
           type: SUCCESS_MENU,
@@ -232,10 +227,10 @@ export const deleteDish = (dishId) => {
   };
 };
 
-export const putDish = (dishId) => {
+export const putDish = (dishId, dish) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/dishes/${dishId}`);
+      const response = await axios.put(`/dishes/${dishId}`, dish);
       if (response.status === 200) {
         dispatch({
           type: SUCCESS_DISH,

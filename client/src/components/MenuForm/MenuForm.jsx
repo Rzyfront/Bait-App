@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
 import { postMenu } from '../../redux/actions/actions';
@@ -20,9 +20,6 @@ const MenuForm = () => {
   });
   const handleSelect = (event) => {
     const { name, value } = event.target;
-    if (!value){
-      
-    }
     setMenu({
       [name]: value
     });
@@ -44,6 +41,8 @@ const MenuForm = () => {
           autoClose: 2000
         });
       });
+    } else {
+      swal('Campo obligatorio', 'Selecciona la sección del menú.');
     }
   };
 
