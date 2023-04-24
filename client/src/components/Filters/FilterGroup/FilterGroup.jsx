@@ -42,9 +42,10 @@ function FilterGroup ({
           <option value="" >
             Ordena por Rating
           </option>
-          <option value={'ratingASC'}>Mayor rating</option>
-          <option value={'ratingDESC'}>Menor rating</option>
+        <option value={'ratingASC'}>Menor rating</option>
+        <option value={'ratingDESC'}>Mayor rating</option>
         </select>
+      
 
         <select
           name = "alphabet"
