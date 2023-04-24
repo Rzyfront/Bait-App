@@ -22,7 +22,7 @@ export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-export const DETAIL_USER = "DETAIL_USER"
+export const DETAIL_USER = 'DETAIL_USER';
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
@@ -232,6 +232,25 @@ export const deleteDish = (dishId) => {
   };
 };
 
+export const putDish = (dishId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.put(`/dishes/${dishId}`);
+      if (response.status === 200) {
+        dispatch({
+          type: SUCCESS_DISH,
+          payload: response.data.success
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR_DISH,
+        payload: error.message
+      });
+    }
+  };
+};
+
 export const getMenu = (localId) => {
   return async (dispatch) => {
     try {
@@ -280,12 +299,10 @@ export const ResetUser = () => {
 };
 // REVIEWS ACTION GENERATORS
 export const getReviews = (localId, page = 1) => {
-
   return async (dispatch) => {
-    
     try {
       const response = await axios(`/reviews/${localId}?page=${page}`);
-      
+
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
@@ -293,7 +310,7 @@ export const getReviews = (localId, page = 1) => {
         });
       }
     } catch (error) {
-    
+
     }
   };
 };
