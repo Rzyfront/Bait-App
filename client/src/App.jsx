@@ -9,7 +9,8 @@ import {
   About,
   DataTreatment,
   Dashboard,
-  MenuForm
+  MenuForm,
+  Userprofile
 } from './components/components.js';
 import LocalsDatabasic from './components/Locales/LocalsDatabasic';
 import { Routes, Route } from 'react-router-dom';
@@ -48,6 +49,7 @@ function App () {
       <Routes>
         <Route path='/home/:id' element={<Home />} />
         <Route path='/profile/:id' element={<Profile />} />
+        {/* <Route path='/userprofile/:id' element={<Userprofile />} /> */}
         <Route path='/createplace' element={<Locales />} />
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />

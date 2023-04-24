@@ -124,23 +124,19 @@ export const comentarie = (
   calculateAverage,
   inputs,
   id
-
 ) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `/reviews/${id}`,
-        {
-          title: inputs.title,
-          rating: calculateAverage,
-          comment: inputs.comment,
-          image: inputs.image,
-          food: calificationFood,
-          service: calificationService,
-          environment: calificationEnvironment,
-          qaPrice: calificationQaPrice
-        }
-      );
+      const response = await axios.post(`/reviews/${id}`, {
+        title: inputs.title,
+        rating: calculateAverage,
+        comment: inputs.comment,
+        image: inputs.image,
+        food: calificationFood,
+        service: calificationService,
+        environment: calificationEnvironment,
+        qaPrice: calificationQaPrice
+      });
       console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
     } catch (error) {
       console.log(error);
@@ -281,7 +277,9 @@ export const ResetUser = () => {
 export const getReviews = (localId, page = 1) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`/reviews/${localId}?page=${page}`);
+      const response = await axios(
+        `/reviews/${localId}?page=${page}&verified=unVerified`
+      );
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,

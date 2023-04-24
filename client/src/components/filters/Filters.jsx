@@ -1,6 +1,7 @@
 import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
+import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 // import { TbToolsKitchen2 } from "react-icons/tb";
@@ -8,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { order, reset } from '../../redux/actions/actions';
 import { useState } from 'react';
 // import Filtertype from "./filtertype/Filtertype";
-const Filters = () => {
+const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
   const [filterState, setFilterState] = useState(false);
   const [selectOrder, setSelectOrder] = useState('');
   const dispatch = useDispatch();
@@ -58,9 +59,9 @@ const Filters = () => {
   return (
     <div className="Filters">
       <div className='Left-Home-Buttons'>
-        <Link to="/createplace">
+        <Link to="/map">
         <div className="AddPlace">
-          <h2 className="AddPlace_Text">Inscribe tu sitio</h2> <MdAddBusiness />
+          <h2 className="AddPlace_Text">Inscrir sitio</h2> <MdAddBusiness />
         </div>
       </Link>
       <Link to="/home/1?name=&city=">
@@ -71,12 +72,6 @@ const Filters = () => {
       </div>
 
       <div className="FiltersGroup">
-        {/* <div
-          className={filterState === false ? 'FilterOff' : 'FilterOn'}
-          onClick={handlecafication}
-        >
-          <h3>Mejor calificacion</h3>
-        </div> */}
         <select
           className="Restriction"
           onChange={handleSelect}
@@ -98,24 +93,9 @@ const Filters = () => {
           value={selectedOptions}
           onChange={handleMultiSelectChange}
           options={Caracteristicaslist}
+          className='MultiSelect-filters'
           isMulti
         />
-        {/* <select
-          className="Caracteristics"
-          onChange={handleSelect}
-          value={selectOrder}
-        >
-          <option value="" disabled>
-            Caracteristicas adicionales
-          </option>
-          <option value={'mayor'}>Pet frenly</option>
-          <option value={'menor'}>Wifi</option>
-          <option value={'menor'}>Parqueadero</option>
-          <option value={'menor'}>Musica</option>
-          <option value={'menor'}>Romantico</option>
-          <option value={'menor'}>Familiar</option>
-          <option value={'menor'}>Exteriores</option>
-        </select> */}
         <select
           className="RatingOrder"
           onChange={handleSelect}
@@ -127,19 +107,6 @@ const Filters = () => {
           <option value={'mayor'}>Mayor rating</option>
           <option value={'menor'}>Menor rating</option>
         </select>
-        {/* <div
-        className="filter_calification"
-        onClick={() => handlecalification("opentype")}
-      >
-        <TbToolsKitchen2 /> <h3>Cocina</h3>
-        {filterState.opentype === false ? (
-          <div></div>
-        ) : (
-          <div className="filter_type">
-            <Filtertype />
-          </div>
-        )}
-      </div> */}
 
         <select
           className="AlphaOrder"
@@ -152,6 +119,11 @@ const Filters = () => {
           <option value={'A-Z'}>A-Z</option>
           <option value={'Z-A'}>Z-A</option>
         </select>
+        <div className='Map-Toggle-Group'>
+          {toggleMapMenu
+            ? <TbMapOff onClick={() => setToggleMapMenu(false)}/>
+            : <TbMap2 onClick={() => setToggleMapMenu(true)}/>}
+        </div>
       </div>
     </div>
   );

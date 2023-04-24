@@ -18,7 +18,7 @@
     justify-content: space-between;
     font-size: 20px;
     color: var(--tertiary);
-    width: 180px;
+    width: 140px;
     height: 40px;
     border:none;
     background-color: var(--btn-secondary);
@@ -70,7 +70,7 @@
 
 
 .Filters .FiltersGroup select {
-    height: 35px;
+    height: 40px;
     outline: none;
     background-color: var(--bg-primary);
     font-size: 15px;
@@ -79,7 +79,7 @@
     font-weight: 400;
     padding-left: 10px;
     border: 1px solid var(--bg-secondary);
-    border-radius: 7px;
+    border-radius: 5px;
     transition: 0.3s;
     box-shadow: rgba(0, 0, 0, 0.195) 0px 1px 1px;
 
@@ -87,7 +87,7 @@
 
 .Filters .FiltersGroup select:hover {
     box-shadow: rgba(0, 0, 0, 0.195) 0px 2px 3px;
-    border-radius: 10px;
+    border-radius: 7px;
 
 }
 
@@ -106,7 +106,7 @@
     height: 40px;
     border: none;
     background-color: var(--btn-secondary);
-    border-radius: 7px;
+    border-radius: 5px;
     gap: 5px;
     padding: 7px;
     transition: 0.3s;
@@ -121,7 +121,7 @@
     height: 40px;
     border: none;
     background-color: var(--btn-primary);
-    border-radius: 7px;
+    border-radius: 5px;
     gap: 5px;
     padding: 7px;
     transition: 0.3s;
@@ -133,4 +133,39 @@
     font-size: 17px;
     font-weight: 200;
     font-family: var(--subtitle);
+}
+
+.Filters .FiltersGroup .Map-Toggle-Group{
+    font-size: 25px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--primary);
+}
+
+.Filters .FiltersGroup .Map-Toggle-Group:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
+    border-radius: 7px;
+}
+.Filters .FiltersGroup .Map-Toggle-Group:active {
+ background-color: var(--btn-primary);
+}
+
+.Filters .FiltersGroup .MultiSelect-filters{
+    border: 1px solid var(--primary);
+    background-color: var(--bg-primary);
+    border-radius: 5px;
+    color: var(--primary);
+    outline-color: none;
+    transition: 0.3s;
+}
+
+.Filters .FiltersGroup .MultiSelect-filters:hover {
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,7 +8,7 @@ import { homepage } from '../../redux/actions/actions';
 import { searchByQuery } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
-function Cards () {
+function Cards ({ toggleMapMenu }) {
   const location = useLocation();
 
   // params consulta
@@ -39,11 +39,13 @@ function Cards () {
   }, [totalPages]);
   // controller map
 
+  useEffect(() => {}, [toggleMapMenu]);
+
   return (
     <div className="containerCardsall animated-element">
-      <div>
-      {totalPages && <Pagination totalPages={totalPages} />}
+
       <div className="ContainerCards animated-element">
+      {totalPages ? <Pagination totalPages={totalPages} /> : ''}
           <div className='widthcards'>
         {locals &&
           locals.map(
@@ -75,12 +77,12 @@ function Cards () {
             }
           )}
           </div>
-          <div className='widthmap'>
-            <MapHouse className="mapsize"/>
-          </div>
       </div>
+      {toggleMapMenu && <div className={'widthmap scale-up-tr'}>
+        <MapHouse className="mapsize"/>
+      </div>}
       </div>
-    </div>
+
   );
 }
 export default Cards;
