@@ -1,15 +1,17 @@
 import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
-import { TbMapOff, TbMap2 } from 'react-icons/tb';
+import { BiFilterAlt } from 'react-icons/bi';
+import FilterGroup from './FilterGroup/FilterGroup';
 import { Link } from 'react-router-dom';
-import Select from 'react-select';
+
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useDispatch, useSelector } from 'react-redux';
 import { order, reset } from '../../redux/actions/actions';
 import { useState } from 'react';
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
+  const [toggleFilterModal, setToggleFilterModal] = useState(false);
   const [filterState, setFilterState] = useState(false);
   const [selectOrder, setSelectOrder] = useState('');
   const dispatch = useDispatch();
@@ -61,7 +63,7 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
       <div className='Left-Home-Buttons'>
         <Link to="/map">
         <div className="AddPlace">
-          <h2 className="AddPlace_Text">Inscrir sitio</h2> <MdAddBusiness />
+          <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
         </div>
       </Link>
       <Link to="/home/1?name=&city=">
@@ -71,59 +73,27 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
       </Link>
       </div>
 
-      <div className="FiltersGroup">
-        <select
-          className="Restriction"
-          onChange={handleSelect}
-          value={selectOrder}
-        >
-          <option value="" disabled>
-            Tipo de comida
-          </option>
-          <option value={'mayor'}>Vegana</option>
-          <option value={'menor'}>Libre de gluten</option>
-          <option value={'mayor'}>Keto diet</option>
-          <option value={'mayor'}>Mexicana</option>
-          <option value={'mayor'}>Argentina</option>
-          <option value={'mayor'}>Italiana</option>
-          <option value={'mayor'}>Peruana</option>
-        </select>
+      <FilterGroup selectedOptions={selectedOptions}
+      handleMultiSelectChange={handleMultiSelectChange}
+      Caracteristicaslist={Caracteristicaslist}
+      handleSelect={handleSelect}
+      selectOrder={selectOrder}
+      toggleMapMenu={toggleMapMenu}
+      setToggleMapMenu={setToggleMapMenu}
+      />
 
-        <Select
-          value={selectedOptions}
-          onChange={handleMultiSelectChange}
-          options={Caracteristicaslist}
-          className='MultiSelect-filters'
-          isMulti
-        />
-        <select
-          className="RatingOrder"
-          onChange={handleSelect}
-          value={selectOrder}
-        >
-          <option value="" disabled>
-            Ordena por Rating
-          </option>
-          <option value={'mayor'}>Mayor rating</option>
-          <option value={'menor'}>Menor rating</option>
-        </select>
-
-        <select
-          className="AlphaOrder"
-          onChange={handleSelect}
-          value={selectOrder}
-        >
-          <option value="" disabled>
-            Ordena Alfabeticamente
-          </option>
-          <option value={'A-Z'}>A-Z</option>
-          <option value={'Z-A'}>Z-A</option>
-        </select>
-        <div className='Map-Toggle-Group'>
-          {toggleMapMenu
-            ? <TbMapOff onClick={() => setToggleMapMenu(false)}/>
-            : <TbMap2 onClick={() => setToggleMapMenu(true)}/>}
-        </div>
+      <div className='ToggleFilterButton' onClick={toggleFilterModal
+        ? () => setToggleFilterModal(false)
+        : () => setToggleFilterModal(true)}>
+        <BiFilterAlt/>
+        {toggleFilterModal && <FilterGroup selectedOptions={selectedOptions}
+      handleMultiSelectChange={handleMultiSelectChange}
+      Caracteristicaslist={Caracteristicaslist}
+      handleSelect={handleSelect}
+      selectOrder={selectOrder}
+      toggleMapMenu={toggleMapMenu}
+      setToggleMapMenu={setToggleMapMenu}
+      />}
       </div>
     </div>
   );

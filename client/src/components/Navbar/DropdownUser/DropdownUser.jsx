@@ -10,7 +10,7 @@ const DropdownUser = ({ close, toggleMenuUser }) => {
                 <div className='dropDown-Container'>
                     <ul className="dropdown-menu">
                     <li>
-                        <Link to="">
+                        <Link to="/userprofile">
                             <RiUserLine /> Perfil
                         </Link>
                     </li>

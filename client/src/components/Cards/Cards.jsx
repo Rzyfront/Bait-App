@@ -10,6 +10,7 @@ import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
 function Cards ({ toggleMapMenu }) {
   const location = useLocation();
+  const [outAnimation, setOutAnimation] = useState(false);
 
   // params consulta
   // obtener los valores de los parametros de consulta
@@ -64,7 +65,8 @@ function Cards ({ toggleMapMenu }) {
               },
               index
             ) => {
-              return (<Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
+              return (
+              <Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
                     Characteristic={Characteristic}
                     Images={Images}
                     location={location}
@@ -78,9 +80,18 @@ function Cards ({ toggleMapMenu }) {
           )}
           </div>
       </div>
-      {toggleMapMenu && <div className={'widthmap scale-up-tr'}>
+      {toggleMapMenu
+        ? <div className={'widthmap scale-up-tr'}>
         <MapHouse className="mapsize"/>
-      </div>}
+        {() => setOutAnimation(false) }
+      </div>
+        : <div className={`widthmap scale-down-tr ${outAnimation && 'none-display'}`}>
+        <MapHouse className="mapsize"/>
+        {setTimeout(() => {
+          setOutAnimation(true);
+        }, 200)}
+        </div>
+        }
       </div>
 
   );
