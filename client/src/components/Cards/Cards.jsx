@@ -4,8 +4,10 @@ import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
-import { homepage, searchByQuery } from '../../redux/actions/actions';
-
+import { homepage } from '../../redux/actions/actions';
+import { searchByQuery } from '../../redux/actions/cards';
+import MapHouse from '../Map/Maphouse';
+import eliminarTildes from '../../hooks/eliminarTildes.';
 function Cards () {
   const location = useLocation();
 
@@ -23,20 +25,26 @@ function Cards () {
   // actualiza pagina
   useEffect(() => {
     if (name || city) {
-      dispatch(searchByQuery(name, city));
+      dispatch(searchByQuery(name, eliminarTildes(city)));
       setnavegation(pagine.id);
     } else {
       dispatch(homepage(pagine.id));
       setnavegation('', '');
     }
   }, [pagine]);
+
   // controller navegation
   useEffect(() => {
     setnavegation(pagine.id);
   }, [totalPages]);
+  // controller map
+
   return (
-    <div className="containerCardsall">
-      <div className="ContainerCards">
+    <div className="containerCardsall animated-element">
+      <div>
+      {totalPages && <Pagination totalPages={totalPages} />}
+      <div className="ContainerCards animated-element">
+          <div className='widthcards'>
         {locals &&
           locals.map(
             (
@@ -48,28 +56,30 @@ function Cards () {
                 schedule,
                 id,
                 Characteristic,
-                Images
+                Images,
+                lat,
+                lng
               },
               index
             ) => {
-              return (
-                <Link to={`/profile/${id}`} key={index}>
-                  <Card
-                    id={id}
-                    Name={name}
-                    Rating={rating}
-                    location={location}
-                    verified={verified}
-                    schedule={schedule}
+              return (<Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
                     Characteristic={Characteristic}
                     Images={Images}
+                    location={location}
+                    key={index}
+                    lat={lat}
+                    lng={lng}
                   />
-                </Link>
+
               );
             }
           )}
+          </div>
+          <div className='widthmap'>
+            <MapHouse className="mapsize"/>
+          </div>
       </div>
-      {totalPages && <Pagination totalPages={totalPages} />}
+      </div>
     </div>
   );
 }

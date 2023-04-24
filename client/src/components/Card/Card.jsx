@@ -2,6 +2,9 @@ import { GoLocation } from 'react-icons/go';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import './Card.css';
+import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { foco } from '../../redux/actions/ubication';
 
 function Card ({
   id,
@@ -12,10 +15,21 @@ function Card ({
   schedule,
   Characteristic,
   Images,
-  Price
+  Price,
+  lat,
+  lng
 }) {
+  const pathlocation = useLocation();
+  const dispatch = useDispatch();
+
+  const handleFoco = () => {
+    const data = { lat, lng };
+    dispatch(foco(data));
+  };
+
   return (
-    <div className="Card">
+    <div className="Card animated-element">
+      <Link to={`/profile/${id}`} >
       {Images.length > 0
         ? (
         <img src={Images[0].url} alt={Name} className="imgCard" />
@@ -27,22 +41,31 @@ function Card ({
           className="imgCard"
         />
           )}
+      </Link>
       <div className="infoCard">
         <h2 className="placeName">{Name || 'No name'}</h2>
-        {Rating && (
+
           <div className="RatingGroup">
             <p className="Rating">Rating: </p>
-            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating} />
+            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 5} />
           </div>
-        )}
+
         {location && (
           <div className="LocationGroup">
             <p className="Location"></p>
-            <GoLocation />
-            {location}
+            <GoLocation className='locationico' onClick={handleFoco} />
+            {location.split(',').at(-2)} {location.split(',').at(-3)}{location.split(',').at(-1)}
+
           </div>
         )}
         {Price && <p className="Price">${Price}</p>}
+        {
+        pathlocation.pathname.includes('/home') &&
+        <div className='Card-Tags'>
+          <div className='Tag-Type'><p>Vegana</p></div>
+          <div className='Tag-Charact'><p>Pet</p></div>
+        </div>
+        }
       </div>
     </div>
   );

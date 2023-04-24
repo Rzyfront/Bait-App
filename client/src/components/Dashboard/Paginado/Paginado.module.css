@@ -1,0 +1,26 @@
+.container{
+    margin-top: 15px;
+}
+
+.atras{
+    background-color: var(--btn-primary);
+    color: white;
+    padding: 3px 15px;
+    border-radius: 10px;
+    margin-left: -20px;
+    cursor:pointer;
+}
+
+.paginado{
+    margin-left: 20px;
+    font-size: 1.2em;
+}
+
+.next{
+    background-color: var(--btn-primary);
+    color: white;
+    padding: 3px 15px;
+    border-radius: 10px;
+    margin-left: 20px;
+    cursor:pointer;
+}
