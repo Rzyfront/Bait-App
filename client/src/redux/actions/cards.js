@@ -1,6 +1,7 @@
 import axios from 'axios';
 export const SEARCH_BY_QUERY = 'SEARCH_BY_QUERY';
 export const SEARCH_BY_FILTERS = 'SEARCH_BY_FILTERS';
+export const SAVE_SEARCH_HOME = 'SAVE_SEARCH_HOME';
 
 export const searchByQuery = (name, city) => {
   return async (dispatch) => {
@@ -16,12 +17,11 @@ export const searchByQuery = (name, city) => {
 
 export const searchByFilters = (filter) => {
   const {
-    name = '',
-    city = '',
+    name,
+    city,
     specialty,
     characteristics,
-    rating,
-    alphabet,
+    order,
     page
   } = filter;
   return async (dispatch) => {
@@ -33,10 +33,19 @@ export const searchByFilters = (filter) => {
         }
       };
       const response = await axios.get(
-        `/locals/page/${page ?? 1}?name=${name}&location=${city}&specialty=${specialty}&order=${rating || alphabet}&characteristics=${JSON.stringify(character)}`);
+        `/locals/page/${page ?? 1}?name=${name || ''}&location=${city || ''}&specialty=${specialty || ''}&order=${order || ''}&characteristics=${JSON.stringify(character)}`);
       const info = response.data;
-      info.filters = filter;
       return dispatch({ type: SEARCH_BY_FILTERS, payload: info });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const saveInfoSearchHome = (info) => {
+  return async (dispatch) => {
+    try {
+      return dispatch({ type: SAVE_SEARCH_HOME, payload: info });
     } catch (error) {
       console.log(error.message);
     }

@@ -1,26 +1,24 @@
 import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 // import { TbToolsKitchen2 } from "react-icons/tb";
-import { useDispatch } from 'react-redux';
-import { searchByFilters } from '../../redux/actions/cards';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { path } from '../../helpers/path';
+import { useSelector } from 'react-redux';
 
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = () => {
-  const location = useLocation();
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { searchName, ubication } = useSelector((state) => state);
   const filterState = {
     specialty: '',
     characteristics: [],
     rating: '',
     alphabet: ''
   };
-
   const [filters, setFilters] = useState(filterState);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [special, setSpecial] = useState([]);
@@ -45,8 +43,13 @@ const Filters = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(searchByFilters(filters));
+    navigate(path(1, searchName, ubication.city, filters));
   }, [filters]);
+
+  useEffect(() => {
+    setFilters(filterState);
+    navigate(path(1, searchName, ubication.city, filterState));
+  }, [searchName, ubication]);
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
@@ -55,12 +58,10 @@ const Filters = () => {
     } else if (name === 'alphabet') {
       setFilters({ ...filters, rating: '', [name]: value });
     } else { setFilters({ ...filters, [name]: value }); };
-    navigate('/home/1');
   };
 
   const onRefresh = () => {
-    navigate('/home/1');
-    console.log(filters);
+    navigate(path(1, searchName, ubication.city, filters));
     setFilters(filterState);
   };
 
