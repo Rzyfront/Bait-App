@@ -1,25 +1,32 @@
+const { fn, col } = require('sequelize');
 const {
-  Local, Characteristic, Menu, Review, Image,
+  Local, Characteristic, Review, Image,
 } = require('../../db');
 const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
 module.exports = async (req, res) => {
-  // const { verified } = req.query;
   try {
     const locals = await Local.findByPk(req.local.id, {
       attributes: {
+        include: [
+          [fn('AVG', col('Reviews.rating')), 'rating'],
+          [fn('AVG', col('Reviews.food')), 'avgFood'],
+          [fn('AVG', col('Reviews.service')), 'avgService'],
+          [fn('AVG', col('Reviews.environment')), 'avgEnvironment'],
+          [fn('AVG', col('Reviews.qaPrice')), 'avgQaPrice'],
+        ],
         exclude: ['email', 'createdAt', 'updatedAt'],
       },
       include: [{
         model: Characteristic,
         attributes: allCharacteristics,
-      }, { model: Menu },
+      },
       {
         model: Review,
-        // where: { verified: verified ?? true },
-        required: false,
+        attributes: [],
       },
       { model: Image, attributes: ['url'] }],
+      group: ['Local.id', 'Images.id', 'Characteristic.id'],
     });
     res.status(200).json({ locals, success: true });
   } catch (error) {

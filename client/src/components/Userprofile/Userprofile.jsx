@@ -8,12 +8,12 @@ import  "./Userprofile.css"
 
 function Userprofile () {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.detail);
+  const { user} = useSelector((state) => state.user);
   const { id } = useParams();
-  useEffect(() => {
-    dispatch(DetailUser(id));
-  }, [id]);
-
+  // useEffect(() => {
+  //   dispatch(DetailUser(id));
+  // }, [id]);
+  
   const { name, lastName, Image, location, phone, email } = {
     name: '',
     Image: '',
@@ -36,9 +36,7 @@ function Userprofile () {
           </div>
           <div className="TelGroup">
             <h3>Tel:</h3>
-            {phone.map((t, i) => {
-              return <p key={i}>{t} |</p>;
-            })}
+            <p>{user.phone_number}</p>
           </div>
           <div className="EmailGroup">
             <h3>E-mail:</h3>

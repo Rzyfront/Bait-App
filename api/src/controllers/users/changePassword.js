@@ -11,7 +11,8 @@ module.exports = async (req, res) => {
 
     const passwordHash = await bcrypt.hash(newPassword, 10);
     user.password = passwordHash;
-    await User.save();
+
+    await user.save();
     res.status(201).json({ success: true });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });

@@ -3,16 +3,32 @@ import axios from 'axios';
 export const ORDER = 'ORDER';
 export const RESET = 'RESET';
 export const COMENTARIE = 'COMENTARIE';
-export const CREATE_USER = 'CREATE_USER';
 export const HOMEPAGE = 'HOMEPAGE';
-export const ERROR = 'ERROR';
-export const SUCCESS_RESET = 'SUCCESS_RESET';
-export const ERROR_RESET = 'ERROR_RESET';
+
+// ACTION TYPES MENU - DISH
+export const SUCCESS_MENU = 'SUCCESS_MENU';
+export const ERROR_MENU = 'ERROR_MENU';
+export const GET_MENU = 'GET_MENU';
 export const POST_MENU = 'POST_MENU';
 export const POST_DISH = 'POST_DISH';
+export const SUCCESS_DISH = 'SUCCESS_DISH';
+export const ERROR_DISH = 'ERROR_DISH';
+export const PUT_DISH = 'PUT_DISH';
+export const DELETE_DISH = 'DELETE_DISH';
+export const SUCCESS_DEL_DISH = 'SUCCESS_DEL_DISH';
+export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
+
+// ACTION TYPES USER
+export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
+<<<<<<< HEAD
 export const DETAIL_USER = "DETAIL_USER"
+=======
+
+// ACTION TYPES REVIEWS
+export const GET_REVIEWS = 'GET_REVIEWS';
+>>>>>>> 38b73d62208dc890c3307ea959e9a89aaed98dd0
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -144,75 +160,105 @@ export const homepage = (id) => {
         type: HOMEPAGE,
         payload: response.data
       });
-      setTimeout(() => {
-        dispatch({
-          type: SUCCESS_RESET
-        });
-      }, 3000);
     } catch (error) {
       console.log(error.message);
     }
   };
 };
+
+/* ACTION GENERATORS MENU DISHES */
+
 export const postMenu = (localId, menu) => {
-  console.log(localId, menu);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/menu/${localId}`, menu);
-      console.log(response.data);
+      console.log(response);
       if (response.status === 201) {
         dispatch({
-          type: SUCCESS,
+          type: SUCCESS_MENU,
           payload: response.data.success
         });
         dispatch({
           type: POST_MENU,
-          payload: { ...response.data.menu, ...response.data.local.id }
+          payload: response.data.menu
         });
       }
     } catch (error) {
       dispatch({
-        type: ERROR,
+        type: ERROR_MENU,
         payload: error.message
-      }, 3000);
-      // set error state to null after 3 seconds
-      setTimeout(() => {
-        dispatch({
-          type: ERROR_RESET
-        });
-      }, 3000);
+      });
+      console.log(error);
     }
   };
 };
 
 export const postDish = (menuId, dish) => {
+  dish = {
+    ...dish,
+    price: Number(dish.price)
+  };
+  console.log(dish);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/dishes/${menuId}`, dish);
       if (response.status === 201) {
         dispatch({
-          type: SUCCESS,
+          type: SUCCESS_DISH,
           payload: response.data.success
-        });
-        dispatch({
-          type: POST_DISH,
-          payload: response.data
         });
       }
     } catch (error) {
       dispatch({
-        type: ERROR,
+        type: ERROR_DISH,
         payload: error.message
       });
-      // set error state to null after 3 seconds
-      setTimeout(() => {
-        dispatch({
-          type: ERROR_RESET
-        });
-      }, 3000);
     }
   };
 };
+export const deleteDish = (dishId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`/dishes/${dishId}`);
+      if (response.status === 200) {
+        dispatch({
+          type: SUCCESS_DEL_DISH,
+          payload: response.data.success
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR_DEL_DISH,
+        payload: error.message
+      });
+    }
+  };
+};
+
+export const getMenu = (localId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`locals/${localId}/menu`);
+      if (response.status === 200) {
+        dispatch({
+          type: SUCCESS_MENU,
+          payload: response.data.success
+        });
+        dispatch({
+          type: GET_MENU,
+          payload: response.data.menu
+        });
+      }
+    } catch (error) {
+      dispatch({
+        type: ERROR_MENU,
+        payload: error.message
+      });
+    }
+  };
+};
+
+// USER ACTION GENERATORS
 export const checkUser = () => {
   return async (dispatch) => {
     try {
@@ -233,5 +279,21 @@ export const ResetUser = () => {
       type: RESETUSER,
       payload: ''
     });
+  };
+};
+// REVIEWS ACTION GENERATORS
+export const getReviews = (localId, page = 1) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`/reviews/${localId}?page=${page}`);
+      if (response.status === 200) {
+        dispatch({
+          type: GET_REVIEWS,
+          payload: response.data.reviews
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 };

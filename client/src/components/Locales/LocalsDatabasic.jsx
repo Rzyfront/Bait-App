@@ -13,49 +13,61 @@ import DatabasicLocal from './DataLocal/DatabasicLocal';
 import Mapdata from '../Map/Mapdata';
 import SearchMap from '../Map/SearchMap/Searchmap';
 import { createLocal } from '../../redux/actions/local';
+
 function LocalsDatabasic () {
-  //map controllers
-  const [Mapcenter,setMapcenter]=useState([40.574215, -105.08333])
-  const [statemap,setStatemap]=useState(false)
-  const [mapSearch,setMapsearch]=useState("")
-  const handleMap=(e)=>{
-    setMapsearch(e.target.value)
-      }
-  const handleBoton=()=>{
-    setStatemap(false)
-  }
-const searchCity=async()=>{
-        const data=await SearchMap(mapSearch)
-        if(data)
-        {
-          setMapcenter(data)
-          setStatemap(true)
-        }else{
-          toast.error('No existe esta ciudad', {
-            position: toast.POSITION.TOP_CENTER,
-            autoClose: 2000
-          });
-        }
-      }   
-const handlemapdatas=(information)=>{
-  console.log(information)
-  const data={lat:information.location.y ,lng:information.location.x ,location:information.address
-    .LongLabel
-  } 
-  setInputs({...inputs,
-    location:data})
+  const positionMap = useSelector((state) => state.ubication);
+  const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
 
-    console.log(inputs)
-}
+  // map controllers
+  useEffect(() => {
+    if (Mapcenter[0] !== positionMap.lat && Mapcenter[1] !== positionMap.lng) {
+      setMapcenter([positionMap.lat, positionMap.lng]);
+    }
+  }, [positionMap]);
 
-////
+  const [statemap, setStatemap] = useState(false);
+  const [mapSearch, setMapsearch] = useState('');
+  const handleMap = (e) => {
+    setMapsearch(e.target.value);
+  };
+  const handleBoton = () => {
+    setStatemap(false);
+  };
+  const searchCity = async () => {
+    const data = await SearchMap(mapSearch);
+    if (data) {
+      setMapcenter(data);
+      setStatemap(true);
+    } else {
+      toast.error('No existe esta ciudad', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+    }
+  };
+  const handlemapdatas = (information) => {
+    console.log(information);
+    const data = {
+      lat: information.location.y,
+      lng: information.location.x,
+      location: information.address
+        .LongLabel
+    };
+    setInputs({
+      ...inputs,
+      location: data
+    });
+
+    console.log(inputs);
+  };
+
+  /// /
   const Navigate = useNavigate();
-  
+
   const { image, loading, handleChangeimage } = useUploadImage();
   const { success, error } = useSelector(state => state);
   const dispatch = useDispatch();
   const [termsAndConditions, setTemsAndConditions] = useState(true);
-
 
   const [inputs, setInputs] = useState({
     location: '',
@@ -133,8 +145,6 @@ const handlemapdatas=(information)=>{
     );
   };
 
-  
-
   function handleClick () {
     setTemsAndConditions(false);
     // targetRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -166,12 +176,8 @@ const handlemapdatas=(information)=>{
     autoClose: 2000
   });
 
-  
-
-
-
   return (
-    <div className='locales animated-element'>
+    <div className='Create-Locals-Form animated-element'>
       { termsAndConditions
         ? <TYC src={BaitLogo} handleClick={handleClick}/>
         : <div className='locales_data animated-element'>
@@ -196,10 +202,8 @@ const handlemapdatas=(information)=>{
              handleMap={handleMap}
           />
            <div className='MapSize'>
-            <Mapdata Mapcenter={Mapcenter}   statemap={statemap} handleBoton={handleBoton}  handlemapdatas={handlemapdatas}/>
+            <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas}/>
             </div>
-
-
 
           <label className='imagen' htmlFor='imagen'>
             Imágenes
@@ -211,7 +215,7 @@ const handlemapdatas=(information)=>{
             // multiple
             onChange={handleChangeimages}
           ></input>
-         
+
           {image.length
             ? (
                 image.map((image, i) => (
@@ -235,9 +239,7 @@ const handlemapdatas=(information)=>{
             />
                 )}
 
-        
-
-          <button type='submit'> ENVIAR</button>
+          <button type='submit' className='Send-Locals'> ENVIAR</button>
           <ToastContainer theme='colored'/>
         </form>
       </div>}

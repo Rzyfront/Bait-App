@@ -1,4 +1,4 @@
-.Card{
+.Card {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,19 +8,20 @@
     color: var(--prymary);
     background-color: var(--bg-primary);
     margin: 10px;
-    padding:10px 2px;
+    padding: 10px 2px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     text-align: left;
     transition: 0.3s;
 }
+
 .Card:hover {
     box-shadow: rgba(0, 0, 0, 0.37) 0px 2px 4px;
     transform: scale(1.01);
     cursor :pointer;
 }
 
-.Card .imgCard{
+.Card .imgCard {
     width: 210px;
     height: 150px;
     border-radius: 5px;
@@ -28,7 +29,7 @@
     background-color: var(--bg-primary);
 }
 
-.Card .infoCard{
+.Card .infoCard {
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -43,7 +44,7 @@
     font-family: var(--subtitle);
 }
 
-.Card .infoCard .RatingGroup{
+.Card .infoCard .RatingGroup {
     display: flex;
     align-items: center;
 }
@@ -51,28 +52,28 @@
 .Card .RatingGroup .Rating {
     font-family: var(--text);
     padding-top: 5px;
-} 
+}
 
-.Card .LocationGroup{
+.Card .LocationGroup {
     display: flex;
     align-items: center;
-    
+
 }
 
-.Card .Price{
- font-family: var(--text);
+.Card .Price {
+    font-family: var(--text);
 }
 
-.Card .infoCard .Card-Tags{
+.Card .infoCard .Card-Tags {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
 }
 
 .Card .infoCard .Card-Tags .Tag-Type,
-.Card .infoCard .Card-Tags .Tag-Charact{
+.Card .infoCard .Card-Tags .Tag-Charact {
     height: 22px;
-    width:max-content;
+    width: max-content;
     font-size: 12px;
     border-radius: 4px;
     padding: 1px;
@@ -84,9 +85,16 @@
     font-weight: bold;
     margin: 0 5px;
 }
-.Card .infoCard .Card-Tags .Tag-Charact{
+
+.Card .infoCard .Card-Tags .Tag-Charact {
     background-color: var(--bg-tertiary);
 }
+
 .Card .infoCard .Card-Tags .Tag-Type {
     background-color: var(--optional1);
+}
+
+.locationico:hover {
+    color: red;
+    cursor: pointer;
 }

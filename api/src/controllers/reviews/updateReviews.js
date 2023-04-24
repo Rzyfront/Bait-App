@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     const rating = (food + environment + service + qaPrice) / 4;
     // Update the review with the new information
     await updReview.update({
-      title, comment, food, environment, service, qaPrice, rating, verified: false,
+      title, comment, food, environment, service, qaPrice, rating, verified: req.verified ?? 'unVerified',
     });
     await updReview.setImage(image.id);
     return res.status(200).json({ success: true, review: updReview });
