@@ -1,7 +1,16 @@
 
 import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import Select from 'react-select';
-function FilterGroup ({ selectedOptions, handleMultiSelectChange, Caracteristicaslist, handleSelect, selectOrder, toggleMapMenu, setToggleMapMenu }) {
+function FilterGroup ({
+  selectedOptions,
+  handleMultiSelectChange,
+  Caracteristicaslist,
+  toggleMapMenu,
+  setToggleMapMenu,
+  filters,
+  handleFilters,
+  special
+}) {
   return (
      <div className="FiltersGroup">
 
@@ -15,44 +24,41 @@ function FilterGroup ({ selectedOptions, handleMultiSelectChange, Caracteristica
           isMulti
         />
         <select
+          name = "specialty"
           className="Restriction"
-          onChange={handleSelect}
-          value={selectOrder}
+          onChange={handleFilters}
+          value={filters.specialty}
         >
-          <option value="" disabled>
-            Tipo de comida
-          </option>
-          <option value={'mayor'}>Vegana</option>
-          <option value={'menor'}>Libre de gluten</option>
-          <option value={'mayor'}>Keto diet</option>
-          <option value={'mayor'}>Mexicana</option>
-          <option value={'mayor'}>Argentina</option>
-          <option value={'mayor'}>Italiana</option>
-          <option value={'mayor'}>Peruana</option>
-        </select>
-        <select
-          className="RatingOrder"
-          onChange={handleSelect}
-          value={selectOrder}
-        >
-          <option value="" disabled>
-            Ordena por Rating
-          </option>
-          <option value={'mayor'}>Mayor rating</option>
-          <option value={'menor'}>Menor rating</option>
+          <option value="" disabled> Tipo de comida </option>
+          {special?.map((spe, i) => <option key={i} value={spe}>{spe}</option>)}
         </select>
 
         <select
-          className="AlphaOrder"
-          onChange={handleSelect}
-          value={selectOrder}
+          name = "rating"
+          className="RatingOrder"
+          onChange={handleFilters}
+          value={filters.rating}
         >
-          <option value="" disabled>
+          <option value="" >
+            Ordena por Rating
+          </option>
+          <option value={'ratingASC'}>Mayor rating</option>
+          <option value={'ratingDESC'}>Menor rating</option>
+        </select>
+
+        <select
+          name = "alphabet"
+          className="AlphaOrder"
+          onChange={handleFilters}
+          value={filters.alphabet}
+        >
+          <option value="">
             Ordena Alfabeticamente
           </option>
-          <option value={'A-Z'}>A-Z</option>
-          <option value={'Z-A'}>Z-A</option>
+          <option value={'nameASC'}>A-Z</option>
+          <option value={'nameDESC'}>Z-A</option>
         </select>
+
         <div className='Map-Toggle-Group' onClick={toggleMapMenu
           ? () => setToggleMapMenu(false)
           : () => setToggleMapMenu(true)}>
