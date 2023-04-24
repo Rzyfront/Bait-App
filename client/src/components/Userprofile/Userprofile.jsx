@@ -25,7 +25,7 @@ function Userprofile () {
 
   
   return (
-    <>
+    <div className='userProfileContainer'>
     <Navbar />
       <h2 className='userProfileText'>perfil de usuario</h2>
       {user && (
@@ -80,7 +80,7 @@ function Userprofile () {
      
      
    
-    </>
+    </div>
   );
 }
 
