@@ -25,8 +25,8 @@ module.exports = (req, res, next) => {
   if (menu) {
     req.menu = { type: menu };
   }
-
-  req.characteristics = characteristics;
+  if (typeof characteristics.characteristics === 'string') req.characteristics = JSON.parse(characteristics.characteristics);
+  else req.characteristics = characteristics;
   req.reviews = { verified: verified ?? 'verified' };
   req.order = reqOrder;
   req.where = where;
