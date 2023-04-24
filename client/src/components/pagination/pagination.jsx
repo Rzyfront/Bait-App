@@ -12,14 +12,13 @@ const Pagination = ({ totalPages, position }) => {
   const { id } = useParams();
   for (let i = 0; i < totalPages; i++) {
     numbers.push(
+      <Link to={`/home/${i + 1}?name=${name}&city=${city}`} key={i}>
       <div
-        key={i}
         className={`paginatioNumbers animated-pagination ${Number(id) === i + 1 ? 'pagination_on' : 'pagination_off'}`}
       >
-        <Link to={`/home/${i + 1}?name=${name}&city=${city}`}>
           <p>{i + 1}</p>
-        </Link>
       </div>
+        </Link>
     );
   }
   return (
