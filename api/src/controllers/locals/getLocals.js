@@ -30,14 +30,14 @@ module.exports = async (req, res) => {
           model: Menu,
           attributes: [],
           where: req.menu,
-          required: false,
+          required: !!req.menu.type,
         },
       ],
       attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'specialty', 'verified', 'schedule', 'UserId', 'lat', 'lng'],
       order: req.order,
       limit: 10,
       offset: (page - 1) * 10,
-      group: ['Local.id', 'Images.id', 'Characteristic.id', 'Menus.id'],
+      group: ['Local.id', 'Images.id', 'Characteristic.id'],
       subQuery: false,
     });
     const totalPages = Math.ceil((count.length - 1) / 10);
