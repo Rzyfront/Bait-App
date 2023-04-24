@@ -1,5 +1,5 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS } from '../actions/actions';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS,USER_PROFILE } from '../actions/actions';
 import { SEARCH_BY_QUERY } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
@@ -19,7 +19,8 @@ const initialState = {
   menu: [],
   reviews: [],
   ubication: { lat: 40.56684898238947, lng: -34.60762000391614, city: 'buenos aires' },
-  foco: { lat: null, lng: null }
+  foco: { lat: null, lng: null },
+  userProfile :[]
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -121,6 +122,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         foco: payload
       };
+
+    case USER_PROFILE :
+      return {
+        ...state,
+        userProfile:payload
+      }
 
     default:
       return { ...state };

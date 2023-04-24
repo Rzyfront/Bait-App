@@ -22,7 +22,7 @@ export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-export const DETAIL_USER = "DETAIL_USER"
+export const USER_PROFILE = "USER_PROFILE"
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
@@ -297,3 +297,23 @@ export const getReviews = (localId, page = 1) => {
     }
   };
 };
+
+// DETAIL USER FOR USSER PROFILE
+export const getUserProfile = (id)=>{
+  return async (dispatch)=>{
+    try {
+      const response = await axios(`http://localhost:3001/user/${id}`)
+     
+      if(response.data.success ===true){
+        dispatch({
+          type: USER_PROFILE,
+          payload: response.data
+        });
+      }
+       
+    } catch (error) {
+      console.log(error.message);
+    }
+
+}
+}

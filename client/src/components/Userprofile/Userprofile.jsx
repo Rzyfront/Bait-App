@@ -1,24 +1,29 @@
 import './UserProfile.css';
 import { useEffect } from 'react';
 import { Reviews, Navbar } from '../components';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import  "./Userprofile.css"
-// import { DetailUser } from '../../redux/actions/actions';
+import {getUserProfile} from "../../redux/actions/actions"
+import { DetailLocal } from '../../redux/actions/local';
+import { useParams } from 'react-router';
+
 
 function Userprofile () {
   const dispatch = useDispatch();
-  const { user} = useSelector((state) => state.user);
-  const { id } = useParams();
-  // useEffect(() => {
-  //   dispatch(DetailUser(id));
-  // }, [id]);
+  const {userId} = useParams()
+  const  {user} = useSelector((state) => state.user);
+  const  userProfile  = useSelector((state) =>  state.userProfile )
+  useEffect(()=>{
+   
+    dispatch(getUserProfile(userId))
   
-  const { name, lastName, Image, location, phone, email } = {
-    name: '',
-    Image: '',
-    phone: []
-  };
+  },[])
+
+  userProfile && console.log(userProfile.user?.Reviews);
+
+  
+
+  
   return (
     <>
     <Navbar />
@@ -46,9 +51,25 @@ function Userprofile () {
             <h3 className="Location">{user.location}</h3>
           </div>
         </div>
+       
       </div>
       )
-}
+} 
+      <div className='userReviews'>
+        <h1>Tus Reviews </h1>
+        {userProfile && userProfile.user?.Reviews.map((review) => {
+          return (
+            <div key={review.id} className='reviewContainer'>
+              <h4>Titulo: {review.title}</h4>
+              <h4>Comentario: {review.comment}</h4>
+              <h3>Calificaciones:</h3>
+               <h2>Food :{review.food}</h2> 
+              <h2>Service :{review.service}</h2> 
+              <h2>Environment :{review.environment}</h2> 
+            </div>
+          )
+        })}
+      </div>
       <input
         type='file'
         name='imagen'
@@ -57,10 +78,7 @@ function Userprofile () {
       ></input>
       <div className="Userprofile"></div>
      
-   <div className="ContainerSelection">
-        `{Reviews === `ReviewsUsers` && (<Reviews ReviewsList={user.Reviews} />
-          ) }` 
-   </div>
+     
    
     </>
   );
