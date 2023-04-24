@@ -113,7 +113,7 @@ function LocalsDatabasic () {
       }
     } else {
       setStatesupmit(true);
-      toast.error('Error en enviar datos', {
+      toast.error('Datos no validos', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
