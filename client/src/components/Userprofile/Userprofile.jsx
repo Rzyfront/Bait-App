@@ -1,5 +1,4 @@
 import './UserProfile.css';
-import { useEffect } from 'react';
 import { Reviews, Navbar } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import  "./Userprofile.css"

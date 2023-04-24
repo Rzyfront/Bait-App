@@ -1,0 +1,195 @@
+.Filters{
+   display: flex; 
+   justify-content: space-between;
+   align-items: center;
+   width: 100%;
+   height: 60px;
+   gap: 10px;
+   padding: 0 20px;
+}
+
+.Filters .Left-Home-Buttons{
+    display: flex;
+    gap: 10px;
+}
+
+.Filters .AddPlace{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 20px;
+    color: var(--tertiary);
+    width: 140px;
+    height: 40px;
+    border:none;
+    background-color: var(--btn-secondary);
+    border-radius: 7px;
+    gap: 3px;
+    padding: 5px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.Filters .AddPlace:hover {
+    background-color: var(--btn-primary);
+    box-shadow: rgba(0, 0, 0, 0.347) 0px 1px 4px;
+}
+
+.Filters .AddPlace .AddPlace_Text {
+    font-size: 17px;
+    font-family: var(--subtitle);
+    font-weight: 200;
+    
+}
+
+.Filters .ResetHome{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    color: var(--tertiary);
+    width: 50px;
+    height: 40px;
+    border: none;
+    background-color: var(--btn-secondary);
+    border-radius: 7px;
+    gap: 5px;
+    padding: 7px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.Filters .ResetHome:hover {
+    background-color: var(--btn-primary);
+    box-shadow: rgba(0, 0, 0, 0.347) 0px 1px 4px;
+}
+.Filters .FiltersGroup{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.Filters .ToggleFilterButton {
+    display: none;
+    height: 40px;
+    padding: 10px;
+    font-size: 20px;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    border-radius: 5px;
+    position: relative;
+}
+.Filters .ToggleFilterButton:hover {
+ background-color: var(--bg-secondary);
+ color: var(--tertiary);
+}
+.Filters .ToggleFilterButton:active {
+    background-color: var(--bg-tertiary);
+    color: var(--tertiary);
+}
+
+.Filters .FiltersGroup select {
+    height: 40px;
+    outline: none;
+    background-color: var(--bg-primar);
+    font-size: 15px;
+    font-family: var(--subtitle);
+    color: var(--primary);
+    font-weight: 400;
+    padding-left: 5px;
+    border: 1px solid var(--bg-secondary);
+    border-radius: 5px;
+    transition: 0.3s;
+    box-shadow: rgba(0, 0, 0, 0.195) 0px 1px 1px;
+
+}
+
+.Filters .FiltersGroup select:hover {
+    box-shadow: rgba(0, 0, 0, 0.195) 0px 2px 3px;
+    border-radius: 7px;
+
+}
+
+.Filters .FiltersGroup select option{
+    background-color:var(--bg-primary);
+    font-family: var(--subtitle);
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+.Filters .FiltersGroup .Map-Toggle-Group{
+    font-size: 25px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    color: var(--primary);
+}
+
+.Filters .FiltersGroup .Map-Toggle-Group:hover {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
+    border-radius: 7px;
+}
+.Filters .FiltersGroup .Map-Toggle-Group:active {
+ background-color: var(--btn-primary);
+}
+
+.Filters .FiltersGroup .MultiSelect-filters{
+    border: 1px solid var(--primary);
+    background-color: var(--bg-primary);
+    border-radius: 5px;
+    color: var(--primary);
+    outline-color: none;
+    transition: 0.3s;
+}
+
+.Filters .FiltersGroup .MultiSelect-filters:hover {
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media screen and (max-width: 900px) {
+    .Filters .FiltersGroup .Map-Toggle-Group {
+        display: none;
+    }
+    .Filters .FiltersGroup select {
+        width: 120px;
+    }
+    .Filters .FiltersGroup select option {
+        width: 120px;
+    }
+
+}
+
+@media screen and (max-width: 750px) {
+    .Filters .FiltersGroup {
+        display: none;
+    }
+    .Filters .ToggleFilterButton{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .Filters .ToggleFilterButton .FiltersGroup {
+       display: flex;
+       flex-direction: column;
+       background-color: var(--bg-primary);
+       padding: 40px;
+       position: absolute;
+       right: 0;
+       top: 40px;
+       z-index: var(--alto-3);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        border-radius: 10px;
+        -webkit-animation: scale-up-tr 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+            animation: scale-up-tr 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    }
+        .Filters .ToggleFilterButton .FiltersGroup select {
+            width: 150px;
+            height: 45px;
+        }
+}
