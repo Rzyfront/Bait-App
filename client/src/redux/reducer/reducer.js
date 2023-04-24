@@ -124,6 +124,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
         foco: payload
       };
 
+    case USER_PROFILE : 
+    return {
+      ...state,
+      userProfile:payload 
+    }
+
     default:
       return { ...state };
   }
