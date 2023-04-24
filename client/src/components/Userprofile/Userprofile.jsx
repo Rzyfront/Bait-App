@@ -3,15 +3,17 @@ import { useEffect } from 'react';
 import { Reviews, Navbar } from '../components';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DetailUser } from '../../redux/actions/actions';
+import  "./Userprofile.css"
+// import { DetailUser } from '../../redux/actions/actions';
 
 function Userprofile () {
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.detail);
+  const { user} = useSelector((state) => state.user);
   const { id } = useParams();
-  useEffect(() => {
-    dispatch(DetailUser(id));
-  }, [id]);
+  // useEffect(() => {
+  //   dispatch(DetailUser(id));
+  // }, [id]);
+  
   const { name, lastName, Image, location, phone, email } = {
     name: '',
     Image: '',
@@ -20,46 +22,46 @@ function Userprofile () {
   return (
     <>
     <Navbar />
+      <h2 className='userProfileText'>perfil de usuario</h2>
+      {user && (
+      <div className="userInfo">
+        <div className="Decorator"></div>
+        <div className="Info">
+          <figure className="imgProfileContainer">
+              <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="" className="imgProfile" />
+          </figure>
+          <h2>{user.name + ' ' + user.lastname}</h2>
+          <div className="AgeGroup">
+            <h3 className="Age">{user.age}</h3>
+          </div>
+          <div className="TelGroup">
+            <h3>Tel:</h3>
+            <p>{user.phone_number}</p>
+          </div>
+          <div className="EmailGroup">
+            <h3>E-mail:</h3>
+            <p>{user.email}</p>
+          </div>
+          <div className="LocationGroup">
+            <h3 className="Location">{user.location}</h3>
+          </div>
+        </div>
+      </div>
+      )
+}
+      <input
+        type='file'
+        name='imagen'
+        accept='image/png,image/jpeg,image/jpg,image/gif'
+       
+      ></input>
       <div className="Userprofile"></div>
-      {users && (
-          <div className="userInfo">
-            {users.Images.length
-              ? (
-              <img
-                src={users.Images[0].url}
-                className="UserImage"
-              />
-                )
-              : (
-              <img src={Image} className="userImage" />
-                )}
-
-            <div className="Decorator"></div>
-            <div className="Info">
-              <h2>{users.name + ' ' + users.lastname }</h2>
-             <div className="AgeGroup">
-                <h3 className="Age">{users.age}</h3>
-            </div>
-           <div className="TelGroup">
-                <h3>Tel:</h3>
-                {phone.map((t, i) => {
-                  return <p key={i}>{t} |</p>;
-                })}
-              </div>
-            <div className="EmailGroup">
-                <h3>E-mail:</h3>
-                <p>{users.email}</p>
-              </div>
-            <div className="LocationGroup">
-                <h3 className="Location">{users.location}</h3>
-            </div>
-              </div>
-              </div>
-      )}
+     
    <div className="ContainerSelection">
-        Reviews === `ReviewsUsers` && (<Reviews ReviewsList={users.Reviews} />
-          )
+        `{Reviews === `ReviewsUsers` && (<Reviews ReviewsList={user.Reviews} />
+          ) }` 
    </div>
+   
     </>
   );
 }

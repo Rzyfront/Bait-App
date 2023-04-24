@@ -3,9 +3,9 @@ const {
   verifiedExistsTypeLength,
   verifiedExists,
 } = require('../helpers/validations');
-const { isAppropriate } = require('../helpers/badWords');
+const { prospectiveApi } = require('../helpers/badWords');
 
-module.exports = (req, res, next) => {
+module.exports = async (req, res, next) => {
   try {
     const {
       title, comment, /* image, */ food, service, environment, qaPrice,
@@ -16,8 +16,7 @@ module.exports = (req, res, next) => {
 
     // COMMENT
     verifiedExistsTypeLength(comment, 'string', 700, 'comment');
-    isAppropriate(comment);
-
+    // isAppropriate(comment);
     // QUALIFICATIONS
     const qualifications = {
       food,
@@ -39,6 +38,7 @@ module.exports = (req, res, next) => {
     // verifiedTypeOf(image, 'object', 'image');
     // verifiedTypeOf(image.url, 'string', 'url');
 
+    if (await prospectiveApi(comment))req.verified = 'archived';
     next();
   } catch (error) {
     res.status(404).json({ error: error.message });
