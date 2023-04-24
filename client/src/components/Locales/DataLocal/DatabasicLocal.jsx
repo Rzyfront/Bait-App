@@ -76,7 +76,7 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 onChange={handleMap}
                 value={mapSearch}
                 type='text'
-                required
+                // required
             />
             <Button onPress={searchCity}>Buscar Ciudad</Button>
 

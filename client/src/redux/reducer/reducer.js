@@ -18,7 +18,7 @@ const initialState = {
   newMenu: {},
   menu: [],
   reviews: [],
-  ubication: { lat: 40.56684898238947, lng: -34.60762000391614, city: 'buenos aires' },
+  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires' },
   foco: { lat: null, lng: null }
 };
 const rootReducer = (state = initialState, { type, payload }) => {
