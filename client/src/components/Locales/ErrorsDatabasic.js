@@ -5,6 +5,9 @@ export const ErrorsDatabasic = (contenido) => {
   if (contenido.name.length > 30) {
     error.name = 'Nombre muy grande';
   }
+  if (contenido.name === '') {
+    error.name = 'no tiene nombre';
+  }
   if (!contenido.specialty.length) {
     error.specialty = 'Escoje una especialidad';
   }

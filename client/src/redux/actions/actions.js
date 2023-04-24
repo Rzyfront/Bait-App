@@ -22,7 +22,7 @@ export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-export const DETAIL_USER = "DETAIL_USER"
+export const DETAIL_USER = 'DETAIL_USER';
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
@@ -125,26 +125,23 @@ export const comentarie = (
   calculateAverage,
   inputs,
   id
-
 ) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(
-        `/reviews/${id}`,
-        {
-          title: inputs.title,
-          rating: calculateAverage,
-          comment: inputs.comment,
-          image: inputs.image,
-          food: calificationFood,
-          service: calificationService,
-          environment: calificationEnvironment,
-          qaPrice: calificationQaPrice
-        }
-      );
-      console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
+      const response = await axios.post(`/reviews/${id}`, {
+        title: inputs.title,
+        rating: calculateAverage,
+        comment: inputs.comment,
+        image: inputs.image,
+        food: calificationFood,
+        service: calificationService,
+        environment: calificationEnvironment,
+        qaPrice: calificationQaPrice
+      });
+      console.log(response);
+      return true;
     } catch (error) {
-      console.log(error);
+      return false;
     }
   };
 };
@@ -280,20 +277,16 @@ export const ResetUser = () => {
 };
 // REVIEWS ACTION GENERATORS
 export const getReviews = (localId, page = 1) => {
-
   return async (dispatch) => {
-    
     try {
       const response = await axios(`/reviews/${localId}?page=${page}`);
-      
+
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
           payload: response.data.reviews
         });
       }
-    } catch (error) {
-    
-    }
+    } catch (error) {}
   };
 };

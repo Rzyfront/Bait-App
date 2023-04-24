@@ -15,6 +15,7 @@ import { createLocal } from '../../redux/actions/local';
 import { ErrorsDatabasic } from './ErrorsDatabasic';
 
 function LocalsDatabasic () {
+  const [statesupmit, setStatesupmit] = useState(false);
   const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
   const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
@@ -111,7 +112,8 @@ function LocalsDatabasic () {
         }, 2000);
       }
     } else {
-      toast.error('Faltan datos', {
+      setStatesupmit(true);
+      toast.error('Error en enviar datos', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
@@ -171,6 +173,7 @@ function LocalsDatabasic () {
              handleChange={handleChange}
              inputs={inputs}
              errors={errors}
+             statesupmit={statesupmit}
              handleSelect={handleSelect}
              searchCity={searchCity}
              setMapsearch={setMapsearch}
