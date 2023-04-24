@@ -8,6 +8,7 @@ import { homepage } from '../../redux/actions/actions';
 import { searchByQuery, searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
+
 function Cards ({ toggleMapMenu }) {
   const location = useLocation();
   const [outAnimation, setOutAnimation] = useState(false);
@@ -77,8 +78,6 @@ function Cards ({ toggleMapMenu }) {
   useEffect(() => {
     dispatch(searchByFilters({ name, city: eliminarTildes(city), specialty, order, characteristics, page }));
   }, [name, city, specialty, order, characteristics, page]);
-
-  useEffect(() => {}, [toggleMapMenu]);
 
   return (
     <div className="containerCardsall animated-element">

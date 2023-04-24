@@ -1,63 +1,65 @@
 .Create-Locals-Form {
-    overflow: auto;
-    max-width: 100%;  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
-  }
+  overflow: auto;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+}
 
- 
-  .Create-Locals-Form .termAndConditions{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    padding: 30px;
-    gap: 10px;
-    width: 650px;
-    height: 100vh;
-    
-  }
-  .Create-Locals-Form .termAndConditions .Logo {
-    width: 130px;
-    transition: 0.3s;
-  }
 
-  .Create-Locals-Form .termAndConditions .Logo:hover {
-    transform: scale(1.1);
-    
-  }
+.Create-Locals-Form .termAndConditions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding: 30px;
+  gap: 10px;
+  width: 650px;
+  height: 100vh;
 
-  .Create-Locals-Form .termAndConditions h2{
-    padding: 20px;
-    color: var(--primary);
-  }
+}
 
-  .Create-Locals-Form .termAndConditions h2 span{
-    color: var(--secondary);
-  }
+.Create-Locals-Form .termAndConditions .Logo {
+  width: 130px;
+  transition: 0.3s;
+}
 
-  .Create-Locals-Form .termAndConditions .termsButtons{
-    display: flex;
-    gap: 30px;
-  }
- .Create-Locals-Form .termAndConditions button{
-      width: 140px;
-      height: 35px;
-      border-radius: 20px;
-      border: none;
-      font-size: 15px;
-      font-family: var(--subtitle);
-      background-color: var(--bg-secondary);
-      color: var(--tertiary);
-      transition: 0.3s;
-      margin-bottom: 30px;
- }  
+.Create-Locals-Form .termAndConditions .Logo:hover {
+  transform: scale(1.1);
 
- 
-  
+}
+
+.Create-Locals-Form .termAndConditions h2 {
+  padding: 20px;
+  color: var(--primary);
+}
+
+.Create-Locals-Form .termAndConditions h2 span {
+  color: var(--secondary);
+}
+
+.Create-Locals-Form .termAndConditions .termsButtons {
+  display: flex;
+  gap: 30px;
+}
+
+.Create-Locals-Form .termAndConditions button {
+  width: 140px;
+  height: 35px;
+  border-radius: 20px;
+  border: none;
+  font-size: 15px;
+  font-family: var(--subtitle);
+  background-color: var(--bg-secondary);
+  color: var(--tertiary);
+  transition: 0.3s;
+  margin-bottom: 30px;
+}
+
+
+
 .Create-Locals-Form .termAndConditions .Ok:hover {
   background-color: var(--bg-tertiary);
   color: var(--tertiary);
@@ -81,7 +83,7 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.Create-Locals-Form .locales_data form{
+.Create-Locals-Form .locales_data form {
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -90,7 +92,7 @@
 
 }
 
-.Create-Locals-Form .locales_data form select{
+.Create-Locals-Form .locales_data form select {
   background-color: var(--bg-primary);
   border: none;
   outline: none;
@@ -124,10 +126,10 @@
 }
 
 .Create-Locals-Form .locales_data form button:hover {
-background-color: var(--btn-secondary);
+  background-color: var(--btn-secondary);
 }
 
-.Create-Locals-Form .locales_data .Logo{
+.Create-Locals-Form .locales_data .Logo {
   width: 130px;
 }
 
@@ -177,7 +179,7 @@ background-color: var(--btn-secondary);
 }
 
 .danger {
-  color: var(--bg-optional1);
+  color: var(--optional2);
   font-size: var(--subtitle);
 }
 

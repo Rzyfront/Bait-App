@@ -138,9 +138,10 @@ export const comentarie = (
         environment: calificationEnvironment,
         qaPrice: calificationQaPrice
       });
-      console.log(response.data); // Aquí puedes hacer algo con la respuesta del servidor
+      console.log(response);
+      return true;
     } catch (error) {
-      console.log(error);
+      return false;
     }
   };
 };

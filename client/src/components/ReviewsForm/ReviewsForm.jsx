@@ -40,17 +40,18 @@ function ReviewsForm ({ setToggleModal2, id }) {
       ...inputs,
       [name]: value
     });
-
-    setErrors(validate({
-      ...inputs,
-      [name]: value
-    }));
   };
+  useEffect(() => {
+    setErrors(validate({
+      ...inputs
+    }));
+    console.log(errors);
+  }, [inputs]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (inputs.comment.length > 0 && inputs.title.length > 0) {
-      dispatch(
+    if (!Object.values(errors).length) {
+      const response = await dispatch(
         comentarie(
           calificationFood,
           calificationQaPrice,
@@ -62,10 +63,16 @@ function ReviewsForm ({ setToggleModal2, id }) {
           // userToken
         )
       );
-      toast.success('¡Gracias por tu Opinion!', {
-        position: toast.POSITION.TOP_CENTER
-      });
-      location.reload();
+      if (response === true) {
+        toast.success('¡Gracias por tu Opinion!', {
+          position: toast.POSITION.TOP_CENTER
+        });
+        location.reload();
+      } else {
+        toast.error('¡Error al hacer la reseña!', {
+          position: toast.POSITION.TOP_CENTER
+        });
+      }
     } else {
       toast.error('¡La reseña no cumple con las normal de Bait!', {
         position: toast.POSITION.TOP_CENTER
@@ -79,12 +86,6 @@ function ReviewsForm ({ setToggleModal2, id }) {
   useEffect(() => {
     setInputs({ ...inputs, image: image[image.length - 1] });
   }, [image.length]);
-
-  // useEffect(() => {
-  //   const { token } = JSON.parse(localStorage.getItem('user'));
-  //   const data = JSON.parse(localStorage.getItem('user'));
-  //   setDataUser(token);
-  // }, []);
 
   useEffect(() => {
     setcalculateAverage(
@@ -216,14 +217,15 @@ function ReviewsForm ({ setToggleModal2, id }) {
               />
             {errors.comment && <p className='danger'>{errors.comment}</p>}
             </div>
+          <input
+            className='LoadImg'
+            type='file'
+            placeholder='Sube una foto de tu visita'
+            accept='image/png,image/jpeg,image/jpg,image/gif'
+            onChange={handleImage}
+          ></input>
             <div className='ImgGroup'>
-              <input
-                className='LoadImg'
-                type='file'
-                placeholder='Sube una foto de tu visita'
-                accept='image/png,image/jpeg,image/jpg,image/gif'
-                onChange={handleImage}
-              ></input>
+
               {image.length
                 ? (
                 <img
