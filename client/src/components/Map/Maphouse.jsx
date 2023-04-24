@@ -11,11 +11,8 @@ const MAP_LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 
 function MapHouse () {
   const { locals } = useSelector((state) => state.cards);
-  if (locals && locals.length) {
-    console.log(locals[0].lat, locals[0].lng);
-  }
   const foco = useSelector((state) => state.foco);
-  const [mCity, setMcity] = useState({ lat: 40.56684898238947, lng: -34.60762000391614 });
+  const [mCity, setMcity] = useState({ lat: -34.60762000391614, lng: -58.381592 });
   const [mfoco, setmfoco] = useState(foco);
   function MyComponent () {
     const map = useMapEvents({});

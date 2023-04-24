@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,34 +15,26 @@ function Cards () {
   // obtener los valores de los parametros de consulta
   const queryParams = new URLSearchParams(location.search);
   const name = queryParams.get('name');
-  const city = queryParams.get('city');
+  const city = eliminarTildes(queryParams.get('city'));
 
   const { locals, totalPages } = useSelector((state) => state.cards);
   const pagine = useParams();
   const dispatch = useDispatch();
   // navegation
-  const [navegation, setnavegation] = useState(pagine.id);
+
   // actualiza pagina
   useEffect(() => {
     if (name || city) {
-      dispatch(searchByQuery(name, eliminarTildes(city)));
-      setnavegation(pagine.id);
+      dispatch(searchByQuery(name, city));
     } else {
       dispatch(homepage(pagine.id));
-      setnavegation('', '');
     }
   }, [pagine]);
-
-  // controller navegation
-  useEffect(() => {
-    setnavegation(pagine.id);
-  }, [totalPages]);
-  // controller map
 
   return (
     <div className="containerCardsall animated-element">
       <div>
-      {totalPages && <Pagination totalPages={totalPages} />}
+      {totalPages ? <Pagination totalPages={totalPages}/> : ''}
       <div className="ContainerCards animated-element">
           <div className='widthcards'>
         {locals &&
