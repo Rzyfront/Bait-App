@@ -1,65 +1,57 @@
 import './UserProfile.css';
-import { useEffect } from 'react';
 import { Reviews, Navbar } from '../components';
-import { useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { DetailUser } from '../../redux/actions/actions';
+import { useSelector } from 'react-redux';
 
 function Userprofile () {
-  const dispatch = useDispatch();
-  const { users } = useSelector((state) => state.detail);
-  const { id } = useParams();
-  useEffect(() => {
-    dispatch(DetailUser(id));
-  }, [id]);
-  const { name, lastName, Image, location, phone, email } = {
-    name: '',
-    Image: '',
-    phone: []
-  };
+  const { user } = useSelector((state) => state);
+  // const { name, lastName, Image, location, phone, email } = {
+  //   name: '',
+  //   Image: '',
+  //   phone: []
+  // };
   return (
     <>
     <Navbar />
       <div className="Userprofile"></div>
-      {users && (
+      {user && (
           <div className="userInfo">
-            {users.Images.length
+            {user.Image
               ? (
               <img
-                src={users.Images[0].url}
+                src={user.Image.url}
                 className="UserImage"
               />
                 )
               : (
-              <img src={Image} className="userImage" />
+            // <img src={Image} className="userImage" />
+                  ''
                 )}
 
             <div className="Decorator"></div>
             <div className="Info">
-              <h2>{users.name + ' ' + users.lastname }</h2>
+              <h2>{user.name + ' ' + user.lastname }</h2>
              <div className="AgeGroup">
-                <h3 className="Age">{users.age}</h3>
+                <h3 className="Age">{user.age}</h3>
             </div>
            <div className="TelGroup">
                 <h3>Tel:</h3>
-                {phone.map((t, i) => {
-                  return <p key={i}>{t} |</p>;
-                })}
+                <p>{user.phone_number}</p>;
               </div>
             <div className="EmailGroup">
                 <h3>E-mail:</h3>
-                <p>{users.email}</p>
+                <p>{user.email}</p>
               </div>
             <div className="LocationGroup">
-                <h3 className="Location">{users.location}</h3>
+                <h3 className="Location">{user.location}</h3>
             </div>
               </div>
               </div>
       )}
    <div className="ContainerSelection">
-        Reviews === `ReviewsUsers` && (<Reviews ReviewsList={users.Reviews} />
+        Reviews === `ReviewsUsers` && (<Reviews ReviewsList={user.Reviews} />
           )
    </div>
+   
     </>
   );
 }

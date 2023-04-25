@@ -1,11 +1,12 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS } from '../actions/actions';
-import { SEARCH_BY_QUERY } from '../actions/cards';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, GET_REVIEWS } from '../actions/actions';
+import { POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU } from '../actions/menuDish';
+import { SEARCH_BY_QUERY, SEARCH_BY_FILTERS, SAVE_SEARCH_HOME } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
 
 const initialState = {
-  cards: [],
+  cards: {},
   reset: [],
   detail: [],
   success: null,
@@ -18,8 +19,9 @@ const initialState = {
   newMenu: {},
   menu: [],
   reviews: [],
-  ubication: { lat: 40.56684898238947, lng: -34.60762000391614, city: 'buenos aires' },
-  foco: { lat: null, lng: null }
+  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
+  foco: { lat: null, lng: null },
+  searchName: { input: '', map: '' }
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -114,14 +116,23 @@ const rootReducer = (state = initialState, { type, payload }) => {
     case GET_REVIEWS:
       return {
         ...state,
-        reviews: [...state.reviews, payload]
+        reviews: [...state.reviews, ...payload]
       };
     case FOCO:
       return {
         ...state,
         foco: payload
       };
-
+    case SAVE_SEARCH_HOME:
+      return {
+        ...state,
+        searchName: payload
+      };
+    case SEARCH_BY_FILTERS:
+      return {
+        ...state,
+        cards: payload
+      };
     default:
       return { ...state };
   }

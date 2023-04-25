@@ -1,35 +1,24 @@
-import {
-  isEmail,
-  verifiedExists,
-  verifiedLength
-} from '../../helpers/validations';
-
+const regGmail = /^\S+@\S+\.\S+$/;
 export const validateForm = (data) => {
   const errors = {};
-  if (!Object.keys(data).length) errors.rule = 'No puede estar vacío';
-  if (data.name) {
-    const result = verifiedLength(data.name, 30, 'El nombre');
-    result && (errors.name = result);
+  if (data.name.length > 30) {
+    errors.name = 'Nombre muy grande';
+  }
+  if (!data.specialty.length) {
+    errors.specialty = 'Escoge una especialidad';
+  }
+  if (!regGmail.test(data.email)) {
+    errors.email = 'Correo no válido';
+  }
+  if (JSON.stringify(data.location) === '{}') {
+    errors.location = 'Selecciona un punto';
+  }
+  if (!data.images.length) {
+    errors.images = 'Sube una imagen';
+  }
+  if (!data.schedule.length) {
+    errors.schedule = 'falta horarios';
   }
 
-  if (data.email) {
-    const result = isEmail(data.email);
-    result && (errors.email = result);
-  }
-
-  if (data.phone) {
-    const result = verifiedLength(data.phone, 20, 'El teléfono');
-    result && (errors.phone = result);
-  }
-
-  if (data.location) {
-    const result = verifiedExists(data.location, 'location');
-    result && (errors.location = result);
-  }
-
-  if (!data.schedule) {
-    const result = verifiedExists(data.schedule, 'El horario');
-    result && (errors.schedule = result);
-  }
   return errors;
 };

@@ -1,10 +1,9 @@
-import { Input } from '@nextui-org/react';
+import { Button, Input } from '@nextui-org/react';
 import { specialties } from '../../../helpers/specialties';
 
-export default function DataLocal ({ handleChange, inputs, errors, handleSelect }) {
+export default function DataLocal ({ handleChange, inputs, errors, handleSelect, searchCity, mapSearch, handleMap }) {
   return (
     <>
-
             <Input
                 underlined
                 labelPlaceholder="Nombre del Local"
@@ -17,21 +16,6 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 required
             />
             {errors.name && <p className='danger'>{errors.name}</p>}
-
-            <select
-                name='location'
-                className='location'
-                onChange={handleSelect}
-                value={inputs.location}
-                required
-            >
-                <option value='value2' defaultValue>
-                    Ubicacion
-                </option>
-                <option value='Cordoba'>Córdoba</option>
-                <option value='Buenos Aires'>Buenos Aires</option>
-                <option value='Corrientes'>Corrientes</option>
-            </select>
 
             <Input
                 underlined
@@ -55,14 +39,6 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 type='text'
                 name='schedule'
             />
-            {/* <input
-                onChange={handleChange}
-                value={inputs.schedule}
-                type='text'
-                name='schedule'
-                required
-            /> */}
-            {errors.schedule && <p className='danger'>{errors.schedule}</p>}
 
             <Input
                 underlined
@@ -74,17 +50,6 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 type='number'
                 name='phone'
             />
-            {/* <input
-                className='telefono'
-                onChange={handleChange}
-                value={inputs.phone}
-                type='tel'
-                name='phone'
-                pattern='[0-9]{10}'
-                placeholder='Escribe tu número de teléfono...'
-                required
-            /> */}
-            {errors.phone && <p className='danger'>{errors.phone}</p>}
 
             <select
                 name='specialty'
@@ -103,22 +68,17 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect 
                 ))}
                 {/* <option value='Otro'>Otro</option> */}
             </select>
-            {/* {inputs.specialty === 'Otro' && (
-                <>
-                    <Input
-                        underlined
-                        labelPlaceholder="Especialidad"
-                        color="dark"
-                        className='other-specialty'
-                        onChange={handleChange}
-                        value={inputs.otherSpecialty}
-                        type='text'
-                        name='otherSpecialty'
-                        required
-                    />
-                    <br />
-                </>
-            )} */}
+          <Input
+              underlined
+              labelPlaceholder="Nombre de ciudad"
+              color="dark"
+              className='name'
+              onChange={handleMap}
+              value={mapSearch}
+              type='text'
+          // required
+          />
+          <Button onPress={searchCity}>Buscar ciudad</Button>
 
         </>
   );

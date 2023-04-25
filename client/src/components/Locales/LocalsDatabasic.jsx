@@ -7,16 +7,23 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUploadImage } from '../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
-import { validateForm } from './localHelpers';
 import TYC from './TYC';
 import DatabasicLocal from './DataLocal/DatabasicLocal';
 import Mapdata from '../Map/Mapdata';
 import SearchMap from '../Map/SearchMap/Searchmap';
 import { createLocal } from '../../redux/actions/local';
+import { ErrorsDatabasic } from './ErrorsDatabasic';
 
 function LocalsDatabasic () {
+  const [statesupmit, setStatesupmit] = useState(false);
+  const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
   const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
+  /// /
+  const Navigate = useNavigate();
+  const { image, loading, handleChangeimage } = useUploadImage();
+  const dispatch = useDispatch();
+  const [termsAndConditions, setTemsAndConditions] = useState(true);
 
   // map controllers
   useEffect(() => {
@@ -46,7 +53,6 @@ function LocalsDatabasic () {
     }
   };
   const handlemapdatas = (information) => {
-    console.log(information);
     const data = {
       lat: information.location.y,
       lng: information.location.x,
@@ -57,20 +63,10 @@ function LocalsDatabasic () {
       ...inputs,
       location: data
     });
-
-    console.log(inputs);
   };
-
-  /// /
-  const Navigate = useNavigate();
-
-  const { image, loading, handleChangeimage } = useUploadImage();
-  const { success, error } = useSelector(state => state);
-  const dispatch = useDispatch();
-  const [termsAndConditions, setTemsAndConditions] = useState(true);
-
+  /// inputs and erros
   const [inputs, setInputs] = useState({
-    location: '',
+    location: {},
     name: '',
     images: [],
     email: '',
@@ -78,52 +74,49 @@ function LocalsDatabasic () {
     schedule: '',
     specialty: ''
   });
+  // Error controller
   const [errors, setErrors] = useState({
-
+    location: '',
+    name: '',
+    email: '',
+    schedule: '',
+    specialty: ''
   });
+
+  useEffect(() => {
+    setErrors(
+      ErrorsDatabasic({
+        ...inputs
+      })
+    );
+  }, [inputs]);
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setInputs({
       ...inputs,
       [name]: value
     });
-
-    setErrors(
-      validateForm({
-        ...inputs,
-        [name]: value
-      })
-    );
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(errors);
     if (!Object.values(errors).length) {
-      dispatch(createLocal(inputs));
-      setTimeout(() => {
-        Navigate('/home/1?name=&city=');
-      }, 3000);
-      // setInputs({
-      //   location: '',
-      //   name: '',
-      //   images: '',
-      //   email: '',
-      //   phone: '',
-      //   schedule: '',
-      //   specialty: ''
-      // });
-      // setErrors({
-      // });
-      // setChekInputs({
-      //   wifi: false,
-      //   parking_lot: false,
-      //   outdoor_seating: false,
-      //   live_music: false,
-      //   table_service: false,
-      //   big_group: false,
-      //   work_friendly: false,
-      //   pet_friendly: false
-      // });
+      const response = await dispatch(createLocal(inputs));
+      if (response === true) {
+        toast.success('¡Local creado satisfactoriamente!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000
+        });
+        setTimeout(() => {
+          Navigate(`/home/1?name=&city=${ubication.city}`);
+        }, 2000);
+      }
+    } else {
+      setStatesupmit(true);
+      toast.error('Datos no validos', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
     }
   };
 
@@ -137,12 +130,6 @@ function LocalsDatabasic () {
       ...inputs,
       [name]: value
     });
-    setErrors(
-      validateForm({
-        ...inputs,
-        [name]: value
-      })
-    );
   };
 
   function handleClick () {
@@ -158,23 +145,13 @@ function LocalsDatabasic () {
       setInputs({ ...inputs, images: data });
 
       setErrors(
-        validateForm({
+        ErrorsDatabasic({
           ...inputs,
           images: [data]
         })
       );
     }
   }, [image]);
-
-  success && toast.success('¡Local creado satisfactoriamente!', {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000
-  });
-
-  error && toast.error('Falló al crear el local', {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000
-  });
 
   return (
     <div className='Create-Locals-Form animated-element'>
@@ -196,6 +173,7 @@ function LocalsDatabasic () {
              handleChange={handleChange}
              inputs={inputs}
              errors={errors}
+             statesupmit={statesupmit}
              handleSelect={handleSelect}
              searchCity={searchCity}
              setMapsearch={setMapsearch}

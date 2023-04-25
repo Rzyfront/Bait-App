@@ -1,11 +1,25 @@
 import { Input, Textarea } from '@nextui-org/react';
 import '../DishForm.css';
-const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image }) => {
+import { useSelector } from 'react-redux';
+
+const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId }) => {
+  const { menu } = useSelector(state => state);
+
+  const findDish = (dishId) => {
+    if (dishId) {
+      const updDish = menu.map(menu => {
+        return menu.Dishes.find(dish => dish.id === dishId);
+      });
+      dish = updDish[0];
+    }
+  };
+
   return (
         <>
-            <div className='Dish-Form-Container'>
+            {
+                dishId && findDish(dishId)
+            }
 
-                <div className='dishColumn'>
                     <Input
                         underlined
                         labelPlaceholder="Nombre producto"
@@ -25,7 +39,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image })
                         value={dish.type}
                         required
                     >
-                        <option value='value2' defaultValue>Selecciona</option>
+                        <option value='value2' defaultValue>Tipo</option>
                         <option value='comun'>Común</option>
                         <option value='glutenFree'>Gluten free</option>
                         <option value='diabetic'>Apto para diabéticos</option>
@@ -33,12 +47,10 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image })
                         <option value='fitness'>fitness</option>
                         <option value='na'>No aplica</option>
                     </select>
-
-                </div>
-                <div className='dishColumn'>
+                    {errors.type && <p className='danger'>{errors.type}</p>}
                     <Input
                         underlined
-                        labelPlaceholder="Price"
+                        labelPlaceholder="Price USD"
                         color="dark"
                         className='type'
                         onChange={handleChange}
@@ -47,6 +59,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image })
                         name='price'
                         required
                     />
+                    {errors.price && <p className='danger'>{errors.price}</p>}
                     <Textarea
                         underlined
                         labelPlaceholder="Descripción"
@@ -58,6 +71,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image })
                         name='description'
                         required
                     />
+                     {errors.description && <p className='danger'>{errors.description}</p>}
                     <input
                         type='file'
                         name='image'
@@ -71,8 +85,6 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image })
 
                       />
                     }
-                </div>
-            </div>
         </>
   );
 };
