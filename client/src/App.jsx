@@ -10,6 +10,7 @@ import {
   DataTreatment,
   Dashboard,
   MenuForm,
+  DishForm,
   Userprofile
 } from './components/components.js';
 import LocalsDatabasic from './components/Locales/LocalsDatabasic';
@@ -37,7 +38,7 @@ function App () {
   const onUbicacionConcedida = async (posicion) => {
     const { latitude, longitude } = posicion.coords;
     const data = await reverseGeoCoding(longitude, latitude);
-    dispatch(ubicationPagine({ lat: data.location.y, lng: data.location.x, city: data.address.City }));
+    dispatch(ubicationPagine({ lat: data.location.y, lng: data.location.x, city: data.address.City, gps: true }));
     setubication(true);
   };
   function onError (error) {
@@ -59,6 +60,7 @@ function App () {
         <Route path='/userprofile/:userId' element={<Userprofile />} />
         <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
+        <Route path='/updateDish/:id' element={<DishForm/>} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

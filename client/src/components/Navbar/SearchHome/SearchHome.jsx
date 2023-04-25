@@ -1,20 +1,18 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Search_home.css';
 import { MdOutlineRestaurant } from 'react-icons/md';
 import { BiMap, BiSearchAlt } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { ubicationPagine } from '../../../redux/actions/ubication';
-import SearchMap from '../../Map/SearchMap/Searchmap';
 import { saveInfoSearchHome } from '../../../redux/actions/cards';
+import { useNavigate } from 'react-router-dom';
 
 function SearchHome () {
-  const navigate = useNavigate();
+  const { city } = useSelector((state) => state.ubication);
   const dispatch = useDispatch();
-  const { searchName, ubication } = useSelector(state => state);
+  const navigate = useNavigate();
   const [data, setData] = useState({
-    input: searchName,
-    map: ubication.city
+    input: '',
+    map: ''
   });
   const handleinputs = (e) => {
     setData({
@@ -25,21 +23,18 @@ function SearchHome () {
 
   const searchDatas = async (e) => {
     e.preventDefault();
-    console.log(`/home/1?name=${data.input}&city=${data.map}`);
-    navigate(`/home/1?name=${data.input}&city=${data.map}`);
-    const position = await SearchMap(data.map);
-    console.log({ lat: position[0], lng: position[1], city: data.map });
-    dispatch(ubicationPagine({ lat: position[0], lng: position[1], city: data.map }));
+    const currentPath = location.pathname;
+    if (currentPath !== currentPath.split('/').at(1) && (data.input.length || data.map.length)) {
+      dispatch(saveInfoSearchHome(data));
+      navigate('/home/1?');
+    }
+    if (!data.input && !data.map && currentPath !== currentPath.split('/').at(1)) {
+      dispatch(saveInfoSearchHome({ input: '', map: city }));
+      navigate('/home/1?');
+    } else {
+      dispatch(saveInfoSearchHome(data));
+    }
   };
-
-  useEffect(
-    () => {
-      dispatch(saveInfoSearchHome(data.input));
-      return () => {
-        dispatch(saveInfoSearchHome(''));
-      };
-    }, [data]
-  );
   return (
     <div className="search_home">
       <div className="searchs">

@@ -38,9 +38,9 @@ const Restaurantes = () => {
   };
 
   const verifyRestaurant = (e) => {
-    swal(`${e.target.name} ha sido verificado exitosamente`, {
-      icon: 'success'
-    });
+    // swal(`${e.target.name} ha sido verificado exitosamente`, {
+    //   icon: 'success'
+    // });
   };
 
   return (

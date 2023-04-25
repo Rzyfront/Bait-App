@@ -1,6 +1,12 @@
 
+<<<<<<< HEAD
 import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS,USER_PROFILE } from '../actions/actions';
 import { SEARCH_BY_QUERY,SEARCH_BY_FILTERS,SAVE_SEARCH_HOME } from '../actions/cards';
+=======
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, GET_REVIEWS } from '../actions/actions';
+import { POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU } from '../actions/menuDish';
+import { SEARCH_BY_QUERY, SEARCH_BY_FILTERS, SAVE_SEARCH_HOME } from '../actions/cards';
+>>>>>>> cd347751f98b4706e153286db78ab87e879ab45b
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
 
@@ -18,10 +24,14 @@ const initialState = {
   newMenu: {},
   menu: [],
   reviews: [],
-  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires' },
+  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
   foco: { lat: null, lng: null },
+<<<<<<< HEAD
   searchName: '',
   userProfile:[]
+=======
+  searchName: { input: '', map: '' }
+>>>>>>> cd347751f98b4706e153286db78ab87e879ab45b
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {
