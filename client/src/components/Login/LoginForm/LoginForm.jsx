@@ -115,7 +115,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                     src={`${ojo ? ojoAbierto : ojoCerrado}`}
                                     width="20px"
                                     ></img>
-
+                                  {errors.password && <PopComent text={errors.password}/> }
                             </div>
                             <button className="button" type="submit">Ingresar</button>
                             <div className="loginwith">
@@ -126,8 +126,6 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                             <div className="registrarme" onClick={() => loginRegister()}>
                                 <p>¿Aún no tienes cuenta?</p>
                                 <h5>Regístrate</h5>
-
-                                {errors.password && <span>{errors.password}</span>}
                             </div>
                         </form>
                     </div>

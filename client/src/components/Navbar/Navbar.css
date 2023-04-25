@@ -191,9 +191,15 @@ transition: 2s;
             width: 110px;
         }
     .UserGroup .nav_login .LogIn {
-        font-size: 15px;
+        font-size: 14px;
+    }
+    .all_navbar .UserGroup {
+        gap: 10px;
     }
 
+    .all_navbar {
+        padding: 5px 10px;
+    }
 }
 
 /*! Responsive 750px */
@@ -209,6 +215,10 @@ transition: 2s;
         width: 40px;
         margin-right: 10px;
     }
+        .UserGroup .nav_login .LogIn {
+            font-size: 9px;
+            font-weight: 500;
+        }
 
 .UserGroup .nav_login .Name-User-bar {
     display: none;
@@ -226,7 +236,7 @@ transition: 2s;
 @media screen and (max-width:570px) {
 
          .UserGroup .nav_login .LogIn {
-             font-size: 13px;
+             display: none;
          }
 
 }

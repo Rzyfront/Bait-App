@@ -1,6 +1,6 @@
 .popover-container {
-    position: relative;
-    right: -90px;
+    position: absolute;
+    right: -90%;
     display: inline-block;
     background-color: #ffffff;
     padding: 15px;
@@ -26,12 +26,3 @@
     border-color: transparent #ffffff transparent transparent;
 }
 
-.popover-container::after {
-    content: "";
-    position: absolute;
-    border-style: solid;
-    border-width: 10px 12px 10px 0;
-    border-color: transparent rgba(0, 0, 0, 0.2) transparent transparent;
-    top: 13px;
-    left: -14px;
-}
