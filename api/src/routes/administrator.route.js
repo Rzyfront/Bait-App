@@ -1,6 +1,6 @@
 const administratorRoute = require('express').Router();
 const { isSuperAdmin, isAdmin } = require('../middlewares/validateRole');
-const { verifyDelete } = require('../middlewares/userMiddlewares');
+// const { verifyDelete } = require('../middlewares/userMiddlewares');
 
 const usersTest = require('../helpers/usersTest');
 
@@ -9,7 +9,7 @@ const { setQueryUsers, setReviewQuery } = require('../middlewares');
 const { getReviews } = require('../controllers/reviews');
 const {
   changeRole,
-  deleteAdministrator,
+  // deleteAdministrator,
   deleteReview,
   getAllUsers,
   getSupendedUsers,
@@ -25,7 +25,7 @@ administratorRoute
   .get('/', isAdmin, getSupendedUsers)
   .get('/reviews', isAdmin, setReviewQuery, getReviews)
   .put('/createAdmin/:userId', isSuperAdmin, putCreateAdmin)
-  .delete('/:userId', verifyDelete, deleteAdministrator)
+  // .delete('/:userId', verifyDelete, deleteAdministrator)
   .patch('/review/:reviewId', isAdmin, patchReviewVerify)
   .patch('/role/:userId', isAdmin, changeRole)
   .patch('/suspend/:userId', isAdmin, patchSupendUser)
