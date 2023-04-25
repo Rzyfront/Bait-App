@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Notificación de eliminación de reseña</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+        }
+        p {
+            margin: 0 0 1.5rem;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0 0 1.5rem;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .review {
+            text-align: center;
+            background-color: rgb(200, 217, 255);
+            padding: .5rem 1rem;
+            margin-bottom: 1rem;
+            border-radius: 1rem;
+        }
+        .review h4 {
+            margin: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Notificación de eliminación de reseña</h1>
+        <h3>Estimado/a ${name},</h3>
+    
+        <h4>Le informamos que su reseña: </h4>
+
+        <div class="review">
+            <h4>${title}</h4>
+            <p>${comment}</p>
+        </div>
+        
+        <p>Ha sido eliminada de nuestro sitio web debido a ${reason}.</p>
+        <p>Entendemos que este contenido puede ser importante para usted, pero nuestra política de revisión de contenido establece que no se permiten comentarios inapropiados o ofensivos. Por favor, asegúrese de seguir nuestras pautas de revisión de contenido en el futuro para evitar que sus reseñas sean eliminadas.</p>
+    
+        <p>Gracias por su comprensión.</p>
+    
+        <p>Atentamente,</p>
+        <p>Administración de Bait</p>
+    </div>
+</body>
+</html>

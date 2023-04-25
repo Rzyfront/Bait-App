@@ -2,13 +2,22 @@ const { User } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
-    // Deberian mandar por params el id del usuario a modificar
     const { userId } = req.params;
-    // Deberian mandar por body el rol a update
     const { role } = req.body;
-    const userToChangeRole = await User.update({ role }, { where: { id: userId } });
-    return res.status(200).send(userToChangeRole);
+    if (!role) throw new Error('Need a role to update');
+    if (role === 'admin') throw new Error('You cannot change the role to admin, contact a superAdmin');
+
+    const updateUser = await User.findByPk(userId);
+    if (!updateUser) throw new Error('User not found');
+    updateUser.role = role;
+    await updateUser.save();
+    const user = {
+      id: updateUser.id,
+      role: updateUser.role,
+      verified: updateUser.verified,
+    };
+    return res.status(201).json({ success: true, user });
   } catch (err) {
-    return res.status(500).send(err.message);
+    return res.status(400).json({ message: err.message, success: false });
   }
 };

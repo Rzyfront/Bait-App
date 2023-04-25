@@ -1,64 +1,44 @@
-import axios from "axios";
-//////names/////////////
-export const FILTERS = "FILTERS";
-export const ORDER = "ORDER";
-export const RESET = "RESET";
-export const LOADINGLOCALS = "LOADINGLOCALS";
-export const SEARCH_BY_QUERY = "SEARCH_BY_QUERY";
-export const DETAIL="DETAIL"
-export const LOGIN = 'LOGIN';
+import axios from 'axios';
+/// ///names/////////////
+export const ORDER = 'ORDER';
+export const RESET = 'RESET';
+export const COMENTARIE = 'COMENTARIE';
+export const HOMEPAGE = 'HOMEPAGE';
+
+// ACTION TYPES USER
 export const CREATE_USER = 'CREATE_USER';
+export const CHECKUSER = 'CHEKUSER';
+export const RESETUSER = 'RESETUSER';
+export const DETAIL_USER = 'DETAIL_USER';
 
-
-//////////actions////////////////////////////
-
-//filter
-export const filter = () => {
-  // const datapaginada=paginado(data)
-  return {
-    type: FILTERS,
-    payload: data,
-  };
-};
-
+// ACTION TYPES REVIEWS
+export const GET_REVIEWS = 'GET_REVIEWS';
+/// ///////actions////////////////////////////
 export const reset = () => {
   return {
     type: RESET,
-    payload: "",
+    payload: ''
   };
 };
-/// loadinglocals
-export const loadingLocals = () => {
-  return async dispatch => {
-    try {
-      const response = await axios.get("/locals");
-      dispatch({
-        type: LOADINGLOCALS,
-        payload: response.data.locals
-      });
-    } catch (error) {
-      console.log(error.message);
-      // Dispatch an error action if needed
-      dispatch({
-        type: LOADINGLOCALS_ERROR,
-        payload: error.message
-      });
-    }
-  };
-};
-
-
-  
-
 /// Create user
-export const createUser=({name,lastname,age,phone_number,email,password,location,verified,isActive,role})=>{
-
-  return async(dispatch)=>{
+export const createUser = ({
+  name,
+  lastname,
+  age,
+  phone_number,
+  email,
+  password,
+  location,
+  verified,
+  isActive,
+  role
+}) => {
+  return async (dispatch) => {
     try {
-       await axios.post("http://localhost:3001/user", {
+      await axios.post('http://localhost:3001/user', {
         name,
         lastname,
-        age,
+        age: Number(age),
         phone_number,
         email,
         password,
@@ -66,80 +46,22 @@ export const createUser=({name,lastname,age,phone_number,email,password,location
         verified,
         isActive,
         role
-      })
-      return dispatch({ type: CREATE_USER, payload: "Usuario Creado Correctamente" })
-
-      console.log("Usuario Creado mi vale");
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
-}
-
-//Detail id
-export const DetailLocal=(id)=>{
-  return async dispatch=>{
-    try {
-    const datos =await axios.get(`/locals/${id}`)
-    dispatch({
-        type: DETAIL,
-        payload: datos.data
+      });
+      return dispatch({
+        type: CREATE_USER,
+        payload: 'Usuario Creado Correctamente'
       });
     } catch (error) {
-      console.log(error.message)
+      console.log(error);
+      console.log(error.message);
     }
-  }
-}
-
-//correguir imagen cuando este listo la ruta
-export const createLocal=(inputs, chekinputs)=>{
-
-
-  let images=[]
- inputs.imagen.forEach(data=>{
-   images.push({id:data.id})
- })
-
-
-
-
-   return async dispatch => {
-        try{
-    await axios.post("/locals",{
-    "name":inputs.name, 
-    "location":inputs.location, 
-    "schedule":inputs.schedule,
-    "email":inputs.email,
-    "images":images,
-    "characteristics":{
-			"wifi": chekinputs.wifi,
-			"parking_lot": chekinputs.parking_lot,
-			"outdoor_seating": chekinputs.outdoor_seating,
-			"live_music": chekinputs.live_music,
-			"table_service": chekinputs.table_service,
-			"family_style": chekinputs.family_style,
-			"romantic": chekinputs.romantic,
-			"big_group": chekinputs.big_group,
-			"work_friendly": chekinputs.work_friendly,
-			"pet_friendly": chekinputs.pet_friendly
-		}
-    })
-        }catch(error){
-            console.log(error.message)
-        }
-      }     
-}
-
-
-
-
-
-//order and filters
+  };
+};
+// order and filters and cards
 export const order = (data, actions) => {
-  console.log(data)
   const datas = data.flat();
   switch (actions) {
-    case "best":
+    case 'best':
       for (let j = 0; j < datas.length; j++) {
         for (let i = 0; i < datas.length - 1; i++) {
           if (datas[i + 1].rating > datas[i].rating) {
@@ -151,52 +73,117 @@ export const order = (data, actions) => {
       }
       return {
         type: ORDER,
-        payload: datas,
+        payload: datas
       };
-    case "A-Z":
+    case 'A-Z':
       const az = datas.sort((a, b) => a.name.localeCompare(b.name));
       return {
         type: ORDER,
-        payload: az,
+        payload: az
       };
-    case "Z-A":
+    case 'Z-A':
       const za = datas.sort((a, b) => b.name.localeCompare(a.name));
       return {
         type: ORDER,
-        payload: za,
+        payload: za
       };
 
     default:
       break;
   }
-  //adgorithm aordering
+  // adgorithm aordering
 };
-export const searchByQuery = (data) => {
-  const { input, map } = data;
+export const logIn = (credentials) => {
   return async (dispatch) => {
     try {
-      let response = await axios.get(`/locals?name=${input}&location=${map}`);
-      let info = response.data.locals;
-      return dispatch({ type: SEARCH_BY_QUERY, payload: info })
+      const res = await axios.post('/login', credentials);
+      localStorage.setItem('token', res.data.token);
+      location.reload();
     } catch (error) {
-      console.log(error.message)
-      dispatch({
-        type: LOADINGLOCALS_ERROR,
-        payload: error.message
+      console.log(error.message);
+    }
+  };
+};
+export const comentarie = (
+  calificationFood,
+  calificationQaPrice,
+  calificationEnvironment,
+  calificationService,
+  calculateAverage,
+  inputs,
+  id
+) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`/reviews/${id}`, {
+        title: inputs.title,
+        rating: calculateAverage,
+        comment: inputs.comment,
+        image: inputs.image,
+        food: calificationFood,
+        service: calificationService,
+        environment: calificationEnvironment,
+        qaPrice: calificationQaPrice
       });
+      console.log(response);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
+};
+/// / home pages
+export const homepage = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/locals/page/${id}`);
+      dispatch({
+        type: HOMEPAGE,
+        payload: response.data
+      });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 };
 
-
-
-export const logIn = (credentials) => {
-  console.log('haciendo dispatch')
+// USER ACTION GENERATORS
+export const checkUser = () => {
   return async (dispatch) => {
-    const res = await axios.post("/login", credentials);
-    return dispatch({
-      type: LOGIN,
-      payload: res.data
-    })
-  }
-}
+    try {
+      const res = await axios.get('/login');
+      console.log(res.data);
+      dispatch({
+        type: CHECKUSER,
+        payload: res.data
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const ResetUser = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: RESETUSER,
+      payload: ''
+    });
+  };
+};
+// REVIEWS ACTION GENERATORS
+export const getReviews = (localId, page = 1) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`/reviews/${localId}?page=${page}`);
+
+      if (response.status === 200) {
+        dispatch({
+          type: GET_REVIEWS,
+          payload: response.data.reviews
+        });
+      }
+    } catch (error) {
+
+    }
+  };
+};

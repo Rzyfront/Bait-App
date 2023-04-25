@@ -1,47 +1,72 @@
-import { useState } from "react";
-import "./Navbar.css";
-import BaitLogo from "../../assets/BaitLogo.png";
-import Search_home from "./Search_home/Search_home";
-import { Link } from "react-router-dom";
-import { Login } from "../components";
-import { FaUserCircle } from "react-icons/fa";
+import { useState } from 'react';
+import './Navbar.css';
+import BaitLogo from '../../assets/LogoBait.svg';
+import BaitLogoSmall from '../../assets/LogoBaitSmall.svg';
+import SearchHome from './SearchHome/SearchHome';
+import { Link, useLocation } from 'react-router-dom';
+import { Login, DropdownUser } from '../components';
+import { FaUserCircle } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { ResetUser } from '../../redux/actions/actions';
+
 const Navbar = () => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.user);
+  const [toggleMenuUser, setToggleMenuUser] = useState(false);
   const [toogleLogin, setToggleLogin] = useState(false);
-  const [user, setUser] = useState(false);
+  const ubication = useSelector((state) => state.ubication);
+
+  const close = () => {
+    localStorage.clear();
+    dispatch(ResetUser());
+  };
+
   return (
-    <div className="all_navbar">
+    <div className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to="/home">
+      <Link to={`${location.pathname !== '/' ? '/' : `/home/1?name=&city=${ubication.city}`}`}>
         <img
           src={BaitLogo}
           alt="Bait"
           className="Logo"
-          width="40px"
-          height="45px"
+        />
+        <img
+          src={BaitLogoSmall}
+          alt="Bait"
+          className="Logo-Small"
         />
       </Link>
 
-      <div className="SearchBar">
-        <Search_home />
-      </div>
+      <SearchHome />
 
       <div className="UserGroup">
-        {user === false ? (
-          <div
-            className="nav_login"
-            onClick={() => {
-              setToggleLogin(true);
-            }}
-          >
-            <FaUserCircle className="UserIcon" />
-            <h4 className="LogIn">Inicia sesión </h4>
-          </div>
-        ) : (
-          <div className="nav_login">
-            <FaUserCircle />
-            Mi perfil
-          </div>
-        )}
+        {JSON.stringify(dataUser) === '{}'
+          ? (
+            <div
+              className="nav_login LogInGroup"
+              onClick={() => {
+                setToggleLogin(true);
+              }}
+            >
+              <FaUserCircle className="UserIcon" />
+              <h4 className="LogIn"> Iniciar Sesion</h4>
+            </div>
+            )
+          : (
+            <div className="nav_login" onClick={toggleMenuUser
+              ? () => {
+                  setToggleMenuUser(false);
+                }
+              : () => {
+                  setToggleMenuUser(true);
+                }}
+            >
+              <FaUserCircle className="UserIcon" />
+              <h4 className='Name-User-bar'>{dataUser.user.name}</h4>
+              {toggleMenuUser && <DropdownUser close={close} toggleMenuUser={toggleMenuUser}/>}
+            </div>
+            )}
       </div>
     </div>
   );

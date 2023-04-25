@@ -11,17 +11,12 @@
 
 .Landing .Carrousel{
     width: 100%;
-    height: calc(100vh - 50px);
-    padding: 0;
-    margin: 0;
+    height: auto;
 }
 
 .Landing .Carrousel .CarrouselItem{
-    position: relative;
     width: 100%;
-    height: calc(100vh - 50px);
-    padding: 0;
-    margin: 0;
+    height: auto;
 }   
 
 .Landing .Carrousel .CarrouselItem .SlideItem1 img,
@@ -33,7 +28,7 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
-        z-index: -5;
+        z-index: var(--bajo-5);
 }
 
 /*! Slide 1 */
@@ -71,24 +66,31 @@
     gap: 20px;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     padding: 50px;
     margin-left: 50px;
 }
 
 .SlideItem1 .FirstTitle h1{
-    font-size: 60px;
+    font-size: 41px;
     color: var(--primary);
     font-family: var(--title);
+    text-align: center;
+    font-weight: 600;
+    text-shadow:  2px 2px 4px rgb(66, 66, 66);
+   
 }
 .SlideItem1 .FirstTitle span {
     color: var(--secondary);
+    
 }
 
 .SlideItem1 .FirstTitle h2 {
-    font-size: 30px;
+    font-size: 26px;
     font-family: var(--subtitle);
     text-align: center;
+    font-weight: 300;
+    /* font-weight: 300; */
 }
 
 .SlideItem1 .FirstTitle button {
@@ -153,9 +155,11 @@
 }
 
 .SlideItem2 .SecondTitle h2 {
-    font-size: 60px;
+    font-size: 41px;
     color: var(--primary);
     font-family: var(--title);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgb(66, 66, 66);
 }
 
 .SlideItem2 .SecondTitle span {
@@ -164,8 +168,9 @@
 }
 
 .SlideItem2 .SecondTitle h3 {
-    font-size: 30px;
+    font-size: 26px;
     font-family: var(--subtitle);
+    font-weight: 300;
 }
 
 .SlideItem2 .SecondTitle button {
@@ -234,16 +239,19 @@
     font-size: 60px;
     color: var(--primary);
     font-family: var(--title);
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgb(66, 66, 66);
 }
 
 .SlideItem3 .ThirdTitle span {
-    font-weight: 700;
+    font-weight: 500;
     color: var(--secondary);
 }
 
 .SlideItem3 .ThirdTitle h3 {
-    font-size: 30px;
+    font-size: 31px;
     font-family: var(--subtitle);
+    font-weight: 300;
 }
 
 .SlideItem3 .ThirdTitle button {
@@ -264,7 +272,160 @@
     background-color: var(--bg-secondary);
 }
 
+@media screen and (max-width: 2000px) {
 
+    .CarrouselItem .SlideItem1 .FirstTitle {
+        padding: 40px;
+        margin-left: 40px;
+    }
+
+    .CarrouselItem .SlideItem2 .SecondTitle {
+        padding: 40px;
+        margin-right: 40px;
+    }
+
+    .CarrouselItem .SlideItem3 .ThirdTitle {
+        padding: 40px;
+    }
+
+    .SlideItem1 .FirstTitle h1 {
+        font-size: 40px;
+    }
+
+    .SlideItem1 .FirstTitle h2 {
+        font-size: 25px;
+    }
+
+    .SlideItem2 .SecondTitle h2 {
+        font-size: 40px;
+    }
+
+    .SlideItem2 .SecondTitle h3 {
+        font-size: 25px;
+    }
+
+    .SlideItem3 .ThirdTitle h2 {
+        font-size: 55px;
+    }
+
+    .SlideItem3 .ThirdTitle h3 {
+        font-size: 30px;
+    }
+
+}
+
+@media screen and (max-width: 900px) {
+
+    .CarrouselItem .SlideItem1 .FirstTitle {
+            margin-left: 20px;
+        }
+    
+        .CarrouselItem .SlideItem2 .SecondTitle {
+            margin-right: 20px;
+        }
+    
+        .SlideItem1 .FirstTitle h1 {
+            font-size: 35px;
+        }
+    
+        .SlideItem1 .FirstTitle h2 {
+            font-size: 20px;
+        }
+    
+        .SlideItem2 .SecondTitle h2 {
+            font-size: 35px;
+        }
+    
+        .SlideItem2 .SecondTitle h3 {
+            font-size: 20px;
+        }
+    
+        .SlideItem3 .ThirdTitle h2 {
+            font-size: 45px;
+        }
+    
+        .SlideItem3 .ThirdTitle h3 {
+            font-size: 25px;
+        }
+}
+
+@media screen and (max-width: 750px) {
+
+    .CarrouselItem .SlideItem1 .FirstTitle {
+            margin-left: 10px;
+        }
+    
+        .CarrouselItem .SlideItem2 .SecondTitle {
+            margin-right: 10px;
+        }
+    
+        .SlideItem1 .FirstTitle h1 {
+            font-size: 30px;
+        }
+    
+        .SlideItem1 .FirstTitle h2 {
+            font-size: 18px;
+        }
+    
+        .SlideItem2 .SecondTitle h2 {
+            font-size: 30px;
+        }
+    
+        .SlideItem2 .SecondTitle h3 {
+            font-size: 18px;
+        }
+    
+        .SlideItem3 .ThirdTitle h2 {
+            font-size: 40px;
+        }
+    
+        .SlideItem3 .ThirdTitle h3 {
+            font-size: 18px;
+        }
+}
+
+@media screen and (max-width: 550px) {
+
+    .Landing .Carrousel .CarrouselItem .SlideItem1 {
+            justify-content: center
+    }
+
+    .Landing .Carrousel .CarrouselItem .SlideItem2 {
+        justify-content: center
+    }
+
+    .CarrouselItem .SlideItem1 .FirstTitle {
+            margin-left: 0px;
+        }
+    
+        .CarrouselItem .SlideItem2 .SecondTitle {
+            margin-right: 0px;
+        }
+
+        .SlideItem1 .FirstTitle h1 {
+            font-size: 28px;
+        }
+    
+        .SlideItem1 .FirstTitle h2 {
+            font-size: 18px;
+        }
+    
+        .SlideItem2 .SecondTitle h2 {
+            font-size: 28px;
+        }
+    
+        .SlideItem2 .SecondTitle h3 {
+            font-size: 18px;
+        }
+    
+        .SlideItem3 .ThirdTitle h2 {
+            font-size: 35px;
+        }
+    
+        .SlideItem3 .ThirdTitle h3 {
+            font-size: 25px;
+        }
+}
 
 
 /* 

@@ -14,5 +14,6 @@ const images = [
 ];
 const seedImg = async () => {
   await Image.bulkCreate(images);
+  console.log('Done!');
 };
 seedImg();

@@ -26,6 +26,16 @@ module.exports = (sequelize) => {
       // unique: true,
       allowNull: false,
     },
+    lat: {
+      type: DataTypes.FLOAT,
+    },
+    lng: {
+      type: DataTypes.FLOAT,
+    },
+    specialty: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+    },
     schedule: DataTypes.STRING,
   });
 };

@@ -1,0 +1,21 @@
+const { User, Image, Review } = require('../../db');
+
+module.exports = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const user = await User.findByPk(userId, {
+      attributes: ['id', 'name', 'lastname', 'age', 'location'],
+      include: [
+        { model: Image, attributes: ['url'] },
+        {
+          model: Review,
+          required: false,
+        },
+      ],
+    });
+    if (!user) throw new Error('User not found');
+    return res.status(200).json({ user, success: true });
+  } catch (error) {
+    return res.status(404).json({ success: false, message: error.message });
+  }
+};

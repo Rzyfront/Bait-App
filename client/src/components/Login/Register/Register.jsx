@@ -1,90 +1,89 @@
-import { TfiClose } from "react-icons/tfi";
-import { useRef, useState } from "react";
-import { createUser } from "../../../redux/actions/actions";
-import { validation} from "../validation";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { TfiClose } from 'react-icons/tfi';
+import { useRef, useState } from 'react';
+import { createUser } from '../../../redux/actions/actions';
+import { validation } from '../validation';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-const Register = ({ setToggleLogin, loginRegister }) => {
-    const navigate = useNavigate()
-     const dispatch = useDispatch()   
-    const passRef = useRef();
-    const formRef = useRef();
-    const [message, setMessage] = useState(false);
-    const[dataRegister, setDataRegister] = useState({
-        name: "",
-        lastname: "",
-        age: "",
-        phone_number: "",
-        email: "",
-        password: "",
-        password2: "",
-        location: "",
-        verified: "",
-        isActive: "",
-        role: "",
-    })
+const Register = ({ setToggleLogin, loginRegister, login }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const passRef = useRef();
+  const formRef = useRef();
+  const [dataRegister, setDataRegister] = useState({
+    name: '',
+    lastname: '',
+    age: '',
+    phone_number: '',
+    email: '',
+    password: '',
+    password2: '',
+    location: '',
+    verified: '',
+    isActive: '',
+    role: ''
+  });
 
-    const [errorsRegister, setErrorsRegister] = useState({
-        name: "",
-        phone_number: "",
-        password: "",
+  const [errorsRegister, setErrorsRegister] = useState({
+    name: '',
+    phone_number: '',
+    password: ''
+  });
+  const handleRegister = (event) => {
+    setDataRegister({
+      ...dataRegister,
+      [event.target.name]: event.target.value
     });
-    const handleRegister = (event) => {
-        setDataRegister({
-            ...dataRegister,
-            [event.target.name]: event.target.value,
-        });
-        setErrorsRegister(
-            validation({
-                ...dataRegister,
-                [event.target.name]: event.target.value,
-            })
-        );
+    setErrorsRegister(
+      validation({
+        ...dataRegister,
+        [event.target.name]: event.target.value
+      })
+    );
+  };
 
-        // console.log(errorsRegister);
-    };
-
-
-
-    const sendRegister = (event) => {
-        event.preventDefault();
-        console.log(dataRegister);
-        if (!Object.values(errorsRegister).length) {
-            dispatch(createUser(dataRegister));
-            setDataRegister({
-                name: "",
-                lastname: "",
-                age: "",
-                phone_number: "",
-                email: "",
-                password: "",
-                password2: "",
-                location: "",
-                verified: "",
-                isActive: "",
-                role: "",
-            });
-            alert("Usario creado")
-            navigate("/home")
-            setErrorsRegister({});
-        } else {
-            alert(
-                errorsRegister.name +
-                "\n" +
+  const sendRegister = (event) => {
+    event.preventDefault();
+    if (!Object.values(errorsRegister).length) {
+      dispatch(createUser(dataRegister));
+      setDataRegister({
+        name: '',
+        lastname: '',
+        age: '',
+        phone_number: '',
+        email: '',
+        password: '',
+        password2: '',
+        location: '',
+        verified: '',
+        isActive: '',
+        role: ''
+      });
+      toast.success('¡Ac satisfactoriamente!', {
+        position: toast.POSITION.TOP_CENTER
+      });
+      navigate('/home/1?name=&city=');
+      setErrorsRegister({});
+    } else {
+      toast.error(errorsRegister.name +
+                '\n' +
                 errorsRegister.password +
-                "\n" +
-                errorsRegister.phone_number
-            );
-        }
-    };
-    return(
+                '\n' +
+                errorsRegister.phone_number, {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
+  };
+  return (
         <>
-            <div className={`login ${!loginRegister && "scale-up-bottom"}`}>
+            <div className={`${!login && 'register scale-up-bottom'}`} onClick={(e) => e.stopPropagation()}>
+              <ToastContainer className="notify" theme="colored"/>
                 <TfiClose
                     className="CloseIcon"
                     onClick={() => {
-                        setToggleLogin(false);
+                      setToggleLogin(false);
                     }}
                 />
 
@@ -166,14 +165,6 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                                     placeholder="Repetir contraseña"
                                     ref={passRef}
                                 ></input>
-                                {/* <img
-                    alt="img"
-                    ref={imgRef}
-                    onClick={fn}
-                    className="ojo"
-                    src="./img/icons/abrir-ojo.png"
-                    width="20px"
-                  ></img> */}
                             </div>
                             <button className="button" onClick={sendRegister}>
                                 Registrarme
@@ -186,13 +177,9 @@ const Register = ({ setToggleLogin, loginRegister }) => {
                         </form>
                     </div>
                 </div>
-                {message && (
-                    <h3 className="invalid">Los datos ingresados no son válidos</h3>
-                )}
             </div>
         </>
-    )
-
-}
+  );
+};
 
 export default Register;

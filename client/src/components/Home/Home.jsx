@@ -1,20 +1,14 @@
-import "./Home.css";
-import { Filters, Navbar, Cards, Footer } from "../components";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadingLocals } from "../../redux/actions/actions";
-const Home = () => {
-  const dispatch = useDispatch();
-  //initial Home
-  useEffect(() => {
-    dispatch(loadingLocals());
-  }, []);
+import './Home.css';
+import { Filters, Navbar, Cards, Footer } from '../components';
+import { useState } from 'react';
 
+const Home = () => {
+  const [toggleMapMenu, setToggleMapMenu] = useState(true);
   return (
     <div className="Home animated-element">
       <Navbar />
-      <Filters />
-      <Cards />
+      <Filters toggleMapMenu={toggleMapMenu} setToggleMapMenu={setToggleMapMenu} />
+      <Cards toggleMapMenu={toggleMapMenu}/>
       <Footer />
     </div>
   );

@@ -1,13 +1,28 @@
-const badWords = ['boludo', 'idiota', 'hijo de puta', 'estupido', 'estupida', 'imbecil', 'estúpido', 'estúpida', 'imbécil', 'mierda', 'cabrón', 'cabron'];
+const { google } = require('googleapis');
 
-const isAppropriate = (value) => {
-  const words = value.toLowerCase().split(' ');
+const DISCOVERY_URL = 'https://commentanalyzer.googleapis.com/$discovery/rest?version=v1alpha1';
+const prospectiveApi = async (comment) => {
+  try {
+    const config = {
+      key: process.env.PERSPECTIVE_API_KEY,
+      resource: {
+        comment: {
+          text: comment,
+        },
+        requestedAttributes: {
+          TOXICITY: {},
+        },
+      },
+    };
+    const { comments } = await google.discoverAPI(DISCOVERY_URL);
+    const { data } = await comments.analyze(config);
+    const { value } = data.attributeScores.TOXICITY.summaryScore;
 
-  const foundBadWord = words.some((word) => badWords.includes(word.toLowerCase()));
-
-  if (foundBadWord) {
-    throw new Error('Comment contains inappropriate words.');
+    console.log(value);
+    return value > 0.5;
+  } catch (error) {
+    throw new Error(error.message);
   }
 };
 
-module.exports = { isAppropriate };
+module.exports = { prospectiveApi };

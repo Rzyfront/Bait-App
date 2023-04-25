@@ -20,7 +20,6 @@ module.exports = (req, res, next) => {
 
     // INGREDIENTS
     verifiedExistsTypeLength(ingredients, 'string', 200, 'ingredients');
-
     // DESCRIPTION
     verifiedExistsTypeLength(description, 'string', 500, 'description');
 
@@ -33,6 +32,7 @@ module.exports = (req, res, next) => {
 
     req.dish = {
       name, type, ingredients, price, description, image,
+
     };
 
     next();
@@ -40,3 +40,6 @@ module.exports = (req, res, next) => {
     res.status(400).json({ message: error.message, success: false });
   }
 };
+ 
+
+  

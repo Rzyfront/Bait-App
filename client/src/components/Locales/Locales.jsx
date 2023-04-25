@@ -1,64 +1,90 @@
-import React from "react";
-import "./Locales.css";
-import { useState } from "react";
-import BaitLogo from "../../assets/BaitLogo.png";
-import { Link } from "react-router-dom";
-// eslint-disable-next-line
-const regexEmail = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-import { useUploadImage } from "../../hooks/useUploadImage";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { createLocal } from "../../redux/actions/actions";
+import { useState, useEffect } from 'react';
+import './Locales.css';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import BaitLogo from '../../assets/LogoBait.svg';
+import { Link, useNavigate } from 'react-router-dom';
+import { useUploadImage } from '../../hooks/useUploadImage';
+import { Loading } from '@nextui-org/react';
+import { useDispatch, useSelector } from 'react-redux';
+import TYC from './TYC';
+// import DatabasicLocal from './DataLocal/DatabasicLocal';
+import DataLocal from './DataLocal/DataLocal';
+import Mapdata from '../Map/Mapdata';
+import SearchMap from '../Map/SearchMap/Searchmap';
+import { createLocal, createLocalFull } from '../../redux/actions/local';
+import { ErrorsDatabasic } from './ErrorsDatabasic';
+import Chars from './Chars/Chars';
 
-export const validate = (inputs) => {
-  let errors = {};
-  if (!inputs.location) {
-    errors.location = "Seleccione una opcion";
-  }
-  if (!inputs.name) {
-    errors.name = "Se requiere un nombre";
-  }
-  if (!regexEmail.test(inputs.email)) {
-    errors.email = "Debe ser un correo electronico";
-  }
-  if (!inputs.imagen) {
-    errors.imagen = "Se requiere cargar una o mas imagenes del Local";
-  }
-  if (!inputs.phone) {
-    errors.phone = "Ingrese un numero de telefono valido";
-  }
-
-  if (inputs.schedule.length === 0) {
-    errors.schedule = "Seleccione fecha";
-  }
-
-  return errors;
-};
-
-function Locales() {
-  let { image, loading, handleChangeimage } = useUploadImage();
+function Locales () {
+  const ubication = useSelector((state) => state.ubication);
+  const positionMap = useSelector((state) => state.ubication);
+  const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
+  /// /
+  const Navigate = useNavigate();
+  const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
+  const [termsAndConditions, setTemsAndConditions] = useState(true);
 
+  // map controllers
+  useEffect(() => {
+    if (Mapcenter[0] !== positionMap.lat && Mapcenter[1] !== positionMap.lng) {
+      setMapcenter([positionMap.lat, positionMap.lng]);
+    }
+  }, [positionMap]);
+
+  const [statemap, setStatemap] = useState(false);
+  const [mapSearch, setMapsearch] = useState('');
+  const handleMap = (e) => {
+    setMapsearch(e.target.value);
+  };
+  const handleBoton = () => {
+    setStatemap(false);
+  };
+  const searchCity = async () => {
+    const data = await SearchMap(mapSearch);
+    if (data) {
+      setMapcenter(data);
+      setStatemap(true);
+    } else {
+      toast.error('No existe esta ciudad', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+    }
+  };
+  const handlemapdatas = (information) => {
+    const data = {
+      lat: information.location.y,
+      lng: information.location.x,
+      location: information.address
+        .LongLabel
+    };
+    setInputs({
+      ...inputs,
+      location: data
+    });
+  };
+  /// inputs and erros
   const [inputs, setInputs] = useState({
-    location: "",
-    name: "",
-    imagen: [],
-    email: "",
-    phone: "",
-    schedule: "",
+    location: {},
+    name: '',
+    images: [],
+    email: '',
+    phone: '',
+    schedule: '',
+    specialty: ''
+  });
+  // Error controller
+  const [errors, setErrors] = useState({
+    location: '',
+    name: '',
+    email: '',
+    schedule: '',
+    specialty: ''
   });
 
-  useEffect(() => {
-    setInputs({ ...inputs, imagen: image });
-
-    setErrors(
-      validate({
-        ...inputs,
-        imagen: [image],
-      })
-    );
-  }, [image]);
-
+  // check list
   const [chekinputs, setChekInputs] = useState({
     wifi: false,
     parking_lot: false,
@@ -69,65 +95,43 @@ function Locales() {
     work_friendly: false,
     pet_friendly: false,
     family_style: false,
-    romantic: false,
+    romantic: false
   });
+  useEffect(() => {
+    setErrors(
+      ErrorsDatabasic({
+        ...inputs
+      })
 
-  const [errors, setErrors] = useState({
-    location: "",
-    name: "",
-    imagen: "",
-    email: "",
-    phone: "",
-    schedule: "",
-  });
+    );
+    console.log(inputs);
+  }, [inputs]);
 
   const handleChange = (event) => {
+    const { name, value } = event.target;
     setInputs({
       ...inputs,
-      [event.target.name]: event.target.value,
+      [name]: value
     });
-
-    setErrors(
-      validate({
-        ...inputs,
-        [event.target.name]: event.target.value,
-      })
-    );
-    console.log(errors);
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (!Object.values(errors).length) {
-      alert("Datos completos");
-      dispatch(createLocal(inputs, chekinputs));
-      setInputs({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
-      });
-      setErrors({
-        location: "",
-        name: "",
-        imagen: "",
-        email: "",
-        phone: "",
-        schedule: "",
-      });
-      setChekInputs({
-        wifi: false,
-        parking_lot: false,
-        outdoor_seating: false,
-        live_music: false,
-        table_service: false,
-        big_group: false,
-        work_friendly: false,
-        pet_friendly: false,
-      });
+      const response = await dispatch(createLocalFull(inputs, chekinputs));
+      if (response === true) {
+        toast.success('¡Local creado satisfactoriamente!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000
+        });
+        setTimeout(() => {
+          Navigate(`/home/1?name=&city=${ubication.city}`);
+        }, 2000);
+      }
     } else {
-      alert("Debe llenar todos los campos");
+      toast.error('Faltan datos', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
     }
   };
 
@@ -136,262 +140,99 @@ function Locales() {
   };
 
   const handleSelect = (event) => {
+    const { name, value } = event.target;
     setInputs({
       ...inputs,
-      location: event.target.value,
+      [name]: value
     });
-    setErrors(
-      validate({
-        ...inputs,
-        location: event.target.value,
-      })
-    );
   };
 
-  const handleCheck = (e) => {
-    if (e.target.value === "false") {
-      setChekInputs({ ...chekinputs, [e.target.name]: true });
-    } else {
-      setChekInputs({ ...chekinputs, [e.target.name]: false });
+  function handleClick () {
+    setTemsAndConditions(false);
+    // targetRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
+  useEffect(() => {
+    if (image.length) {
+      const data = image.map((data) => {
+        return { id: data.id };
+      });
+
+      setInputs({ ...inputs, images: data });
     }
-    console.log(chekinputs);
+  }, [image]);
+  const handleCheck = (e) => {
+    const { name, checked } = e.target;
+    setChekInputs({ ...chekinputs, [name]: checked });
   };
   return (
-    <div className="locales">
-      <div className="locales_data">
-        <Link to="/home" className="LinkLogo">
-          <img
-            src={BaitLogo}
-            alt="Bait"
-            className="Logo"
-            width="60px"
-            height="60px"
-          />
-        </Link>
-        <h1>Crea un nuevo Local</h1>
-        <form onSubmit={handleSubmit}>
-          <label>Nombre Local: </label>
-          <input
-            className="name"
-            onChange={handleChange}
-            value={inputs.name}
-            type="text"
-            name="name"
-            placeholder="Escribe el nombre del Local..."
-          />
-          {errors.name && <p className="danger">{errors.name}</p>}
-          <hr />
-          <label>Ubicacion: </label>
-          <select
-            name="location"
-            className="location"
-            onChange={handleSelect}
-            value={inputs.location}
-          >
-            <option value="value2" defaultValue>
-              Selecciona
-            </option>
-            <option value="Cordoba">Cordoba</option>
-            <option value="Buenos Aires">Buenos Aires</option>
-            <option value="Corrientes">Corrientes</option>
-          </select>
-          <hr />
-          <label>Correo Electronico: </label>
-          <input
-            className="correo"
-            onChange={handleChange}
-            value={inputs.email}
-            type="text"
-            name="email"
-            placeholder="Escribe tu email..."
-          />
-          <hr />
-          <label>Horario: </label>
-          <input
-            onChange={handleChange}
-            value={inputs.schedule}
-            type="text"
-            name="schedule"
-            placeholder="Escribe tu email..."
-          />
-          {errors.email && <p className="danger">{errors.schedule}</p>}
-          <hr />
-          <label>Telefono: </label>
-          <input
-            className="telefono"
-            onChange={handleChange}
-            value={inputs.phone}
-            type="tel"
-            name="phone"
-            pattern="[0-9]{10}"
-            placeholder="Escribe tu numero de telefono..."
-          />
-          {errors.message && <p className="danger">{errors.phone}</p>}
-          <hr />
-          <label className="imagen" htmlFor="imagen">
-            Imagenes
-          </label>
-          <input
-            type="file"
-            name="imagen"
-            accept="image/png,image/jpeg,image/jpg,image/gif"
-            // multiple
-            onChange={handleChangeimages}
-          ></input>
-          <hr />
-
-          {image.length ? (
-            image.map((image, i) => (
-              <img
-                key={i}
-                src={image.url}
-                alt="imagen"
-                className="LocalesImage"
-              />
-            ))
-          ) : loading === true ? (
+    <div className='Create-Locals-Form animated-element'>
+      {termsAndConditions
+        ? <TYC src={BaitLogo} handleClick={handleClick} />
+        : <div className='locales_data animated-element'>
+          <Link to='/home/1?name=&city=' className='LinkLogo'>
             <img
-              src="https://res.cloudinary.com/dirsusbyy/image/upload/v1681577086/kvkmom2t84yjw3lpc5pz.gif"
-              alt="cargando"
-              className="LocalesImage"
+              src={BaitLogo}
+              alt='Bait'
+              className='Logo'
+              width='60px'
+              height='60px'
             />
-          ) : (
-            <img
-              src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"
-              alt="image default"
-              className="LocalesImage"
+          </Link>
+          <h1>Crea un nuevo Local</h1>
+          <form onSubmit={handleSubmit}>
+            <DataLocal
+              handleChange={handleChange}
+              inputs={inputs}
+              errors={errors}
+              handleSelect={handleSelect}
+              searchCity={searchCity}
+              setMapsearch={setMapsearch}
+              handleMap={handleMap}
             />
-          )}
-          {/* <label>Tipos de Comida: </label> */}
-          {/* <select
-            id="category-select"
-            multiple
-            name="checkbox"
-            className="checkbox"
-            onChange={() => alert("Change")}
-          >
-            <option value="value1">Comida Italiana</option>
-            <option value="value1">Comida Japonesa</option>
-            <option value="value2">Comida Vegana</option>
-            <option value="value3">Comida China</option>
-            <option value="value4">Comida Mediterranea</option>
-            <option value="value5">Comida de Mar</option>
-            <option value="value6">Desayunos</option>
-            <option value="value7">Bar y Bedidas</option>
-            <option value="value8">Heladeria</option>
-            <option value="value9">Postres</option>
-            <option value="value10">Panaderia</option>
-          </select> */}
-          <hr />
-          <legend>Caracteristicas:</legend>
-          <label htmlFor="wifi">
-            <input
-              type="checkbox"
-              multiple
-              value={chekinputs.wifi}
-              onChange={handleCheck}
-              name="wifi"
-              checked={chekinputs.wifi}
-            />
-            Wifi
-          </label>
-          <label htmlFor="parking_lot">
-            <input
-              type="checkbox"
-              name="parking_lot"
-              value={chekinputs.parking_lot}
-              checked={chekinputs.parking_lot}
-              onChange={handleCheck}
-            />
-            Parqueadero
-          </label>
-          <label htmlFor="outdoor_seating">
-            <input
-              type="checkbox"
-              name="outdoor_seating"
-              value={chekinputs.outdoor_seating}
-              checked={chekinputs.outdoor_seating}
-              onChange={handleCheck}
-            />
-            Asientos exteriores
-          </label>
-          <label htmlFor="live_music">
-            <input
-              type="checkbox"
-              name="live_music"
-              value={chekinputs.live_music}
-              checked={chekinputs.live_music}
-              onChange={handleCheck}
-            />
-            Musica
-          </label>
-          <label htmlFor="table_service">
-            <input
-              type="checkbox"
-              name="table_service"
-              value={chekinputs.table_service}
-              checked={chekinputs.table_service}
-              onChange={handleCheck}
-            />
-            servicio de mesa
-          </label>
-          <label htmlFor="family_style">
-            <input
-              type="checkbox"
-              name="family_style"
-              value={chekinputs.family_style}
-              checked={chekinputs.family_style}
-              onChange={handleCheck}
-            />
-            Estilo familiar
-          </label>
-          <label htmlFor="romantic">
-            <input
-              type="checkbox"
-              name="romantic"
-              value={chekinputs.romantic}
-              checked={chekinputs.romantic}
-              onChange={handleCheck}
-            />
-            Estilo romantico
-          </label>
-          <label htmlFor="big_group">
-            <input
-              type="checkbox"
-              name="big_group"
-              value={chekinputs.big_group}
-              checked={chekinputs.big_group}
-              onChange={handleCheck}
-            />
-            Grupos grandes
-          </label>
-          <label htmlFor="work_friendly">
-            <input
-              type="checkbox"
-              name="work_friendly"
-              value={chekinputs.work_friendly}
-              checked={chekinputs.work_friendly}
-              onChange={handleCheck}
-            />
-            Ambiente relajante
-          </label>
-          <label htmlFor="pet_friendly">
-            <input
-              type="checkbox"
-              name="pet_friendly"
-              value={chekinputs.pet_friendly}
-              checked={chekinputs.pet_friendly}
-              onChange={handleCheck}
-            />
-            Mascotas
-          </label>
-          <hr />
+            <div className='MapSize'>
+              <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas} />
+            </div>
 
-          <button type="submit"> ENVIAR</button>
-        </form>
-      </div>
+            <label className='imagen' htmlFor='imagen'>
+              Imágenes
+            </label>
+            <input
+              type='file'
+              name='imagen'
+              accept='image/png,image/jpeg,image/jpg,image/gif'
+              // multiple
+              onChange={handleChangeimages}
+            ></input>
+
+            {image.length
+              ? (
+                  image.map((image, i) => (
+                  <img
+                    key={i}
+                    src={image.url}
+                    alt='imagen'
+                    className='LocalesImage'
+                  />
+                  ))
+                )
+              : loading === true
+                ? (
+                  <Loading color="primary" />
+                  )
+                : (
+                  <img
+                    src='https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png'
+                    alt='image default'
+                    className='LocalesImage'
+                  />
+                  )}
+
+            <Chars handleCheck={handleCheck} chekinputs={chekinputs} />
+            <button type='submit' className='Send-Locals'> ENVIAR</button>
+            <ToastContainer theme='colored' />
+          </form>
+        </div>}
     </div>
   );
 }
-
 export default Locales;

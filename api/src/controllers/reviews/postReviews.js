@@ -2,7 +2,7 @@ const { Review, Local } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    title, comment, verified, food, image, environment, service, qaPrice,
+    title, comment, food, image, environment, service, qaPrice,
   } = req.body;
   const { localId } = req.params;
   try {
@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
     const rating = (food + environment + service + qaPrice) / 4;
     const newReview = await Review.create({
-      title, comment, verified, food, environment, service, qaPrice, rating,
+      title, comment, food, environment, service, qaPrice, rating, verified: req.verified ?? 'unVerified',
     });
     await local.addReview(newReview.id);
     await newReview.setUser(req.userId);
