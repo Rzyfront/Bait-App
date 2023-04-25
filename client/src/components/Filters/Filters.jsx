@@ -9,10 +9,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { path } from '../../helpers/path';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveInfoSearchHome } from '../../redux/actions/cards';
 
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
+  const { city } = useSelector((state) => state.ubication);
+  const dispatch = useDispatch();
   const [toggleFilterModal, setToggleFilterModal] = useState(false);
   const navigate = useNavigate();
   const { searchName, ubication } = useSelector((state) => state);
@@ -65,9 +68,10 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
   };
 
   const onRefresh = () => {
-    setSelectedOptions([]);
-    navigate(path(1, searchName, ubication.city, initialFilter));
     setFilters(initialFilter);
+    setSelectedOptions([]);
+    dispatch(saveInfoSearchHome({ input: '', map: city }));
+    // navigate(path(1, searchName, ubication.city, initialFilter));
   };
 
   const handleMultiSelectChange = (selectedOptions) => {
