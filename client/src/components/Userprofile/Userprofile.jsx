@@ -5,6 +5,7 @@ import  "./Userprofile.css"
 import {getUserProfile} from "../../redux/actions/actions"
 import { DetailLocal } from '../../redux/actions/local';
 import { useParams } from 'react-router';
+import { useEffect } from 'react';
 
 
 function Userprofile () {
@@ -58,14 +59,23 @@ function Userprofile () {
         <h1>Tus Reviews </h1>
         {userProfile && userProfile.user?.Reviews.map((review) => {
           return (
-            <div key={review.id} className='reviewContainer'>
-              <h4>Titulo: {review.title}</h4>
-              <h4>Comentario: {review.comment}</h4>
-              <h3>Calificaciones:</h3>
-               <h2>Food :{review.food}</h2> 
-              <h2>Service :{review.service}</h2> 
-              <h2>Environment :{review.environment}</h2> 
-            </div>
+            <>
+              <div key={review.id} className='reviewContainer'>
+                <h5>Titulo: {review.title}</h5>
+                <h5>Comentario: {review.comment}</h5>
+                <h3>Calificaciones:</h3>
+                <h2>Food :{review.food}</h2>
+                <h2>Service :{review.service}</h2>
+                <h2>Environment :{review.environment}</h2>
+                <div>
+                  <button>Modifica</button>
+                  <button>Eliminar</button>
+
+                </div>
+              </div>
+             
+            </>
+           
           )
         })}
       </div>
