@@ -1,3 +1,24 @@
+
+.userProfileText{
+    text-align: center;
+   
+}
+.userInfo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+.imgProfileContainer{
+
+width: 100%;
+}
+
+.imgProfile{
+width: 100%;
+height: 100%;
+object-fit: contain;
+}
 .Userprofile {
     display: flex;
     justify-content: center;
@@ -62,8 +83,4 @@ h3 {
 
 p {
     margin: 0;
-}
-
-.ContainerSelection {
-    margin-top: 50px;
 }

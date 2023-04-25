@@ -1,6 +1,8 @@
 import { Button, Input } from '@nextui-org/react';
 import { specialties } from '../../../helpers/specialties';
-export default function DatabasicLocal ({ handleChange, inputs, errors, handleSelect, searchCity, mapSearch, handleMap }) {
+
+export default function DatabasicLocal ({ handleChange, inputs, errors, handleSelect, searchCity, mapSearch, handleMap, statesupmit }) {
+  console.log(errors);
   return (
     <>
 
@@ -15,7 +17,7 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 name='name'
                 required
             />
-            {errors.name && <p className='danger'>{errors.name}</p>}
+          {statesupmit === true && errors.name && < p style={{ color: 'red' }}>{errors.name}</p >}
 
             <Input
                 underlined
@@ -27,8 +29,7 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 type='text'
                 name='email'
             />
-            {errors.email && <p className='danger'>{errors.email}</p>}
-
+          {statesupmit === true && errors.email && < p style={{ color: 'red' }}>{errors.email}</p >}
             <Input
                 underlined
                 labelPlaceholder="Horario"
@@ -40,17 +41,6 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 name='schedule'
             />
 
-            {/* <input
-                onChange={handleChange}
-                value={inputs.schedule}
-                type='text'
-                name='schedule'
-                required
-            /> */}
-            {errors.schedule && <p className='danger'>{errors.schedule}</p>}
-
-            {errors.phone && <p className='danger'>{errors.phone}</p>}
-
             <select
                 name='specialty'
                 className='specialty'
@@ -58,7 +48,7 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 value={inputs.specialty}
                 required
             >
-                <option value='value2' defaultValue>
+                <option value='' defaultValue>
                     Especialidad
                 </option>
                 {specialties.map(specialty => (
@@ -68,6 +58,7 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 ))}
                 {/* <option value='Otro'>Otro</option> */}
             </select>
+          {statesupmit === true && errors.specialty && < p style={{ color: 'red' }}>{errors.specialty}</p >}
             <Input
                 underlined
                 labelPlaceholder="Nombre de ciudad"
@@ -76,9 +67,11 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
                 onChange={handleMap}
                 value={mapSearch}
                 type='text'
-                required
+                // required
             />
+
             <Button onPress={searchCity}>Buscar Ciudad</Button>
+          {statesupmit === true && errors.location && < p style={{ color: 'red' }}>{errors.location}</p >}
 
         </>
   );

@@ -13,8 +13,8 @@ import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DetailLocal } from '../../redux/actions/actions';
-
+import { DetailLocal} from '../../redux/actions/local';
+import { getReviews } from '../../redux/actions/actions';
 
 function Profile () {
   const dispatch = useDispatch();
@@ -24,43 +24,21 @@ function Profile () {
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
+
   useEffect(() => {
     dispatch(getMenu(id));
   }, []);
 
+ 
+  useEffect(() => {
+    if (id) dispatch(getReviews(id)); 
+  }, []);
+
+
+
   const [toogleModal, setToggleModal] = useState('ReviewsLocal');
   const [toogleModal2, setToggleModal2] = useState(false);
-  // const ListMenu = [
-  //   {
-  //     name: 'Pollo Teriyaky',
-  //     Price: 200,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   },
-  //   { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-  //   { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
-  //   {
-  //     name: 'Pasta italiana',
-  //     Price: 150,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   },
-  //   {
-  //     name: 'Pollo Teriyaky',
-  //     Price: 200,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   },
-  //   { name: 'Milanesa', Price: 400, Images: [{ url: imgComida }], Rating: 3 },
-  //   { name: 'Lomo asado', Price: 600, Images: [{ url: imgComida }], Rating: 3 },
-  //   {
-  //     name: 'Pasta italiana',
-  //     Price: 150,
-  //     Images: [{ url: imgComida }],
-  //     Rating: 3
-  //   }
-  // ];
-
+ 
   return (
     <>
       <Navbar />

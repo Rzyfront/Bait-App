@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-const { isAppropriate } = require('../helpers/badWords');
 
 module.exports = (sequelize) => {
   sequelize.define(
@@ -31,11 +30,6 @@ module.exports = (sequelize) => {
           len: {
             args: [1, 700],
             msg: 'Comment must be between 1 and 700 characters long.',
-          },
-          containsBadWords(value) {
-            if (isAppropriate(value)) {
-              throw new Error('Comment contains inappropriate language.');
-            }
           },
         },
       },

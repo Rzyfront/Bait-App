@@ -1,49 +1,56 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
-import { homepage, searchByQuery } from '../../redux/actions/actions';
 
+import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
-function Cards () {
+
+function Cards ({ toggleMapMenu }) {
   const location = useLocation();
-
-  // params consulta
-  // obtener los valores de los parametros de consulta
-  const queryParams = new URLSearchParams(location.search);
-  const name = queryParams.get('name');
-  const city = queryParams.get('city');
-
+  const [outAnimation, setOutAnimation] = useState(false);
   const { locals, totalPages } = useSelector((state) => state.cards);
   const pagine = useParams();
   const dispatch = useDispatch();
-  // navegation
-  const [navegation, setnavegation] = useState(pagine.id);
-  // actualiza pagina
+  const [name, setName] = useState('');
+  const [city, setCity] = useState('');
+  const [specialty, setSpecialty] = useState('');
+  const [order, setOrder] = useState('');
+  const [characteristics, setCharacteristics] = useState([]);
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    if (name || city) {
-      dispatch(searchByQuery(name, eliminarTildes(city)));
-      setnavegation(pagine.id);
-    } else {
-      dispatch(homepage(pagine.id));
-      setnavegation('', '');
-    }
+    setPage(pagine.id);
   }, [pagine]);
 
-  // controller navegation
   useEffect(() => {
-    setnavegation(pagine.id);
-  }, [totalPages]);
-  // controller map
+    const queryParams = new URLSearchParams(location.search);
+    setName(queryParams.get('name') || '');
+    setCity(queryParams.get('city') || '');
+    setSpecialty(queryParams.get('specialty') || '');
+    setOrder(queryParams.get('order') || '');
+
+    const characteristicsArr = [];
+    queryParams.forEach((value, key) => {
+      if (key === 'characteristics[]') {
+        characteristicsArr.push(value);
+      }
+    });
+    setCharacteristics(characteristicsArr);
+  }, [location]);
+
+  useEffect(() => {
+    const ciudad = eliminarTildes(city);
+    dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
+  }, [name, city, specialty, order, characteristics, page]);
 
   return (
     <div className="containerCardsall animated-element">
-      <div>
-      {totalPages && <Pagination totalPages={totalPages} />}
       <div className="ContainerCards animated-element">
+      {totalPages ? <Pagination totalPages={totalPages} filters={{ name, city, specialty, order, characteristics, page }} /> : ''}
           <div className='widthcards'>
         {locals &&
           locals.map(
@@ -62,7 +69,8 @@ function Cards () {
               },
               index
             ) => {
-              return (<Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
+              return (
+              <Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
                     Characteristic={Characteristic}
                     Images={Images}
                     location={location}
@@ -75,12 +83,21 @@ function Cards () {
             }
           )}
           </div>
-          <div className='widthmap'>
-            <MapHouse className="mapsize"/>
-          </div>
       </div>
+      {toggleMapMenu
+        ? <div className={'widthmap scale-up-tr'}>
+        <MapHouse className="mapsize"/>
+        {() => setOutAnimation(false) }
       </div>
-    </div>
+        : <div className={`widthmap scale-down-tr ${outAnimation && 'none-display'}`}>
+        <MapHouse className="mapsize"/>
+        {setTimeout(() => {
+          setOutAnimation(true);
+        }, 200)}
+        </div>
+        }
+      </div>
+
   );
 }
 export default Cards;

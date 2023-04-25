@@ -11,18 +11,13 @@
 
 .Landing .Carrousel{
     width: 100%;
-    height: calc(100vh - 50px);
-    padding: 0;
-    margin: 0;
+    height: auto;
 }
-/* 
+
 .Landing .Carrousel .CarrouselItem{
-    position: relative;
     width: 100%;
-    height: calc(100vh - 50px);
-    padding: 0;
-    margin: 0;
-}    */
+    height: auto;
+}   
 
 .Landing .Carrousel .CarrouselItem .SlideItem1 img,
 .Landing .Carrousel .CarrouselItem .SlideItem2 img,

@@ -12,7 +12,7 @@ function DishCard ({
   onClose
 }) {
   return (
-        <div className='Card animated-element'>
+        <div className='Card animated-element' key={id}>
       <span onClick={() => onClose(id)}><FaTrash className='delete-icon' /><FaEdit className='edit-icon' /></span>
             {image
               ? (

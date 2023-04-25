@@ -1,11 +1,19 @@
-import { isAppropriate } from '../../helpers/validations';
 
 export default function validate (data) {
   const errors = {};
 
-  if (data.comment) {
-    const result = isAppropriate(data.comment);
-    result && (errors.comment = result);
+  if (!data.title.length) {
+    errors.title = 'Falta titulo';
   }
+  if (!data.comment.length) {
+    errors.title = 'Falta comentario';
+  }
+  if (!data.comment.length) {
+    errors.title = 'Falta comentario';
+  }
+  if (!data.image) {
+    errors.image = 'Tome una foto';
+  }
+
   return errors;
 }
