@@ -6,7 +6,7 @@ import './DishForm.css';
 import validateForm from './dishVal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { postDish, putDish } from '../../../redux/actions/actions';
+import { postDish, putDish } from '../../../redux/actions/menuDish';
 import Inputs from './Inputs/Inputs';
 import { useParams } from 'react-router-dom';
 

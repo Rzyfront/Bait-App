@@ -6,12 +6,13 @@ import { BsCalendar3 } from 'react-icons/bs';
 import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
 import { GiMeal } from 'react-icons/gi';
 import img from '../../assets/restaurante.jpg';
-import { getMenu, getReviews } from '../../redux/actions/actions';
+import { getReviews } from '../../redux/actions/actions';
 import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailLocal } from '../../redux/actions/local';
+import { getMenu } from '../../redux/actions/menuDish';
 
 function Profile () {
   const dispatch = useDispatch();

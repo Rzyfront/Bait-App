@@ -9,15 +9,15 @@ function DishCard ({
   price,
   description,
   id,
-  onClose,
   edit,
-  editDish
+  editDish,
+  delDish
 }) {
   return (
     <div className='DishCard animated-element'>
       {edit && (
         <div className='dish-icons-container'>
-          <p onClick={() => onClose(id)} className='iconsDishCard'>
+          <p onClick={() => delDish(id)} className='iconsDishCard'>
             <FaTrash className='delete-icon' />
           </p>
           <p onClick={() => editDish(id)} className='iconsDishCard'>

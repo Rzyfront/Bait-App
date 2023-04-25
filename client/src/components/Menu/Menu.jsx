@@ -4,7 +4,8 @@ import swal from 'sweetalert';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getMenu, deleteDish } from '../../redux/actions/actions';
+import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
+import { FaEdit, FaTrash } from 'react-icons/fa';
 
 function Menu () {
   const { id } = useParams();
@@ -22,7 +23,7 @@ function Menu () {
     }
   };
 
-  const onClose = (dishId) => {
+  const delDish = (dishId) => {
     swal({
       title: '¿Está seguro(a)',
       text: 'Una vez borrado no podrás deshacer esta acción',
@@ -48,6 +49,14 @@ function Menu () {
     window.open(`/updateDish/${dishId}`, '_blank');
   };
 
+  const editMenu = (menuId) => {
+    window.open(`/menu/${menuId}`, '_blank');
+  };
+
+  const delMenu = (menuId) => {
+    dispatch(deleteMenu(menuId));
+  };
+
   useEffect(() => {
     if (successDish) dispatch(getMenu(id));
   }, [successDish, menu]);
@@ -70,7 +79,15 @@ function Menu () {
           menu.map((section, index) => {
             return (
               <>
-                {<div><h4 key={index} className='section-title'>{section.type}</h4></div>}
+                {<div>
+                  {edit && <><p onClick={() => delMenu(id)} className='iconsDishCard'>
+                    <FaTrash className='delete-icon' />
+                    </p>
+                     <p onClick={() => editMenu(id)} className='iconsDishCard'>
+                    <FaEdit className='edit-icon' />
+                    </p></>}
+                  <h4 key={index} className='section-title'>{section.type}</h4>
+                </div>}
                 {section.Dishes?.map(({ id, type, name, Image, price, description }, subIndex) => {
                   return (
                     <DishCard
@@ -81,7 +98,7 @@ function Menu () {
                       image={Image}
                       price={price}
                       description={description}
-                      onClose={onClose}
+                      delDish={delDish}
                       editDish={reqPutDish}
                       edit={edit}
                     />

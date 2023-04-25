@@ -3,7 +3,7 @@ import swal from 'sweetalert';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
-import { postMenu } from '../../redux/actions/actions';
+import { postMenu } from '../../redux/actions/menuDish';
 import DishForm from './DishForm/DishForm';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

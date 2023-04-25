@@ -1,5 +1,6 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU, GET_REVIEWS } from '../actions/actions';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, GET_REVIEWS } from '../actions/actions';
+import { POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU } from '../actions/menuDish';
 import { SEARCH_BY_QUERY, SEARCH_BY_FILTERS, SAVE_SEARCH_HOME } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
