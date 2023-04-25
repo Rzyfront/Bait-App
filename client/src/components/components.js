@@ -10,7 +10,7 @@ export { default as Navbar } from './Navbar/Navbar';
 export { default as SearchHome } from './Navbar/SearchHome/SearchHome';
 export { default as Profile } from './Profile/Profile';
 export { default as Reviews } from './Reviews/Reviews';
-export { default as ReviewsForm } from './ReviewsForm/ReviewsForm';
+export { default as ReviewsForm } from './Profile/ReviewsForm/ReviewsForm';
 export { default as Footer } from './Footer/Footer';
 export { default as Filters } from './Filters/Filters';
 export { default as Answers } from './Footer/Answers/Answers';
