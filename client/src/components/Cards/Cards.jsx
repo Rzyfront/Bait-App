@@ -76,7 +76,8 @@ function Cards ({ toggleMapMenu }) {
   }, [pagine]); */
 
   useEffect(() => {
-    dispatch(searchByFilters({ name, city: eliminarTildes(city), specialty, order, characteristics, page }));
+    const ciudad = eliminarTildes(city);
+    dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
   }, [name, city, specialty, order, characteristics, page]);
 
   return (

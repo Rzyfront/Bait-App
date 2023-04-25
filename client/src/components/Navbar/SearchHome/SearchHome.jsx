@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './Search_home.css';
 import { MdOutlineRestaurant } from 'react-icons/md';
 import { BiMap, BiSearchAlt } from 'react-icons/bi';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveInfoSearchHome } from '../../../redux/actions/cards';
+import { useNavigate } from 'react-router-dom';
 
 function SearchHome () {
-  const navigate = useNavigate();
+  const { city } = useSelector((state) => state.ubication);
   const dispatch = useDispatch();
-  const { searchName } = useSelector(state => state);
+  const navigate = useNavigate();
   const [data, setData] = useState({
-    input: searchName,
+    input: '',
     map: ''
   });
   const handleinputs = (e) => {
@@ -23,17 +23,19 @@ function SearchHome () {
 
   const searchDatas = async (e) => {
     e.preventDefault();
-    navigate(`/home/1?name=${data.input}&city=${data.map}`);
+    const currentPath = location.pathname;
+    if (currentPath !== currentPath.split('/').at(1) && (data.input.length || data.map.length)) {
+      console.log('aaaaaaaa');
+      dispatch(saveInfoSearchHome(data));
+      navigate(`/home/1?name=${data.input}&city=${data.map}`);
+    }
+    if (!data.input && !data.map && currentPath !== currentPath.split('/').at(1)) {
+      dispatch(saveInfoSearchHome({ input: '', map: city }));
+      navigate('/home/1?');
+    } else {
+      dispatch(saveInfoSearchHome(data));
+    }
   };
-
-  useEffect(
-    () => {
-      dispatch(saveInfoSearchHome(data.input));
-      return () => {
-        dispatch(saveInfoSearchHome(''));
-      };
-    }, [data]
-  );
   return (
     <div className="search_home">
       <div className="searchs">
