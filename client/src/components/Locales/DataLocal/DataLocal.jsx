@@ -17,21 +17,6 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect,
             />
             {errors.name && <p className='danger'>{errors.name}</p>}
 
-            <select
-                name='location'
-                className='location'
-                onChange={handleSelect}
-                value={inputs.location}
-                required
-            >
-                <option value='value2' defaultValue>
-                    Ubicacion
-                </option>
-                <option value='Cordoba'>Córdoba</option>
-                <option value='Buenos Aires'>Buenos Aires</option>
-                <option value='Corrientes'>Corrientes</option>
-            </select>
-
             <Input
                 underlined
                 labelPlaceholder="Correo Electrónico"
@@ -93,7 +78,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect,
               type='text'
           // required
           />
-          <Button onPress={searchCity}></Button>
+          <Button onPress={searchCity}>Buscar ciudad</Button>
 
         </>
   );
