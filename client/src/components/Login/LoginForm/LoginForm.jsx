@@ -1,4 +1,5 @@
 import { TfiClose } from 'react-icons/tfi';
+import { PopComent } from '../../components';
 import { FcGoogle } from 'react-icons/fc';
 import ojoAbierto from '../../../assets/abrir-ojo.png';
 import ojoCerrado from '../../../assets/cerrar-ojo.png';
@@ -82,6 +83,8 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                 <div className="formulario">
                     <div className="container">
                         <form autoComplete="off" className="form" onSubmit={handleLogin}>
+                          <div className='Input-Email-Group'>
+
                             <input
                                 className="input"
                                 type="text"
@@ -91,7 +94,9 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                 autoComplete="off"
                                 placeholder="Usuario"
                             ></input>
+                            {errors.email && <PopComent text={errors.email}/> }
 
+                          </div>
                             <div className="PasswordGroup">
                                 <input
                                     type="password"
@@ -121,7 +126,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                             <div className="registrarme" onClick={() => loginRegister()}>
                                 <p>¿Aún no tienes cuenta?</p>
                                 <h5>Regístrate</h5>
-                                {errors.email && <span>{errors.email}</span>}
+
                                 {errors.password && <span>{errors.password}</span>}
                             </div>
                         </form>
