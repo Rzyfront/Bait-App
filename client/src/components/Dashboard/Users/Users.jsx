@@ -35,7 +35,7 @@ const Users = () => {
     axios
       .get('/administrator')
       .then((data) => setUsers(data.data.users));
-  },[]);
+  }, []);
 
   return (
     <div className={style.options}>

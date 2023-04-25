@@ -45,7 +45,6 @@ function FilterGroup ({
         <option value={'ratingASC'}>Menor rating</option>
         <option value={'ratingDESC'}>Mayor rating</option>
         </select>
-      
 
         <select
           name = "alphabet"
