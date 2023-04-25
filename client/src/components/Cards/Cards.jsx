@@ -4,8 +4,8 @@ import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
-import { homepage } from '../../redux/actions/actions';
-import { searchByQuery, searchByFilters } from '../../redux/actions/cards';
+
+import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
 
