@@ -4,8 +4,8 @@ import Card from '../Card/Card';
 import './Cards.css';
 import { useDispatch, useSelector } from 'react-redux';
 import Pagination from '../pagination/pagination';
-import { homepage } from '../../redux/actions/actions';
-import { searchByQuery, searchByFilters } from '../../redux/actions/cards';
+
+import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
 
@@ -76,7 +76,8 @@ function Cards ({ toggleMapMenu }) {
   }, [pagine]); */
 
   useEffect(() => {
-    dispatch(searchByFilters({ name, city: eliminarTildes(city), specialty, order, characteristics, page }));
+    const ciudad = eliminarTildes(city);
+    dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
   }, [name, city, specialty, order, characteristics, page]);
 
   return (

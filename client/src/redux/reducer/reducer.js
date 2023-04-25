@@ -18,9 +18,9 @@ const initialState = {
   newMenu: {},
   menu: [],
   reviews: [],
-  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires' },
+  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
   foco: { lat: null, lng: null },
-  searchName: ''
+  searchName: { input: '', map: '' }
 };
 const rootReducer = (state = initialState, { type, payload }) => {
   switch (type) {

@@ -46,12 +46,12 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
   }, []);
 
   useEffect(() => {
-    navigate(path(1, searchName, ubication.city, filters));
+    navigate(path(1, searchName.input, searchName.map, filters));
   }, [filters]);
 
   useEffect(() => {
     setFilters(initialFilter);
-    navigate(path(1, searchName, ubication.city, initialFilter));
+    navigate(path(1, searchName.input, searchName.map, initialFilter));
     setSelectedOptions([]);
   }, [searchName, ubication]);
 
