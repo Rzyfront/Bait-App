@@ -9,7 +9,7 @@
     height: calc(100vh - 60px);
     background-color: rgba(var(--bg-primary), 0.2);
     backdrop-filter: blur(2px);
-    z-index: 10;
+    z-index: var(--alto-4);
 }
 
 @keyframes aparecer{

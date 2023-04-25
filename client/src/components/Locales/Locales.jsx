@@ -8,10 +8,11 @@ import { useUploadImage } from '../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
 import TYC from './TYC';
-import DatabasicLocal from './DataLocal/DatabasicLocal';
+// import DatabasicLocal from './DataLocal/DatabasicLocal';
+import DataLocal from './DataLocal/DataLocal';
 import Mapdata from '../Map/Mapdata';
 import SearchMap from '../Map/SearchMap/Searchmap';
-import { createLocal } from '../../redux/actions/local';
+import { createLocal, createLocalFull } from '../../redux/actions/local';
 import { ErrorsDatabasic } from './ErrorsDatabasic';
 import Chars from './Chars/Chars';
 
@@ -82,6 +83,8 @@ function Locales () {
     schedule: '',
     specialty: ''
   });
+
+  // check list
   const [chekinputs, setChekInputs] = useState({
     wifi: false,
     parking_lot: false,
@@ -99,7 +102,9 @@ function Locales () {
       ErrorsDatabasic({
         ...inputs
       })
+
     );
+    console.log(inputs);
   }, [inputs]);
 
   const handleChange = (event) => {
@@ -112,7 +117,7 @@ function Locales () {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!Object.values(errors).length) {
-      const response = await dispatch(createLocal(inputs));
+      const response = await dispatch(createLocalFull(inputs, chekinputs));
       if (response === true) {
         toast.success('¡Local creado satisfactoriamente!', {
           position: toast.POSITION.TOP_CENTER,
@@ -153,18 +158,11 @@ function Locales () {
       });
 
       setInputs({ ...inputs, images: data });
-
-      setErrors(
-        ErrorsDatabasic({
-          ...inputs,
-          images: [data]
-        })
-      );
     }
   }, [image]);
   const handleCheck = (e) => {
-    const { name } = e.target;
-    setChekInputs({ ...chekinputs, [name]: true });
+    const { name, checked } = e.target;
+    setChekInputs({ ...chekinputs, [name]: checked });
   };
   return (
     <div className='Create-Locals-Form animated-element'>
@@ -182,7 +180,7 @@ function Locales () {
           </Link>
           <h1>Crea un nuevo Local</h1>
           <form onSubmit={handleSubmit}>
-            <DatabasicLocal
+            <DataLocal
               handleChange={handleChange}
               inputs={inputs}
               errors={errors}
