@@ -217,21 +217,21 @@ function ReviewsForm ({ setToggleModal2, id }) {
               />
             {errors.comment && <p className='danger'>{errors.comment}</p>}
             </div>
-          <input
+            <div className='ImgGroup'>
+            {!image.length && <input
             className='LoadImg'
             type='file'
             placeholder='Sube una foto de tu visita'
             accept='image/png,image/jpeg,image/jpg,image/gif'
             onChange={handleImage}
-          ></input>
-            <div className='ImgGroup'>
+          ></input>}
 
               {image.length
                 ? (
                 <img
                   src={image[image.length - 1].url}
                   alt='imagen'
-                  className='imagenDefault'
+                  className='imagen-Review'
                 />
                   )
                 : loading === true
