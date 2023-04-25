@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios';
 /// ///names/////////////
 export const ORDER = 'ORDER';
@@ -232,7 +233,7 @@ export const deleteDish = (dishId) => {
 export const getMenu = (localId) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`locals/${localId}/menu`);
+      const response = await axios(`/locals/${localId}/menu`);
       if (response.status === 200) {
         dispatch({
           type: SUCCESS_MENU,
