@@ -1,0 +1,133 @@
+.DishCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 230px;
+    height: 290px;
+    color: var(--prymary);
+    background-color: var(--bg-primary);
+    margin: 10px;
+    padding: 10px 2px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    text-align: left;
+    transition: 0.3s;
+    position: relative;
+}
+
+/* .DishCard:hover {
+  box-shadow: rgba(0, 0, 0, 0.37) 0px 2px 4px;
+  transform: scale(1.01);
+} */
+
+.DishCard .imgCard {
+    width: 210px;
+    height: 150px;
+    border-radius: 5px;
+    align-self: center;
+    background-color: var(--bg-primary);
+}
+
+.DishCard .infoCard {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 210px;
+    height: 100%;
+    padding: 5px 0px;
+    background-color: var(--bg-primary);
+}
+
+.DishCard .infoCard h2 {
+    font-size: 20px;
+    font-family: var(--subtitle);
+}
+
+.DishCard .Price {
+    font-family: var(--text);
+}
+
+.DishCard .infoCard .DishCard-Tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.DishCard .infoCard .DishCard-Tags .Tag-Type,
+.DishCard .infoCard .DishCard-Tags .Tag-Charact {
+    height: 22px;
+    width: max-content;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.DishCard .infoCard .DishCard-Tags .Tag-Type p,
+.DishCard .infoCard .DishCard-Tags .Tag-Charact p {
+    color: var(--tertiary);
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.DishCard .infoCard .DishCard-Tags .Tag-Charact {
+    background-color: var(--bg-tertiary);
+}
+
+.DishCard .infoCard .DishCard-Tags .Tag-Type {
+    background-color: var(--optional1);
+}
+
+.dish-icons-container {
+    display: flex;
+    gap: 10px;
+    color: #300a0a;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 1;
+}
+
+.dish-icons-container .delete-icon,
+.dish-icons-container .edit-icon {
+    text-shadow: 3px 4px 2px rgba(0, 0, 0);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    height: 1.7rem;
+    width: 1.7rem;
+    margin: 0.4rem 0.1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.dish-icons-container .delete-icon:hover,
+.dish-icons-container .edit-icon:hover {
+    transform: scale(1.1);
+}
+
+
+.imgCard {
+    object-fit: cover;
+    height: 25rem;
+    width: 100%;
+}
+
+.infoCard {
+    padding: 2rem;
+}
+
+.dish-price {
+    color: var(--optional1);
+    font-size: 1rem;
+    letter-spacing: -0.08rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.dish-type {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.description {
+    font-size: 0.8rem;
+}
