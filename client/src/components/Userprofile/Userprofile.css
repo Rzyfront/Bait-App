@@ -1,3 +1,4 @@
+
 .userProfileContainer{
     height: calc(100vh - 60px);
     overflow: auto;
@@ -24,9 +25,69 @@ height: 100%;
 object-fit: contain;
 }
 
+.reviewContainer{
+    background: var(--bg-secondary);
+    color: white;
+}
+.reviewTitle{
+    text-align: center;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: inherit;
+}
+.reviewInfoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:inherit;
+    
+}
 
+.imgContainer {
+    width: 20%;
+    background-color: aqua;
+}
+.imgContainer img {
+    width: 100%;
+    object-fit: contain;
+   
+}
+.reviewCalification{
+    width: 50%;
+    margin: 1px solid black;
+    text-align: left;
+   
+}
 .reviewContainer { 
     border:  1px solid black;
     padding: 2rem;
     margin: 1rem;
+}
+
+.reviewButtons{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.3rem;
+}
+.reviewButtons button {
+    color: inherit;
+    align-items: center;
+        
+        font-size: 20px;
+        color: var(--tertiary);
+        width: 140px;
+        height: 40px;
+        border: none;
+        background-color: var(--btn-secondary);
+        border-radius: 7px;
+        gap: 3px;
+        padding: 5px;
+        transition: 0.3s;
+        cursor: pointer;
+        border: 1px solid white;
+}
+
+.reviewButtons button:hover{
+    background-color: var(--btn-primary);
+    
 }

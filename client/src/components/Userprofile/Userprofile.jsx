@@ -2,7 +2,7 @@ import './UserProfile.css';
 import { Reviews, Navbar } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import  "./Userprofile.css"
-import {getUserProfile} from "../../redux/actions/actions"
+import {getReviews, getUserProfile} from "../../redux/actions/actions"
 import { DetailLocal } from '../../redux/actions/local';
 import { useParams } from 'react-router';
 import { useEffect } from 'react';
@@ -13,14 +13,16 @@ function Userprofile () {
   const {userId} = useParams()
   const  {user} = useSelector((state) => state.user);
   const  userProfile  = useSelector((state) =>  state.userProfile )
+  const reviews = useSelector((state) => state.reviews)
   useEffect(()=>{
    
+    dispatch(getReviews(userId))
     dispatch(getUserProfile(userId))
   
   },[])
 
   userProfile && console.log(userProfile.user?.Reviews);
-
+  reviews && console.log(reviews);
   
 
   
@@ -57,18 +59,35 @@ function Userprofile () {
 } 
       <div className='userReviews'>
         <h1>Tus Reviews </h1>
-        {userProfile && userProfile.user?.Reviews.map((review) => {
+        {reviews && reviews.map((review) => {
           return (
             <>
               <div key={review.id} className='reviewContainer'>
-                <h5>Titulo: {review.title}</h5>
-                <h5>Comentario: {review.comment}</h5>
-                <h3>Calificaciones:</h3>
-                <h2>Food :{review.food}</h2>
-                <h2>Service :{review.service}</h2>
-                <h2>Environment :{review.environment}</h2>
-                <div>
-                  <button>Modifica</button>
+                <div className='reviewTitle'>
+                  <h3>Titulo: {review.title}</h3>
+                </div>
+
+              <div className='reviewInfoContainer'>
+
+                  <div className='reviewCalification'>
+                    <p>Comentario: {review.comment}</p>
+                    <p>Calificaciones:</p>
+                    <p>Food :{review.food}</p>
+                    <p>Service :{review.service}</p>
+                    <p>Environment :{review.environment}</p>
+                  </div>
+
+                  <figure className='imgContainer'>
+                    <img src={review.Image?.url} alt="" />
+                  </figure>
+
+                
+
+              </div>
+                
+               
+                <div className='reviewButtons'>
+                  <button>Modificar</button>
                   <button>Eliminar</button>
 
                 </div>
