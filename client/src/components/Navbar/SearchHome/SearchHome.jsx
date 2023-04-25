@@ -25,7 +25,6 @@ function SearchHome () {
     e.preventDefault();
     const currentPath = location.pathname;
     if (currentPath !== currentPath.split('/').at(1) && (data.input.length || data.map.length)) {
-      console.log('aaaaaaaa');
       dispatch(saveInfoSearchHome(data));
       navigate(`/home/1?name=${data.input}&city=${data.map}`);
     }
