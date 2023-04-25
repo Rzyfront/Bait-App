@@ -10,7 +10,7 @@ const { getReviews } = require('../controllers/reviews');
 const {
   changeRole,
   // deleteAdministrator,
-  deleteReview,
+  // deleteReview,
   getAllUsers,
   getSupendedUsers,
   patchReviewVerify,
@@ -30,7 +30,7 @@ administratorRoute
   .patch('/role/:userId', isAdmin, changeRole)
   .patch('/suspend/:userId', isAdmin, patchSupendUser)
   .put('/assignLocal', isAdmin, putAssignLocal)
-  .delete('/review/:reviewId', isAdmin, deleteReview)
+  // .delete('/review/:reviewId', isAdmin, deleteReview)
   .post('/test', isSuperAdmin, usersTest);
 
 module.exports = administratorRoute;
