@@ -11,30 +11,9 @@ import eliminarTildes from '../../hooks/eliminarTildes.';
 function Cards ({ toggleMapMenu }) {
   const location = useLocation();
   const [outAnimation, setOutAnimation] = useState(false);
-
-  // params consulta
-  // obtener los valores de los parametros de consulta
-  /*
-  const queryParams = new URLSearchParams(location.search);
-  const name = queryParams.get('name');
-  const city = eliminarTildes(queryParams.get('city'));
-
-  const city = queryParams.get('city');
-  const specialty = queryParams.get('specialty');
-  const order = queryParams.get('order');
-  const characteristics = [];
-  queryParams.forEach(function (value, key) {
-    if (key === 'characteristics[]') {
-      characteristics.push(value);
-    }
-  }); */
   const { locals, totalPages } = useSelector((state) => state.cards);
   const pagine = useParams();
   const dispatch = useDispatch();
-  // navegation
-
-  // actualiza pagina
-
   const [name, setName] = useState('');
   const [city, setCity] = useState('');
   const [specialty, setSpecialty] = useState('');
@@ -62,20 +41,9 @@ function Cards ({ toggleMapMenu }) {
     setCharacteristics(characteristicsArr);
   }, [location]);
 
-  /*
   useEffect(() => {
-    if (name || city) {
-      dispatch(searchByQuery(name, city));
-      dispatch(searchByFilters({ name, city: eliminarTildes(city), specialty, order, characteristics, page }));
-      dispatch(searchByQuery(name, eliminarTildes(city)));
-      setnavegation(pagine.id);
-    } else {
-      dispatch(homepage(pagine.id));
-    }
-  }, [pagine]); */
-
-  useEffect(() => {
-    dispatch(searchByFilters({ name, city: eliminarTildes(city), specialty, order, characteristics, page }));
+    const ciudad = eliminarTildes(city);
+    dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
   }, [name, city, specialty, order, characteristics, page]);
 
   return (

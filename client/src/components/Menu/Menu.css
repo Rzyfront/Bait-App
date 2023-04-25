@@ -7,16 +7,20 @@
 }
 
 .Menu .Menu-Title {
-    font-size: 60px;
+    font-size: 30px;
+    padding-right: 20px;
+    border-right: 1px solid var(--primary);
+    font-family: var(--title);
 }
 
 .Menu .Menu-List {
     width: 98%;
     height: 80%;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     justify-content: space-around;
-    overflow: auto;
+    overflow: scroll;
 }
 
 .TitleGroup {
@@ -44,5 +48,9 @@
 .menuBtn:hover {
     align-self: flex-end;
     border-bottom: 2px solid var(--btn-primary);
-    
+
+}
+
+.section-title {
+    display: block;
 }

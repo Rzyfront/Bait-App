@@ -6,19 +6,6 @@ export const RESET = 'RESET';
 export const COMENTARIE = 'COMENTARIE';
 export const HOMEPAGE = 'HOMEPAGE';
 
-// ACTION TYPES MENU - DISH
-export const SUCCESS_MENU = 'SUCCESS_MENU';
-export const ERROR_MENU = 'ERROR_MENU';
-export const GET_MENU = 'GET_MENU';
-export const POST_MENU = 'POST_MENU';
-export const POST_DISH = 'POST_DISH';
-export const SUCCESS_DISH = 'SUCCESS_DISH';
-export const ERROR_DISH = 'ERROR_DISH';
-export const PUT_DISH = 'PUT_DISH';
-export const DELETE_DISH = 'DELETE_DISH';
-export const SUCCESS_DEL_DISH = 'SUCCESS_DEL_DISH';
-export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
-
 // ACTION TYPES USER
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
@@ -288,6 +275,8 @@ export const getReviews = (localId, page = 1) => {
           payload: response.data.reviews
         });
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 };
