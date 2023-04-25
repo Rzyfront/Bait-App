@@ -10,6 +10,7 @@ import {
   DataTreatment,
   Dashboard,
   MenuForm,
+  DishForm,
   Userprofile
 } from './components/components.js';
 import LocalsDatabasic from './components/Locales/LocalsDatabasic';
@@ -57,8 +58,8 @@ function App () {
         <Route path='/map' element={<LocalsDatabasic />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/userprofile' element={<Userprofile />} />
-        <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
+        <Route path='/updateDish/:id' element={<DishForm/>} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

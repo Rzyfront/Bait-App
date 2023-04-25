@@ -5,16 +5,16 @@ export const validateForm = (data) => {
     errors.name = 'Nombre muy grande';
   }
   if (!data.specialty.length) {
-    errors.specialty = 'Escoje una especialidad';
+    errors.specialty = 'Escoge una especialidad';
   }
   if (!regGmail.test(data.email)) {
-    errors.email = 'Correo no valido';
+    errors.email = 'Correo no válido';
   }
   if (JSON.stringify(data.location) === '{}') {
-    errors.location = 'selecciona punto';
+    errors.location = 'Selecciona un punto';
   }
   if (!data.images.length) {
-    errors.images = 'falta foto';
+    errors.images = 'Sube una imagen';
   }
   if (!data.schedule.length) {
     errors.schedule = 'falta horarios';
