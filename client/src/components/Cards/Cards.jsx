@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Card from '../Card/Card';
 import './Cards.css';
+import { Card, Pagination } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import Pagination from '../pagination/pagination';
 import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
