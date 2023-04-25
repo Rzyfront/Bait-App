@@ -12,7 +12,7 @@ import {
   MenuForm,
   Userprofile
 } from './components/components.js';
-import Mapdata from './components/Map/Map';
+import Mapdata from './components/Map/Mapdata';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';

@@ -13,7 +13,7 @@ import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DetailLocal} from '../../redux/actions/local';
+import { DetailLocal } from '../../redux/actions/local';
 import { getReviews } from '../../redux/actions/actions';
 
 function Profile () {
