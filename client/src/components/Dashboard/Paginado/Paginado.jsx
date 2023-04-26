@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import style from './Paginado.module.css';
-import { useSelector } from 'react-redux';
 
 const Paginado = (props) => {
   const [page, setPage] = useState(1);
