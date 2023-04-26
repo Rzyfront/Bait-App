@@ -1,74 +1,77 @@
 import { useEffect, useState } from 'react';
 import style from '../Dashboard.module.css';
-import Paginado from '../Paginado/Paginado.jsx';
+import PaginadoU from '../Paginado/PaginadoU';
 // import swal from '@sweetalert/with-react';
-import axios from 'axios';
+import { getAllUsers } from '../../../redux/actions/admin';
+import { useDispatch, useSelector } from 'react-redux';
+import User from './User';
+import { ToastContainer } from 'react-toastify';
 
 const Users = () => {
-  const [users, setUsers] = useState();
+  const data = useSelector((state) => state.users);
 
-  const userBan = () => {
-  //   swal('Razon de la sancion', {
-  //     content: 'input',
-  //     buttons: true
-  //     // cancel:true
-  //   }).then((value) => (value !== null ? swal(`Razon: ${value}`) : ''));
-  };
-
-  const setRank = (e) => {
-    console.log(e.target.name);
-    // swal({
-    //   title: `¿Estas seguro que deseas que ${e.target.name} sea ${e.target.value}?`,
-    //   icon: 'warning',
-    //   buttons: true,
-    //   dangerMode: true
-    // }).then((willDelete) => {
-    //   if (willDelete) {
-    //     swal(`${e.target.name} ahora es ${e.target.value}`, {
-    //       icon: 'success'
-    //     });
-    //   }
-    // });
-  };
+  const [filter, setFilter] = useState({
+    page: 1,
+    role: '',
+    email: ''
+  });
+  console.log(data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get('/administrator')
-      .then((data) => setUsers(data.data.users));
-  }, []);
+    if (filter) {
+      dispatch(getAllUsers(filter));
+    }
+  }, [filter || undefined]);
+
+  const paginade = (e) => {
+    console.log(e);
+    setFilter({
+      ...filter,
+      page: e
+    });
+  };
+  const handleData = (e) => {
+    const { name, value } = e.target;
+    setFilter({
+      ...filter,
+      [name]: value
+    });
+  };
+  const handleSelect = (e) => {
+    setFilter({
+      ...filter,
+      role: e.target.value
+    });
+  };
 
   return (
     <div className={style.options}>
       <h2 className={style.nameSection}>Usuarios</h2>
-      <input placeholder="Buscar usuario" className={style.buscador}></input>
+      <select
+        onChange={handleSelect}
+        value={filter.role}
+        defaultValue=""
+      >
+        <option value="" disabled selected>Seleccionar rol</option>
+        <option value="" >all</option>
+       <option value="user" >user</option>
+       <option value="owner" >owner</option>
+        <option value="admin" >admin</option>
+        <option value="superAdmin" >superAdmin</option>
+      </select >
+      <input placeholder="email" name="email" value={filter.email} className={style.buscador} onChange={handleData}></input>
       <div className={style.containerUserCard}>
-        {users &&
-          users.map((u) => (
-            <>
-              <div className={style.userCard}>
-                <img
-                  className={style.userIcon}
-                  src="https://i0.wp.com/lamiradafotografia.es/wp-content/uploads/2014/07/foto-perfil-psicologo-180x180.jpg?resize=180%2C180"
-                ></img>
-                <div className={style.nameAndUser}>
-                  <p className={style.name}>{u.name}</p>
-                  <p className={style.usernames}>@{u.user}</p>
-                </div>
-                <select className={style.role} name={u.name} onChange={setRank}>
-                  <option selected value="User">
-                    USER
-                  </option>
-                  <option value="Owner">OWNER</option>
-                  <option value="Admin">ADMIN</option>
-                </select>
-                <button className={style.banButton} onClick={userBan}>
-                  Sancionar
-                </button>
-              </div>
-            </>
-          ))}
+
+        {data && data.users &&
+           data.users.map((data, index) => {
+             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} />;
+           })
+          }
+        <PaginadoU paginade={paginade} />
+        <ToastContainer />
       </div>
-      <Paginado />
+
     </div>
   );
 };

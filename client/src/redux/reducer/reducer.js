@@ -39,12 +39,7 @@ const initialState = {
   success: null,
   successDish: null,
   successMenu: null,
-  ubication: {
-    lat: -34.60762000391614,
-    lng: -58.381592,
-    city: 'buenos aires',
-    gps: false
-  },
+  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
   user: {},
   users: {},
   adminReviews: {},
