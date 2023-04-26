@@ -20,6 +20,7 @@ function Userprofile () {
 
   const [openInfoModal, setOpenInfoModal] = useState(false)
   const [openBonoModal, setOpenBonoModal] = useState(false)
+  // const [scroll,setScroll] = useState(false)
 
   const dispatch = useDispatch();
   const {userId} = useParams()
@@ -46,7 +47,9 @@ function Userprofile () {
     }
  
 
-  }, [image,user])
+  }, [image, user])
+
+ 
   
 
   userProfile && console.log(userProfile.user?.Reviews);
@@ -118,7 +121,9 @@ function Userprofile () {
            </button>
 
           <button 
-          className='userButtons'>
+
+            className={`userButtons ${scroll && "scroll" }`}   >
+          
             Reviews
           </button>
 
