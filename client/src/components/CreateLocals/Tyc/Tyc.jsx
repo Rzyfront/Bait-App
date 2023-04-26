@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import BaitLogo from '../../../assets/LogoBait.svg';
+import './Tyc.css';
 export default function TYC ({ setTemsAndConditions }) {
   return (
         <div className='termAndConditions-container'>

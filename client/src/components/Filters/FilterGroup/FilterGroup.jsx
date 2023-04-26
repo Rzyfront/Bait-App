@@ -1,5 +1,4 @@
 
-import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import Select from 'react-select';
 function FilterGroup ({
   selectedOptions,
@@ -58,14 +57,6 @@ function FilterGroup ({
           <option value={'nameASC'}>A-Z</option>
           <option value={'nameDESC'}>Z-A</option>
         </select>
-
-        <div className='Map-Toggle-Group' onClick={toggleMapMenu
-          ? () => setToggleMapMenu(false)
-          : () => setToggleMapMenu(true)}>
-          {toggleMapMenu
-            ? <TbMapOff/>
-            : <TbMap2/>}
-        </div>
       </div>
   );
 }

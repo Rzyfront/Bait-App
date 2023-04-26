@@ -5,15 +5,24 @@ export const VERIFY_REVIEWS = 'VERIFY_REVIEWS';
 export const CHANGE_ROLE = 'CHANGE_ROLE';
 export const SUSPEND_USER = 'SUSPEND_USER';
 export const ASSIGN_LOCAL = 'ASSIGN_LOCAL';
+export const REVIEW_DETAIL = 'REVIEW_DETAIL';
 
 export const getAllUsers = (filter) => {
   return async (dispatch) => {
     try {
       const query = [];
+<<<<<<< HEAD
       if (filter.email)query.push(`&email=${filter.email}`);
       if (filter.role)query.push(`&role=${filter.role}`);
       const { data } = await axios(`/administrator/page/${filter.page}?${query.join('')}`);
       dispatch({ type: GET_ALL_USERS, payload: data });
+=======
+      if (email)query.push(`&email=${email}`);
+      if (role)query.push(`&role=${role}`);
+
+      const { data } = await axios(`/administrator/page/${page}?${query.join('')}`);
+      return dispatch({ type: GET_ALL_USERS, payload: data });
+>>>>>>> 7fb28499c201978c96ded352dfa4021c84396f76
     } catch (error) {
 
     }
@@ -79,5 +88,13 @@ export const assignLocal = ({ userId, localId }) => async (dispatch) => {
     return dispatch({ type: SUSPEND_USER, payload: data });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getReviewDetail = (detail) => {
+  try {
+    return { type: REVIEW_DETAIL, payload: detail };
+  } catch (err) {
+    console.log(err);
   }
 };
