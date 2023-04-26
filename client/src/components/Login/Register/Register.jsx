@@ -6,6 +6,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { loginWithGoogle } from '../../../helpers/loginWithGoogle';
+import { FcGoogle } from 'react-icons/fc';
 
 const Register = ({ setToggleLogin, loginRegister, login }) => {
   const navigate = useNavigate();
@@ -61,11 +63,10 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
         isActive: '',
         role: ''
       });
-      toast.success('¡Ac satisfactoriamente!', {
+      setErrorsRegister({});
+      toast.success('Hemos enviado un email de verificacion', {
         position: toast.POSITION.TOP_CENTER
       });
-      navigate('/home/1?name=&city=');
-      setErrorsRegister({});
     } else {
       toast.error(errorsRegister.name +
                 '\n' +
@@ -170,6 +171,10 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
                                 Registrarme
                             </button>
 
+                              <div className="loginwith">
+                                <FcGoogle className='google'/>
+                                <span className="texto" onClick={() => loginWithGoogle()}>Entra con Google</span>
+                            </div>
                             <div className="registrarme" onClick={() => loginRegister()}>
                                 <p>¿Ya tienes cuenta?</p>
                                 <h5>Inicia sesión</h5>
