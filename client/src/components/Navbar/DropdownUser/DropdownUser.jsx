@@ -4,8 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const DropdownUser = ({ close, toggleMenuUser }) => {
-    const role = useSelector(store => store.user.user.role);
-    console.log(role)
+  const role = useSelector(store => store.user.user.role);
   useEffect(() => {}, [toggleMenuUser]);
   return (
           <div className={`DropDown-Component ${toggleMenuUser && 'scale-up-tr'}`}>
@@ -22,7 +21,7 @@ const DropdownUser = ({ close, toggleMenuUser }) => {
                             <RiSettingsLine /> Configuraciones
                         </Link>
                     </li>
-                    {(role === "superAdmin" || role === "admin") && <li>
+                    {(role === 'superAdmin' || role === 'admin') && <li>
                         <Link to="/dashboard">
                             DashBoard Admin
                         </Link>
