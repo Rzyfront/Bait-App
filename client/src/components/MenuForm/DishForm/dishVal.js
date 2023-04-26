@@ -24,6 +24,7 @@ const validateForm = (data) => {
     const result = verifiedExists(data.description, 'Este campo');
     result && (errors.description = result);
   }
+  return errors;
 };
 
 export default validateForm;
