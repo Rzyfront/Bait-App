@@ -12,7 +12,7 @@ import TYC from './TYC';
 import DataLocal from './DataLocal/DataLocal';
 import Mapdata from '../Map/Mapdata';
 import SearchMap from '../Map/SearchMap/Searchmap';
-import { createLocal, createLocalFull } from '../../redux/actions/local';
+import { createLocalFull } from '../../redux/actions/local';
 import { ErrorsDatabasic } from './ErrorsDatabasic';
 import Chars from './Chars/Chars';
 
