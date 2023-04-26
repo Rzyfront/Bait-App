@@ -9,9 +9,9 @@ module.exports = async (req, res) => {
       include: [{ model: User }],
     });
     if (!deletedReview) throw new Error('Review not found');
-    await deletedReview.destroy();
+    deletedReview.verified = 'archived';
     await deletedReview.save();
-    sendReviewRejected(
+    await sendReviewRejected(
       deletedReview.User.email,
       deletedReview.User.name,
       deletedReview.title,
