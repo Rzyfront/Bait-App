@@ -59,6 +59,7 @@ transition: 0.3s;
 }
 .UserGroup .nav_login .LogIn {
     font-size: 18px;
+    margin-left: 5px;
     font-family: var(--title);
     font-weight: 300;
 }
