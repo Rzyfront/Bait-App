@@ -15,7 +15,8 @@ import {
   SUCCESS_DISH,
   SUCCESS_MENU,
   ERROR_MENU,
-  GET_MENU
+  GET_MENU,
+  SUCCESS_DEL
 } from '../actions/menuDish';
 import {
   SEARCH_BY_QUERY,
@@ -39,6 +40,7 @@ const initialState = {
   reviews: [],
   searchName: { input: '', map: '' },
   success: null,
+  successDel: null,
   successDish: null,
   successMenu: null,
   ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
@@ -122,6 +124,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         successMenu: payload
+      };
+    case SUCCESS_DEL:
+      return {
+        ...state,
+        sucessDel: payload
       };
     case ERROR_MENU:
       return {

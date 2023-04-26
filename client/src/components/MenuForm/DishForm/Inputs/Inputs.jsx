@@ -31,7 +31,9 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='name'
                         required
                     />
-                    {/* {errors.name && <p className='danger'>{errors.name}</p>} */}
+                    {errors.name && <span className='danger'>{errors.name}</span>}
+                    {errors.type && <span className='danger'>{errors.type}</span>}
+
                     <select
                         name='type'
                         className='type'
@@ -47,7 +49,6 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         <option value='fitness'>fitness</option>
                         <option value='na'>No aplica</option>
                     </select>
-                    {errors.type && <p className='danger'>{errors.type}</p>}
                     <Input
                         underlined
                         labelPlaceholder="Price USD"
@@ -59,7 +60,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='price'
                         required
                     />
-                    {errors.price && <p className='danger'>{errors.price}</p>}
+                    {errors.price && <span>{errors.price}</span>}
                     <Textarea
                         underlined
                         labelPlaceholder="Descripción"
@@ -71,7 +72,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='description'
                         required
                     />
-                     {errors.description && <p className='danger'>{errors.description}</p>}
+                    {errors.description && <span>{errors.description}</span>}
                     <input
                         type='file'
                         name='image'
