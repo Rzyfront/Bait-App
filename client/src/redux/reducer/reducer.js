@@ -13,7 +13,8 @@ import {
   SUCCESS_DISH,
   SUCCESS_MENU,
   ERROR_MENU,
-  GET_MENU
+  GET_MENU,
+  SUCCESS_DEL
 } from '../actions/menuDish';
 import {
   SEARCH_BY_QUERY,
@@ -37,6 +38,7 @@ const initialState = {
   reviews: [],
   searchName: { input: '', map: '' },
   success: null,
+  successDel: null,
   successDish: null,
   successMenu: null,
   ubication: {
@@ -124,6 +126,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         successMenu: payload
+      };
+    case SUCCESS_DEL:
+      return {
+        ...state,
+        sucessDel: payload
       };
     case ERROR_MENU:
       return {

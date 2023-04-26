@@ -9,7 +9,7 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 
 function Menu () {
   const { id } = useParams();
-  const { menu, successDish } = useSelector(state => state);
+  const { menu, successDish, successDel } = useSelector(state => state);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState('Editar');
@@ -24,8 +24,6 @@ function Menu () {
       setEditText(edit ? 'Editar' : 'Finalizar edición');
     }
   };
-
-  console.log(menu);
 
   const delDish = (dishId) => {
     swal({
@@ -58,13 +56,30 @@ function Menu () {
   };
 
   const delMenu = (menuId) => {
-    console.log('clicked');
-    dispatch(deleteMenu(menuId));
+    swal({
+      title: '¿Está seguro(a)',
+      text: 'Una vez borrado no podrás deshacer esta acción',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          dispatch(deleteMenu(menuId));
+          if (successDel) {
+            swal('¡Producto eliminado con éxito!', {
+              icon: 'success'
+            });
+          }
+        } else {
+          swal('Acción cancelada');
+        }
+      });
   };
 
   useEffect(() => {
-    if (successDish) dispatch(getMenu(id));
-  }, [successDish, menu]);
+    dispatch(getMenu(id));
+  }, [successDel]);
 
   return (
     <div className="Menu">

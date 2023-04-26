@@ -2,9 +2,11 @@ import axios from 'axios';
 
 // ACTION TYPES MENU
 export const SUCCESS_MENU = 'SUCCESS_MENU';
+export const SUCCESS_DEL = 'SUCCESS_DEL';
 export const ERROR_MENU = 'ERROR_MENU';
 export const GET_MENU = 'GET_MENU';
 export const POST_MENU = 'POST_MENU';
+export const PUT_MENU = 'PUT_MENU';
 
 // ACTION TYPES DISH
 export const POST_DISH = 'POST_DISH';
@@ -36,7 +38,6 @@ export const postMenu = (localId, menu) => {
         type: SUCCESS_MENU,
         payload: false
       });
-      console.log(error);
     }
   };
 };
@@ -47,12 +48,11 @@ export const deleteMenu = (menuId) => {
       const response = await axios.delete(`locals/menu/${menuId}`);
       if (response.status === 201) {
         dispatch({
-          type: SUCCESS_MENU,
+          type: SUCCESS_DEL,
           payload: response.data.success
         });
       }
     } catch (error) {
-      console.log(error);
       dispatch({
         type: ERROR_MENU,
         payload: error.message
@@ -66,10 +66,6 @@ export const getMenu = (localId) => {
     try {
       const response = await axios(`locals/${localId}/menu`);
       if (response.status === 200) {
-        dispatch({
-          type: SUCCESS_MENU,
-          payload: response.data.success
-        });
         dispatch({
           type: GET_MENU,
           payload: response.data.menu

@@ -3,7 +3,7 @@ import swal from 'sweetalert';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
-import { postMenu } from '../../redux/actions/menuDish';
+import { getMenu, postMenu } from '../../redux/actions/menuDish';
 import DishForm from './DishForm/DishForm';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,6 +13,7 @@ const MenuForm = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { successMenu, newMenu, menu } = useSelector(state => state);
+  const [menuData, setMenuData] = useState([]);
   const [showDish, setShowDish] = useState(false);
   console.log(menu);
 
@@ -26,8 +27,8 @@ const MenuForm = () => {
     });
   };
 
-  const isTypeAlreadyInMenu = () => {
-    console.log(menu.some((section) => foodTypes.includes(section.type)));
+  const isTypeAlreadyInMenu = (type) => {
+    return menuData.some((section) => section.type === type);
   };
 
   const handleSubmit = (e) => {
@@ -35,27 +36,24 @@ const MenuForm = () => {
 
     if (menuForm.type !== '') {
       dispatch(postMenu(id, menuForm));
-      if (successMenu) {
-        toast.success('Se agregó la sección', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 2000
-        });
-      } else {
-        toast.error('Falló al crear', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 2000
-        });
-      }
     } else {
       swal('Campo obligatorio', 'Selecciona la sección del menú.');
     }
   };
+  useEffect(() => {
+    if (!menuData.length) dispatch(getMenu(id));
+    setMenuData(menu);
+  }, [menu, successMenu]);
 
   useEffect(() => {
     if (successMenu) {
       setShowDish(true);
+      toast.success('Se agregó la sección', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
     }
-  }, [showDish, successMenu]);
+  }, [successMenu]);
 
   return (
         <div className='Menu-Form-Container'>
@@ -78,7 +76,7 @@ const MenuForm = () => {
                     <option
                       key={type}
                       value={type}
-                      disabled={isTypeAlreadyInMenu()}
+                      disabled={isTypeAlreadyInMenu(type)}
                     >
                       {type}
                     </option>
