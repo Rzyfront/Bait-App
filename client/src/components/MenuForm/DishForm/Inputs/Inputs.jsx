@@ -2,7 +2,7 @@ import { Input, Textarea } from '@nextui-org/react';
 import '../DishForm.css';
 import { useSelector } from 'react-redux';
 
-const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId }) => {
+const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image, dishId }) => {
   const { menu } = useSelector(state => state);
 
   const findDish = (dishId) => {
@@ -31,7 +31,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='name'
                         required
                     />
-                    {/* {errors.name && <p className='danger'>{errors.name}</p>} */}
+
                     <select
                         name='type'
                         className='type'
@@ -47,7 +47,6 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         <option value='fitness'>fitness</option>
                         <option value='na'>No aplica</option>
                     </select>
-                    {errors.type && <p className='danger'>{errors.type}</p>}
                     <Input
                         underlined
                         labelPlaceholder="Price USD"
@@ -59,7 +58,6 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='price'
                         required
                     />
-                    {errors.price && <p className='danger'>{errors.price}</p>}
                     <Textarea
                         underlined
                         labelPlaceholder="Descripción"
@@ -71,7 +69,6 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='description'
                         required
                     />
-                     {errors.description && <p className='danger'>{errors.description}</p>}
                     <input
                         type='file'
                         name='image'
