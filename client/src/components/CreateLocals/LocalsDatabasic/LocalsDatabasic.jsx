@@ -1,20 +1,19 @@
 import { useState, useEffect } from 'react';
-import './Locales.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BaitLogo from '../../assets/LogoBait.svg';
+import BaitLogo from '../../../assets/LogoBait.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUploadImage } from '../../hooks/useUploadImage';
+import { useUploadImage } from '../../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
-import TYC from './TYC';
-import DatabasicLocal from './DataLocal/DatabasicLocal';
-import Mapdata from '../Map/Mapdata';
-import SearchMap from '../Map/SearchMap/Searchmap';
-import { createLocal } from '../../redux/actions/local';
-import { ErrorsDatabasic } from './ErrorsDatabasic';
+import DatabasicLocal from './DataLocalBasic/DatabasicLocal';
+import Mapdata from '../../Map/Mapdata';
+import SearchMap from '../../Map/SearchMap/Searchmap';
+import { createLocal } from '../../../redux/actions/local';
+import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
+import CreateLocalsSelector from './CreateLocalsSelector/CreateLocalsSelector';
 
-function LocalsDatabasic () {
+function LocalsDatabasic ({ formType, setFormType }) {
   const [statesupmit, setStatesupmit] = useState(false);
   const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
@@ -23,7 +22,6 @@ function LocalsDatabasic () {
   const Navigate = useNavigate();
   const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
-  const [termsAndConditions, setTemsAndConditions] = useState(true);
 
   // map controllers
   useEffect(() => {
@@ -132,10 +130,6 @@ function LocalsDatabasic () {
     });
   };
 
-  function handleClick () {
-    setTemsAndConditions(false);
-    // targetRef.current.scrollIntoView({ behavior: 'smooth' });
-  }
   useEffect(() => {
     if (image.length) {
       const data = image.map((data) => {
@@ -154,10 +148,9 @@ function LocalsDatabasic () {
   }, [image]);
 
   return (
-    <div className='Create-Locals-Form animated-element'>
-      { termsAndConditions
-        ? <TYC src={BaitLogo} handleClick={handleClick}/>
-        : <div className='locales_data animated-element'>
+    <div className='LocalsDataBasic-Component'>
+        {(formType === 'NoSelection') && <CreateLocalsSelector setFormType={setFormType}/>}
+      <div className='locales_data animated-element'>
         <Link to='/home/1?name=&city=' className='LinkLogo'>
           <img
             src={BaitLogo}
@@ -220,7 +213,8 @@ function LocalsDatabasic () {
           <button type='submit' className='Send-Locals'> ENVIAR</button>
           <ToastContainer theme='colored'/>
         </form>
-      </div>}
+
+    </div>
     </div>
   );
 }

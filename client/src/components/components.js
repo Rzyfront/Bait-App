@@ -1,7 +1,7 @@
 export { default as Card } from './Card/Card';
 export { default as Pagination } from './Cards/Pagination/Pagination';
 export { default as Cards } from './Cards/Cards';
-export { default as Locales } from './Locales/Locales';
+export { default as CreateLocals } from './CreateLocals/CreateLocals';
 export { default as Home } from './Home/Home';
 export { default as Landing } from './Landing/Landing';
 export { default as Login } from './Login/Login';
@@ -22,3 +22,6 @@ export { default as MenuForm } from './MenuForm/MenuForm';
 export { default as Userprofile } from './Userprofile/Userprofile';
 export { default as DishForm } from './MenuForm/DishForm/DishForm';
 export { default as PopComent } from './PopComent/PopComent';
+export { default as Tyc } from './CreateLocals/Tyc/Tyc';
+export { default as LocalsDatabasic } from './CreateLocals/LocalsDatabasic/LocalsDatabasic';
+export { default as LocalsCompleteData } from './CreateLocals/LocalsCompleteData/LocalesCompleteData';
