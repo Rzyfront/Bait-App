@@ -11,18 +11,10 @@ export const getAllUsers = (filter) => {
   return async (dispatch) => {
     try {
       const query = [];
-<<<<<<< HEAD
       if (filter.email)query.push(`&email=${filter.email}`);
       if (filter.role)query.push(`&role=${filter.role}`);
       const { data } = await axios(`/administrator/page/${filter.page}?${query.join('')}`);
       dispatch({ type: GET_ALL_USERS, payload: data });
-=======
-      if (email)query.push(`&email=${email}`);
-      if (role)query.push(`&role=${role}`);
-
-      const { data } = await axios(`/administrator/page/${page}?${query.join('')}`);
-      return dispatch({ type: GET_ALL_USERS, payload: data });
->>>>>>> 7fb28499c201978c96ded352dfa4021c84396f76
     } catch (error) {
 
     }
