@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 // import Reseña from './Reseña';
 const Reseñas = ({ fn }) => {
   // data
+  
   const dispatch = useDispatch();
   const data = useSelector((state) => state.users);
   // states controllers

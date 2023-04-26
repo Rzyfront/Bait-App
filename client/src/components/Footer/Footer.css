@@ -26,7 +26,8 @@
     font-size: 16px;
     font-weight: 100;
     font-family: var(--subtitle);
-    gap: 5px;
+    padding: 10px;
+    gap: 10px;
 }
 
 .Container_Footer .SocialMedia .SM_IconLinks:hover {
@@ -36,6 +37,7 @@
 }
 
 .Container_Footer .PageInformation{
+    margin-top: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -52,6 +54,11 @@
     transition: 0.3s;
     font-size: 15px;
     font-family: var(--text);
+    width: 190px;
+    height: 23px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .Container_Footer .PageInformation li:hover {

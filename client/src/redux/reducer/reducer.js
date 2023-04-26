@@ -1,7 +1,25 @@
-
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, GET_REVIEWS } from '../actions/actions';
-import { POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU } from '../actions/menuDish';
-import { SEARCH_BY_QUERY, SEARCH_BY_FILTERS, SAVE_SEARCH_HOME } from '../actions/cards';
+import {
+  ORDER,
+  RESET,
+  CREATE_USER,
+  HOMEPAGE,
+  CHECKUSER,
+  RESETUSER,
+  GET_REVIEWS
+} from '../actions/actions';
+import {
+  POST_MENU,
+  ERROR_DISH,
+  SUCCESS_DISH,
+  SUCCESS_MENU,
+  ERROR_MENU,
+  GET_MENU
+} from '../actions/menuDish';
+import {
+  SEARCH_BY_QUERY,
+  SEARCH_BY_FILTERS,
+  SAVE_SEARCH_HOME
+} from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
 import { GET_ALL_USERS, GET_ALL_REVIEWS } from '../actions/admin';

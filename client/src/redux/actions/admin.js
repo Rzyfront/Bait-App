@@ -13,9 +13,9 @@ export const getAllUsers = (filter) => {
       if (filter.email)query.push(`&email=${filter.email}`);
       if (filter.role)query.push(`&role=${filter.role}`);
       const { data } = await axios(`/administrator/page/${filter.page}?${query.join('')}`);
-      return dispatch({ type: GET_ALL_USERS, payload: data });
+      dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
-      console.log(error);
+
     }
   };
 };
@@ -66,12 +66,13 @@ export const changeRole = ({ id, role }) => async (dispatch) => {
 
 export const suspendUser = ({ id }) => async (dispatch) => {
   try {
-    const { data } = await axios.patch(`/administrator/suspend/${id}`);
-    return dispatch({ type: SUSPEND_USER, payload: data });
+    const { status } = await axios.patch(`/administrator/suspend/${id}`);
+    return status;
   } catch (error) {
     console.log(error);
   }
 };
+
 export const assignLocal = ({ userId, localId }) => async (dispatch) => {
   try {
     const { data } = await axios.put('/administrator/assignLocal', { userId, localId });

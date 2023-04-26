@@ -2,8 +2,9 @@ import './User.css';
 import imageDefault from '../../../assets/imagenDefault.png';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { changeRole } from '../../../redux/actions/admin';
+import { changeRole, suspendUser } from '../../../redux/actions/admin';
 import { useDispatch } from 'react-redux';
+import { FiUserX } from 'react-icons/fi';
 
 const User = ({ id, lastname, age, role, image, name }) => {
   const dispatch = useDispatch();
@@ -29,6 +30,21 @@ const User = ({ id, lastname, age, role, image, name }) => {
     }
   };
 
+  const suspent = async () => {
+    const respuesta = await dispatch(suspendUser({ id }));
+    if (respuesta === 201) {
+      toast.success(`El usuario ${name + ' ' + lastname} ha sido sancionado efectivamente`, {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 4000
+      });
+    } else {
+      toast.error('Ocurrio un error', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+    }
+  };
+
   return <div className='userContainer'>
         {image ? <img src={image.url} alt='user foto'/> : <img src={imageDefault} alt='default'/>}
         <div className='containerName'>
@@ -47,7 +63,11 @@ const User = ({ id, lastname, age, role, image, name }) => {
 
       </select >
               <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></div>
-        : <div className='selectdata'> <h3>{role}</h3></div>}
+        : <div className='selectdata'> <h3>{role}</h3>
+
+        </div>
+        }
+      <FiUserX className='icon' onClick={suspent}/>
 
   </div>;
 };

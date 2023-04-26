@@ -1,6 +1,6 @@
 import './pagination.css';
 import { FcPrevious, FcNext } from 'react-icons/fc';
-import { path } from '../../helpers/path';
+import { path } from '../../../helpers/path';
 
 import { Link, useParams } from 'react-router-dom';
 const Pagination = ({ totalPages, filters }) => {

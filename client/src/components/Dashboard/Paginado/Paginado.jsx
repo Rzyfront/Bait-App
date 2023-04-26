@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import style from './Paginado.module.css';
+import { useSelector } from 'react-redux';
 
-const Paginado = () => {
+const Paginado = ({ paginade }) => {
+  const { totalPages } = useSelector((state) => state.users);
   const [page, setPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(6);
+  const hadlepage = (e) => {
+    setPage(page + e);
+    paginade(page + e);
+  };
 
   return (
     <div className={style.container}>
-      {page > 1 && <b className={style.atras} onClick={() => setPage(page - 1)}>ATRAS</b>}
-      <span className={style.paginado}>{page}/{maxPage}</span>
-      {page !== maxPage && <b className={style.next} onClick={() => setPage(page + 1)}>SIGUIENTE</b>}
+      {page > 1 && <b className={style.atras} onClick={() => hadlepage(-1)}>ATRAS</b>}
+      <span className={style.paginado}>{page}/{totalPages}</span>
+      {totalPages && page !== totalPages && <b className={style.next} onClick={() => hadlepage(1)}>SIGUIENTE</b>}
     </div>
   );
 };

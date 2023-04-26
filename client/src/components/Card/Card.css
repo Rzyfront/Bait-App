@@ -39,14 +39,23 @@
     background-color: var(--bg-primary);
 }
 
-.Card .infoCard h2 {
+.Card .infoCard .placeName {
     font-size: 20px;
     font-family: var(--subtitle);
+    width: 210px;
+    height: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .Card .infoCard .RatingGroup {
     display: flex;
     align-items: center;
+    width: 210px;
+    height: 29px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .Card .RatingGroup .Rating {
@@ -57,7 +66,18 @@
 .Card .LocationGroup {
     display: flex;
     align-items: center;
+    width: 205px;
+    height: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
+.Card .LocationGroup:hover {
+   color: var(--secondary);
+   transform: scale(1.02);
 }
 
 .Card .Price {
@@ -67,7 +87,13 @@
 .Card .infoCard .Card-Tags {
     display: flex;
     flex-wrap: wrap;
+    width: 210px;
+    height: 24px;
     gap: 5px;
+    margin: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .Card .infoCard .Card-Tags .Tag-Type,
@@ -92,9 +118,4 @@
 
 .Card .infoCard .Card-Tags .Tag-Type {
     background-color: var(--optional1);
-}
-
-.locationico:hover {
-    color: red;
-    cursor: pointer;
 }
