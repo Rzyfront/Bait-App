@@ -54,9 +54,8 @@ function Card ({
           </Link>
         {location && (
           <div className="LocationGroup" onClick={handleFoco}>
-            <p className="Location"></p>
-            <GoLocation className='locationico'/>
-            {location.split(',').at(-2)} {location.split(',').at(-3)}{location.split(',').at(-1)}
+            <p className="Location"><GoLocation className='locationico'/> {location.split(',').at(-2)} {location.split(',').at(-3)}{location.split(',').at(-1)}
+            </p>
 
           </div>
         )}

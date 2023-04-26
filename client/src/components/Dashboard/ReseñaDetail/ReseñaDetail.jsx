@@ -1,27 +1,34 @@
 import style from '../Dashboard.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { verifyReview } from '../../../redux/actions/admin';
+const reviewImage = 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png';
+const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
 
 const ReseñaDetail = () => {
-  const reseñasola = {
-    id: 1,
-    local: 'La taberna de Rodri',
-    name: 'Edgar Vilchez',
-    title: 'Pesimo servicio',
-    content: 'Esa mierda no sirve para nada, no me gusto la atencion, ese HDP del mesero no sabe atender, que asco',
-    stars: '2'
+  const dispatch = useDispatch();
+  const reviewDetail = useSelector((state) => state.adminReviewDetail);
+  const [review, setReview] = useState(reviewDetail);
+  useEffect(
+    () => { setReview(reviewDetail); }, [reviewDetail]
+  );
+  const verifiedChange = ({ target }) => {
+    const value = target.value;
+    dispatch(verifyReview({ id: Number(review.id), verified: value }));
   };
 
   return (
     <div className={style.options}>
-        <h2 className={style.nameSection}>Reseña de Edgar Vilchez</h2>
+        <h2 className={style.nameSection}>{`Reseña de ${review?.User?.name} ${review?.User?.lastname}`}</h2>
         <div className={style.containerReview}>
         <div className={style.reseña}>
-            <h3 className={style.tituloReseña}>{reseñasola.title}</h3>
-            <h4 className={style.contentReseña}>{reseñasola.content}</h4>
+            <h3 className={style.tituloReseña}>{review?.title}</h3>
+            <h4 className={style.contentReseña}>{review?.comment}</h4>
             <div className={style.userCard}>
-            <img className={style.userIcon} src="https://i0.wp.com/lamiradafotografia.es/wp-content/uploads/2014/07/foto-perfil-psicologo-180x180.jpg?resize=180%2C180"></img>
+            <img className={style.userIcon} src={review?.User?.Image || imageDefault}></img>
             <div className={style.nameAndUser}>
-            <p className={style.name}>Edgar Vilchez</p>
-            <p className={style.usernames}>@edgarrios</p>
+            <p className={style.name}>{`${review?.User?.name} ${review?.User?.lastname}`}</p>
+            <p className={style.usernames}>@emailHere</p>
             </div>
             <div className={style.titleAndStars} style={{ marginLeft: '300px' }}>
             <p>Reseñas creadas: 283</p>
@@ -29,13 +36,13 @@ const ReseñaDetail = () => {
             </div>
         </div>
             <div className={style.interactuar}>
-                <button className={style.botonAccept}>Aceptar</button>
-                <button className={style.botonDenied}>Rechazar</button>
+                <button value="verified" className={style.botonAccept} onClick={verifiedChange}>Aceptar</button>
+                <button value="archived" className={style.botonDenied} onClick={verifiedChange}>Rechazar</button>
             </div>
         </div>
         <div className={style.profiler}>
         <div className={style.pruebas}>
-            <img src="https://i0.wp.com/webdelmaestro.com/educacion/wp-content/uploads/2017/01/TTTTT.jpg" className={style.fotos}></img>
+            <img src={review?.Image?.url || reviewImage } className={style.fotos}></img>
         </div>
         </div>
         </div>

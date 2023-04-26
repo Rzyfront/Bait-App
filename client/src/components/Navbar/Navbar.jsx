@@ -50,7 +50,7 @@ const Navbar = () => {
               }}
             >
               <FaUserCircle className="UserIcon" />
-              <h4 className="LogIn"> Iniciar Sesion</h4>
+              <h4 className="LogIn">Ingresar</h4>
             </div>
             )
           : (

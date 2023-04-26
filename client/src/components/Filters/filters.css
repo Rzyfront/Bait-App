@@ -117,7 +117,7 @@
     border-radius: 5px;
 }
 
-.Filters .FiltersGroup .Map-Toggle-Group{
+.Filters .Map-Toggle-Group{
     font-size: 25px;
     height: 40px;
     display: flex;
@@ -129,13 +129,13 @@
     color: var(--primary);
 }
 
-.Filters .FiltersGroup .Map-Toggle-Group:hover {
+.Filters .Map-Toggle-Group:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background-color: var(--btn-secondary);
     color: var(--tertiary);
     border-radius: 7px;
 }
-.Filters .FiltersGroup .Map-Toggle-Group:active {
+.Filters .Map-Toggle-Group:active {
  background-color: var(--btn-primary);
 }
 

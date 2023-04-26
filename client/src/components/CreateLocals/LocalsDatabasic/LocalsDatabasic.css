@@ -1,0 +1,190 @@
+.LocalsDataBasic-Component .Container-Basic{
+    position: relative;
+    width: 75%;
+    height: 95%;
+    padding:30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    
+    background: conic-gradient(from 60deg at 0% 100%, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.19) 100%);
+    background-color: var(--bg-primary);
+}
+
+.LocalsDataBasic-Component .Container-Basic .LinkLogo{
+    position: absolute;
+    top: 20px;
+    left: 30px; 
+}
+
+.LocalsDataBasic-Component .Container-Basic .Logo {
+    width: 140px;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Title {
+    align-self: flex-start;
+    margin-top: 40px;
+    font-size: 45px;
+    font-family: var(--title);
+    font-weight: 600;
+    color: var(--primary);
+}
+.LocalsDataBasic-Component .Container-Basic .Basic-Title span{
+    color: var(--secondary);
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create{
+    display: flex;
+    justify-content: center;
+    width: 98%;
+    height: 90%;
+    gap: 5%;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 8%;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Name-Input-Group{
+    position: relative;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Name-Input-Group .popover-container{
+    top: -20%;
+    right: -120%;
+}
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Email-Input-Group {
+    position: relative;
+}
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Email-Input-Group .popover-container {
+    top: -20%;
+    right: -100%;
+}
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Especial-Input-Group{
+    position: relative;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Especial-Input-Group .popover-container {
+    top: 0%;
+    right: -150%;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group{
+    width: 35%;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+    
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .popover-container{
+    top: 35%;
+    right: -20%;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic{
+    width: 80%;
+    height: 40px;
+    border: none;
+    background-color: var(--btn-secondary);
+    border-radius: 10px;
+    color: var(--tertiary);
+    font-size: 15px;
+    font-family: var(--subtitle);
+    font-weight: 500;
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic:hover {
+    background-color: var(--btn-primary);
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic:active {
+    background-color: var(--optional1);
+}
+
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Img-Group{
+    width: 35%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Basic-File{
+    position: absolute;
+    display:none;
+}
+
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 300px;
+    height: 300px;
+    gap: 10px;
+    transition: 0.3s;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add:hover {
+    transform: scale(1.1);
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add .Add-Img-Basic{
+    font-size: 20px;
+    color: var(--primary);
+    font-family: var(--title);
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add .Add-Img-Basic span {
+    color: var(--secondary);
+    font-weight: 600;
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .LocalesImage {
+    width: 280px;
+    height: 200px;
+    align-self: center;
+}
+
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Send-Locals{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+    height: 40px;
+    gap: 10px;
+    font-size: 16px;
+    font-family: var(--title);
+    font-weight: 600;
+    border-radius: 10px;
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Send-Locals:hover {
+    background-color: var(--optional1);
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Send-Locals:active {
+    background-color: var(--optional2);
+}

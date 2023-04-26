@@ -1,0 +1,215 @@
+.Create-Locals-Form {
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+
+/* FORMULARIOS STYLE */
+
+.Create-Locals-Form .LocalsDataBasic-Component{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+  position: relative;
+      /* ff 3.6+ */
+        background: -moz-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
+      
+        /* safari 5.1+,chrome 10+ */
+        background: -webkit-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
+      
+        /* opera 11.10+ */
+        background: -o-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
+      
+        /* ie 6-9 */
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3884FD', endColorstr='#F4F4F4', GradientType=1);
+      
+        /* ie 10+ */
+        background: -ms-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
+      
+        /* global 94%+ browsers support */
+        background: linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(94, 154, 251, 0.5) 100%);
+}
+
+.Create-Locals-Form .LocalsCompleteData-Component{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow: auto;
+  background: conic-gradient(from 65deg at 0% 100%, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.19) 100%);
+}
+
+/* .Create-Locals-Form .locales_data {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: column;
+  width: 650px;
+  background-color: var(--bg-primary);
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+} */
+
+/* .Create-Locals-Form .locales_data form {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  gap: 30px;
+
+} */
+
+.Create-Locals-Form .locales_data form select {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--primary);
+  opacity: 0.4;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.Create-Locals-Form .locales_data form select option {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid var(--primary);
+  opacity: 0.4;
+  padding: 10px;
+  transition: 0.3s;
+}
+
+.Create-Locals-Form .locales_data form select:hover {
+  opacity: 0.9;
+  border-radius: 5px;
+}
+
+.Create-Locals-Form .locales_data form .Send-Locals {
+  padding: 10px;
+  background-color: var(--btn-primary);
+  border-radius: 20px;
+  border: none;
+  transition: 0.3s;
+}
+
+.Create-Locals-Form .locales_data form button:hover {
+  background-color: var(--btn-secondary);
+}
+
+/* .Create-Locals-Form .locales_data .Logo {
+  width: 130px;
+} */
+
+/* .locales_data h1 {
+  font-size: 50px;
+  color: var(--primary);
+  font-family: var(--title);
+  font-weight: 700;
+} */
+
+/* .form-container {
+  margin-top: 0px;
+} */
+
+
+
+
+
+/* .form-container input,
+.form-container select {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+} */
+/* 
+.form-container input[type="submit"] {
+  background-color: var(--bg-secundary);
+  color: var(--bg-primary);
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.form-container input[type="submit"]:hover {
+  background-color: var(--bg-primary);
+}
+
+.danger {
+  color: var(--optional2);
+  font-size: var(--subtitle);
+} */
+
+/* .LinkLogo {
+  text-decoration: none;
+  color: var(--bg-primary);
+} */
+
+/* 
+.danger {
+  color: var(--bg-optional2);
+  font-size: 14px;
+  margin-top: 5px;
+} */
+
+/* Estilos para los campos con errores */
+/* .input-error {
+  border: 1px solid var(--bg-optional2);
+} */
+
+/* Estilos para los campos con errores en el formulario */
+/* .form-error {
+  border: 1px solid var(--bg-optional2);
+} */
+
+/* Estilos para los mensajes de éxito */
+/* .success {
+  color: var(--bg-optional1);
+  font-size: 14px;
+  margin-top: 5px;
+} */
+
+.MapSize {
+  width: 300px;
+  height: 300px;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  transition: 0.3s;
+}
+
+.MapSize:hover {
+  transform: scale(1.1);
+}
+
+
+
+@media screen and (max-width: 900px) {
+  .Create-Locals-Form .termAndConditions-container {
+    width: 70%;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .Create-Locals-Form .termAndConditions-container {
+      width: 90%;
+      height: 100%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+  
+}

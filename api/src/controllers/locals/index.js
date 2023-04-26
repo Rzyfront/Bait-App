@@ -6,6 +6,7 @@ const getSpecialties = require('./getSpecialties');
 const paramLocal = require('./paramLocal');
 const postLocal = require('./postLocal');
 const putLocal = require('./putLocal');
+const postAcquisitionRequest = require('./postAcquisitionRequest');
 
 module.exports = {
   deleteLocal,
@@ -16,4 +17,5 @@ module.exports = {
   paramLocal,
   postLocal,
   putLocal,
+  postAcquisitionRequest,
 };
