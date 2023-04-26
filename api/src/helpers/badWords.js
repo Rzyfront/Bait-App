@@ -18,8 +18,7 @@ const prospectiveApi = async (comment) => {
     const { data } = await comments.analyze(config);
     const { value } = data.attributeScores.TOXICITY.summaryScore;
 
-    console.log(value);
-    return value > 0.5;
+    return value;
   } catch (error) {
     throw new Error(error.message);
   }
