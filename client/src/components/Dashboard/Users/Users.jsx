@@ -21,7 +21,6 @@ const Users = () => {
   useEffect(() => {
     if (filter) {
       dispatch(getAllUsers(filter));
-      console.log(data.users);
     }
   }, [filter || undefined]);
 
@@ -35,13 +34,15 @@ const Users = () => {
     const { name, value } = e.target;
     setFilter({
       ...filter,
-      [name]: value
+      [name]: value,
+      page: 1
     });
   };
   const handleSelect = (e) => {
     setFilter({
       ...filter,
-      role: e.target.value
+      role: e.target.value,
+      page: 1
     });
   };
 
@@ -68,7 +69,7 @@ const Users = () => {
              return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter}/>;
            })
           }
-        <PaginadoU paginade={paginade} />
+        <PaginadoU paginade={paginade} page={filter.page}/>
         <ToastContainer />
       </div>
 
