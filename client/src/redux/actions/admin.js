@@ -7,17 +7,16 @@ export const SUSPEND_USER = 'SUSPEND_USER';
 export const ASSIGN_LOCAL = 'ASSIGN_LOCAL';
 export const REVIEW_DETAIL = 'REVIEW_DETAIL';
 
-export const getAllUsers = ({ page = 1, email, role }) => {
+export const getAllUsers = (filter) => {
   return async (dispatch) => {
     try {
       const query = [];
-      if (email)query.push(`&email=${email}`);
-      if (role)query.push(`&role=${role}`);
-
-      const { data } = await axios(`/administrator/page/${page}?${query.join('')}`);
-      return dispatch({ type: GET_ALL_USERS, payload: data });
+      if (filter.email)query.push(`&email=${filter.email}`);
+      if (filter.role)query.push(`&role=${filter.role}`);
+      const { data } = await axios(`/administrator/page/${filter.page}?${query.join('')}`);
+      dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
-      console.log(error);
+
     }
   };
 };
@@ -58,6 +57,7 @@ export const verifyReview = ({ id, verified }) => async (dispatch) => {
 
 export const changeRole = ({ id, role }) => async (dispatch) => {
   try {
+    console.log(id, role);
     const { data } = await axios.patch(`/administrator/role/${id}`, { role });
     return dispatch({ type: CHANGE_ROLE, payload: data });
   } catch (error) {
@@ -67,12 +67,13 @@ export const changeRole = ({ id, role }) => async (dispatch) => {
 
 export const suspendUser = ({ id }) => async (dispatch) => {
   try {
-    const { data } = await axios.patch(`/administrator/suspend/${id}`);
-    return dispatch({ type: SUSPEND_USER, payload: data });
+    const { status } = await axios.patch(`/administrator/suspend/${id}`);
+    return status;
   } catch (error) {
     console.log(error);
   }
 };
+
 export const assignLocal = ({ userId, localId }) => async (dispatch) => {
   try {
     const { data } = await axios.put('/administrator/assignLocal', { userId, localId });

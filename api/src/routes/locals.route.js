@@ -19,6 +19,7 @@ const {
   paramLocal,
   postLocal,
   putLocal,
+  postAcquisitionRequest,
 } = require('../controllers/locals');
 const { isOwner, isTheOwnerOrAdmin } = require('../middlewares/validateRole');
 
@@ -33,6 +34,7 @@ localsRoute
   .param('localId', paramLocal)
   .post('/', userExtractor, localValidator, postLocal)
   .get('/:localId', getLocalsDetail)
+  .post('/acquisition/:localId', userExtractor, postAcquisitionRequest)
   .post('/:localId/menu', userExtractor, isOwner, isTheOwnerOrAdmin, postMenu)
   .put('/:localId', userExtractor, isOwner, isTheOwnerOrAdmin, localValidator, putLocal)
   .delete('/:localId', userExtractor, isOwner, isTheOwnerOrAdmin, deleteLocal);
