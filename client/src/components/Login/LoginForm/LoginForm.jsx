@@ -90,7 +90,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                 value={user.email}
                                 onChange={handleChange}
                                 autoComplete="off"
-                                placeholder="Usuario"
+                                placeholder="Email"
                             ></input>
                             {errors.email && <PopComent text={errors.email}/> }
 
