@@ -1,61 +1,79 @@
 import style from '../Dashboard.module.css';
 import Paginado from '../Paginado/Paginado';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { getAllReviews, getReviewDetail } from '../../../redux/actions/admin';
+import { Rating as RatingStar } from '@smastrom/react-rating';
+
+const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
 
 const Reseñas = ({ fn }) => {
-  const reseñas = [{
-    id: 1,
-    local: 'La taberna de Rodri',
-    name: 'Edgar Vilchez',
-    title: 'Pesimo servicio',
-    stars: '2'
-  }, {
-    id: 1,
-    local: 'K1LO',
-    name: 'Juan Vargas',
-    title: 'Probando...',
-    stars: '4'
-  }, {
-    id: 1,
-    local: 'Amanecer Llanero',
-    name: 'Yubirizaida',
-    title: 'Excelente lugar',
-    stars: '5'
-  }, {
-    id: 1,
-    local: 'Starbucks',
-    name: 'Edgar Vilchez',
-    title: 'Muy caro',
-    stars: '1'
-  }, {
-    id: 1,
-    local: 'Doña Claudia',
-    name: 'Franco Gutierrez',
-    title: 'Comida con pelos',
-    stars: '1'
-  }];
+  const dispatch = useDispatch();
+  const { adminReviews } = useSelector(state => state);
+  const [allReviews, setAllReviews] = useState({});
+  const [status, setStatus] = useState('unVerified');
 
+  useEffect(() => {
+    dispatch(getAllReviews({}));
+  }, []);
+
+  useEffect(() => {
+    dispatch(getAllReviews({ page: 1, verified: status }));
+  }, [status]);
+
+  useEffect(() => {
+    setAllReviews(adminReviews);
+  }, [adminReviews]);
+
+  const setReviewsByPage = (page) => {
+    dispatch(getAllReviews({ page, verified: status }));
+  };
+
+  const redirectDetail = (e) => {
+    const value = e.target.value;
+    const detail = adminReviews.reviews.find(e => e.id === Number(value));
+    dispatch(getReviewDetail(detail));
+    fn(3, e);
+  };
+
+  const selectStatusReview = (e) => {
+    const { value } = e.target;
+    setStatus(value);
+  };
   return (
     <div className={style.options}>
         <h2 className={style.nameSection}>Reseñas</h2>
+        <select
+          value={status}
+          name = "status"
+          className="RatingOrder"
+          onChange={selectStatusReview}
+        >
+          <option value="unVerified" >Sin verificar</option>
+          <option value="archived">Archivados</option>
+          <option value="verified" >Verificados</option>
+        </select>
         <div className={style.containerUserCard}>
             {
-                reseñas.map(u => <>
-        <div className={style.userCard}>
-            <img className={style.userIcon} src="https://i0.wp.com/lamiradafotografia.es/wp-content/uploads/2014/07/foto-perfil-psicologo-180x180.jpg?resize=180%2C180"></img>
-            <div className={style.nameAndUser}>
-            <p className={style.name}>{u.local}</p>
-            <p className={style.usernames}>{u.name}</p>
-            </div>
-            <div className={style.titleAndStars}>
-            <p className={style.name}>{u.title}</p>
-            <p className={style.usernames}>{u.stars} estrellas</p>
-            </div>
-            <button className={style.buttonExaminar} onClick={() => fn(3)}>Examinar</button>
-        </div>
-        </>
+                allReviews?.reviews?.map((u) =>
+                  <div className={style.userCard} key={u?.id}>
+                      <img className={style.userIcon} src={u?.User?.Image || imageDefault}></img>
+                      <div className={style.nameAndUser}>
+                      <p className={style.name}>{u?.local}</p> { // incluir nombre del local
+                      }
+                      <p className={style.usernames}>{u?.User?.name}</p>
+                      </div>
+                      <div className={style.titleAndStars}>
+                        <p className={style.name}>{u?.title}</p>
+                        <div className="RatingGroup">
+                            <RatingStar readOnly style={{ maxWidth: 100 }} value={u?.rating || 5} />
+                        </div>
+                      </div>
+                      <button className={style.buttonExaminar} value={u?.id} onClick={redirectDetail}>Examinar</button>
+                  </div>
                 )}
         </div>
-        <Paginado/>
+        <Paginado totalPages={allReviews?.totalPages} setReviewsByPage={setReviewsByPage}/>
     </div>
   );
 };

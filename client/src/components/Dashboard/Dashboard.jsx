@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   const changeSection = (n, e) => {
     setSection(n);
-    e.target.style.backgroundColor = 'black';
+  // e.target.style.backgroundColor = 'black';
   };
 
   return (

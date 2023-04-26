@@ -46,7 +46,9 @@
 }
 
 @media screen and (max-width: 750px) {
-    .containerCardsall .widthmap {
-        display: none;
+    .containerCardsall {
+        overflow: auto;
+        flex-direction: column;
+        justify-content: start;
     }
 }

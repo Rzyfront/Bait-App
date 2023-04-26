@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable camelcase */
 import axios from 'axios';
 /// ///names/////////////
