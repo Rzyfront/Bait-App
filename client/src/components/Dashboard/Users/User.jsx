@@ -28,7 +28,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter }) => {
         autoClose: 2000
       });
     } else {
-      dispatch(changeRole({ id, role: selector }));
+      await dispatch(changeRole({ id, role: selector }));
 
       toast.success('¡Rol cambiado satisfactoriamente!', {
         position: toast.POSITION.TOP_CENTER,
