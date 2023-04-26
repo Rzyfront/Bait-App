@@ -227,7 +227,7 @@
 
 @media screen and (max-width:750px) {
     .ReviewsForm .Container {
-            width: 450px;
+            width: 400px;
             height: 700px;
             flex-direction: column;
             align-items: flex-start;

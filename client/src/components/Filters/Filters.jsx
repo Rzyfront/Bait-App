@@ -82,7 +82,7 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
   return (
     <div className="Filters">
       <div className='Left-Home-Buttons'>
-        <Link to="/map">
+        <Link to="/createplace">
         <div className="AddPlace">
           <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
         </div>
