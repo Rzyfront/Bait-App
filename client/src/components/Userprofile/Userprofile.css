@@ -1,4 +1,36 @@
 
+
+.infoSection{
+  
+    width: 60%;
+    height: 30vh;
+    margin: 0 auto;
+    margin-top: 10rem;
+    border-radius: 3rem;
+
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        color: var(--prymary);
+        background-color: var(--bg-primary);
+        margin: 0 auto;
+        margin-top: 8rem;
+        padding: 10px 2px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        text-align: left;
+        transition: 0.3s;
+   
+    
+}
+
+.userAvatarContainer{
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
 .userProfileContainer{
     height: calc(100vh - 60px);
     overflow: auto;
@@ -7,11 +39,20 @@
     text-align: center;
    
 }
+
 .userInfo{
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 5vh;
+ 
    
+}
+.userImage{
+    position: relative;
+    top: -10px;
+    left: 40px;
+    
 }
 .imgProfileContainer{
 
@@ -25,23 +66,55 @@ height: 100%;
 object-fit: contain;
 }
 
-.reviewContainer{
-    background: var(--bg-secondary);
-    color: white;
-}
-.reviewTitle{
-    text-align: center;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    color: inherit;
-}
-.reviewInfoContainer{
+.userButtonContainer{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    color:inherit;
-    
+    width: 80%;
+    margin:0 auto;
+    position: relative;
+    top: 120px;
+   justify-content: space-around;
 }
+.userButtonContainer button { 
+width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.1s;
+    opacity: 0.8;
+    background-color: rgb(213, 213, 213);
+    cursor: pointer;
+}
+.userButtonContainer button:hover { 
+    background-color: var(--bg-tertiary);
+        opacity: 1;
+}
+.mainContainer{
+    width: 60%;
+    margin: 0 auto;
+}
+
+
+.reviewTittle{
+    background-color: var(--bg-primary);
+    width: 50%;
+   
+    margin: 0 auto;
+    margin-top: 2rem;
+    border-radius: 3rem;
+
+        padding: 10px 2px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        text-align: center;
+        transition: 0.3s;
+ 
+}
+
+
+
 
 .imgContainer {
     width: 20%;
@@ -52,17 +125,52 @@ object-fit: contain;
     object-fit: contain;
    
 }
+
+.reviewContainer {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--prymary);
+    background-color: var(--bg-primary);
+    margin: 20px;
+    padding: 10px 2px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    text-align: left;
+    transition: 0.3s;
+
+}
+
+.mainContainer :hover {
+
+    box-shadow: rgba(0, 0, 0, 0.37) 0px 2px 4px;
+        transform: scale(1.01);
+        cursor: pointer;
+
+}
+
+.reviewInfoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: inherit;
+
+}
+.reviewTitle {
+    text-align: center;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: inherit;
+}
 .reviewCalification{
     width: 50%;
     margin: 1px solid black;
     text-align: left;
    
 }
-.reviewContainer { 
-    border:  1px solid black;
-    padding: 2rem;
-    margin: 1rem;
-}
+
 
 .reviewButtons{
     display: flex;
@@ -73,21 +181,24 @@ object-fit: contain;
     color: inherit;
     align-items: center;
         
-        font-size: 20px;
-        color: var(--tertiary);
-        width: 140px;
-        height: 40px;
-        border: none;
-        background-color: var(--btn-secondary);
-        border-radius: 7px;
-        gap: 3px;
-        padding: 5px;
-        transition: 0.3s;
+    width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition: 0.1s;
+        opacity: 0.8;
+        background-color: rgb(213, 213, 213);
         cursor: pointer;
-        border: 1px solid white;
 }
 
-.reviewButtons button:hover{
-    background-color: var(--btn-primary);
-    
+
+
+.userImage{
+    border-radius: 20rem;
+    width: 150px;
+    height: 150px;
 }
+

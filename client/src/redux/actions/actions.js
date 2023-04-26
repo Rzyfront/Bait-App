@@ -9,7 +9,10 @@ export const HOMEPAGE = 'HOMEPAGE';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
+
+//ACTION TYPES USERPROFILE
 export const USER_PROFILE = "USER_PROFILE"
+export const USER_POST_IMG = "USER_POST_IMG"
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
@@ -206,4 +209,23 @@ export const getUserProfile = (id)=>{
     }
 
 }
+}
+
+export const userPostImg = (img) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(`http://localhost:3001/user/`,{img})
+
+      if (response.data.success === true) {
+        dispatch({
+          type: USER_POST_IMG,
+          payload: response.data
+        });
+      }
+
+    } catch (error) {
+      console.log(error.message);
+    }
+
+  }
 }

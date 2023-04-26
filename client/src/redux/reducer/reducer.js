@@ -1,5 +1,5 @@
 
-import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER,GET_REVIEWS,USER_PROFILE} from '../actions/actions';
+import { ORDER, RESET, CREATE_USER, HOMEPAGE, CHECKUSER, RESETUSER, GET_REVIEWS, USER_PROFILE, USER_POST_IMG } from '../actions/actions';
 import { POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU } from '../actions/menuDish';
 import { SEARCH_BY_QUERY,SEARCH_BY_FILTERS,SAVE_SEARCH_HOME } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
@@ -141,6 +141,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
       ...state,
       userProfile:payload 
     }
+
+    case USER_POST_IMG:
+      return {
+        ...state,
+        user: { ...user, Image: payload }
+      }
 
     default:
       return { ...state };
