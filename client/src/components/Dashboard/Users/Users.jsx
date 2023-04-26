@@ -15,7 +15,7 @@ const Users = () => {
     role: '',
     email: ''
   });
-
+  console.log(data);
   const dispatch = useDispatch();
 
   useEffect(() => {
