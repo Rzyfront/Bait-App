@@ -15,17 +15,17 @@ const Users = () => {
     role: '',
     email: ''
   });
-  console.log(data);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (filter) {
       dispatch(getAllUsers(filter));
+      console.log(data.users);
     }
   }, [filter || undefined]);
 
   const paginade = (e) => {
-    console.log(e);
     setFilter({
       ...filter,
       page: e
@@ -65,7 +65,7 @@ const Users = () => {
 
         {data && data.users &&
            data.users.map((data, index) => {
-             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} />;
+             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter}/>;
            })
           }
         <PaginadoU paginade={paginade} />
