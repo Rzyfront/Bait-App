@@ -35,12 +35,10 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
       ...user,
       [name]: value
     }));
-    console.log(errors);
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('bye');
     if (Object.entries(errors).length === 0) {
       dispatch(logIn(user));
       return;
