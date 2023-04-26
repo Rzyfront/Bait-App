@@ -4,7 +4,7 @@ import { POST_MENU, ERROR_DISH, SUCCESS_DISH, SUCCESS_MENU, ERROR_MENU, GET_MENU
 import { SEARCH_BY_QUERY, SEARCH_BY_FILTERS, SAVE_SEARCH_HOME } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
-import { GET_ALL_USERS, GET_ALL_REVIEWS } from '../actions/admin';
+import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL } from '../actions/admin';
 
 const initialState = {
   cards: {},
@@ -17,14 +17,15 @@ const initialState = {
   newMenu: {},
   reset: [],
   reviews: [],
-  searchName: { input: '', map: '' }
+  searchName: { input: '', map: '' },
   success: null,
   successDish: null,
   successMenu: null,
-   ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
+  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
   user: {},
   users: {},
-  adminReviews: {}
+  adminReviews: {},
+  adminReviewDetail: {}
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -146,6 +147,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         adminReviews: payload
+      };
+    case REVIEW_DETAIL:
+      return {
+        ...state,
+        adminReviewDetail: payload
       };
     default:
       return { ...state };

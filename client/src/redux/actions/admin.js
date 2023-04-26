@@ -5,6 +5,7 @@ export const VERIFY_REVIEWS = 'VERIFY_REVIEWS';
 export const CHANGE_ROLE = 'CHANGE_ROLE';
 export const SUSPEND_USER = 'SUSPEND_USER';
 export const ASSIGN_LOCAL = 'ASSIGN_LOCAL';
+export const REVIEW_DETAIL = 'REVIEW_DETAIL';
 
 export const getAllUsers = ({ page = 1, email, role }) => {
   return async (dispatch) => {
@@ -13,7 +14,7 @@ export const getAllUsers = ({ page = 1, email, role }) => {
       if (email)query.push(`&email=${email}`);
       if (role)query.push(`&role=${role}`);
 
-      const { data } = await axios(`/administator/page/${page}?${query.join('')}`);
+      const { data } = await axios(`/administrator/page/${page}?${query.join('')}`);
       return dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
       console.log(error);
@@ -24,7 +25,7 @@ export const getAllUsers = ({ page = 1, email, role }) => {
 export const getAllReviews = ({ page = 1, verified = 'unVerified' }) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios(`/administator/reviews?page=${page}&verified=${verified}`);
+      const { data } = await axios(`/administrator/reviews?page=${page}&verified=${verified}`);
       return dispatch({ type: GET_ALL_REVIEWS, payload: data });
     } catch (error) {
       console.log(error);
@@ -78,5 +79,13 @@ export const assignLocal = ({ userId, localId }) => async (dispatch) => {
     return dispatch({ type: SUSPEND_USER, payload: data });
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getReviewDetail = (detail) => {
+  try {
+    return { type: REVIEW_DETAIL, payload: detail };
+  } catch (err) {
+    console.log(err);
   }
 };
