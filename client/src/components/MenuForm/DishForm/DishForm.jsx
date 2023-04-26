@@ -26,7 +26,6 @@ const DishForm = ({ menuId }) => {
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setDish({
       ...dish,
       [name]: value
@@ -125,10 +124,6 @@ const DishForm = ({ menuId }) => {
             dishId={dishId}
             errors={errors}
           />
-          {errors.name && swal(`${errors.name}`)}
-          {errors.type && swal(`${errors.type}`)}
-          {errors.price && swal(`${errors.price}`)}
-          {errors.description && swal(`${errors.description}`)}
       {
         dishId
           ? <button onClick={handleUpdate} className='btnDish' type='submit'>Actualizar</button>

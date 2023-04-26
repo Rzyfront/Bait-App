@@ -12,16 +12,20 @@ function Menu () {
   const { menu, successDish } = useSelector(state => state);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
+  const [editText, setEditText] = useState('Editar');
 
-  const handleSelectChange = (e) => {
-    const { value } = e.target;
+  const handleMenuChange = (e) => {
+    const { name } = e.target;
 
-    if (value === 'agregar') {
+    if (name === 'addMenu') {
       window.open(`/menu/${id}`, '_blank');
-    } else if (value === 'editar') {
-      setEdit(true);
+    } else if (name === 'editMenu') {
+      setEdit(!edit);
+      setEditText(edit ? 'Editar' : 'Finalizar edición');
     }
   };
+
+  console.log(menu);
 
   const delDish = (dishId) => {
     swal({
@@ -50,10 +54,11 @@ function Menu () {
   };
 
   const editMenu = (menuId) => {
-    window.open(`/menu/${menuId}`, '_blank');
+    window.open(`/updateMenu/${menuId}`, '_blank');
   };
 
   const delMenu = (menuId) => {
+    console.log('clicked');
     dispatch(deleteMenu(menuId));
   };
 
@@ -63,31 +68,34 @@ function Menu () {
 
   return (
     <div className="Menu">
-      <div className="TitleGroup">
-        <h2 className="Menu-Title">Menu</h2>
-        <div className="Decorator"></div>
+      <div className="Menu-TitleGroup">
+        <div>
+          <h2 className="Menu-Title">Menú</h2>
+          <div className="Decorator"></div>
+        </div>
+        <div className='buttons-menu'>
+          <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
+          <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección</button>
+        </div>
       </div>
-
-      <select defaultValue="default" onChange={handleSelectChange}>
-        <option value="default" disabled>Actualizar</option>
-        <option value="editar">Editar</option>
-        <option value="agregar">Agregar</option>
-      </select>
 
       <div className='Menu-List'>
         {menu && (
           menu.map((section, index) => {
             return (
-              <>
-                {<div>
-                  {edit && <><p onClick={() => delMenu(id)} className='iconsDishCard'>
-                    <FaTrash className='delete-icon' />
-                    </p>
-                     <p onClick={() => editMenu(id)} className='iconsDishCard'>
-                    <FaEdit className='edit-icon' />
-                    </p></>}
+              <div className='section-menu' key={index}>
+                {<div className='section-menu-title'>
                   <h4 key={index} className='section-title'>{section.type}</h4>
+                  {edit && <div>
+                     <p onClick={() => editMenu(section.id)} className='iconsDishCard'>
+                        <FaEdit className='edit-icon' />
+                    </p>
+                    <p onClick={() => delMenu(section.id)} className='iconsDishCard'>
+                        <FaTrash className='delete-icon' />
+                    </p>
+                  </div>}
                 </div>}
+                <div className='menu-cards-container'>
                 {section.Dishes?.map(({ id, type, name, Image, price, description }, subIndex) => {
                   return (
                     <DishCard
@@ -105,7 +113,8 @@ function Menu () {
                   );
                 })
                 }
-              </>
+                </div>
+              </div>
             );
           })
         )}

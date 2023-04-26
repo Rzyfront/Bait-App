@@ -12,35 +12,40 @@ import './MenuForm.css';
 const MenuForm = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { successMenu, newMenu } = useSelector(state => state);
+  const { successMenu, newMenu, menu } = useSelector(state => state);
   const [showDish, setShowDish] = useState(false);
+  console.log(menu);
 
-  const [menu, setMenu] = useState({
+  const [menuForm, setMenuForm] = useState({
     type: ''
   });
   const handleSelect = (event) => {
     const { name, value } = event.target;
-    setMenu({
+    setMenuForm({
       [name]: value
     });
+  };
+
+  const isTypeAlreadyInMenu = () => {
+    console.log(menu.some((section) => foodTypes.includes(section.type)));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (menu.type !== '') {
-      dispatch(postMenu(id, menu)).then(() => {
+    if (menuForm.type !== '') {
+      dispatch(postMenu(id, menuForm));
+      if (successMenu) {
         toast.success('Se agregó la sección', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
         });
-        setShowDish(true);
-      }).catch(() => {
+      } else {
         toast.error('Falló al crear', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
         });
-      });
+      }
     } else {
       swal('Campo obligatorio', 'Selecciona la sección del menú.');
     }
@@ -50,28 +55,31 @@ const MenuForm = () => {
     if (successMenu) {
       setShowDish(true);
     }
-  }, [successMenu]);
+  }, [showDish, successMenu]);
 
   return (
         <div className='Menu-Form-Container'>
           <ToastContainer />
           { !successMenu && (
             <>
-              <h2>Agrega una sección</h2>
+              <h2>Nueva sección</h2>
               <form className='Menu-Form'>
-                <label>Sección</label>
                 <select
                   name='type'
                   className='type'
                   onChange={handleSelect}
-                  value={menu.type}
+                  value={menuForm.type}
                   required
                 >
-                  <option value='defaultValue' defaultValue>
+                  <option value="defaultValue" defaultValue>
                     Selecciona
                   </option>
-                  {foodTypes.map(type => (
-                    <option key={type} value={type}>
+                  {foodTypes.map((type) => (
+                    <option
+                      key={type}
+                      value={type}
+                      disabled={isTypeAlreadyInMenu()}
+                    >
                       {type}
                     </option>
                   ))}

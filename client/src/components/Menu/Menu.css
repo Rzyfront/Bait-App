@@ -3,7 +3,31 @@
     height: 95%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+}
+.Menu-TitleGroup {
+    display: flex;
+    justify-content: space-between;
+}
+.Menu .Menu-TitleGroup {
+     z-index: 99;
+     width: 100%;
+     height: 10%;
+     padding: 0 20px;
+     display: flex;
+     justify-content: space-between;
+     flex-direction: row;
+     align-items: center;
+     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+ }
+.TitleGroup .Decorator {
+    width: 60%;
+    height: 3px;
+    background-color: var(--bg-tertiary);
+    border-radius: 10px;
+}
+
+.Menu .Menu-Title .section-menu {
+    display: flex;
 }
 
 .Menu .Menu-Title {
@@ -11,6 +35,7 @@
     padding-right: 20px;
     border-right: 1px solid var(--primary);
     font-family: var(--title);
+
 }
 
 .Menu .Menu-List {
@@ -21,22 +46,10 @@
     flex-wrap: wrap;
     justify-content: space-around;
     overflow: scroll;
+    margin-top: 4rem;
 }
 
-.TitleGroup {
-    width: 100%;
-    height: 20%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 
-.TitleGroup .Decorator {
-    width: 60%;
-    height: 3px;
-    background-color: var(--bg-tertiary);
-    border-radius: 10px;
-}
 
 .menuBtn {
     align-self: flex-end;
@@ -50,7 +63,47 @@
     border-bottom: 2px solid var(--btn-primary);
 
 }
+.Menu .Menu-List .section-menu-title{
+    display: flex;
+    gap: 20px;
+}
 
-.section-title {
-    display: block;
+.Menu .Menu-List .section-menu-title div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.Menu .Menu-List .section-menu-title .iconsDishCard:hover {
+    color: var(--btn-primary);
+}
+
+.Menu .buttons-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    right: 30px;
+
+}
+
+.Menu .buttons-menu button {
+    width: fit-content;
+    padding: 0.4rem 0.7rem;
+    border: none;
+    font-size: 15px;
+    font-family: var(--subtitle);
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
+    transition: 0.3s;
+}
+
+.Menu .menu-cards-container {
+    display: flex;
+}
+
+.Menu .buttons-menu .btn-edit-menu:hover{
+    background-color: var(--btn-primary);
+}
+.Menu .buttons-menu .btn-add-sect:hover {
+    background-color: var(--btn-primary);
 }

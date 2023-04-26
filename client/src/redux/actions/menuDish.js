@@ -33,8 +33,8 @@ export const postMenu = (localId, menu) => {
       }
     } catch (error) {
       dispatch({
-        type: ERROR_MENU,
-        payload: error.message
+        type: SUCCESS_MENU,
+        payload: false
       });
       console.log(error);
     }
@@ -44,14 +44,15 @@ export const postMenu = (localId, menu) => {
 export const deleteMenu = (menuId) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`locals/menu/${menuId}`);
-      if (response.status === 204) {
+      const response = await axios.delete(`locals/menu/${menuId}`);
+      if (response.status === 201) {
         dispatch({
           type: SUCCESS_MENU,
           payload: response.data.success
         });
       }
     } catch (error) {
+      console.log(error);
       dispatch({
         type: ERROR_MENU,
         payload: error.message

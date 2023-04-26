@@ -2,7 +2,7 @@ import { Input, Textarea } from '@nextui-org/react';
 import '../DishForm.css';
 import { useSelector } from 'react-redux';
 
-const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image, dishId }) => {
+const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId }) => {
   const { menu } = useSelector(state => state);
 
   const findDish = (dishId) => {
@@ -31,6 +31,8 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image, d
                         name='name'
                         required
                     />
+                    {errors.name && <span className='danger'>{errors.name}</span>}
+                    {errors.type && <span className='danger'>{errors.type}</span>}
 
                     <select
                         name='type'
@@ -58,6 +60,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image, d
                         name='price'
                         required
                     />
+                    {errors.price && <span>{errors.price}</span>}
                     <Textarea
                         underlined
                         labelPlaceholder="Descripción"
@@ -69,6 +72,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, image, d
                         name='description'
                         required
                     />
+                    {errors.description && <span>{errors.description}</span>}
                     <input
                         type='file'
                         name='image'
