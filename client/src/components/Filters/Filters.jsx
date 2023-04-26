@@ -4,7 +4,7 @@ import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
 import FilterGroup from './FilterGroup/FilterGroup';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { TbMapOff, TbMap2 } from 'react-icons/tb';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -92,6 +92,7 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
         </div>
       </div>
 
+      <>
       <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
@@ -101,6 +102,15 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
       filters = {filters}
       special = {special}
       />
+
+        <div className='Map-Toggle-Group' onClick={toggleMapMenu
+          ? () => setToggleMapMenu(false)
+          : () => setToggleMapMenu(true)}>
+          {toggleMapMenu
+            ? <TbMapOff/>
+            : <TbMap2/>}
+        </div>
+        </>
 
       <div className='ToggleFilterButton' onClick={toggleFilterModal
         ? () => setToggleFilterModal(false)
