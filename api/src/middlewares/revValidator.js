@@ -38,7 +38,7 @@ module.exports = async (req, res, next) => {
     // verifiedTypeOf(image, 'object', 'image');
     // verifiedTypeOf(image.url, 'string', 'url');
 
-    if (await prospectiveApi(comment))req.verified = 'archived';
+    req.toxicity = await prospectiveApi(comment);
     next();
   } catch (error) {
     res.status(404).json({ error: error.message });
