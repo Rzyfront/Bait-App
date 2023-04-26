@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import style from '../Dashboard.module.css';
-import PaginadoU from '../Paginado/PaginadoU';
+import PaginadoU from '../Pagination/PaginationU';
 // import swal from '@sweetalert/with-react';
 import { getAllUsers } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
