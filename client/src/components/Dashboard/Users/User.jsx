@@ -29,11 +29,12 @@ const User = ({ id, lastname, age, role, image, name, email, filter }) => {
       });
     } else {
       dispatch(changeRole({ id, role: selector }));
-      dispatch(getAllUsers(filter));
+
       toast.success('¡Rol cambiado satisfactoriamente!', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
+      dispatch(getAllUsers(filter));
     }
   };
 

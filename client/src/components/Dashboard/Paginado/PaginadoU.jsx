@@ -1,13 +1,10 @@
-import { useState, useEffect } from 'react';
+
 import style from './Paginado.module.css';
 import { useSelector } from 'react-redux';
 
 const PaginadoU = ({ paginade, page }) => {
   const { totalPages } = useSelector((state) => state.users);
-  //  const [page, setPage] = useState(page);
   const hadlepage = (e) => {
-    // setPage(page + e);
-    console.log(page + e);
     paginade(page + e);
   };
 
