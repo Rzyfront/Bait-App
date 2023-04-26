@@ -1,18 +1,19 @@
 import { Link } from 'react-router-dom';
-export default function TYC ({ src, handleClick }) {
+import BaitLogo from '../../../assets/LogoBait.svg';
+export default function TYC ({ setTemsAndConditions }) {
   return (
-        <>
+        <div className='termAndConditions-container'>
           <div className='termAndConditions animated-element'>
               <Link to='/home/1?name=&city=' className='LinkLogo'>
                   <img
-                      src={src}
+                      src={BaitLogo}
                       alt='Bait'
                       className='Logo'
                       width='60px'
                       height='60px'
                   />
               </Link>
-              <h2 >Terminos y <span>Condiciones</span></h2>
+              <h2 >Términos y <span>Condiciones</span></h2>
               <p>Bienvenido a Bait, la plataforma que permite a los usuarios buscar, reservar y reseñar locales y restaurantes. Al utilizar nuestra aplicación móvil, aceptas los siguientes términos y condiciones:</p>
 
               <p>Registro de usuario: Para utilizar nuestros servicios, debes registrarte como usuario en nuestra aplicación móvil. Debes proporcionar información precisa y actualizada al registrarte. Si descubrimos que has proporcionado información falsa o inexacta, podemos suspender o cerrar tu cuenta.</p>
@@ -33,12 +34,12 @@ export default function TYC ({ src, handleClick }) {
 
               <p>Ley aplicable y jurisdicción: Estos términos y condiciones se rigen por las leyes del país donde se encuentra Bait. Cualquier disputa relacionada con estos términos y condiciones será resuelta por los tribunales competentes en el lugar donde se encuentra Bait.</p>
               <div className='termsButtons'>
-                  <button className='Ok' onClick={handleClick}>Aceptar</button>
+                  <button className='Ok' onClick={() => setTemsAndConditions(true)}>Aceptar</button>
                   <Link to='/home/1?name=&city='>
                       <button className='No' >Rechazar</button>
                   </Link>
               </div>
           </div>
-        </>
+        </div>
   );
 }
