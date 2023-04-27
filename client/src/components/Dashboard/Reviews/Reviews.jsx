@@ -61,11 +61,10 @@ const Reseñas = ({ fn }) => {
                   <div className={style.userCard} key={u?.id}>
                       <img className={style.userIcon} src={u?.User?.Image || imageDefault}></img>
                       <div className={style.nameAndUser}>
-                      <p className={style.name}>{u?.local}</p> { // incluir nombre del local
-                      }
-                      <p className={style.usernames}>{u?.User?.name}</p>
+                        <p className={style.name}>{u?.Local?.name}</p>
+                        <p className={style.usernames}>{u?.User?.name}</p>
                       </div>
-                      <div className={style.titleAndStars}>
+                      <div className={style.nameAndUser}>
                         <p className={style.name}>{u?.title}</p>
                         <div className="RatingGroup">
                             <RatingStar readOnly style={{ maxWidth: 100 }} value={u?.rating || 5} />

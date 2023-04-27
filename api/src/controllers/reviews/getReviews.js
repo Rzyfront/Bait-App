@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
       where: req.where,
       include: [{
         model: User,
-        attributes: ['name', 'lastname', 'id'],
+        attributes: ['name', 'lastname', 'id', 'email', 'role', 'age'],
         include: [{ model: Image, attributes: ['url'] }],
       }, { model: Image, attributes: ['url'] },
       { model: Local, attributes: ['name', 'id'] },
@@ -33,6 +33,12 @@ module.exports = async (req, res) => {
  *     description: Este endpoint retorna todas las reviews de la DB paginadas de a 10. Para acceder a él es necesario estar autenticado como administrador y enviar un JWT en el header de la solicitud que contenga un payload con una propiedad "role" cuyo valor sea "admin". Además, se pueden enviar opcionalmente parámetros de query para filtrar por verified y page.
  *     tags: [Administrador]
  *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación JWT.
  *       - in: query
  *         name: verified
  *         description: Indica el estado de verificación de las reviews que se quieren filtrar.
