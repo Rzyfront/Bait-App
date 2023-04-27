@@ -15,6 +15,7 @@ const Pagination = ({ totalPages, filters }) => {
     numbers.push(
       <Link to={`${path(i + 1, name, city, filters)}`} key={i}>
       <div
+      key={i}
         className={`paginatioNumbers animated-pagination ${Number(id) === i + 1 ? 'pagination_on' : 'pagination_off'}`}
       >
           <p>{i + 1}</p>

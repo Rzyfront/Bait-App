@@ -58,8 +58,7 @@ function App () {
         <Route path='/userprofile/:userId' element={<Userprofile />} />
         <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
-        <Route path='/updateMenu/:menuId' element={<DishForm />} />
-        <Route path='/updateDish/:dishId' element={<DishForm/>} />
+        <Route path='/updateDish/:id' element={<DishForm/>} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

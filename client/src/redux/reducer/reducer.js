@@ -6,7 +6,7 @@ import {
   CHECKUSER,
   RESETUSER,
   GET_REVIEWS,
-  USER_PROFILE, 
+  USER_PROFILE,
   USER_POST_IMG
 } from '../actions/actions';
 import {
@@ -25,7 +25,7 @@ import {
 } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
-import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL } from '../actions/admin';
+import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL, GETLOCALSADMIN } from '../actions/admin';
 
 const initialState = {
   cards: {},
@@ -48,7 +48,8 @@ const initialState = {
   users: {},
   adminReviews: {},
   adminReviewDetail: {},
-  userProfile:[]
+  adminLocals: {},
+  userProfile: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -182,17 +183,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         adminReviewDetail: payload
       };
-        case USER_PROFILE :
-    return {
-      ...state,
-      userProfile:payload
-    }
+    case GETLOCALSADMIN:
+      return {
+        ...state,
+        adminLocals: payload
+      };
+    case USER_PROFILE :
+      return {
+        ...state,
+        userProfile: payload
+      };
 
     case USER_POST_IMG:
       return {
         ...state,
-        user: { ...user, Image: payload }
-      }
+        user: { payload }
+      };
     default:
       return { ...state };
   }

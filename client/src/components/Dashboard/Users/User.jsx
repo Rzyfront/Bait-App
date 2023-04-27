@@ -2,11 +2,13 @@ import './User.css';
 import imageDefault from '../../../assets/imagenDefault.png';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { changeRole, suspendUser } from '../../../redux/actions/admin';
-import { useDispatch } from 'react-redux';
+import { changeRole, createAdmin, getAllUsers, suspendUser } from '../../../redux/actions/admin';
+import { useDispatch, useSelector } from 'react-redux';
 import { FiUserX } from 'react-icons/fi';
 
-const User = ({ id, lastname, age, role, image, name }) => {
+const User = ({ id, lastname, age, role, image, name, email, filter }) => {
+  const { user } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
   const [selector, setSelector] = useState(role);
 
@@ -15,18 +17,24 @@ const User = ({ id, lastname, age, role, image, name }) => {
     setSelector(value);
   };
 
-  const changeType = () => {
+  const changeType = async () => {
+    if (selector === 'admin') {
+      await dispatch(createAdmin({ id }));
+      dispatch(getAllUsers(filter));
+    }
     if (selector === role) {
       toast.error(`El usuario ya es ${role}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
     } else {
-      dispatch(changeRole({ id, role: selector }));
+      await dispatch(changeRole({ id, role: selector }));
+
       toast.success('¡Rol cambiado satisfactoriamente!', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
+      dispatch(getAllUsers(filter));
     }
   };
 
@@ -48,7 +56,7 @@ const User = ({ id, lastname, age, role, image, name }) => {
   return <div className='userContainer'>
         {image ? <img src={image.url} alt='user foto'/> : <img src={imageDefault} alt='default'/>}
         <div className='containerName'>
-        <h3>{name} {lastname}</h3>
+        <h3>{email}</h3>
         </div>
       {role !== 'superAdmin' && role !== 'admin'
         ? <div className='selectdata'>
@@ -60,6 +68,7 @@ const User = ({ id, lastname, age, role, image, name }) => {
           <option value={role} defaultValue>{role}</option>
                   {role !== 'user' && <option value="user" >user</option>}
                   {role !== 'owner' && <option value="owner" >owner</option>}
+          {user.role === 'superAdmin' && <option value="admin" >admin</option>}
 
       </select >
               <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></div>
