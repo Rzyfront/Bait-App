@@ -1,16 +1,13 @@
 import { Input, Textarea } from '@nextui-org/react';
 import '../DishForm.css';
-import { useSelector } from 'react-redux';
 
 const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId }) => {
-  const { menu } = useSelector(state => state);
-
   const findDish = (dishId) => {
     if (dishId) {
-      const updDish = menu.map(menu => {
-        return menu.Dishes.find(dish => dish.id === dishId);
+      const updDish = menu?.map(menu => {
+        return menu?.Dishes.find(dish => dish.id === dishId);
       });
-      dish = updDish[0];
+      console.log('hola', updDish);
     }
   };
 
@@ -19,7 +16,6 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
             {
                 dishId && findDish(dishId)
             }
-
                     <Input
                         underlined
                         labelPlaceholder="Nombre producto"

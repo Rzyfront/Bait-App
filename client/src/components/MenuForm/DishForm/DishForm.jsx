@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
 import { useUploadImage } from '../../../hooks/useUploadImage';
 import './DishForm.css';
 import validateForm from './dishVal';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { postDish, putDish } from '../../../redux/actions/menuDish';
+import { getMenu, postDish, putDish } from '../../../redux/actions/menuDish';
 import Inputs from './Inputs/Inputs';
 import { useParams } from 'react-router-dom';
 
-const DishForm = ({ menuId }) => {
-  const { dishId } = useParams();
+const DishForm = ({ menuId, localId }) => {
+  const { dishId, idMenu } = useParams();
   const { image, loading, handleChangeimage } = useUploadImage();
+  const { menu } = useSelector(state => state);
+  const [postId, setPostId] = useState(null);
+
+  const changeId = (id) => {
+    setPostId(id);
+  };
+
   const dispatch = useDispatch();
   const [title, setTile] = useState(false);
   const [dish, setDish] = useState({
@@ -50,12 +57,6 @@ const DishForm = ({ menuId }) => {
   const handleChangeimages = (event) => {
     handleChangeimage(event);
   };
-
-  useEffect(() => {
-    if (image.length) {
-      setDish({ ...dish, image: image[0] });
-    }
-  }, [image]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -108,12 +109,33 @@ const DishForm = ({ menuId }) => {
     });
   };
 
+  useEffect(() => {
+    if (image.length) {
+      setDish({ ...dish, image: image[0] });
+    }
+  }, [image]);
+
+  useEffect(() => {
+    if (!menu.length) dispatch(getMenu());
+  }, [menu]);
+
+  useEffect(() => {
+    
+  })
+
   return (
   <>
       <ToastContainer />
       <div className='Create-dish-Form animated-element'>
         <div className='dishes_data animated-element'>
-         { title ? <h2>Agrega otro producto</h2> : <h2>Agrega un producto</h2 >}
+          {
+            dishId && <>
+                    { title ? <h2>Agrega otro producto</h2> : <h2>Agrega un producto</h2 > }
+                    </>
+          }
+          {
+            idMenu && <h2>Agregar producto a la sección</h2>
+          }
           <div className='dish-form-container'>
           <Inputs
             handleChange={handleChange}
@@ -123,6 +145,7 @@ const DishForm = ({ menuId }) => {
             image={image}
             dishId={dishId}
             errors={errors}
+            menuId={idMenu}
           />
       {
         dishId

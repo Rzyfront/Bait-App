@@ -1,6 +1,7 @@
 import './Menu.css';
 import DishCard from '../Card/DishCard';
 import swal from 'sweetalert';
+// import Tooltip from './Tooltip/Tooltip';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
@@ -78,8 +79,8 @@ function Menu () {
   };
 
   useEffect(() => {
-    dispatch(getMenu(id));
-  }, [successDel]);
+    if (!menu.length) dispatch(getMenu(id));
+  }, [successDel, menu]);
 
   return (
     <div className="Menu">
@@ -101,14 +102,20 @@ function Menu () {
               <div className='section-menu' key={index}>
                 {<div className='section-menu-title'>
                   <h4 key={index} className='section-title'>{section.type}</h4>
-                  {edit && <div>
-                     <p onClick={() => editMenu(section.id)} className='iconsDishCard'>
-                        <FaEdit className='edit-icon' />
-                    </p>
-                    <p onClick={() => delMenu(section.id)} className='iconsDishCard'>
-                        <FaTrash className='delete-icon' />
-                    </p>
-                  </div>}
+                  {edit && (
+                    <div>
+                      {/* <Tooltip text={'Agregar productos'}> */}
+                        <p onClick={() => editMenu(section.id)} className='iconsDishCard'>
+                          <FaEdit className='edit-icon' />
+                        </p>
+                      {/* </Tooltip> */}
+                      {/* <Tooltip text={'Eliminar'}> */}
+                        <p onClick={() => delMenu(section.id)} className='iconsDishCard'>
+                          <FaTrash className='delete-icon' />
+                        </p>
+                      {/* </Tooltip> */}
+                    </div>
+                  )}
                 </div>}
                 <div className='menu-cards-container'>
                 {section.Dishes?.map(({ id, type, name, Image, price, description }, subIndex) => {
