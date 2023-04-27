@@ -13,7 +13,7 @@ const Navbar = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user);
-  const [barra, setbarra] = useState(false);
+  const [toggleMenuUser, setToggleMenuUser] = useState(false);
   const [toogleLogin, setToggleLogin] = useState(false);
   const ubication = useSelector((state) => state.ubication);
 
@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="all_navbar animated-element">
+    <div id='Navbar' className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
       <Link to={`${location.pathname !== '/' ? '/' : `/home/1?name=&city=${ubication.city}`}`}>
         <img
@@ -50,21 +50,21 @@ const Navbar = () => {
               }}
             >
               <FaUserCircle className="UserIcon" />
-              <h4 className="LogIn"> Iniciar Sesion</h4>
+              <h4 className="LogIn">Ingresar</h4>
             </div>
             )
           : (
-            <div className="nav_login" onClick={barra
+            <div className="nav_login" onClick={toggleMenuUser
               ? () => {
-                  setbarra(false);
+                  setToggleMenuUser(false);
                 }
               : () => {
-                  setbarra(true);
+                  setToggleMenuUser(true);
                 }}
             >
               <FaUserCircle className="UserIcon" />
               <h4 className='Name-User-bar'>{dataUser.user.name}</h4>
-              {barra && <DropdownUser close={close} />}
+              {toggleMenuUser && <DropdownUser close={close} toggleMenuUser={toggleMenuUser}/>}
             </div>
             )}
       </div>

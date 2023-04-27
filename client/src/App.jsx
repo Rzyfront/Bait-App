@@ -4,15 +4,15 @@ import {
   Landing,
   Home,
   Profile,
-  Locales,
   Answers,
   About,
   DataTreatment,
   Dashboard,
   MenuForm,
-  Userprofile
+  DishForm,
+  Userprofile,
+  CreateLocals
 } from './components/components.js';
-import LocalsDatabasic from './components/Locales/LocalsDatabasic';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
@@ -37,7 +37,7 @@ function App () {
   const onUbicacionConcedida = async (posicion) => {
     const { latitude, longitude } = posicion.coords;
     const data = await reverseGeoCoding(longitude, latitude);
-    dispatch(ubicationPagine({ lat: data.location.y, lng: data.location.x, city: data.address.City }));
+    dispatch(ubicationPagine({ lat: data.location.y, lng: data.location.x, city: data.address.City, gps: true }));
     setubication(true);
   };
   function onError (error) {
@@ -49,15 +49,16 @@ function App () {
       <Routes>
         <Route path='/home/:id' element={<Home />} />
         <Route path='/profile/:id' element={<Profile />} />
-        <Route path='/createplace' element={<Locales />} />
+        <Route path='/userprofile' element={<Userprofile />} />
+        <Route path='/createplace' element={<CreateLocals />} />
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />
         <Route path='/dataTreatment' element={<DataTreatment />} />
-        <Route path='/map' element={<LocalsDatabasic />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/userprofile' element={<Userprofile />} />
+        <Route path='/userprofile/:userId' element={<Userprofile />} />
         <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
+        <Route path='/updateDish/:id' element={<DishForm/>} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

@@ -6,7 +6,6 @@
     color: var(--tertiary);
     margin-bottom: 15px;
     border-radius: 10px;
-    font-size: 1rem;
     padding-bottom: 5px;
     padding-top: 5px;
 }
@@ -22,6 +21,8 @@
     display: flex;
     flex-wrap: wrap;
     margin: auto;
+    overflow: auto;
+    font-size: 0.1rem;
 }
 
 .selectdata {
@@ -38,4 +39,15 @@
 .bottonfalse {
     background: rgb(25, 221, 162);
 
+}
+
+.icon {
+    font-size: 1rem;
+    width: 30%;
+    margin: auto;
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: var(--optional2);
 }

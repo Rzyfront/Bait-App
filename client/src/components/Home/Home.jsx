@@ -5,8 +5,8 @@ const Home = () => {
   return (
     <div className="Home animated-element">
       <Navbar />
-      <Filters />
-      <Cards />
+      <Filters/>
+      <Cards/>
       <Footer />
     </div>
   );

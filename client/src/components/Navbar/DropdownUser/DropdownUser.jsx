@@ -1,14 +1,18 @@
+import { useEffect } from 'react';
 import { RiUserLine, RiSettingsLine, RiLogoutCircleLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const DropdownUser = ({ close }) => {
+const DropdownUser = ({ close, toggleMenuUser }) => {
+  const role = useSelector(store => store.user.user.role);
+  useEffect(() => {}, [toggleMenuUser]);
   return (
-          <div className='DropDown-Component'>
+          <div className={`DropDown-Component ${toggleMenuUser && 'scale-up-tr'}`}>
 
                 <div className='dropDown-Container'>
                     <ul className="dropdown-menu">
                     <li>
-                        <Link to="">
+                        <Link to="/userprofile">
                             <RiUserLine /> Perfil
                         </Link>
                     </li>
@@ -17,11 +21,11 @@ const DropdownUser = ({ close }) => {
                             <RiSettingsLine /> Configuraciones
                         </Link>
                     </li>
-                     <li>
+                    {(role === 'superAdmin' || role === 'admin') && <li>
                         <Link to="/dashboard">
                             DashBoard Admin
                         </Link>
-                    </li>
+                    </li>}
                     <li onClick={() => close()}>
 
                             <RiLogoutCircleLine /> Cerrar sesión

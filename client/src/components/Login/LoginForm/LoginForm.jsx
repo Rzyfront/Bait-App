@@ -1,4 +1,5 @@
 import { TfiClose } from 'react-icons/tfi';
+import { PopComent } from '../../components';
 import { FcGoogle } from 'react-icons/fc';
 import ojoAbierto from '../../../assets/abrir-ojo.png';
 import ojoCerrado from '../../../assets/cerrar-ojo.png';
@@ -34,12 +35,10 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
       ...user,
       [name]: value
     }));
-    console.log(errors);
   };
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('bye');
     if (Object.entries(errors).length === 0) {
       dispatch(logIn(user));
       return;
@@ -82,6 +81,8 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                 <div className="formulario">
                     <div className="container">
                         <form autoComplete="off" className="form" onSubmit={handleLogin}>
+                          <div className='Input-Email-Group'>
+
                             <input
                                 className="input"
                                 type="text"
@@ -91,7 +92,9 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                 autoComplete="off"
                                 placeholder="Usuario"
                             ></input>
+                            {errors.email && <PopComent text={errors.email}/> }
 
+                          </div>
                             <div className="PasswordGroup">
                                 <input
                                     type="password"
@@ -110,7 +113,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                     src={`${ojo ? ojoAbierto : ojoCerrado}`}
                                     width="20px"
                                     ></img>
-
+                                  {errors.password && <PopComent text={errors.password}/> }
                             </div>
                             <button className="button" type="submit">Ingresar</button>
                             <div className="loginwith">
@@ -121,8 +124,6 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                             <div className="registrarme" onClick={() => loginRegister()}>
                                 <p>¿Aún no tienes cuenta?</p>
                                 <h5>Regístrate</h5>
-                                {errors.email && <span>{errors.email}</span>}
-                                {errors.password && <span>{errors.password}</span>}
                             </div>
                         </form>
                     </div>

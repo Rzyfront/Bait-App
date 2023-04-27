@@ -9,11 +9,12 @@
     justify-content: center;
     align-items: center;
     transition: 0.3s;
+    backdrop-filter: blur(3px);
 }
 
-.LoginContainer:hover{
+/* .LoginContainer:hover{
 backdrop-filter: blur(3px);
-}
+} */
 
 .LoginContainer .login{
     position: relative;
@@ -26,7 +27,7 @@ backdrop-filter: blur(3px);
     justify-content: space-evenly;  
     background-color: white; 
     box-shadow: rgba(0, 0, 0, 0.338) 0px 3px 8px;
-    opacity: 0;
+    opacity: 1;
     transition: 0.3s;
 }
 
@@ -41,7 +42,7 @@ backdrop-filter: blur(3px);
     justify-content: space-evenly;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.338) 0px 3px 8px;
-    opacity: 0;
+    opacity: 1;
     transition: 1s;
 }
 
@@ -113,14 +114,26 @@ backdrop-filter: blur(3px);
 }
 
 .login .formulario .form input{
+    width: 100%;
     height: 25px;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 15px;
     font-size: 15px;
     font-family: var(--subtitle);
     transition: 0.3s;
+    border: none;
+    background-color: rgb(248, 248, 248);
+    /* font-weight: 600; */
+    text-align: center;
 }
+
+.login .formulario .form input:focus{
+    background-color: rgb(252, 252, 252);
+    outline: 0;
+}
+
 .login .formulario .form button {
+width: 100%;
 height: 35px;
 border-radius: 20px;
 border: none;
@@ -142,17 +155,19 @@ transition: 0.3s;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    background-color: var(--bg-tertiary);
+    background-color: rgb(198, 198, 198);
     height: 35px;
     border-radius: 20px;
     font-size: 15px;
     font-family: var(--subtitle);
     transition: 0.3s;
     cursor: pointer;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
     animation: aparecer .5s ease-in-out;
 }
 
-.login .formulario .form .loginwith:hover {
+.formulario .form .loginwith:hover {
     background-color: var(--bg-secondary);
     color: var(--tertiary);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -160,6 +175,33 @@ transition: 0.3s;
 
 .login .formulario .form .loginwith .google{
     font-size: 25px;
+}
+
+.form .loginwith:hover {
+    background-color: var(--bg-secondary);
+    color: var(--tertiary);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.form .loginwith .google{
+    font-size: 25px;
+}
+
+.formulario .form .loginwith{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgb(198, 198, 198);
+    height: 35px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-family: var(--subtitle);
+    transition: 0.3s;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    animation: aparecer .5s ease-in-out;
 }
 
 .login .formulario .form .registrarme{
@@ -178,22 +220,23 @@ transition: 0.3s;
 .login .formulario .form .registrarme h5{
     color: var(--secondary);
     font-size: 14px;
-    border-bottom: 1px solid var(--primary);
-    border-radius:0 0 0 5px;
+    /* border-bottom: 1px solid var(--primary); */
+    /* border-radius:0 0 0 5px; */
     transition: 0.3s;
 }
 
 .login .formulario .form .registrarme:hover h5{
-    color: var(--optional2);
-    border-bottom: 1px solid var(--secondary);
+    color: var(--btn-secondary);
+    /* border-bottom: 1px solid var(--secondary); */
 }
 
 
 .register .Registro{
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
     font-family: var(--title);
-    border-bottom: 2px solid var(--secondary);
+    color: var(--secondary);
+    /* border-bottom: 2px solid var(--secondary); */
     border-radius: 0 0 0 10px;
     animation: aparecer .5s ease-in-out;
 }
@@ -238,9 +281,11 @@ transition: 0.3s;
 }
 
 .register .formulario .form input {
+    width: 100%;
     height: 25px;
     border-radius: 12px;
-    border: 1px solid var(--primary);
+    border: none;
+    background-color: rgb(243, 243, 243);
     padding: 15px;
     font-size: 15px;
     font-family: var(--subtitle);
@@ -285,134 +330,58 @@ transition: 0.3s;
 .register .formulario .form .registrarme h5 {
     color: var(--secondary);
     font-size: 14px;
-    border-bottom: 1px solid var(--primary);
-    border-radius: 0 0 0 5px;
+    /* border-bottom: 1px solid var(--primary); */
+    /* border-radius: 0 0 0 5px; */
     transition: 0.3s;
 }
 
 .register .formulario .form .registrarme:hover h5 {
+    color: var(--btn-secondary);
+    /* border-bottom: 1px solid var(--secondary); */
+}
+
+
+.login .formulario .Input-Email-Group{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.login .Message-Ux-Nubecita{
     color: var(--optional2);
-    border-bottom: 1px solid var(--secondary);
+    z-index: var(--alto-5);
 }
 
-.invalid {
-    text-align: center;
-    opacity: 0;
-    color: var(--optional2);
-    animation: aparecer .4s ease-in-out forwards
-}
+@media screen and (max-width:550px) {
+    .LoginContainer .login {
+            width: 300px;
+            height: 350px;
+        }
 
-@keyframes aparecer {
-    0% {
-        scale: 0;
-        opacity: 0
-    }
+        .LoginContainer .register {
+            width: 300px;
+            height: 500px;
+        }
 
-    80% {
-        scale: 1.05
-    }
+        .LoginContainer .login .title h3 {
+            font-size: 30px;
+        }
 
-    100% {
-        scale: 1;
-        opacity: 1;
-    }
-}
+        .login .formulario .container {
+          width: 200px;
+        }
+        .register .formulario .container {
+            width: 200px;
+        }
+        
+        .LoginContainer .login .formulario .container .form input{
+            height: 20px;
+        }
 
-.scale-up-bottom {
-    -webkit-animation: scale-up-bottom 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: scale-up-bottom 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-.scale-up-tr {
-    -webkit-animation: scale-up-tr 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: scale-up-tr 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-}
-
-/* ----------------------------------------------
- * Generated by Animista on 2023-4-15 0:21:49
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation scale-up-tr
- * ----------------------------------------
- */
-@-webkit-keyframes scale-up-tr {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 100% 0%;
-        transform-origin: 100% 0%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 100% 0%;
-        transform-origin: 100% 0%;
-    }
-}
-
-@keyframes scale-up-tr {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 100% 0%;
-        transform-origin: 100% 0%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 100% 0%;
-        transform-origin: 100% 0%;
-    }
-}
-
-/* ----------------------------------------------
- * Generated by Animista on 2023-4-15 0:43:52
- * Licensed under FreeBSD License.
- * See http://animista.net/license for more info. 
- * w: http://animista.net, t: @cssanimista
- * ---------------------------------------------- */
-
-/**
- * ----------------------------------------
- * animation scale-up-bottom
- * ----------------------------------------
- */
-@-webkit-keyframes scale-up-bottom {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 50% 100%;
-        transform-origin: 50% 100%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 50% 100%;
-        transform-origin: 50% 100%;
-    }
-}
-
-@keyframes scale-up-bottom {
-    0% {
-        -webkit-transform: scale(0.5);
-        transform: scale(0.5);
-        -webkit-transform-origin: 50% 100%;
-        transform-origin: 50% 100%;
-    }
-
-    100% {
-        -webkit-transform: scale(1);
-        transform: scale(1);
-        -webkit-transform-origin: 50% 100%;
-        transform-origin: 50% 100%;
-    }
+        .LoginContainer .register .formulario .container .form input{
+            height: 20px;
+        }
 }
 
 /* 

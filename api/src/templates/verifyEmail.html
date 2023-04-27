@@ -4,6 +4,31 @@
     <meta charset="UTF-8" />
     <title>¡Activa tu cuenta de Bait!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333333; background-color: #f0f0f0; margin: 0; padding: 0;">
+    <table style="max-width: 600px; margin: 0 auto; padding: 5%; background-color: #ffffff; border: 1px solid #dddddd; border-radius: 4px; text-align: center;">
+      <tr>
+        <td>
+          <h1 style="font-size: 24px; font-weight: bold; color: #333333;">Hola ${name}</h1>
+          <p style="margin-bottom: 20px;">Gracias por registrarte en Bait. Haga clic en este botón para verificar su correo electrónico:</p>
+          <a href="${process.env.SERVER_DEPLOY}" style="display: inline-block; padding: .7rem 1.5rem; background-color: #007bff; color: #f0f0f0; border-radius: .5rem; border:0; font-weight: 600; text-decoration: none;">Verifica tu email</a>
+          <p style="margin-top: 20px; margin-bottom: 20px;">Este enlace caducará en 24 horas. Si no se ha registrado para obtener una cuenta de Bait, puede ignorar este correo.</p>
+          <p style="margin-bottom: 10px;">¡Gracias por leer!</p>
+          <p style="margin-bottom: 0;">Saludos cordiales,</p>
+          <p style="margin-bottom: 0;">Bait</p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>¡Activa tu cuenta de Bait!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -82,4 +107,4 @@
       <p>Bait</p>
     </div>
   </body>
-</html>
+</html> -->

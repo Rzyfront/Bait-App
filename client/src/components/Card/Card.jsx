@@ -11,6 +11,7 @@ function Card ({
   Name,
   Rating,
   location,
+
   verified,
   schedule,
   Characteristic,
@@ -28,7 +29,7 @@ function Card ({
   };
 
   return (
-    <div className="Card animated-element">
+    <div className="Card animated-element" key={id}>
       <Link to={`/profile/${id}`} >
       {Images.length > 0
         ? (
@@ -43,18 +44,18 @@ function Card ({
           )}
       </Link>
       <div className="infoCard">
+        <Link to={`/profile/${id}`} >
         <h2 className="placeName">{Name || 'No name'}</h2>
 
           <div className="RatingGroup">
             <p className="Rating">Rating: </p>
             <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 5} />
           </div>
-
+          </Link>
         {location && (
-          <div className="LocationGroup">
-            <p className="Location"></p>
-            <GoLocation className='locationico' onClick={handleFoco} />
-            {location.split(',').at(-2)} {location.split(',').at(-3)}{location.split(',').at(-1)}
+          <div className="LocationGroup" onClick={handleFoco}>
+            <p className="Location"><GoLocation className='locationico'/> {location.split(',').at(-2)} {location.split(',').at(-3)}{location.split(',').at(-1)}
+            </p>
 
           </div>
         )}
