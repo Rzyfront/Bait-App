@@ -101,7 +101,7 @@ const ReseñaDetail = () => {
             </div>
           </div>
           <img className='ImageReview' src={review?.Image?.url || reviewImage } ></img>
-          <div>
+          <div className= 'Review-Detail-Button'>
               {review?.verified !== 'verified' &&
               <button value="verified" className='botonAccept' onClick={verifiedChange}>Aceptar</button>}
               {review?.verified !== 'archived' &&

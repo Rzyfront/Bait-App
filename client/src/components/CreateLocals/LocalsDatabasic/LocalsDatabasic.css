@@ -11,9 +11,11 @@
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     
-    background: conic-gradient(from 60deg at 0% 100%, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.19) 100%);
+    background: conic-gradient(from 60deg at 0% 100%, rgba(244, 244, 244, 0.17) 0%, var(--bg-tertiary) 100%);
     background-color: var(--bg-primary);
 }
+
+
 
 .LocalsDataBasic-Component .Container-Basic .LinkLogo{
     position: absolute;
@@ -34,7 +36,7 @@
     color: var(--primary);
 }
 .LocalsDataBasic-Component .Container-Basic .Basic-Title span{
-    color: var(--secondary);
+    color: var(--tertiary);
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create{

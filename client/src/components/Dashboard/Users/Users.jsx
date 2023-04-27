@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import style from '../Dashboard.module.css';
-import PaginadoU from '../Paginado/PaginadoU';
+import PaginadoU from '../Pagination/PaginationU';
 // import swal from '@sweetalert/with-react';
 import { getAllUsers } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,17 +15,17 @@ const Users = () => {
     role: '',
     email: ''
   });
-  console.log(data);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (filter) {
       dispatch(getAllUsers(filter));
+      console.log(data);
     }
   }, [filter || undefined]);
 
   const paginade = (e) => {
-    console.log(e);
     setFilter({
       ...filter,
       page: e
@@ -35,13 +35,15 @@ const Users = () => {
     const { name, value } = e.target;
     setFilter({
       ...filter,
-      [name]: value
+      [name]: value,
+      page: 1
     });
   };
   const handleSelect = (e) => {
     setFilter({
       ...filter,
-      role: e.target.value
+      role: e.target.value,
+      page: 1
     });
   };
 
@@ -65,10 +67,10 @@ const Users = () => {
 
         {data && data.users &&
            data.users.map((data, index) => {
-             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} />;
+             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter}/>;
            })
           }
-        <PaginadoU paginade={paginade} />
+        <PaginadoU paginade={paginade} page={filter.page}/>
         <ToastContainer />
       </div>
 

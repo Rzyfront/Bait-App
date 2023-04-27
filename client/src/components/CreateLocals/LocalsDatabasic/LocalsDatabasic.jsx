@@ -11,7 +11,7 @@ import { PopComent } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
 import DatabasicLocal from './DataLocalBasic/DatabasicLocal';
 import Mapdata from '../../Map/Mapdata';
-import SearchMap from '../../Map/SearchMap/Searchmap';
+import SearchMap from '../../Map/SearchMap/SearchMap';
 import { createLocal } from '../../../redux/actions/local';
 import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
 import CreateLocalsSelector from './CreateLocalsSelector/CreateLocalsSelector';
