@@ -1,7 +1,9 @@
 import { MapContainer, Marker, Popup, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { useEffect } from 'react';
-import myIcon from './Icono';
+// pointers
+import icoInfo from '../../assets/ciosearch.ico';
+//
 import L from 'leaflet';
 import reverseGeoCoding from './SearchMap/reverseGeocoding';
 // const MAPCENTERDEFAULT = [40.574215, -105.08333];
@@ -10,6 +12,11 @@ const MAP_LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
   // actions map
   function MyComponent () {
+    const customIcon = L.icon({
+      iconUrl: icoInfo,
+      iconSize: [25, 25]
+    });
+
     const map = useMapEvents({
       click: async (e) => {
         const { lat, lng } = e.latlng;
@@ -21,25 +28,8 @@ function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
           }
         });
 
-
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
-import 'leaflet/dist/leaflet.css' 
-import { useEffect, useState } from 'react';
-const position = [51.505, -0.09];
-
-
-
-let MAPCENTERDEFAULT = [40.574215, -105.08333];
-const MAP_LAYER_ATTRIBUTION = "&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors";
-const MAP_LAYER_URL = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-const GEOCODE_URL = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode?f=pjson&langCode=EN&location=";
-
-
-
-function Mapdata({Mapcenter,statemap,handleBoton,handlemapdatas}){
-  //data point
-    let [point,setPoint]=useState([])
-
+        // Crea un nuevo marcador con las coordenadas obtenidas del evento click
+        const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map).bindPopup(`Dirección: ${information.address.LongLabel}`);
 
     // data information
     const reverseGeoCoding = async(lng,lat)=> {

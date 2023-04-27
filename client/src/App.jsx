@@ -63,7 +63,8 @@ function App () {
 =======
 >>>>>>> f238f107dc90cb40666aadc69bfdb5cf7000e9bc
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/userprofile' element={<Userprofile />} />
+        <Route path='/userprofile/:userId' element={<Userprofile />} />
+        <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
 <<<<<<< HEAD
         <Route path='/user/:id' element={<Userprofile/>} />

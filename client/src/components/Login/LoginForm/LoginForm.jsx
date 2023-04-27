@@ -1,5 +1,5 @@
 import { TfiClose } from 'react-icons/tfi';
-import { PopComent } from '../../components';
+// import { PopComent } from '../../components';
 import { FcGoogle } from 'react-icons/fc';
 import ojoAbierto from '../../../assets/abrir-ojo.png';
 import ojoCerrado from '../../../assets/cerrar-ojo.png';
@@ -35,23 +35,26 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
       ...user,
       [name]: value
     }));
-    console.log(errors);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log('bye');
-    if (Object.entries(errors).length === 0) {
-      dispatch(logIn(user));
+    if (Object.entries(errors).length || !user.email || !user.password) {
+      toast.error('¡Completa los campos!', {
+        position: toast.POSITION.TOP_CENTER
+      });
       return;
     }
-    toast.error('¡Completa los campos!', {
-      position: toast.POSITION.TOP_CENTER
-    });
-    setUser({
-      email: '',
-      password: ''
-    });
+    const res = await dispatch(logIn(user));
+    if (!res) {
+      toast.error('Datos invalidos', {
+        position: toast.POSITION.TOP_CENTER
+      });
+    }
+    // setUser({
+    //   email: '',
+    //   password: ''
+    // });
   };
   const fn = () => {
     if (!ojo) {
@@ -92,9 +95,9 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                 value={user.email}
                                 onChange={handleChange}
                                 autoComplete="off"
-                                placeholder="Usuario"
+                                placeholder="Email"
                             ></input>
-                            {errors.email && <PopComent text={errors.email}/> }
+                            {/* {errors.email && <PopComent text={errors.email}/> } */}
 
                           </div>
                             <div className="PasswordGroup">
@@ -115,7 +118,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
                                     src={`${ojo ? ojoAbierto : ojoCerrado}`}
                                     width="20px"
                                     ></img>
-                                  {errors.password && <PopComent text={errors.password}/> }
+                                  {/* {errors.password && <PopComent text={errors.password}/> } */}
                             </div>
                             <button className="button" type="submit">Ingresar</button>
                             <div className="loginwith">

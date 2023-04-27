@@ -1,17 +1,63 @@
 
+
+.infoSection{
+  
+    width: 60%;
+    height: 30vh;
+    margin: 0 auto;
+    margin-top: 10rem;
+    border-radius: 3rem;
+
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        color: var(--prymary);
+        background-color: var(--bg-primary);
+        margin: 0 auto;
+        margin-top: 8rem;
+        padding: 10px 2px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        text-align: left;
+        transition: 0.3s;
+   
+    
+}
+
+.userAvatarContainer{
+    width: 60%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.userProfileContainer{
+    height: calc(100vh - 60px);
+    overflow: auto;
+}
 .userProfileText{
     text-align: center;
    
 }
+
 .userInfo{
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 5vh;
+ 
    
+}
+.userImage{
+    position: relative;
+    top: -10px;
+    left: 40px;
+    
 }
 .imgProfileContainer{
 
-width: 100%;
+width: 150px;
+height: 150px;
 }
 
 .imgProfile{
@@ -19,68 +65,140 @@ width: 100%;
 height: 100%;
 object-fit: contain;
 }
-.Userprofile {
+
+.userButtonContainer{
+    display: flex;
+    width: 80%;
+    margin:0 auto;
+    position: relative;
+    top: 120px;
+   justify-content: space-around;
+}
+.userButtonContainer button { 
+width: 100%;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.1s;
+    opacity: 0.8;
+    background-color: rgb(213, 213, 213);
+    cursor: pointer;
+}
+.userButtonContainer button:hover { 
+    background-color: var(--bg-tertiary);
+        opacity: 1;
+}
+.mainContainer{
+    width: 60%;
+    margin: 0 auto;
+}
+
+
+.reviewTittle{
+    background-color: var(--bg-primary);
+    width: 50%;
+   
+    margin: 0 auto;
+    margin-top: 2rem;
+    border-radius: 3rem;
+
+        padding: 10px 2px;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+        text-align: center;
+        transition: 0.3s;
+ 
+}
+
+
+
+
+.imgContainer {
+    width: 20%;
+    background-color: aqua;
+}
+.imgContainer img {
+    width: 100%;
+    object-fit: contain;
+   
+}
+
+.reviewContainer {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--prymary);
+    background-color: var(--bg-primary);
+    margin: 20px;
+    padding: 10px 2px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    text-align: left;
+    transition: 0.3s;
+
+}
+
+.mainContainer :hover {
+
+    box-shadow: rgba(0, 0, 0, 0.37) 0px 2px 4px;
+        transform: scale(1.01);
+        cursor: pointer;
+
+}
+
+.reviewInfoContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-}
+    color: inherit;
 
-.userInfo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 50px;
 }
-
-.UserImage {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.Decorator {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    height: 2px;
-    width: 70%;
-    background-color: gray;
-}
-
-.Info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.reviewTitle {
     text-align: center;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: inherit;
+}
+.reviewCalification{
+    width: 50%;
+    margin: 1px solid black;
+    text-align: left;
+   
 }
 
-.AgeGroup {
+
+.reviewButtons{
     display: flex;
+    justify-content: flex-end;
+    padding: 0.3rem;
+}
+.reviewButtons button {
+    color: inherit;
     align-items: center;
-    margin-bottom: 10px;
+        
+    width: 100%;
+        height: 35px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition: 0.1s;
+        opacity: 0.8;
+        background-color: rgb(213, 213, 213);
+        cursor: pointer;
 }
 
-.Age {
-    margin-right: 10px;
-    font-size: 24px;
-    font-weight: bold;
+
+
+.userImage{
+    border-radius: 20rem;
+    width: 150px;
+    height: 150px;
 }
 
-.TelGroup,
-.EmailGroup,
-.LocationGroup {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-h3 {
-    margin-right: 10px;
-    font-weight: bold;
-}
-
-p {
-    margin: 0;
-}

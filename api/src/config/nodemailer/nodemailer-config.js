@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer');// eslint-disable-line
+const nodemailer = require('nodemailer') // eslint-disable-line
 const jwt = require('jsonwebtoken');
 
 const pass = process.env.EMAIL_PASS;
@@ -12,9 +12,12 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const sendVerificationEmail = (id, userEmail, userName) => {
-  const tokenEmail = jwt.sign({ id, verified: 'verified' }, process.env.SECRET_KEY_2);
-  transporter.sendMail({
+const sendVerificationEmail = async (id, userEmail, userName) => {
+  const tokenEmail = jwt.sign(
+    { id, verified: 'verified' },
+    process.env.SECRET_KEY_2,
+  );
+  await transporter.sendMail({
     subject: 'Verifica tu Email de Bait!!',
     from: email,
     to: userEmail,
@@ -22,13 +25,58 @@ const sendVerificationEmail = (id, userEmail, userName) => {
   });
 };
 
-const sendReviewRejected = (userEmail, userName, title, comment, reason = 'contenido inapropiado') => {
-  transporter.sendMail({
+const sendReviewRejected = async (
+  userEmail,
+  userName,
+  title,
+  comment,
+  reason = 'contenido inapropiado',
+) => {
+  await transporter.sendMail({
     subject: 'Review rechazada',
     from: email,
     to: userEmail,
     html: `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Notificación de eliminación de reseña</title><style>body{font-family: Arial, sans-serif;font-size: 16px;line-height: 1.5;color: #333;}p{margin: 0 0 1.5rem;}h1{font-size: 24px;margin: 0 0 1.5rem;}.container{max-width: 600px;margin: 0 auto;padding: 1.5rem;background-color: #f9f9f9;border: 1px solid #ddd;}.review{text-align: center;background-color: rgb(200, 217, 255);padding: .5rem 1rem;margin-bottom: 1rem;border-radius: 1rem;}.review h4{margin: .5rem;}</style></head><body><div class="container"><h1>Notificación de eliminación de reseña</h1><h3>Estimado/a ${userName},</h3><h4>Le informamos que su reseña: </h4><div class="review"><h4>${title}</h4><p>${comment}</p></div><p>Ha sido eliminada de nuestro sitio web debido a ${reason}.</p><p>Entendemos que este contenido puede ser importante para usted, pero nuestra política de revisión de contenido establece que no se permiten comentarios inapropiados o ofensivos. Por favor, asegúrese de seguir nuestras pautas de revisión de contenido en el futuro para evitar que sus reseñas sean eliminadas.</p><p>Gracias por su comprensión.</p><p>Atentamente,</p><p>Administración de Bait</p></div></body></html>`,
   });
 };
+const sendRequestOdAcquisitionLocal = async ({
+  userEmail,
+  userName,
+  localId,
+  localName,
+}) => {
+  await transporter.sendMail({
+    subject: 'Solcitud de adquisición de local',
+    from: email,
+    to: email,
+    html: `
+    <h1>El usuario:</h1>
+    <p>Nombre:${userName}</p>
+    <p>Email:${userEmail}</p>
+    <h1>Quiere reclamar el local:</h1>
+    <p>Nombre:${localName}</p>
+    <p>Id:${localId}</p>
+`,
+  });
+};
+const sendRequestForOwnership = async ({ userEmail, userName, userId }) => {
+  await transporter.sendMail({
+    subject: 'Solcitud de adquisición de local',
+    from: email,
+    to: email,
+    html: `
+    <h1>El usuario:</h1>
+    <p>Id:${userId}</p>
+    <p>Nombre:${userName}</p>
+    <p>Email:${userEmail}</p>
+    <h1>Quiere que se le asigne el rol de owner c:</h1>
+`,
+  });
+};
 
-module.exports = { sendVerificationEmail, sendReviewRejected };
+module.exports = {
+  sendVerificationEmail,
+  sendReviewRejected,
+  sendRequestOdAcquisitionLocal,
+  sendRequestForOwnership,
+};
