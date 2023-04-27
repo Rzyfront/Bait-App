@@ -6,8 +6,10 @@ const { User } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const { userId, local } = req;
+    const { document } = req.body;
     const { localId } = req.params;
     const user = await User.findBypk(userId);
+    await local.setDocument(document.id);
     await sendRequestOdAcquisitionLocal({
       userEmail: user.email,
       userName: user.name,

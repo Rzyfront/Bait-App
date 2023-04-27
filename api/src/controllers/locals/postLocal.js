@@ -2,7 +2,7 @@ const { Local, User } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    name, location, schedule, email, characteristics, images, specialty, lat, lng,
+    name, location, schedule, email, characteristics, images, specialty, lat, lng, document,
   } = req.body;
   try {
     const user = await User.findByPk(req.userId);
@@ -12,6 +12,7 @@ module.exports = async (req, res) => {
     await newLocal.createCharacteristic(characteristics);
     await newLocal.addImages(images.map((image) => image.id));
     await user.addLocal(newLocal);
+    await newLocal.setDocument(document.id);
     const local = {
       id: newLocal.id,
       name: newLocal.name,

@@ -7,10 +7,9 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    archive: {
       type: DataTypes.STRING,
-      default: 'document',
+      allowNull: false,
     },
-    archive: DataTypes.BLOB,
-  });
+  }, { timestamps: false });
 };
