@@ -1,12 +1,8 @@
-import { useState } from 'react';
-import style from './Pagination.module.css';
-import { useSelector } from 'react-redux';
 
-const PaginadoU = ({ paginade }) => {
-  const { totalPages } = useSelector((state) => state.users);
-  const [page, setPage] = useState(1);
+import style from './Pagination.module.css';
+
+const PaginadoU = ({ paginade, page, totalPages }) => {
   const hadlepage = (e) => {
-    setPage(page + e);
     paginade(page + e);
   };
 

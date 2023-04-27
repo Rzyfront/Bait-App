@@ -11,7 +11,10 @@ export const HOMEPAGE = 'HOMEPAGE';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-export const DETAIL_USER = 'DETAIL_USER';
+
+// ACTION TYPES USERPROFILE
+export const USER_PROFILE = 'USER_PROFILE';
+export const USER_POST_IMG = 'USER_POST_IMG';
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
@@ -101,8 +104,9 @@ export const logIn = (credentials) => {
       const res = await axios.post('/login', credentials);
       localStorage.setItem('token', res.data.token);
       location.reload();
+      return true;
     } catch (error) {
-      console.log(error.message);
+      return false;
     }
   };
 };
@@ -186,6 +190,41 @@ export const getReviews = (localId, page = 1) => {
       }
     } catch (error) {
 
+    }
+  };
+};
+
+// DETAIL USER FOR USSER PROFILE
+export const getUserProfile = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`http://localhost:3001/user/${id}`);
+
+      if (response.data.success === true) {
+        dispatch({
+          type: USER_PROFILE,
+          payload: response.data
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const userPostImg = (img) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3001/user/', { img });
+
+      if (response.data.success === true) {
+        dispatch({
+          type: USER_POST_IMG,
+          payload: response.data
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 };

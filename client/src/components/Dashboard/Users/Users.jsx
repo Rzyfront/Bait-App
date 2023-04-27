@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import User from './User';
 import { ToastContainer } from 'react-toastify';
 
-const Users = () => {
+const Users = ({ localId, handleAdd }) => {
   const data = useSelector((state) => state.users);
 
   const [filter, setFilter] = useState({
@@ -15,17 +15,17 @@ const Users = () => {
     role: '',
     email: ''
   });
-  console.log(data);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (filter) {
       dispatch(getAllUsers(filter));
+      console.log(data);
     }
   }, [filter || undefined]);
 
   const paginade = (e) => {
-    console.log(e);
     setFilter({
       ...filter,
       page: e
@@ -35,13 +35,15 @@ const Users = () => {
     const { name, value } = e.target;
     setFilter({
       ...filter,
-      [name]: value
+      [name]: value,
+      page: 1
     });
   };
   const handleSelect = (e) => {
     setFilter({
       ...filter,
-      role: e.target.value
+      role: e.target.value,
+      page: 1
     });
   };
 
@@ -62,13 +64,13 @@ const Users = () => {
       </select >
       <input placeholder="email" name="email" value={filter.email} className={style.buscador} onChange={handleData}></input>
       <div className={style.containerUserCard}>
-
+        <PaginadoU paginade={paginade} page={filter.page} totalPages={data.totalPages} />
         {data && data.users &&
            data.users.map((data, index) => {
-             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} />;
+             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd}/>;
            })
           }
-        <PaginadoU paginade={paginade} />
+
         <ToastContainer />
       </div>
 

@@ -36,6 +36,8 @@
     border-radius: 15px;
     background-color: rgb(225, 225, 225);
     display: flex;
+    justify-content: space-between;
+    flex-direction: row;
     /* gap:100px */
     transition: .3s;
 }
@@ -71,16 +73,14 @@
 }
 
 .buttonExaminar {
-    position: absolute;
     border: 0;
     border-radius: 10px;
     background-color: var(--btn-primary);
     color: white;
-    margin-left: 800px;
     height: 40px;
-    margin-top: 3px;
     padding: 0px 10px;
     transition: .3s;
+    margin: auto 20px;
 }
 
 .role {
@@ -258,12 +258,6 @@
         width: 200px;
     }
 
-    .buttonExaminar {
-        margin-top: 50px;
-        position: static;
-        margin-left: -205px;
-        display: block;
-    }
 
     .reseña .titleAndStars {
         display: none;

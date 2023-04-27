@@ -49,6 +49,8 @@ module.exports = async (req, res) => {
  *         schema:
  *           type: string
  *         description: Filtrar la lista de usuarios por correo electrónico.
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: Respuesta exitosa. Retorna todos los usuarios de la DB paginados de a 10.
@@ -117,6 +119,12 @@ module.exports = async (req, res) => {
  *     description: Este endpoint retorna todos los usuarios de la DB paginados de a 10. Para acceder a él es necesario estar autenticado como administrador y enviar un JWT en el header de la solicitud que contenga un payload con una propiedad "role" cuyo valor sea "admin". Además, se pueden enviar opcionalmente parámetros de query para filtrar por role y email. El número de página se recibe por parámetro en la ruta.
  *     tags: [Administrador]
  *     parameters:
+ *       - in: header
+ *         name: Authorization
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: Token de autenticación JWT.
  *       - in: path
  *         name: numPage
  *         required: true
@@ -135,6 +143,8 @@ module.exports = async (req, res) => {
  *         description: El correo electrónico de los usuarios que se quieren filtrar.
  *         schema:
  *           type: string
+ *     security:
+ *       - bearerAuth: []
  *     responses:
  *       '200':
  *         description: Respuesta exitosa. Retorna todos los usuarios de la DB paginados de a 10.

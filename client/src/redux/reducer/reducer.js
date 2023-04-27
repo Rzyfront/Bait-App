@@ -5,7 +5,9 @@ import {
   HOMEPAGE,
   CHECKUSER,
   RESETUSER,
-  GET_REVIEWS
+  GET_REVIEWS,
+  USER_PROFILE,
+  USER_POST_IMG
 } from '../actions/actions';
 import {
   POST_MENU,
@@ -23,7 +25,7 @@ import {
 } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
-import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL } from '../actions/admin';
+import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL, GETLOCALSADMIN } from '../actions/admin';
 
 const initialState = {
   cards: {},
@@ -45,7 +47,9 @@ const initialState = {
   user: {},
   users: {},
   adminReviews: {},
-  adminReviewDetail: {}
+  adminReviewDetail: {},
+  adminLocals: {},
+  userProfile: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -153,6 +157,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         foco: payload
       };
+
     case SAVE_SEARCH_HOME:
       return {
         ...state,
@@ -177,6 +182,22 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         adminReviewDetail: payload
+      };
+    case GETLOCALSADMIN:
+      return {
+        ...state,
+        adminLocals: payload
+      };
+    case USER_PROFILE :
+      return {
+        ...state,
+        userProfile: payload
+      };
+
+    case USER_POST_IMG:
+      return {
+        ...state,
+        user: { payload }
       };
     default:
       return { ...state };

@@ -1,73 +1,89 @@
+import { useDispatch, useSelector } from 'react-redux';
 import style from '../Dashboard.module.css';
-import Paginado from '../Pagination/Pagination';
-// import swal from '@sweetalert/with-react';
+import './Restaurant.css';
+import { useEffect, useState } from 'react';
+import { getAllLocal } from '../../../redux/actions/admin';
+import OneRestaurant from './OneRestaurant';
+import PaginadoU from '../Pagination/PaginationU';
+import { ToastContainer } from 'react-toastify';
 
 const Restaurantes = () => {
-  const locales = [{
-    id: 1,
-    name: 'La taberna de Rodri',
-    user: 'Verificado'
-  }, {
-    id: 2,
-    name: 'La cabaña dorada',
-    user: 'Verificado'
-  }, {
-    id: 3,
-    name: 'Mc Donals',
-    user: 'No verificado'
-  }, {
-    id: 3,
-    name: 'Doña Claudia',
-    user: 'Verificado'
-  }];
-  const deleteRestaurant = () => {
-    // swal({
-    //   title: 'Estas seguro?',
-    //   text: 'Una vez eliminado no podras recuperarlo',
-    //   icon: 'warning',
-    //   buttons: true,
-    //   dangerMode: true
-    // })
-    //   .then((willDelete) => {
-    //     if (willDelete) {
-    //       swal('Eliminado con exito', {
-    //         icon: 'success'
-    //       });
-    //     }
-    //   });
+  const dispatch = useDispatch();
+  const { locals, totalPages } = useSelector((state) => state.adminLocals);
+  const [filter, setFilter] = useState({
+    page: 1,
+    name: '',
+    location: '',
+    verified: ''
+  });
+
+  console.log(locals);
+  useEffect(() => {
+    const url = [];
+    // caracters filter
+    for (const property in filter) {
+      if (property !== 'page' && filter[property] !== '') {
+        const oneProperty = `${property}=${filter[property]}`;
+        url.push(oneProperty);
+      }
+    }
+
+    dispatch(getAllLocal(filter.page, url.join('&')));
+  }, [filter]);
+
+  const handleFilter = (e) => {
+    const { name, value } = e.target;
+    setFilter({
+      ...filter,
+      [name]: value,
+      page: 1
+    });
   };
 
-  const verifyRestaurant = (e) => {
-    // swal(`${e.target.name} ha sido verificado exitosamente`, {
-    //   icon: 'success'
-    // });
+  const handleSelect = (e) => {
+    setFilter({
+      ...filter,
+      verified: e.target.value,
+      page: 1
+    });
+    console.log(filter.verified);
+  };
+
+  const paginade = (e) => {
+    setFilter({
+      ...filter,
+      page: e
+    });
   };
 
   return (
     <div className={style.options}>
         <h2 className={style.nameSection}>Locales</h2>
-        <input placeholder="Buscar local" className={style.buscador}></input>
-        <select className={style.filtro}>
-            <option selected>Todos</option>
-            <option>Verificados</option>
-            <option>No verificados</option>
-        </select>
+      <select
+        onChange={handleSelect}
+        value={filter.verified}
+        defaultValue=""
+      >
+        <option value="" disabled selected>Estado</option>
+        <option value="" >all</option>
+        <option value="unVerified" >unVerified</option>
+        <option value="verified" >verified</option>
+        <option value="suspended" >suspended</option>
+      </select >
+        <input placeholder="Nombre" className={style.buscador} value={filter.name} onChange={handleFilter} name="name"></input>
+      <input placeholder="ciudad" className={style.buscador} onChange={handleFilter} name='location'></input>
+
         <div className={style.containerUserCard}>
-            {
-                locales.map(u => <>
-        <div className={style.userCard}>
-            <img className={style.userIcon} src="https://e7.pngegg.com/pngimages/227/108/png-clipart-logo-kfc-red-rebranding-graphic-design-kfc-miscellaneous-white.png"></img>
-            <div className={style.nameAndUser}>
-            <p className={style.name}>{u.name}</p>
-            <p className={style.usernames}>{u.user}</p>
-            </div>
-            {u.user === 'No verificado' && <button name={u.name} onClick={verifyRestaurant} className={style.button}>Verificar</button>}
-            <button className={style.banButton} onClick={deleteRestaurant}>Eliminar</button>
+        {locals
+          ? locals.map((data, index) => {
+            return <OneRestaurant key={index} name={data.name} image={data.Images
+} verified={data.verified} id={data.id} filter={filter}/>;
+          })
+          : ''}
+
         </div>
-        </>
-                )}
-        </div>
-        <Paginado/>
+      <PaginadoU paginade={paginade} page={filter.page} totalPages={totalPages} />
+      <ToastContainer/>
     </div>
   );
 };
