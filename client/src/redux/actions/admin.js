@@ -6,7 +6,7 @@ export const CHANGE_ROLE = 'CHANGE_ROLE';
 export const SUSPEND_USER = 'SUSPEND_USER';
 export const ASSIGN_LOCAL = 'ASSIGN_LOCAL';
 export const REVIEW_DETAIL = 'REVIEW_DETAIL';
-
+export const GETLOCALSADMIN = 'GETLOCALSADMIN';
 export const getAllUsers = (filter) => {
   return async (dispatch) => {
     try {
@@ -89,4 +89,16 @@ export const getReviewDetail = (detail) => {
   } catch (err) {
     console.log(err);
   }
+};
+/// // locals
+export const getAllLocal = (page, caracters) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/locals/page/${page}?&${caracters}`);
+      const info = response.data;
+      return dispatch({ type: GETLOCALSADMIN, payload: info });
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 };

@@ -23,7 +23,7 @@ import {
 } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
-import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL } from '../actions/admin';
+import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL, GETLOCALSADMIN } from '../actions/admin';
 
 const initialState = {
   cards: {},
@@ -45,7 +45,8 @@ const initialState = {
   user: {},
   users: {},
   adminReviews: {},
-  adminReviewDetail: {}
+  adminReviewDetail: {},
+  adminLocals: {}
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -177,6 +178,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         adminReviewDetail: payload
+      };
+    case GETLOCALSADMIN:
+      return {
+        ...state,
+        adminLocals: payload
       };
     default:
       return { ...state };

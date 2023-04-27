@@ -1,5 +1,5 @@
 
-import style from './Paginado.module.css';
+import style from './Pagination.module.css';
 import { useSelector } from 'react-redux';
 
 const PaginadoU = ({ paginade, page }) => {
