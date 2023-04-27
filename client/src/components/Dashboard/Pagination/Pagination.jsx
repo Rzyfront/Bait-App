@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import style from './Paginado.module.css';
+import style from './Pagination.module.css';
 
 const Paginado = (props) => {
   const [page, setPage] = useState(1);

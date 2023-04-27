@@ -28,7 +28,7 @@ localsRoute
   .get('/:localId/menu', getMenu)
   .post('/', userExtractor, localValidator, postLocal)
   .get('/menu/:menuId', getMenuDetail)
-  .delete('/menu/:menuId', isOwner, deleteMenu)
+  .delete('/menu/:menuId', userExtractor, isOwner, deleteMenu)
   .get('/page/:numPage', setQueryLocals, getLocals)
   .get('/search-by-name', getLocalsName)
   .get('/specialties', getSpecialties)

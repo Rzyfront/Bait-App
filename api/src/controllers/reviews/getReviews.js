@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
       where: req.where,
       include: [{
         model: User,
-        attributes: ['name', 'lastname', 'id'],
+        attributes: ['name', 'lastname', 'id', 'email', 'role', 'age'],
         include: [{ model: Image, attributes: ['url'] }],
       }, { model: Image, attributes: ['url'] },
       { model: Local, attributes: ['name', 'id'] },

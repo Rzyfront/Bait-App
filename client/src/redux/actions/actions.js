@@ -11,7 +11,10 @@ export const HOMEPAGE = 'HOMEPAGE';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-export const DETAIL_USER = 'DETAIL_USER';
+
+// ACTION TYPES USERPROFILE
+export const USER_PROFILE = 'USER_PROFILE';
+export const USER_POST_IMG = 'USER_POST_IMG';
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
@@ -149,98 +152,6 @@ export const homepage = (id) => {
   };
 };
 
-/* ACTION GENERATORS MENU DISHES */
-
-export const postMenu = (localId, menu) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`/menu/${localId}`, menu);
-      console.log(response);
-      if (response.status === 201) {
-        dispatch({
-          type: SUCCESS_MENU,
-          payload: response.data.success
-        });
-        dispatch({
-          type: POST_MENU,
-          payload: response.data.menu
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: ERROR_MENU,
-        payload: error.message
-      });
-      console.log(error);
-    }
-  };
-};
-
-export const postDish = (menuId, dish) => {
-  dish = {
-    ...dish,
-    price: Number(dish.price)
-  };
-  console.log(dish);
-  return async (dispatch) => {
-    try {
-      const response = await axios.post(`/dishes/${menuId}`, dish);
-      if (response.status === 201) {
-        dispatch({
-          type: SUCCESS_DISH,
-          payload: response.data.success
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: ERROR_DISH,
-        payload: error.message
-      });
-    }
-  };
-};
-export const deleteDish = (dishId) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.delete(`/dishes/${dishId}`);
-      if (response.status === 200) {
-        dispatch({
-          type: SUCCESS_DEL_DISH,
-          payload: response.data.success
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: ERROR_DEL_DISH,
-        payload: error.message
-      });
-    }
-  };
-};
-
-export const getMenu = (localId) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios(`/locals/${localId}/menu`);
-      if (response.status === 200) {
-        dispatch({
-          type: SUCCESS_MENU,
-          payload: response.data.success
-        });
-        dispatch({
-          type: GET_MENU,
-          payload: response.data.menu
-        });
-      }
-    } catch (error) {
-      dispatch({
-        type: ERROR_MENU,
-        payload: error.message
-      });
-    }
-  };
-};
-
 // USER ACTION GENERATORS
 export const checkUser = () => {
   return async (dispatch) => {
@@ -278,6 +189,41 @@ export const getReviews = (localId, page = 1) => {
       }
     } catch (error) {
 
+    }
+  };
+};
+
+// DETAIL USER FOR USSER PROFILE
+export const getUserProfile = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios(`http://localhost:3001/user/${id}`);
+
+      if (response.data.success === true) {
+        dispatch({
+          type: USER_PROFILE,
+          payload: response.data
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+};
+
+export const userPostImg = (img) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('http://localhost:3001/user/', { img });
+
+      if (response.data.success === true) {
+        dispatch({
+          type: USER_POST_IMG,
+          payload: response.data
+        });
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 };
