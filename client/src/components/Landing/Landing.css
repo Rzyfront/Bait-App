@@ -33,7 +33,7 @@
 .Landing .CarrouselItem .Slide-Arrow{
     position: absolute;
     font-size: 50px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(0, 0, 0, 0.27);
     font-weight: 100;
     bottom: 20px;
     transition: 0.3s;
@@ -41,7 +41,7 @@
 .Landing .CarrouselItem .Slide-Arrow2 {
     position: absolute;
     font-size: 50px;
-    color: rgba(0, 0, 0, 0.54);
+    color: rgba(0, 0, 0, 0.27);
     font-weight: 100;
     top: 20px;
     transition: 0.3s;
@@ -50,11 +50,13 @@
 .Landing .CarrouselItem .Slide-Arrow:hover {
     cursor: pointer;
     transform: scale(1.3);
+    color: rgba(0, 0, 0, 0.53);
 }
 
 .Landing .CarrouselItem .Slide-Arrow2:hover {
     cursor: pointer;
     transform: scale(1.3);
+    color: rgba(0, 0, 0, 0.53);
 }
 
 /*! Slide 1 */
