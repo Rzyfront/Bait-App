@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import User from './User';
 import { ToastContainer } from 'react-toastify';
 
-const Users = () => {
+const Users = ({ localId, handleAdd }) => {
   const data = useSelector((state) => state.users);
 
   const [filter, setFilter] = useState({
@@ -64,13 +64,13 @@ const Users = () => {
       </select >
       <input placeholder="email" name="email" value={filter.email} className={style.buscador} onChange={handleData}></input>
       <div className={style.containerUserCard}>
-
+        <PaginadoU paginade={paginade} page={filter.page} totalPages={data.totalPages} />
         {data && data.users &&
            data.users.map((data, index) => {
-             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter}/>;
+             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd}/>;
            })
           }
-        <PaginadoU paginade={paginade} page={filter.page}/>
+
         <ToastContainer />
       </div>
 
