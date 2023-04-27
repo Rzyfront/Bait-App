@@ -41,9 +41,7 @@ const Footer = () => {
             <li>
               <a href="mailto:baitdevs2023@gmail.com">Contactanos</a>
             </li>
-            <li>
-              <Link to="/createplace">Inscribe tu Local</Link>
-            </li>
+
           </ul>
         </div>
         <div className="InfoFooter2">
@@ -58,22 +56,12 @@ const Footer = () => {
             >
               Terminos de Uso
             </li>
-            <li
-              onClick={
-                showCookies
-                  ? () => setShowCookies(false)
-                  : () => setShowCookies(true)
-              }
-            >
-              Declaración de privacidad y cookies
-            </li>
+
           </ul>
         </div>
         <div className="InfoFooter3">
           <ul>
-            <li>
-              <Link to="/Answers">Como funciona este sitio</Link>
-            </li>
+
             <li
               onClick={
                 showCookies
@@ -94,17 +82,13 @@ const Footer = () => {
         </div>
         <div className="InfoFooter4">
           <ul>
-            <li>
-              <Link to="/answers">Q&A</Link>
+              <li>
+              <Link to="/createplace">Inscribe tu Local</Link>
             </li>
             <li>
                <Link to="/datatreatment">Tratamiento de Datos</Link>
             </li>
-            <li>
-               <Link to="/createplace">
-              Trabaja con nosotros
-              </Link>
-            </li>
+
           </ul>
         </div>
       </div>
