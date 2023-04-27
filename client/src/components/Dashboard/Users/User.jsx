@@ -2,11 +2,12 @@ import './User.css';
 import imageDefault from '../../../assets/imagenDefault.png';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { changeRole, createAdmin, getAllUsers, suspendUser } from '../../../redux/actions/admin';
+import { assignLocal, changeRole, createAdmin, getAllLocal, getAllUsers, suspendUser } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiUserX } from 'react-icons/fi';
+import { BsFillHouseAddFill } from 'react-icons/bs';
 
-const User = ({ id, lastname, age, role, image, name, email, filter }) => {
+const User = ({ id, lastname, age, role, image, name, email, filter, localId, handleAdd }) => {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -29,7 +30,6 @@ const User = ({ id, lastname, age, role, image, name, email, filter }) => {
       });
     } else {
       await dispatch(changeRole({ id, role: selector }));
-
       toast.success('¡Rol cambiado satisfactoriamente!', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
@@ -53,6 +53,11 @@ const User = ({ id, lastname, age, role, image, name, email, filter }) => {
     }
   };
 
+  const asigLocal = () => {
+    dispatch(assignLocal({ userId: id, localId }));
+    handleAdd();
+    useDispatch(getAllLocal(1, ''));
+  };
   return <div className='userContainer'>
         {image ? <img src={image.url} alt='user foto'/> : <img src={imageDefault} alt='default'/>}
         <div className='containerName'>
@@ -65,10 +70,10 @@ const User = ({ id, lastname, age, role, image, name, email, filter }) => {
           value={selector}
           required
       >
-          <option value={role} defaultValue>{role}</option>
+          <option value={role}>{role}</option>
                   {role !== 'user' && <option value="user" >user</option>}
                   {role !== 'owner' && <option value="owner" >owner</option>}
-          {user.role === 'superAdmin' && <option value="admin" >admin</option>}
+          {user && user.role === 'superAdmin' && <option value="admin" >admin</option>}
 
       </select >
               <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></div>
@@ -77,6 +82,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter }) => {
         </div>
         }
       <FiUserX className='icon' onClick={suspent}/>
+    {localId && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
 
   </div>;
 };
