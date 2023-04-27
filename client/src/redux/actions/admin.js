@@ -16,7 +16,7 @@ export const getAllUsers = (filter) => {
       const { data } = await axios(`/administrator/page/${filter.page}?${query.join('')}`);
       dispatch({ type: GET_ALL_USERS, payload: data });
     } catch (error) {
-
+      dispatch({ type: GET_ALL_USERS, payload: {} });
     }
   };
 };
@@ -74,15 +74,6 @@ export const suspendUser = ({ id }) => async (dispatch) => {
   }
 };
 
-export const assignLocal = ({ userId, localId }) => async (dispatch) => {
-  try {
-    const { data } = await axios.put('/administrator/assignLocal', { userId, localId });
-    return dispatch({ type: SUSPEND_USER, payload: data });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getReviewDetail = (detail) => {
   try {
     return { type: REVIEW_DETAIL, payload: detail };
@@ -98,7 +89,25 @@ export const getAllLocal = (page, caracters) => {
       const info = response.data;
       return dispatch({ type: GETLOCALSADMIN, payload: info });
     } catch (error) {
-      console.log(error.message);
+      return dispatch({ type: GETLOCALSADMIN, payload: {} });
     }
   };
+};
+export const deleteLocal = (id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/locals/${id}`);
+    } catch (error) {
+      return true;
+    }
+  };
+};
+export const assignLocal = ({ userId, localId }) => async (dispatch) => {
+  try {
+    const { data } = await axios.put('/administrator/assignLocal', { userId, localId });
+    console.log('paso');
+    return dispatch({ type: SUSPEND_USER, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
 };

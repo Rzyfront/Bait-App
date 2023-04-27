@@ -1,9 +1,7 @@
 
 import style from './Pagination.module.css';
-import { useSelector } from 'react-redux';
 
-const PaginadoU = ({ paginade, page }) => {
-  const { totalPages } = useSelector((state) => state.users);
+const PaginadoU = ({ paginade, page, totalPages }) => {
   const hadlepage = (e) => {
     paginade(page + e);
   };
