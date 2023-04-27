@@ -4,6 +4,7 @@ import './Restaurant.css';
 import { useEffect, useState } from 'react';
 import { getAllLocal } from '../../../redux/actions/admin';
 import OneRestaurant from './OneRestaurant';
+import PaginadoU from '../Pagination/PaginationU';
 const Restaurantes = () => {
   const dispatch = useDispatch();
   const { locals, totalPages } = useSelector((state) => state.adminLocals);
@@ -13,6 +14,7 @@ const Restaurantes = () => {
     location: '',
     verified: ''
   });
+
   console.log(totalPages);
   useEffect(() => {
     const url = [];
