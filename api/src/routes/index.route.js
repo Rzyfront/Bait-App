@@ -6,7 +6,7 @@ const localsRoute = require('./locals.route');
 const loginRoute = require('./login.route');
 // const menuRouter = require('./menu');
 const reviewsRoute = require('./reviews.route');
-const userExtractor = require('../middlewares/userExtractor');
+const { userExtractor } = require('../middlewares');
 const userRoutes = require('./users.route');
 
 mainRouter

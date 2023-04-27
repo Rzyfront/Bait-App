@@ -10,7 +10,11 @@ module.exports = async (req, res) => {
       include: [
         { model: Image, attributes: ['url'] },
         { model: Review, include: [{ model: Image, attributes: ['url'] }] },
-        { model: Local },
+        {
+          model: Local,
+          where: { verified: 'verified' },
+          required: false,
+        },
       ],
     });
     if (!user) throw Error('User not found');
