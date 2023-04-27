@@ -9,7 +9,7 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
             <Input
                 underlined
                 labelPlaceholder="Nombre del Local"
-                color="dark"
+                color="default"
                 className='name'
                 onChange={handleChange}
                 value={inputs.name}
@@ -23,7 +23,7 @@ export default function DatabasicLocal ({ handleChange, inputs, errors, handleSe
             <Input
                 underlined
                 labelPlaceholder="Correo Electrónico"
-                color="dark"
+                color="default"
                 className='correo'
                 onChange={handleChange}
                 value={inputs.email}
