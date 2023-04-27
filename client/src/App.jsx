@@ -56,9 +56,8 @@ function App () {
         <Route path='/dataTreatment' element={<DataTreatment />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/userprofile/:userId' element={<Userprofile />} />
-        <Route path='/menu/:id' element={<MenuForm />} />
-        <Route path='/udpateMenu/:idMenu' element={<DishForm />} />
-        <Route path='/updateDish/:dishId' element={<DishForm/>} />
+        <Route path='/udpateMenu/:id/:idMenu' element={<DishForm />} />
+        <Route path='/updateDish/:id/:dishId' element={<DishForm/>} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

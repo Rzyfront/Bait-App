@@ -7,10 +7,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import MenuForm from '../MenuForm/MenuForm';
 
 function Menu () {
   const { id } = useParams();
   const { menu, successDish, successDel } = useSelector(state => state);
+  const [showForm, setShowForm] = useState(false);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState('Editar');
@@ -19,7 +21,7 @@ function Menu () {
     const { name } = e.target;
 
     if (name === 'addMenu') {
-      window.open(`/menu/${id}`, '_blank');
+      setShowForm(true);
     } else if (name === 'editMenu') {
       setEdit(!edit);
       setEditText(edit ? 'Editar' : 'Finalizar edición');
@@ -49,12 +51,13 @@ function Menu () {
   };
 
   const reqPutDish = (dishId) => {
-    window.open(`/updateDish/${dishId}`, '_blank');
+    window.open(`/updateDish/${id}/${dishId}`, '_blank');
   };
 
   const editMenu = (menuId) => {
-    window.open(`/updateMenu/${menuId}`, '_blank');
+    window.open(`/updateMenu/${id}/${menuId}`, '_blank');
   };
+  console.log(menu);
 
   const delMenu = (menuId) => {
     swal({
@@ -78,6 +81,10 @@ function Menu () {
       });
   };
 
+  const handleClose = () => {
+    setShowForm(!showForm);
+  };
+
   useEffect(() => {
     if (!menu.length) dispatch(getMenu(id));
   }, [successDel, menu]);
@@ -87,7 +94,6 @@ function Menu () {
       <div className="Menu-TitleGroup">
         <div>
           <h2 className="Menu-Title">Menú</h2>
-          <div className="Decorator"></div>
         </div>
         <div className='buttons-menu'>
           <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
@@ -141,6 +147,13 @@ function Menu () {
           })
         )}
       </div>
+      {showForm && (
+        <div className="Menu-Form-Container">
+          <div className="Menu-Form">
+            <MenuForm localId={id} handleClose={handleClose}/>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

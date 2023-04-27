@@ -1,7 +1,7 @@
 import { Input, Textarea } from '@nextui-org/react';
 import '../DishForm.css';
 
-const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId }) => {
+const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId, menu }) => {
   const findDish = (dishId) => {
     if (dishId) {
       const updDish = menu?.map(menu => {
@@ -16,6 +16,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
             {
                 dishId && findDish(dishId)
             }
+            <div className='dish-form-column'>
                     <Input
                         underlined
                         labelPlaceholder="Nombre producto"
@@ -45,6 +46,8 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         <option value='fitness'>fitness</option>
                         <option value='na'>No aplica</option>
                     </select>
+            </div>
+      <div className='dish-form-column'>
                     <Input
                         underlined
                         labelPlaceholder="Price USD"
@@ -68,6 +71,8 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='description'
                         required
                     />
+      </div>
+      <div className='dish-form-column'>
                     {errors.description && <span>{errors.description}</span>}
                     <input
                         type='file'
@@ -82,6 +87,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
 
                       />
                     }
+      </div>
         </>
   );
 };

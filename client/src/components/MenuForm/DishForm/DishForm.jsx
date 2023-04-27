@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
+import { MdClose } from 'react-icons/md';
 import { useUploadImage } from '../../../hooks/useUploadImage';
 import './DishForm.css';
 import validateForm from './dishVal';
@@ -10,16 +11,15 @@ import { getMenu, postDish, putDish } from '../../../redux/actions/menuDish';
 import Inputs from './Inputs/Inputs';
 import { useParams } from 'react-router-dom';
 
-const DishForm = ({ menuId, localId }) => {
-  const { dishId, idMenu } = useParams();
-  const { image, loading, handleChangeimage } = useUploadImage();
+const DishForm = ({ menuId, handleClose }) => {
+  const { dishId, idMenu, id } = useParams();
+  const { image, handleChangeimage } = useUploadImage();
   const { menu } = useSelector(state => state);
   const [postId, setPostId] = useState(null);
 
   const changeId = (id) => {
     setPostId(id);
   };
-
   const dispatch = useDispatch();
   const [title, setTile] = useState(false);
   const [dish, setDish] = useState({
@@ -109,6 +109,10 @@ const DishForm = ({ menuId, localId }) => {
     });
   };
 
+  const handleFormClose = () => {
+    handleClose();
+  };
+
   useEffect(() => {
     if (image.length) {
       setDish({ ...dish, image: image[0] });
@@ -116,22 +120,19 @@ const DishForm = ({ menuId, localId }) => {
   }, [image]);
 
   useEffect(() => {
-    if (!menu.length) dispatch(getMenu());
-  }, [menu]);
-
-  useEffect(() => {
-    
-  })
+    dispatch(getMenu(id));
+  }, []);
 
   return (
   <>
       <ToastContainer />
       <div className='Create-dish-Form animated-element'>
+        <button className='Close-dish-form-button' onClick={handleFormClose}><MdClose/></button>
         <div className='dishes_data animated-element'>
           {
-            dishId && <>
-                    { title ? <h2>Agrega otro producto</h2> : <h2>Agrega un producto</h2 > }
-                    </>
+            dishId
+              ? <h2>Agrega otro producto</h2>
+              : <h2>Agrega un producto</h2 >
           }
           {
             idMenu && <h2>Agregar producto a la sección</h2>
@@ -146,6 +147,7 @@ const DishForm = ({ menuId, localId }) => {
             dishId={dishId}
             errors={errors}
             menuId={idMenu}
+            menu={menu}
           />
       {
         dishId

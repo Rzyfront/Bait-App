@@ -9,13 +9,12 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './MenuForm.css';
 
-const MenuForm = () => {
+const MenuForm = ({ handleClose }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { successMenu, newMenu, menu } = useSelector(state => state);
   const [menuData, setMenuData] = useState([]);
   const [showDish, setShowDish] = useState(false);
-  console.log(menu);
 
   const [menuForm, setMenuForm] = useState({
     type: ''
@@ -40,6 +39,10 @@ const MenuForm = () => {
       swal('Campo obligatorio', 'Selecciona la sección del menú.');
     }
   };
+  const handleCloseDishForm = () => {
+    setShowDish(false);
+    handleClose();
+  };
   useEffect(() => {
     if (!menuData.length) dispatch(getMenu(id));
     setMenuData(menu);
@@ -59,9 +62,9 @@ const MenuForm = () => {
         <div className='Menu-Form-Container'>
           <ToastContainer />
           { !successMenu && (
-            <>
+          <div className='Menu-Form'>
               <h2>Nueva sección</h2>
-              <form className='Menu-Form'>
+              <form>
                 <select
                   name='type'
                   className='type'
@@ -83,11 +86,11 @@ const MenuForm = () => {
                   ))}
                 </select>
                 <button type='submit' onClick={handleSubmit}>Agregar</button>
-          </form>
-            </>
+              </form>
+          </div>
           )}
           {
-           showDish && <DishForm menuId={newMenu?.id}/>
+        showDish && <DishForm menuId={newMenu?.id} handleClose={handleCloseDishForm} />
           }
 
         </div>

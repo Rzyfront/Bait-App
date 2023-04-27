@@ -1,38 +1,33 @@
 .Create-dish-Form {
     position: relative;
     max-width: 100%;
-    display: flex;
-    margin-top: 4rem;
+    margin-top: 2rem;
     align-items: center;
     justify-content: flex-start;
     height: 100vh;
+    z-index: 100;
 }
+
 .Create-dish-Form .dishes_data {
     align-items: center;
-    flex-direction: column;
     background-color: var(--bg-primary);
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
- .Create-dish-Form button {
+
+.Close-dish-form-button {
     position: absolute;
     right: 20px;
-    bottom: 150px;
-    width: 140px;
-    height: 35px;
-    border-radius: 20px;
-    border: none;
-    font-size: 15px;
-    font-family: var(--subtitle);
-    background-color: var(--btn-secondary);
-    color: var(--tertiary);
-    transition: 0.3s;
-    margin-bottom: 30px;
- }
+    top: 5px;
+    z-index: 300;
+    cursor: pointer;
+    font-size: 30px;
+}
 
 .Create-dish-Form button:hover {
     background-color: var(--btn-primary);
 }
+
 .dishes_data h2 {
     font-size: 50px;
     color: var(--primary);
@@ -42,11 +37,16 @@
 }
 
 .dish-form-container {
-    margin-top: 20px;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-around;
+    gap: 4rem;
+}
+
+.dish-form-column {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    gap:20px;
+    gap: 2.5rem;
 }
 
 .dish-form-container label {
@@ -54,6 +54,7 @@
     margin-bottom: 5px;
     font-weight: bold;
 }
+
 .dish-form-container input,
 .dish-form-container select {
     width: 100%;
@@ -61,10 +62,20 @@
     margin-top: 5px;
     margin-bottom: 20px;
     border-radius: 4px;
+    z-index: inherit;
 }
+
 .btnDish {
     position: absolute;
-    bottom: 30px;
+    margin: 10% 0;
+    border-radius: 20px;
+    border: none;
+    font-size: 15px;
+    font-family: var(--subtitle);
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
+    transition: 0.3s;
+
 }
 
 .photosize {
