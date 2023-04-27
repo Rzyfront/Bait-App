@@ -28,7 +28,9 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
     role: ''
   });
 
-  const [errorsRegister, setErrorsRegister] = useState({});
+  const [errorsRegister, setErrorsRegister] = useState({
+    password: 'Todos los campos son obligatorios'
+  });
   const handleRegister = (event) => {
     setDataRegister({
       ...dataRegister,
@@ -44,7 +46,7 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
 
   const sendRegister = (event) => {
     event.preventDefault();
-    if (!Object.values(errorsRegister).length) {
+    if (!Object.values(errorsRegister).length && Object.values(dataRegister).length) {
       dispatch(createUser(dataRegister));
       setDataRegister({
         name: '',
