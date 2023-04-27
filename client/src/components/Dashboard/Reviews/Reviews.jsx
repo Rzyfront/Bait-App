@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import style from '../Dashboard.module.css';
-import Paginado from '../Paginado/Paginado';
+import Paginado from '../Pagination/Pagination';
 
 import { useEffect, useState } from 'react';
 import { getAllReviews, getReviewDetail } from '../../../redux/actions/admin';

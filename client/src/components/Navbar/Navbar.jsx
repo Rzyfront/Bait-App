@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="all_navbar animated-element">
+    <div id='Navbar' className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
       <Link to={`${location.pathname !== '/' ? '/' : `/home/1?name=&city=${ubication.city}`}`}>
         <img

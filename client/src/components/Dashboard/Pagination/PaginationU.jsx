@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import style from './Paginado.module.css';
+import { useState } from 'react';
+import style from './Pagination.module.css';
 import { useSelector } from 'react-redux';
 
 const PaginadoU = ({ paginade }) => {

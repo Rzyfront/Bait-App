@@ -1,10 +1,10 @@
 
-import { Navbar } from '../components';
+import { Footer, Navbar } from '../components';
 import ImgSlide1 from '../../assets/Slide1Landing.webp';
 import ImgSlide2 from '../../assets/Slide2Landing.webp';
-import ImgSlide3 from '../../assets/Slide3Landing.webp';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import '@coreui/coreui/dist/css/coreui.min.css';
-import { CCarousel, CCarouselItem } from '@coreui/react';
+
 import './Landing.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -15,14 +15,8 @@ const Landing = () => {
     <div className='Landing animated-element'>
       <Navbar />
       {/* HAY QUE REFACTORIZAR EL CARROUSEL USANDO EL COMPONENTE ADECUADO PARA QUE AUTOCAMBIE DE SLIDE */}
-      <CCarousel
-        className='Carrousel'
-        controls
-        transition='crossfade'
-        interval={3000}
-        indicators={true}
-      >
-        <CCarouselItem className='CarrouselItem'>
+
+        <div id='CarrouselItem1' className='CarrouselItem'>
           <div className='SlideItem1'>
             <div className='FirstTitle'>
               <h1>
@@ -35,8 +29,10 @@ const Landing = () => {
             </div>
             <img src={ImgSlide1} alt='ImgSlide1' />
           </div>
-        </CCarouselItem>
-        <CCarouselItem className='CarrouselItem'>
+          <a className='Slide-Arrow' href="#Footer"><IoIosArrowDown/></a>
+        </div>
+        <div id='CarrouselItem2' className='CarrouselItem'>
+          <a className='Slide-Arrow2' href="#Navbar"><IoIosArrowUp/></a>
           <div className='SlideItem2'>
             <img src={ImgSlide2} alt='ImgSlide1' />
             <div className='SecondTitle'>
@@ -50,23 +46,9 @@ const Landing = () => {
               </Link>
             </div>
           </div>
-        </CCarouselItem>
-        <CCarouselItem className='CarrouselItem'>
-          <div className='SlideItem3'>
-            <div className='ThirdTitle'>
-              <h2>Reserva ahora</h2>
-              <h3>
-                <span>Agenda</span> tu <span>visita</span> y verifica las
-                reseñas para tener una mejor elección.
-              </h3>
-              <Link to='/home/1?name=&city='>
-                <button>Ver sitios</button>
-              </Link>
-            </div>
-            <img src={ImgSlide3} alt='ImgSlide1' />
-          </div>
-        </CCarouselItem>
-      </CCarousel>
+        </div>
+        <Footer/>
+
     </div>
   );
 };

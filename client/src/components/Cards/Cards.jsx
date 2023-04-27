@@ -7,9 +7,8 @@ import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
 
-function Cards ({ toggleMapMenu }) {
+function Cards () {
   const location = useLocation();
-  const [outAnimation, setOutAnimation] = useState(false);
   const { locals, totalPages } = useSelector((state) => state.cards);
   const pagine = useParams();
   const dispatch = useDispatch();
@@ -82,18 +81,9 @@ function Cards ({ toggleMapMenu }) {
           )}
           </div>
       </div>
-      {toggleMapMenu
-        ? <div className={'widthmap scale-up-tr'}>
+      <div className={'widthmap scale-up-tr'}>
         <MapHouse className="mapsize"/>
-        {() => setOutAnimation(false) }
       </div>
-        : <div className={`widthmap scale-down-tr ${outAnimation && 'none-display'}`}>
-        <MapHouse className="mapsize"/>
-        {setTimeout(() => {
-          setOutAnimation(true);
-        }, 200)}
-        </div>
-        }
       </div>
 
   );
