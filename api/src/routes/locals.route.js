@@ -37,6 +37,6 @@ localsRoute
   .post('/acquisition/:localId', userExtractor, postAcquisitionRequest)
   .post('/:localId/menu', userExtractor, isOwner, isTheOwnerOrAdmin, postMenu)
   .put('/:localId', userExtractor, isOwner, isTheOwnerOrAdmin, localValidator, putLocal)
-  .delete('/:localId', userExtractor, isOwner, isTheOwnerOrAdmin, deleteLocal);
+  .delete('/:localId', userExtractor, isOwner, deleteLocal);
 
 module.exports = localsRoute;

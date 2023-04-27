@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         {
           model: Review,
           attributes: [],
-          where: req.reviews,
+          where: { verified: 'verified' },
           required: false,
         },
         {
