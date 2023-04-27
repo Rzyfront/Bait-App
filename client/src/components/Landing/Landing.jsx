@@ -2,7 +2,7 @@
 import { Footer, Navbar } from '../components';
 import ImgSlide1 from '../../assets/Slide1Landing.webp';
 import ImgSlide2 from '../../assets/Slide2Landing.webp';
-
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import '@coreui/coreui/dist/css/coreui.min.css';
 
 import './Landing.css';
@@ -29,8 +29,10 @@ const Landing = () => {
             </div>
             <img src={ImgSlide1} alt='ImgSlide1' />
           </div>
+          <a className='Slide-Arrow' href="#Footer"><IoIosArrowDown/></a>
         </div>
-        <div id='CarrouselItem1' className='CarrouselItem'>
+        <div id='CarrouselItem2' className='CarrouselItem'>
+          <a className='Slide-Arrow2' href="#Navbar"><IoIosArrowUp/></a>
           <div className='SlideItem2'>
             <img src={ImgSlide2} alt='ImgSlide1' />
             <div className='SecondTitle'>

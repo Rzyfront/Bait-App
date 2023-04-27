@@ -1,7 +1,6 @@
 .Container_Footer{
     width: 100%;
-    min-height: 180px;
-    max-height: 300px;
+    min-height: 150px;
     color: var(--tertiary);
     background-color: var(--bg-secondary);
     display: flex;
@@ -67,4 +66,44 @@
     transform: scale(1.01);
     filter: drop-shadow(2px 5px 8px rgb(0, 0, 0));
     color: var(--secondary);
+}
+
+@media screen and (max-width: 768px) {
+
+    .Container_Footer {
+        min-height: 200px;
+    }
+
+        
+    .Container_Footer .SocialMedia .SM_IconLinks {
+        gap: 5px;
+        font-size: 12px;
+    }
+    
+    .Container_Footer .PageInformation ul {
+        gap: 5px;
+    }
+
+    .Container_Footer .PageInformation li{
+
+        font-size: 12px;
+
+    }
+}
+
+@media screen and (max-width: 440px) {
+
+    .Container_Footer {
+        min-height: 220px;
+    }
+
+}
+
+@media screen and (max-width: 390px) {
+
+    .Container_Footer {
+        min-height: 350px;
+        text-align: center;
+    }
+
 }

@@ -9,7 +9,7 @@ const Footer = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showCookies, setShowCookies] = useState(false);
   return (
-    <div className="Container_Footer">
+    <div id='Footer' className="Container_Footer">
       <div className="SocialMedia">
         <div className="SM_IconLinks SM_Instagram">
           <AiFillInstagram />
