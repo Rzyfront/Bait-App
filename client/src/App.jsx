@@ -55,7 +55,8 @@ function App () {
         <Route path='/about' element={<About />} />
         <Route path='/dataTreatment' element={<DataTreatment />} />
         <Route path='/dashboard' element={<Dashboard />} />
-        <Route path='/userprofile' element={<Userprofile />} />
+        <Route path='/userprofile/:userId' element={<Userprofile />} />
+        <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
         <Route path='/updateMenu/:menuId' element={<DishForm />} />
         <Route path='/updateDish/:dishId' element={<DishForm/>} />

@@ -5,7 +5,9 @@ import {
   HOMEPAGE,
   CHECKUSER,
   RESETUSER,
-  GET_REVIEWS
+  GET_REVIEWS,
+  USER_PROFILE, 
+  USER_POST_IMG
 } from '../actions/actions';
 import {
   POST_MENU,
@@ -45,7 +47,8 @@ const initialState = {
   user: {},
   users: {},
   adminReviews: {},
-  adminReviewDetail: {}
+  adminReviewDetail: {},
+  userProfile:[]
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -153,6 +156,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         foco: payload
       };
+
     case SAVE_SEARCH_HOME:
       return {
         ...state,
@@ -178,6 +182,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         adminReviewDetail: payload
       };
+        case USER_PROFILE :
+    return {
+      ...state,
+      userProfile:payload
+    }
+
+    case USER_POST_IMG:
+      return {
+        ...state,
+        user: { ...user, Image: payload }
+      }
     default:
       return { ...state };
   }
