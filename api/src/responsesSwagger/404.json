@@ -1,0 +1,15 @@
+{
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "enum": ["Not found"]
+      },
+      "success": {
+        "type": "boolean",
+        "const": false
+      }
+    },
+    "required": ["message", "success"]
+  }
+  
