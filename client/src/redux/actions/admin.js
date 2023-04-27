@@ -48,10 +48,11 @@ export const verifyReview = ({ id, verified }) => async (dispatch) => {
     //                                                    Este endpoint por default la verfica, pero se le puede enviar por
     //                                                    Query 'archived' o 'unVerified' c:
     const { data } = await axios.patch(`/administrator/review/${id}${verified ? `?verified=${verified}` : ''}`);
+    console.log(data);
     // TODO agregar el estado a redux y el switches
-    return dispatch({ type: VERIFY_REVIEWS, payload: data });
+    return true;
   } catch (error) {
-    console.log(error);
+    return false;
   }
 };
 
