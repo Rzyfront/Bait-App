@@ -20,12 +20,15 @@ function SearchHome () {
       [e.target.name]: e.target.value
     });
   };
-
   const searchDatas = async (e) => {
     e.preventDefault();
     const currentPath = location.pathname;
     if (currentPath !== currentPath.split('/').at(1) && (data.input.length || data.map.length)) {
       dispatch(saveInfoSearchHome(data));
+      setData({
+        input: '',
+        map: ''
+      });
       navigate('/home/1?');
     }
     if (!data.input && !data.map && currentPath !== currentPath.split('/').at(1)) {

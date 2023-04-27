@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
-import BaitLogo from '../../assets/BaitLogo.png';
+import BaitLogo from '../../../assets/BaitLogo.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TfiClose } from 'react-icons/tfi';
@@ -10,9 +10,9 @@ import { FaPaperPlane } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 import './ReviewsForm.css';
-import { useUploadImage } from '../../hooks/useUploadImage';
+import { useUploadImage } from '../../../hooks/useUploadImage';
 import { useDispatch } from 'react-redux';
-import { comentarie } from '../../redux/actions/actions';
+import { comentarie } from '../../../redux/actions/actions';
 import validate from './revHelper';
 
 function ReviewsForm ({ setToggleModal2, id }) {
@@ -217,21 +217,21 @@ function ReviewsForm ({ setToggleModal2, id }) {
               />
             {errors.comment && <p className='danger'>{errors.comment}</p>}
             </div>
-          <input
+            <div className='ImgGroup'>
+            {!image.length && <input
             className='LoadImg'
             type='file'
             placeholder='Sube una foto de tu visita'
             accept='image/png,image/jpeg,image/jpg,image/gif'
             onChange={handleImage}
-          ></input>
-            <div className='ImgGroup'>
+          ></input>}
 
               {image.length
                 ? (
                 <img
                   src={image[image.length - 1].url}
                   alt='imagen'
-                  className='imagenDefault'
+                  className='imagen-Review'
                 />
                   )
                 : loading === true

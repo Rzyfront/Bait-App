@@ -1,5 +1,5 @@
 import { Button, Input } from '@nextui-org/react';
-import { specialties } from '../../../helpers/specialties';
+import { specialties } from '../../../../helpers/specialties';
 
 export default function DataLocal ({ handleChange, inputs, errors, handleSelect, searchCity, mapSearch, handleMap }) {
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import axios from 'axios';
 /// ///names/////////////
 export const ORDER = 'ORDER';
@@ -10,19 +11,6 @@ export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
 export const SUCCESS_RESET = 'SUCCESS_RESET';
 export const ERROR_RESET = 'ERROR_RESET';
-
-// ACTION TYPES MENU - DISH
-export const SUCCESS_MENU = 'SUCCESS_MENU';
-export const ERROR_MENU = 'ERROR_MENU';
-export const GET_MENU = 'GET_MENU';
-export const POST_MENU = 'POST_MENU';
-export const POST_DISH = 'POST_DISH';
-export const SUCCESS_DISH = 'SUCCESS_DISH';
-export const ERROR_DISH = 'ERROR_DISH';
-export const PUT_DISH = 'PUT_DISH';
-export const DELETE_DISH = 'DELETE_DISH';
-export const SUCCESS_DEL_DISH = 'SUCCESS_DEL_DISH';
-export const ERROR_DEL_DISH = 'ERROR_DEL_DISH';
 
 // ACTION TYPES USER
 export const CREATE_USER = 'CREATE_USER';
@@ -322,7 +310,7 @@ export const deleteDish = (dishId) => {
 export const getMenu = (localId) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`locals/${localId}/menu`);
+      const response = await axios(`/locals/${localId}/menu`);
       if (response.status === 200) {
         dispatch({
           type: SUCCESS_MENU,
@@ -377,6 +365,8 @@ export const getReviews = (localId, page = 1) => {
           payload: response.data.reviews
         });
       }
-    } catch (error) {}
+    } catch (error) {
+
+    }
   };
 };

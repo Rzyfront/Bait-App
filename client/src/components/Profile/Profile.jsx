@@ -7,18 +7,22 @@ import { TfiCommentAlt, TfiPencilAlt } from 'react-icons/tfi';
 
 import { GiMeal } from 'react-icons/gi';
 import img from '../../assets/restaurante.jpg';
-import { getMenu } from '../../redux/actions/actions';
+import { getReviews } from '../../redux/actions/actions';
 import { Menu, Navbar, Reviews, ReviewsForm } from '../components';
 
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailLocal } from '../../redux/actions/local';
+<<<<<<< HEAD
 import { getReviews } from '../../redux/actions/actions';
+=======
+import { getMenu } from '../../redux/actions/menuDish';
+>>>>>>> f238f107dc90cb40666aadc69bfdb5cf7000e9bc
 
 function Profile () {
   const dispatch = useDispatch();
-  const { detail, reviews } = useSelector(state => state);
+  const { detail, reviews, successDish } = useSelector(state => state);
 
   const { id } = useParams();
   useEffect(() => {
@@ -27,18 +31,15 @@ function Profile () {
 
   useEffect(() => {
     dispatch(getMenu(id));
-  }, []);
+  }, [successDish]);
 
- 
   useEffect(() => {
-    if (id) dispatch(getReviews(id)); 
+    if (id) dispatch(getReviews(id));
   }, []);
-
-
 
   const [toogleModal, setToggleModal] = useState('ReviewsLocal');
   const [toogleModal2, setToggleModal2] = useState(false);
- 
+
   return (
     <>
       <Navbar />

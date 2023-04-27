@@ -1,18 +1,28 @@
 import { useState, useEffect } from 'react';
-import './Locales.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import BaitLogo from '../../assets/LogoBait.svg';
+import BaitLogo from '../../../assets/LogoBait.svg';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUploadImage } from '../../hooks/useUploadImage';
+import { useUploadImage } from '../../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
+<<<<<<< HEAD:client/src/components/Locales/Locales.jsx
 import { validateForm } from './localHelpers';
 import TYC from './TYC';
 // import DatabasicLocal from './DataLocal/DatabasicLocal';
 import DataLocal from './DataLocal/DataLocal';
 import { createLocal } from '../../redux/actions/local';
 function Locales () {
+=======
+import DataLocal from './DataLocal/DataLocal';
+import Mapdata from '../../Map/Mapdata';
+import SearchMap from '../../Map/SearchMap/Searchmap';
+import { createLocal, createLocalFull } from '../../../redux/actions/local';
+import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
+import Chars from './Chars/Chars';
+
+function LocalsCompleteData () {
+>>>>>>> f238f107dc90cb40666aadc69bfdb5cf7000e9bc:client/src/components/CreateLocals/LocalsCompleteData/LocalesCompleteData.jsx
   const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
   const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
@@ -20,7 +30,6 @@ function Locales () {
   const Navigate = useNavigate();
   const { image, loading, handleChangeimage } = useUploadImage();
   const dispatch = useDispatch();
-  const [termsAndConditions, setTemsAndConditions] = useState(true);
 
   // map controllers
   useEffect(() => {
@@ -143,10 +152,6 @@ function Locales () {
     });
   };
 
-  function handleClick () {
-    setTemsAndConditions(false);
-    // targetRef.current.scrollIntoView({ behavior: 'smooth' });
-  }
   useEffect(() => {
     if (image.length) {
       const data = image.map((data) => {
@@ -161,10 +166,8 @@ function Locales () {
     setChekInputs({ ...chekinputs, [name]: checked });
   };
   return (
-    <div className='Create-Locals-Form animated-element'>
-      {termsAndConditions
-        ? <TYC src={BaitLogo} handleClick={handleClick} />
-        : <div className='locales_data animated-element'>
+    <div className='LocalsCompleteData-Component'>
+       <div className='locales_data animated-element'>
           <Link to='/home/1?name=&city=' className='LinkLogo'>
             <img
               src={BaitLogo}
@@ -227,8 +230,8 @@ function Locales () {
             <button type='submit' className='Send-Locals'> ENVIAR</button>
             <ToastContainer theme='colored' />
           </form>
-        </div>}
+    </div>
     </div>
   );
 }
-export default Locales;
+export default LocalsCompleteData;
