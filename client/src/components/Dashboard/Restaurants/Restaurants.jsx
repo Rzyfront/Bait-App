@@ -13,6 +13,7 @@ const Restaurantes = () => {
     location: '',
     verified: ''
   });
+  console.log(totalPages);
   useEffect(() => {
     const url = [];
     // caracters filter
