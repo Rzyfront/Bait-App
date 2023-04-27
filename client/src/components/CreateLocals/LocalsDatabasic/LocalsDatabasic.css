@@ -11,8 +11,7 @@
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     
-    background: conic-gradient(from 60deg at 0% 100%, rgba(244, 244, 244, 0.17) 0%, var(--bg-tertiary) 100%);
-    background-color: var(--bg-primary);
+    background: conic-gradient(from 60deg at 0% 100%,var(--bg-tertiary) 0%, rgba(244, 244, 244, 0.17) 100%);
 }
 
 
@@ -36,7 +35,7 @@
     color: var(--primary);
 }
 .LocalsDataBasic-Component .Container-Basic .Basic-Title span{
-    color: var(--tertiary);
+    color: var(--secondary);
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create{
@@ -47,41 +46,40 @@
     gap: 5%;
 }
 
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs{
-    width: 25%;
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component{
+    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: start;
     justify-content: center;
-    gap: 8%;
+    gap: 7%;
 }
 
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Name-Input-Group{
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Name-Input-Group{
     position: relative;
 }
 
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Name-Input-Group .popover-container{
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Name-Input-Group .popover-container{
     top: -20%;
     right: -120%;
 }
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Email-Input-Group {
+/* .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Email-Input-Group {
     position: relative;
 }
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Email-Input-Group .popover-container {
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Email-Input-Group .popover-container {
     top: -20%;
     right: -100%;
 }
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Especial-Input-Group{
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Especial-Input-Group{
     position: relative;
 }
 
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs .Especial-Input-Group .popover-container {
+.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Especial-Input-Group .popover-container {
     top: 0%;
     right: -150%;
-}
+} */
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group{
-    width: 35%;
+    width: 60%;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -97,7 +95,7 @@
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic{
-    width: 80%;
+    width: 55%;
     height: 40px;
     border: none;
     background-color: var(--btn-secondary);
@@ -117,7 +115,8 @@
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Img-Group{
-    width: 35%;
+    width: 40%;
+    margin-top: 10px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -140,25 +139,25 @@
     justify-content: center;
     text-align: center;
     width: 300px;
-    height: 300px;
-    gap: 10px;
+    height: 270px;
+    gap: 5px;
     transition: 0.3s;
     background-color: var(--bg-primary);
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 .Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add:hover {
     transform: scale(1.1);
 }
 
-.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add .Add-Img-Basic{
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Add-Img-Basic{
     font-size: 20px;
     color: var(--primary);
     font-family: var(--title);
 }
 
-.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add .Add-Img-Basic span {
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Add-Img-Basic span {
     color: var(--secondary);
     font-weight: 600;
 }

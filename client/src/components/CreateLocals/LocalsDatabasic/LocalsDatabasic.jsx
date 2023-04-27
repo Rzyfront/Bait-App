@@ -166,7 +166,8 @@ function LocalsDatabasic ({ formType, setFormType }) {
         </Link>
         <h1 className='Basic-Title'>Crea un <span>nuevo</span> Local</h1>
         <form onSubmit={handleSubmit} className='Basic-Form-Create'>
-          <DatabasicLocal
+          <div className='Map-Basic-Group'>
+             <DatabasicLocal
              handleChange={handleChange}
              inputs={inputs}
              errors={errors}
@@ -177,7 +178,6 @@ function LocalsDatabasic ({ formType, setFormType }) {
              handleMap={handleMap}
           />
 
-          <div className='Map-Basic-Group'>
            <div className='MapSize'>
             <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas}/>
             </div>
@@ -188,8 +188,8 @@ function LocalsDatabasic ({ formType, setFormType }) {
           </div>
 
           <div className='Basic-Img-Group' >
-          <label htmlFor="photo-upload" className='Label-Img-Add'>
           <h5 className='Add-Img-Basic'><span>Agrega</span> imagen del local <RiImageAddFill/></h5>
+          <label htmlFor="photo-upload" className='Label-Img-Add'>
           <input
           className='Basic-File'
           id="photo-upload"

@@ -18,23 +18,23 @@
   align-items: center;
   overflow: auto;
   position: relative;
-      /* ff 3.6+ */
-        background: -moz-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
-      
-        /* safari 5.1+,chrome 10+ */
-        background: -webkit-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
-      
-        /* opera 11.10+ */
-        background: -o-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
-      
-        /* ie 6-9 */
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3884FD', endColorstr='#F4F4F4', GradientType=1);
-      
-        /* ie 10+ */
-        background: -ms-linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(56, 132, 253, 0.5) 100%);
-      
-        /* global 94%+ browsers support */
-        background: linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(94, 154, 251, 0.5) 100%);
+          /* ff 3.6+ */
+            background: -moz-linear-gradient(180deg, rgba(244, 244, 244, 1) 0%, rgba(212, 208, 255, 0.71) 85%, rgba(56, 132, 253, 1) 100%);
+          
+            /* safari 5.1+,chrome 10+ */
+            background: -webkit-linear-gradient(180deg, rgba(244, 244, 244, 1) 0%, rgba(212, 208, 255, 0.71) 85%, rgba(56, 132, 253, 1) 100%);
+          
+            /* opera 11.10+ */
+            background: -o-linear-gradient(180deg, rgba(244, 244, 244, 1) 0%, rgba(212, 208, 255, 0.71) 85%, rgba(56, 132, 253, 1) 100%);
+          
+            /* ie 6-9 */
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3884FD', endColorstr='#F4F4F4', GradientType=1);
+          
+            /* ie 10+ */
+            background: -ms-linear-gradient(180deg, rgba(244, 244, 244, 1) 0%, rgba(212, 208, 255, 0.71) 85%, rgba(56, 132, 253, 1) 100%);
+          
+            /* global 94%+ browsers support */
+            background: linear-gradient(180deg, rgba(244, 244, 244, 1) 0%, rgba(212, 208, 255, 0.71) 85%, rgba(56, 132, 253, 1) 100%);
 }
 
 .Create-Locals-Form .LocalsCompleteData-Component{
@@ -181,8 +181,8 @@
 } */
 
 .MapSize {
-  width: 300px;
-  height: 300px;
+  width: 400px;
+  height: 260px;
   background-color: var(--bg-primary);
   border-radius: 10px;
   padding: 15px;
