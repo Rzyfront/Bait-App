@@ -4,8 +4,6 @@ function FilterGroup ({
   selectedOptions,
   handleMultiSelectChange,
   Caracteristicaslist,
-  toggleMapMenu,
-  setToggleMapMenu,
   filters,
   handleFilters,
   special
@@ -45,7 +43,7 @@ function FilterGroup ({
         <option value={'ratingDESC'}>Mayor rating</option>
         </select>
 
-        <select
+        {/* <select
           name = "alphabet"
           className="AlphaOrder"
           onChange={handleFilters}
@@ -56,7 +54,7 @@ function FilterGroup ({
           </option>
           <option value={'nameASC'}>A-Z</option>
           <option value={'nameDESC'}>Z-A</option>
-        </select>
+        </select> */}
       </div>
   );
 }
