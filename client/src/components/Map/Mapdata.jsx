@@ -6,11 +6,13 @@ import icoInfo from '../../assets/ciosearch.ico';
 //
 import L from 'leaflet';
 import reverseGeoCoding from './SearchMap/reverseGeocoding';
+import { useSelector } from 'react-redux';
 // const MAPCENTERDEFAULT = [40.574215, -105.08333];
 const MAP_LAYER_ATTRIBUTION = '&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors';
 const MAP_LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
   // actions map
+  // initial State
   function MyComponent () {
     const customIcon = L.icon({
       iconUrl: icoInfo,

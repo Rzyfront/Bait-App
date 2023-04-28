@@ -1,4 +1,3 @@
-const regGmail = /^\S+@\S+\.\S+$/;
 
 export const ErrorsDatabasic = (contenido) => {
   const error = {};
@@ -8,14 +7,12 @@ export const ErrorsDatabasic = (contenido) => {
   if (contenido.name === '') {
     error.name = 'no tiene nombre';
   }
-  if (!contenido.specialty.length) {
-    error.specialty = 'Escoje una especialidad';
-  }
-  if (!regGmail.test(contenido.email)) {
-    error.email = 'Correo no valido';
-  }
   if (JSON.stringify(contenido.location) === '{}') {
     error.location = 'selecciona punto';
+  }
+  // limit argentina create locals
+  if (JSON.stringify(contenido.location) !== '{}' && contenido.location.location.split(',').at(-1) !== 'Argentina') {
+    error.location = 'no es argentina';
   }
   return error;
 };
