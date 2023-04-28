@@ -96,7 +96,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         }
       <FiUserX className='icon' onClick={suspent}/>
     <AiFillDelete className='icon' onClick={DeleteUserid}/>
-    {localId && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
+    {localId && role === 'owner' && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
 
   </div>;
 };

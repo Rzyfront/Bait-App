@@ -7,14 +7,18 @@ import { AiFillDelete } from 'react-icons/ai';
 import photoDefault from '../../../assets/storePhoto.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteLocal, getAllLocal } from '../../../redux/actions/admin';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Users from '../Users/Users';
+
 const OneRestaurant = ({ name, image, verified, id }) => {
   const [adduser, setAdduser] = useState(false);
-
   const { user } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const [verifiedLocal, setverifiedLocal] = useState(verified);
+  useEffect(() => {
+    setverifiedLocal(verified);
+  }, [verified]);
 
+  const dispatch = useDispatch();
   const deleteRestaurant = async () => {
     if (user.role === 'superAdmin' || user.role === 'admin') {
       const response = await dispatch(deleteLocal(id));
@@ -29,14 +33,17 @@ const OneRestaurant = ({ name, image, verified, id }) => {
           autoClose: 2000
         });
       }
+      dispatch(getAllLocal(1, ''));
     }
   };
   const handleAdd = () => {
     if (adduser === true) {
+      setverifiedLocal('verified');
+      dispatch(getAllLocal(1, ''));
       setAdduser(false);
     } else {
-      useDispatch(getAllLocal(1, ''));
       setAdduser(true);
+      dispatch(getAllLocal(1, ''));
     }
   };
 
@@ -46,9 +53,9 @@ const OneRestaurant = ({ name, image, verified, id }) => {
     <h3>{name}</h3>
       </div>
       <div className='state'>
-    <h3>Estado:{verified}</h3>
+    <h3>Estado:{verifiedLocal}</h3>
       </div>
-      {verified === 'unVerified'
+      {verifiedLocal && verifiedLocal === 'unVerified'
         ? <div className='state'>
           <BsPersonFillAdd onClick={handleAdd} />
               <AiFillDelete onClick={deleteRestaurant} />

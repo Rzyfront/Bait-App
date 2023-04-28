@@ -7,15 +7,15 @@ export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
-        email: inputs.email,
+        // email: inputs.email,
         images: inputs.images,
         location: eliminarTildes(inputs.location.location),
         lat: inputs.location.lat,
         lng: inputs.location.lng,
-        name: inputs.name,
+        name: inputs.name
         // phone: inputs.phone,
-        schedule: inputs.schedule,
-        specialty: inputs.specialty
+        // schedule: inputs.schedule,
+        // specialty: inputs.specialty
         // characteristics: chekinputs
       });
 
@@ -25,6 +25,7 @@ export const createLocal = (inputs) => {
       });
       return true;
     } catch (error) {
+      console.log(error);
       return false;
     }
   };
