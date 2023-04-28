@@ -21,7 +21,6 @@ const Users = ({ localId, handleAdd }) => {
   useEffect(() => {
     if (filter) {
       dispatch(getAllUsers(filter));
-      console.log(data);
     }
   }, [filter || undefined]);
 

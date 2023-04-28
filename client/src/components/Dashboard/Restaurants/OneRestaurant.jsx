@@ -6,7 +6,7 @@ import { FaUserEdit } from 'react-icons/fa';
 import { AiFillDelete } from 'react-icons/ai';
 import photoDefault from '../../../assets/storePhoto.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteLocal } from '../../../redux/actions/admin';
+import { deleteLocal, getAllLocal } from '../../../redux/actions/admin';
 import { useState } from 'react';
 import Users from '../Users/Users';
 const OneRestaurant = ({ name, image, verified, id }) => {
@@ -34,7 +34,10 @@ const OneRestaurant = ({ name, image, verified, id }) => {
   const handleAdd = () => {
     if (adduser === true) {
       setAdduser(false);
-    } else { setAdduser(true); }
+    } else {
+      useDispatch(getAllLocal(1, ''));
+      setAdduser(true);
+    }
   };
 
   return <div className="Restaurantcard">
