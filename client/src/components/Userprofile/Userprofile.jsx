@@ -3,7 +3,7 @@ import {Navbar } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import  "./Userprofile.css"
 import {getReviews, getUserProfile} from "../../redux/actions/actions"
-
+import axios from 'axios';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useUploadImage } from '../../hooks/useUploadImage';
@@ -60,8 +60,14 @@ function Userprofile () {
   const handleChangeimages = (event) => {
     handleChangeimage(event);
   };
+
+  const handleSaveImg = async()=>{
+  
+    await axios.post(`http://localhost:3001/user/${user.id}`, {Image:{id:2 , url:[profileImg]}})
+   
+  }
     return(
-    (user?.role === "user"
+    (user?.role === "user"  
       ? <div className='userProfileContainer'>
         {openInfoModal ? <InfoModal
           closeModal={setOpenInfoModal}
@@ -150,6 +156,9 @@ function Userprofile () {
             onChange={handleChangeimages}
             title='Cambiar Avatar'
           ></input>
+          <div>
+            <button onClick={handleSaveImg}>Guardar</button>
+          </div>
         </div>
 
 
@@ -286,6 +295,9 @@ function Userprofile () {
               onChange={handleChangeimages}
               title='Cambiar Avatar'
             ></input>
+            <div>
+              <button onClick={handleSaveImg}>Guardar</button>
+            </div>
           </div>
 
 
