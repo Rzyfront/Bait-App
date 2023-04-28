@@ -8,7 +8,7 @@
     color: var(--prymary);
     background-color: var(--bg-primary);
     margin: 10px;
-    padding: 15px 20px;
+    padding: 15px 15px;
     border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
     text-align: left;
@@ -21,9 +21,14 @@
     cursor :pointer;
 }
 
+.Card .Img-Card-Group{
+    width: 50%;
+    height: 100%;
+}
+
 .Card .imgCard {
-    width: 300px;
-    height: 220px;
+    width: 100%;
+    height: 100%;
     border-radius: 5px;
     align-self: center;
     background-color: var(--bg-primary);
@@ -33,7 +38,8 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    width: 100%;
+    min-width: 50%;
+    max-width: 62%;
     height: 100%;
     padding: 0 5px;
     background-color: var(--bg-primary);
@@ -42,7 +48,7 @@
 .Card .infoCard .placeName {
     font-size: 25px;
     font-family: var(--title);
-    width: 300px;
+    width: 100%;
     height: 30px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -52,7 +58,7 @@
 .Card .infoCard .RatingGroup {
     display: flex;
     align-items: center;
-    width: 210px;
+    width: 100%;
     height: 29px;
     overflow: hidden;
     white-space: nowrap;
@@ -60,15 +66,20 @@
 
 .Card .RatingGroup .Rating {
     font-family: var(--text);
-    padding-top: 5px;
+    font-size: 20px;
 }
 
+
 .Card .LocationGroup {
+    position: relative;
     display: flex;
     align-items: center;
-    width: 350px;
+    width: 100%;
     min-height: 25px;
     max-height: 50px;
+    font-size: 16px;
+    font-family: var(--text);
+    font-weight: 400;
     overflow: hidden;
     text-overflow: ellipsis;
     cursor: pointer;
@@ -80,6 +91,46 @@
    transform: scale(1.02);
 }
 
+.Card .LocationGroup .popover-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -0%;
+    width: 70px;
+    height: 20px;
+    background-color: #ffffffc4;
+    padding: 5px;
+    border-radius:0 8px 8px 0;
+    box-shadow: 0 0 10px rgba(119, 119, 119, 0.2);
+    line-height: 1.4;
+    animation: aparecer .5s ease-in-out;
+    z-index: var(--alto-5);
+}
+
+.Card .LocationGroup:hover .popover-container{
+    display: inline-block;
+    transform: scale(1.1);
+}
+
+.Card .LocationGroup .popover-container .popcoment-text {
+    color: var(--optional2);
+    font-size: 8px;
+    font-family: var(--text);
+    font-weight: 800;
+}
+
+.Card .LocationGroup .popover-arrow {
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-width: 10px 12px 10px 0;
+    border-color: transparent #ffffffc4 transparent transparent;
+
+}
+
 .Card .Price {
     font-family: var(--text);
 }
@@ -87,7 +138,7 @@
 .Card .infoCard .Card-Tags {
     display: flex;
     flex-wrap: wrap;
-    width: 210px;
+    width: 100%;
     height: 24px;
     gap: 5px;
     margin: 5px 0;
@@ -118,4 +169,103 @@
 
 .Card .infoCard .Card-Tags .Tag-Type {
     background-color: var(--optional1);
+}
+
+
+@media screen and (max-width:1050px) {
+
+.Card .LocationGroup {
+        font-size: 14px;
+}
+
+.Card .infoCard .RatingGroup {
+    height: 25px;
+}
+
+.Card .RatingGroup .Rating {
+        font-family: var(--text);
+        font-size: 16px;
+}
+
+.Card .RatingGroup .Stars-Cards{
+    width: 80px;
+}
+    
+.Card {
+        height: 190px;
+}
+.Card .Img-Card-Group {
+    width: 42%;
+    height: 100%;
+}
+.Card .infoCard .placeName {
+    font-size: 20px;
+    height: 26px;
+
+}
+
+}
+
+@media screen and (max-width:900px) {
+
+    .Card {
+        height: 160px;
+        gap: 10px;
+        padding: 10px 10px;
+    }
+
+}
+
+@media screen and (max-width:750px) {
+    .Card .infoCard .RatingGroup {
+            height: 23px;
+        }
+
+    .Card .RatingGroup .Stars-Cards {
+            width: 70px;
+        }
+    .Card {
+        height: 150px;
+        gap: 7px;
+        margin: 7px;
+        padding: 7px 7px;
+    }
+
+    .Card .Img-Card-Group {
+        width: 38%;
+        height: 100%;
+    }
+    .Card .infoCard .placeName {
+        height: 24px;
+
+    }
+}
+
+@media screen and (max-width:550px) {
+
+.Card .infoCard .RatingGroup {
+        height: 20px;
+    }
+    .Card .RatingGroup .Stars-Cards {
+            width: 60px;
+            height: 16px;
+        }
+    .Card {
+        height: 120px;
+        gap: 5px;
+        margin: 5px;
+        padding: 5px 5px;
+    }
+
+    .Card .Img-Card-Group {
+        width: 38%;
+        height: 100%;
+    }
+    .Card .infoCard .Card-Tags {
+        margin: 0;
+    }
+    .Card .LocationGroup .popover-container {
+        width: 70px;
+        right: -0%;
+    }
 }

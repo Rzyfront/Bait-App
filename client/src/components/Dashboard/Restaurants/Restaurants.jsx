@@ -4,7 +4,7 @@ import './Restaurant.css';
 import { useEffect, useState } from 'react';
 import { getAllLocal } from '../../../redux/actions/admin';
 import OneRestaurant from './OneRestaurant';
-import PaginadoU from '../Pagination/PaginationU';
+import Pagination from '../Pagination/Pagination';
 import { ToastContainer } from 'react-toastify';
 
 const Restaurantes = () => {
@@ -82,7 +82,7 @@ const Restaurantes = () => {
           : ''}
 
         </div>
-      <PaginadoU paginade={paginade} page={filter.page} totalPages={totalPages} />
+      <Pagination paginade={paginade} page={filter.page} totalPages={totalPages} />
       <ToastContainer/>
     </div>
   );
