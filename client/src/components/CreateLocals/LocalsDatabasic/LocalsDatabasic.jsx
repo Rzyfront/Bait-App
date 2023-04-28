@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Loading } from '@nextui-org/react';
+import { Loading, Input } from '@nextui-org/react';
+import { PopComent } from '../../components';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BaitLogo from '../../../assets/LogoBait.svg';
@@ -7,9 +8,7 @@ import { RiImageAddFill } from 'react-icons/ri';
 import { IoCreate } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUploadImage } from '../../../hooks/useUploadImage';
-import { PopComent } from '../../components';
 import { useDispatch, useSelector } from 'react-redux';
-import DatabasicLocal from './DataLocalBasic/DatabasicLocal';
 import Mapdata from '../../Map/Mapdata';
 import SearchMap from '../../Map/SearchMap/SearchMap';
 import { createLocal } from '../../../redux/actions/local';
@@ -126,14 +125,6 @@ function LocalsDatabasic ({ formType, setFormType }) {
     handleChangeimage(event);
   };
 
-  const handleSelect = (event) => {
-    const { name, value } = event.target;
-    setInputs({
-      ...inputs,
-      [name]: value
-    });
-  };
-
   useEffect(() => {
     if (image.length) {
       const data = image.map((data) => {
@@ -167,16 +158,38 @@ function LocalsDatabasic ({ formType, setFormType }) {
         <h1 className='Basic-Title'>Crea un <span>nuevo</span> Local</h1>
         <form onSubmit={handleSubmit} className='Basic-Form-Create'>
           <div className='Map-Basic-Group'>
-             <DatabasicLocal
-             handleChange={handleChange}
-             inputs={inputs}
-             errors={errors}
-             statesupmit={statesupmit}
-             handleSelect={handleSelect}
-             searchCity={searchCity}
-             setMapsearch={setMapsearch}
-             handleMap={handleMap}
-          />
+           <div className='Basic-Inputs-Component'>
+          <div className='Name-Input-Group'>
+            <Input
+                underlined
+                labelPlaceholder="Nombre del Local"
+                color="default"
+                className='Inputs-Data-Basic'
+                onChange={handleChange}
+                value={inputs.name}
+                borderWeight='bold'
+                size='lg'
+                type='text'
+                name='name'
+                required
+            />
+          {statesupmit === true && errors.name && <PopComent text={errors.name}/>}
+           </div>
+
+               <Input
+                underlined
+                labelPlaceholder="Ciudad"
+                color="default"
+                className='name Inputs-Data-Basic'
+                onChange={handleMap}
+                borderWeight='bold'
+                value={mapSearch}
+                size='lg'
+                type='text'
+                required
+            />
+
+        </div>
 
            <div className='MapSize'>
             <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas}/>

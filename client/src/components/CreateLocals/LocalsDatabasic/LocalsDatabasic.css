@@ -62,21 +62,6 @@
     top: -20%;
     right: -120%;
 }
-/* .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Email-Input-Group {
-    position: relative;
-}
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Email-Input-Group .popover-container {
-    top: -20%;
-    right: -100%;
-}
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Especial-Input-Group{
-    position: relative;
-}
-
-.LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component .Especial-Input-Group .popover-container {
-    top: 0%;
-    right: -150%;
-} */
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group{
     width: 60%;
@@ -95,19 +80,22 @@
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic{
-    width: 55%;
+    width: 50%;
     height: 40px;
-    border: none;
-    background-color: var(--btn-secondary);
+    border: 1px solid var(--btn-secondary);
+    background-color: transparent;
     border-radius: 10px;
-    color: var(--tertiary);
+    color: var(--primary);
     font-size: 15px;
     font-family: var(--subtitle);
     font-weight: 500;
+    transition: 0.3s;
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic:hover {
-    background-color: var(--btn-primary);
+    border: 2px solid var(--btn-secondary);
+    border-radius: 15px;
+    font-weight: 600;
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic:active {
@@ -168,6 +156,14 @@
     align-self: center;
 }
 
+.Create-Locals-Form .locales_data form .Send-Locals {
+    padding: 10px;
+    background-color: var(--btn-secondary);
+    border-radius: 20px;
+    color: var(--tertiary);
+    border: none;
+    transition: 0.3s;
+}
 
 .Container-Basic .Basic-Form-Create .Basic-Img-Group .Send-Locals{
     display: flex;

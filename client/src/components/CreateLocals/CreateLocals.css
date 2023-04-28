@@ -93,13 +93,6 @@
   border-radius: 5px;
 }
 
-.Create-Locals-Form .locales_data form .Send-Locals {
-  padding: 10px;
-  background-color: var(--btn-primary);
-  border-radius: 20px;
-  border: none;
-  transition: 0.3s;
-}
 
 .Create-Locals-Form .locales_data form button:hover {
   background-color: var(--btn-secondary);
