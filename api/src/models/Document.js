@@ -9,7 +9,10 @@ module.exports = (sequelize) => {
     },
     archive: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
+    },
+    data: {
+      type: DataTypes.BLOB,
     },
   }, { timestamps: false });
 };

@@ -11,6 +11,9 @@ module.exports = async (req, res) => {
     const secureURL = cloudinary.url(local.Document.archive, { secure: true });
 
     res.redirect(secureURL);
+    // const doc = await Document.findByPk(6);
+    // res.set('Content-Type', 'application/pdf');
+    // res.send(doc.data);
   } catch (error) {
     res.status(400).json({ message: error.message, success: false });
   }
