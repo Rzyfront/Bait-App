@@ -173,7 +173,7 @@
   margin-top: 5px;
 } */
 
-.MapSize {
+/* .MapSize {
   width: 400px;
   height: 260px;
   background-color: var(--bg-primary);
@@ -185,7 +185,7 @@
 
 .MapSize:hover {
   transform: scale(1.1);
-}
+} */
 
 
 
