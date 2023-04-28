@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
     },
     specialty: {
       type: DataTypes.STRING(50),
-      allowNull: true,
+      // allowNull: true,
     },
     schedule: DataTypes.STRING,
   });

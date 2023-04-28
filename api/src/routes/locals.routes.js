@@ -20,10 +20,15 @@ const {
   postLocal,
   putLocal,
   postAcquisitionRequest,
+  postDocument,
+  getDocument,
 } = require('../controllers/locals');
-const { isOwner, isTheOwnerOrAdmin } = require('../middlewares/validateRole');
+const { isOwner, isTheOwnerOrAdmin, isAdmin } = require('../middlewares/validateRole');
+const multerDocs = require('../config/multerDocs.');
 
 localsRoute
+  .post('/document', multerDocs.single('document'), postDocument)
+  .get('/document/:localId', userExtractor, isAdmin, getDocument)
   .get('/', setQueryLocals, getLocals)
   .get('/:localId/menu', getMenu)
   .post('/', userExtractor, localValidator, postLocal)

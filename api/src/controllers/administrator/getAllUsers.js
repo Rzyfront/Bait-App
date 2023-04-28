@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     const page = numPage || 1;
     const { count, rows } = await User.findAndCountAll({
       where: where.user ?? {},
-      attributes: ['id', 'name', 'lastname', 'age', 'role', 'location', 'phone_number', 'email'],
+      attributes: ['id', 'name', 'lastname', 'age', 'role', 'location', 'phone_number', 'email', 'verified'],
       include: [
         { model: Image, attributes: ['url'] },
       ],

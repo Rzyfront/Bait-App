@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 const bcrypt = require('bcrypt');
 const { User } = require('../../db');
 const { sendVerificationEmail } = require('../../config/nodemailer/nodemailer-config');
@@ -12,6 +11,7 @@ module.exports = async (req, res) => {
     email,
     location,
     password,
+    image,
   } = req.body;
   try {
     const passwordHash = await bcrypt.hash(password, 10);
@@ -25,6 +25,7 @@ module.exports = async (req, res) => {
       password: passwordHash,
     });
     await sendVerificationEmail(newUser.id, newUser.email, newUser.name);
+    await newUser.setImage(image.id);
     res
       .status(201)
       .json({ success: true, message: 'Email send' });
