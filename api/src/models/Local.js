@@ -12,7 +12,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     verified: {
-      type: DataTypes.ENUM('verified', 'unVerified', 'suspended'),
+      type: DataTypes.ENUM('verified', 'unVerified', 'archived'),
       defaultValue: 'unVerified',
     },
     email: {

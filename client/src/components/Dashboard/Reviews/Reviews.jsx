@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import style from '../Dashboard.module.css';
-import Paginado from '../Pagination/Pagination';
-
+import Pagination from '../Pagination/Pagination';
 import { useEffect, useState } from 'react';
 import { getAllReviews, getReviewDetail } from '../../../redux/actions/admin';
 import { Rating as RatingStar } from '@smastrom/react-rating';
@@ -12,24 +11,17 @@ const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank
 const Reseñas = ({ fn }) => {
   const dispatch = useDispatch();
   const { adminReviews } = useSelector(state => state);
-  const [allReviews, setAllReviews] = useState({});
+  const [allReviews, setAllReviews] = useState(adminReviews);
   const [status, setStatus] = useState('unVerified');
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    dispatch(getAllReviews({}));
-  }, []);
-
-  useEffect(() => {
-    dispatch(getAllReviews({ page: 1, verified: status }));
-  }, [status]);
+    dispatch(getAllReviews({ page, verified: status }));
+  }, [status, page]);
 
   useEffect(() => {
     setAllReviews(adminReviews);
   }, [adminReviews]);
-
-  const setReviewsByPage = (page) => {
-    dispatch(getAllReviews({ page, verified: status }));
-  };
 
   const redirectDetail = (e) => {
     const value = e.target.value;
@@ -42,6 +34,11 @@ const Reseñas = ({ fn }) => {
     const { value } = e.target;
     setStatus(value);
   };
+
+  const paginade = (e) => {
+    setPage(e);
+  };
+
   return (
     <div className={style.options}>
         <h2 className={style.nameSection}>Reseñas</h2>
@@ -61,11 +58,10 @@ const Reseñas = ({ fn }) => {
                   <div className={style.userCard} key={u?.id}>
                       <img className={style.userIcon} src={u?.User?.Image || imageDefault}></img>
                       <div className={style.nameAndUser}>
-                      <p className={style.name}>{u?.local}</p> { // incluir nombre del local
-                      }
-                      <p className={style.usernames}>{u?.User?.name}</p>
+                        <p className={style.name}>{u?.Local?.name}</p>
+                        <p className={style.usernames}>{u?.User?.name}</p>
                       </div>
-                      <div className={style.titleAndStars}>
+                      <div className={style.nameAndUser}>
                         <p className={style.name}>{u?.title}</p>
                         <div className="RatingGroup">
                             <RatingStar readOnly style={{ maxWidth: 100 }} value={u?.rating || 5} />
@@ -75,7 +71,7 @@ const Reseñas = ({ fn }) => {
                   </div>
                 )}
         </div>
-        <Paginado totalPages={allReviews?.totalPages} setReviewsByPage={setReviewsByPage}/>
+       <Pagination paginade={paginade} page={page} totalPages={allReviews.totalPages} />
     </div>
   );
 };

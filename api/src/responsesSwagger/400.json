@@ -1,0 +1,17 @@
+{
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string"
+      },
+      "success": {
+        "type": "boolean",
+        "const": false
+      }
+    },
+    "required": ["message", "success"],
+    "example": {
+      "message": "Error Invalid input",
+      "success": false
+    }
+  }

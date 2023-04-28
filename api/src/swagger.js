@@ -7,12 +7,14 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: { title: 'Bait-API', version: '1.0.0' },
+    basePath: '/',
   },
   apis: [
     'src/routes/*.js',
     'src/db.js',
     'src/controllers/administrator/*.js',
     'src/controllers/reviews/*.js',
+    'src/responsesSwagger/*.json',
   ],
 };
 const swaggerSpec = swaggerJSDoc(options);
