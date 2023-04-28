@@ -71,6 +71,7 @@
 
 
 .Card .LocationGroup {
+    position: relative;
     display: flex;
     align-items: center;
     width: 100%;
@@ -88,6 +89,46 @@
 .Card .LocationGroup:hover {
    color: var(--secondary);
    transform: scale(1.02);
+}
+
+.Card .LocationGroup .popover-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -0%;
+    width: 70px;
+    height: 20px;
+    background-color: #ffffffc4;
+    padding: 5px;
+    border-radius:0 8px 8px 0;
+    box-shadow: 0 0 10px rgba(119, 119, 119, 0.2);
+    line-height: 1.4;
+    animation: aparecer .5s ease-in-out;
+    z-index: var(--alto-5);
+}
+
+.Card .LocationGroup:hover .popover-container{
+    display: inline-block;
+    transform: scale(1.1);
+}
+
+.Card .LocationGroup .popover-container .popcoment-text {
+    color: var(--optional2);
+    font-size: 8px;
+    font-family: var(--text);
+    font-weight: 800;
+}
+
+.Card .LocationGroup .popover-arrow {
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-width: 10px 12px 10px 0;
+    border-color: transparent #ffffffc4 transparent transparent;
+
 }
 
 .Card .Price {
@@ -222,5 +263,9 @@
     }
     .Card .infoCard .Card-Tags {
         margin: 0;
+    }
+    .Card .LocationGroup .popover-container {
+        width: 70px;
+        right: -0%;
     }
 }

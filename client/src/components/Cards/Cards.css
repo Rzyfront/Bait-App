@@ -27,6 +27,7 @@
 
 }
 
+
 .containerCardsall .widthmap {
     /* z-index: var(--bajo-1); */
     min-width: 40%;
@@ -50,4 +51,7 @@
         flex-direction: column;
         justify-content: start;
     }
+        .containerCardsall .Auxiliar-map {
+            display: none;
+        }
 }

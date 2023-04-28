@@ -126,6 +126,9 @@ function LocalsDatabasic ({ formType, setFormType }) {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
+      setTimeout(() => {
+        setStatesupmit(false);
+      }, 5000);
     }
   };
 
@@ -176,7 +179,6 @@ function LocalsDatabasic ({ formType, setFormType }) {
                 onChange={handleChange}
                 value={inputs.name}
                 borderWeight='bold'
-                size='lg'
                 type='text'
                 name='name'
                 required
@@ -192,14 +194,13 @@ function LocalsDatabasic ({ formType, setFormType }) {
                 onChange={handleMap}
                 borderWeight='bold'
                 value={mapSearch}
-                size='lg'
                 type='text'
 
             />
 
         </div>
 
-           <div className='MapSize'>
+           <div className='MapSize-Basic'>
             <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas}/>
             </div>
             <button onClick={searchCity} className='Pick-Location-Basic'>
@@ -209,7 +210,9 @@ function LocalsDatabasic ({ formType, setFormType }) {
           </div>
 
           <div className='Basic-Img-Group' >
-          <h5 className='Add-Img-Basic'><span>Agrega</span> imagen del local <RiImageAddFill/></h5>
+            <label htmlFor="photo-upload">
+          <h5 className='Add-Img-Basic'>{image.length ? 'Agrega otra imagen' : 'Agrega imagen del local'}<RiImageAddFill/></h5>
+          </label>
           <label htmlFor="photo-upload" className='Label-Img-Add'>
           <input
           className='Basic-File'

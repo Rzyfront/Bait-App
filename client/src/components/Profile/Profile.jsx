@@ -19,8 +19,7 @@ function Profile () {
   const { detail, reviews, successDish } = useSelector(state => state);
 
   const { id } = useParams();
-  
- 
+
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
