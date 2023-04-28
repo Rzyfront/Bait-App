@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
       name,
       lastname,
       age,
-      phone_number, // eslint-disable-line camelcase
+      phone_number,
       location,
       image,
     } = req.body; // se envia un objeto con las modificaciones desde el front
@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
     updateUser.name = name;
     updateUser.lastname = lastname;
     updateUser.age = age;
-    updateUser.phone_number = phone_number;// eslint-disable-line camelcase
+    updateUser.phone_number = phone_number;
     updateUser.location = location;
     updateUser.setImage(image.id);
     await updateUser.save();
