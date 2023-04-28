@@ -3,7 +3,7 @@ import axios from 'axios';
 // ACTION TYPES MENU
 export const SUCCESS_MENU = 'SUCCESS_MENU';
 export const SUCCESS_DEL = 'SUCCESS_DEL';
-export const ERROR_MENU = 'ERROR_MENU';
+export const SUCCESS_GET_MENU = 'SUCCESS_GET_MENU';
 export const GET_MENU = 'GET_MENU';
 export const POST_MENU = 'POST_MENU';
 export const PUT_MENU = 'PUT_MENU';
@@ -54,8 +54,8 @@ export const deleteMenu = (menuId) => {
       }
     } catch (error) {
       dispatch({
-        type: ERROR_MENU,
-        payload: error.message
+        type: SUCCESS_DEL,
+        payload: false
       });
     }
   };
@@ -70,11 +70,15 @@ export const getMenu = (localId) => {
           type: GET_MENU,
           payload: response.data.menu
         });
+        dispatch({
+          type: SUCCESS_GET_MENU,
+          payload: response.data.success
+        });
       }
     } catch (error) {
       dispatch({
-        type: ERROR_MENU,
-        payload: error.message
+        type: SUCCESS_GET_MENU,
+        payload: false
       });
     }
   };

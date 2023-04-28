@@ -69,14 +69,15 @@ function Menu () {
     })
       .then((willDelete) => {
         if (willDelete) {
-          dispatch(deleteMenu(menuId));
-          if (successDel) {
-            swal('¡Producto eliminado con éxito!', {
-              icon: 'success'
-            });
-          }
-        } else {
-          swal('Acción cancelada');
+          dispatch(deleteMenu(menuId)).then((res) => {
+            if (!res) {
+              swal('¡Sección eliminada con éxito!', {
+                icon: 'success'
+              });
+            } else {
+              swal('Acción cancelada');
+            }
+          });
         }
       });
   };
@@ -86,14 +87,14 @@ function Menu () {
   };
 
   useEffect(() => {
-    if (!menu.length) dispatch(getMenu(id));
-  }, [successDel, menu]);
+    dispatch(getMenu(id));
+  }, [successDel, successDish]);
 
   return (
-    <div className="Menu">
-      <div className="Menu-TitleGroup">
+    <div className='Menu'>
+      <div className='Menu-TitleGroup'>
         <div>
-          <h2 className="Menu-Title">Menú</h2>
+          <h2 className='Menu-Title'>Menú</h2>
         </div>
         <div className='buttons-menu'>
           <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
@@ -148,8 +149,8 @@ function Menu () {
         )}
       </div>
       {showForm && (
-        <div className="Menu-Form-Container">
-          <div className="Menu-Form">
+        <div className='Menu-Form-Container'>
+          <div className='Menu-Form'>
             <MenuForm localId={id} handleClose={handleClose}/>
           </div>
         </div>

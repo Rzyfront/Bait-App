@@ -46,7 +46,7 @@ const MenuForm = ({ handleClose }) => {
   useEffect(() => {
     if (!menuData.length) dispatch(getMenu(id));
     setMenuData(menu);
-  }, [menu, successMenu]);
+  }, [successMenu]);
 
   useEffect(() => {
     if (successMenu) {

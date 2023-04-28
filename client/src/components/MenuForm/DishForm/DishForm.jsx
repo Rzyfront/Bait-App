@@ -14,7 +14,7 @@ import { useParams } from 'react-router-dom';
 const DishForm = ({ menuId, handleClose }) => {
   const { dishId, idMenu, id } = useParams();
   const { image, handleChangeimage } = useUploadImage();
-  const { menu } = useSelector(state => state);
+  const { menu, successDish } = useSelector(state => state);
   const [postId, setPostId] = useState(null);
 
   const changeId = (id) => {
@@ -130,7 +130,7 @@ const DishForm = ({ menuId, handleClose }) => {
         <button className='Close-dish-form-button' onClick={handleFormClose}><MdClose/></button>
         <div className='dishes_data animated-element'>
           {
-            dishId
+            dishId || successDish
               ? <h2>Agrega otro producto</h2>
               : <h2>Agrega un producto</h2 >
           }
