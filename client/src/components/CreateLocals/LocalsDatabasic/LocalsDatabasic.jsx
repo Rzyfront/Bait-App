@@ -10,7 +10,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUploadImage } from '../../../hooks/useUploadImage';
 import { useDispatch, useSelector } from 'react-redux';
 import Mapdata from '../../Map/Mapdata';
-import SearchMap from '../../Map/SearchMap/SearchMap';
+// import SearchMap from '../../Map/SearchMap/SearchMap';
+import SearchMap from '../../Map/SearchMap/Searchmap';
 import { createLocal } from '../../../redux/actions/local';
 import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
 import CreateLocalsSelector from './CreateLocalsSelector/CreateLocalsSelector';
@@ -20,7 +21,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
   const [statesupmit, setStatesupmit] = useState(false);
   const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
-  const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
+  const [Mapcenter, setMapcenter] = useState([ubication.lat, ubication.lng]);
   /// /
   const Navigate = useNavigate();
   const { image, loading, handleChangeimage } = useUploadImage();
@@ -54,12 +55,13 @@ function LocalsDatabasic ({ formType, setFormType }) {
     }
   };
   const handlemapdatas = (information) => {
+    const locationData = `${information.address.Match_addr},${information.address.CntryName}`;
     const data = {
       lat: information.location.y,
       lng: information.location.x,
-      location: information.address
-        .LongLabel
+      location: locationData
     };
+
     setInputs({
       ...inputs,
       location: data
@@ -83,7 +85,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
     schedule: '',
     specialty: ''
   });
-
+  // controller Erros
   useEffect(() => {
     setErrors(
       ErrorsDatabasic({
@@ -103,6 +105,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
     event.preventDefault();
     if (!Object.values(errors).length) {
       const response = await dispatch(createLocal(inputs));
+
       if (response === true) {
         toast.success('¡Local creado satisfactoriamente!', {
           position: toast.POSITION.TOP_CENTER,
@@ -111,6 +114,11 @@ function LocalsDatabasic ({ formType, setFormType }) {
         setTimeout(() => {
           Navigate(`/home/1?name=&city=${ubication.city}`);
         }, 2000);
+      } else {
+        toast.error('No pudimos enviar los datos', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000
+        });
       }
     } else {
       setStatesupmit(true);
@@ -186,7 +194,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
                 value={mapSearch}
                 size='lg'
                 type='text'
-                required
+
             />
 
         </div>
@@ -236,10 +244,10 @@ function LocalsDatabasic ({ formType, setFormType }) {
                   <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate/></button>
           </div>
 
-          <ToastContainer theme='colored'/>
         </form>
 
     </div>
+      <ToastContainer className="errors" theme='colored' />
     </div>
   );
 }

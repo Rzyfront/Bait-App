@@ -19,19 +19,12 @@ export const createLocal = (inputs) => {
         // characteristics: chekinputs
       });
 
-      if (response.status === 201) {
-        dispatch({
-          type: SUCCESS,
-          payload: response.data.success
-        });
-        return true;
-      }
-    } catch (error) {
-      console.log(error.message);
       dispatch({
-        type: ERROR,
-        payload: error.message
+        type: SUCCESS,
+        payload: response.data.success
       });
+      return true;
+    } catch (error) {
       return false;
     }
   };
