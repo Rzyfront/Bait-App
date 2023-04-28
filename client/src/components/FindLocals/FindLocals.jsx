@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import style from './FindLocals.module.css';
 import Card from '../Card/Card';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 const FindLocals = () => {
   const [nombre, setNombre] = useState();
   const handleChange = (e) => setNombre(e.target.value);
+  useEffect(() => {
+    console.log('dispatch busqueda');
+  }, [nombre]);
   return (
     <main className={style.main}>
       <h2 className={style.title}>¿Que lugar queres reseñar?</h2>
