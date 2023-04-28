@@ -68,6 +68,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         <select
           onChange={handleSelect}
           value={selector}
+          defaultValue={role}
           required
       >
           <option value={role}>{role}</option>
