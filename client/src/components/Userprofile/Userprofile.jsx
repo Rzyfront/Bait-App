@@ -1,5 +1,4 @@
 import './UserProfile.css';
-import {Navbar } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import  "./Userprofile.css"
 import {getReviews, getUserProfile} from "../../redux/actions/actions"
@@ -11,6 +10,7 @@ import { Loading } from '@nextui-org/react';
 import { userPostImg } from '../../redux/actions/actions';
 import InfoModal from  "../Userprofile/InfoModal/InfoModal"
 import BonoModal from "../Userprofile/BonoModal/BonoModal"
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -20,26 +20,29 @@ function Userprofile () {
 
   const [openInfoModal, setOpenInfoModal] = useState(false)
   const [openBonoModal, setOpenBonoModal] = useState(false)
-  // const [scroll,setScroll] = useState(false)
+  const [userReview,setUserReview] = useState([]) 
+
 
   const dispatch = useDispatch();
   const {userId} = useParams()
 
   const  {user} = useSelector((state) => state.user);
-  const  userProfile  = useSelector((state) =>  state.userProfile )
+const userProfile = useSelector((state)=>state.userProfile)
   const reviews = useSelector((state) => state.reviews)
-  useEffect(()=>{
-   
-    
-    dispatch(getUserProfile(userId))
+
+
+  const navigate = useNavigate()
   
-  },[])
+  useEffect(()=>{
+    user && dispatch(getUserProfile(user.id))
+  },[user])
+
+  userProfile && console.log(userProfile);
   useEffect(() => {
-
     dispatch(getReviews(userId))
-   
-
   }, [])
+
+ 
   useEffect(() => {
     if (image.length) {
       setProfileImg(image[0].url)
@@ -50,10 +53,7 @@ function Userprofile () {
   }, [image, user])
 
  
-  
 
-  userProfile && console.log(userProfile.user?.Reviews);
-  user && console.log(user.role);
 
  
   
@@ -66,9 +66,30 @@ function Userprofile () {
     await axios.post(`http://localhost:3001/user/${user.id}`, {Image:{id:2 , url:[profileImg]}})
    
   }
+
+  const handleDeleteReview =async(e)=>{
+
+   
+    
+    const reviewId = Number(e.target.id)
+   
+    const newReviews = userReview.filter(rev=>rev.id != reviewId)
+   
+    setUserReview(newReviews)
+    await axios.put(`http://localhost:3001/reviews/${reviewId}`, { title: "Modificado", UserId: user.id, toxicity: 0, comment: "Eliminada", verified:"archived"})
+   
+  
+  }
+  const handleInicio =()=>{
+    navigate("/home/1?name=&city=")
+  }
     return(
     (user?.role === "user"  
+      
       ? <div className='userProfileContainer'>
+        <div>
+            <button onClick={handleInicio}>Incio</button>
+        </div>
         {openInfoModal ? <InfoModal
           closeModal={setOpenInfoModal}
           name={user.name}
@@ -166,10 +187,10 @@ function Userprofile () {
 
         <div className='userReviews'>
           <h1 className='reviewTittle'>Reviews </h1>
-          {reviews && reviews.map((review) => {
+          {userProfile.Reviews && userProfile.Reviews.map((review) => {
             return (
-              <div className='mainContainer'>
-                <div key={review.id} className='reviewContainer'>
+              <div key={review.id} className='mainContainer'>
+                <div key={review.id} className='reviewContainer' >
                   <div className='reviewTitle'>
                     <h3>Titulo: {review.title}</h3>
                   </div>
@@ -194,9 +215,9 @@ function Userprofile () {
 
 
                   <div className='reviewButtons'>
-                    <button>Modificar</button>
-                    <button>Eliminar</button>
-
+                    <button >Modificar</button>
+                    <button id={review.id} onClick={handleDeleteReview}>Eliminar</button>
+                   
                   </div>
                 </div>
 
@@ -208,6 +229,9 @@ function Userprofile () {
 
       </div>
         : <div className='userProfileContainer'>
+          <div>
+            <button onClick={handleInicio}>Inicio</button>
+          </div>
           {openInfoModal ? <InfoModal
             closeModal={setOpenInfoModal}
             name={user.name}
