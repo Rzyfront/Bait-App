@@ -11,7 +11,7 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         color="dark"
                         className='name'
                         onChange={handleChange}
-                        value={formValues.name}
+                        value={formValues?.name}
                         type='text'
                         name='name'
                         required
@@ -23,7 +23,7 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         name='type'
                         className='type'
                         onChange={handleSelect}
-                        value={formValues.type}
+                        value={formValues?.type}
                         required
                     >
                         <option value='value2' defaultValue>Tipo</option>
@@ -42,7 +42,7 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         color="dark"
                         className='type'
                         onChange={handleChange}
-                        value={formValues.price}
+                        value={formValues?.price}
                         type='number'
                         name='price'
                         required
@@ -54,7 +54,7 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         color="dark"
                         className='type'
                         onChange={handleChange}
-                        value={formValues.description}
+                        value={formValues?.description}
                         type='text'
                         name='description'
                         required
@@ -68,8 +68,8 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         accept='image/png,image/jpeg,image/jpg,image/gif'
                         onChange={handleChangeImages}
                     ></input>
-                    {image.length
-                      ? <img src={image[image.length - 1].url} alt="foto" className='photosize' />
+                    {image?.url
+                      ? <img src={image.url} alt='dish' className='photosize' />
                       : loading === true
                         ? (
                         <Loading color="primary" />

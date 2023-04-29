@@ -14,6 +14,7 @@ export const POST_DISH = 'POST_DISH';
 export const GET_DISH = 'GET_DISH';
 export const SUCCESS_DISH = 'SUCCESS_DISH';
 export const ERROR_DISH = 'ERROR_DISH';
+export const RESET_DISH = 'RESET_DISH';
 export const PUT_DISH = 'PUT_DISH';
 export const DELETE_DISH = 'DELETE_DISH';
 export const SUCCESS_DEL_DISH = 'SUCCESS_DEL_DISH';
@@ -93,6 +94,7 @@ export const postDish = (menuId, dish) => {
     ...dish,
     price: Number(dish.price)
   };
+
   return async (dispatch) => {
     try {
       const response = await axios.post(`/dishes/${menuId}`, dish);
@@ -111,20 +113,16 @@ export const postDish = (menuId, dish) => {
   };
 };
 
-export const getDish = (dishId) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios(`/dishes/${dishId}`);
-      if (response.status === 201) {
-        dispatch({
-          type: GET_DISH,
-          payload: response.data.dish
-        });
-      }
-    } catch (error) {
-      swal('Ocurrió un error');
+export const getDish = async (dishId) => {
+  try {
+    const response = await axios(`/dishes/${dishId}`);
+    if (response.status === 201) {
+      const { Image, ...dish } = response.data.dish;
+      return { ...dish, image: Image };
     }
-  };
+  } catch (error) {
+    swal('Ocurrió un error');
+  }
 };
 
 export const deleteDish = (dishId) => {
@@ -147,7 +145,11 @@ export const deleteDish = (dishId) => {
 };
 
 export const putDish = (dishId, dish) => {
-  console.log(dish);
+  dish = {
+    ...dish,
+    image: { id: dish.image.id || dish.Image.id, url: 'url' },
+    price: Number(dish.price)
+  };
   return async (dispatch) => {
     try {
       const response = await axios.put(`/dishes/${dishId}`, dish);
@@ -158,7 +160,28 @@ export const putDish = (dishId, dish) => {
         });
       }
     } catch (error) {
+      console.log(error);
       swal('Ocurrió un error');
     }
   };
 };
+
+// export const getDish = (dishId) => {
+//   return async (dispatch) => {
+//     try {
+//       const response = await axios(`/dishes/${dishId}`);
+//       if (response.status === 201) {
+//         dispatch({
+//           type: GET_DISH,
+//           payload: response.data.dish
+//         });
+//         setTimeout(dispatch({
+//           type: RESET_DISH,
+//           payload: {}
+//         }), 3000);
+//       }
+//     } catch (error) {
+//       swal('Ocurrió un error');
+//     }
+//   };
+// };

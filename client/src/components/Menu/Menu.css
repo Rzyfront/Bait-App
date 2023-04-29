@@ -11,7 +11,7 @@
 }
 .Menu .Menu-TitleGroup {
      width: 100%;
-     height: 10%;
+     height: 13%;
      padding: 0 20px;
      display: flex;
      justify-content: space-between;
@@ -34,25 +34,19 @@
     flex-wrap: no-wrap;
     margin-top: 30px;
     justify-content: space-around;
+    overflow: auto;
 }
 
 
-
-.menuBtn {
-    align-self: flex-end;
-    border: none;
-    position: absolute;
-    right: 10px;
-}
-
-.menuBtn:hover {
-    align-self: flex-end;
-    border-bottom: 2px solid var(--btn-primary);
-
-}
 .Menu .Menu-List {
-    overflow: scroll;
+    margin-top: 2rem;
+    overflow: auto
 
+}
+.Menu .Menu-List .section-menu {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .Menu .Menu-List .section-menu-title{

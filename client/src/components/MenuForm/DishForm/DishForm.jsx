@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import swal from 'sweetalert';
 import { MdClose } from 'react-icons/md';
 import { useDishForm } from '../../../hooks/useDishForm';
@@ -11,26 +11,12 @@ import { getMenu, postDish, putDish } from '../../../redux/actions/menuDish';
 import Inputs from './Inputs/Inputs';
 import { useParams } from 'react-router-dom';
 
-const DishForm = ({ menuId, nomodal, setToggleModal }) => {
+const DishForm = ({ menuId, nomodal, setToggleModal, dishId }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { dish } = useSelector(state => state);
-  console.log(dish);
-  const initialValues = dish
-    ? {
-        name: dish.name,
-        type: dish.type,
-        price: dish.price,
-        description: dish.description,
-        image: dish.Image
-      }
-    : {
-        name: '',
-        type: '',
-        price: '',
-        description: ''
-      };
-  const { formValues, errors, handleInputChange, handleSelect, resetForm, loading, handleChangeImages, image } = useDishForm(initialValues, validateForm);
+  // const { dish } = useSelector(state => state);
+
+  const { formValues, errors, handleInputChange, handleSelect, resetForm, loading, handleChangeImages, image } = useDishForm({ validateForm, dishId });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,6 +27,7 @@ const DishForm = ({ menuId, nomodal, setToggleModal }) => {
           autoClose: 2000
         });
         resetForm();
+        dispatch(getMenu(id));
       }).catch(() => {
         toast.error('Error al agregar', {
           position: toast.POSITION.TOP_CENTER,
@@ -54,12 +41,13 @@ const DishForm = ({ menuId, nomodal, setToggleModal }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(putDish(dish.id, formValues)).then(() => {
+    dispatch(putDish(dishId, formValues)).then(() => {
       toast.success('Producto actualizado con éxito.', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
       resetForm();
+      dispatch(getMenu(id));
     }).catch(() => {
       toast.error('Error al actualizar', {
         position: toast.POSITION.TOP_CENTER,
@@ -79,9 +67,9 @@ const DishForm = ({ menuId, nomodal, setToggleModal }) => {
         <button className='Close-dish-form-button' onClick={() => setToggleModal(nomodal)}><MdClose/></button>
         <div className='dishes_data animated-element'>
           {
-            dish
-              ? <h2>Actualizar producto</h2>
-              : <h2>Agregar un nuevo producto</h2>
+            menuId
+              ? <h2>Agregar un nuevo producto</h2>
+              : <h2>Actualizar producto</h2>
           }
           <div className='dish-form-container'>
           <Inputs
@@ -89,14 +77,14 @@ const DishForm = ({ menuId, nomodal, setToggleModal }) => {
             handleChangeImages={handleChangeImages}
             handleSelect={handleSelect}
             formValues = {formValues}
-            image={image}
+            image={image[image.length - 1] || formValues.image}
             errors={errors}
             loading={loading}
           />
       {
-        dish
-          ? <button onClick={handleUpdate} className='btnDish' type='submit'>Actualizar</button>
-          : <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
+        menuId
+          ? <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
+          : <button onClick={handleUpdate} className='btnDish' type='submit'>Actualizar</button>
       }
           </div>
       </div>

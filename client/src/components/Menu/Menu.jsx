@@ -14,12 +14,13 @@ function Menu () {
   const [nomodal, modal1, modal2] = ['nomodal', 'modal1', 'modal2'];
 
   const { id } = useParams();
-  const { menu, successDish, successDel, newMenu } = useSelector(state => state);
+  const { menu, successDish, successDel, successMenu, newMenu } = useSelector(state => state);
   const [toggleModal, setToggleModal] = useState(nomodal);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState('Editar');
   const [menuId, setMenuId] = useState(null);
+  const [dishId, setDishId] = useState(null);
 
   const handleMenuChange = (e) => {
     const { name } = e.target;
@@ -49,6 +50,7 @@ function Menu () {
               icon: 'success'
             });
           }
+          dispatch(getMenu(id));
         } else {
           swal('Acción cancelada');
         }
@@ -56,7 +58,7 @@ function Menu () {
   };
 
   const reqPutDish = (dishId) => {
-    dispatch(getDish(dishId));
+    setDishId(dishId);
     setToggleModal(modal2);
   };
 
@@ -89,8 +91,8 @@ function Menu () {
   };
 
   useEffect(() => {
-    dispatch(getMenu(id));
-  }, [successDel, successDish]);
+    if (!menu) dispatch(getMenu(id));
+  }, [successDel, successDish, successMenu, menu]);
 
   return (
     <div className='Menu'>
@@ -151,7 +153,7 @@ function Menu () {
         )}
       </div>
       {(toggleModal === modal1) && <MenuForm localId={id} modal2={modal2} nomodal={nomodal} setToggleModal={setToggleModal} />}
-      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} />}
+      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} dishId={dishId} />}
     </div>
   );
 }
