@@ -7,7 +7,8 @@ import {
   RESETUSER,
   GET_REVIEWS,
   USER_PROFILE,
-  USER_POST_IMG
+  USER_POST_IMG,
+  USER_DASH_LOCALS
 } from '../actions/actions';
 import {
   POST_MENU,
@@ -49,7 +50,8 @@ const initialState = {
   adminReviews: {},
   adminReviewDetail: {},
   adminLocals: {},
-  userProfile: []
+  userProfile: [],
+  userDashLocals: {}
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -198,6 +200,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: { payload }
+      };
+    case USER_DASH_LOCALS:
+      return {
+        ...state,
+        userDashLocals: payload
       };
     default:
       return { ...state };

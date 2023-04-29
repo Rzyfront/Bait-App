@@ -1,69 +1,70 @@
 import './UserProfile.css';
-import {Navbar } from '../components';
+import { Navbar } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import  "./Userprofile.css"
-import {getReviews, getUserProfile} from "../../redux/actions/actions"
+import './Userprofile.css';
+import { getReviews, getUserProfile, userPostImg, getUserLocals } from '../../redux/actions/actions';
 
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useUploadImage } from '../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
-import { userPostImg } from '../../redux/actions/actions';
-import InfoModal from  "../Userprofile/InfoModal/InfoModal"
-import BonoModal from "../Userprofile/BonoModal/BonoModal"
 
-
+import InfoModal from '../Userprofile/InfoModal/InfoModal';
+import BonoModal from '../Userprofile/BonoModal/BonoModal';
+import UserLocals from './UserLocals';
 
 function Userprofile () {
   const { image, loading, handleChangeimage } = useUploadImage();
-  const [profileImg,setProfileImg]= useState([])
+  const [profileImg, setProfileImg] = useState([]);
 
-  const [openInfoModal, setOpenInfoModal] = useState(false)
-  const [openBonoModal, setOpenBonoModal] = useState(false)
-  // const [scroll,setScroll] = useState(false)
+  const [openInfoModal, setOpenInfoModal] = useState(false);
+  const [openBonoModal, setOpenBonoModal] = useState(false);
+  // const [scroll,setScroll] = useState(false);
+  const [select, setSelect] = useState('reviews');
 
   const dispatch = useDispatch();
-  const {userId} = useParams()
+  const { userId } = useParams();
 
-  const  {user} = useSelector((state) => state.user);
-  const  userProfile  = useSelector((state) =>  state.userProfile )
-  const reviews = useSelector((state) => state.reviews)
-  useEffect(()=>{
-   
-    
-    dispatch(getUserProfile(userId))
-  
-  },[])
+  const { user } = useSelector((state) => state.user);
+  const userProfile = useSelector((state) => state.userProfile);
+  const obtainUserLocal = useSelector((state) => state.userDashLocals);
+  const reviews = useSelector((state) => state.reviews);
+  const [userLocal, setUserLocal] = useState(obtainUserLocal);
   useEffect(() => {
-
-    dispatch(getReviews(userId))
-   
-
-  }, [])
+    dispatch(getUserProfile(userId));
+  }, []);
+  useEffect(() => {
+    dispatch(getReviews(userId));
+  }, []);
   useEffect(() => {
     if (image.length) {
-      setProfileImg(image[0].url)
-      user.Image=profileImg
+      setProfileImg(image[0].url);
+      user.Image = profileImg;
     }
- 
-
-  }, [image, user])
-
- 
-  
-
+  }, [image, user]);
+  useEffect(
+    () => {
+      setUserLocal(obtainUserLocal);
+    }, [obtainUserLocal]
+  );
+  /*
   userProfile && console.log(userProfile.user?.Reviews);
   user && console.log(user);
 
-  console.log(profileImg);
-  
+  console.log(profileImg); */
+
   const handleChangeimages = (event) => {
     handleChangeimage(event);
   };
-  
+
+  const userLocals = () => {
+    setSelect('locals');
+    dispatch(getUserLocals());
+  };
   return (
     <div className='userProfileContainer'>
-      {openInfoModal ? <InfoModal
+      {openInfoModal
+        ? <InfoModal
        closeModal={setOpenInfoModal}
        name ={user.name}
        lastname ={user.lastname}
@@ -72,12 +73,15 @@ function Userprofile () {
         phone_number ={user.phone_number}
         location ={user.location}
         verified={user.verified}
-        /> : null}
+        />
+        : null}
 
-      {openBonoModal ? <BonoModal
+      {openBonoModal
+        ? <BonoModal
         closeBonoModal={setOpenBonoModal}
         name={user.name}
-      /> : null}
+      />
+        : null}
     <Navbar />
     <div className='infoSection'>
         {/* <h2 className='userProfileText'>perfil de usuario</h2> */}
@@ -87,61 +91,61 @@ function Userprofile () {
             <div className="Info">
               {profileImg.length
                 ? (
-                  image.map((image, i) => (
+                    image.map((image, i) => (
                     <img
                       key={i}
                       src={profileImg}
                       alt='imagen'
                       className='userImage'
                     />
-                  ))
-                )
+                    ))
+                  )
                 : loading === true
                   ? (
                     <Loading color="primary" />
-                  )
+                    )
                   : (
                     <img
                       src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
                       alt='image default'
                       className='userImage'
                     />
-                  )}
+                    )}
               <h2>{user.name + ' ' + user.lastname}</h2>
-              
-             
+
             </div>
-            
+
           </div>
         )}
         <div className='userButtonContainer'>
           <button className='userButtons'
-           onClick={()=>{setOpenInfoModal(!openInfoModal)}}>
+           onClick={() => { setOpenInfoModal(!openInfoModal); }}>
             Informacion
            </button>
 
-          <button 
-
-            className={`userButtons ${scroll && "scroll" }`}   >
-          
+          <button
+            className={`userButtons ${scroll && 'scroll'}`} >
             Reviews
           </button>
 
-          <button 
-          className='userButtons' 
-          onClick={() => {setOpenBonoModal(!openBonoModal) }}>
+          <button
+            className={`userButtons ${scroll && 'scroll'}`}
+            onClick = {userLocals}
+            >
+            Mis establecimientos
+          </button>
+
+          <button
+          className='userButtons'
+          onClick={() => { setOpenBonoModal(!openBonoModal); }}>
             Bonificaciones
             </button>
-          
-          
+
         </div>
     </div>
-    
-   
-   
-     
+
     <div className='userAvatarContainer'>
-     
+
       <p>Cambiar Imagen De Perfil</p>
         <input
           type='file'
@@ -151,22 +155,18 @@ function Userprofile () {
           title='Cambiar Avatar'
         ></input>
     </div>
-      
-      
-     
 
       <div className='userReviews'>
         <h1 className='reviewTittle'>Reviews </h1>
-        {reviews && reviews.map((review) => {
+        {select === 'reviews' && reviews && reviews.map((review) => {
           return (
-            <div className='mainContainer'>
+            <div className='mainContainer' key={review.id}>
               <div key={review.id} className='reviewContainer'>
                 <div className='reviewTitle'>
                   <h3>Titulo: {review.title}</h3>
                 </div>
 
-              <div className='reviewInfoContainer'>
-
+                <div className='reviewInfoContainer'>
                   <div className='reviewCalification'>
                     <p>Comentario: {review.comment}</p>
                     <p>Calificaciones:</p>
@@ -174,39 +174,37 @@ function Userprofile () {
                     <p>Service :{review.service}</p>
                     <p>Environment :{review.environment}</p>
                   </div>
-
                   <figure className='imgContainer'>
                     <img src={review.Image?.url} alt="" />
                   </figure>
+                </div>
 
-                
-
-              </div>
-                
-               
                 <div className='reviewButtons'>
                   <button>Modificar</button>
                   <button>Eliminar</button>
-
                 </div>
+
               </div>
-             
             </div>
-           
-          )
+          );
         })}
       </div>
-      
-      <div className="Userprofile"></div>
-     
-    
-   
-    </div>
+      {select === 'locals' && userLocal?.user?.Locals && userLocal?.user?.Locals.map((e, i) =>
+      <UserLocals
+      key={i}
+      id={e.id}
+      name={e.name}
+      image={e.image}
+      location={e.location}
+      specialty={e.specialty}
+      schedule={e.schedule}
+      />)}
+    <div className="Userprofile"></div>
+  </div>
   );
 }
 
 export default Userprofile;
-
 
 //  <div className="AgeGroup">
 //                 <h3 className="Age">{user.age}</h3>

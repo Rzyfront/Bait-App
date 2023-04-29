@@ -18,6 +18,7 @@ export const USER_POST_IMG = 'USER_POST_IMG';
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
+export const USER_DASH_LOCALS = 'USER_DASH_LOCALS';
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -158,7 +159,6 @@ export const checkUser = () => {
   return async (dispatch) => {
     try {
       const res = await axios.get('/login');
-      console.log(res.data);
       dispatch({
         type: CHECKUSER,
         payload: res.data
@@ -225,6 +225,20 @@ export const userPostImg = (img) => {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const getUserLocals = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get('http://localhost:3001/user/profile');
+      dispatch({
+        type: USER_DASH_LOCALS,
+        payload: response.data
+      });
+    } catch (err) {
+      console.log(err.message);
     }
   };
 };
