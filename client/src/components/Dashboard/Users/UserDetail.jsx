@@ -2,15 +2,20 @@ import imageDefault from '../../../assets/imagenDefault.png';
 import './UserDetail.css';
 import { AiFillDelete } from 'react-icons/ai';
 import { FiUserX } from 'react-icons/fi';
+import { MdVerified } from 'react-icons/md';
 const UserDetail = ({ id, lastname, age, role, image, name, email, filter, verified, handledetail, DeleteUserid, suspent }) => {
   const deleteDetail = async () => {
-    console.log(id);
     await DeleteUserid();
     handledetail();
   };
   const handleSuspent = async () => {
-    await suspent();
-    handledetail();
+    if (verified === 'suspended') {
+      await suspent('verified');
+      handledetail();
+    } else {
+      await suspent('suspended');
+      handledetail();
+    }
   };
 
   return <div className="detailcontainer">
@@ -22,8 +27,12 @@ const UserDetail = ({ id, lastname, age, role, image, name, email, filter, verif
       <p>email:{email}</p>
       <p>rol:{role}</p>
       <p>age:{age}</p>
-      <AiFillDelete className='icon' onClick={deleteDetail} />
-      <FiUserX className='icon' onClick={handleSuspent} />
+      <p>estado={verified}</p>
+
+       <AiFillDelete className='icon' onClick={deleteDetail} />
+      {verified === 'suspended' && <MdVerified onClick={handleSuspent}/>}
+
+      {verified !== 'suspended' && <FiUserX className='icon' onClick={handleSuspent} />}
     </div>
     </div>;
 };

@@ -16,7 +16,8 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   // actualizar role
   useEffect(() => {
     setSelector(role);
-  }, [role]);
+    setdetailon(verified);
+  }, [role, verified]);
 
   const handleSelect = (event) => {
     const { value } = event.target;
@@ -45,13 +46,15 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
     }
   };
 
-  const suspent = async () => {
-    const respuesta = await dispatch(suspendUser({ id }));
+  const suspent = async (action) => {
+    const respuesta = await dispatch(suspendUser({ id, action }));
+
     if (respuesta === 201) {
-      toast.success(`El usuario ${name + ' ' + lastname} ha sido sancionado efectivamente`, {
+      toast.success(`El usuario ${name + ' ' + lastname} su estado es ${action}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 4000
       });
+      setStateV(action);
     } else {
       toast.error('Ocurrio un error', {
         position: toast.POSITION.TOP_CENTER,
@@ -100,11 +103,13 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         : <div className='selectdata'> <h3>{role}</h3>
         </div>
         }
-    {verified && <div className={verified === 'verified' ? 'green' : verified === 'unVerified' ? 'orange' : 'red'}></div>}
+  {/* colores estado cuenta */}
 
-    <button onClick={handledetail}>Detalles</button>
+    {!localId && <button onClick={handledetail}>Detalles</button>}
+
     {localId && role === 'owner' && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
-    {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={verified} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent}/>}
+    {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={stateV} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent} />}
+    {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
   </div>;
 };
 export default User;

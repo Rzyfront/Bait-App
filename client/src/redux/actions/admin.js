@@ -49,6 +49,15 @@ export const detailUser = (data) => {
   };
 };
 
+export const suspendUser = ({ id, action }) => async (dispatch) => {
+  try {
+    const { status } = await axios.patch(`/administrator/suspend/${id}?verified=${action}`);
+    return status;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //
 
 export const getAllReviews = ({ page = 1, verified = 'unVerified' }) => {
@@ -83,15 +92,6 @@ export const verifyReview = ({ id, verified }) => async (dispatch) => {
     return true;
   } catch (error) {
     return false;
-  }
-};
-
-export const suspendUser = ({ id }) => async (dispatch) => {
-  try {
-    const { status } = await axios.patch(`/administrator/suspend/${id}`);
-    return status;
-  } catch (error) {
-    console.log(error);
   }
 };
 
