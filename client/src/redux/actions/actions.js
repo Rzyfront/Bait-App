@@ -199,11 +199,11 @@ export const getUserProfile = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios(`http://localhost:3001/user/${id}`);
-
+      console.log(response.data.user);
       if (response.data.success === true) {
         dispatch({
           type: USER_PROFILE,
-          payload: response.data
+          payload: response.data.user
         });
       }
     } catch (error) {
