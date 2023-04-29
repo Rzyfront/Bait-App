@@ -10,13 +10,14 @@ module.exports = async (req, res) => {
         model: User,
         attributes: ['name', 'lastname', 'id', 'email', 'role', 'age'],
         include: [{ model: Image, attributes: ['url'] }],
-      }, { model: Image, attributes: ['url'] },
+      },
+      { model: Image, attributes: ['url'], as: 'Image' },
+      { model: Image, attributes: ['url'], as: 'ticket' },
       { model: Local, attributes: ['name', 'id'] },
       ],
       limit: 10,
       offset: (req.page - 1) * 10,
     });
-
     const totalPages = Math.ceil(count / 10);
     return res.status(200).json({
       totalPages, count, success: true, reviews: rows,

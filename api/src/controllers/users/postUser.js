@@ -25,7 +25,7 @@ module.exports = async (req, res) => {
       password: passwordHash,
     });
     await sendVerificationEmail(newUser.id, newUser.email, newUser.name);
-    await newUser.setImage(image.id);
+    if (image) await newUser.setImage(image.id);
     res
       .status(201)
       .json({ success: true, message: 'Email send' });
