@@ -2,7 +2,7 @@ const { User } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
-    const { userId } = req; // se envia por params el Id para obtener el registro a modificar
+    const { userId } = req; // se envia por token el Id para obtener el registro a modificar
     const {
       name,
       lastname,

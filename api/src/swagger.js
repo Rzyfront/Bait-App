@@ -13,10 +13,7 @@ const options = {
     'src/routes/*.js',
     'src/db.js',
     'src/models/*.js',
-    'src/controllers/administrator/*.js',
-    'src/controllers/reviews/*.js',
-    'src/controllers/dishes/*.js',
-    'src/controllers/images/*.js',
+    'src/controllers/**/*.js',
     'src/responsesSwagger/*.js',
   ],
 };
