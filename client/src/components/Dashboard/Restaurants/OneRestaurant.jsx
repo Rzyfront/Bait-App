@@ -39,11 +39,9 @@ const OneRestaurant = ({ name, image, verified, id }) => {
   const handleAdd = () => {
     if (adduser === true) {
       setverifiedLocal('verified');
-      dispatch(getAllLocal(1, ''));
       setAdduser(false);
     } else {
       setAdduser(true);
-      dispatch(getAllLocal(1, ''));
     }
   };
 

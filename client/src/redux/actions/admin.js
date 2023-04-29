@@ -7,6 +7,7 @@ export const SUSPEND_USER = 'SUSPEND_USER';
 export const ASSIGN_LOCAL = 'ASSIGN_LOCAL';
 export const REVIEW_DETAIL = 'REVIEW_DETAIL';
 export const GETLOCALSADMIN = 'GETLOCALSADMIN';
+export const DETAILUSER = 'DETAILUSER';
 // users
 export const getAllUsers = (filter) => {
   return async (dispatch) => {
@@ -40,6 +41,14 @@ export const DeleteUser = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const detailUser = (data) => {
+  return {
+    type: DETAILUSER,
+    payload: data
+  };
+};
+
 //
 
 export const getAllReviews = ({ page = 1, verified = 'unVerified' }) => {

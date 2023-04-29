@@ -21,6 +21,7 @@ const Users = ({ localId, handleAdd }) => {
   useEffect(() => {
     if (filter) {
       dispatch(getAllUsers(filter));
+      console.log(data);
     }
   }, [filter || undefined]);
 
@@ -66,7 +67,8 @@ const Users = ({ localId, handleAdd }) => {
         <Pagination paginade={paginade} page={filter.page} totalPages={data.totalPages} />
         {data && data.users &&
            data.users.map((data, index) => {
-             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd}/>;
+             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
+               phone_number={data.phone_number} />;
            })
           }
 

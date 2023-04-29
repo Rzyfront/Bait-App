@@ -51,3 +51,25 @@
     cursor: pointer;
     color: var(--optional2);
 }
+
+.green {
+    width: 15px;
+    height: 15px;
+    background: green;
+    border-radius: 50%;
+}
+
+.orange {
+    width: 15px;
+    height: 15px;
+    background: rgb(250, 167, 14);
+    border-radius: 50%;
+}
+
+.red {
+    width: 15px;
+    height: 15px;
+    background: red;
+    border-radius: 50%;
+}
+
