@@ -8,13 +8,11 @@ export const useDishForm = (initialValues, validate) => {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
-    setFormValues((prevValues) => ({
-      ...prevValues,
+    setFormValues({
+      ...formValues,
       [name]: value
-    }));
-    const validationErrors = validate({ ...formValues, [name]: value });
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: validationErrors[name] }));
+    });
+    setErrors(validate({ ...formValues, [name]: value }));
   };
   const handleChangeImages = (event) => {
     handleChangeimage(event);
@@ -22,22 +20,19 @@ export const useDishForm = (initialValues, validate) => {
 
   useEffect(() => {
     if (image.length) {
-      setFormValues(prevValues => ({ ...prevValues, image: image[0] }));
-      setErrors(prevErrors => ({ ...prevErrors, image: undefined }));
+      setFormValues({ ...formValues, image: image[0] });
     }
   }, [image]);
 
   const handleSelect = (event) => {
     const { name, value } = event.target;
-    setFormValues((prevValues) => ({
-      ...prevValues,
+    setFormValues({
+      ...formValues,
       [name]: value
-    }));
+    });
 
-    const validationErrors = validate({ ...formValues, [name]: value });
-    setErrors((prevErrors) => ({ ...prevErrors, [name]: validationErrors[name] }));
+    setErrors(validate({ ...formValues, [name]: value }));
   };
-  console.log(errors);
   const resetForm = () => {
     setFormValues(initialValues);
     setErrors({});

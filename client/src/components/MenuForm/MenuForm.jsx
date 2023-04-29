@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import swal from 'sweetalert';
+import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
@@ -8,10 +9,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './MenuForm.css';
 
-const MenuForm = ({ modal2, setToggleModal }) => {
+const MenuForm = ({ modal2, setToggleModal, nomodal }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { menu, successMenu } = useSelector(state => state);
+  const { menu } = useSelector(state => state);
   const [menuData, setMenuData] = useState([]);
   const [menuForm, setMenuForm] = useState({
     type: ''
@@ -29,7 +30,6 @@ const MenuForm = ({ modal2, setToggleModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target);
     if (menuForm.type !== '') {
       dispatch(postMenu(id, menuForm)).then(() => {
         toast.success('Se agregó la sección', {
@@ -51,6 +51,7 @@ const MenuForm = ({ modal2, setToggleModal }) => {
         <div className='Menu-Form-Container'>
           <ToastContainer />
           <div className='Menu-Form'>
+            <button className='Close-menu-form-button' onClick={() => setToggleModal(nomodal)}><MdClose /></button>
               <h2>Nueva sección</h2>
               <form>
                 <select
@@ -73,7 +74,7 @@ const MenuForm = ({ modal2, setToggleModal }) => {
                     </option>
                   ))}
                 </select>
-                <button type='submit' onClick={handleSubmit}>Agregar</button>
+                <button type='submit' className='menu-form-button' onClick={handleSubmit}>Agregar</button>
               </form>
           </div>
         </div>

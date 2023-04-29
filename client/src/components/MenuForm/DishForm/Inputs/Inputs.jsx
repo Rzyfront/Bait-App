@@ -1,7 +1,7 @@
 import { Input, Textarea, Loading } from '@nextui-org/react';
 import '../DishForm.css';
 
-const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect, handleChangeimages }) => {
+const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect, handleChangeImages }) => {
   return (
         <>
             <div className='formValues-form-column'>
@@ -66,7 +66,7 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         type='file'
                         name='image'
                         accept='image/png,image/jpeg,image/jpg,image/gif'
-                        onChange={handleChangeimages}
+                        onChange={handleChangeImages}
                     ></input>
                     {image.length
                       ? <img src={image[image.length - 1].url} alt="foto" className='photosize' />

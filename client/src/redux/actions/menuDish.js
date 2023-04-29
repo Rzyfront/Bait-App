@@ -114,8 +114,8 @@ export const postDish = (menuId, dish) => {
 export const getDish = (dishId) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`/dishes/${dishId}`);
-      if (response.status === 200) {
+      const response = await axios(`/dishes/${dishId}`);
+      if (response.status === 201) {
         dispatch({
           type: GET_DISH,
           payload: response.data.dish
@@ -147,6 +147,7 @@ export const deleteDish = (dishId) => {
 };
 
 export const putDish = (dishId, dish) => {
+  console.log(dish);
   return async (dispatch) => {
     try {
       const response = await axios.put(`/dishes/${dishId}`, dish);

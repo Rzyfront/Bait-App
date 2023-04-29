@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
+import { getMenu, deleteDish, deleteMenu, getDish } from '../../redux/actions/menuDish';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import MenuForm from '../MenuForm/MenuForm';
 import DishForm from '../MenuForm/DishForm/DishForm';
@@ -19,12 +19,13 @@ function Menu () {
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState('Editar');
-  const [dishId, setDishId] = useState(null);
+  const [menuId, setMenuId] = useState(null);
 
   const handleMenuChange = (e) => {
     const { name } = e.target;
 
     if (name === 'addMenu') {
+      setMenuId(newMenu.id);
       setToggleModal(modal1);
     } else if (name === 'editMenu') {
       setEdit(!edit);
@@ -55,14 +56,14 @@ function Menu () {
   };
 
   const reqPutDish = (dishId) => {
-    setDishId(dishId);
+    dispatch(getDish(dishId));
     setToggleModal(modal2);
   };
 
-  const editMenu = (menuId) => {
-    window.open(`/updateMenu/${id}/${menuId}`, '_blank');
+  const editSection = (menuId) => {
+    setMenuId(menuId);
+    setToggleModal(modal2);
   };
-  console.log(menu);
 
   const delMenu = (menuId) => {
     swal({
@@ -113,7 +114,7 @@ function Menu () {
                   {edit && (
                     <div>
                       {/* <Tooltip text={'Agregar productos'}> */}
-                        <p onClick={() => editMenu(section.id)} className='iconsDishCard'>
+                        <p onClick={() => editSection(section.id)} className='iconsDishCard'>
                           <FaEdit className='edit-icon' />
                         </p>
                       {/* </Tooltip> */}
@@ -149,8 +150,8 @@ function Menu () {
           })
         )}
       </div>
-      {(toggleModal === modal1) && <MenuForm localId={id} modal2={modal2} setToggleModal={setToggleModal} />}
-      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={newMenu.id} dishId={dishId}/>}
+      {(toggleModal === modal1) && <MenuForm localId={id} modal2={modal2} nomodal={nomodal} setToggleModal={setToggleModal} />}
+      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} />}
     </div>
   );
 }

@@ -15,13 +15,14 @@ const DishForm = ({ menuId, nomodal, setToggleModal }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { dish } = useSelector(state => state);
-
+  console.log(dish);
   const initialValues = dish
     ? {
         name: dish.name,
         type: dish.type,
         price: dish.price,
-        description: dish.description
+        description: dish.description,
+        image: dish.Image
       }
     : {
         name: '',
@@ -29,8 +30,7 @@ const DishForm = ({ menuId, nomodal, setToggleModal }) => {
         price: '',
         description: ''
       };
-  const { formValues, errors, handleInputChange, handleSelect, resetForm, loading, handleChangeimages, image } = useDishForm(initialValues, validateForm);
-  console.log(errors);
+  const { formValues, errors, handleInputChange, handleSelect, resetForm, loading, handleChangeImages, image } = useDishForm(initialValues, validateForm);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -86,7 +86,7 @@ const DishForm = ({ menuId, nomodal, setToggleModal }) => {
           <div className='dish-form-container'>
           <Inputs
             handleChange={handleInputChange}
-            handleChangeimages={handleChangeimages}
+            handleChangeImages={handleChangeImages}
             handleSelect={handleSelect}
             formValues = {formValues}
             image={image}

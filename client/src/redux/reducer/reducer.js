@@ -15,7 +15,8 @@ import {
   SUCCESS_DISH,
   SUCCESS_MENU,
   GET_MENU,
-  SUCCESS_DEL
+  SUCCESS_DEL,
+  GET_DISH
 } from '../actions/menuDish';
 import {
   SEARCH_BY_QUERY,
@@ -42,6 +43,7 @@ const initialState = {
   successDel: null,
   successDish: null,
   successMenu: null,
+  dish: {},
   ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
   user: {},
   users: {},
@@ -140,7 +142,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         errorDish: payload
       };
-
+    case GET_DISH:
+      return {
+        ...state,
+        dish: payload
+      };
     case GET_REVIEWS:
       return {
         ...state,
