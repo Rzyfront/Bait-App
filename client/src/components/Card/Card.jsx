@@ -56,12 +56,12 @@ function Card ({
         <h2 className="placeName">{Name || 'No name'}</h2>
           <div className="RatingGroup">
             <p className="Rating">Rating: </p>
-            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 3} className='Stars-Cards' itemStyles={myStyles}/>
+            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 0} className='Stars-Cards' itemStyles={myStyles}/>
           </div>
           </Link>
         {location && (
           <div className="LocationGroup" onClick={handleFoco}>
-            <p className="Location"><GoLocation className='locationico' /> {location.split(',').at(3) + ' ' + location.split(',').at(0) + location.split(',').at(1) }
+            <p className="Location"><GoLocation className='locationico' /> {location.split(',').splice(0, location.split(',').length - 2).join(',')}
             </p>
             <PopComent text={'Click para ir'} className='Go-To-Map'/>
           </div>

@@ -2,7 +2,7 @@ const dishesRouter = require('express').Router();
 const { dishValidator } = require('../middlewares');
 
 const {
-  getDish, deleteDish, postDish, putDish,
+  deleteDish, postDish, putDish, getDish,
 } = require('../controllers/dishes');
 
 dishesRouter

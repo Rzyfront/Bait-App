@@ -2,7 +2,8 @@ const getDish = require('./getDish');
 const deleteDish = require('./deleteDish');
 const postDish = require('./postDish');
 const putDish = require('./putDish');
+const getDish = require('./getDish');
 
 module.exports = {
-  getDish, deleteDish, postDish, putDish,
+  deleteDish, postDish, putDish, getDish,
 };

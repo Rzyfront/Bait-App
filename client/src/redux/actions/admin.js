@@ -7,6 +7,7 @@ export const SUSPEND_USER = 'SUSPEND_USER';
 export const ASSIGN_LOCAL = 'ASSIGN_LOCAL';
 export const REVIEW_DETAIL = 'REVIEW_DETAIL';
 export const GETLOCALSADMIN = 'GETLOCALSADMIN';
+// users
 export const getAllUsers = (filter) => {
   return async (dispatch) => {
     try {
@@ -20,6 +21,26 @@ export const getAllUsers = (filter) => {
     }
   };
 };
+
+export const changeRole = ({ id, role }) => async (dispatch) => {
+  try {
+    console.log(id, role);
+    const { data } = await axios.patch(`/administrator/role/${id}`, { role });
+    return dispatch({ type: CHANGE_ROLE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const DeleteUser = (id) => async (dispatch) => {
+  console.log(id, 'sas');
+  try {
+    await axios.delete(`/administrator/${id}`);
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+};
+//
 
 export const getAllReviews = ({ page = 1, verified = 'unVerified' }) => {
   return async (dispatch) => {
@@ -53,16 +74,6 @@ export const verifyReview = ({ id, verified }) => async (dispatch) => {
     return true;
   } catch (error) {
     return false;
-  }
-};
-
-export const changeRole = ({ id, role }) => async (dispatch) => {
-  try {
-    console.log(id, role);
-    const { data } = await axios.patch(`/administrator/role/${id}`, { role });
-    return dispatch({ type: CHANGE_ROLE, payload: data });
-  } catch (error) {
-    console.log(error);
   }
 };
 
@@ -106,7 +117,6 @@ export const deleteLocal = (id) => {
 export const assignLocal = ({ userId, localId }) => async (dispatch) => {
   try {
     const { data } = await axios.put('/administrator/assignLocal', { userId, localId });
-    console.log('paso');
     return dispatch({ type: SUSPEND_USER, payload: data });
   } catch (error) {
     console.log(error);

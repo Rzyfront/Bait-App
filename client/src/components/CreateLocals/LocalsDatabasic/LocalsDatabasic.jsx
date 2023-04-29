@@ -55,7 +55,10 @@ function LocalsDatabasic ({ formType, setFormType }) {
     }
   };
   const handlemapdatas = (information) => {
-    const locationData = `${information.address.Match_addr},${information.address.CntryName}`;
+    const informationMp = information.address.LongLabel.split(',');
+    informationMp.splice(-1, 1);
+    const locationData = `${informationMp.join(',')},${information.address.CntryName}`;
+    console.log(locationData);
     const data = {
       lat: information.location.y,
       lng: information.location.x,
