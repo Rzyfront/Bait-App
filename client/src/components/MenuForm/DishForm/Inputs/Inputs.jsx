@@ -1,29 +1,17 @@
-import { Input, Textarea } from '@nextui-org/react';
+import { Input, Textarea, Loading } from '@nextui-org/react';
 import '../DishForm.css';
 
-const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId, menu }) => {
-  const findDish = (dishId) => {
-    if (dishId) {
-      const updDish = menu?.map(menu => {
-        return menu?.Dishes.find(dish => dish.id === dishId);
-      });
-      console.log('hola', updDish);
-    }
-  };
-
+const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect, handleChangeimages }) => {
   return (
         <>
-            {
-                dishId && findDish(dishId)
-            }
-            <div className='dish-form-column'>
+            <div className='formValues-form-column'>
                     <Input
                         underlined
                         labelPlaceholder="Nombre producto"
                         color="dark"
                         className='name'
                         onChange={handleChange}
-                        value={dish.name}
+                        value={formValues.name}
                         type='text'
                         name='name'
                         required
@@ -35,7 +23,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='type'
                         className='type'
                         onChange={handleSelect}
-                        value={dish.type}
+                        value={formValues.type}
                         required
                     >
                         <option value='value2' defaultValue>Tipo</option>
@@ -47,14 +35,14 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         <option value='na'>No aplica</option>
                     </select>
             </div>
-      <div className='dish-form-column'>
+      <div className='formValues-form-column'>
                     <Input
                         underlined
                         labelPlaceholder="Price USD"
                         color="dark"
                         className='type'
                         onChange={handleChange}
-                        value={dish.price}
+                        value={formValues.price}
                         type='number'
                         name='price'
                         required
@@ -66,13 +54,13 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         color="dark"
                         className='type'
                         onChange={handleChange}
-                        value={dish.description}
+                        value={formValues.description}
                         type='text'
                         name='description'
                         required
                     />
       </div>
-      <div className='dish-form-column'>
+      <div className='formValues-form-column'>
                     {errors.description && <span>{errors.description}</span>}
                     <input
                         type='file'
@@ -82,7 +70,11 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                     ></input>
                     {image.length
                       ? <img src={image[image.length - 1].url} alt="foto" className='photosize' />
-                      : <img src='https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png' alt="photo default"
+                      : loading === true
+                        ? (
+                        <Loading color="primary" />
+                          )
+                        : <img src='https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png' alt="photo default"
                           className='photosize'
 
                       />

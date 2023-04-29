@@ -5,6 +5,7 @@ import {
 
 const validateForm = (data) => {
   const errors = {};
+  console.log('errors');
   if (data.name) {
     const result = verifiedLength(data.name, 30, 'El nombre');
     result && (errors.name = result);

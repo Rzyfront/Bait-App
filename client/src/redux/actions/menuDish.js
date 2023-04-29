@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 
 // ACTION TYPES MENU
 export const SUCCESS_MENU = 'SUCCESS_MENU';
@@ -10,6 +11,7 @@ export const PUT_MENU = 'PUT_MENU';
 
 // ACTION TYPES DISH
 export const POST_DISH = 'POST_DISH';
+export const GET_DISH = 'GET_DISH';
 export const SUCCESS_DISH = 'SUCCESS_DISH';
 export const ERROR_DISH = 'ERROR_DISH';
 export const PUT_DISH = 'PUT_DISH';
@@ -108,6 +110,23 @@ export const postDish = (menuId, dish) => {
     }
   };
 };
+
+export const getDish = (dishId) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.delete(`/dishes/${dishId}`);
+      if (response.status === 200) {
+        dispatch({
+          type: GET_DISH,
+          payload: response.data.dish
+        });
+      }
+    } catch (error) {
+      swal('Ocurrió un error');
+    }
+  };
+};
+
 export const deleteDish = (dishId) => {
   return async (dispatch) => {
     try {
@@ -138,10 +157,7 @@ export const putDish = (dishId, dish) => {
         });
       }
     } catch (error) {
-      dispatch({
-        type: ERROR_DISH,
-        payload: error.message
-      });
+      swal('Ocurrió un error');
     }
   };
 };

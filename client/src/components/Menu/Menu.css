@@ -2,6 +2,7 @@
     width: 98%;
     height: 95%;
     display: flex;
+    position: relative;
     flex-direction: column;
 }
 .Menu-TitleGroup {
@@ -28,11 +29,10 @@
 }
 
 .Menu .Menu-List {
-    width: 98%;
-    height: 80%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: no-wrap;
+    margin-top: 30px;
     justify-content: space-around;
 }
 
@@ -52,7 +52,9 @@
 }
 .Menu .Menu-List {
     overflow: scroll;
+
 }
+
 .Menu .Menu-List .section-menu-title{
     display: flex;
     gap: 20px;

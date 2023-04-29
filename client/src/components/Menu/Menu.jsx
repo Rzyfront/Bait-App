@@ -8,20 +8,24 @@ import { useState, useEffect } from 'react';
 import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import MenuForm from '../MenuForm/MenuForm';
+import DishForm from '../MenuForm/DishForm/DishForm';
 
 function Menu () {
+  const [nomodal, modal1, modal2] = ['nomodal', 'modal1', 'modal2'];
+
   const { id } = useParams();
-  const { menu, successDish, successDel } = useSelector(state => state);
-  const [showForm, setShowForm] = useState(false);
+  const { menu, successDish, successDel, newMenu } = useSelector(state => state);
+  const [toggleModal, setToggleModal] = useState(nomodal);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState('Editar');
+  const [dishId, setDishId] = useState(null);
 
   const handleMenuChange = (e) => {
     const { name } = e.target;
 
     if (name === 'addMenu') {
-      setShowForm(true);
+      setToggleModal(modal1);
     } else if (name === 'editMenu') {
       setEdit(!edit);
       setEditText(edit ? 'Editar' : 'Finalizar edición');
@@ -51,7 +55,8 @@ function Menu () {
   };
 
   const reqPutDish = (dishId) => {
-    window.open(`/updateDish/${id}/${dishId}`, '_blank');
+    setDishId(dishId);
+    setToggleModal(modal2);
   };
 
   const editMenu = (menuId) => {
@@ -80,10 +85,6 @@ function Menu () {
           });
         }
       });
-  };
-
-  const handleClose = () => {
-    setShowForm(!showForm);
   };
 
   useEffect(() => {
@@ -148,13 +149,8 @@ function Menu () {
           })
         )}
       </div>
-      {showForm && (
-        <div className='Menu-Form-Container'>
-          <div className='Menu-Form'>
-            <MenuForm localId={id} handleClose={handleClose}/>
-          </div>
-        </div>
-      )}
+      {(toggleModal === modal1) && <MenuForm localId={id} modal2={modal2} setToggleModal={setToggleModal} />}
+      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={newMenu.id} dishId={dishId}/>}
     </div>
   );
 }

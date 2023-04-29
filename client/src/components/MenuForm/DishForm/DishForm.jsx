@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import swal from 'sweetalert';
 import { MdClose } from 'react-icons/md';
-import { useUploadImage } from '../../../hooks/useUploadImage';
+import { useDishForm } from '../../../hooks/useDishForm';
 import './DishForm.css';
 import validateForm from './dishVal';
 import { toast, ToastContainer } from 'react-toastify';
@@ -11,70 +11,36 @@ import { getMenu, postDish, putDish } from '../../../redux/actions/menuDish';
 import Inputs from './Inputs/Inputs';
 import { useParams } from 'react-router-dom';
 
-const DishForm = ({ menuId, handleClose }) => {
-  const { dishId, idMenu, id } = useParams();
-  const { image, handleChangeimage } = useUploadImage();
-  const { menu, successDish } = useSelector(state => state);
-  const [postId, setPostId] = useState(null);
-
-  const changeId = (id) => {
-    setPostId(id);
-  };
+const DishForm = ({ menuId, nomodal, setToggleModal }) => {
   const dispatch = useDispatch();
-  const [title, setTile] = useState(false);
-  const [dish, setDish] = useState({
-    name: '',
-    type: '',
-    ingredients: '',
-    price: '',
-    description: ''
-  });
-  const [errors, setErrors] = useState({});
+  const { id } = useParams();
+  const { dish } = useSelector(state => state);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setDish({
-      ...dish,
-      [name]: value
-    });
-    setErrors(validateForm({
-      ...dish,
-      [name]: value
-    }));
-  };
-  const handleSelect = (event) => {
-    const { name, value } = event.target;
-    setDish({
-      ...dish,
-      [name]: value
-    });
-    setErrors(validateForm({
-      ...dish,
-      [name]: value
-    }));
-  };
-
-  const handleChangeimages = (event) => {
-    handleChangeimage(event);
-  };
+  const initialValues = dish
+    ? {
+        name: dish.name,
+        type: dish.type,
+        price: dish.price,
+        description: dish.description
+      }
+    : {
+        name: '',
+        type: '',
+        price: '',
+        description: ''
+      };
+  const { formValues, errors, handleInputChange, handleSelect, resetForm, loading, handleChangeimages, image } = useDishForm(initialValues, validateForm);
+  console.log(errors);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!Object.entries(errors).length) {
-      if (!image.length) return swal('Falta una imagen', 'Adjúntala');
-      dispatch(postDish(menuId, dish)).then(() => {
+      dispatch(postDish(menuId, formValues)).then(() => {
         toast.success('Producto agregado', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
         });
-        setDish({
-          name: '',
-          type: '',
-          ingredients: '',
-          price: '',
-          description: ''
-        });
-        setTile(true);
+        resetForm();
       }).catch(() => {
         toast.error('Error al agregar', {
           position: toast.POSITION.TOP_CENTER,
@@ -88,19 +54,12 @@ const DishForm = ({ menuId, handleClose }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(putDish(dishId, dish)).then(() => {
+    dispatch(putDish(dish.id, formValues)).then(() => {
       toast.success('Producto actualizado con éxito.', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
-      setDish({
-        name: '',
-        type: '',
-        ingredients: '',
-        price: '',
-        description: ''
-      });
-      setTile(true);
+      resetForm();
     }).catch(() => {
       toast.error('Error al actualizar', {
         position: toast.POSITION.TOP_CENTER,
@@ -109,48 +68,33 @@ const DishForm = ({ menuId, handleClose }) => {
     });
   };
 
-  const handleFormClose = () => {
-    handleClose();
-  };
-
-  useEffect(() => {
-    if (image.length) {
-      setDish({ ...dish, image: image[0] });
-    }
-  }, [image]);
-
   useEffect(() => {
     dispatch(getMenu(id));
-  }, []);
+  }, [dispatch, id]);
 
   return (
   <>
       <ToastContainer />
       <div className='Create-dish-Form animated-element'>
-        <button className='Close-dish-form-button' onClick={handleFormClose}><MdClose/></button>
+        <button className='Close-dish-form-button' onClick={() => setToggleModal(nomodal)}><MdClose/></button>
         <div className='dishes_data animated-element'>
           {
-            dishId || successDish
-              ? <h2>Agrega otro producto</h2>
-              : <h2>Agrega un producto</h2 >
-          }
-          {
-            idMenu && <h2>Agregar producto a la sección</h2>
+            dish
+              ? <h2>Actualizar producto</h2>
+              : <h2>Agregar un nuevo producto</h2>
           }
           <div className='dish-form-container'>
           <Inputs
-            handleChange={handleChange}
+            handleChange={handleInputChange}
             handleChangeimages={handleChangeimages}
             handleSelect={handleSelect}
-            dish={dish}
+            formValues = {formValues}
             image={image}
-            dishId={dishId}
             errors={errors}
-            menuId={idMenu}
-            menu={menu}
+            loading={loading}
           />
       {
-        dishId
+        dish
           ? <button onClick={handleUpdate} className='btnDish' type='submit'>Actualizar</button>
           : <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
       }

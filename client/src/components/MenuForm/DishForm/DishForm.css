@@ -1,15 +1,11 @@
 .Create-dish-Form {
-    position: relative;
-    max-width: 100%;
+    position: absolute;
     margin-top: 2rem;
-    align-items: center;
-    justify-content: flex-start;
     height: 100vh;
-    z-index: 100;
+    z-index: var(--alto-4);
 }
 
 .Create-dish-Form .dishes_data {
-    align-items: center;
     background-color: var(--bg-primary);
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -19,7 +15,7 @@
     position: absolute;
     right: 20px;
     top: 5px;
-    z-index: 300;
+    z-index: var(--alto-4);
     cursor: pointer;
     font-size: 30px;
 }
@@ -40,13 +36,12 @@
     margin-top: 4rem;
     display: flex;
     justify-content: space-around;
-    gap: 4rem;
+    gap: 3.5rem;
 }
 
 .dish-form-column {
     display: flex;
-    flex-direction: column;
-    gap: 2.5rem;
+    justify-content: space-between;
 }
 
 .dish-form-container label {
@@ -55,18 +50,22 @@
     font-weight: bold;
 }
 
-.dish-form-container input,
 .dish-form-container select {
     width: 100%;
     padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 20px;
+    margin-top: 30px;
     border-radius: 4px;
-    z-index: inherit;
+}
+.formValues-form-column{
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
 }
 
 .btnDish {
     position: absolute;
+    padding: 0.6rem 1.2rem;
+    bottom: 50px;
     margin: 10% 0;
     border-radius: 20px;
     border: none;
@@ -81,4 +80,8 @@
 .photosize {
     width: 300px;
     height: 300px;
+}
+
+.Close-dish-form-button{
+    border: none;
 }
