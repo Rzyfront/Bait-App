@@ -16,6 +16,7 @@ const options = {
     'src/controllers/administrator/*.js',
     'src/controllers/reviews/*.js',
     'src/controllers/dishes/*.js',
+    'src/controllers/images/*.js',
     'src/responsesSwagger/*.js',
   ],
 };
