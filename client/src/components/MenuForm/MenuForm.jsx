@@ -1,22 +1,19 @@
 import { useEffect, useState } from 'react';
 import swal from 'sweetalert';
+import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
 import { getMenu, postMenu } from '../../redux/actions/menuDish';
-import DishForm from './DishForm/DishForm';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './MenuForm.css';
 
-const MenuForm = () => {
+const MenuForm = ({ modal2, setToggleModal, nomodal }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { successMenu, newMenu, menu } = useSelector(state => state);
+  const { menu } = useSelector(state => state);
   const [menuData, setMenuData] = useState([]);
-  const [showDish, setShowDish] = useState(false);
-  console.log(menu);
-
   const [menuForm, setMenuForm] = useState({
     type: ''
   });
@@ -33,35 +30,30 @@ const MenuForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (menuForm.type !== '') {
-      dispatch(postMenu(id, menuForm));
-    } else {
-      swal('Campo obligatorio', 'Selecciona la sección del menú.');
+      dispatch(postMenu(id, menuForm)).then(() => {
+        toast.success('Se agregó la sección', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000
+        });
+      }).then(setToggleModal(modal2));
+    } else if (!menuForm.type) {
+      return swal('Selecciona una opción');
     }
   };
+
   useEffect(() => {
     if (!menuData.length) dispatch(getMenu(id));
     setMenuData(menu);
-  }, [menu, successMenu]);
-
-  useEffect(() => {
-    if (successMenu) {
-      setShowDish(true);
-      toast.success('Se agregó la sección', {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000
-      });
-    }
-  }, [successMenu]);
+  }, []);
 
   return (
         <div className='Menu-Form-Container'>
           <ToastContainer />
-          { !successMenu && (
-            <>
+          <div className='Menu-Form'>
+            <button className='Close-menu-form-button' onClick={() => setToggleModal(nomodal)}><MdClose /></button>
               <h2>Nueva sección</h2>
-              <form className='Menu-Form'>
+              <form>
                 <select
                   name='type'
                   className='type'
@@ -82,14 +74,9 @@ const MenuForm = () => {
                     </option>
                   ))}
                 </select>
-                <button type='submit' onClick={handleSubmit}>Agregar</button>
-          </form>
-            </>
-          )}
-          {
-           showDish && <DishForm menuId={newMenu?.id}/>
-          }
-
+                <button type='submit' className='menu-form-button' onClick={handleSubmit}>Agregar</button>
+              </form>
+          </div>
         </div>
   );
 };

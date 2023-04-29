@@ -14,7 +14,6 @@ import {
   ERROR_DISH,
   SUCCESS_DISH,
   SUCCESS_MENU,
-  ERROR_MENU,
   GET_MENU,
   SUCCESS_DEL
 } from '../actions/menuDish';
@@ -131,11 +130,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         sucessDel: payload
       };
-    case ERROR_MENU:
-      return {
-        ...state,
-        errorMenu: payload
-      };
     case SUCCESS_DISH:
       return {
         ...state,
@@ -146,7 +140,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         errorDish: payload
       };
-
     case GET_REVIEWS:
       return {
         ...state,
