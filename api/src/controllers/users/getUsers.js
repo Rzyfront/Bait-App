@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
         { model: Image, attributes: ['url'] },
         {
           model: Review,
-          where: { verified: verified ?? true },
+          where: { verified: verified ?? 'verified' },
           required: false,
         },
       ],

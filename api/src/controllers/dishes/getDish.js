@@ -6,7 +6,7 @@ module.exports = async (req, res) => {
     const dish = await Dish.findByPk(dishId, {
       include: [
         { model: Menu },
-        { model: Image, attributes: ['url'] },
+        { model: Image, attributes: ['url', 'id'] },
       ],
     });
 
