@@ -7,10 +7,33 @@ module.exports = (sequelize) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    archive: {
       type: DataTypes.STRING,
-      default: 'document',
+      // allowNull: false,
     },
-    archive: DataTypes.BLOB,
-  });
+    data: {
+      type: DataTypes.BLOB,
+    },
+  }, { timestamps: false });
 };
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *    Document:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: integer
+ *          description: ID del documento
+ *        archive:
+ *          type: string
+ *          description: Nombre del archivo
+ *        data:
+ *          type: string
+ *          format: binary
+ *          description: Contenido del archivo
+ *      required:
+ *        - archive
+ *        - data
+*/

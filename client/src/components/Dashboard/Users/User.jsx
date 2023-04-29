@@ -1,17 +1,22 @@
 import './User.css';
 import imageDefault from '../../../assets/imagenDefault.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { assignLocal, changeRole, createAdmin, getAllLocal, getAllUsers, suspendUser } from '../../../redux/actions/admin';
+import { DeleteUser, assignLocal, changeRole, createAdmin, getAllLocal, getAllUsers, suspendUser } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
 import { FiUserX } from 'react-icons/fi';
 import { BsFillHouseAddFill } from 'react-icons/bs';
+import { AiFillDelete } from 'react-icons/ai';
 
 const User = ({ id, lastname, age, role, image, name, email, filter, localId, handleAdd }) => {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const [selector, setSelector] = useState(role);
+  // actualizar role
+  useEffect(() => {
+    setSelector(role);
+  }, [role]);
 
   const handleSelect = (event) => {
     const { value } = event.target;
@@ -20,8 +25,9 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
 
   const changeType = async () => {
     if (selector === 'admin') {
-      await dispatch(createAdmin({ id }));
+      await dispatch(createAdmin(id));
       dispatch(getAllUsers(filter));
+      setSelector(role);
     }
     if (selector === role) {
       toast.error(`El usuario ya es ${role}`, {
@@ -35,6 +41,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         autoClose: 2000
       });
       dispatch(getAllUsers(filter));
+      setSelector(role);
     }
   };
 
@@ -56,8 +63,12 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   const asigLocal = () => {
     dispatch(assignLocal({ userId: id, localId }));
     handleAdd();
-    useDispatch(getAllLocal(1, ''));
   };
+
+  const DeleteUserid = () => {
+    dispatch(DeleteUser(id));
+  };
+
   return <div className='userContainer'>
         {image ? <img src={image.url} alt='user foto'/> : <img src={imageDefault} alt='default'/>}
         <div className='containerName'>
@@ -68,8 +79,10 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         <select
           onChange={handleSelect}
           value={selector}
+          defaultValue={role}
           required
       >
+
           <option value={role}>{role}</option>
                   {role !== 'user' && <option value="user" >user</option>}
                   {role !== 'owner' && <option value="owner" >owner</option>}
@@ -82,7 +95,8 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         </div>
         }
       <FiUserX className='icon' onClick={suspent}/>
-    {localId && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
+    <AiFillDelete className='icon' onClick={DeleteUserid}/>
+    {localId && role === 'owner' && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
 
   </div>;
 };
