@@ -11,6 +11,7 @@ const MAP_LAYER_ATTRIBUTION = '&copy; <a href=&quot;http://osm.org/copyright&quo
 const MAP_LAYER_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
   // actions map
+  // initial State
   function MyComponent () {
     const customIcon = L.icon({
       iconUrl: icoInfo,

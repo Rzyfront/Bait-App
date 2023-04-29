@@ -12,9 +12,11 @@ const options = {
   apis: [
     'src/routes/*.js',
     'src/db.js',
+    'src/models/*.js',
     'src/controllers/administrator/*.js',
     'src/controllers/reviews/*.js',
-    'src/responsesSwagger/*.json',
+    'src/controllers/dishes/*.js',
+    'src/responsesSwagger/*.js',
   ],
 };
 const swaggerSpec = swaggerJSDoc(options);

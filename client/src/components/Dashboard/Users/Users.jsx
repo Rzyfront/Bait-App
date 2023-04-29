@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import style from '../Dashboard.module.css';
-import PaginadoU from '../Pagination/PaginationU';
+import Pagination from '../Pagination/Pagination';
 // import swal from '@sweetalert/with-react';
 import { getAllUsers } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,7 +21,6 @@ const Users = ({ localId, handleAdd }) => {
   useEffect(() => {
     if (filter) {
       dispatch(getAllUsers(filter));
-      console.log(data);
     }
   }, [filter || undefined]);
 
@@ -64,7 +63,7 @@ const Users = ({ localId, handleAdd }) => {
       </select >
       <input placeholder="email" name="email" value={filter.email} className={style.buscador} onChange={handleData}></input>
       <div className={style.containerUserCard}>
-        <PaginadoU paginade={paginade} page={filter.page} totalPages={data.totalPages} />
+        <Pagination paginade={paginade} page={filter.page} totalPages={data.totalPages} />
         {data && data.users &&
            data.users.map((data, index) => {
              return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd}/>;

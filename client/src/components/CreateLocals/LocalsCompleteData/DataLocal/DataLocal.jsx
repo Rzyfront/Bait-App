@@ -7,7 +7,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect,
             <Input
                 underlined
                 labelPlaceholder="Nombre del Local"
-                color="dark"
+                color="default"
                 className='name'
                 onChange={handleChange}
                 value={inputs.name}
@@ -20,7 +20,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect,
             <Input
                 underlined
                 labelPlaceholder="Correo Electrónico"
-                color="dark"
+                color="default"
                 className='correo'
                 onChange={handleChange}
                 value={inputs.email}
@@ -32,7 +32,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect,
             <Input
                 underlined
                 labelPlaceholder="Horario"
-                color="dark"
+                color="default"
                 className='horario'
                 onChange={handleChange}
                 value={inputs.schedule}
@@ -43,7 +43,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect,
             <Input
                 underlined
                 labelPlaceholder="Telefono"
-                color="dark"
+                color="default"
                 className='telefono'
                 onChange={handleChange}
                 value={inputs.phone}
@@ -71,7 +71,7 @@ export default function DataLocal ({ handleChange, inputs, errors, handleSelect,
           <Input
               underlined
               labelPlaceholder="Nombre de ciudad"
-              color="dark"
+              color="default"
               className='name'
               onChange={handleMap}
               value={mapSearch}
