@@ -3,8 +3,9 @@ const { User } = require('../../db');
 module.exports = async (req, res) => {
   try {
     const { userId } = req.params;
+    const { verified } = req.query;
     const userToSupend = await User.findByPk(userId);
-    userToSupend.verified = 'suspended';
+    userToSupend.verified = verified ?? 'suspend';
     await userToSupend.save();
     res.status(201).json({ success: true });
   } catch (error) {

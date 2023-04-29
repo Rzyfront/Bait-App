@@ -16,3 +16,24 @@ module.exports = (sequelize) => {
     },
   }, { timestamps: false });
 };
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *    Document:
+ *      type: object
+ *      properties:
+ *        id:
+ *          type: integer
+ *          description: ID del documento
+ *        archive:
+ *          type: string
+ *          description: Nombre del archivo
+ *        data:
+ *          type: string
+ *          format: binary
+ *          description: Contenido del archivo
+ *      required:
+ *        - archive
+ *        - data
+*/

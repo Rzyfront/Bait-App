@@ -1,28 +1,40 @@
-const { User, Image } = require('../../db');
+const { fn, col } = require('sequelize');
+const { User, Image, Review } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
     const { numPage } = req.params;
-    const { where } = req;
     const page = numPage || 1;
     const { count, rows } = await User.findAndCountAll({
-      where: where.user ?? {},
-      attributes: ['id', 'name', 'lastname', 'age', 'role', 'location', 'phone_number', 'email', 'verified'],
+      where: req.where,
+      attributes: {
+        include: [[fn('COUNT', col('Reviews.id')), 'archivedReviews'], [fn('AVG', col('Reviews.toxicity')), 'toxicityRevies']],
+        exclude: ['password', 'createdAt', 'updatedAt'],
+      },
       include: [
-        { model: Image, attributes: ['url'] },
+        { model: Image, attributes: ['url'], required: false },
+        {
+          model: Review,
+          attributes: [],
+          where: { verified: 'archived' },
+          required: false,
+        },
       ],
+      group: ['User.id', 'Image.id'],
       limit: page * 10,
       offset: (page - 1) * 10,
+      subQuery: false,
     });
-    const totalPages = Math.ceil(count / 10);
+    const totalPages = Math.ceil(count.length / 10);
     if (!rows.length) throw new Error('Users not found');
     return res.status(200).json({
-      success: true, count, totalPages, users: rows,
+      success: true, count: count.length, totalPages, users: rows,
     });
   } catch (error) {
     return res.status(404).json({ success: false, message: error.message });
   }
 };
+// attributes: ['id', 'name', 'lastname', 'age', 'role', 'location', 'phone_number', 'email', 'verified', [fn('COUNT', col('Reviews.id')), 'archiveds']],
 
 /**
  * @swagger
@@ -98,6 +110,12 @@ module.exports = async (req, res) => {
  *                       email:
  *                         type: string
  *                         description: Correo electrónico del usuario.
+ *                       archivedReviews:
+ *                         type: string
+ *                         description: Total de reviews archivadas.
+ *                       toxicityRevies:
+ *                         type: string
+ *                         description: Promedio de la toxicidad de las reviews archivadas.
  *                       Image:
  *                         type: object
  *                         description: Imagen del usuario.
@@ -192,6 +210,12 @@ module.exports = async (req, res) => {
  *                       email:
  *                         type: string
  *                         description: Correo electrónico del usuario.
+ *                       archivedReviews:
+ *                         type: string
+ *                         description: Total de reviews archivadas.
+ *                       toxicityRevies:
+ *                         type: string
+ *                         description: Promedio de la toxicidad de las reviews archivadas.
  *                       Image:
  *                         type: string
  *                         description: Imagen del usuario (en formato Base64).
