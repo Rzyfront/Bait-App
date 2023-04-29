@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
     await newLocal.createCharacteristic(characteristics);
     await newLocal.addImages(images.map((image) => image.id));
     await user.addLocal(newLocal);
-    await newLocal.setDocument(document.id);
+    if (document) await newLocal.setDocument(document.id);
     const local = {
       id: newLocal.id,
       name: newLocal.name,
