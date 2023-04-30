@@ -39,7 +39,7 @@ const Footer = () => {
               <Link to="/about">Sobre Nosotros</Link>
             </li>
             <li>
-              <a href="mailto:baitdevs2023@gmail.com">Contactanos</a>
+              <a href="mailto:baitdevs2023@gmail.com">Contáctanos</a>
             </li>
 
           </ul>
@@ -54,7 +54,7 @@ const Footer = () => {
                 showTerms ? () => setShowTerms(false) : () => setShowTerms(true)
               }
             >
-              Terminos de Uso
+              Términos de Uso
             </li>
 
           </ul>
@@ -86,7 +86,7 @@ const Footer = () => {
               <Link to="/createplace">Inscribe tu Local</Link>
             </li>
             <li>
-               <Link to="/datatreatment">Tratamiento de Datos</Link>
+               <Link to="/datatreatment">Tratamiento de datos</Link>
             </li>
 
           </ul>
