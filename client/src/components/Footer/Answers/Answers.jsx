@@ -18,15 +18,15 @@ function Answers () {
 
       <p>2. ¿Cómo puedo descargar <span>Bait</span>?
       <br/><br/>
-      Actualmente no se puede <span>Bait</span> en tu tienda de aplicaciones (App Store o Google Play) solo puedes usarla entrado a su sitio web www.dominiobait.com, esperamos proximamente poder traerla a dispositivos moviles.</p>
+      Actualmente no se puede <span>Bait</span> en tu tienda de aplicaciones (App Store o Google Play) solo puedes usarla entrado a su sitio web www.dominiobait.com, esperamos proximamente poder traerla a dispositivos móviles.</p>
 
       <p>3. ¿Cómo puedo registrarme en <span>Bait</span>?
      <br/><br/>
-      Para registrarte en <span>Bait</span>, debes darle click a el botton de inicio de sesion y luego a la opcion registrarme. También puedes usar tu cuenta de Google para registrarte.</p>
+      Para registrarte en <span>Bait</span>, debes darle click a el botónn de inicio de sesión y luego a la opción registrarme. También puedes usar tu cuenta de Google para registrarte.</p>
 
       <p>4. ¿Cómo puedo buscar locales en <span>Bait</span>?
       <br/><br/>
-      Puedes buscar locales en <span>Bait</span> a través de la barra de búsqueda en la pantalla principal de la  pagina web.</p>
+      Puedes buscar locales en <span>Bait</span> a través de la barra de búsqueda en la pantalla principal de la  página web.</p>
 
       <p>5. ¿Cómo puedo reservar un local en <span>Bait</span>?
       <br/><br/>
@@ -66,7 +66,7 @@ function Answers () {
 
       <p>14. ¿Cómo puedo cambiar mi contraseña en <span>Bait</span>?
       <br/><br/>
-      Si necesitas cambiar tu contraseña en <span>Bait</span>, ve a la sección de "Configuración" y selecciona "Cambiar Contraseña". Sigue las instrucciones para cambiar tu contraseña. En caso de no tener acceso ve a la opcion "Iniciar sesion " y luego "Olvide mi contraseña" y sigue las instrucciones para obtener una nueva contraseña.</p>
+      Si necesitas cambiar tu contraseña en <span>Bait</span>, ve a la sección de "Configuración" y selecciona "Cambiar Contraseña". Sigue las instrucciones para cambiar tu contraseña. En caso de no tener acceso ve a la opción "Iniciar sesión " y luego "Olvidé mi contraseña" y sigue las instrucciones para obtener una nueva contraseña.</p>
 
       <p>15. ¿Cómo puedo obtener ayuda en <span>Bait</span>?
       <br/><br/>

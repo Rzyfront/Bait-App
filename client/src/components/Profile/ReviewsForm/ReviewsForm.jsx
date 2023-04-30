@@ -123,7 +123,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
         <div className='Left'>
           <div className='TitleReviewForm'>
             <div className='Decorator'></div>
-            <h2 className='Title'>Deja aquí tu Reseña</h2>
+            <h2 className='Title'>Deja aquí tu reseña</h2>
           </div>
 
           <p>
