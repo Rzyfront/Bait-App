@@ -94,7 +94,7 @@
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .MapSize-Basic:hover {
-    transform: scale(1.1);
+    transform: scale(1.01);
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic{
@@ -157,7 +157,7 @@
 }
 
 .Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add:hover {
-    transform: scale(1.1);
+    transform: scale(1.01);
 }
 
 .Container-Basic .Basic-Form-Create .Basic-Img-Group .Add-Img-Basic{
@@ -321,31 +321,36 @@
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group {
+        margin-top: 15px;
         width: 90%;
+        height: 100%;
         gap: 5%;
-        justify-content: flex-start;
+        justify-content: space-between;
+        
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .MapSize-Basic {
         width: 100%;
         padding: 10px;
-        height: 80%;
+        height: 50%;
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Img-Group {
         width: 90%;
-        justify-content: flex-start;
+        height: 40%;
+        justify-content: space-between;
         margin-top: 30px;
     }
 
     .Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add {
         width: 100%;
-        height: 60%;
+        height: 70%;
         padding: 5px;
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Inputs-Component {
         flex-direction: column;
+        align-items: center;
         margin-top: 15px;
         gap: 30%;
     }
