@@ -35,18 +35,18 @@ module.exports = async (req, res) => {
  *     security:
  *       - bearerAuth: []
  *     parameters:
- *       - in: path
- *         name: localId
- *         schema:
- *           type: integer
- *         required: true
- *         description: ID del local al que se le asignará la reseña.
  *       - in: header
  *         name: Authorization
  *         schema:
  *           type: string
  *         required: true
  *         description: Token de autorización JWT del cual se obtiene el id del usuario.
+ *       - in: path
+ *         name: localId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID del local al que se le asignará la reseña.
  *       - in: body
  *         name: body
  *         description: Campos necesarios para crear una nueva reseña.
