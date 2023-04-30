@@ -40,7 +40,7 @@ export const createUser = ({
 }) => {
   return async (dispatch) => {
     try {
-      await axios.post('http://localhost:3001/user', {
+      await axios.post('/user', {
         name,
         lastname,
         age: Number(age),
@@ -198,7 +198,7 @@ export const getReviews = (localId, page = 1) => {
 export const getUserProfile = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`http://localhost:3001/user/${id}`);
+      const response = await axios(`/user/${id}`);
       console.log(response.data.user);
       if (response.data.success === true) {
         dispatch({
@@ -215,7 +215,7 @@ export const getUserProfile = (id) => {
 export const userPostImg = (img) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('http://localhost:3001/user/', { img });
+      const response = await axios.post('/user/', { img });
 
       if (response.data.success === true) {
         dispatch({

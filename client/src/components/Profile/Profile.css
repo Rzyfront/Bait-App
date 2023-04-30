@@ -1,151 +1,36 @@
-.Profile{
+.Profile-Locals{
+    margin-top: 20px;
+    overflow: auto;
     width: 100%;
-    height: 100vh;
+    height: calc(100% - 60px);
     display: flex;
-    background-color:var(--bg-primary);
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.Profile-Locals .Img-Header {
+    width: 100%;
+    height: 40%;
+    overflow: hidden;   
+}
+/* /* 
+.Profile-Locals .Img-Header .Slide-Img-Carrousel{
     position: relative;
-    overflow: auto;
+} */
+
+.Profile-Locals .Img-Header .Slide-Img-Carrousel img{
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
 }
 
-.Profile .ProfileInfo{
-    width: 350px;
-    height: 100vh;
-    background-color: var(--bg-primary);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px;
-    display: flex;
-    flex-direction: column;
-    padding: 5px;
-    align-items: center;
-}
-
-.Profile .ContainerSelection{
-    width: calc(100% - 350px);
-    height: 100vh;
-    background-color: var(--bg-primary);
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 3px;
-}
-
-.ProfileInfo .ImageProfile{
-    width: 300px;
-    height: 220px;
-    padding-top: 5px;
-    border-radius:10px;
-
-}
-
-.ProfileInfo .Info{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 300px;
-    height: calc(100vh - 305px);
-    overflow: auto;
-    margin: 5px 0px;
-    gap: 5px;
-}
-
-.ProfileInfo .Info h2{
-    font-size: 35px;
-    font-weight: 700;
-    font-family: var(--title);
-    color: var(--primary);
-}
-
-.ProfileInfo .Info h3{
-    font-size: 16px;
-    font-weight: 700;
-    font-family: var(--subtitle);
-}
-
-.ProfileInfo .Info div p{
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--primary);
-    font-family: var(--text);
-}
-
-.ProfileInfo .Decorator{
-    width: 90%;
-    height: 3px;
-    margin-top: 8px;
-    background-color: var(--bg-tertiary);
-    border-radius: 10px;
-}
-
-.Info .RatingGroup{
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-.Info .LocationGroup {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-.Info .ScheduleGroup {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-.Info .TelGroup {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-.Info .EmailGroup {
-    display: flex;
-    gap: 5px;
-    align-items: center;
-}
-
-.ContainerSelection{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-}
-
-.Options{
+.Profile-Locals .Info-Profile-Locals-Container{
     width: 100%;
+    margin: 20px;
+    overflow: auto;
     display: flex;
     flex-direction: column;
-    align-items: center ;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 1px;
-}
-
-.Options div{
-    width: 100%;
-    height: 35px;
-    border-radius: 5px;
-    display: flex;
+    justify-content: start;
     align-items: center;
-    justify-content: center;
-    gap: 5px;
-    transition: 0.1s;
-    opacity: 0.8;
-    background-color: rgb(213, 213, 213);
-    cursor: pointer;
-    
-}
-
-.Options div:hover {
-    background-color: var(--bg-tertiary);
-    opacity: 1;
-}
-
-.Options div:active{
-    background-color: var(--bg-secondary);
-    opacity: 1;
-}
-
-.Options div p{
-    border-bottom: 2px solid var(--bg-tertiary);
-    border-radius: 0 0 0 10px;
-}
-
-.Options div:hover p {
-    border-bottom: 2px solid var(--bg-primary);
-    border-radius: 0 0 0 10px;
 }
