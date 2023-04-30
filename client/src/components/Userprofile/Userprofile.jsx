@@ -49,7 +49,7 @@ function Userprofile () {
   };
 
   const handleSaveImg = async () => {
-    await axios.post(`http://localhost:3001/user/${user.id}`, { Image: { id: 2, url: [profileImg] } });
+    await axios.post(`/user/${user.id}`, { Image: { id: 2, url: [profileImg] } });
   };
 
   const handleDeleteReview = async (e) => {
@@ -58,7 +58,7 @@ function Userprofile () {
     const newReviews = userReview.filter(rev => rev.id !== reviewId);
 
     setUserReview(newReviews);
-    await axios.put(`http://localhost:3001/reviews/${reviewId}`, { title: 'Modificado', UserId: user.id, toxicity: 0, comment: 'Eliminada', verified: 'archived' });
+    await axios.put(`/reviews/${reviewId}`, { title: 'Modificado', UserId: user.id, toxicity: 0, comment: 'Eliminada', verified: 'archived' });
   };
   const handleInicio = () => {
     navigate('/home/1?name=&city=');
