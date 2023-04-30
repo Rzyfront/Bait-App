@@ -6,7 +6,7 @@ const {
   getUserProfile,
   postUser,
   postUserWithGoogle,
-  putInactiveUser,
+  // putInactiveUser,
   putUser,
   verifyUser,
 } = require('../controllers/users');
@@ -21,7 +21,7 @@ userRoutes
   .post('/', verifyPost, postUser)
   .delete('/:userId', userExtractor, deleteUser)
   .put('/', userExtractor, putUser)
-  .put('/changePassword', userExtractor, changePassword)
-  .put('/inactive/:userId', putInactiveUser);
+  .put('/changePassword', userExtractor, changePassword);
+// .put('/inactive/:userId', putInactiveUser);
 
 module.exports = userRoutes;
