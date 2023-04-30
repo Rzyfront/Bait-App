@@ -2,7 +2,7 @@ const { Review, Local } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    title, comment, food, image, environment, service, qaPrice,
+    title, comment, food, image, environment, service, qaPrice, ticket,
   } = req.body;
   const { localId } = req.params;
   const { userId, toxicity } = req;
@@ -17,6 +17,7 @@ module.exports = async (req, res) => {
     await local.addReview(newReview.id);
     await newReview.setUser(userId);
     await newReview.setImage(image.id);
+    await newReview.setTicket(ticket.id);
     await newReview.save();
     return res.status(201).json({ success: true, review: newReview });
   } catch (error) {

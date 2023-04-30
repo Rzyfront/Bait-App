@@ -1,4 +1,4 @@
-import './pagination.css';
+import './Pagination.css';
 import { FcPrevious, FcNext } from 'react-icons/fc';
 import { path } from '../../../helpers/path';
 

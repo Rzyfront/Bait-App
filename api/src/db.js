@@ -28,8 +28,11 @@ const {
   User, Local, Image, Dish, Menu, Review, Characteristic, Document,
 } = sequelize.models;
 
-Image.belongsTo(Review);
-Review.hasOne(Image);
+Image.belongsTo(Review, { foreignKey: 'ReviewId' });
+Review.hasOne(Image, { as: 'Image' });
+
+Image.belongsTo(Review, { foreignKey: 'ticketId' });
+Review.hasOne(Image, { as: 'ticket' });
 
 Review.belongsTo(Local);
 Local.hasMany(Review, { foreignKey: 'LocalId' });

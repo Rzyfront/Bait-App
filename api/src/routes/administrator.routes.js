@@ -19,8 +19,10 @@ const {
   putAssignLocal,
   putCreateAdmin,
 } = require('../controllers/administrator');
+const { getUserProfile } = require('../controllers/users');
 
 administratorRoute
+  .get('/:userId', isAdmin, getUserProfile)
   .get('/', isAdmin, setQueryUsers, getAllUsers)
   .get('/page/:numPage', isAdmin, setQueryUsers, getAllUsers)
   .get('/', isAdmin, getSupendedUsers)
