@@ -34,3 +34,72 @@ module.exports = async (req, res) => {
     return res.status(400).json({ success: false, message: error.message });
   }
 };
+
+/**
+* @swagger
+* /user/google:
+*   post:
+*     summary: Registro de usuario a través de Google
+*     description: Registra un nuevo usuario utilizando las credenciales de Google.
+*     tags:
+*       - User
+*     produces:
+*       - application/json
+*     parameters:
+*       - name: body
+*         in: body
+*         description: Objeto con los datos del usuario.
+*         required: true
+*         schema:
+*           type: object
+*           properties:
+*             firstName:
+*               type: string
+*               description: Nombre del usuario.
+*               example: John
+*             lastName:
+*               type: string
+*               description: Apellido del usuario.
+*               example: Doe
+*             email:
+*               type: string
+*               description: Correo electrónico del usuario.
+*               example: johndoe@gmail.com
+*             phoneNumber:
+*               type: string
+*               description: Número de teléfono del usuario.
+*               example: 1234567890
+*             photoURL:
+*               type: string
+*               description: URL de la foto de perfil del usuario.
+*               example: https://example.com/image.jpg
+*             emailVerified:
+*               type: boolean
+*               description: Indica si la dirección de correo electrónico del usuario ha sido verificada.
+*               example: true
+*         examples:
+*           userData:
+*             value:
+*               firstName: John
+*               lastName: Doe
+*               email: johndoe@gmail.com
+*               phoneNumber: 1234567890
+*               photoURL: https://example.com/image.jpg
+*               emailVerified: true
+*     responses:
+*       201:
+*         description: Usuario registrado correctamente.
+*         schema:
+*           type: object
+*           properties:
+*             success:
+*               type: boolean
+*               example: true
+*             token:
+*               type: string
+*               description: Token JWT generado para el usuario registrado.
+*               format: uuid
+*               example: "eyJhbGciOiJIUzI6IkpXVCJ9.eyJlbWFpbCmNvbSIsImlkIjoxLVkIjoidmVyQiyMTIyMzN9.DMINZmDOOuD6Q2q-5KZsM4XVE"
+*       400:
+*         $ref: '#/components/responses/BadRequest'
+*/
