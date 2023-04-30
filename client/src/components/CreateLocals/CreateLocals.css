@@ -198,7 +198,7 @@
 
 @media screen and (max-width: 750px) {
   .Create-Locals-Form .termAndConditions-container {
-      width: 90%;
+      width: 80%;
       height: 100%;
     }
 }
