@@ -10,11 +10,12 @@ import { deleteLocal, getAllLocal } from '../../../redux/actions/admin';
 import { useEffect, useState } from 'react';
 import Users from '../Users/Users';
 import SelectRestaurant from './LookRestaurant/SelectRestaurant';
-
+import DetailRestaurant from './LookRestaurant/DetailRestaurant';
 const OneRestaurant = ({ name, image, verified, id }) => {
   const [adduser, setAdduser] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [verifiedLocal, setverifiedLocal] = useState(verified);
+  const [DetailRestaurantD, setDetailRestaurantD] = useState(false);
   useEffect(() => {
     setverifiedLocal(verified);
   }, [verified]);
@@ -46,6 +47,14 @@ const OneRestaurant = ({ name, image, verified, id }) => {
     }
   };
 
+  const handleDetail = () => {
+    if (DetailRestaurantD === false) {
+      setDetailRestaurantD(true);
+    } else {
+      setDetailRestaurantD(false);
+    }
+  };
+
   return <div className="Restaurantcard">
       {image && image.length ? <img src={image[0].url} alt='image' className='RestaurantImage' /> : <img src={photoDefault} alt='image' className='RestaurantImage' />}
       <div className='name'>
@@ -63,7 +72,8 @@ const OneRestaurant = ({ name, image, verified, id }) => {
 
             <FaUserEdit onClick={handleAdd} /> <AiFillDelete onClick={deleteRestaurant}/></div>}
     {adduser === true && <div className='userAdd'>   {adduser && <SelectRestaurant id={id} handleAdd={handleAdd}/>}<Users localId={id} handleAdd={handleAdd}/></div>}
-
+    {DetailRestaurantD === true && <DetailRestaurant id={id} handleDetail={handleDetail}/>}
+    <button onClick={handleDetail}>Detalles</button>
 </div>;
 };
 export default OneRestaurant;
