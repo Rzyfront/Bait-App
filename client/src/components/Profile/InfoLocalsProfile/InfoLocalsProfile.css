@@ -1,0 +1,42 @@
+.InfoLocalsProfile-Compontent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+}
+
+.InfoLocalsProfile-Compontent .Info-left{
+    width: 60%;
+    padding: 10px;
+}
+
+.InfoLocalsProfile-Compontent .Info-rigth {
+    width: 40%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+}
+
+
+.InfoLocalsProfile-Compontent .Info-rigth .Rating-C-Group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.InfoLocalsProfile-Compontent .Info-rigth .Info-rigth-title .Info-rigth-decoration{
+    height: 4px;
+    width: 100%;
+    background-color: var(--bg-tertiary);
+}
+
+.InfoLocalsProfile-Compontent .Info-rigth .Rating-C-Group-Container{
+    padding: 15px;
+    border: 1px solid var(--primary);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
