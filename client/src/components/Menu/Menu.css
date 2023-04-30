@@ -2,55 +2,94 @@
     width: 98%;
     height: 95%;
     display: flex;
+    position: relative;
     flex-direction: column;
-    align-items: center;
 }
-
+.Menu-TitleGroup {
+    display: flex;
+    justify-content: space-between;
+}
+.Menu .Menu-TitleGroup {
+     width: 100%;
+     height: 13%;
+     padding: 0 20px;
+     display: flex;
+     justify-content: space-between;
+     flex-direction: row;
+     align-items: center;
+     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+ }
+ 
 .Menu .Menu-Title {
     font-size: 30px;
     padding-right: 20px;
     border-right: 1px solid var(--primary);
     font-family: var(--title);
+
 }
 
 .Menu .Menu-List {
-    width: 98%;
-    height: 80%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
+    flex-wrap: no-wrap;
+    margin-top: 30px;
     justify-content: space-around;
-    overflow: scroll;
+    overflow: auto;
 }
 
-.TitleGroup {
-    width: 100%;
-    height: 20%;
+
+.Menu .Menu-List {
+    margin-top: 2rem;
+    overflow: auto
+
+}
+.Menu .Menu-List .section-menu {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    overflow: auto;
 }
 
-.TitleGroup .Decorator {
-    width: 60%;
-    height: 3px;
-    background-color: var(--bg-tertiary);
-    border-radius: 10px;
+.Menu .Menu-List .section-menu-title{
+    display: flex;
+    gap: 20px;
 }
 
-.menuBtn {
-    align-self: flex-end;
-    border: none;
+.Menu .Menu-List .section-menu-title div{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.Menu .Menu-List .section-menu-title .iconsDishCard:hover {
+    color: var(--btn-primary);
+}
+
+.Menu .buttons-menu {
     position: absolute;
-    right: 10px;
-}
-
-.menuBtn:hover {
-    align-self: flex-end;
-    border-bottom: 2px solid var(--btn-primary);
+    display: flex;
+    flex-direction: row;
+    right: 30px;
 
 }
 
-.section-title {
-    display: block;
+.Menu .buttons-menu button {
+    width: fit-content;
+    padding: 0.4rem 0.7rem;
+    border: none;
+    font-size: 15px;
+    font-family: var(--subtitle);
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
+    transition: 0.3s;
+}
+
+.Menu .menu-cards-container {
+    display: flex;
+}
+
+.Menu .buttons-menu .btn-edit-menu:hover{
+    background-color: var(--btn-primary);
+}
+.Menu .buttons-menu .btn-add-sect:hover {
+    background-color: var(--btn-primary);
 }

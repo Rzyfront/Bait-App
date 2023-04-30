@@ -40,7 +40,7 @@ function DishCard ({
         {edit && <div className='dish-icons-overlay'></div>}
         {edit && (
           <div className='dish-icons-container'>
-            <p onClick={() => onClose(id)} className='iconsDishCard'>
+            <p onClick={() => delDish(id)} className='iconsDishCard'>
               <FaTrash className='delete-icon' />
             </p>
             <p onClick={() => editDish(id)} className='iconsDishCard'>

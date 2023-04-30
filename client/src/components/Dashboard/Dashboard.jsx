@@ -1,8 +1,8 @@
 import style from './Dashboard.module.css';
 import Users from './Users/Users';
-import Restaurantes from './Restaurantes/Restaurantes';
-import Reseñas from './Reseñas/Reseñas';
-import ReseñaDetail from './ReseñaDetail/ReseñaDetail';
+import Restaurantes from './Restaurants/Restaurants';
+import Reseñas from './Reviews/Reviews';
+import ReseñaDetail from './ReviewDetail/ReviewDetail';
 import NavAdmin from './NavAdmin/NavAdmin';
 import { useState } from 'react';
 
@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   const changeSection = (n, e) => {
     setSection(n);
-    e.target.style.backgroundColor = 'black';
+  // e.target.style.backgroundColor = 'black';
   };
 
   return (

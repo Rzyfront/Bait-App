@@ -7,8 +7,8 @@ const Home = () => {
   return (
     <div className="Home animated-element">
       <Navbar />
-      <Filters toggleMapMenu={toggleMapMenu} setToggleMapMenu={setToggleMapMenu} />
-      <Cards toggleMapMenu={toggleMapMenu}/>
+      <Filters toggle={toggleMapMenu} setToggle={setToggleMapMenu}/>
+      <Cards toggle={toggleMapMenu}/>
       <Footer />
     </div>
   );

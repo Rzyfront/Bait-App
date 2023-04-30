@@ -69,12 +69,10 @@
     align-items: center;
 }
 
-.Filters .ToggleFilterButton {
+.Filters .ToggleFilterButton-Container {
     display: none;
     height: 40px;
-    padding: 10px;
     font-size: 20px;
-    border: 1px solid var(--primary);
     color: var(--primary);
     border-radius: 5px;
     position: relative;
@@ -91,7 +89,7 @@
 .Filters .FiltersGroup select {
     height: 40px;
     outline: none;
-    background-color: var(--bg-primar);
+    background-color: rgba(255, 255, 255, 0.83);
     font-size: 15px;
     font-family: var(--subtitle);
     color: var(--primary);
@@ -114,10 +112,11 @@
     background-color:var(--bg-primary);
     font-family: var(--subtitle);
     font-size: 15px;
+    padding: 20px;
     border-radius: 5px;
 }
 
-.Filters .FiltersGroup .Map-Toggle-Group{
+.Filters .Map-Toggle-Group{
     font-size: 25px;
     height: 40px;
     display: flex;
@@ -129,13 +128,13 @@
     color: var(--primary);
 }
 
-.Filters .FiltersGroup .Map-Toggle-Group:hover {
+.Filters .Map-Toggle-Group:hover {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     background-color: var(--btn-secondary);
     color: var(--tertiary);
     border-radius: 7px;
 }
-.Filters .FiltersGroup .Map-Toggle-Group:active {
+.Filters .Map-Toggle-Group:active {
  background-color: var(--btn-primary);
 }
 
@@ -143,6 +142,7 @@
     border: 1px solid var(--primary);
     background-color: var(--bg-primary);
     border-radius: 5px;
+
     color: var(--primary);
     outline-color: none;
     transition: 0.3s;
@@ -169,15 +169,29 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     .Filters .FiltersGroup {
         display: none;
     }
-    .Filters .ToggleFilterButton{
+    .Filters .ToggleFilterButton-Container{
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 10px;
     }
-    .Filters .ToggleFilterButton .FiltersGroup {
+    .Filters .ToggleFilterButton {
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--primary);
+        border-radius: 5px;
+        padding: 10px;
+ 
+    }
+    .Filters .FiltersGroup .MultiSelect-filters {
+        width: 200px;
+    }
+    .Filters .ToggleFilterButton-Container .FiltersGroup {
        display: flex;
        flex-direction: column;
        background-color: var(--bg-primary);
+       width: 300px;
+       font-size: 15px;
        padding: 40px;
        position: absolute;
        right: 0;
@@ -188,8 +202,8 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         -webkit-animation: scale-up-tr 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
             animation: scale-up-tr 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
     }
-        .Filters .ToggleFilterButton .FiltersGroup select {
-            width: 150px;
-            height: 45px;
+        .Filters .ToggleFilterButton-Container .FiltersGroup select {
+            width: 200px;
+            height: 40px;
         }
 }
