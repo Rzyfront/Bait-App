@@ -1,7 +1,6 @@
 .Profile-Locals{
     margin-top: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
     width: 100%;
     height: calc(100% - 60px);
     display: flex;
@@ -28,9 +27,10 @@
 
 .Profile-Locals .Info-Profile-Locals-Container{
     width: 100%;
-    height: 60%;
-    overflow-y: auto;
+    margin: 20px;
+    overflow: auto;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
 }

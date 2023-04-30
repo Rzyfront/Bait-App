@@ -1,42 +1,143 @@
 .InfoLocalsProfile-Compontent{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 70%;
 }
 
 .InfoLocalsProfile-Compontent .Info-left{
-    width: 60%;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    gap: 5px;
 }
 
+.InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    height: 35px;
+    overflow: hidden;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Type-Eat{
+    height: 35px;
+    background-color: var(--bg-tertiary);
+    padding: 7px 10px;
+    border-radius: 5px;
+    color: var(--tertiary);
+}
+
+
+.InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Type-Local{
+    height: 35px;
+    background-color: var(--optional1);
+    color: var(--tertiary);
+    padding: 7px 10px;
+    border-radius: 5px;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Text {
+    font-size: 1rem;
+    font-family: var(--text);
+    font-weight: 300;
+}
+
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Local-Name{
+    font-size: 2rem;
+    font-family: var(--title);
+    font-weight: 400;
+    color: var(--primary);
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Local-Location{
+    font-size: 1rem;
+    font-family: var(--title);
+    font-weight: 300;
+    color: var(--primary);
+    transition: 0.3s;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Local-Location:hover{
+    transform: scale(1.01);
+    color: var(--secondary);
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Rating{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--text);
+    font-weight: 400;
+    font-size: 1.6rem;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Caracteristic-Group{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Caracteristic-Group .Info-C-Title{
+    font-size: 1rem;
+    font-family: var(--text);
+    font-weight: 300;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Caracteristic-Group .Info-C-Tag {
+    font-size: 0.8rem;
+    font-family: var(--text);
+    font-weight: 300;
+    color: var(--tertiary);
+    background-color: var(--optional2);
+    border-radius: 5px;
+    padding: 2px 5px;
+}
+
+
 .InfoLocalsProfile-Compontent .Info-rigth {
-    width: 40%;
-    padding: 10px;
+    width: 35%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 
 .InfoLocalsProfile-Compontent .Info-rigth .Rating-C-Group{
     display: flex;
-    align-items: center;
+    align-items: start;
     justify-content: space-between;
 }
 
 .InfoLocalsProfile-Compontent .Info-rigth .Info-rigth-title .Info-rigth-decoration{
-    height: 4px;
-    width: 100%;
+    height: 2px;
+    width: 20%;
+    border-radius: 20px;
     background-color: var(--bg-tertiary);
 }
 
+.InfoLocalsProfile-Compontent .Info-rigth .Info-rigth-title .Info-rinth-Title {
+    font-size: 1.7rem;
+    font-family: var(--text);
+    font-weight: 400;
+}
+
 .InfoLocalsProfile-Compontent .Info-rigth .Rating-C-Group-Container{
+    width: 90%;
     padding: 15px;
     border: 1px solid var(--primary);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 10px;
+    
+}
+
+.InfoLocalsProfile-Compontent .Info-rigth .Rating-C-Group-Container .Rating-C-Group{
+    font-size: 1rem;
+    font-family: var(--text);
+    font-weight: 300;
+
 }

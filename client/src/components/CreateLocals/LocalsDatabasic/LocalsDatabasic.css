@@ -10,7 +10,7 @@
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     background: conic-gradient(from 60deg at 0% 100%,var(--bg-tertiary) 0%, var(--bg-primary) 100%);
-    overflow: auto;
+
 }
 
 
@@ -19,15 +19,18 @@
     position: absolute;
     top: 15px;
     left: 30px; 
+    transition: 0.3s;
 }
-
+.LocalsDataBasic-Component .Container-Basic .LinkLogo:hover{
+    transform: scale(1.04);
+}
 .LocalsDataBasic-Component .Container-Basic .Logo {
     width: 140px;
 }
 
 .LocalsDataBasic-Component .Container-Basic .Basic-Title {
     align-self: flex-start;
-    margin-top: 35px;
+    margin-top: 60px;
     font-size: 45px;
     font-family: var(--title);
     font-weight: 600;
@@ -43,7 +46,6 @@
     justify-content: center;
     align-content: center;
     width: 100%;
-    margin-top: 20px;
     height: 90%;
     gap: 5%;
 }
@@ -245,7 +247,7 @@
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .Pick-Location-Basic {
         font-size: 12px;
-        height: 28px;
+        height: 25px;
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Img-Group .Send-Locals {
@@ -256,7 +258,6 @@
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group {
         width: 50%;
         gap: 5%;
-        justify-content: flex-start;
     }
     
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .MapSize-Basic {
@@ -279,7 +280,7 @@
     gap: 30%;
     }
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create {
-        height: 100%;
+        height: 90%;
         gap: 4%;
     }
       
@@ -289,6 +290,7 @@
 
     .LocalsDataBasic-Component .Container-Basic {
         padding: 15px;
+        width: 90%;
         height: 800px;
         align-self: start;
     }
@@ -304,6 +306,7 @@
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Title {
         font-size: 25px;
+        margin-top: 100px;
     }
 
     .Container-Basic .Basic-Form-Create .Basic-Img-Group .Add-Img-Basic {
@@ -323,28 +326,27 @@
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group {
         margin-top: 15px;
         width: 90%;
-        height: 100%;
+        height: 45%;
         gap: 5%;
-        justify-content: space-between;
         
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Map-Basic-Group .MapSize-Basic {
         width: 100%;
         padding: 10px;
-        height: 50%;
+        height: 55%;
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create .Basic-Img-Group {
         width: 90%;
-        height: 40%;
-        justify-content: space-between;
-        margin-top: 30px;
+        height: 45%;
+        margin-top: 0px;
+
     }
 
     .Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add {
         width: 100%;
-        height: 70%;
+        height: 60%;
         padding: 5px;
     }
 
@@ -352,15 +354,16 @@
         flex-direction: column;
         align-items: center;
         margin-top: 15px;
-        gap: 30%;
+        gap: 40%;
     }
 
     .LocalsDataBasic-Component .Container-Basic .Basic-Form-Create {
         height: 100%;
         flex-direction: column;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
         gap: 0%;
+        margin-top: 10px;
     }
 
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '@smastrom/react-rating/style.css';
 import Slider from 'react-slick';
 import { getReviews } from '../../redux/actions/actions';
-import { Menu, Navbar, Reviews, ReviewsForm, InfoLocalsProfile } from '../components';
+import { Menu, Navbar, Reviews, ReviewsForm, InfoLocalsProfile, SelectProfileBar } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,9 +10,10 @@ import { DetailLocal } from '../../redux/actions/local';
 import { getMenu } from '../../redux/actions/menuDish';
 
 function Profile () {
+  const [ShowReviews, ShowMenu] = ['ShowReviews', 'ShowMenu'];
   const dispatch = useDispatch();
   const { detail, reviews, successDish } = useSelector(state => state);
-
+  const [toggleModal, setToggleModal] = useState(ShowReviews);
   const { id } = useParams();
 
   useEffect(() => {
@@ -56,6 +57,9 @@ function Profile () {
         </div>
         <div className='Info-Profile-Locals-Container'>
           <InfoLocalsProfile detail={detail}/>
+          <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu}/>
+          {(toggleModal === ShowReviews) && <Reviews/>}
+          {(toggleModal === ShowMenu) && <Menu/>}
         </div>
       </div>
     </>
