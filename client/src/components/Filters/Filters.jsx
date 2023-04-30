@@ -2,9 +2,9 @@ import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
+import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import FilterGroup from './FilterGroup/FilterGroup';
 import { Link, useNavigate } from 'react-router-dom';
-
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveInfoSearchHome } from '../../redux/actions/cards';
 
 // import Filtertype from "./filtertype/Filtertype";
-const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
+const Filters = ({ toggle, setToggle }) => {
   const { city } = useSelector((state) => state.ubication);
   const dispatch = useDispatch();
   const [toggleFilterModal, setToggleFilterModal] = useState(false);
@@ -82,7 +82,7 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
   return (
     <div className="Filters">
       <div className='Left-Home-Buttons'>
-        <Link to="/map">
+        <Link to="/createplace">
         <div className="AddPlace">
           <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
         </div>
@@ -95,25 +95,29 @@ const Filters = ({ toggleMapMenu, setToggleMapMenu }) => {
       <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
-      toggleMapMenu={toggleMapMenu}
-      setToggleMapMenu={setToggleMapMenu}
       handleFilters = {handleFilters}
       filters = {filters}
       special = {special}
       />
 
-      <div className='ToggleFilterButton' onClick={toggleFilterModal
-        ? () => setToggleFilterModal(false)
-        : () => setToggleFilterModal(true)}>
-        <BiFilterAlt/>
+      <div className='ToggleFilterButton-Container'>
+        <BiFilterAlt className='ToggleFilterButton' onClick={toggleFilterModal
+          ? () => setToggleFilterModal(false)
+          : () => setToggleFilterModal(true)}/>
         {toggleFilterModal && <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
-      toggleMapMenu={toggleMapMenu}
-      setToggleMapMenu={setToggleMapMenu}
       handleFilters = {handleFilters}
       filters = {filters}
+      special = {special}
       />}
+          <div className='Map-Toggle-Group' onClick={toggle
+            ? () => setToggle(false)
+            : () => setToggle(true)}>
+          {toggle
+            ? <TbMapOff/>
+            : <TbMap2/>}
+        </div>
       </div>
     </div>
   );

@@ -9,28 +9,28 @@ const Footer = () => {
   const [showTerms, setShowTerms] = useState(false);
   const [showCookies, setShowCookies] = useState(false);
   return (
-    <div className="Container_Footer">
+    <div id='Footer' className="Container_Footer">
       <div className="SocialMedia">
-        <div className="SM_IconLinks SM_Instagram">
+        <a href='https://www.instagram.com/bait.app/' className="SM_IconLinks SM_Instagram">
           <AiFillInstagram />
           <p>Instagram</p>
-        </div>
-        <div className="SM_IconLinks SM_Facebook">
+        </a>
+        <a className="SM_IconLinks SM_Facebook">
           <FaFacebookSquare />
           <p>Facebook</p>
-        </div>
-        <div className="SM_IconLinks SM_Twiter">
+        </a>
+        <a className="SM_IconLinks SM_Twiter">
           <FaTwitterSquare />
           <p>Twitter</p>
-        </div>
-        <div className="SM_IconLinks SM_Youtube">
+        </a>
+        <a className="SM_IconLinks SM_Youtube">
           <FaYoutubeSquare />
           <p>Youtube</p>
-        </div>
-        <div className="SM_IconLinks SM_Tiktok">
+        </a>
+        <a className="SM_IconLinks SM_Tiktok">
           <IoLogoTiktok />
           <p>Tiktok</p>
-        </div>
+        </a>
       </div>
       <div className="PageInformation">
         <div className="InfoFooter1">
@@ -41,9 +41,7 @@ const Footer = () => {
             <li>
               <a href="mailto:baitdevs2023@gmail.com">Contactanos</a>
             </li>
-            <li>
-              <Link to="/createplace">Inscribe tu Local</Link>
-            </li>
+
           </ul>
         </div>
         <div className="InfoFooter2">
@@ -58,22 +56,12 @@ const Footer = () => {
             >
               Terminos de Uso
             </li>
-            <li
-              onClick={
-                showCookies
-                  ? () => setShowCookies(false)
-                  : () => setShowCookies(true)
-              }
-            >
-              Declaración de privacidad y cookies
-            </li>
+
           </ul>
         </div>
         <div className="InfoFooter3">
           <ul>
-            <li>
-              <Link to="/Answers">Como funciona este sitio</Link>
-            </li>
+
             <li
               onClick={
                 showCookies
@@ -94,17 +82,13 @@ const Footer = () => {
         </div>
         <div className="InfoFooter4">
           <ul>
-            <li>
-              <Link to="/answers">Q&A</Link>
+              <li>
+              <Link to="/createplace">Inscribe tu Local</Link>
             </li>
             <li>
                <Link to="/datatreatment">Tratamiento de Datos</Link>
             </li>
-            <li>
-               <Link to="/createplace">
-              Trabaja con nosotros
-              </Link>
-            </li>
+
           </ul>
         </div>
       </div>

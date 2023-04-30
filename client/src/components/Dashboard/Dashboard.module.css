@@ -1,23 +1,26 @@
-.options{
+.options {
     /* background-color: red; */
     height: 100vh;
-    width: 85vw;
+    overflow: auto;
+    width: 100%;
     text-align: center;
-    
+
 }
 
-.container{
-    display:flex;
+.container {
+    display: flex;
     flex-direction: row;
     height: 100vh;
     animation: example 0.6s;
 }
 
-.containerUserCard{
+.containerUserCard {
     margin-top: 50px;
+
+    width: 100%;
 }
 
-.userIcon{
+.userIcon {
     margin-left: 30px;
     width: 50px;
     height: 50px;
@@ -25,7 +28,7 @@
 }
 
 
-.userCard{
+.userCard {
     margin-left: 10%;
     margin-top: 20px;
     width: 80%;
@@ -33,28 +36,30 @@
     border-radius: 15px;
     background-color: rgb(225, 225, 225);
     display: flex;
+    justify-content: space-between;
+    flex-direction: row;
     /* gap:100px */
-    transition:.3s;
+    transition: .3s;
 }
 
 
-.usernames{
+.usernames {
     font-size: .9em;
     /* margin-left: -20px; */
 }
 
-.correo{
+.correo {
     margin-left: 100px;
 }
 
-.nameAndUser{
+.nameAndUser {
     text-align: left;
     margin-left: 15px;
     display: flex;
     flex-direction: column;
 }
 
-.button{
+.button {
     position: absolute;
     border: 0;
     border-radius: 10px;
@@ -67,20 +72,18 @@
     transition: .3s;
 }
 
-.buttonExaminar{
-    position: absolute;
+.buttonExaminar {
     border: 0;
     border-radius: 10px;
     background-color: var(--btn-primary);
     color: white;
-    margin-left: 800px;
     height: 40px;
-    margin-top: 3px;
     padding: 0px 10px;
     transition: .3s;
+    margin: auto 20px;
 }
 
-.role{
+.role {
     margin-top: 10px;
     position: absolute;
     margin-left: 300px;
@@ -88,41 +91,42 @@
     background-color: transparent;
     cursor: pointer;
 }
-.button:hover ~ .roles{
+
+.button:hover~.roles {
     opacity: 1;
 }
 
-.buscador{
+.buscador {
     background-color: transparent;
     font-size: 1.3em;
-    border:0;
+    border: 0;
     text-align: center;
     margin-top: 30px;
     height: 30px;
     width: 300px;
 }
 
-.buscador:focus{
+.buscador:focus {
     outline: 0;
 }
 
-.nameSection{
+.nameSection {
     margin-top: 20px;
     color: var(--secondary)
 }
 
-.roles{
+.roles {
     position: absolute;
     height: 50px;
     width: 84px;
     background-color: rgb(255, 255, 255);
-    margin-left:700px;
+    margin-left: 700px;
     margin-top: 40px;
-    opacity:0;
+    opacity: 0;
     transition: .2s;
 }
 
-.banButton{
+.banButton {
     position: absolute;
     border: 0;
     border-radius: 10px;
@@ -134,12 +138,12 @@
     padding: 0px 10px
 }
 
-.filtro{
+.filtro {
     background-color: transparent;
     border: 0;
 }
 
-.titleAndStars{
+.titleAndStars {
     position: absolute;
     text-align: left;
     margin-left: 400px;
@@ -149,125 +153,134 @@
 
 /* RESEÑAS REVIEW */
 
-.reseña{
+.reseña {
     width: 60%;
 }
 
-.tituloReseña{
- margin-top: 15px;
+.tituloReseña {
+    margin-top: 15px;
 }
 
-.contentReseña{
+.contentReseña {
     font-size: 1.1em;
     padding: 20px 120px;
 }
 
-.fotos{
+.fotos {
     width: 70%;
     border-radius: 30px;
     border: 3px solid rgb(67, 153, 200);
 }
 
-.interactuar{
-margin-top: 70px;
+.interactuar {
+    margin-top: 70px;
 }
 
-.botonAccept{
+.botonAccept {
     border: 0;
     background-color: var(--optional1);
-    color:white;
+    color: white;
     font-size: 1.1em;
     padding: 10px 50px;
     border-radius: 10px;
 }
 
-.botonDenied{
+.botonDenied {
     margin-left: 100px;
     border: 0;
     background-color: var(--optional2);
-    color:white;
+    color: white;
     font-size: 1.1em;
     padding: 10px 50px;
     border-radius: 10px;
 }
 
-.containerReview{
+.containerReview {
     margin-top: 50px;
     /* background-color: red; */
     display: flex;
     flex-direction: row;
 }
 
-@media screen and (max-width: 800px){
-    .options{
+@media screen and (max-width: 800px) {
+    .options {
         margin-top: 100px;
     }
-    .nameSection{
+
+    .nameSection {
         width: 100vw;
     }
-    .buscador{
+
+    .buscador {
         margin-left: 15vw;
     }
-    .role{
+
+    .role {
         margin-left: -100px;
         margin-top: 0px;
         position: relative;
         display: inline;
         height: 50px;
     }
-    .nameAndUser{
+
+    .nameAndUser {
         width: 270px;
     }
-    .button{
+
+    .button {
         margin-top: 50px;
         position: static;
         margin-left: -135px;
         display: block;
     }
-    .banButton{
+
+    .banButton {
         display: block;
         margin-top: 50px;
         position: relative;
         margin-left: 20px;
     }
-    .userCard{
+
+    .userCard {
         height: 120px;
         width: 80vw;
     }
-    .reseña .userCard{
+
+    .reseña .userCard {
         height: 70px;
         width: 85vw;
     }
-    .titleAndStars{
+
+    .titleAndStars {
         position: relative;
-        margin:0;
+        margin: 0;
         margin-left: -80px;
         width: 200px;
     }
-    .buttonExaminar{
-        margin-top: 50px;
-        position: static;
-        margin-left: -205px;
-        display: block;
-    }
-    .reseña .titleAndStars{
+
+
+    .reseña .titleAndStars {
         display: none;
         margin-left: -100px;
     }
-    .tituloReseña{
+
+    .tituloReseña {
         display: none;
     }
-    .contentReseña{
+
+    .contentReseña {
         margin-top: -20px;
         font-size: 1em;
         width: 100vw;
-        padding:0 100px;
+        padding: 0 100px;
         display: block;
     }
-    .containerReview{
+
+    .containerReview {
         flex-direction: column-reverse;
     }
-    .interactuar{
+
+    .interactuar {
         margin-top: 30px;
         display: flex;
         flex-direction: row;
@@ -276,15 +289,18 @@ margin-top: 70px;
         text-align: center;
         margin-bottom: 50px;
     }
-    .botonAccept{
-        margin:0;
+
+    .botonAccept {
+        margin: 0;
     }
-    .botonDenied{
-        margin:0;
+
+    .botonDenied {
+        margin: 0;
         margin-left: 20px;
     }
-    .pruebas{
-        margin-left:80px;
+
+    .pruebas {
+        margin-left: 80px;
         margin-bottom: 50px;
     }
 }

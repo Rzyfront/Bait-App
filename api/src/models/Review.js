@@ -92,6 +92,69 @@ module.exports = (sequelize) => {
       rating: {
         type: DataTypes.FLOAT,
       },
+      toxicity: {
+        type: DataTypes.FLOAT,
+      },
     },
   );
 };
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Review:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           format: int64
+ *         title:
+ *           type: string
+ *           maxLength: 50
+ *         comment:
+ *           type: string
+ *           maxLength: 700
+ *         verified:
+ *           type: string
+ *           enum: ['verified', 'unVerified', 'archived']
+ *         food:
+ *           type: integer
+ *           minimum: 0
+ *           maximum: 5
+ *         service:
+ *           type: integer
+ *           minimum: 0
+ *           maximum: 5
+ *         environment:
+ *           type: integer
+ *           minimum: 0
+ *           maximum: 5
+ *         qaPrice:
+ *           type: integer
+ *           minimum: 0
+ *           maximum: 5
+ *         rating:
+ *           type: number
+ *           format: float
+ *         toxicity:
+ *           type: number
+ *           format: float
+ *       required:
+ *         - title
+ *         - comment
+ *         - food
+ *         - service
+ *         - environment
+ *         - qaPrice
+ *       example:
+ *         id: 1
+ *         title: "Review Title"
+ *         comment: "This is a sample review comment."
+ *         verified: "unVerified"
+ *         food: 4
+ *         service: 3
+ *         environment: 5
+ *         qaPrice: 2
+ *         rating: 4.5
+ *         toxicity: 0.2
+*/

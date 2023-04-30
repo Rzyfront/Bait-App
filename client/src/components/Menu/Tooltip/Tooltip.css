@@ -1,0 +1,23 @@
+.Menu-icon-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.Menu-edit-tooltip {
+    visibility: hidden;
+    position: absolute;
+    z-index: 10;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg-primary);
+    color: #fff;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+.Menu-icon-wrapper:hover .tooltip {
+    visibility: visible;
+}

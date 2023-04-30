@@ -16,7 +16,8 @@
         "no-console": "off",
         "import/no-dynamic-require": "off",
         "global-require": "off",
-        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }]
-        // "camelcase": ["error", { "properties": "never", "ignoreDestructuring": true, "ignoreImports": true }]
+        "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+        "camelcase": "off",
+        "max-len": "off"
     }
 }

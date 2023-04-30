@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import Card from '../Card/Card';
 import './Cards.css';
+import { Card, Pagination } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import Pagination from '../pagination/pagination';
-
 import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
 
-function Cards ({ toggleMapMenu }) {
+function Cards ({ toggle }) {
   const location = useLocation();
-  const [outAnimation, setOutAnimation] = useState(false);
   const { locals, totalPages } = useSelector((state) => state.cards);
   const pagine = useParams();
   const dispatch = useDispatch();
@@ -21,6 +18,7 @@ function Cards ({ toggleMapMenu }) {
   const [order, setOrder] = useState('');
   const [characteristics, setCharacteristics] = useState([]);
   const [page, setPage] = useState(1);
+  const [outAnimation, setOutAnimation] = useState(false);
 
   useEffect(() => {
     setPage(pagine.id);
@@ -46,7 +44,6 @@ function Cards ({ toggleMapMenu }) {
     const ciudad = eliminarTildes(city);
     dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
   }, [name, city, specialty, order, characteristics, page]);
-
   return (
     <div className="containerCardsall animated-element">
       <div className="ContainerCards animated-element">
@@ -84,12 +81,17 @@ function Cards ({ toggleMapMenu }) {
           )}
           </div>
       </div>
-      {toggleMapMenu
-        ? <div className={'widthmap scale-up-tr'}>
+      {!toggle &&
+         <div className='widthmap scale-up-tr Auxiliar-map'>
+        <MapHouse className="mapsize"/>
+        </div>
+      }
+       {toggle
+         ? <div className={'widthmap scale-up-tr'}>
         <MapHouse className="mapsize"/>
         {() => setOutAnimation(false) }
       </div>
-        : <div className={`widthmap scale-down-tr ${outAnimation && 'none-display'}`}>
+         : <div className={`widthmap scale-down-tr ${outAnimation && 'none-display'}`}>
         <MapHouse className="mapsize"/>
         {setTimeout(() => {
           setOutAnimation(true);

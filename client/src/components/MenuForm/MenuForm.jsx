@@ -1,89 +1,82 @@
 import { useEffect, useState } from 'react';
 import swal from 'sweetalert';
+import { MdClose } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { foodTypes } from '../../helpers/foodTypes';
-import { postMenu } from '../../redux/actions/menuDish';
-import DishForm from './DishForm/DishForm';
+import { getMenu, postMenu } from '../../redux/actions/menuDish';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './MenuForm.css';
 
-const MenuForm = () => {
+const MenuForm = ({ modal2, setToggleModal, nomodal }) => {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { successMenu, newMenu } = useSelector(state => state);
-  const [showDish, setShowDish] = useState(false);
-
-  const [menu, setMenu] = useState({
+  const { menu } = useSelector(state => state);
+  const [menuData, setMenuData] = useState([]);
+  const [menuForm, setMenuForm] = useState({
     type: ''
   });
   const handleSelect = (event) => {
     const { name, value } = event.target;
-    setMenu({
+    setMenuForm({
       [name]: value
     });
   };
 
+  const isTypeAlreadyInMenu = (type) => {
+    return menuData.some((section) => section.type === type);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (menu.type !== '') {
-      dispatch(postMenu(id, menu)).then(() => {
+    if (menuForm.type !== '') {
+      dispatch(postMenu(id, menuForm)).then(() => {
         toast.success('Se agregó la sección', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
         });
-        setShowDish(true);
-      }).catch(() => {
-        toast.error('Falló al crear', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 2000
-        });
-      });
-    } else {
-      swal('Campo obligatorio', 'Selecciona la sección del menú.');
+      }).then(setToggleModal(modal2));
+    } else if (!menuForm.type) {
+      return swal('Selecciona una opción');
     }
   };
 
   useEffect(() => {
-    if (successMenu) {
-      setShowDish(true);
-    }
-  }, [successMenu]);
+    if (!menuData.length) dispatch(getMenu(id));
+    setMenuData(menu);
+  }, []);
 
   return (
         <div className='Menu-Form-Container'>
           <ToastContainer />
-          { !successMenu && (
-            <>
-              <h2>Agrega una sección</h2>
-              <form className='Menu-Form'>
-                <label>Sección</label>
+          <div className='Menu-Form'>
+            <button className='Close-menu-form-button' onClick={() => setToggleModal(nomodal)}><MdClose /></button>
+              <h2>Nueva sección</h2>
+              <form>
                 <select
                   name='type'
                   className='type'
                   onChange={handleSelect}
-                  value={menu.type}
+                  value={menuForm.type}
                   required
                 >
-                  <option value='defaultValue' defaultValue>
+                  <option value="defaultValue" defaultValue>
                     Selecciona
                   </option>
-                  {foodTypes.map(type => (
-                    <option key={type} value={type}>
+                  {foodTypes.map((type) => (
+                    <option
+                      key={type}
+                      value={type}
+                      disabled={isTypeAlreadyInMenu(type)}
+                    >
                       {type}
                     </option>
                   ))}
                 </select>
-                <button type='submit' onClick={handleSubmit}>Agregar</button>
-          </form>
-            </>
-          )}
-          {
-           showDish && <DishForm menuId={newMenu?.id}/>
-          }
-
+                <button type='submit' className='menu-form-button' onClick={handleSubmit}>Agregar</button>
+              </form>
+          </div>
         </div>
   );
 };
