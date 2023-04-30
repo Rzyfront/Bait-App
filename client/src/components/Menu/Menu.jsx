@@ -1,24 +1,33 @@
 import './Menu.css';
 import DishCard from '../Card/DishCard';
 import swal from 'sweetalert';
+// import Tooltip from './Tooltip/Tooltip';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
+import { getMenu, deleteDish, deleteMenu, getDish } from '../../redux/actions/menuDish';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import MenuForm from '../MenuForm/MenuForm';
+import DishForm from '../MenuForm/DishForm/DishForm';
 
 function Menu () {
+  const [nomodal, modal1, modal2] = ['nomodal', 'modal1', 'modal2'];
+
   const { id } = useParams();
-  const { menu, successDish, successDel } = useSelector(state => state);
+  const { menu, successDish, successDel, successMenu, newMenu } = useSelector(state => state);
+  const [toggleModal, setToggleModal] = useState(nomodal);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState('Editar');
+  const [menuId, setMenuId] = useState(null);
+  const [dishId, setDishId] = useState(null);
 
   const handleMenuChange = (e) => {
     const { name } = e.target;
 
     if (name === 'addMenu') {
-      window.open(`/menu/${id}`, '_blank');
+      setMenuId(newMenu.id);
+      setToggleModal(modal1);
     } else if (name === 'editMenu') {
       setEdit(!edit);
       setEditText(edit ? 'Editar' : 'Finalizar edición');
@@ -41,6 +50,7 @@ function Menu () {
               icon: 'success'
             });
           }
+          dispatch(getMenu(id));
         } else {
           swal('Acción cancelada');
         }
@@ -48,11 +58,13 @@ function Menu () {
   };
 
   const reqPutDish = (dishId) => {
-    window.open(`/updateDish/${dishId}`, '_blank');
+    setDishId(dishId);
+    setToggleModal(modal2);
   };
 
-  const editMenu = (menuId) => {
-    window.open(`/updateMenu/${menuId}`, '_blank');
+  const editSection = (menuId) => {
+    setMenuId(menuId);
+    setToggleModal(modal2);
   };
 
   const delMenu = (menuId) => {
@@ -65,28 +77,28 @@ function Menu () {
     })
       .then((willDelete) => {
         if (willDelete) {
-          dispatch(deleteMenu(menuId));
-          if (successDel) {
-            swal('¡Producto eliminado con éxito!', {
-              icon: 'success'
-            });
-          }
-        } else {
-          swal('Acción cancelada');
+          dispatch(deleteMenu(menuId)).then((res) => {
+            if (!res) {
+              swal('¡Sección eliminada con éxito!', {
+                icon: 'success'
+              });
+            } else {
+              swal('Acción cancelada');
+            }
+          });
         }
       });
   };
 
   useEffect(() => {
-    dispatch(getMenu(id));
-  }, [successDel]);
+    if (!menu) dispatch(getMenu(id));
+  }, [successDel, successDish, successMenu, menu]);
 
   return (
-    <div className="Menu">
-      <div className="Menu-TitleGroup">
+    <div className='Menu'>
+      <div className='Menu-TitleGroup'>
         <div>
-          <h2 className="Menu-Title">Menú</h2>
-          <div className="Decorator"></div>
+          <h2 className='Menu-Title'>Menú</h2>
         </div>
         <div className='buttons-menu'>
           <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
@@ -101,14 +113,20 @@ function Menu () {
               <div className='section-menu' key={index}>
                 {<div className='section-menu-title'>
                   <h4 key={index} className='section-title'>{section.type}</h4>
-                  {edit && <div>
-                     <p onClick={() => editMenu(section.id)} className='iconsDishCard'>
-                        <FaEdit className='edit-icon' />
-                    </p>
-                    <p onClick={() => delMenu(section.id)} className='iconsDishCard'>
-                        <FaTrash className='delete-icon' />
-                    </p>
-                  </div>}
+                  {edit && (
+                    <div>
+                      {/* <Tooltip text={'Agregar productos'}> */}
+                        <p onClick={() => editSection(section.id)} className='iconsDishCard'>
+                          <FaEdit className='edit-icon' />
+                        </p>
+                      {/* </Tooltip> */}
+                      {/* <Tooltip text={'Eliminar'}> */}
+                        <p onClick={() => delMenu(section.id)} className='iconsDishCard'>
+                          <FaTrash className='delete-icon' />
+                        </p>
+                      {/* </Tooltip> */}
+                    </div>
+                  )}
                 </div>}
                 <div className='menu-cards-container'>
                 {section.Dishes?.map(({ id, type, name, Image, price, description }, subIndex) => {
@@ -134,6 +152,8 @@ function Menu () {
           })
         )}
       </div>
+      {(toggleModal === modal1) && <MenuForm localId={id} modal2={modal2} nomodal={nomodal} setToggleModal={setToggleModal} />}
+      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} dishId={dishId} />}
     </div>
   );
 }
