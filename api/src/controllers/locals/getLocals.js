@@ -93,30 +93,9 @@ module.exports = async (req, res) => {
  *           type: string
  *       - in: query
  *         name: characteristics
- *         description: Características que tiene el local (wifi, parking_lot, outdoor_seating, live_music, table_service, family_style, romantic, big_group, work_friendly, pet_friendly). Si el valor es true, se buscan los locales que tengan la característica. Si el valor es false, se buscan los locales que no tengan la característica. Si no se especifica, no se filtra por esta propiedad.
+ *         description: Características que tiene el local (wifi, parking_lot, outdoor_seating, live_music, table_service, family_style, romantic, big_group, work_friendly, pet_friendly). Si el valor es true, se buscan los locales que tengan la característica. Si el valor es false, se buscan los locales que no tengan la característica. Si no se especifica, no se filtra por esta propiedad. O filtra por el type.
  *         schema:
- *           type: object
- *           properties:
- *             wifi:
- *               type: boolean
- *             parking_lot:
- *               type: boolean
- *             outdoor_seating:
- *               type: boolean
- *             live_music:
- *               type: boolean
- *             table_service:
- *               type: boolean
- *             family_style:
- *               type: boolean
- *             romantic:
- *               type: boolean
- *             big_group:
- *               type: boolean
- *             work_friendly:
- *               type: boolean
- *             pet_friendly:
- *               type: boolean
+ *           $ref: '#/components/schemas/Characteristic'
  *       - in: query
  *         name: order
  *         description: Criterio de ordenamiento de los locales (ratingASC, ratingDESC). Si no se especifica, no se ordena la lista.
