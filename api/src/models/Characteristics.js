@@ -4,6 +4,10 @@ module.exports = (sequelize) => {
   sequelize.define(
     'Characteristic',
     {
+      type: {
+        type: DataTypes.ENUM('Elegante', 'Joven', 'Nuevo', 'Colonial'),
+        default: 'Nuevo',
+      },
       wifi: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -55,6 +59,14 @@ module.exports = (sequelize) => {
  *     Characteristic:
  *       type: object
  *       properties:
+ *         type:
+ *           type: string
+ *           enum:
+ *             - Elegante
+ *             - Joven
+ *             - Nuevo
+ *             - Colonial
+ *           default: Nuevo
  *         wifi:
  *           type: boolean
  *           default: false
