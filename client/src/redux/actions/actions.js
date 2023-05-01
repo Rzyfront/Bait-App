@@ -109,7 +109,7 @@ export const logIn = (credentials) => {
       location.reload();
       return true;
     } catch (error) {
-      return false;
+      return error.response.data;
     }
   };
 };
