@@ -1,32 +1,18 @@
-import { useState, useEffect } from 'react';
+
 import style from './Pagination.module.css';
 
-const Paginado = (props) => {
-  const [page, setPage] = useState(1);
-  const [maxPage, setMaxPage] = useState(1);
-  useEffect(() => {
-    setMaxPage(props?.totalPages);
-  }, [props.totalPages]);
-
-  const moveInPagination = ({ target }) => {
-    const value = target.value;
-    if (value === 'back') {
-      setPage(page - 1);
-      props.setReviewsByPage(page - 1);
-    };
-    if (value === 'next') {
-      setPage(page + 1);
-      props.setReviewsByPage(page + 1);
-    }
+const PaginadoU = ({ paginade, page, totalPages }) => {
+  const hadlepage = (e) => {
+    paginade(page + e);
   };
 
   return (
-    <div className={style.container}>
-      {page > 1 && <button className={style.atras} value="back" onClick={moveInPagination}>ATRAS</button>}
-      <span className={style.paginado}>{page}/{maxPage}</span>
-      {page !== maxPage && <button className={style.next} value="next" onClick={moveInPagination}>SIGUIENTE</button>}
-    </div>
+        <div className={style.container}>
+            {page > 1 && <b className={style.atras} onClick={() => hadlepage(-1)}>ATRÁS</b>}
+            <span className={style.paginado}>{page}/{totalPages}</span>
+            {totalPages && page !== totalPages && <b className={style.next} onClick={() => hadlepage(1)}>SIGUIENTE</b>}
+        </div>
   );
 };
 
-export default Paginado;
+export default PaginadoU;

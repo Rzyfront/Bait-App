@@ -9,9 +9,9 @@
     z-index: var(--alto-3);
 }
 .CreateLocalsSelector .CreateLocalsSelector-Container {
-    width: 400px;
-    height: 380px;
-    border-radius: 15px;
+    width: 500px;
+    height: 350px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,7 +53,7 @@
     border: none;
     background-color: var(--btn-primary);
     padding:7px 15px;
-    border-radius: 15px;
+    border-radius: 10px;
     color: var(--primary);
     font-size: 15px;
     font-weight: 500;

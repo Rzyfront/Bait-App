@@ -12,19 +12,19 @@ const options = {
   apis: [
     'src/routes/*.js',
     'src/db.js',
-    'src/controllers/administrator/*.js',
-    'src/controllers/reviews/*.js',
-    'src/responsesSwagger/*.json',
+    'src/models/*.js',
+    'src/controllers/**/*.js',
+    'src/responsesSwagger/*.js',
   ],
 };
 const swaggerSpec = swaggerJSDoc(options);
 
-const swaggerDocs = (app, port) => {
+const swaggerDocs = (app) => {
   app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.get('/docs.json', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(swaggerSpec);
   });
-  console.log(`Docs are available at http://localhost:${port}/docs C:`);
+  console.log(`Docs are available at ${process.env.SERVER_DEPLOY}/docs C:`);
 };
 module.exports = swaggerDocs;

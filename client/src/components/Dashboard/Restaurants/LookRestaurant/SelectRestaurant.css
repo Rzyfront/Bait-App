@@ -1,0 +1,28 @@
+.selectcontainer {
+    width: 50%;
+    display: flex;
+    margin: auto;
+    background: var(--bg-secondary);
+    padding: 20px;
+    border-radius: 10px;
+    gap: 80px;
+
+}
+
+.father {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.cancel {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+}
+
+.photoselect {
+    width: 150px;
+    height: 150px;
+}

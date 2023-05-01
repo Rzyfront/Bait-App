@@ -4,6 +4,8 @@
     color: var(--tertiary);
     background-color: var(--bg-secondary);
     display: flex;
+    overflow-y: auto;
+    overflow-x: hidden;
     flex-direction: column;
     justify-content: space-around;
 }

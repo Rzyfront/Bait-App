@@ -11,26 +11,26 @@ const Footer = () => {
   return (
     <div id='Footer' className="Container_Footer">
       <div className="SocialMedia">
-        <div className="SM_IconLinks SM_Instagram">
+        <a href='https://www.instagram.com/bait.app/' className="SM_IconLinks SM_Instagram">
           <AiFillInstagram />
           <p>Instagram</p>
-        </div>
-        <div className="SM_IconLinks SM_Facebook">
+        </a>
+        <a className="SM_IconLinks SM_Facebook">
           <FaFacebookSquare />
           <p>Facebook</p>
-        </div>
-        <div className="SM_IconLinks SM_Twiter">
+        </a>
+        <a className="SM_IconLinks SM_Twiter">
           <FaTwitterSquare />
           <p>Twitter</p>
-        </div>
-        <div className="SM_IconLinks SM_Youtube">
+        </a>
+        <a className="SM_IconLinks SM_Youtube">
           <FaYoutubeSquare />
           <p>Youtube</p>
-        </div>
-        <div className="SM_IconLinks SM_Tiktok">
+        </a>
+        <a className="SM_IconLinks SM_Tiktok">
           <IoLogoTiktok />
           <p>Tiktok</p>
-        </div>
+        </a>
       </div>
       <div className="PageInformation">
         <div className="InfoFooter1">
@@ -39,7 +39,7 @@ const Footer = () => {
               <Link to="/about">Sobre Nosotros</Link>
             </li>
             <li>
-              <a href="mailto:baitdevs2023@gmail.com">Contactanos</a>
+              <a href="mailto:baitdevs2023@gmail.com">Contáctanos</a>
             </li>
 
           </ul>
@@ -54,7 +54,7 @@ const Footer = () => {
                 showTerms ? () => setShowTerms(false) : () => setShowTerms(true)
               }
             >
-              Terminos de Uso
+              Términos de Uso
             </li>
 
           </ul>
@@ -86,7 +86,7 @@ const Footer = () => {
               <Link to="/createplace">Inscribe tu Local</Link>
             </li>
             <li>
-               <Link to="/datatreatment">Tratamiento de Datos</Link>
+               <Link to="/datatreatment">Tratamiento de datos</Link>
             </li>
 
           </ul>

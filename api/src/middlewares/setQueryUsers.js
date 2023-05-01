@@ -2,12 +2,14 @@ const { Op } = require('sequelize');
 
 module.exports = (req, res, next) => {
   const { email, verified, role } = req.query;
-  const where = { user: {} };
-  if (verified) where.review = { verified };
+  const where = {};
+  const review = {};
+  if (verified) review.verified = verified;
   if (email) {
-    where.user.email = { [Op.iLike]: `%${email}%` };
+    where.email = { [Op.iLike]: `%${email}%` };
   }
-  if (role) where.user.role = role;
+  if (role) where.role = role;
   req.where = where;
+  req.review = review;
   next();
 };

@@ -4,6 +4,10 @@ module.exports = (sequelize) => {
   sequelize.define(
     'Characteristic',
     {
+      type: {
+        type: DataTypes.ENUM('Elegante', 'Joven', 'Nuevo', 'Colonial'),
+        default: 'Nuevo',
+      },
       wifi: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
@@ -48,3 +52,60 @@ module.exports = (sequelize) => {
     { timestamps: false },
   );
 };
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Characteristic:
+ *       type: object
+ *       properties:
+ *         type:
+ *           type: string
+ *           enum:
+ *             - Elegante
+ *             - Joven
+ *             - Nuevo
+ *             - Colonial
+ *           default: Nuevo
+ *         wifi:
+ *           type: boolean
+ *           default: false
+ *         parking_lot:
+ *           type: boolean
+ *           default: false
+ *         outdoor_seating:
+ *           type: boolean
+ *           default: false
+ *         live_music:
+ *           type: boolean
+ *           default: false
+ *         table_service:
+ *           type: boolean
+ *           default: false
+ *         family_style:
+ *           type: boolean
+ *           default: false
+ *         romantic:
+ *           type: boolean
+ *           default: false
+ *         big_group:
+ *           type: boolean
+ *           default: false
+ *         work_friendly:
+ *           type: boolean
+ *           default: false
+ *         pet_friendly:
+ *           type: boolean
+ *           default: false
+ *       required:
+ *         - wifi
+ *         - parking_lot
+ *         - outdoor_seating
+ *         - live_music
+ *         - table_service
+ *         - family_style
+ *         - romantic
+ *         - big_group
+ *         - work_friendly
+ *         - pet_friendly
+ */

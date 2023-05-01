@@ -2,6 +2,7 @@ import './Filters.css';
 import { MdAddBusiness } from 'react-icons/md';
 import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
+import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import FilterGroup from './FilterGroup/FilterGroup';
 import { Link, useNavigate } from 'react-router-dom';
 // import { TbToolsKitchen2 } from "react-icons/tb";
@@ -12,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveInfoSearchHome } from '../../redux/actions/cards';
 
 // import Filtertype from "./filtertype/Filtertype";
-const Filters = () => {
+const Filters = ({ toggle, setToggle }) => {
   const { city } = useSelector((state) => state.ubication);
   const dispatch = useDispatch();
   const [toggleFilterModal, setToggleFilterModal] = useState(false);
@@ -29,16 +30,16 @@ const Filters = () => {
   const [special, setSpecial] = useState([]);
 
   const Caracteristicaslist = [
-    { value: 'wifi', label: 'Wifi' },
+    { value: 'wifi', label: 'Wi-fi' },
     { value: 'parking_lot', label: 'Parqueadero' },
     { value: 'outdoor_seating', label: 'Asientos exteriores' },
-    { value: 'live_music', label: 'Musica' },
+    { value: 'live_music', label: 'Música' },
     { value: 'table_service', label: 'Servicio a Mesa' },
     { value: 'big_group', label: 'Grupos grandes' },
     { value: 'work_friendly', label: 'Amigable' },
     { value: 'pet_friendly', label: 'Mascotas' },
     { value: 'family_style', label: 'Familiar' },
-    { value: 'romantic', label: 'Romantico' }
+    { value: 'romantic', label: 'Romántico' }
   ];
 
   useEffect(() => {
@@ -99,16 +100,24 @@ const Filters = () => {
       special = {special}
       />
 
-      <div className='ToggleFilterButton' onClick={toggleFilterModal
-        ? () => setToggleFilterModal(false)
-        : () => setToggleFilterModal(true)}>
-        <BiFilterAlt/>
+      <div className='ToggleFilterButton-Container'>
+        <BiFilterAlt className='ToggleFilterButton' onClick={toggleFilterModal
+          ? () => setToggleFilterModal(false)
+          : () => setToggleFilterModal(true)}/>
         {toggleFilterModal && <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
       handleFilters = {handleFilters}
       filters = {filters}
+      special = {special}
       />}
+          <div className='Map-Toggle-Group' onClick={toggle
+            ? () => setToggle(false)
+            : () => setToggle(true)}>
+          {toggle
+            ? <TbMapOff/>
+            : <TbMap2/>}
+        </div>
       </div>
     </div>
   );

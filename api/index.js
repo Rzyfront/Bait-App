@@ -8,7 +8,7 @@ db.sync({ alter: true })
   .then(() => {
     express.listen(PORT, () => {
       console.log(`listening on ${PORT}`);
-      swaggerDocs(express, PORT);
+      swaggerDocs(express);
     });
   })
   .catch((err) => {

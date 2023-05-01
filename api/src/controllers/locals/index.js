@@ -7,6 +7,8 @@ const paramLocal = require('./paramLocal');
 const postLocal = require('./postLocal');
 const putLocal = require('./putLocal');
 const postAcquisitionRequest = require('./postAcquisitionRequest');
+const postDocument = require('./postDocument');
+const getDocument = require('./getDocument');
 
 module.exports = {
   deleteLocal,
@@ -18,4 +20,6 @@ module.exports = {
   postLocal,
   putLocal,
   postAcquisitionRequest,
+  postDocument,
+  getDocument,
 };

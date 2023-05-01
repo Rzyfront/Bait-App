@@ -19,12 +19,14 @@ const {
   putAssignLocal,
   putCreateAdmin,
 } = require('../controllers/administrator');
+const { getUserProfile } = require('../controllers/users');
 
 administratorRoute
   .get('/', isAdmin, setQueryUsers, getAllUsers)
   .get('/page/:numPage', isAdmin, setQueryUsers, getAllUsers)
   .get('/', isAdmin, getSupendedUsers)
   .get('/reviews', isAdmin, setReviewQuery, getReviews)
+  .get('/:userId', isAdmin, getUserProfile)
   .put('/createAdmin/:userId', isSuperAdmin, putCreateAdmin)
   .patch('/review/:reviewId', isAdmin, patchReviewVerify)
   .patch('/role/:userId', isAdmin, changeRole)
