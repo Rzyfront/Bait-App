@@ -47,7 +47,7 @@ const LoginForm = ({ setToggleLogin, loginRegister }) => {
     }
     const res = await dispatch(logIn(user));
     if (!res) {
-      toast.error('Datos invalidos', {
+      toast.error('Datos inválidos', {
         position: toast.POSITION.TOP_CENTER
       });
     }

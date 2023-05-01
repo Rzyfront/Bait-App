@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import '@smastrom/react-rating/style.css';
 import Slider from 'react-slick';
 import { getReviews } from '../../redux/actions/actions';
-import { Menu, Navbar, Reviews, ReviewsForm, InfoLocalsProfile, SelectProfileBar } from '../components';
+import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +12,7 @@ import { getMenu } from '../../redux/actions/menuDish';
 function Profile () {
   const [ShowReviews, ShowMenu] = ['ShowReviews', 'ShowMenu'];
   const dispatch = useDispatch();
-  const { detail, reviews, successDish } = useSelector(state => state);
+  const { detail, successDish } = useSelector(state => state);
   const [toggleModal, setToggleModal] = useState(ShowReviews);
   const { id } = useParams();
 
@@ -38,7 +38,7 @@ function Profile () {
     autoplaySpeed: 3000,
     pauseOnHover: true
   };
-  console.log(detail);
+
   return (
     <>
       <Navbar />
@@ -59,7 +59,7 @@ function Profile () {
           <InfoLocalsProfile detail={detail}/>
           <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu}/>
           {(toggleModal === ShowReviews) && <Reviews/>}
-          {(toggleModal === ShowMenu) && <Menu/>}
+          {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
         </div>
       </div>
     </>
