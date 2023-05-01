@@ -1,36 +1,36 @@
 .Profile-Locals{
-    margin-top: 20px;
-    overflow: auto;
+    padding-top: 20px;
     width: 100%;
     height: calc(100% - 60px);
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 
 .Profile-Locals .Img-Header {
     width: 100%;
-    height: 40%;
-    overflow: hidden;   
 }
-/* /* 
+
 .Profile-Locals .Img-Header .Slide-Img-Carrousel{
-    position: relative;
-} */
+    height: 250px;
+}
 
 .Profile-Locals .Img-Header .Slide-Img-Carrousel img{
    width: 100%;
    height: 100%;
+   overflow: hidden;
+   aspect-ratio: 16/9;
    object-fit: cover;
 }
 
 .Profile-Locals .Info-Profile-Locals-Container{
     width: 100%;
-    margin: 20px;
-    overflow: auto;
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: start;
     align-items: center;
 }

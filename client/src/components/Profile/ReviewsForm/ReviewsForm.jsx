@@ -15,7 +15,7 @@ import { useDispatch } from 'react-redux';
 import { comentarie } from '../../../redux/actions/actions';
 import validate from './revHelper';
 
-function ReviewsForm ({ setToggleModal2, id }) {
+function ReviewsForm ({ setShowReviewList, id }) {
   // const [userToken, setDataUser] = useState('');
   const [errors, setErrors] = useState({});
 
@@ -117,7 +117,7 @@ function ReviewsForm ({ setToggleModal2, id }) {
         <TfiClose
           className='CloseIcon'
           onClick={() => {
-            setToggleModal2(false);
+            setShowReviewList(false);
           }}
         />
         <div className='Left'>

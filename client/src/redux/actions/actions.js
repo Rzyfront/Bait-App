@@ -18,9 +18,11 @@ export const USER_POST_IMG = 'USER_POST_IMG';
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
+export const CLEAN_REVIEWS = 'CLEAN_REVIEWS';
 
 // ACTION TYPE USERPROFILE DASHBOARD LOCALS
 export const USER_DASH_LOCALS = 'USER_DASH_LOCALS';
+
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -122,6 +124,7 @@ export const comentarie = (
   inputs,
   id
 ) => {
+  console.log(id);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/reviews/${id}`, {
@@ -161,7 +164,6 @@ export const checkUser = () => {
   return async (dispatch) => {
     try {
       const res = await axios.get('/login');
-      console.log(res.data);
       dispatch({
         type: CHECKUSER,
         payload: res.data
@@ -184,16 +186,20 @@ export const getReviews = (localId, page = 1) => {
   return async (dispatch) => {
     try {
       const response = await axios(`/reviews/${localId}?page=${page}`);
-
+      console.log('holisss soy reviews' + response.data.reviews);
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
           payload: response.data.reviews
         });
       }
-    } catch (error) {
+    } catch (error) {}
+  };
+};
 
-    }
+export const cleanReviews = () => {
+  return {
+    type: CLEAN_REVIEWS
   };
 };
 
