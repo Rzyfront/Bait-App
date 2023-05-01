@@ -1,4 +1,3 @@
-
 import Select from 'react-select';
 function FilterGroup ({
   selectedOptions,
@@ -15,7 +14,7 @@ function FilterGroup ({
           value={selectedOptions}
           onChange={handleMultiSelectChange}
           options={Caracteristicaslist}
-          placeholder={'Caracteristicas'}
+          placeholder={'Características'}
           className='MultiSelect-filters'
           isMulti
         />

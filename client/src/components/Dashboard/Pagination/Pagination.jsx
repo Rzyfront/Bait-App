@@ -8,7 +8,7 @@ const PaginadoU = ({ paginade, page, totalPages }) => {
 
   return (
         <div className={style.container}>
-            {page > 1 && <b className={style.atras} onClick={() => hadlepage(-1)}>ATRAS</b>}
+            {page > 1 && <b className={style.atras} onClick={() => hadlepage(-1)}>ATRÁS</b>}
             <span className={style.paginado}>{page}/{totalPages}</span>
             {totalPages && page !== totalPages && <b className={style.next} onClick={() => hadlepage(1)}>SIGUIENTE</b>}
         </div>

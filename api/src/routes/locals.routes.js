@@ -23,7 +23,7 @@ const {
   postDocument,
   getDocument,
 } = require('../controllers/locals');
-const { isOwner, isTheOwnerOrAdmin, isAdmin } = require('../middlewares/validateRole');
+const { isOwner, isAdmin } = require('../middlewares/validateRole');
 const multerDocs = require('../config/multerDocs.');
 
 localsRoute
@@ -39,9 +39,9 @@ localsRoute
   .get('/specialties', getSpecialties)
   .param('localId', paramLocal)
   .get('/:localId', getLocalsDetail)
-  .post('/acquisition/:localId', userExtractor, postAcquisitionRequest)
-  .post('/:localId/menu', userExtractor, isOwner, isTheOwnerOrAdmin, postMenu)
-  .put('/:localId', userExtractor, isOwner, isTheOwnerOrAdmin, localValidator, putLocal)
+  .post('/acquisition/:localId', userExtractor, postAcquisitionRequest)// TODO
+  .post('/:localId/menu', userExtractor, isOwner, postMenu)
+  .put('/:localId', userExtractor, isOwner, localValidator, putLocal)
   .delete('/:localId', userExtractor, isOwner, deleteLocal);
 
 module.exports = localsRoute;

@@ -14,7 +14,7 @@ function About () {
 
             <p>¡Bienvenidos a Bait! Somos una plataforma que conecta a los usuarios con restaurantes y locales gastronómicos de su ciudad. En Bait, los usuarios pueden ver información detallada sobre los locales, como menús, precios y reseñas, y pueden reservar sin costo alguno desde nuestra página web.</p>
 
-            <p>Actualmente no contamos con aplicacion movil, esperamos proximamenta tenerla lista para todos nuestros usuarios, pero puedes acceder a nuestra página web en www.dominiobait.com para explorar la amplia variedad de opciones gastronómicas disponibles en tu ciudad.</p>
+            <p>Actualmente no contamos con aplicación móvil, esperamos proximamenta tenerla lista para todos nuestros usuarios, pero puedes acceder a nuestra página web en www.dominiobait.com para explorar la amplia variedad de opciones gastronómicas disponibles en tu ciudad.</p>
 
            <p> En Bait, nuestra misión es hacer que la búsqueda de restaurantes sea lo más fácil y accesible posible para nuestros usuarios. Queremos que puedan encontrar los mejores lugares para comer y disfrutar de experiencias gastronómicas memorables.</p>
 

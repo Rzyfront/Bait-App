@@ -30,16 +30,16 @@ const Filters = ({ toggle, setToggle }) => {
   const [special, setSpecial] = useState([]);
 
   const Caracteristicaslist = [
-    { value: 'wifi', label: 'Wifi' },
+    { value: 'wifi', label: 'Wi-fi' },
     { value: 'parking_lot', label: 'Parqueadero' },
     { value: 'outdoor_seating', label: 'Asientos exteriores' },
-    { value: 'live_music', label: 'Musica' },
+    { value: 'live_music', label: 'Música' },
     { value: 'table_service', label: 'Servicio a Mesa' },
     { value: 'big_group', label: 'Grupos grandes' },
     { value: 'work_friendly', label: 'Amigable' },
     { value: 'pet_friendly', label: 'Mascotas' },
     { value: 'family_style', label: 'Familiar' },
-    { value: 'romantic', label: 'Romantico' }
+    { value: 'romantic', label: 'Romántico' }
   ];
 
   useEffect(() => {

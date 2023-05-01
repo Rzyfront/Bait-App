@@ -137,7 +137,7 @@ function Userprofile () {
           <div className='userButtonContainer'>
             <button className='userButtons'
               onClick={() => { setOpenInfoModal(!openInfoModal); }}>
-              Informacion
+              Información
             </button>
 
             <button
@@ -158,7 +158,7 @@ function Userprofile () {
 
         <div className='userAvatarContainer'>
 
-          <p>Cambiar Imagen De Perfil</p>
+          <p>Cambiar imagen de perfil</p>
           <input
             type='file'
             name='imagen'
@@ -178,7 +178,7 @@ function Userprofile () {
               <div key={review.id} className='mainContainer'>
                 <div key={review.id} className='reviewContainer' >
                   <div className='reviewTitle'>
-                    <h3>Titulo: {review.title}</h3>
+                    <h3>Título: {review.title}</h3>
                   </div>
 
                   <div className='reviewInfoContainer'>
@@ -272,7 +272,7 @@ function Userprofile () {
             <div className='userButtonContainer'>
               <button className='userButtons'
                 onClick={() => { setOpenInfoModal(!openInfoModal); }}>
-                Informacion
+                Información
               </button>
 
               <button
@@ -293,7 +293,7 @@ function Userprofile () {
 
           <div className='userAvatarContainer'>
 
-            <p>Cambiar Imagen De Perfil</p>
+            <p>Cambiar imagen de perfil</p>
             <input
               type='file'
               name='imagen'
@@ -314,7 +314,7 @@ function Userprofile () {
                 <div className='mainContainer' key={index}>
                   <div key={review.id} className='reviewContainer'>
                     <div className='reviewTitle'>
-                      <h3>Titulo: {review.title}</h3>
+                      <h3>Título: {review.title}</h3>
                     </div>
 
                     <div className='reviewInfoContainer'>
