@@ -12,9 +12,11 @@ import { getMenu } from '../../redux/actions/menuDish';
 function Profile () {
   const [ShowReviews, ShowMenu] = ['ShowReviews', 'ShowMenu'];
   const dispatch = useDispatch();
-  const { detail, reviews, successDish } = useSelector(state => state);
+  const { detail, successDish } = useSelector(state => state);
   const [toggleModal, setToggleModal] = useState(ShowReviews);
+  const [ShowReviewList, setShowReviewList] = useState(false);
   const { id } = useParams();
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(DetailLocal(id));
@@ -24,9 +26,9 @@ function Profile () {
     dispatch(getMenu(id));
   }, [successDish]);
 
-  useEffect(() => {
-    if (id) dispatch(getReviews(id));
-  }, []);
+  // useEffect(() => {
+  //   if (id) dispatch(getReviews(id));
+  // }, []);
 
   // const [toogleModal, setToggleModal] = useState('ReviewsLocal');
   // const [toogleModal2, setToggleModal2] = useState(false);
@@ -38,11 +40,11 @@ function Profile () {
     autoplaySpeed: 3000,
     pauseOnHover: true
   };
-  console.log(detail);
   return (
     <>
       <Navbar />
       <div className="Profile-Locals animated-element">
+        {ShowReviewList && <ReviewsForm ShowReviewList={ShowReviewList} setShowReviewList={setShowReviewList} id={id}/>}
         <div className='Img-Header'>
 
  <Slider {...settings}>
@@ -57,8 +59,8 @@ function Profile () {
         </div>
         <div className='Info-Profile-Locals-Container'>
           <InfoLocalsProfile detail={detail}/>
-          <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu}/>
-          {(toggleModal === ShowReviews) && <Reviews/>}
+          <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
+          {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
           {(toggleModal === ShowMenu) && <Menu/>}
         </div>
       </div>
