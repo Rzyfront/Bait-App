@@ -2,7 +2,7 @@ const { Op, fn, col } = require('sequelize');
 
 module.exports = (req, res, next) => {
   const {
-    name, location, order, page, verified, specialty, menu, ...characteristics
+    name, location, order, verified, specialty, menu, ...characteristics
   } = req.query;
   const where = {};
   let reqOrder = [];

@@ -21,23 +21,23 @@ function InfoLocalsProfile ({ detail }) {
         </div>
         <h2 className='Info-Local-Name'>{name}</h2>
         <h4 className='Info-Local-Location'><GoLocation className='locationico' />  {location}</h4>
-        <h4 className='Info-Rating' title={`Rating promedio ${rating || 0}`}>Calificacion: <RatingStar readOnly style={{ maxWidth: 150 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h4>
+        <h4 className='Info-Rating' title={`Rating promedio ${rating || 0}`}>Calificación: <RatingStar readOnly style={{ maxWidth: 150 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h4>
         <div className='Info-Caracteristic-Group'>
-            <h5 className='Info-C-Title'>Caracteristias:</h5>
+            <h5 className='Info-C-Title'>Características:</h5>
             {/* Mapear characteristias y renderizar cada una true en un div */}
-            <div className='Info-C-Tag'>Sin Caracteristicas</div>
+            <div className='Info-C-Tag'>Sin Características</div>
         </div>
         </div>
         <div className='Info-rigth'>
             <div className='Info-rigth-title'>
-              <h4 className='Info-rinth-Title'>Categorias calificadas</h4>
+              <h4 className='Info-rinth-Title'>Categorías calificadas</h4>
               <div className='Info-rigth-decoration'></div>
               </div>
             <div className='Rating-C-Group-Container'>
                 <h5 className='Rating-C-Group'>Ambiente: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
                 <h5 className='Rating-C-Group'>Comida: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
                 <h5 className='Rating-C-Group'>Calidad-Precio: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
-                <h5 className='Rating-C-Group'>Serviio: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Servicio: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
             </div>
         </div>
     </div>

@@ -18,13 +18,13 @@ const ReseñaDetail = () => {
   const verifiedChange = async ({ target }) => {
     const value = target.value;
     const response = await dispatch(verifyReview({ id: Number(review.id), verified: value }));
-    if (response === true) {
+    if (response.success === true) {
       toast.success(`Estado de la reseña actualizada a  ${statusOfReviews[value]} con éxito`, {
         position: toast.POSITION.TOP_CENTER
       });
       location.reload();
     } else {
-      toast.error('¡Error al actualizar el estado de la reseña !', {
+      toast.error(`${response.message}`, {
         position: toast.POSITION.TOP_CENTER
       });
     }
