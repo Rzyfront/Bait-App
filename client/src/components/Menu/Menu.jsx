@@ -27,8 +27,9 @@ function Menu ({ localUser }) {
     const { name } = e.target;
 
     if (name === 'addMenu') {
-      setMenuId(newMenu.id);
-      setToggleModal(modal1);
+      if (newMenu) {
+        setToggleModal(modal1);
+      }
     } else if (name === 'editMenu') {
       setEdit(!edit);
       setEditText(edit ? 'Editar' : 'Finalizar edición');
@@ -160,7 +161,7 @@ function Menu ({ localUser }) {
         )}
       </div>
       {(toggleModal === modal1) && <MenuForm localId={id} modal2={modal2} nomodal={nomodal} setToggleModal={setToggleModal} />}
-      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} dishId={dishId} />}
+      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} newMenuId={newMenu.id} dishId={dishId} />}
     </div>
   );
 }

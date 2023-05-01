@@ -105,6 +105,7 @@ export const postDish = (menuId, dish) => {
         });
       }
     } catch (error) {
+      console.log(error);
       dispatch({
         type: ERROR_DISH,
         payload: error.message
