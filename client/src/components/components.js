@@ -28,6 +28,3 @@ export { default as LocalsCompleteData } from './CreateLocals/LocalsCompleteData
 export { default as FindLocals } from './FindLocals/FindLocals';
 export { default as InfoLocalsProfile } from './Profile/InfoLocalsProfile/InfoLocalsProfile';
 export { default as SelectProfileBar } from './Profile/SelectProfileBar/SelectProfileBar';
-=========
-export { default as FindLocals } from './FindLocals/FindLocals';
->>>>>>>>> Temporary merge branch 2
