@@ -16,6 +16,7 @@ module.exports = async (req, res) => {
     res.status(404).json({ success: false, message: error.message });
   }
 };
+
 /**
  * @swagger
  * /locals/search-by-name:
