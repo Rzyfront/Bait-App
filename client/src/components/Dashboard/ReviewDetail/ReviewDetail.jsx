@@ -8,26 +8,26 @@ import { Rating as RatingStar } from '@smastrom/react-rating';
 const reviewImage = 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png';
 const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
 
-const ReseñaDetail = () => {
+const ReseñaDetail = ({ fn }) => {
   const dispatch = useDispatch();
   const reviewDetail = useSelector((state) => state.adminReviewDetail);
   const [review, setReview] = useState(reviewDetail);
   useEffect(
     () => { setReview(reviewDetail); }, [reviewDetail]
   );
-  const verifiedChange = async ({ target }) => {
-    const value = target.value;
+  const verifiedChange = async (e) => {
+    const value = e.target.value;
     const response = await dispatch(verifyReview({ id: Number(review.id), verified: value }));
     if (response.success === true) {
       toast.success(`Estado de la reseña actualizada a  ${statusOfReviews[value]} con éxito`, {
         position: toast.POSITION.TOP_CENTER
       });
-      location.reload();
     } else {
       toast.error(`${response.message}`, {
         position: toast.POSITION.TOP_CENTER
       });
     }
+    setTimeout(() => fn(2, e), 3000);
   };
 
   const statusOfReviews = {

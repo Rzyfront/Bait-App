@@ -20,7 +20,7 @@ const Dashboard = () => {
     {section === 0 && <Users />}
     {section === 1 && <Restaurantes/> }
     {section === 2 && <Reseñas fn={changeSection}/> }
-    {section === 3 && <ReseñaDetail/> }
+    {section === 3 && <ReseñaDetail fn={changeSection}/> }
     </div>
   );
 };
