@@ -6,15 +6,16 @@ import {
   CHECKUSER,
   RESETUSER,
   GET_REVIEWS,
+  CLEAN_REVIEWS,
   USER_PROFILE,
-  USER_POST_IMG
+  USER_POST_IMG,
+  USER_DASH_LOCALS
 } from '../actions/actions';
 import {
   POST_MENU,
   ERROR_DISH,
   SUCCESS_DISH,
   SUCCESS_MENU,
-  ERROR_MENU,
   GET_MENU,
   SUCCESS_DEL
 } from '../actions/menuDish';
@@ -25,7 +26,12 @@ import {
 } from '../actions/cards';
 import { DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
-import { GET_ALL_USERS, GET_ALL_REVIEWS, REVIEW_DETAIL, GETLOCALSADMIN } from '../actions/admin';
+import {
+  GET_ALL_USERS,
+  GET_ALL_REVIEWS,
+  REVIEW_DETAIL,
+  GETLOCALSADMIN
+} from '../actions/admin';
 
 const initialState = {
   cards: {},
@@ -43,13 +49,19 @@ const initialState = {
   successDel: null,
   successDish: null,
   successMenu: null,
-  ubication: { lat: -34.60762000391614, lng: -58.381592, city: 'buenos aires', gps: false },
+  ubication: {
+    lat: -34.60762000391614,
+    lng: -58.381592,
+    city: 'buenos aires',
+    gps: false
+  },
   user: {},
   users: {},
   adminReviews: {},
   adminReviewDetail: {},
   adminLocals: {},
-  userProfile: []
+  userProfile: [],
+  userDashLocals: {}
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -131,11 +143,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         sucessDel: payload
       };
-    case ERROR_MENU:
-      return {
-        ...state,
-        errorMenu: payload
-      };
     case SUCCESS_DISH:
       return {
         ...state,
@@ -146,11 +153,15 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         errorDish: payload
       };
-
     case GET_REVIEWS:
       return {
         ...state,
         reviews: [...state.reviews, ...payload]
+      };
+    case CLEAN_REVIEWS:
+      return {
+        ...state,
+        reviews: []
       };
     case FOCO:
       return {
@@ -188,7 +199,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         adminLocals: payload
       };
-    case USER_PROFILE :
+    case USER_PROFILE:
       return {
         ...state,
         userProfile: payload
@@ -198,6 +209,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         user: { payload }
+      };
+    case USER_DASH_LOCALS:
+      return {
+        ...state,
+        userDashLocals: payload
       };
     default:
       return { ...state };

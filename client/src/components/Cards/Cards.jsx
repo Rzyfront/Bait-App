@@ -7,7 +7,7 @@ import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
 
-function Cards () {
+function Cards ({ toggle }) {
   const location = useLocation();
   const { locals, totalPages } = useSelector((state) => state.cards);
   const pagine = useParams();
@@ -18,6 +18,7 @@ function Cards () {
   const [order, setOrder] = useState('');
   const [characteristics, setCharacteristics] = useState([]);
   const [page, setPage] = useState(1);
+  const [outAnimation, setOutAnimation] = useState(false);
 
   useEffect(() => {
     setPage(pagine.id);
@@ -43,7 +44,6 @@ function Cards () {
     const ciudad = eliminarTildes(city);
     dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
   }, [name, city, specialty, order, characteristics, page]);
-
   return (
     <div className="containerCardsall animated-element">
       <div className="ContainerCards animated-element">
@@ -81,9 +81,23 @@ function Cards () {
           )}
           </div>
       </div>
-      <div className={'widthmap scale-up-tr'}>
+      {!toggle &&
+         <div className='widthmap scale-up-tr Auxiliar-map'>
         <MapHouse className="mapsize"/>
+        </div>
+      }
+       {toggle
+         ? <div className={'widthmap scale-up-tr'}>
+        <MapHouse className="mapsize"/>
+        {() => setOutAnimation(false) }
       </div>
+         : <div className={`widthmap scale-down-tr ${outAnimation && 'none-display'}`}>
+        <MapHouse className="mapsize"/>
+        {setTimeout(() => {
+          setOutAnimation(true);
+        }, 200)}
+        </div>
+        }
       </div>
 
   );

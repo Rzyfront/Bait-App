@@ -1,18 +1,35 @@
 .Menu-Form-Container {
+    position: relative;
     width: 100%;
+    height: 100%;
+    z-index: var(--alto-4);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: auto;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
 }
 
 .Menu-Form-Container .Menu-Form {
+    position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 20px;
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.Menu-Form-Container .Menu-Form form{
+    display: flex;
+    gap: 20px;
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
 }
 
 .Menu-Form-Container .Menu-Form select {
@@ -21,7 +38,7 @@
     border-radius: 4px;
 }
 
-.Menu-Form-Container .Menu-Form button {
+.Menu-Form-Container .Menu-Form .menu-form-button {
     width: fit-content;
     padding: 0.4rem 0.7rem;
     border: none;
@@ -32,6 +49,21 @@
     transition: 0.3s;
 }
 
-.Menu-Form-Container .Menu-Form button:hover {
+.Menu-Form-Container .Menu-Form .menu-form-button:hover {
     background-color: var(--btn-primary);
+}
+
+.Close-menu-form-button {
+    position: absolute;
+    border: none;
+    background-color: transparent;
+    top: 8px;
+    right: 10px;
+    font-size: 1.3rem;
+}
+
+.Close-menu-form-button:hover {
+    color: var(--btn-primary);
+    font-size: 1.4rem;
+    font-weight: bold;
 }

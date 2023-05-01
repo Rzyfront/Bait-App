@@ -1,11 +1,11 @@
 import { GoLocation } from 'react-icons/go';
-import { Rating as RatingStar } from '@smastrom/react-rating';
+import { Rating as RatingStar, ThinStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import './Card.css';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { foco } from '../../redux/actions/ubication';
-
+import { PopComent } from '../components';
 function Card ({
   id,
   Name,
@@ -28,12 +28,19 @@ function Card ({
     dispatch(foco(data));
   };
 
+  const myStyles = {
+    itemShapes: ThinStar,
+    activeFillColor: '#343434',
+    inactiveFillColor: '#3434343B'
+  };
+
   return (
     <div className="Card animated-element" key={id}>
-      <Link to={`/profile/${id}`} >
+      <div className='Img-Card-Group'>
+        <Link to={`/profile/${id}`} >
       {Images.length > 0
         ? (
-        <img src={Images[0].url} alt={Name} className="imgCard" />
+        <img src={Images[0].url} alt={Name} className="imgCard" width='350'/>
           )
         : (
         <img
@@ -43,20 +50,20 @@ function Card ({
         />
           )}
       </Link>
+      </div>
       <div className="infoCard">
         <Link to={`/profile/${id}`} >
         <h2 className="placeName">{Name || 'No name'}</h2>
-
           <div className="RatingGroup">
             <p className="Rating">Rating: </p>
-            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 5} />
+            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 0} className='Stars-Cards' itemStyles={myStyles}/>
           </div>
           </Link>
         {location && (
           <div className="LocationGroup" onClick={handleFoco}>
-            <p className="Location"><GoLocation className='locationico'/> {location.split(',').at(-2)} {location.split(',').at(-3)}{location.split(',').at(-1)}
+            <p className="Location"><GoLocation className='locationico' /> {location.split(',').splice(0, location.split(',').length - 2).join(',')}
             </p>
-
+            <PopComent text={'Click para ir'} className='Go-To-Map'/>
           </div>
         )}
         {Price && <p className="Price">${Price}</p>}

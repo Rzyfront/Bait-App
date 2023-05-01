@@ -26,3 +26,5 @@ export { default as Tyc } from './CreateLocals/Tyc/Tyc';
 export { default as LocalsDatabasic } from './CreateLocals/LocalsDatabasic/LocalsDatabasic';
 export { default as LocalsCompleteData } from './CreateLocals/LocalsCompleteData/LocalesCompleteData';
 export { default as FindLocals } from './FindLocals/FindLocals';
+export { default as InfoLocalsProfile } from './Profile/InfoLocalsProfile/InfoLocalsProfile';
+export { default as SelectProfileBar } from './Profile/SelectProfileBar/SelectProfileBar';

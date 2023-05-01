@@ -10,13 +10,15 @@ module.exports = async (req, res) => {
         model: User,
         attributes: ['name', 'lastname', 'id', 'email', 'role', 'age'],
         include: [{ model: Image, attributes: ['url'] }],
-      }, { model: Image, attributes: ['url'] },
+      },
+      { model: Image, attributes: ['url'], as: 'Image' },
+      { model: Image, attributes: ['url'], as: 'ticket' },
       { model: Local, attributes: ['name', 'id'] },
       ],
       limit: 10,
+      order: req.order,
       offset: (req.page - 1) * 10,
     });
-
     const totalPages = Math.ceil(count / 10);
     return res.status(200).json({
       totalPages, count, success: true, reviews: rows,
@@ -147,6 +149,13 @@ module.exports = async (req, res) => {
  *                           url:
  *                             type: string
  *                             description: URL de la imagen asociada a la review.
+ *                       ticket:
+ *                         type: object
+ *                         description: Objeto que representa el ticket asociado a la review.
+ *                         properties:
+ *                           url:
+ *                             type: string
+ *                             description: URL del ticket asociado a la review.
  *                       Local:
  *                         type: object
  *                         description: Objeto que representa el lcoal asociado a la review.
@@ -159,8 +168,8 @@ module.exports = async (req, res) => {
  *                             description: ID del local asociado a la review.
  *                   example:
  *                    success: true
- *                    count: 76
- *                    totalPages: 8
+ *                    count: 1
+ *                    totalPages: 1
  *                    reviews:
  *                      - id: 7
  *                        title: se puede comer
@@ -182,9 +191,119 @@ module.exports = async (req, res) => {
  *                          id: 1
  *                          Image: { url: "https://example.com/image.jpg" }
  *                        Image: { url: "https://example.com/image.jpg" }
+ *                        ticket: { url: "https://example.com/ticket.jpg" }
  *                        Local: { name: "Mc Donals", id: 1 }
  *       401:
  *         description: No se proporcionó el token de autorización o el usuario no tiene permisos de administrador.
  *       500:
  *         description: Error interno del servidor.
+*/
+
+/**
+ * @swagger
+ * /reviews/{localId}:
+ *   get:
+ *     summary: Obtener las reviews de un local paginado de a 10
+ *     description: Este endpoint retorna todas las reviews de un local paginadas de a 10. Además, se pueden enviar opcionalmente parámetros de query para filtrar por verified y page u ordenar por rating.
+ *     tags: [Review]
+ *     parameters:
+ *       - in: path
+ *         name: localId
+ *         schema:
+ *           type: integer
+ *         required: true
+ *         description: ID del local del cual se quieren las reviews
+ *       - in: query
+ *         name: page
+ *         schema:
+ *           type: integer
+ *         required: false
+ *         description: Número de página a obtener (por defecto es 1)
+ *       - in: query
+ *         name: order
+ *         schema:
+ *           type: string
+ *           enum: [ASC, DESC]
+ *         required: false
+ *         description: Ordenar las reviews por rating en orden ascendente o descendente (por defecto no se ordena)
+ *       - in: query
+ *         name: verified
+ *         schema:
+ *           type: string
+ *           enum: [verified, unVerified, archived]
+ *         required: false
+ *         description: Filtrar las reviews por estado de verificación (por defecto es "verified")
+ *     responses:
+ *       200:
+ *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 totalPages:
+ *                   type: integer
+ *                   description: Número total de páginas
+ *                   example: 1
+ *                 count:
+ *                   type: integer
+ *                   description: Número total de reviews
+ *                   example: 1
+ *                 success:
+ *                   type: boolean
+ *                   description: Indica si la operación fue exitosa
+ *                   example: true
+ *                 reviews:
+ *                   type: array
+ *                   items:
+ *                     allOf:
+ *                       - $ref: '#/components/schemas/Review'
+ *                       - type: object
+ *                         properties:
+ *                           Image:
+ *                             $ref: '#/components/schemas/Image'
+ *                           ticket:
+ *                             $ref: '#/components/schemas/Image'
+ *                           User:
+ *                             $ref: '#/components/schemas/User'
+ *                           Local:
+ *                             type: object
+ *                             properties:
+ *                               id:
+ *                                 type: integer
+ *                                 description: ID del local al que está relacionada la review
+ *                                 example: 1
+ *                               name:
+ *                                 type: string
+ *                                 description: Nombre del local al que está relacionada la review
+ *                                 example: McDonald
+ *                   example:
+ *                    success: true
+ *                    count: 1
+ *                    totalPages: 1
+ *                    reviews:
+ *                      - id: 7
+ *                        title: se puede comer
+ *                        comment: aceptable
+ *                        verified: unVerified
+ *                        food: 1
+ *                        service: 1
+ *                        environment: 3
+ *                        qaPrice: 4
+ *                        rating: 2.25
+ *                        toxicity: 0.120304
+ *                        createdAt: '2023-04-21T17:58:39.860Z'
+ *                        updatedAt: '2023-04-21T17:58:39.870Z'
+ *                        LocalId: 1
+ *                        UserId: 1
+ *                        User:
+ *                          name: Franco
+ *                          lastname: Gutierrez
+ *                          id: 1
+ *                          Image: { url: "https://example.com/image.jpg" }
+ *                        Image: { url: "https://example.com/image.jpg" }
+ *                        ticket: { url: "https://example.com/ticket.jpg" }
+ *                        Local: { name: "Mc Donals", id: 1 }
+ *       404:
+ *         $ref: '#/components/responses/NotFound'
  */

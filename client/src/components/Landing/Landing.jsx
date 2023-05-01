@@ -20,7 +20,7 @@ const Landing = () => {
           <div className='SlideItem1'>
             <div className='FirstTitle'>
               <h1>
-                Bienvenido a <span>Bait</span>
+                <span>Descubrí</span> dónde comer
               </h1>
               <h2>Encuentra el mejor sitio para vivir experiencias</h2>
               <Link to={`/home/1?name=&city=${ubication.city}`} >

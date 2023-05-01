@@ -3,13 +3,13 @@
     display: flex;
     height: calc(100vh - 100px);
     justify-content: center;
-    overflow: hidden;   
+    overflow: hidden;  
 }
 
 .ContainerCards {
     display: flex;
     max-width: 100%;
-    min-width: 60%;
+    min-width: 55%;
     flex-direction: column;
     
 }
@@ -27,15 +27,15 @@
 
 }
 
+
 .containerCardsall .widthmap {
     /* z-index: var(--bajo-1); */
     min-width: 40%;
-    min-height: 90%;
-    height: 500px;
+    min-height: 60%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     padding: 20px;
-    margin: 10px;
-    border-radius: 10px;
+    margin: 30px;
+    border-radius: 5px;
     overflow: auto;
 }
 
@@ -51,4 +51,7 @@
         flex-direction: column;
         justify-content: start;
     }
+        .containerCardsall .Auxiliar-map {
+            display: none;
+        }
 }
