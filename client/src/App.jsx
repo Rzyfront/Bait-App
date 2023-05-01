@@ -8,7 +8,6 @@ import {
   About,
   DataTreatment,
   Dashboard,
-  MenuForm,
   DishForm,
   Userprofile,
   CreateLocals
