@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import '@smastrom/react-rating/style.css';
 import Slider from 'react-slick';
-import { getReviews } from '../../redux/actions/actions';
-import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar } from '../components';
+// import { getReviews } from '../../redux/actions/actions';
+import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar, ReviewsForm } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
