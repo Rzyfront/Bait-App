@@ -10,7 +10,9 @@ import {
   Dashboard,
   DishForm,
   Userprofile,
-  CreateLocals
+  CreateLocals,
+  MenuForm,
+  FindLocals
 } from './components/components.js';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -55,6 +57,10 @@ function App () {
         <Route path='/dataTreatment' element={<DataTreatment />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/userprofile/:userId' element={<Userprofile />} />
+        <Route path='/menu' element={<MenuForm />} />
+        <Route path='/menu/:id' element={<MenuForm />} />
+        <Route path='/updateDish/:id' element={<DishForm/>} />
+        <Route path='/findLocals' element={<FindLocals />} />
         <Route path='/udpateMenu/:id/:idMenu' element={<DishForm />} />
         <Route path='/updateDish/:id/:dishId' element={<DishForm/>} />
         <Route exact path='/' element={<Landing />} />
