@@ -5,22 +5,27 @@ import swal from 'sweetalert';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getMenu, deleteDish, deleteMenu, getDish } from '../../redux/actions/menuDish';
+import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import MenuForm from '../MenuForm/MenuForm';
 import DishForm from '../MenuForm/DishForm/DishForm';
 
-function Menu () {
+function Menu ({ localUser }) {
   const [nomodal, modal1, modal2] = ['nomodal', 'modal1', 'modal2'];
 
   const { id } = useParams();
-  const { menu, successDish, successDel, successMenu, newMenu } = useSelector(state => state);
+  const { menu, successDish, successDel, successMenu, newMenu, user } = useSelector(state => state);
+  const role = useSelector(state => state.user?.user?.role);
   const [toggleModal, setToggleModal] = useState(nomodal);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
   const [editText, setEditText] = useState('Editar');
   const [menuId, setMenuId] = useState(null);
   const [dishId, setDishId] = useState(null);
+
+  // const userIsActive = () => {
+  //   return Object.values(user).length > 0;
+  // };
 
   const handleMenuChange = (e) => {
     const { name } = e.target;
@@ -100,10 +105,14 @@ function Menu () {
         <div>
           <h2 className='Menu-Title'>Menú</h2>
         </div>
-        <div className='buttons-menu'>
-          <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
-          <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección</button>
-        </div>
+        {
+          user.user && role === 'owner' && localUser === user.user.id && (
+            <div className='buttons-menu'>
+              <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
+              <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección</button>
+            </div>
+          )
+        }
       </div>
 
       <div className='Menu-List'>

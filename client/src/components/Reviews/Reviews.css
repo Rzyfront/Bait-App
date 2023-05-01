@@ -1,6 +1,6 @@
-.Reviews{
-    width: 100%;
-    height: 100%;
+ .Reviews{
+    width: 70%;
+    height: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,8 +21,9 @@
     flex-wrap: wrap;
     justify-content: space-around;
     overflow: auto;
-    gap: 15px;
+    gap: 2px;
 }
+
 
  .Reviews .TitleGroup {
     position: relative;
@@ -37,6 +38,35 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
+.Reviews .TitleGroup .Selectors-Group .Order-Rating{
+    height: 40px;
+    background-color: var(--bg-primary);
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--primary);
+}
+
+.Reviews .Load-More{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ }
+
+.Reviews .Load-More .Load{
+    font-size: 1rem;
+    font-family: var(--title);
+    font-weight: 400;
+    padding: 20px;
+    color: var(--primary);
+    transition: 0.3s;
+}
+
+.Reviews .Load-More .Load:hover {
+    color: var(--secondary);
+    transform: scale(1.05);
+}
+
+/*
 .TitleGroup .Decorator {
     width: 60%;
     height: 3px;
@@ -125,4 +155,4 @@
     font-family: var(--text);
     font-weight: 400;
     padding: 10px;
-}
+} */
