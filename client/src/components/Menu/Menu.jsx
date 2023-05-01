@@ -23,10 +23,6 @@ function Menu ({ localUser }) {
   const [menuId, setMenuId] = useState(null);
   const [dishId, setDishId] = useState(null);
 
-  // const userIsActive = () => {
-  //   return Object.values(user).length > 0;
-  // };
-
   const handleMenuChange = (e) => {
     const { name } = e.target;
 
@@ -49,15 +45,16 @@ function Menu ({ localUser }) {
     })
       .then((willDelete) => {
         if (willDelete) {
-          dispatch(deleteDish(dishId));
-          if (successDish) {
-            swal('¡Producto eliminado con éxito!', {
-              icon: 'success'
-            });
-          }
-          dispatch(getMenu(id));
-        } else {
-          swal('Acción cancelada');
+          dispatch(deleteDish(dishId)).then((res) => {
+            if (!res) {
+              swal('¡Producto eliminado con éxito!', {
+                icon: 'success'
+              });
+              dispatch(getMenu(id));
+            } else {
+              swal('Acción cancelada');
+            }
+          });
         }
       });
   };
@@ -87,6 +84,7 @@ function Menu ({ localUser }) {
               swal('¡Sección eliminada con éxito!', {
                 icon: 'success'
               });
+              dispatch(getMenu(id));
             } else {
               swal('Acción cancelada');
             }
