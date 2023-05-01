@@ -199,7 +199,7 @@ export const getUserProfile = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios(`/user/${id}`);
-      console.log(response.data.user);
+
       if (response.data.success === true) {
         dispatch({
           type: USER_PROFILE,
