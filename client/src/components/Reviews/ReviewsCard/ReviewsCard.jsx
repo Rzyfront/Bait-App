@@ -12,10 +12,11 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
   };
 
   const handleShowMore = () => {
-    setShowMore(true);
-    setTimeout(() => {
+    if (showMore) {
       setShowMore(false);
-    }, 15000);
+    } else {
+      setShowMore(true);
+    }
   };
   return (
      <div key={index} className={`ReviewCard-Completed ${!showMore && 'ReviewCard-Simple'}`}>
@@ -39,13 +40,16 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
             <div className='Review-Main-Info'>
                 {/* <h3>{title}</h3>
                  <p>{comment}</p> */}
-                 <h3 className='Review-Card-Title'>Super rico!</h3>
+                 <h3 className='Review-Card-Title'>title</h3>
                  <div className='Review-Comment-Group'>
-                    <p className='Comment'>Excelente experiencia gastronómica en un ambiente acogedor. Los platos tienen una presentación impecable y un sabor que deleita el paladar. El servicio es amable y eficiente, definitivamente volvería a este restaurante</p>
-                    <p className={`More-On ${showMore && 'More-Off'}`} onClick={handleShowMore}>Ver mas...</p>
+                    <p className='Comment'>{comment}</p>
+                    <p className='More' onClick={handleShowMore}>{showMore
+                      ? 'Ver menos...'
+                      : 'Ver mas...'}</p>
                  </div>
             </div>
-            <div className={`Aditional-Info-On ${!showMore && 'Aditional-Info-Off'}`}>
+            {showMore &&
+              <div className='Aditional-Info'>
             <div className='Info-left'>
             <div className='Info-title-Group'>
               <h4 className='Info-Title'>Categorías calificadas</h4>
@@ -69,6 +73,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
                     /> }
                 </div>
             </div>
+            }
 
             </div>
   );
