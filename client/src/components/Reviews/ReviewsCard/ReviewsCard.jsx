@@ -12,10 +12,11 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
   };
 
   const handleShowMore = () => {
-    setShowMore(true);
-    setTimeout(() => {
+    if (showMore) {
       setShowMore(false);
-    }, 15000);
+    } else {
+      setShowMore(true);
+    }
   };
   return (
      <div key={index} className={`ReviewCard-Completed ${!showMore && 'ReviewCard-Simple'}`}>
@@ -39,11 +40,14 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
             <div className='Review-Main-Info'>
                   <h3 className='Review-Card-Title'>{title}</h3>
                  <div className='Review-Comment-Group'>
-                  <p className='Comment'>{comment}</p>
-                    <p className={`More-On ${showMore && 'More-Off'}`} onClick={handleShowMore}>Ver mas...</p>
+                    <p className='Comment'>{comment}</p>
+                    <p className='More' onClick={handleShowMore}>{showMore
+                      ? 'Ver menos...'
+                      : 'Ver mas...'}</p>
                  </div>
             </div>
-            <div className={`Aditional-Info-On ${!showMore && 'Aditional-Info-Off'}`}>
+            {showMore &&
+              <div className='Aditional-Info'>
             <div className='Info-left'>
             <div className='Info-title-Group'>
               <h4 className='Info-Title'>Categorías calificadas</h4>
@@ -67,6 +71,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
                     /> }
                 </div>
             </div>
+            }
 
             </div>
   );

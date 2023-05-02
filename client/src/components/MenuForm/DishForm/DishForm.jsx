@@ -65,12 +65,13 @@ const DishForm = ({ menuId, newMenuId, nomodal, setToggleModal, dishId }) => {
   <>
       <ToastContainer />
       <div className='Create-dish-Form animated-element'>
-        <button className='Close-dish-form-button' onClick={() => setToggleModal(nomodal)}><MdClose/></button>
+       <div className='Create-dish-Modal'>
+         <MdClose className='Close-dish-form-button' onClick={() => setToggleModal(nomodal)}/>
         <div className='dishes_data animated-element'>
           {
             menuId
-              ? <h2>Agregar un nuevo producto</h2>
-              : <h2>Actualizar producto</h2>
+              ? <h2 className='Dish-Title'>Agregar un nuevo producto</h2>
+              : <h2 className='Dish-Title'>Actualizar producto</h2>
           }
           <div className='dish-form-container'>
           <Inputs
@@ -82,13 +83,14 @@ const DishForm = ({ menuId, newMenuId, nomodal, setToggleModal, dishId }) => {
             errors={errors}
             loading={loading}
           />
+          </div>
       {
         menuId
           ? <button onClick={handleSubmit} className='btnDish' type='submit'>Agregar</button>
           : <button onClick={handleUpdate} className='btnDish' type='submit'>Actualizar</button>
       }
-          </div>
       </div>
+       </div>
     </div>
   </>
   );

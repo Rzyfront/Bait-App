@@ -1,0 +1,39 @@
+.LocalInfoComplete{
+    display: flex;
+    flex-direction: column;
+    gap: 3%;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    
+}
+
+.LocalInfoComplete .Input-C{
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 80%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.LocalInfoComplete .Add-schelude-button{
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 80%;
+    border-radius: 5px;
+    background-color: var(--btn-primary);
+}
+
+.LocalInfoComplete .Add-schelude-button:hover{
+    background-color: var(--btn-secondary);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.LocalInfoComplete .specialty-List-Select,
+.LocalInfoComplete .restaurant-Type-List-Select,
+.LocalInfoComplete .characteristic-List-Select,
+.LocalInfoComplete .payment-List-Select{
+    width: 80%;
+}

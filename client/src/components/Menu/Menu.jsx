@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { AiFillFileAdd } from 'react-icons/ai';
+import { RiFileEditFill } from 'react-icons/ri';
 import MenuForm from '../MenuForm/MenuForm';
 import DishForm from '../MenuForm/DishForm/DishForm';
 
@@ -107,8 +109,8 @@ function Menu ({ localUser }) {
         {
           user.user && role === 'owner' && localUser === user.user.id && (
             <div className='buttons-menu'>
-              <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
-              <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección</button>
+              <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}<RiFileEditFill/></button>
+              <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección<AiFillFileAdd/></button>
             </div>
           )
         }
