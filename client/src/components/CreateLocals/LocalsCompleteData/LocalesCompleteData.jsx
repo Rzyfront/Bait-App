@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DataLocal from './DataLocal/DataLocal';
 import Mapdata from '../../Map/Mapdata';
 import SearchMap from '../../Map/SearchMap/SearchMap';
-import { createLocal, createLocalFull } from '../../../redux/actions/local';
+import { createLocalFull } from '../../../redux/actions/local';
 import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
 import Chars from './Chars/Chars';
 
