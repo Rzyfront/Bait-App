@@ -11,12 +11,13 @@ import { getMenu, postDish, putDish } from '../../../redux/actions/menuDish';
 import Inputs from './Inputs/Inputs';
 import { useParams } from 'react-router-dom';
 
-const DishForm = ({ menuId, nomodal, setToggleModal, dishId }) => {
+const DishForm = ({ menuId, newMenuId, nomodal, setToggleModal, dishId }) => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  // const { dish } = useSelector(state => state);
 
   const { formValues, errors, handleInputChange, handleSelect, resetForm, loading, handleChangeImages, image } = useDishForm({ validateForm, dishId });
+
+  menuId || (menuId = newMenuId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
