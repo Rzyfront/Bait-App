@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
     const { userId } = req.params;
     const { verified } = req.query;
     const userToSupend = await User.findByPk(userId);
+    if (userToSupend.role === 'superAdmin') throw new Error('SuperAdmin cannot be suspended');
     userToSupend.verified = verified ?? 'suspend';
     await userToSupend.save();
     res.status(201).json({ success: true });

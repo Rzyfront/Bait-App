@@ -6,22 +6,22 @@ const {
   getUserProfile,
   postUser,
   postUserWithGoogle,
-  putInactiveUser,
+  // putInactiveUser,
   putUser,
   verifyUser,
 } = require('../controllers/users');
 const { userExtractor } = require('../middlewares');
-const { verifyPost, verifyDelete } = require('../middlewares/userMiddlewares');
+const { verifyPost } = require('../middlewares/userMiddlewares');
 
 userRoutes
   .get('/profile', userExtractor, getUserProfile)
   .get('/verified', verifyUser)
-  .post('/google', postUserWithGoogle)
   .get('/:userId', getUser)
+  .post('/google', postUserWithGoogle)
   .post('/', verifyPost, postUser)
-  .delete('/:userId', verifyDelete, deleteUser)
+  .delete('/:userId', userExtractor, deleteUser)
   .put('/', userExtractor, putUser)
-  .put('/changePassword', userExtractor, changePassword)
-  .put('/inactive/:userId', putInactiveUser);
+  .put('/changePassword', userExtractor, changePassword);
+// .put('/inactive/:userId', putInactiveUser);
 
 module.exports = userRoutes;

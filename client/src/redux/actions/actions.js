@@ -24,6 +24,11 @@ export const USER_POST_IMG = 'USER_POST_IMG';
 
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
+export const CLEAN_REVIEWS = 'CLEAN_REVIEWS';
+
+// ACTION TYPE USERPROFILE DASHBOARD LOCALS
+export const USER_DASH_LOCALS = 'USER_DASH_LOCALS';
+
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -48,7 +53,7 @@ export const createUser = ({
 }) => {
   return async (dispatch) => {
     try {
-      await axios.post('http://localhost:3001/user', {
+      await axios.post('/user', {
         name,
         lastname,
         age: Number(age),
@@ -198,7 +203,7 @@ export const logIn = (credentials) => {
       location.reload();
       return true;
     } catch (error) {
-      return false;
+      return error.response.data;
     }
   };
 };
@@ -212,6 +217,7 @@ export const comentarie = (
   inputs,
   id
 ) => {
+  console.log(id);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/reviews/${id}`, {
@@ -251,7 +257,6 @@ export const checkUser = () => {
   return async (dispatch) => {
     try {
       const res = await axios.get('/login');
-      console.log(res.data);
       dispatch({
         type: CHECKUSER,
         payload: res.data
@@ -270,20 +275,24 @@ export const ResetUser = () => {
   };
 };
 // REVIEWS ACTION GENERATORS
-export const getReviews = (localId, page = 1) => {
+export const getReviews = (localId, page = 1, order) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`/reviews/${localId}?page=${page}`);
-
+      const response = await axios(`/reviews/${localId}?page=${page}&order=${order}`);
+      console.log(response.data.reviews);
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
           payload: response.data.reviews
         });
       }
-    } catch (error) {
+    } catch (error) {}
+  };
+};
 
-    }
+export const cleanReviews = () => {
+  return {
+    type: CLEAN_REVIEWS
   };
 };
 
@@ -291,12 +300,12 @@ export const getReviews = (localId, page = 1) => {
 export const getUserProfile = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`http://localhost:3001/user/${id}`);
-
+      const response = await axios(`/user/${id}`);
+      console.log(response.data.user);
       if (response.data.success === true) {
         dispatch({
           type: USER_PROFILE,
-          payload: response.data
+          payload: response.data.user
         });
       }
     } catch (error) {
@@ -308,7 +317,7 @@ export const getUserProfile = (id) => {
 export const userPostImg = (img) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post('http://localhost:3001/user/', { img });
+      const response = await axios.post('/user/', { img });
 
       if (response.data.success === true) {
         dispatch({
@@ -318,6 +327,20 @@ export const userPostImg = (img) => {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const getUserLocals = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get('/user/profile');
+      dispatch({
+        type: USER_DASH_LOCALS,
+        payload: response.data
+      });
+    } catch (err) {
+      console.log(err.message);
     }
   };
 };

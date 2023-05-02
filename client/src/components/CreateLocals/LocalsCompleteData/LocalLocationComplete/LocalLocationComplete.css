@@ -1,0 +1,47 @@
+.LocationCompleteContainer{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2%;
+        
+}
+
+.LocationCompleteContainer .Direction-Complete,
+.LocationCompleteContainer .City-Complete-Location{
+    border: none;
+    outline: none;
+    height: 40px;
+    width: 65%;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.LocationCompleteContainer .Map-Complete-Container{
+    width: 80%;
+    height: 55%;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.LocationCompleteContainer .Pick-Location-Basic{
+    width: 65%;
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid var(--primary);
+    font-size: 15px;
+    font-family: var(--text);
+    background-color: transparent;
+    
+}
+
+.LocationCompleteContainer .Pick-Location-Basic:hover {
+    border: 2px solid var(--primary);
+}
+
+.LocationCompleteContainer .Pick-Location-Basic:active {
+    border: 2px solid var(--optional1);
+    color: var(--optional1);
+}

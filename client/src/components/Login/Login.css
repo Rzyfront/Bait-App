@@ -27,7 +27,7 @@ backdrop-filter: blur(3px);
     justify-content: space-evenly;  
     background-color: white; 
     box-shadow: rgba(0, 0, 0, 0.338) 0px 3px 8px;
-    opacity: 0;
+    opacity: 1;
     transition: 0.3s;
 }
 
@@ -46,14 +46,6 @@ backdrop-filter: blur(3px);
     transition: .3s;
 }
 
-
-.LoginContainer:hover .login{
-    opacity: 1;
-}
-
-.LoginContainer:hover .register {
-    opacity: 1;
-}
 
 .LoginContainer .login .CloseIcon{
     position: absolute;

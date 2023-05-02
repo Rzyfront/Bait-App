@@ -9,11 +9,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteLocal, getAllLocal } from '../../../redux/actions/admin';
 import { useEffect, useState } from 'react';
 import Users from '../Users/Users';
-
+import SelectRestaurant from './LookRestaurant/SelectRestaurant';
+import DetailRestaurant from './LookRestaurant/DetailRestaurant';
 const OneRestaurant = ({ name, image, verified, id }) => {
   const [adduser, setAdduser] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [verifiedLocal, setverifiedLocal] = useState(verified);
+  const [DetailRestaurantD, setDetailRestaurantD] = useState(false);
   useEffect(() => {
     setverifiedLocal(verified);
   }, [verified]);
@@ -39,11 +41,17 @@ const OneRestaurant = ({ name, image, verified, id }) => {
   const handleAdd = () => {
     if (adduser === true) {
       setverifiedLocal('verified');
-      dispatch(getAllLocal(1, ''));
       setAdduser(false);
     } else {
       setAdduser(true);
-      dispatch(getAllLocal(1, ''));
+    }
+  };
+
+  const handleDetail = () => {
+    if (DetailRestaurantD === false) {
+      setDetailRestaurantD(true);
+    } else {
+      setDetailRestaurantD(false);
     }
   };
 
@@ -60,8 +68,12 @@ const OneRestaurant = ({ name, image, verified, id }) => {
           <BsPersonFillAdd onClick={handleAdd} />
               <AiFillDelete onClick={deleteRestaurant} />
       </div>
-        : <div>  <FaUserEdit onClick={handleAdd} /> <AiFillDelete onClick={deleteRestaurant}/></div>}
-      {adduser === true && <div className='userAdd'><button onClick={handleAdd}>Salir</button> <Users localId={id} handleAdd={handleAdd}/></div>}
+        : <div>
+
+            <FaUserEdit onClick={handleAdd} /> <AiFillDelete onClick={deleteRestaurant}/></div>}
+    {adduser === true && <div className='userAdd'>   {adduser && <SelectRestaurant id={id} handleAdd={handleAdd}/>}<Users localId={id} handleAdd={handleAdd}/></div>}
+    {DetailRestaurantD === true && <DetailRestaurant id={id} handleDetail={handleDetail}/>}
+    <button onClick={handleDetail}>Detalles</button>
 </div>;
 };
 export default OneRestaurant;

@@ -1,32 +1,18 @@
-import { Input, Textarea } from '@nextui-org/react';
+import { Input, Textarea, Loading } from '@nextui-org/react';
 import '../DishForm.css';
-import { useSelector } from 'react-redux';
+import { RiImageAddFill } from 'react-icons/ri';
 
-const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, image, dishId }) => {
-  const { menu } = useSelector(state => state);
-
-  const findDish = (dishId) => {
-    if (dishId) {
-      const updDish = menu.map(menu => {
-        return menu.Dishes.find(dish => dish.id === dishId);
-      });
-      dish = updDish[0];
-    }
-  };
-
+const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect, handleChangeImages }) => {
   return (
         <>
-            {
-                dishId && findDish(dishId)
-            }
-
+            <div className='formValues-form-column'>
                     <Input
                         underlined
                         labelPlaceholder="Nombre producto"
                         color="dark"
                         className='name'
                         onChange={handleChange}
-                        value={dish.name}
+                        value={formValues?.name}
                         type='text'
                         name='name'
                         required
@@ -38,7 +24,7 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         name='type'
                         className='type'
                         onChange={handleSelect}
-                        value={dish.type}
+                        value={formValues?.type}
                         required
                     >
                         <option value='value2' defaultValue>Tipo</option>
@@ -49,13 +35,15 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         <option value='fitness'>fitness</option>
                         <option value='na'>No aplica</option>
                     </select>
+            </div>
+      <div className='formValues-form-column'>
                     <Input
                         underlined
                         labelPlaceholder="Price USD"
                         color="dark"
                         className='type'
                         onChange={handleChange}
-                        value={dish.price}
+                        value={formValues?.price}
                         type='number'
                         name='price'
                         required
@@ -65,27 +53,37 @@ const Inputs = ({ handleChange, handleChangeimages, handleSelect, dish, errors, 
                         underlined
                         labelPlaceholder="Descripción"
                         color="dark"
-                        className='type'
+                        className='type textArea-Dish'
                         onChange={handleChange}
-                        value={dish.description}
+                        value={formValues?.description}
                         type='text'
                         name='description'
                         required
                     />
+      </div>
+      <div className='formValues-form-column Img-Input-Ouput'>
                     {errors.description && <span>{errors.description}</span>}
-                    <input
+                    {image?.url
+                      ? <img src={image.url} alt='dish' className='Dish-Photo' />
+                      : loading === true
+                        ? (
+                        <Loading color="primary" />
+                          )
+                        : <label htmlFor="Input-Dish" className='Input-Dish-Label'>
+                     <input
+                        id='Input-Dish'
+                        className='Input-File-Dish'
                         type='file'
                         name='image'
                         accept='image/png,image/jpeg,image/jpg,image/gif'
-                        onChange={handleChangeimages}
+                        onChange={handleChangeImages}
                     ></input>
-                    {image.length
-                      ? <img src={image[image.length - 1].url} alt="foto" className='photosize' />
-                      : <img src='https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png' alt="photo default"
-                          className='photosize'
+                        <h5 className='addPhoto'>Agrega Foto</h5>
+                          <RiImageAddFill className='LocalesImage' />
 
-                      />
+                    </label>
                     }
+      </div>
         </>
   );
 };

@@ -1,17 +1,20 @@
 import axios from 'axios';
+import swal from 'sweetalert';
 
 // ACTION TYPES MENU
 export const SUCCESS_MENU = 'SUCCESS_MENU';
 export const SUCCESS_DEL = 'SUCCESS_DEL';
-export const ERROR_MENU = 'ERROR_MENU';
+export const SUCCESS_GET_MENU = 'SUCCESS_GET_MENU';
 export const GET_MENU = 'GET_MENU';
 export const POST_MENU = 'POST_MENU';
 export const PUT_MENU = 'PUT_MENU';
 
 // ACTION TYPES DISH
 export const POST_DISH = 'POST_DISH';
+export const GET_DISH = 'GET_DISH';
 export const SUCCESS_DISH = 'SUCCESS_DISH';
 export const ERROR_DISH = 'ERROR_DISH';
+export const RESET_DISH = 'RESET_DISH';
 export const PUT_DISH = 'PUT_DISH';
 export const DELETE_DISH = 'DELETE_DISH';
 export const SUCCESS_DEL_DISH = 'SUCCESS_DEL_DISH';
@@ -54,8 +57,8 @@ export const deleteMenu = (menuId) => {
       }
     } catch (error) {
       dispatch({
-        type: ERROR_MENU,
-        payload: error.message
+        type: SUCCESS_DEL,
+        payload: false
       });
     }
   };
@@ -70,11 +73,15 @@ export const getMenu = (localId) => {
           type: GET_MENU,
           payload: response.data.menu
         });
+        dispatch({
+          type: SUCCESS_GET_MENU,
+          payload: response.data.success
+        });
       }
     } catch (error) {
       dispatch({
-        type: ERROR_MENU,
-        payload: error.message
+        type: SUCCESS_GET_MENU,
+        payload: false
       });
     }
   };
@@ -87,6 +94,7 @@ export const postDish = (menuId, dish) => {
     ...dish,
     price: Number(dish.price)
   };
+
   return async (dispatch) => {
     try {
       const response = await axios.post(`/dishes/${menuId}`, dish);
@@ -97,6 +105,7 @@ export const postDish = (menuId, dish) => {
         });
       }
     } catch (error) {
+      console.log(error);
       dispatch({
         type: ERROR_DISH,
         payload: error.message
@@ -104,6 +113,19 @@ export const postDish = (menuId, dish) => {
     }
   };
 };
+
+export const getDish = async (dishId) => {
+  try {
+    const response = await axios(`/dishes/${dishId}`);
+    if (response.status === 201) {
+      const { Image, ...dish } = response.data.dish;
+      return { ...dish, image: Image };
+    }
+  } catch (error) {
+    swal('Ocurrió un error');
+  }
+};
+
 export const deleteDish = (dishId) => {
   return async (dispatch) => {
     try {
@@ -124,6 +146,11 @@ export const deleteDish = (dishId) => {
 };
 
 export const putDish = (dishId, dish) => {
+  dish = {
+    ...dish,
+    image: { id: dish.image.id || dish.Image.id, url: 'url' },
+    price: Number(dish.price)
+  };
   return async (dispatch) => {
     try {
       const response = await axios.put(`/dishes/${dishId}`, dish);
@@ -134,10 +161,8 @@ export const putDish = (dishId, dish) => {
         });
       }
     } catch (error) {
-      dispatch({
-        type: ERROR_DISH,
-        payload: error.message
-      });
+      console.log(error);
+      swal('Ocurrió un error');
     }
   };
 };

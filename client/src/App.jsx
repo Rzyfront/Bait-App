@@ -8,10 +8,11 @@ import {
   About,
   DataTreatment,
   Dashboard,
-  MenuForm,
   DishForm,
   Userprofile,
-  CreateLocals
+  CreateLocals,
+  MenuForm,
+  FindLocals
 } from './components/components.js';
 import Mapdata from './components/Map/Mapdata';
 import { Routes, Route } from 'react-router-dom';
@@ -50,7 +51,7 @@ function App () {
       <Routes>
         <Route path='/home/:id' element={<Home />} />
         <Route path='/profile/:id' element={<Profile />} />
-        <Route path='/userprofile' element={<Userprofile />} />
+        {/* <Route path='/userprofile' element={<Userprofile />} /> */}
         <Route path='/createplace' element={<CreateLocals />} />
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />
@@ -60,7 +61,10 @@ function App () {
         <Route path='/userprofile/:userId' element={<Userprofile />} />
         <Route path='/menu' element={<MenuForm />} />
         <Route path='/menu/:id' element={<MenuForm />} />
-        <Route path='/user/:id' element={<Userprofile/>} />
+        <Route path='/updateDish/:id' element={<DishForm/>} />
+        <Route path='/findLocals' element={<FindLocals />} />
+        <Route path='/udpateMenu/:id/:idMenu' element={<DishForm />} />
+        <Route path='/updateDish/:id/:dishId' element={<DishForm/>} />
         <Route exact path='/' element={<Landing />} />
       </Routes>
     </div>

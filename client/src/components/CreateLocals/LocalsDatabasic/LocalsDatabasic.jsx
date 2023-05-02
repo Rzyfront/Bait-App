@@ -10,8 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUploadImage } from '../../../hooks/useUploadImage';
 import { useDispatch, useSelector } from 'react-redux';
 import Mapdata from '../../Map/Mapdata';
-// import SearchMap from '../../Map/SearchMap/SearchMap';
-import SearchMap from '../../Map/SearchMap/Searchmap';
+import SearchMap from '../../Map/SearchMap/SearchMap';
 import { createLocal } from '../../../redux/actions/local';
 import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
 import CreateLocalsSelector from './CreateLocalsSelector/CreateLocalsSelector';
@@ -125,7 +124,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
       }
     } else {
       setStatesupmit(true);
-      toast.error('Datos no validos', {
+      toast.error('Datos no válidos', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
@@ -158,7 +157,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
 
   return (
     <div className='LocalsDataBasic-Component'>
-        {(formType === 'NoSelection') && <CreateLocalsSelector setFormType={setFormType}/>}
+      {(formType === 'NoSelection') && <CreateLocalsSelector setFormType={setFormType} />}
       <div className='locales_data animated-element Container-Basic'>
         <Link to='/home/1?name=&city=' className='LinkLogo'>
           <img
@@ -172,24 +171,24 @@ function LocalsDatabasic ({ formType, setFormType }) {
         <h1 className='Basic-Title'>Crea un <span>nuevo</span> Local</h1>
         <form onSubmit={handleSubmit} className='Basic-Form-Create'>
           <div className='Map-Basic-Group'>
-           <div className='Basic-Inputs-Component'>
-          <div className='Name-Input-Group'>
-            <Input
-                underlined
-                labelPlaceholder="Nombre del Local"
-                color="default"
-                className='Inputs-Data-Basic'
-                onChange={handleChange}
-                value={inputs.name}
-                borderWeight='bold'
-                type='text'
-                name='name'
-                required
-            />
-          {statesupmit === true && errors.name && <PopComent text={errors.name}/>}
-           </div>
+            <div className='Basic-Inputs-Component'>
+              <div className='Name-Input-Group'>
+                <Input
+                  underlined
+                  labelPlaceholder="Nombre del Local"
+                  color="default"
+                  className='Inputs-Data-Basic'
+                  onChange={handleChange}
+                  value={inputs.name}
+                  borderWeight='bold'
+                  type='text'
+                  name='name'
+                  required
+                />
+                {statesupmit === true && errors.name && <PopComent text={errors.name} />}
+              </div>
 
-               <Input
+              <Input
                 underlined
                 labelPlaceholder="Ciudad"
                 color="default"
@@ -199,60 +198,60 @@ function LocalsDatabasic ({ formType, setFormType }) {
                 value={mapSearch}
                 type='text'
 
-            />
+              />
 
-        </div>
+            </div>
 
-           <div className='MapSize-Basic'>
-            <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas}/>
+            <div className='MapSize-Basic'>
+              <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas} />
             </div>
             <button onClick={searchCity} className='Pick-Location-Basic'>
-              Buscar Ciudad
+              Buscar ciudad
             </button>
-          {statesupmit === true && errors.location && <PopComent text={errors.location}/>}
+            {statesupmit === true && errors.location && <PopComent text={errors.location} />}
           </div>
 
           <div className='Basic-Img-Group' >
             <label htmlFor="photo-upload">
-          <h5 className='Add-Img-Basic'>{image.length ? 'Agrega otra imagen' : 'Agrega imagen del local'}<RiImageAddFill/></h5>
-          </label>
-          <label htmlFor="photo-upload" className='Label-Img-Add'>
-          <input
-          className='Basic-File'
-          id="photo-upload"
-            type='file'
-            name='imagen'
-            accept='image/png,image/jpeg,image/jpg,image/gif'
-            // multiple
-            onChange={handleChangeimages}
-          ></input>
-
-          {image.length
-            ? (
-                image.map((image, i) => (
-              <img
-                key={i}
-                src={image.url}
-                alt='imagen'
-                className='LocalesImage'
-              />
-                ))
-              )
-            : loading === true
-              ? (
-            <Loading color="primary"/>
-                )
-              : (
-
-            <RiImageAddFill className='LocalesImage'/>
-                )}
+              <h5 className='Add-Img-Basic'>{image.length ? 'Agrega otra imagen' : 'Agrega imagen del local'}<RiImageAddFill /></h5>
             </label>
-                  <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate/></button>
+            <label htmlFor="photo-upload" className='Label-Img-Add'>
+              <input
+                className='Basic-File'
+                id="photo-upload"
+                type='file'
+                name='imagen'
+                accept='image/png,image/jpeg,image/jpg,image/gif'
+                // multiple
+                onChange={handleChangeimages}
+              ></input>
+
+              {image.length
+                ? (
+                    image.map((image, i) => (
+                    <img
+                      key={i}
+                      src={image.url}
+                      alt='imagen'
+                      className='LocalesImage'
+                    />
+                    ))
+                  )
+                : loading === true
+                  ? (
+                    <Loading color="primary" />
+                    )
+                  : (
+
+                    <RiImageAddFill className='LocalesImage' />
+                    )}
+            </label>
+            <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate /></button>
           </div>
 
         </form>
 
-    </div>
+      </div>
       <ToastContainer className="errors" theme='colored' />
     </div>
   );

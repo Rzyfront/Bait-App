@@ -7,6 +7,7 @@ export const SUSPEND_USER = 'SUSPEND_USER';
 export const ASSIGN_LOCAL = 'ASSIGN_LOCAL';
 export const REVIEW_DETAIL = 'REVIEW_DETAIL';
 export const GETLOCALSADMIN = 'GETLOCALSADMIN';
+export const DETAILUSER = 'DETAILUSER';
 // users
 export const getAllUsers = (filter) => {
   return async (dispatch) => {
@@ -40,6 +41,23 @@ export const DeleteUser = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const detailUser = (data) => {
+  return {
+    type: DETAILUSER,
+    payload: data
+  };
+};
+
+export const suspendUser = ({ id, action }) => async (dispatch) => {
+  try {
+    const { status } = await axios.patch(`/administrator/suspend/${id}?verified=${action}`);
+    return status;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //
 
 export const getAllReviews = ({ page = 1, verified = 'unVerified' }) => {
@@ -71,18 +89,9 @@ export const verifyReview = ({ id, verified }) => async (dispatch) => {
     const { data } = await axios.patch(`/administrator/review/${id}${verified ? `?verified=${verified}` : ''}`);
     console.log(data);
     // TODO agregar el estado a redux y el switches
-    return true;
+    return data;
   } catch (error) {
-    return false;
-  }
-};
-
-export const suspendUser = ({ id }) => async (dispatch) => {
-  try {
-    const { status } = await axios.patch(`/administrator/suspend/${id}`);
-    return status;
-  } catch (error) {
-    console.log(error);
+    return error.response.data;
   }
 };
 
