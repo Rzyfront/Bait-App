@@ -3,10 +3,10 @@ import styles from './LocalsCards.module.css';
 import { useState } from 'react';
 
 export default function LocalsCards ({ local }) {
-  const [documenLink, setDocumenLink] = useState();
+  const [documentLink, setDocumentLink] = useState();
   const handleDocument = async () => {
     const { data } = await axios.get(`/locals/document/${local.id}`);
-    setDocumenLink(data.url);
+    setDocumentLink(data.url);
   };
   return (
     <>
@@ -14,7 +14,7 @@ export default function LocalsCards ({ local }) {
         <h1>{local?.name}</h1>
         <h2>{local?.User?.name}</h2>
         <button onClick={handleDocument} >Document</button>
-        {documenLink && <a href={documenLink} target='_blank' rel="noreferrer" >Link al documento</a>}
+        {documentLink && <a href={documentLink} target='_blank' rel="noreferrer" >Link al documento</a>}
       </div>
     </>
   );
