@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailLocal } from '../../redux/actions/local';
 import { getMenu } from '../../redux/actions/menuDish';
+import ClaimLocal from './ClaimLocal/ClaimLocal';
 
 function Profile () {
   const [ShowReviews, ShowMenu] = ['ShowReviews', 'ShowMenu'];
@@ -17,7 +18,11 @@ function Profile () {
   const [ShowReviewList, setShowReviewList] = useState(false);
   const { id } = useParams();
   const [page, setPage] = useState(1);
+  const [modalClaimLocal, setModalClaimLocal] = useState(false);
 
+  const handlerClaimLocalModal = (show) => {
+    setModalClaimLocal(show);
+  };
   useEffect(() => {
     dispatch(DetailLocal(id));
   }, [id]);
@@ -58,10 +63,11 @@ function Profile () {
         </Slider>
         </div>
         <div className='Info-Profile-Locals-Container'>
-          <InfoLocalsProfile detail={detail}/>
+          <InfoLocalsProfile detail={detail} showClaimLocal={handlerClaimLocalModal}/>
           <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
           {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
           {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
+          {modalClaimLocal && <ClaimLocal closeClaimLocal={handlerClaimLocalModal} localId={detail.id}/>}
         </div>
       </div>
     </>
