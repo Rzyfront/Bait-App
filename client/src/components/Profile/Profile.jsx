@@ -14,11 +14,7 @@ import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailLocal } from '../../redux/actions/local';
-<<<<<<< HEAD
-import { getReviews } from '../../redux/actions/actions';
-=======
 import { getMenu } from '../../redux/actions/menuDish';
->>>>>>> f238f107dc90cb40666aadc69bfdb5cf7000e9bc
 
 function Profile () {
   const dispatch = useDispatch();

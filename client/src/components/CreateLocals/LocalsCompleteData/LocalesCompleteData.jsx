@@ -6,14 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUploadImage } from '../../../hooks/useUploadImage';
 import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
-<<<<<<< HEAD:client/src/components/Locales/Locales.jsx
-import { validateForm } from './localHelpers';
-import TYC from './TYC';
-// import DatabasicLocal from './DataLocal/DatabasicLocal';
-import DataLocal from './DataLocal/DataLocal';
-import { createLocal } from '../../redux/actions/local';
-function Locales () {
-=======
 import DataLocal from './DataLocal/DataLocal';
 import Mapdata from '../../Map/Mapdata';
 import SearchMap from '../../Map/SearchMap/Searchmap';
@@ -22,7 +14,6 @@ import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
 import Chars from './Chars/Chars';
 
 function LocalsCompleteData () {
->>>>>>> f238f107dc90cb40666aadc69bfdb5cf7000e9bc:client/src/components/CreateLocals/LocalsCompleteData/LocalesCompleteData.jsx
   const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
   const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
