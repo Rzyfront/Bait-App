@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { DetailLocal } from '../../redux/actions/local';
 import { getMenu } from '../../redux/actions/menuDish';
+import ReviewLocal from '../FindLocals/ReviewLocal/ReviewLocal';
 
 function Profile () {
   const [ShowReviews, ShowMenu] = ['ShowReviews', 'ShowMenu'];
@@ -25,6 +26,7 @@ function Profile () {
   useEffect(() => {
     dispatch(getMenu(id));
   }, [successDish]);
+
 
   // useEffect(() => {
   //   if (id) dispatch(getReviews(id));
@@ -44,7 +46,7 @@ function Profile () {
     <>
       <Navbar />
       <div className="Profile-Locals animated-element">
-        {ShowReviewList && <ReviewsForm ShowReviewList={ShowReviewList} setShowReviewList={setShowReviewList} id={id}/>}
+        {ShowReviewList && <ReviewLocal sendReview={setShowReviewList}/>}
         <div className='Img-Header'>
 
  <Slider {...settings}>

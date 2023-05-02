@@ -176,7 +176,7 @@ const ReviewLocal = ({ sendReview }) => {
         </form>
       </div>
         <div>
-          <button className={style.sendReview} onClick={() => sendReview()}>Enviar reseña</button>
+          <button className={style.sendReview} onClick={() => sendReview(false)}>Enviar reseña</button>
         </div>
       </div>
   );
