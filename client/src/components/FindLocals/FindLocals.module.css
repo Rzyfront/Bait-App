@@ -90,8 +90,9 @@
     background-color: rgba(0, 0, 0, 0.475);
     position: absolute;
     text-align: center;
+    margin-top: -80px;
     height: 100vh;
-    width: 100vw;
+    width: 101vw;
     z-index: 900;
     /* margin-top: 7vh; */
 }
