@@ -1,14 +1,18 @@
 .Restaurantcard {
     width: 90%;
-    background: var(--bg-secondary);
+    background: rgb(225, 225, 225);
+    ;
     margin: auto;
     margin-bottom: 10px;
 
-    color: var(--bg-primary);
+    color: var(--primary);
     display: flex;
+    flex-wrap: wrap;
     border-radius: 10px;
 
 }
+
+
 
 .RestaurantImage {
     width: 100px;
@@ -18,9 +22,15 @@
 }
 
 .name {
-    width: 35%;
+    width: 50%;
+    text-align: left;
     margin: auto;
-    overflow: auto;
+    display: flex;
+
+}
+
+.name h3 {
+    font-size: 1rem;
 }
 
 .state {
@@ -39,4 +49,17 @@
     backdrop-filter: blur(10px);
     border-radius: 10px;
     z-index: var(--alto-3);
+}
+
+.RestaurantDetail {
+    width: 30%;
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    gap: 10px;
+}
+
+.ActionsDetailRestaurant {
+    padding: 5px;
+    border-radius: 10px;
 }
