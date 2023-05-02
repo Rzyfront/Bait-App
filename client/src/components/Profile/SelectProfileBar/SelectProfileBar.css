@@ -3,12 +3,15 @@
     margin-top: 10px;
     width: 70%;
     height: 50px;
-    align-items: start;
-    justify-content: start;box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-
+    box-shadow: #00000005 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    justify-content: space-between;
 }
 
-.SelectProfileBar-Component .Options{
+.SelectProfileBar-Component .Selection-Group{
+    display: flex;
+}
+
+.SelectProfileBar-Component .Selection-Group .Options{
     display: flex;
     width: fit-content;
     height: 50px;
@@ -26,6 +29,7 @@
 .SelectProfileBar-Component .Options:hover {
     background-color: var(--btn-secondary);
     color: var(--tertiary);
+    box-shadow: none;
 }
 
 .SelectProfileBar-Component .Options:active {
@@ -34,5 +38,24 @@
 }
 
 .SelectProfileBar-Component .CurrentSelection {
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+    box-shadow: rgb(204, 219, 232) 1px 1px 6px 1px inset, rgba(255, 255, 255, 0.5) -1px -1px 6px 1px inset;
+    border-bottom: 3px solid var(--btn-primary);
+}
+
+.SelectProfileBar-Component .Create-Review-Option{
+    align-self: center;
+    justify-self:flex-end;
+    font-size: 1rem;
+    font-family: var(--text);
+    font-weight: 300;
+    color: var(--tertiary);
+    background-color: var(--btn-secondary);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.SelectProfileBar-Component .Create-Review-Option:hover {
+    background-color: var(--btn-primary);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
