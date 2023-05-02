@@ -18,6 +18,7 @@ module.exports = (req, res, next) => {
     else if (order === 'ratingDESC') reqOrder = [[fn('AVG', col('Reviews.rating')), 'DESC']];
     // else if (order === 'nameASC') reqOrder = [['name', 'ASC']];
     // else if (order === 'nameDESC') reqOrder = [['name', 'DESC']];
+    req.requireReviews = true;
   }
   if (specialty) {
     where.specialty = { [Op.iLike]: `%${specialty}%` };
