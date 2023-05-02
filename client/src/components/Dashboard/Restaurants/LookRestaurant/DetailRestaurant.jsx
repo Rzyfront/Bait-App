@@ -4,7 +4,6 @@ import { DetailLocal } from '../../../../redux/actions/local';
 import { useEffect } from 'react';
 import './DetailRestaurant.css';
 import { getReviews, getUserProfile } from '../../../../redux/actions/actions';
-import photoDefault from '../../../../assets/storePhoto.png';
 import imageDefault from '../../../../assets/imagenDefault.png';
 const DetailRestaurant = ({ id, handleDetail }) => {
   const dispatch = useDispatch();
@@ -20,26 +19,27 @@ const DetailRestaurant = ({ id, handleDetail }) => {
       dispatch(getUserProfile(detail.UserId
       ));
     }
-    console.log(reviews);
+    console.log(detail);
   }, [detail]);
-  console.log(reviews);
+  console.log(detail);
   return <div className='detailRestaurantContainer'>
-        <button onClick={handleDetail}>cerrar</button>
+        {/* <button onClick={handleDetail}>cerrar</button> */}
        <div className='localDetail'>
-      {detail && detail.Images && detail.Images.length ? <img src={detail.Images[0].url} alt='image' className='photoselect' /> : <img src={photoDefault} alt='foto' className='photoselect' />}
-        <p>{detail.name}</p>
-      <p>{detail.location}</p>
-      <p>estado:{detail.verified}</p>
 
-       </div>
-       <div className='userDetail'>
+      {/* {detail && detail.Images && detail.Images.length ? <img src={detail.Images[0].url} alt='image' className='photoselect' /> : <img src={photoDefault} alt='foto' className='photoselect' />} */}
+        {/* <p>{detail.name}</p> */}
+      <div className='graph1'>
+
+        </div>
+      <p>{detail.location}</p>
+      <p>Estado: {detail.verified}</p>
+      </div>
+    {detail && detail.verified === 'verified' && <div className='userDetail'>
       {userProfile && userProfile.Images && userProfile.Images.length ? <img src={userProfile.Images[0].url} alt='image' className='photoselect' /> : <img src={imageDefault} alt='foto' className='photoselect' />}
       <p>{userProfile.name} {userProfile.lastname}</p>
       <p>Edad:{userProfile.age}</p>
-       </div>
-       <div className='Reviews'>
+    </div>}
 
-       </div>
     </div>;
 };
 export default DetailRestaurant;

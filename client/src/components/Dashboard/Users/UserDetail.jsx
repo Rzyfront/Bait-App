@@ -31,11 +31,20 @@ const UserDetail = ({ id, lastname, age, role, name, email, verified, handledeta
     </div>
     <div className='containerAll'>
       <p>estado:{verified}</p>
-       <AiFillDelete className='icon' onClick={deleteDetail} />
-      {verified === 'suspended' && <MdVerified onClick={handleSuspent}/>}
 
-      {verified !== 'suspended' && <FiUserX className='icon' onClick={handleSuspent} />}
     </div>
+    <table className='tableActions'>
+      <tr>
+        <th>Borrar</th>
+        <th>verificar</th>
+        <th>Sancionar</th>
+      </tr>
+      <tr>
+        <td><AiFillDelete className='iconAction' onClick={deleteDetail} /></td>
+        <td>{(verified === 'suspended' || verified === 'unVerified') && <MdVerified className='iconVerified' onClick={handleSuspent} />}</td>
+        <td> {verified !== 'suspended' && <FiUserX className='iconAction' onClick={handleSuspent} />} </td>
+      </tr>
+    </table>
     </div>;
 };
 export default UserDetail;

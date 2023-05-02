@@ -56,24 +56,26 @@ const OneRestaurant = ({ name, image, verified, id }) => {
   };
 
   return <div className="Restaurantcard">
-      {image && image.length ? <img src={image[0].url} alt='image' className='RestaurantImage' /> : <img src={photoDefault} alt='image' className='RestaurantImage' />}
-      <div className='name'>
-    <h3>{name}</h3>
-      </div>
-      <div className='state'>
-    <h3>Estado:{verifiedLocal}</h3>
-      </div>
+    {image && image.length ? <img src={image[0].url} alt='image' className='RestaurantImage' /> : <img src={photoDefault} alt='image' className='RestaurantImage' />}
+  <div className='name'>
+
+    <h3>Nombre: {name}</h3>
+    </div>
+<div className='RestaurantDetail'>
       {verifiedLocal && verifiedLocal === 'unVerified'
-        ? <div className='state'>
+        ? <div className=''>
           <BsPersonFillAdd onClick={handleAdd} />
-              <AiFillDelete onClick={deleteRestaurant} />
-      </div>
+          <AiFillDelete onClick={deleteRestaurant} />
+        </div>
         : <div>
 
-            <FaUserEdit onClick={handleAdd} /> <AiFillDelete onClick={deleteRestaurant}/></div>}
-    {adduser === true && <div className='userAdd'>   {adduser && <SelectRestaurant id={id} handleAdd={handleAdd}/>}<Users localId={id} handleAdd={handleAdd}/></div>}
-    {DetailRestaurantD === true && <DetailRestaurant id={id} handleDetail={handleDetail}/>}
-    <button onClick={handleDetail}>Detalles</button>
+          <FaUserEdit onClick={handleAdd} /> <AiFillDelete onClick={deleteRestaurant} /></div>}
+      {adduser === true && <div className='userAdd'>   {adduser && <SelectRestaurant id={id} handleAdd={handleAdd} />}<Users localId={id} handleAdd={handleAdd} /></div>}
+
+    <button className="ActionsDetailRestaurant" onClick={handleDetail} >{DetailRestaurantD === false ? 'Detalles' : 'Ocultar'}</button>
+
+    </div>
+    {DetailRestaurantD === true && <DetailRestaurant id={id} handleDetail={handleDetail} />}
 </div>;
 };
 export default OneRestaurant;

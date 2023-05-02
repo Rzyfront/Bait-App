@@ -18,3 +18,20 @@
 .containerAll p {
     width: 30%;
 }
+
+.iconVerified {
+    font-size: 1.5rem;
+}
+
+.iconVerified:hover {
+    color: rgb(59, 240, 99);
+    cursor: pointer;
+}
+
+.iconAction {
+    font-size: 1.5rem;
+}
+
+.iconAction:hover {
+    color: rgba(247, 81, 81, 0.973);
+}
