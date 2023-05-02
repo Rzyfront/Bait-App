@@ -9,29 +9,45 @@ import FormatDate from './FormatDate/FormatDate';
 function Reviews ({ localId, setPage, page }) {
   const dispatch = useDispatch();
   const { reviews } = useSelector(state => state);
+  const [order, setOrder] = useState('');
+
+  const handleOrder = (e) => {
+    const { value } = e.target;
+    setOrder(value);
+  };
+
+  // useEffect(() => {
+  //   if (order.length) {
+  //     dispatch(getReviews(localId, page, order));
+  //   };
+  // }, [order]);
 
   useEffect(() => {
-    dispatch(getReviews(localId, page));
+    if (order.length) {
+      dispatch(getReviews(localId, page, order));
+    } else {
+      dispatch(getReviews(localId, page));
+    }
     return () => {
       dispatch(cleanReviews());
     };
-  }, [page]);
+  }, [page, order]);
   return (
     <div className='Reviews animated-element'>
       <div className='TitleGroup'>
         <h2 className='Reviews-Title'>Reviews</h2>
         <div className='Selectors-Group'>
-          <select name='' id='' className='Order-Rating'>
-            <option value='1' defaultValue >Ordena por rating</option>
-            <option value='1'>Mayor puntuación</option>
-            <option value='2'>Menor puntuación</option>
+          <select name='' id='' className='Order-Rating' onChange={handleOrder}>
+            <option defaultValue >Ordena por rating</option>
+            <option value='DESC'>Mayor puntuación</option>
+            <option value='ASC'>Menor puntuación</option>
 
           </select>
 
         </div>
       </div>
       <div className='Reviews-List'>
-        {reviews.map(({ User, rating, Image, comment, title, environment, food, qaPrice, service, createdAt }, index) => {
+        {reviews?.map(({ User, rating, Image, comment, title, environment, food, qaPrice, service, createdAt }, index) => {
           const reviewDate = FormatDate(createdAt);
           return (
            <ReviewsCard

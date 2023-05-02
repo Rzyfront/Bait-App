@@ -182,11 +182,11 @@ export const ResetUser = () => {
   };
 };
 // REVIEWS ACTION GENERATORS
-export const getReviews = (localId, page = 1) => {
+export const getReviews = (localId, page = 1, order) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`/reviews/${localId}?page=${page}`);
-      console.log('holisss soy reviews' + response.data.reviews);
+      const response = await axios(`/reviews/${localId}?page=${page}&order=${order}`);
+      console.log(response.data.reviews);
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
@@ -241,7 +241,7 @@ export const userPostImg = (img) => {
 export const getUserLocals = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get('http://localhost:3001/user/profile');
+      const response = await axios.get('/user/profile');
       dispatch({
         type: USER_DASH_LOCALS,
         payload: response.data

@@ -37,11 +37,9 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
                 </div>
             </div>
             <div className='Review-Main-Info'>
-                {/* <h3>{title}</h3>
-                 <p>{comment}</p> */}
-                 <h3 className='Review-Card-Title'>Super rico!</h3>
+                  <h3 className='Review-Card-Title'>{title}</h3>
                  <div className='Review-Comment-Group'>
-                    <p className='Comment'>Excelente experiencia gastronómica en un ambiente acogedor. Los platos tienen una presentación impecable y un sabor que deleita el paladar. El servicio es amable y eficiente, definitivamente volvería a este restaurante</p>
+                  <p className='Comment'>{comment}</p>
                     <p className={`More-On ${showMore && 'More-Off'}`} onClick={handleShowMore}>Ver mas...</p>
                  </div>
             </div>
