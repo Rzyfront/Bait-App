@@ -5,6 +5,11 @@
   scroll-behavior: smooth;
 }
 
+span{
+  color: #3884fd;
+  font-weight: 600;
+}
+
 a{
   all: unset;
 }

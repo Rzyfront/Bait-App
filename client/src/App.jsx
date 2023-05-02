@@ -14,6 +14,7 @@ import {
   MenuForm,
   FindLocals
 } from './components/components.js';
+import Mapdata from './components/Map/Mapdata';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
@@ -55,6 +56,7 @@ function App () {
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />
         <Route path='/dataTreatment' element={<DataTreatment />} />
+        <Route path='/map' element={<Mapdata />} />
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/userprofile/:userId' element={<Userprofile />} />
         <Route path='/menu' element={<MenuForm />} />
