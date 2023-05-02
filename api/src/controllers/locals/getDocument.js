@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const cloudinary = require('../../config/cloudinary');// eslint-disable-line no-unused-vars
 const { Local, Document } = require('../../db');
 
@@ -11,8 +12,10 @@ module.exports = async (req, res) => {
     // const secureURL = cloudinary.url(local.Document.archive, { secure: true });
     //
     // res.redirect(secureURL);
-    res.set('Content-Type', 'application/pdf');
-    res.send(local.Document.data);
+    // res.set('Content-Type', 'application/pdf');
+    // res.send(local.Document.data);
+    const token = jwt.sign({ documentId: local.Document.id }, process.env.SECRET_KEY_2, { expiresIn: '1h' });
+    res.status(200).json({ success: true, token });
   } catch (error) {
     res.status(400).json({ message: error.message, success: false });
   }

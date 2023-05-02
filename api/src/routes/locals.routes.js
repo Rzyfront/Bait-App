@@ -22,12 +22,14 @@ const {
   postAcquisitionRequest,
   postDocument,
   getDocument,
+  getServeDocument,
 } = require('../controllers/locals');
 const { isOwner, isAdmin } = require('../middlewares/validateRole');
 const multerDocs = require('../config/multerDocs.');
 
 localsRoute
   .post('/document', multerDocs.single('document'), postDocument)
+  .get('/document', getServeDocument)
   .get('/document/:localId', userExtractor, isAdmin, getDocument)
   .get('/', setQueryLocals, getLocals)
   .get('/page/:numPage', setQueryLocals, getLocals)
