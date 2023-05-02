@@ -15,6 +15,8 @@ export default function LocalsCards ({ local }) {
         <h2>{local?.User?.name}</h2>
         <button onClick={handleDocument} >Document</button>
         {documentLink && <a href={documentLink} target='_blank' rel="noreferrer" >Link al documento</a>}
+        <button>Verificar</button>
+        <button>Denegar</button>
       </div>
     </>
   );

@@ -16,7 +16,7 @@ export default function LocalsToVerify () {
     <>
       <div>
         <header>
-          <h1>Locales a verificar `:emoji_check:`</h1>
+          <h1>Locales a verificar</h1>
         </header>
         <div>
           {locals &&
