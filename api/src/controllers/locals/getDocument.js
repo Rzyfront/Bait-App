@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
     // res.set('Content-Type', 'application/pdf');
     // res.send(local.Document.data);
     const token = jwt.sign({ documentId: local.Document.id }, process.env.SECRET_KEY_2, { expiresIn: '1h' });
-    res.status(200).json({ success: true, token });
+    res.status(200).json({ success: true, url: `${process.env.SERVER_DEPLOY}/locals/document?auth=${token}` });
   } catch (error) {
     res.status(400).json({ message: error.message, success: false });
   }

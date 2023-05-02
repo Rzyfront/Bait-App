@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import LocalsCards from './LocalsCards/LocalsCards';
 import { useEffect } from 'react';
 import { getLocalsToVerify } from '../../../redux/actions/LocalsAdmin';
-import axios from 'axios';
 
 export default function LocalsToVerify () {
   const dispatch = useDispatch();
@@ -13,10 +12,6 @@ export default function LocalsToVerify () {
     dispatch(getLocalsToVerify());
   }, []);
 
-  const handleDocument = async (e) => {
-    const localId = e.target.value;
-    await axios.get(`/locals/document/${localId}`);
-  };
   return (
     <>
       <div>
@@ -25,7 +20,7 @@ export default function LocalsToVerify () {
         </header>
         <div>
           {locals &&
-            locals.map((local, i) => <LocalsCards key={i} local={local} handleDocument={handleDocument}/>)}
+            locals.map((local, i) => <LocalsCards key={i} local={local} />)}
         </div>
       </div>
     </>
