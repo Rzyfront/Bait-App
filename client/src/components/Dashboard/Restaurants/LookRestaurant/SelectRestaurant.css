@@ -1,6 +1,7 @@
 .selectcontainer {
     width: 50%;
     display: flex;
+    flex-wrap: wrap;
     margin: auto;
     background: var(--bg-secondary);
     padding: 20px;

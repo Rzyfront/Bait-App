@@ -1,12 +1,29 @@
 .detailRestaurantContainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
     width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    background: rgba(238, 236, 236, 0.178);
-    backdrop-filter: blur(10px);
-    border-radius: 10px;
-    z-index: var(--alto-3);
+}
+
+.localDetail {
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%;
+    margin-left: 40px;
+    margin-top: 20px;
+    font-size: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+
+}
+
+.localDetail p {
+    font-size: 1rem;
+}
+
+.userDetail {
+    display: flex;
+    gap: 10px;
+    font-size: 2rem;
+}
+
+.localDetail {
+    width: 100%;
 }
