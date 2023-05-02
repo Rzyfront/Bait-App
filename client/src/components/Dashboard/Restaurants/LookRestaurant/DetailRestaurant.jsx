@@ -1,17 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { DetailLocal } from '../../../../redux/actions/local';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './DetailRestaurant.css';
 import { getReviews, getUserProfile } from '../../../../redux/actions/actions';
 import imageDefault from '../../../../assets/imagenDefault.png';
-const DetailRestaurant = ({ id, handleDetail }) => {
+// import { Chart } from '../../../../hooks/Chart';
+const DetailRestaurant = ({ id }) => {
   const dispatch = useDispatch();
   const { detail, reviews, userProfile } = useSelector((state) => state);
+  const [data, setData] = useState();
   useEffect(() => {
     dispatch(DetailLocal(id));
     dispatch(getReviews(id));
-
+    const fetchdata = async () => {
+      const response = await fetch('https://api.coincap.io/v2/assets/?limit=10');
+      const data = await response.json();
+      console.log(data);
+      setData(data.data);
+    };
+    fetchdata();
     console.log(reviews);
   }, []);
   useEffect(() => {
@@ -25,7 +33,7 @@ const DetailRestaurant = ({ id, handleDetail }) => {
   return <div className='detailRestaurantContainer'>
         {/* <button onClick={handleDetail}>cerrar</button> */}
        <div className='localDetail'>
-
+        {/* <Chart data={data}></Chart> */}
       {/* {detail && detail.Images && detail.Images.length ? <img src={detail.Images[0].url} alt='image' className='photoselect' /> : <img src={photoDefault} alt='foto' className='photoselect' />} */}
         {/* <p>{detail.name}</p> */}
       <div className='graph1'>
