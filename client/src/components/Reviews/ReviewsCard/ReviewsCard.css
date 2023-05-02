@@ -47,6 +47,8 @@
     display: flex;
     justify-content: space-between;
     gap: 5%;
+    width: 100%;
+    overflow: hidden;
 }
 
 .ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .Comment{
@@ -57,7 +59,7 @@
     text-align:justify;
 }
 
-.ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .More-On{
+.ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .More{
     width: 20%;
     display: flex;
     justify-content: flex-end;
@@ -65,19 +67,19 @@
     transition: 0.3s;
 }
 
-.ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .More-On:hover {
+.ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .More:hover {
     transform: scale(1.05);
     color: var(--secondary);
 }
 
-.ReviewCard-Completed .Aditional-Info-On{
+.ReviewCard-Completed .Aditional-Info{
     margin-top: 10px;
     display: flex;
     align-items: center;
     justify-content: space-around
 }
 
-.ReviewCard-Completed .Aditional-Info-On .Info-left {
+.ReviewCard-Completed .Aditional-Info .Info-left {
     width: 40%;
     display: flex;
     flex-direction: column;
@@ -87,26 +89,26 @@
 }
 
 
-.ReviewCard-Completed .Aditional-Info-On .Info-left .Rating-C-Group {
+.ReviewCard-Completed .Aditional-Info .Info-left .Rating-C-Group {
     display: flex;
     align-items: start;
     justify-content: space-between;
 }
 
-.ReviewCard-Completed .Aditional-Info-On .Info-left .Info-title-Group .Info-left-decoration {
+.ReviewCard-Completed .Aditional-Info .Info-left .Info-title-Group .Info-left-decoration {
     height: 2px;
     width: 15%;
     border-radius: 20px;
     background-color: var(--bg-tertiary);
 }
 
-.ReviewCard-Completed .Aditional-Info-On .Info-left .Info-title-Group .Info-Title {
+.ReviewCard-Completed .Aditional-Info .Info-left .Info-title-Group .Info-Title {
     font-size: 1.2rem;
     font-family: var(--text);
     font-weight: 400;
 }
 
-.ReviewCard-Completed .Aditional-Info-On .Info-left .Rating-C-Group-Container {
+.ReviewCard-Completed .Aditional-Info .Info-left .Rating-C-Group-Container {
     width: 90%;
     padding: 15px;
     border: 1px solid var(--primary);
@@ -117,19 +119,19 @@
 
 }
 
-.ReviewCard-Completed .Aditional-Info-On .Info-left .Rating-C-Group-Container .Rating-C-Group {
+.ReviewCard-Completed .Aditional-Info .Info-left .Rating-C-Group-Container .Rating-C-Group {
     font-size: 1rem;
     font-family: var(--text);
     font-weight: 300;
 
 }
 
-.ReviewCard-Completed .Aditional-Info-On .Rigth-Img{
+.ReviewCard-Completed .Aditional-Info .Rigth-Img{
     width: 350px;
     height: 200px;
 }
 
-.ReviewCard-Completed .Aditional-Info-On .Rigth-Img img {
+.ReviewCard-Completed .Aditional-Info .Rigth-Img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -140,12 +142,4 @@
 
 .ReviewCard-Simple {
     height: 200px;
-}
-
-.ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .More-Off{
-    display: none;
-}
-
-.ReviewCard-Completed .Aditional-Info-Off {
-   display: none;
 }

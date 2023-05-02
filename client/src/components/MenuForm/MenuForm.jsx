@@ -48,11 +48,11 @@ const MenuForm = ({ modal2, setToggleModal, nomodal }) => {
   }, []);
 
   return (
-        <div className='Menu-Form-Container'>
+        <div className='Menu-Form-Container' onClick={() => setToggleModal(nomodal)}>
           <ToastContainer />
-          <div className='Menu-Form'>
+          <div className='Menu-Form scale-up-tr' onClick={(e) => e.stopPropagation()}>
             <button className='Close-menu-form-button' onClick={() => setToggleModal(nomodal)}><MdClose /></button>
-              <h2>Nueva sección</h2>
+              <h2><span>Agregar</span> una nueva sección</h2>
               <form>
                 <select
                   name='type'

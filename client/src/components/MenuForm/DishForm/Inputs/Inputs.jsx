@@ -1,5 +1,6 @@
 import { Input, Textarea, Loading } from '@nextui-org/react';
 import '../DishForm.css';
+import { RiImageAddFill } from 'react-icons/ri';
 
 const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect, handleChangeImages }) => {
   return (
@@ -52,7 +53,7 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         underlined
                         labelPlaceholder="Descripción"
                         color="dark"
-                        className='type'
+                        className='type textArea-Dish'
                         onChange={handleChange}
                         value={formValues?.description}
                         type='text'
@@ -60,24 +61,27 @@ const Inputs = ({ formValues, errors, image, loading, handleChange, handleSelect
                         required
                     />
       </div>
-      <div className='formValues-form-column'>
+      <div className='formValues-form-column Img-Input-Ouput'>
                     {errors.description && <span>{errors.description}</span>}
-                    <input
+                    {image?.url
+                      ? <img src={image.url} alt='dish' className='Dish-Photo' />
+                      : loading === true
+                        ? (
+                        <Loading color="primary" />
+                          )
+                        : <label htmlFor="Input-Dish" className='Input-Dish-Label'>
+                     <input
+                        id='Input-Dish'
+                        className='Input-File-Dish'
                         type='file'
                         name='image'
                         accept='image/png,image/jpeg,image/jpg,image/gif'
                         onChange={handleChangeImages}
                     ></input>
-                    {image?.url
-                      ? <img src={image.url} alt='dish' className='photosize' />
-                      : loading === true
-                        ? (
-                        <Loading color="primary" />
-                          )
-                        : <img src='https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png' alt="photo default"
-                          className='photosize'
+                        <h5 className='addPhoto'>Agrega Foto</h5>
+                          <RiImageAddFill className='LocalesImage' />
 
-                      />
+                    </label>
                     }
       </div>
         </>
