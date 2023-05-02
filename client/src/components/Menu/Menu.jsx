@@ -107,12 +107,12 @@ function Menu ({ localUser }) {
           <h2 className='Menu-Title'>Menú</h2>
         </div>
         {
-          // user.user && role === 'owner' && localUser === user.user.id && (
+          user.user && role === 'owner' && localUser === user.user.id && (
             <div className='buttons-menu'>
               <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}<RiFileEditFill/></button>
               <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección<AiFillFileAdd/></button>
             </div>
-          // )
+          )
         }
       </div>
 
