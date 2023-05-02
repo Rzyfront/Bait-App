@@ -16,7 +16,7 @@ import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
 import CreateLocalsSelector from './CreateLocalsSelector/CreateLocalsSelector';
 import './LocalsDatabasic.css';
 
-function LocalsDatabasic({ formType, setFormType }) {
+function LocalsDatabasic ({ formType, setFormType }) {
   const [statesupmit, setStatesupmit] = useState(false);
   const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
@@ -124,7 +124,7 @@ function LocalsDatabasic({ formType, setFormType }) {
       }
     } else {
       setStatesupmit(true);
-      toast.error('Datos no validos', {
+      toast.error('Datos no válidos', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
@@ -206,7 +206,7 @@ function LocalsDatabasic({ formType, setFormType }) {
               <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas} />
             </div>
             <button onClick={searchCity} className='Pick-Location-Basic'>
-              Buscar Ciudad
+              Buscar ciudad
             </button>
             {statesupmit === true && errors.location && <PopComent text={errors.location} />}
           </div>
@@ -228,23 +228,23 @@ function LocalsDatabasic({ formType, setFormType }) {
 
               {image.length
                 ? (
-                  image.map((image, i) => (
+                    image.map((image, i) => (
                     <img
                       key={i}
                       src={image.url}
                       alt='imagen'
                       className='LocalesImage'
                     />
-                  ))
-                )
+                    ))
+                  )
                 : loading === true
                   ? (
                     <Loading color="primary" />
-                  )
+                    )
                   : (
 
                     <RiImageAddFill className='LocalesImage' />
-                  )}
+                    )}
             </label>
             <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate /></button>
           </div>

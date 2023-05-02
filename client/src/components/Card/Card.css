@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 95%;
-    height: 250px;
+    height: 220px;
     gap: 20px;
     color: var(--prymary);
     background-color: var(--bg-primary);
@@ -16,8 +16,8 @@
 }
 
 .Card:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transform: scale(1.02);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    transform: scale(1.005);
     cursor :pointer;
 }
 
@@ -27,8 +27,10 @@
 }
 
 .Card .imgCard {
-    width: 100%;
+    aspect-ratio: 16/9;
+    width: 20rem;
     height: 100%;
+    overflow: hidden;
     border-radius: 5px;
     align-self: center;
     background-color: var(--bg-primary);
@@ -62,6 +64,7 @@
     height: 29px;
     overflow: hidden;
     white-space: nowrap;
+    z-index: 1;
 }
 
 .Card .RatingGroup .Rating {
@@ -73,10 +76,11 @@
 .Card .LocationGroup {
     position: relative;
     display: flex;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     width: 100%;
     min-height: 25px;
-    max-height: 70px;
+    max-height: 50px;
     font-size: 16px;
     font-family: var(--text);
     font-weight: 400;
@@ -171,11 +175,21 @@
     background-color: var(--optional1);
 }
 
+@media screen and (min-width:1600px) {
+    .Card {
+        height: 400px;
+    }
+    .Card .imgCard {
+        width: 50rem;
+    }
+}
 
 @media screen and (max-width:1050px) {
 
 .Card .LocationGroup {
         font-size: 14px;
+        min-height: 20px;
+        max-height: 40px;
 }
 
 .Card .infoCard .RatingGroup {
@@ -217,10 +231,13 @@
 }
 
 @media screen and (max-width:750px) {
+    .Card .imgCard {
+            width: 15rem;
+        }
     .Card .infoCard .RatingGroup {
             height: 23px;
         }
-
+     
     .Card .RatingGroup .Stars-Cards {
             width: 70px;
         }
@@ -242,6 +259,9 @@
 }
 
 @media screen and (max-width:550px) {
+    .Card .imgCard {
+            width: 10rem;
+        }
 
 .Card .infoCard .RatingGroup {
         height: 20px;

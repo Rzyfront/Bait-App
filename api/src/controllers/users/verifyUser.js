@@ -20,3 +20,40 @@ module.exports = async (req, res) => {
     res.status(400).send('<h1>User not verified</h1>');
   }
 };
+
+/**
+ * @swagger
+ * /user/verified:
+ *   get:
+ *     summary: Verifica la cuenta de un usuario
+ *     description: Verifica la cuenta de un usuario a través de un token JWT que contiene el ID del usuario y la confirmación de correo electrónico.
+ *     tags:
+ *       - User
+ *     parameters:
+ *       - in: query
+ *         name: token
+ *         required: true
+ *         description: Token JWT que contiene el ID del usuario y la confirmación de correo electrónico.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: Respuesta exitosa que contiene una página HTML que confirma que el correo electrónico del usuario ha sido verificado.
+ *         content:
+ *           text/html:
+ *             schema:
+ *               type: string
+ *               example: >
+ *                 <html>
+ *                   <head>
+ *                     <title>¡Gracias por verificar tu correo electrónico!</title>
+ *                   </head>
+ *                   <body>
+ *                     <h1>¡Gracias por verificar tu correo electrónico!</h1>
+ *                     <p>Tu correo electrónico ha sido verificado con éxito. Ahora puedes disfrutar de todas las funcionalidades de nuestro sitio web.</p>
+ *                     <a href="https://example.com" class="button">Ir a la página principal</a>
+ *                   </body>
+ *                 </html>
+ *       '400':
+ *         $ref: '#/components/responses/BadRequest'
+ */

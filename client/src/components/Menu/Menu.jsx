@@ -5,16 +5,17 @@ import swal from 'sweetalert';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import { getMenu, deleteDish, deleteMenu, getDish } from '../../redux/actions/menuDish';
+import { getMenu, deleteDish, deleteMenu } from '../../redux/actions/menuDish';
 import { FaEdit, FaTrash } from 'react-icons/fa';
 import MenuForm from '../MenuForm/MenuForm';
 import DishForm from '../MenuForm/DishForm/DishForm';
 
-function Menu () {
+function Menu ({ localUser }) {
   const [nomodal, modal1, modal2] = ['nomodal', 'modal1', 'modal2'];
 
   const { id } = useParams();
-  const { menu, successDish, successDel, successMenu, newMenu } = useSelector(state => state);
+  const { menu, successDish, successDel, successMenu, newMenu, user } = useSelector(state => state);
+  const role = useSelector(state => state.user?.user?.role);
   const [toggleModal, setToggleModal] = useState(nomodal);
   const dispatch = useDispatch();
   const [edit, setEdit] = useState(false);
@@ -26,8 +27,9 @@ function Menu () {
     const { name } = e.target;
 
     if (name === 'addMenu') {
-      setMenuId(newMenu.id);
-      setToggleModal(modal1);
+      if (newMenu) {
+        setToggleModal(modal1);
+      }
     } else if (name === 'editMenu') {
       setEdit(!edit);
       setEditText(edit ? 'Editar' : 'Finalizar edición');
@@ -44,15 +46,16 @@ function Menu () {
     })
       .then((willDelete) => {
         if (willDelete) {
-          dispatch(deleteDish(dishId));
-          if (successDish) {
-            swal('¡Producto eliminado con éxito!', {
-              icon: 'success'
-            });
-          }
-          dispatch(getMenu(id));
-        } else {
-          swal('Acción cancelada');
+          dispatch(deleteDish(dishId)).then((res) => {
+            if (!res) {
+              swal('¡Producto eliminado con éxito!', {
+                icon: 'success'
+              });
+              dispatch(getMenu(id));
+            } else {
+              swal('Acción cancelada');
+            }
+          });
         }
       });
   };
@@ -82,6 +85,7 @@ function Menu () {
               swal('¡Sección eliminada con éxito!', {
                 icon: 'success'
               });
+              dispatch(getMenu(id));
             } else {
               swal('Acción cancelada');
             }
@@ -100,10 +104,14 @@ function Menu () {
         <div>
           <h2 className='Menu-Title'>Menú</h2>
         </div>
-        <div className='buttons-menu'>
-          <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
-          <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección</button>
-        </div>
+        {
+          user.user && role === 'owner' && localUser === user.user.id && (
+            <div className='buttons-menu'>
+              <button className='btn-edit-menu' name='editMenu' onClick={handleMenuChange}>{editText}</button>
+              <button className='btn-add-sect' name='addMenu' onClick={handleMenuChange}>Nueva sección</button>
+            </div>
+          )
+        }
       </div>
 
       <div className='Menu-List'>
@@ -153,7 +161,7 @@ function Menu () {
         )}
       </div>
       {(toggleModal === modal1) && <MenuForm localId={id} modal2={modal2} nomodal={nomodal} setToggleModal={setToggleModal} />}
-      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} dishId={dishId} />}
+      {(toggleModal === modal2) && <DishForm nomodal={nomodal} setToggleModal={setToggleModal} menuId={menuId} newMenuId={newMenu.id} dishId={dishId} />}
     </div>
   );
 }

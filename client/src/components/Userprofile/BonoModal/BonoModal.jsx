@@ -1,12 +1,10 @@
-
-import "../BonoModal/BonoModal.css"
+import '../BonoModal/BonoModal.css';
 const BonoModal = ({ closeBonoModal, name }) => {
-
-    return (
+  return (
         <div className="modalBackground">
             <div className="modalContainer">
                 <div className="closeBtnContainer" >
-                    <button onClick={() => { closeBonoModal(false) }}
+                    <button onClick={() => { closeBonoModal(false); }}
                         className="closeBtn"
                     >X</button>
                 </div>
@@ -16,14 +14,13 @@ const BonoModal = ({ closeBonoModal, name }) => {
                 </div>
                 <div className="body">
                     <h3>Lo sentimos {name} !</h3>
-                    <h4>Actualmente no cuentas con bonificaciones por reviews. <br /> <br /> 
-                        te animamos a que sigas Realizando  reviews 
+                    <h4>Actualmente no cuentas con bonificaciones por reviews. <br /> <br />
+                        te animamos a que sigas realizando  reviews
                         para obtener maravillosos descuentos en tus restaurants favoritos
                     </h4>
                 </div>
 
-
-                <h2>Modal De informacion</h2>
+                <h2>Modal De información</h2>
                 <div className="footer">
                     <button>Regresar</button>
                     <button>Actualizar Info</button>
@@ -32,8 +29,7 @@ const BonoModal = ({ closeBonoModal, name }) => {
             </div>
 
         </div>
-    )
+  );
+};
 
-}
-
-export default BonoModal
+export default BonoModal;

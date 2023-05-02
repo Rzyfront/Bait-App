@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
     },
     lastname: {
       type: DataTypes.STRING,
-      allowNull: false,
+      // allowNull: false,
     },
     age: {
       type: DataTypes.INTEGER,
@@ -120,7 +120,6 @@ module.exports = (sequelize) => {
  *           example: true
  *       required:
  *         - name
- *         - lastname
  *         - email
  *         - verified
  *         - role

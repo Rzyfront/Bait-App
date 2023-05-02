@@ -14,7 +14,7 @@ const NavAdmin = ({ fn, section }) => {
            <Link to='/home/1?name=&city='>
             <img src={LogoBait} className={style.img}></img>
             </Link>
-            <p className={style.username}>ADMINISTRACION</p>
+            <p className={style.username}>ADMINISTRACIÓN</p>
         </div>
         <ul className={style.ul}>
             <li className={section === 0 ? style.liSelected : style.li} onClick={() => fn(0)}><FaUserFriends/><span>Usuarios</span></li>

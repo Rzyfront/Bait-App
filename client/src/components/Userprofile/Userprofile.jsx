@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Userprofile.css';
-import { getReviews, getUserProfile, userPostImg } from '../../redux/actions/actions';
+import { getReviews, getUserProfile, userPostImg, getUserLocals } from '../../redux/actions/actions';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
@@ -10,6 +10,8 @@ import { Loading } from '@nextui-org/react';
 import InfoModal from '../Userprofile/InfoModal/InfoModal';
 import BonoModal from '../Userprofile/BonoModal/BonoModal';
 import { useNavigate } from 'react-router-dom';
+
+import UserLocals from './UserLocals';
 
 function Userprofile () {
   const { image, loading, handleChangeimage } = useUploadImage();
@@ -25,7 +27,8 @@ function Userprofile () {
   const { user } = useSelector((state) => state.user);
   const userProfile = useSelector((state) => state.userProfile);
   const reviews = useSelector((state) => state.reviews);
-
+  const obtainUserLocal = useSelector((state) => state.userDashLocals);
+  const [userLocal, setUserLocal] = useState(obtainUserLocal);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +38,7 @@ function Userprofile () {
   userProfile && console.log(userProfile);
   useEffect(() => {
     dispatch(getReviews(userId));
+    dispatch(getUserLocals());
   }, []);
 
   useEffect(() => {
@@ -43,6 +47,12 @@ function Userprofile () {
       user.Image = profileImg;
     }
   }, [image, user]);
+
+  useEffect(
+    () => {
+      setUserLocal(obtainUserLocal);
+    }, [obtainUserLocal]
+  );
 
   const handleChangeimages = (event) => {
     handleChangeimage(event);
@@ -127,7 +137,7 @@ function Userprofile () {
           <div className='userButtonContainer'>
             <button className='userButtons'
               onClick={() => { setOpenInfoModal(!openInfoModal); }}>
-              Informacion
+              Información
             </button>
 
             <button
@@ -148,7 +158,7 @@ function Userprofile () {
 
         <div className='userAvatarContainer'>
 
-          <p>Cambiar Imagen De Perfil</p>
+          <p>Cambiar imagen de perfil</p>
           <input
             type='file'
             name='imagen'
@@ -168,7 +178,7 @@ function Userprofile () {
               <div key={review.id} className='mainContainer'>
                 <div key={review.id} className='reviewContainer' >
                   <div className='reviewTitle'>
-                    <h3>Titulo: {review.title}</h3>
+                    <h3>Título: {review.title}</h3>
                   </div>
 
                   <div className='reviewInfoContainer'>
@@ -262,7 +272,7 @@ function Userprofile () {
             <div className='userButtonContainer'>
               <button className='userButtons'
                 onClick={() => { setOpenInfoModal(!openInfoModal); }}>
-                Informacion
+                Información
               </button>
 
               <button
@@ -283,7 +293,7 @@ function Userprofile () {
 
           <div className='userAvatarContainer'>
 
-            <p>Cambiar Imagen De Perfil</p>
+            <p>Cambiar imagen de perfil</p>
             <input
               type='file'
               name='imagen'
@@ -298,12 +308,13 @@ function Userprofile () {
 
           <div className='userReviews'>
             <h1 className='reviewTittle'>Locales </h1>
-            {reviews && reviews.map((review, index) => {
+            <br/>
+            {/*reviews && reviews.map((review, index) => {
               return (
                 <div className='mainContainer' key={index}>
                   <div key={review.id} className='reviewContainer'>
                     <div className='reviewTitle'>
-                      <h3>Titulo: {review.title}</h3>
+                      <h3>Título: {review.title}</h3>
                     </div>
 
                     <div className='reviewInfoContainer'>
@@ -332,7 +343,20 @@ function Userprofile () {
                 </div>
 
               );
-            })}
+            })*/}
+      { userLocal?.user?.Locals
+        ? userLocal?.user?.Locals.map((e, i) =>
+          <UserLocals
+          key={i}
+          id={e.id}
+          name={e.name}
+          image={e.image}
+          location={e.location}
+          specialty={e.specialty}
+          schedule={e.schedule}
+          />)
+        : <h6> No tienes Locales </h6>
+      }
           </div>
 
         </div>)

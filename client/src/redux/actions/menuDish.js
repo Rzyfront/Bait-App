@@ -105,6 +105,7 @@ export const postDish = (menuId, dish) => {
         });
       }
     } catch (error) {
+      console.log(error);
       dispatch({
         type: ERROR_DISH,
         payload: error.message
@@ -165,23 +166,3 @@ export const putDish = (dishId, dish) => {
     }
   };
 };
-
-// export const getDish = (dishId) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await axios(`/dishes/${dishId}`);
-//       if (response.status === 201) {
-//         dispatch({
-//           type: GET_DISH,
-//           payload: response.data.dish
-//         });
-//         setTimeout(dispatch({
-//           type: RESET_DISH,
-//           payload: {}
-//         }), 3000);
-//       }
-//     } catch (error) {
-//       swal('Ocurrió un error');
-//     }
-//   };
-// };

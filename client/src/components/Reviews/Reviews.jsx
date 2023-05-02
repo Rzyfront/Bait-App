@@ -1,66 +1,75 @@
 import './Reviews.css';
 import { useEffect, useState } from 'react';
-import { Rating as RatingStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
-import { getReviews } from '../../redux/actions/actions';
+import { getReviews, cleanReviews } from '../../redux/actions/actions';
 import { useDispatch, useSelector } from 'react-redux';
+import ReviewsCard from './ReviewsCard/ReviewsCard';
+import FormatDate from './FormatDate/FormatDate';
 
-function Reviews ({ localId }) {
+function Reviews ({ localId, setPage, page }) {
   const dispatch = useDispatch();
   const { reviews } = useSelector(state => state);
-  let [page, setPage] = useState();
+  const [order, setOrder] = useState('');
+
+  const handleOrder = (e) => {
+    const { value } = e.target;
+    setOrder(value);
+  };
+
+  // useEffect(() => {
+  //   if (order.length) {
+  //     dispatch(getReviews(localId, page, order));
+  //   };
+  // }, [order]);
 
   useEffect(() => {
-    dispatch(getReviews(localId, page));
-  }, [page]);
-
+    if (order.length) {
+      dispatch(getReviews(localId, page, order));
+    } else {
+      dispatch(getReviews(localId, page));
+    }
+    return () => {
+      dispatch(cleanReviews());
+    };
+  }, [page, order]);
   return (
     <div className='Reviews animated-element'>
       <div className='TitleGroup'>
         <h2 className='Reviews-Title'>Reviews</h2>
-        <div>
-          <select name='' id=''>
-            <option value='1' defaultValue >Ordena</option>
-            <option value='1'>Mayor puntuación</option>
-            <option value='2'>Menor puntuación</option>
+        <div className='Selectors-Group'>
+          <select name='' id='' className='Order-Rating' onChange={handleOrder}>
+            <option defaultValue >Ordena por rating</option>
+            <option value='DESC'>Mayor puntuación</option>
+            <option value='ASC'>Menor puntuación</option>
 
           </select>
-          <button onClick={() => setPage(page++)}>Cargar más</button>
+
         </div>
       </div>
       <div className='Reviews-List'>
-        {reviews.map(({ User, rating, Image, comment, title }, index) => {
+        {reviews?.map(({ User, rating, Image, comment, title, environment, food, qaPrice, service, createdAt }, index) => {
+          const reviewDate = FormatDate(createdAt);
           return (
-            <div key={index} className='ReviewCard'>
-              <div className='LeftInfo'>
-                <h3>{title}</h3>
-                <div className='RatingGroup'>
-                  <h4>Rating:</h4>
-                  <RatingStar
-                    readOnly
-                    style={{ maxWidth: 100 }}
-                    value={rating}
-                  />
-                </div>
-                <div className='OpinionGroup'>
-                  <h4>Opinión:</h4>
-                  <p>{comment}</p>
-                </div>
-              </div>
-              <div className='RigthImg'>
-                {Image
-                  ? <img src={Image.url} alt='ImageDatabase'/>
-                  : <img
-                  src={
-                    'https://img.freepik.com/vector-premium/icono-marco-fotos-foto-vacia-blanco-vector-sobre-fondo-transparente-aislado-eps-10_399089-1290.jpg'
-                  }
-                  alt='default'
-                /> }
-              </div>
-            </div>
+           <ReviewsCard
+           index={index}
+           key={index}
+           User={User}
+           title={title}
+           comment={comment}
+           Image={Image}
+           rating={rating}
+           environment={environment}
+           food={food}
+           qaPrice={qaPrice}
+           service={service}
+           reviewDate={reviewDate}
+           />
           );
         })}
       </div>
+       <div className='Load-More'>
+        <h4 className='Load' onClick={() => setPage(++page)}>Cargar más</h4>
+       </div>
     </div>
   );
 }
