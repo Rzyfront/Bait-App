@@ -3,16 +3,14 @@ import Chart from '../../../../hooks/Chart';
 import { DetailLocal } from '../../../../redux/actions/local';
 import { useEffect, useState } from 'react';
 import './DetailRestaurant.css';
-import { getReviews, getUserProfile } from '../../../../redux/actions/actions';
+import { getUserProfile } from '../../../../redux/actions/actions';
 import imageDefault from '../../../../assets/imagenDefault.png';
 const DetailRestaurant = ({ id }) => {
   const dispatch = useDispatch();
-  const { detail, reviews, userProfile } = useSelector((state) => state);
+  const { detail, userProfile } = useSelector((state) => state);
   const [data, setData] = useState();
   useEffect(() => {
     dispatch(DetailLocal(id));
-    dispatch(getReviews(id));
-    console.log(reviews);
   }, []);
   useEffect(() => {
     if (detail && detail.verified === 'verified') {
@@ -23,9 +21,8 @@ const DetailRestaurant = ({ id }) => {
       const data = [{ name: 'Ambiente', Calificacion: parseFloat(detail.avgEnvironment).toFixed(1) }, { name: 'Comida', Calificacion: parseFloat(detail.avgFood).toFixed(1) }, { name: 'Precio', Calificacion: parseFloat(detail.avgQaPrice).toFixed(1) }, { name: 'Servicio', Calificacion: parseFloat(detail.avgService).toFixed(1) }];
       setData(data);
     }
-    console.log(detail);
   }, [detail]);
-  console.log(detail);
+
   return <div className='detailRestaurantContainer'>
         {/* <button onClick={handleDetail}>cerrar</button> */}
        <div className='localDetail'>
