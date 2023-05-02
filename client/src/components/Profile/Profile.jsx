@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import '@smastrom/react-rating/style.css';
 import Slider from 'react-slick';
-import { getReviews } from '../../redux/actions/actions';
-import { Menu, Navbar, Reviews, ReviewsForm, InfoLocalsProfile, SelectProfileBar } from '../components';
+// import { getReviews } from '../../redux/actions/actions';
+import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar, ReviewsForm } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,7 +61,7 @@ function Profile () {
           <InfoLocalsProfile detail={detail}/>
           <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
           {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
-          {(toggleModal === ShowMenu) && <Menu/>}
+          {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
         </div>
       </div>
     </>

@@ -38,9 +38,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
                 </div>
             </div>
             <div className='Review-Main-Info'>
-                {/* <h3>{title}</h3>
-                 <p>{comment}</p> */}
-                 <h3 className='Review-Card-Title'>title</h3>
+                  <h3 className='Review-Card-Title'>{title}</h3>
                  <div className='Review-Comment-Group'>
                     <p className='Comment'>{comment}</p>
                     <p className='More' onClick={handleShowMore}>{showMore

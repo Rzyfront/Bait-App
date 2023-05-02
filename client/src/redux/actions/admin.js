@@ -89,9 +89,9 @@ export const verifyReview = ({ id, verified }) => async (dispatch) => {
     const { data } = await axios.patch(`/administrator/review/${id}${verified ? `?verified=${verified}` : ''}`);
     console.log(data);
     // TODO agregar el estado a redux y el switches
-    return true;
+    return data;
   } catch (error) {
-    return false;
+    return error.response.data;
   }
 };
 

@@ -19,6 +19,10 @@ export const USER_POST_IMG = 'USER_POST_IMG';
 // ACTION TYPES REVIEWS
 export const GET_REVIEWS = 'GET_REVIEWS';
 export const CLEAN_REVIEWS = 'CLEAN_REVIEWS';
+
+// ACTION TYPE USERPROFILE DASHBOARD LOCALS
+export const USER_DASH_LOCALS = 'USER_DASH_LOCALS';
+
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
@@ -107,7 +111,7 @@ export const logIn = (credentials) => {
       location.reload();
       return true;
     } catch (error) {
-      return false;
+      return error.response.data;
     }
   };
 };
@@ -178,11 +182,11 @@ export const ResetUser = () => {
   };
 };
 // REVIEWS ACTION GENERATORS
-export const getReviews = (localId, page = 1) => {
+export const getReviews = (localId, page = 1, order) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`/reviews/${localId}?page=${page}`);
-      console.log('holisss soy reviews' + response.data.reviews);
+      const response = await axios(`/reviews/${localId}?page=${page}&order=${order}`);
+      console.log(response.data.reviews);
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
@@ -230,6 +234,20 @@ export const userPostImg = (img) => {
       }
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const getUserLocals = () => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get('/user/profile');
+      dispatch({
+        type: USER_DASH_LOCALS,
+        payload: response.data
+      });
+    } catch (err) {
+      console.log(err.message);
     }
   };
 };
