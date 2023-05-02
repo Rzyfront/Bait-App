@@ -1,0 +1,21 @@
+.claimContainer{
+    position: absolute;
+    display: grid;
+    place-content: center;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100000;
+    backdrop-filter: blur(5px);
+    top:0;
+}
+.claimContain {
+    display: grid;
+    place-content: center;
+    max-width: 30rem;
+    max-height: 30rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 255, 0.289);
+    width: 100%;
+    height: 100%;
+    
+}
