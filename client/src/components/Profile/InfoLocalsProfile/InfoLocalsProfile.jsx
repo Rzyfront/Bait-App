@@ -1,8 +1,8 @@
 import './InfoLocalsProfile.css';
 import { GoLocation } from 'react-icons/go';
 import { Rating as RatingStar, ThinStar } from '@smastrom/react-rating';
-function InfoLocalsProfile ({ detail }) {
-  const { name, location, rating, avgEnvironment, avgFood, avgQaPrice, avgService, Characteristic } = detail;
+function InfoLocalsProfile ({ detail, showClaimLocal }) {
+  const { name, location, rating, avgEnvironment, avgFood, avgQaPrice, avgService, Characteristic } = detail;// eslint-disable-line
   const myStyles = {
     itemShapes: ThinStar,
     activeFillColor: '#343434',
@@ -30,7 +30,8 @@ function InfoLocalsProfile ({ detail }) {
         </div>
         <div className='Info-rigth'>
             <div className='Info-rigth-title'>
-              <h4 className='Info-rinth-Title'>Categorías calificadas</h4>
+              <button onClick={() => showClaimLocal(true)}>Reclamar local</button>
+              {/* <h4 className='Info-rinth-Title'>Categorías calificadas</h4> */}
               <div className='Info-rigth-decoration'></div>
               </div>
             <div className='Rating-C-Group-Container'>
