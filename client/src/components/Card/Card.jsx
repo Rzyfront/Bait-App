@@ -56,7 +56,7 @@ function Card ({
         <h2 className="placeName">{Name || 'No name'}</h2>
           <div className="RatingGroup">
             <p className="Rating">Rating: </p>
-            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 0} className='Stars-Cards' itemStyles={myStyles}/>
+            <RatingStar readOnly style={{ maxWidth: 100 }} value={Rating || 5} className='Stars-Cards' itemStyles={myStyles}/>
           </div>
           </Link>
         {location && (
