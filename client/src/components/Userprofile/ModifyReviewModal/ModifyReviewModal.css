@@ -1,0 +1,40 @@
+/* .modalBackground {
+
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+} */
+
+.modalContainer {
+    width: 500px;
+    height: 500px;
+    border-radius: 12px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    box-shadow: rgba(0, 0, 0, 0.35)0px 5px 15px;
+}
+
+.modalContainer .title {
+    display: inline-block;
+    text-align: center;
+
+}
+
+.closeBtnContainer {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.closeBtnContainer .closeBtn {
+    background-color: transparent;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+} 
