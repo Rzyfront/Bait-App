@@ -72,7 +72,7 @@ const Restaurantes = () => {
         <input placeholder="Nombre" className={style.buscador} value={filter.name} onChange={handleFilter} name="name"></input>
       <input placeholder="ciudad" className={style.buscador} onChange={handleFilter} name='location'></input>
 
-        <div className={style.containerUserCard}>
+        {/* <div className={style.containerUserCard}>
         {locals
           ? locals.map((data, index) => {
             return <OneRestaurant key={index} name={data.name} image={data.Images
@@ -80,7 +80,34 @@ const Restaurantes = () => {
           })
           : ''}
 
-        </div>
+        </div> */}
+      <div className="table-responsive">
+        <table className="table table-bordered">
+          <thead>
+            <tr>
+              <th>Nombre del local</th>
+              <th>Estado</th>
+              {filter.verified === 'unVerified' && <th>Documentación</th>}
+              <th>Detalles</th>
+            </tr>
+          </thead>
+          <tbody>
+            {locals
+              ? locals.map((data, index) => {
+                return (
+                  <OneRestaurant
+                    key={index}
+                    name={data.name}
+                    verified={data.verified}
+                    id={data.id}
+                    filter={filter}
+                  />
+                );
+              })
+              : ''}
+          </tbody>
+        </table>
+      </div>
       <Pagination paginade={paginade} page={filter.page} totalPages={totalPages} />
       <ToastContainer/>
     </div>
