@@ -48,6 +48,7 @@ function Userprofile() {
 
   const userProfile = useSelector((state) => state.userProfile);
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
+  // const userReviews = useSelector((state) => state.reviews);
   const { user } = useSelector((state) => state.user);
 
   const [userLocal, setUserLocal] = useState(obtainUserLocal);
@@ -123,6 +124,8 @@ function Userprofile() {
     alert(`Usuario Actualizado Exitosamente `)
   }
 
+  userProfile && console.log(userProfile.Reviews);
+
   return (
     <div className={style.profileContainer}>
     <div className={style.navBar}>
@@ -130,7 +133,7 @@ function Userprofile() {
       <ul className={style.ul}>
         <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser/>  Informacion</li>
         <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar/> Reseñas</li>
-          {userProfile.role === "user" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> Locales</li> : null } 
+          {user?.role === "owner" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> Locales</li> : null } 
         <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> Bonificaciones</li>
         <li className={style.li} onClick={handleInicio}><BiLogOutCircle/> Salir</li>
       </ul>
@@ -214,6 +217,25 @@ function Userprofile() {
       </div>}
       {selectedId == 2 && <div className={style.myLocals}>
         <p className={style.titleLocal}>Ultimas reseñas</p>
+       { userProfile?.Reviews.map((rev)=>{
+          return (<div>
+            <h4>{rev.title}</h4>
+            <p>{rev.comment}</p>
+            <div>
+              <p>Calificaciones</p>
+              <p>Ambiente :{rev.environment}</p>
+              <p>Comida :{ rev.food}</p>
+              <p>Calida-Precio : {rev.qaPrice}</p>
+              <p>Servicio{rev.service}</p>
+              <p>Estado:{rev.verified}</p>
+              <p>Fecha de Creacion : {rev.updatedAt}</p>
+
+            </div>
+            <div>
+              <button>Eliminar Review</button>
+            </div>
+          </div>)
+       })}
       </div>}
       {selectedId == 3 && <div className={style.myLocals}>
         <p className={style.titleLocal}>Mis locales</p>
