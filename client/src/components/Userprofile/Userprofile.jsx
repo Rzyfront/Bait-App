@@ -67,7 +67,7 @@ function Userprofile () {
   };
 
   const handleSaveImg = async () => {
-    await axios.post(`/user/${user.id}`, { Image: { id: 2, url: [profileImg] } });
+    await axios.put(`/user/${user.id}`, { image: {} });
   };
 
   const handleDeleteReview = async (e) => {
@@ -76,7 +76,7 @@ function Userprofile () {
     const newReviews = userReview.filter(rev => rev.id !== reviewId);
 
     setUserReview(newReviews);
-    await axios.put(`/reviews/${reviewId}`, { title: 'Super Buena COmida', UserId: user.id, toxicity: 0, comment: 'Estaba muy buena la comida', verified: 'verified' });
+    await axios.put(`/reviews/${reviewId}`, { UserId: user.id });
   };
   const handleInicio = () => {
     navigate('/home/1?name=&city=');
@@ -208,7 +208,7 @@ function Userprofile () {
 
                   <div className='reviewButtons'>
                     <button onClick={() => { setModReviewModal(!modReviewModal); }}>Modificar</button>
-                    {modReviewModal && <ModifyReviewModal closeReviewModal={setModReviewModal}/>}
+                    {modReviewModal && <ModifyReviewModal closeReviewModal={setModReviewModal} />}
                     <button id={review.id} onClick={handleDeleteReview}>Eliminar</button>
 
                   </div>
