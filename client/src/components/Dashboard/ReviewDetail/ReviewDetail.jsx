@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { verifyReview } from '../../../redux/actions/admin';
 import { Rating as RatingStar } from '@smastrom/react-rating';
+import ChartToxi from '../../../hooks/ChartToxi';
 const reviewImage = 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png';
 const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
 
@@ -12,8 +13,16 @@ const ReseñaDetail = ({ fn }) => {
   const dispatch = useDispatch();
   const reviewDetail = useSelector((state) => state.adminReviewDetail);
   const [review, setReview] = useState(reviewDetail);
+  const [data, setData] = useState();
   useEffect(
-    () => { setReview(reviewDetail); }, [reviewDetail]
+    () => {
+      setReview(reviewDetail);
+      console.log(reviewDetail);
+      const grap = [{
+        name: 'Toxico', value: Math.ceil(reviewDetail.toxicity * 100), fill: '#FC9811'
+      }, { name: 'No Toxico', value: 100 - Math.ceil(reviewDetail.toxicity * 100), fill: '#27F1E8' }];
+      setData(grap);
+    }, [reviewDetail]
   );
   const verifiedChange = async (e) => {
     const value = e.target.value;
@@ -58,6 +67,7 @@ const ReseñaDetail = ({ fn }) => {
 
           <div className="InfoGroup">
             <h6>Nivel de toxicidad:</h6>
+
             <p>{Math.ceil(review?.toxicity * 100) }%</p>
           </div>
           <div className="InfoGroup">
@@ -85,6 +95,7 @@ const ReseñaDetail = ({ fn }) => {
               <h5>Rating promedio:</h5>
               <RatingStar readOnly style={{ maxWidth: 100 }} value={review?.rating || 5} />
             </div>
+            <ChartToxi data={data} className="graphic"/>
           </div>
         </div>
 

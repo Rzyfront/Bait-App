@@ -20,8 +20,8 @@ export const signInWithGoogle = async () => {
       .then((res) => {
         console.log(res.data);
         if (res.data.token) {
-          window.alert(res.data.message);
-          return window.localStorage.setItem('token', res.data.token);
+          window.localStorage.setItem('token', res.data.token);
+          location.reload();
         };
       }
       );
