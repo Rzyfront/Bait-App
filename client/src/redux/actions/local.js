@@ -7,6 +7,7 @@ export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
+
         // email: inputs.email,
         images: inputs.images,
         location: eliminarTildes(inputs.location.location),

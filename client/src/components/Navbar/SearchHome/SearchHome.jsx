@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Search_home.css';
 import { MdOutlineRestaurant } from 'react-icons/md';
 import { BiMap, BiSearchAlt } from 'react-icons/bi';
@@ -14,6 +14,18 @@ function SearchHome () {
     input: '',
     map: ''
   });
+  const queryParams = new URLSearchParams(location.search);
+  const Name = queryParams.get('name' || '');
+  const searchMap = queryParams.get('city' || '');
+  useEffect(() => {
+    setData({
+      ...data,
+      input: Name,
+      map: searchMap
+
+    });
+  }, [Name, searchMap]);
+
   const handleinputs = (e) => {
     setData({
       ...data,
@@ -25,10 +37,10 @@ function SearchHome () {
     const currentPath = location.pathname;
     if (currentPath !== currentPath.split('/').at(1) && (data.input.length || data.map.length)) {
       dispatch(saveInfoSearchHome(data));
-      setData({
-        input: '',
-        map: ''
-      });
+      // setData({
+      //   input: '',
+      //   map: ''
+      // });
       navigate('/home/1?');
     }
     if (!data.input && !data.map && currentPath !== currentPath.split('/').at(1)) {
