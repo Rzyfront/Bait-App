@@ -45,6 +45,7 @@ function Userprofile () {
 
   const userProfile = useSelector((state) => state.userProfile);
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
+  // const userReviews = useSelector((state) => state.reviews);
   const { user } = useSelector((state) => state.user);
 
   const [userLocal, setUserLocal] = useState(obtainUserLocal);
@@ -115,17 +116,19 @@ function Userprofile () {
     alert('Usuario Actualizado Exitosamente ');
   };
 
+  userProfile && console.log(userProfile.Reviews);
+
   return (
     <div className={style.profileContainer}>
     <div className={style.navBar}>
       <p className={style.title}>Mi perfil</p>
       <ul className={style.ul}>
-        <li className={selectedId === 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser/>  <span>Informacion</span></li>
-        <li className={selectedId === 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar/> <span>Reseñas</span></li>
-        {userProfile.role === 'user' ? <li className={selectedId === 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant/> <span>Locales</span></li> : null }
-        <li className={selectedId === 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
-        <li className={style.li} onClick={handleInicio}><BiLogOutCircle/> <span>Salir</span></li>
-      </ul>
+          <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser />  <span>Informacion</span></li>
+          <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar /> <span>Reseñas</span></li>
+          {user?.role === "owner" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> <span>Locales</span></li> :null} 
+          <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
+          <li className={style.li} onClick={handleInicio}><BiLogOutCircle /> Salir</li>
+       </ul>
     </div>
     <div className={style.menu}>
       {selectedId === 1 && <div className={style.infoMenu}>
@@ -188,6 +191,25 @@ function Userprofile () {
       </div>}
       {selectedId === 2 && <div className={style.myLocals}>
         <p className={style.titleLocal}>Ultimas reseñas</p>
+       { userProfile?.Reviews.map((rev)=>{
+          return (<div>
+            <h4>{rev.title}</h4>
+            <p>{rev.comment}</p>
+            <div>
+              <p>Calificaciones</p>
+              <p>Ambiente :{rev.environment}</p>
+              <p>Comida :{ rev.food}</p>
+              <p>Calida-Precio : {rev.qaPrice}</p>
+              <p>Servicio{rev.service}</p>
+              <p>Estado:{rev.verified}</p>
+              <p>Fecha de Creacion : {rev.updatedAt}</p>
+
+            </div>
+            <div>
+              <button>Eliminar Review</button>
+            </div>
+          </div>)
+       })}
       </div>}
       {selectedId === 3 && <div className={style.myLocals}>
         <p className={style.titleLocal}>Mis locales</p>
@@ -207,292 +229,7 @@ function Userprofile () {
       }
     </div>
     </div>
-    // (user?.role === 'user'
-
-  //   ? <div className='userProfileContainer'>
-  //     <div>
-  //         <button onClick={handleInicio}>Incio</button>
-  //     </div>
-  //     {openInfoModal
-  //       ? <InfoModal
-  //       closeModal={setOpenInfoModal}
-  //       name={user.name}
-  //       lastname={user.lastname}
-  //       age={user.age}
-  //       email={user.email}
-  //       phone_number={user.phone_number}
-  //       location={user.location}
-  //       verified={user.verified}
-  //     />
-  //       : null}
-
-  //     {openBonoModal
-  //       ? <BonoModal
-  //       closeBonoModal={setOpenBonoModal}
-  //       name={user.name}
-  //     />
-  //       : null}
-
-  //     <div className='infoSection'>
-  //       {/* <h2 className='userProfileText'>perfil de usuario</h2> */}
-  //       {user && (
-  //         <div className="userInfo">
-  //           <div className="Decorator"></div>
-  //           <div className="Info">
-  //             {profileImg.length
-  //               ? (
-  //                   image.map((image, i) => (
-  //                   <img
-  //                     key={i}
-  //                     src={profileImg}
-  //                     alt='imagen'
-  //                     className='userImage'
-  //                   />
-  //                   ))
-  //                 )
-  //               : loading === true
-  //                 ? (
-  //                   <Loading color="primary" />
-  //                   )
-  //                 : (
-  //                   <img
-  //                     src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
-  //                     alt='image default'
-  //                     className='userImage'
-  //                   />
-  //                   )}
-  //             <h2>{user.name + ' ' + user.lastname}</h2>
-
-  //           </div>
-
-  //         </div>
-  //       )}
-  //       <div className='userButtonContainer'>
-  //         <button className='userButtons'
-  //           onClick={() => { setOpenInfoModal(!openInfoModal); }}>
-  //           Información
-  //         </button>
-
-  //         <button
-
-  //           className={`userButtons ${scroll && 'scroll'}`} >
-
-  //           Reviews
-  //         </button>
-
-  //         <button
-  //           className='userButtons'
-  //           onClick={() => { setOpenBonoModal(!openBonoModal); }}>
-  //           Bonificaciones
-  //         </button>
-
-  //       </div>
-  //     </div>
-
-  //     <div className='userAvatarContainer'>
-
-  //       <p>Cambiar imagen de perfil</p>
-  //       <input
-  //         type='file'
-  //         name='imagen'
-  //         accept='image/png,image/jpeg,image/jpg,image/gif'
-  //         onChange={handleChangeimages}
-  //         title='Cambiar Avatar'
-  //       ></input>
-  //       <div>
-  //         <button onClick={handleSaveImg}>Guardar</button>
-  //       </div>
-  //     </div>
-
-  //     <div className='userReviews'>
-  //       <h1 className='reviewTittle'>Reviews </h1>
-  //       {userProfile.Reviews && userProfile.Reviews.map((review) => {
-  //         return (
-  //           <div key={review.id} className='mainContainer'>
-  //             <div key={review.id} className='reviewContainer' >
-  //               <div className='reviewTitle'>
-  //                 <h3>Título: {review.title}</h3>
-  //               </div>
-
-  //               <div className='reviewInfoContainer'>
-
-  //                 <div className='reviewCalification'>
-  //                   <p>Comentario: {review.comment}</p>
-  //                   <p>Calificaciones:</p>
-  //                   <p>Food :{review.food}</p>
-  //                   <p>Service :{review.service}</p>
-  //                   <p>Environment :{review.environment}</p>
-  //                 </div>
-
-  //                 <figure className='imgContainer'>
-  //                   <img src={review.Image?.url} alt="" />
-  //                 </figure>
-
-  //               </div>
-
-  //               <div className='reviewButtons'>
-  //                 <button >Modificar</button>
-  //                 <button id={review.id} onClick={handleDeleteReview}>Eliminar</button>
-
-  //               </div>
-  //             </div>
-
-  //           </div>
-
-  //         );
-  //       })}
-  //     </div>
-
-  //   </div>
-  //   : <div className='userProfileContainer'>
-  //       <div>
-  //         <button onClick={handleInicio}>Inicio</button>
-  //       </div>
-  //       {openInfoModal
-  //         ? <InfoModal
-  //         closeModal={setOpenInfoModal}
-  //         name={user.name}
-  //         lastname={user.lastname}
-  //         age={user.age}
-  //         email={user.email}
-  //         phone_number={user.phone_number}
-  //         location={user.location}
-  //         verified={user.verified}
-  //       />
-  //         : null}
-
-  //       {openBonoModal
-  //         ? <BonoModal
-  //         closeBonoModal={setOpenBonoModal}
-  //         name={user.name}
-  //       />
-  //         : null}
-
-  //       <div className='infoSection'>
-  //         {/* <h2 className='userProfileText'>perfil de usuario</h2> */}
-  //         {user && (
-  //           <div className="userInfo">
-  //             <div className="Decorator"></div>
-  //             <div className="Info">
-  //               {profileImg.length
-  //                 ? (
-  //                     image.map((image, i) => (
-  //                     <img
-  //                       key={i}
-  //                       src={profileImg}
-  //                       alt='imagen'
-  //                       className='userImage'
-  //                     />
-  //                     ))
-  //                   )
-  //                 : loading === true
-  //                   ? (
-  //                     <Loading color="primary" />
-  //                     )
-  //                   : (
-  //                     <img
-  //                       src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
-  //                       alt='image default'
-  //                       className='userImage'
-  //                     />
-  //                     )}
-  //               <h2>{user.name + ' ' + user.lastname}</h2>
-
-  //             </div>
-
-  //           </div>
-  //         )}
-  //         <div className='userButtonContainer'>
-  //           <button className='userButtons'
-  //             onClick={() => { setOpenInfoModal(!openInfoModal); }}>
-  //             Información
-  //           </button>
-
-  //           <button
-
-  //             className={`userButtons ${scroll && 'scroll'}`} >
-
-  //           Locales
-  //           </button>
-
-  //           <button
-  //             className='userButtons'
-  //             onClick={() => { setOpenBonoModal(!openBonoModal); }}>
-  //             Bonificaciones
-  //           </button>
-
-  //         </div>
-  //       </div>
-
-  //       <div className='userAvatarContainer'>
-
-  //         <p>Cambiar imagen de perfil</p>
-  //         <input
-  //           type='file'
-  //           name='imagen'
-  //           accept='image/png,image/jpeg,image/jpg,image/gif'
-  //           onChange={handleChangeimages}
-  //           title='Cambiar Avatar'
-  //         ></input>
-  //         <div>
-  //           <button onClick={handleSaveImg}>Guardar</button>
-  //         </div>
-  //       </div>
-
-  //       <div className='userReviews'>
-  //         <h1 className='reviewTittle'>Locales </h1>
-  //         <br/>
-  //         {/*reviews && reviews.map((review, index) => {
-  //           return (
-  //             <div className='mainContainer' key={index}>
-  //               <div key={review.id} className='reviewContainer'>
-  //                 <div className='reviewTitle'>
-  //                   <h3>Título: {review.title}</h3>
-  //                 </div>
-
-  //                 <div className='reviewInfoContainer'>
-
-  //                   <div className='reviewCalification'>
-  //                     <p>Comentario: {review.comment}</p>
-  //                     <p>Calificaciones:</p>
-  //                     <p>Food :{review.food}</p>
-  //                     <p>Service :{review.service}</p>
-  //                     <p>Environment :{review.environment}</p>
-  //                   </div>
-
-  //                   <figure className='imgContainer'>
-  //                     <img src={review.Image?.url} alt="" />
-  //                   </figure>
-
-  //                 </div>
-
-  //                 <div className='reviewButtons'>
-  //                   <button>Modificar</button>
-  //                   <button>Eliminar</button>
-
-  //                 </div>
-  //               </div>
-
-  //             </div>
-
-  //           );
-  //         })*/}
-  //   { userLocal?.user?.Locals
-  //     ? userLocal?.user?.Locals.map((e, i) =>
-  //       <UserLocals
-  //       key={i}
-  //       id={e.id}
-  //       name={e.name}
-  //       image={e.image}
-  //       location={e.location}
-  //       specialty={e.specialty}
-  //       schedule={e.schedule}
-  //       />)
-  //     : <h6> No tienes Locales </h6>
-  //   }
-  //       </div>
-
-  //     </div>)
+   
   );
 }
 
