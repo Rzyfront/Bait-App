@@ -1,3 +1,6 @@
+.restaurants-container {
+    overflow: auto;
+}
 .state {
     width: 30%;
     margin: auto;
@@ -115,4 +118,19 @@
     transition: 0.3s;
     margin: auto;
     width: 10%;
+}
+
+.no-results-dash {
+    text-align: center;
+    margin: auto;
+}
+
+.dash-res-button {
+    border: none;
+    font-size: 2rem;
+    background-color: transparent;
+}
+
+.dash-res-button:hover {
+    color: var(--btn-primary);
 }

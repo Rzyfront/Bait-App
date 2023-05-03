@@ -1,9 +1,15 @@
 import axios from 'axios';
-import styles from './LocalsCards.module.css';
 import { useState } from 'react';
 import swal from 'sweetalert';
 import { useDispatch } from 'react-redux';
 import { getLocalsToVerify } from '../../../../redux/actions/LocalsAdmin';
+
+const ROLES = {
+  admin: 'Administrador',
+  superAdmin: 'Súper admin',
+  user: 'Usuario',
+  owner: 'Propietario'
+};
 
 export default function LocalsCards ({ local }) {
   const dispatch = useDispatch();
@@ -38,16 +44,17 @@ export default function LocalsCards ({ local }) {
     }
   };
   return (
-    <>
-      <div className={styles.localCardContainer}>
-        <h1>{local?.name}</h1>
-        <h2>{local?.User?.name}</h2>
-        <h2>{local?.User?.role}</h2>
-        <button onClick={handleShowDocument} >Document</button>
+    <tr>
+      <td className='align-middle'>{local?.name}</td>
+      <td className='align-middle'>{local?.User?.name}</td>
+      <td className='align-middle'>{ROLES[local?.User?.role]}</td>
+      <td className='align-middle'><button onClick={handleShowDocument} >Document</button>
         {documentLink && <a href={documentLink} target='_blank' rel="noreferrer" >Link al documento</a>}
-        <button onClick={handlerAssignLocal}>Asignar local</button>
-        <button onClick={handlerDenyLocal}>Denegar</button>
-      </div>
-    </>
+        </td>
+      <td className='align-middle'>
+          <button onClick={handlerAssignLocal}>Asignar local</button>
+          <button onClick={handlerDenyLocal}>Denegar</button>
+        </td>
+    </tr>
   );
 }
