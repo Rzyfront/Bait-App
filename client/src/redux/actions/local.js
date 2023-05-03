@@ -47,6 +47,8 @@ export const DetailLocal = (id) => {
 export const createLocalFull = (inputs, chekinputs) => {
   return async (dispatch) => {
     try {
+      console.log(inputs);
+      /*
       const response = await axios.post('/locals', {
         email: inputs.email,
         images: inputs.images,
@@ -57,7 +59,7 @@ export const createLocalFull = (inputs, chekinputs) => {
         phone: inputs.phone,
         schedule: inputs.schedule,
         specialty: inputs.specialty,
-        characteristics: chekinputs
+        characteristics: inputs.characteristics
       });
 
       if (response.status === 201) {
@@ -66,7 +68,7 @@ export const createLocalFull = (inputs, chekinputs) => {
           payload: response.data.success
         });
         return true;
-      }
+      }*/
     } catch (error) {
       dispatch({
         type: ERROR,
