@@ -1,0 +1,117 @@
+.ScheduleModal-Component{
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+    z-index: var(--alto-5);
+}
+.ScheduleModal-Container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    padding: 20px;
+    width: 420px;
+    height: 400px;
+    background-color: var(--bg-primary);
+    border-radius: 10px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    z-index: var(--alto-5);
+}
+
+
+.ScheduleModal-Container .Schedule-title{
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-family: var(--text);
+    font-weight: 200;
+}
+
+.ScheduleModal-Container .Schedule-title .HourTerms{
+    display: flex;
+    width: 70%;
+    margin-right: 0px;
+    gap: 15%;
+    justify-content: flex-end;
+}
+
+.ScheduleModal-Container .Selections-Group{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+}
+
+.Selections-Group .Days{
+    display: flex;
+    align-items: flex-start;
+    width: 30%;
+    gap: 16px;
+    flex-direction: column;
+
+}
+
+.Selections-Group .Days .day{
+    font-size: 20px;
+    font-family: var(--text);
+    font-weight: 400;
+    padding-left: 10px;
+}
+
+.Selections-Group .Days .Hour-ok{
+    color: var(--secondary);
+    font-weight: 500;
+}
+
+
+.Selections-Group .Hours{
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.Selections-Group .Hours label{
+    display: none;
+}
+
+.ScheduleModal-Container .Close-Shedule{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.Selections-Group .Hours .Open-Close{
+    display: flex;
+    gap: 50%;
+}
+
+
+@media screen and (max-width: 550px){
+    .Selections-Group .Days .day {
+            font-size: 15px;
+            font-family: var(--text);
+            font-weight: 400;
+            padding-left: 10px;
+        }
+    .Selections-Group .Days {
+            display: flex;
+            width: 25%;
+            gap: 22px;
+        }
+    .ScheduleModal-Container {
+        gap: 5px;
+        padding: 10px;
+        width: 360px;
+        height: 400px;
+ 
+    }
+
+}

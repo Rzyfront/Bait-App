@@ -5,6 +5,7 @@ import { RiImageAddFill } from 'react-icons/ri';
 import { Loading } from '@nextui-org/react';
 import { useUploadImage } from '../../../../hooks/useUploadImage';
 import Slider from 'react-slick';
+import { HiOutlineDocumentArrowUp } from 'react-icons/hi2';
 
 function AddImgComplete ({ inputs, setInputs }) {
   const { image, loading, handleChangeimage } = useUploadImage();
@@ -20,6 +21,20 @@ function AddImgComplete ({ inputs, setInputs }) {
 
   const handleChangeimages = (event) => {
     handleChangeimage(event);
+  };
+
+  const hanlderInputDocument = async (e) => {
+
+    // MIRAR EL COMPONENTE CLAIMLOCAL PARA COPIAR LA FORMA EN LA QUE SE SUBE EL DOCUMENTO
+
+    // try {
+    //   const formData = new FormData();
+    //   formData.append('document', e.target.files[0]);
+    //   const { data } = await axios.post('/locals/document', formData);
+    //   setDocument(data.newDocument);
+    // } catch (error) {
+    //   swal(error.response.data.message, { type: 'error' });
+    // }
   };
 
   const settings = {
@@ -59,14 +74,6 @@ function AddImgComplete ({ inputs, setInputs }) {
                 }
                 </Slider>
                 </div>
-              // image.map((image, i) => (
-              // <img
-              //   key={i}
-              //   src={image.url}
-              //   alt='imagen'
-              //   className='LocalesImage'
-              // />
-              // ))
                   )
                 : loading === true
                   ? (
@@ -77,6 +84,10 @@ function AddImgComplete ({ inputs, setInputs }) {
                     <RiImageAddFill className='LocalesImage' />
                     )}
             </label>
+            <label htmlFor="documentInput" className='documentInput'>
+              <h3 className='documentInputText'>Subir documentación</h3><HiOutlineDocumentArrowUp className='documentInputIcon'/>
+            </label>
+            <input className='documentInputNone' id='documentInput' type="file" name="document" onChange={hanlderInputDocument} accept='application/pdf'/>
             <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate /></button>
     </div>
   );
