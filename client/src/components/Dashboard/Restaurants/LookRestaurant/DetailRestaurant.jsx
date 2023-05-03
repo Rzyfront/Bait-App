@@ -1,41 +1,33 @@
 import { useDispatch, useSelector } from 'react-redux';
-
+import Chart from '../../../../hooks/Chart';
 import { DetailLocal } from '../../../../redux/actions/local';
 import { useEffect, useState } from 'react';
 import './DetailRestaurant.css';
-import { getReviews, getUserProfile } from '../../../../redux/actions/actions';
+import { getUserProfile } from '../../../../redux/actions/actions';
 import imageDefault from '../../../../assets/imagenDefault.png';
-// import { Chart } from '../../../../hooks/Chart';
 const DetailRestaurant = ({ id }) => {
   const dispatch = useDispatch();
-  const { detail, reviews, userProfile } = useSelector((state) => state);
+  const { detail, userProfile } = useSelector((state) => state);
   const [data, setData] = useState();
   useEffect(() => {
     dispatch(DetailLocal(id));
-    dispatch(getReviews(id));
-    const fetchdata = async () => {
-      const response = await fetch('https://api.coincap.io/v2/assets/?limit=10');
-      const data = await response.json();
-      console.log(data);
-      setData(data.data);
-    };
-    fetchdata();
-    console.log(reviews);
   }, []);
   useEffect(() => {
     if (detail && detail.verified === 'verified') {
       dispatch(getUserProfile(detail.UserId
       ));
     }
-    console.log(detail);
+    if (detail && detail.avgEnvironment) {
+      const data = [{ name: 'Ambiente', Calificacion: parseFloat(detail.avgEnvironment).toFixed(1) }, { name: 'Comida', Calificacion: parseFloat(detail.avgFood).toFixed(1) }, { name: 'Precio', Calificacion: parseFloat(detail.avgQaPrice).toFixed(1) }, { name: 'Servicio', Calificacion: parseFloat(detail.avgService).toFixed(1) }];
+      setData(data);
+    }
   }, [detail]);
-  console.log(detail);
+
   return <div className='detailRestaurantContainer'>
         {/* <button onClick={handleDetail}>cerrar</button> */}
        <div className='localDetail'>
-        {/* <Chart data={data}></Chart> */}
-      {/* {detail && detail.Images && detail.Images.length ? <img src={detail.Images[0].url} alt='image' className='photoselect' /> : <img src={photoDefault} alt='foto' className='photoselect' />} */}
-        {/* <p>{detail.name}</p> */}
+      {detail && detail.avgEnvironment && <Chart data={data} />}
+
       <div className='graph1'>
 
         </div>
