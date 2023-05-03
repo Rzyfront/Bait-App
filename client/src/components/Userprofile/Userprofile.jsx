@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './Userprofile.css';
-import { getReviews, getUserProfile, userPostImg, getUserLocals } from '../../redux/actions/actions';
+import { getReviews, getUserProfile, getUserLocals } from '../../redux/actions/actions';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
@@ -9,27 +9,35 @@ import { Loading } from '@nextui-org/react';
 
 import InfoModal from '../Userprofile/InfoModal/InfoModal';
 import BonoModal from '../Userprofile/BonoModal/BonoModal';
+import ModifyReviewModal from "../Userprofile/ModifyReviewModal/ModifyReviewModal";
 import { useNavigate } from 'react-router-dom';
 
 import UserLocals from './UserLocals';
 
 function Userprofile () {
+
+  const navigate = useNavigate();
+
   const { image, loading, handleChangeimage } = useUploadImage();
   const [profileImg, setProfileImg] = useState([]);
 
   const [openInfoModal, setOpenInfoModal] = useState(false);
   const [openBonoModal, setOpenBonoModal] = useState(false);
+  const [modReviewModal, setModReviewModal] = useState(false)
+
   const [userReview, setUserReview] = useState([]);
+
 
   const dispatch = useDispatch();
   const { userId } = useParams();
 
-  const { user } = useSelector((state) => state.user);
+
   const userProfile = useSelector((state) => state.userProfile);
-  const reviews = useSelector((state) => state.reviews);
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
+  const { user } = useSelector((state) => state.user);
+
   const [userLocal, setUserLocal] = useState(obtainUserLocal);
-  const navigate = useNavigate();
+ 
 
   useEffect(() => {
     user && dispatch(getUserProfile(user.id));
@@ -68,11 +76,12 @@ function Userprofile () {
     const newReviews = userReview.filter(rev => rev.id !== reviewId);
 
     setUserReview(newReviews);
-    await axios.put(`/reviews/${reviewId}`, { title: 'Modificado', UserId: user.id, toxicity: 0, comment: 'Eliminada', verified: 'archived' });
+    await axios.put(`/reviews/${reviewId}`, { title: 'Super Buena COmida', UserId: user.id, toxicity: 0, comment: 'Estaba muy buena la comida', verified: 'verified' });
   };
   const handleInicio = () => {
     navigate('/home/1?name=&city=');
   };
+ 
   return (
     (user?.role === 'user'
 
@@ -198,7 +207,8 @@ function Userprofile () {
                   </div>
 
                   <div className='reviewButtons'>
-                    <button >Modificar</button>
+                    <button onClick={() => { setModReviewModal(!modReviewModal); }}>Modificar</button>
+                    {modReviewModal && <ModifyReviewModal closeReviewModal={setModReviewModal}/>}
                     <button id={review.id} onClick={handleDeleteReview}>Eliminar</button>
 
                   </div>
@@ -309,41 +319,7 @@ function Userprofile () {
           <div className='userReviews'>
             <h1 className='reviewTittle'>Locales </h1>
             <br/>
-            {/*reviews && reviews.map((review, index) => {
-              return (
-                <div className='mainContainer' key={index}>
-                  <div key={review.id} className='reviewContainer'>
-                    <div className='reviewTitle'>
-                      <h3>Título: {review.title}</h3>
-                    </div>
-
-                    <div className='reviewInfoContainer'>
-
-                      <div className='reviewCalification'>
-                        <p>Comentario: {review.comment}</p>
-                        <p>Calificaciones:</p>
-                        <p>Food :{review.food}</p>
-                        <p>Service :{review.service}</p>
-                        <p>Environment :{review.environment}</p>
-                      </div>
-
-                      <figure className='imgContainer'>
-                        <img src={review.Image?.url} alt="" />
-                      </figure>
-
-                    </div>
-
-                    <div className='reviewButtons'>
-                      <button>Modificar</button>
-                      <button>Eliminar</button>
-
-                    </div>
-                  </div>
-
-                </div>
-
-              );
-            })*/}
+           
       { userLocal?.user?.Locals
         ? userLocal?.user?.Locals.map((e, i) =>
           <UserLocals
@@ -365,17 +341,3 @@ function Userprofile () {
 
 export default Userprofile;
 
-//  <div className="AgeGroup">
-//                 <h3 className="Age">{user.age}</h3>
-//               </div>
-//               <div className="TelGroup">
-//                 <h3>Tel:</h3>
-//                 <p>{user.phone_number}</p>
-//               </div>
-//               <div className="EmailGroup">
-//                 <h3>E-mail:</h3>
-//                 <p>{user.email}</p>
-//               </div>
-//               <div className="LocationGroup">
-//                 <h3 className="Location">{user.location}</h3>
-//               </div>
