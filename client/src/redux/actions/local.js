@@ -7,6 +7,7 @@ export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
+
         // email: inputs.email,
         images: inputs.images,
         location: eliminarTildes(inputs.location.location),
@@ -46,20 +47,37 @@ export const DetailLocal = (id) => {
 
 export const createLocalFull = (inputs, chekinputs) => {
   return async (dispatch) => {
+    const schedule = {};
+    for (const day in inputs.schedule) {
+      schedule[day] = `${inputs.schedule[day].open}${inputs.schedule[day].open ? '-' : ''}${inputs.schedule[day].close}`;
+    };
+    const characteristics = {};
+    if (inputs.characteristics.length) {
+      for (const element of inputs.characteristics) {
+        characteristics[element] = true;
+      }
+    };
+    if (inputs.payments.length) {
+      for (const element of inputs.payments) {
+        characteristics[element] = true;
+      }
+    };
+    if (inputs.restaurantType) {
+      characteristics.type = inputs.restaurantType[0];
+    };
     try {
-      console.log(inputs);
-      /*
       const response = await axios.post('/locals', {
-        email: inputs.email,
-        images: inputs.images,
+        name: inputs.name,
         location: eliminarTildes(inputs.location.location),
+        address: inputs.address,
+        email: inputs.email,
         lat: inputs.location.lat,
         lng: inputs.location.lng,
-        name: inputs.name,
-        phone: inputs.phone,
-        schedule: inputs.schedule,
+        images: inputs.images,
+        document: inputs.document,
         specialty: inputs.specialty,
-        characteristics: inputs.characteristics
+        schedule,
+        characteristics
       });
 
       if (response.status === 201) {
@@ -68,7 +86,7 @@ export const createLocalFull = (inputs, chekinputs) => {
           payload: response.data.success
         });
         return true;
-      }*/
+      }
     } catch (error) {
       dispatch({
         type: ERROR,

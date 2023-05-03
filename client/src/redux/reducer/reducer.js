@@ -8,8 +8,8 @@ import {
   GET_REVIEWS,
   CLEAN_REVIEWS,
   USER_PROFILE,
-  USER_POST_IMG,
-  USER_DASH_LOCALS
+  USER_DASH_LOCALS,
+  UPDATE_USER
 } from '../actions/actions';
 import {
   POST_MENU,
@@ -206,12 +206,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         userProfile: payload
       };
-
-    case USER_POST_IMG:
+    case UPDATE_USER:
       return {
         ...state,
-        user: { payload }
+        success: payload
       };
+
+    
     case USER_DASH_LOCALS:
       return {
         ...state,

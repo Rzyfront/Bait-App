@@ -11,6 +11,7 @@ export const HOMEPAGE = 'HOMEPAGE';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
+export const UPDATE_USER = 'UPDATE_USER';
 
 // ACTION TYPES USERPROFILE
 export const USER_PROFILE = 'USER_PROFILE';
@@ -221,17 +222,30 @@ export const getUserProfile = (id) => {
   };
 };
 
-export const userPostImg = (img) => {
+export const updateUser = ({
+  id,
+  name,
+  lastname
+  , age,
+  email,
+  phone_number,
+  image,
+  location
+}) => {
   return async (dispatch) => {
-    try {
-      const response = await axios.post('/user/', { img });
+    console.log(location, age);
 
-      if (response.data.success === true) {
-        dispatch({
-          type: USER_POST_IMG,
-          payload: response.data
-        });
-      }
+    try {
+      await axios.put('/user', {
+        name, lastname, age, email, phone_number, image, location
+      });
+
+      console.log(image);
+
+      dispatch({
+        type: UPDATE_USER,
+        payload: 'Usuario Modificado Correctamente'
+      });
     } catch (error) {
       console.log(error.message);
     }
