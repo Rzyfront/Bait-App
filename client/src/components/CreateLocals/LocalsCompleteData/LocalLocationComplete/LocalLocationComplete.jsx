@@ -27,7 +27,7 @@ function LocalLocationComplete ({ handleMap, mapSearch, Mapcenter, statemap, han
             } }className='Pick-Location-Basic'>
               Buscar ciudad
             </button>
-            {statesupmit === true && errors.location && <PopComent text={errors.location} />}
+      {statesupmit === true && errors && errors.location && <PopComent text={errors.location} />}
 
     </div>
   );
