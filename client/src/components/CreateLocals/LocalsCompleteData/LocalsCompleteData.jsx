@@ -12,6 +12,7 @@ import LocalInfoComplete from './LocalInfoComplete/LocalInfoComplete';
 import LocalLocationComplete from './LocalLocationComplete/LocalLocationComplete';
 import AddImgComplete from './AddImgComplete/AddImgComplete';
 import './LocalsCompleteData.css';
+import ScheduleModal from './LocalInfoComplete/ScheduleModal/ScheduleModal';
 
 function LocalsCompleteData () {
   const ubication = useSelector((state) => state.ubication);
@@ -22,6 +23,16 @@ function LocalsCompleteData () {
   const dispatch = useDispatch();
   const [statemap, setStatemap] = useState(false);
   const [mapSearch, setMapsearch] = useState('');
+  const [showShedule, setShowSchedule] = useState(false);
+  const [schedulState, setScheduleState] = useState({
+    lunes: { open: '', close: '' },
+    martes: { open: '', close: '' },
+    miercoles: { open: '', close: '' },
+    jueves: { open: '', close: '' },
+    viernes: { open: '', close: '' },
+    sabado: { open: '', close: '' },
+    domingo: { open: '', close: '' }
+  });
 
   // map controllers
   useEffect(() => {
@@ -90,7 +101,6 @@ function LocalsCompleteData () {
       })
 
     );
-    console.log(inputs);
   }, [inputs]);
 
   const handleChange = (event) => {
@@ -126,16 +136,19 @@ function LocalsCompleteData () {
     }
   };
 
-  const handleSelect = (event) => {
-    const { name, value } = event.target;
-    setInputs({
-      ...inputs,
-      [name]: value
-    });
-  };
-
+  // const handleSelect = (selectedOptions) => {
+  //   console.log(selectedOptions);
+  //   const selected = selectedOptions.map(option => option.label);
+  //   const { value } = selectedOptions;
+  //   setInputs({
+  //     ...inputs,
+  //     [value]: selected
+  //   });
+  //   console.log(selected);
+  // };
   return (
     <div className='LocalsCompleteData-Component'>
+      {showShedule && <ScheduleModal setShowSchedule={setShowSchedule} schedulState={schedulState} setScheduleState={setScheduleState}/>}
         <svg className='Wabe-Top' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#343434" fillOpacity="1" d="M0,0L40,5.3C80,11,160,21,240,21.3C320,21,400,11,480,42.7C560,75,640,149,720,160C800,171,880,117,960,112C1040,107,1120,149,1200,192C1280,235,1360,277,1400,298.7L1440,320L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>
 
       <Link to='/home/1?name=&city=' className='LinkLogo'>
@@ -146,9 +159,11 @@ function LocalsCompleteData () {
        <h2 className='Title-Complete'>Crea un <span>nuevo</span> local</h2>
      <form onSubmit={handleSubmit} className='Complete-Form-Create'>
        <LocalInfoComplete
-      handleSelect={handleSelect}
+      showShedule={showShedule}
+      setShowSchedule={setShowSchedule}
       inputs={inputs}
       handleChange={handleChange}
+      setInputs={setInputs}
       />
       <LocalLocationComplete
       handleMap={handleMap}
@@ -171,68 +186,3 @@ function LocalsCompleteData () {
   );
 }
 export default LocalsCompleteData;
-
-//  <div className='locales_data animated-element'>
-//           <Link to='/home/1?name=&city=' className='LinkLogo'>
-//             <img
-//               src={BaitLogo}
-//               alt='Bait'
-//               className='Logo'
-//               width='60px'
-//               height='60px'
-//             />
-//           </Link>
-//           <h1>Crea un nuevo Local</h1>
-//           <form onSubmit={handleSubmit}>
-//             <DataLocal
-//               handleChange={handleChange}
-//               inputs={inputs}
-//               errors={errors}
-//               handleSelect={handleSelect}
-//               searchCity={searchCity}
-//               setMapsearch={setMapsearch}
-//               handleMap={handleMap}
-//             />
-//             <div className='MapSize'>
-//               <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas} />
-//             </div>
-
-//             <label className='imagen' htmlFor='imagen'>
-//               Imágenes
-//             </label>
-//             <input
-//               type='file'
-//               name='imagen'
-//               accept='image/png,image/jpeg,image/jpg,image/gif'
-//               // multiple
-//               onChange={handleChangeimages}
-//             ></input>
-
-//             {image.length
-//               ? (
-//                   image.map((image, i) => (
-//                   <img
-//                     key={i}
-//                     src={image.url}
-//                     alt='imagen'
-//                     className='LocalesImage'
-//                   />
-//                   ))
-//                 )
-//               : loading === true
-//                 ? (
-//                   <Loading color="primary" />
-//                   )
-//                 : (
-//                   <img
-//                     src='https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png'
-//                     alt='image default'
-//                     className='LocalesImage'
-//                   />
-//                   )}
-
-//             <Chars handleCheck={handleCheck} chekinputs={chekinputs} />
-//             <button type='submit' className='Send-Locals'> ENVIAR</button>
-//             <ToastContainer theme='colored' />
-//           </form>
-//     </div>

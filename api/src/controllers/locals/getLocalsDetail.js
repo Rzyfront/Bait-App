@@ -1,8 +1,7 @@
 const { fn, col } = require('sequelize');
 const {
-  Local, Characteristic, Review, Image,
+  Local, Characteristic, Review, Image, Specialty, Schedule,
 } = require('../../db');
-const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
 module.exports = async (req, res) => {
   try {
@@ -19,14 +18,27 @@ module.exports = async (req, res) => {
       },
       include: [{
         model: Characteristic,
-        attributes: allCharacteristics,
+        attributes: { exclude: ['id', 'LocalId'] },
+      },
+      {
+        model: Specialty,
+        as: 'specialties',
+        attributes: ['name'],
+        through: { attributes: [] },
+      },
+      {
+        model: Schedule,
+        as: 'schedule',
+        attributes: {
+          exclude: ['scheduleId', 'id', 'localId'],
+        },
       },
       {
         model: Review,
         attributes: [],
       },
       { model: Image, attributes: ['url'] }],
-      group: ['Local.id', 'Images.id', 'Characteristic.id'],
+      group: ['Local.id', 'Images.id', 'Characteristic.id', 'specialties.id', 'schedule.id'],
     });
     res.status(200).json({ locals, success: true });
   } catch (error) {
@@ -90,6 +102,13 @@ module.exports = async (req, res) => {
  *                           type: array
  *                           items:
  *                             $ref: '#/components/schemas/Image'
+ *                         schedule:
+ *                           $ref: '#/components/schemas/Schedule'
+ *                         specialty:
+ *                           type: array
+ *                           description: Lista de especialiades que coinciden con la consulta.
+ *                           items:
+ *                             $ref: '#/components/schemas/Specialty'
  *       400:
  *        $ref: '#/components/responses/BadRequest'
 */

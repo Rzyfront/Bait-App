@@ -1,6 +1,6 @@
 .AddImgComplete{
     width: 40%;
-    gap: 5%;
+    gap: 3%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,4 +92,46 @@
     /* aspect-ratio: 16/9; */
     object-fit: cover;
     border-radius: 5px;
+}
+
+.AddImgComplete .documentInputNone{
+    display: none;
+}
+
+.AddImgComplete .documentInput{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: var(--btn-primary);
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.AddImgComplete .documentInput:hover {
+    background-color: var(--btn-secondary);
+}
+
+.AddImgComplete .documentInput:hover .documentInputText{
+    color: var(--tertiary);
+}
+
+.AddImgComplete .documentInput:hover .documentInputIcon {
+    color: var(--tertiary);
+}
+
+.AddImgComplete .documentInput .documentInputText{
+    font-size: 1rem;
+    font-family: var(--title);
+    font-weight: 600;
+}
+
+.AddImgComplete .documentInput .documentInputIcon {
+    font-size: 25px;
+    font-family: var(--title);
+    font-weight: 700;
+
 }

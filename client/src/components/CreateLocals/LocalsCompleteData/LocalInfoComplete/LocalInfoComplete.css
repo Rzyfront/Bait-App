@@ -5,7 +5,6 @@
     align-items: center;
     justify-content: center;
     width: 30%;
-    
 }
 
 .LocalInfoComplete .Input-C{
@@ -18,9 +17,12 @@
 }
 
 .LocalInfoComplete .Add-schelude-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: none;
     outline: none;
-    height: 40px;
+    min-height: 40px;
     width: 80%;
     border-radius: 5px;
     background-color: var(--btn-primary);
@@ -36,4 +38,5 @@
 .LocalInfoComplete .characteristic-List-Select,
 .LocalInfoComplete .payment-List-Select{
     width: 80%;
+    max-height:50px;
 }
