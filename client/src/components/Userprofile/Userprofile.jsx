@@ -4,7 +4,7 @@ import "./Userprofile.css";
 import {
   getReviews,
   getUserProfile,
-  userPostImg,
+  updateUser,
   getUserLocals,
 } from "../../redux/actions/actions";
 import axios from "axios";
@@ -16,20 +16,25 @@ import style from "./UserProfile.module.css";
 import { FiUser, FiGift } from "react-icons/fi"
 import { AiOutlineStar } from "react-icons/ai"
 import { BiRestaurant, BiLogOutCircle } from "react-icons/bi"
-import InfoModal from "../Userprofile/InfoModal/InfoModal";
-import BonoModal from "../Userprofile/BonoModal/BonoModal";
-import ModifyReviewModal from "../Userprofile/ModifyReviewModal/ModifyReviewModal";
 import { useNavigate } from "react-router-dom";
+import { RiImageAddFill } from 'react-icons/ri';
 
 import UserLocals from "./UserLocals";
 
 function Userprofile() {
   const { image, loading, handleChangeimage } = useUploadImage();
   const [profileImg, setProfileImg] = useState([]);
+  const [userData,setUserData]=useState({
+    name:"",
+    lastname:"",
+    age: "",
+    email: "",
+    phone_number:"",
+    image :{url:""},
+    location :"",
+    id:""
 
-  const [openInfoModal, setOpenInfoModal] = useState(false);
-  const [openBonoModal, setOpenBonoModal] = useState(false);
-  const [modReviewModal, setModReviewModal] = useState(false)
+  })
 
   const [userReview, setUserReview] = useState([]);
 
@@ -50,7 +55,7 @@ function Userprofile() {
     user && dispatch(getUserProfile(user.id));
   }, [user]);
 
-  userProfile && console.log(userProfile);
+
   useEffect(() => {
     dispatch(getReviews(userId));
     dispatch(getUserLocals());
@@ -64,6 +69,21 @@ function Userprofile() {
   }, [image, user]);
 
   useEffect(() => {
+    user && setUserData({
+      id:user.id,
+      name: user.name,
+      lastname:user.lastname,
+      age:user.age,
+      email: user.email,
+      phone_number: user.phone_number,
+      image: { url: profileImg},
+      location: user.location,
+    })
+  }, [user,profileImg]);
+
+  userData && console.log(userData);
+user && console.log(user);
+  useEffect(() => {
     setUserLocal(obtainUserLocal);
   }, [obtainUserLocal]);
 
@@ -71,11 +91,7 @@ function Userprofile() {
     handleChangeimage(event);
   };
 
-  const handleSaveImg = async () => {
-    await axios.post(`/user/${user.id}`, {
-      Image: { id: 2, url: [profileImg] },
-    });
-  };
+
 
   const handleDeleteReview = async (e) => {
     const reviewId = Number(e.target.id);
@@ -94,6 +110,22 @@ function Userprofile() {
   const handleInicio = () => {
     navigate("/home/1?name=&city=");
   };
+
+  const handleChange=(event)=>{
+    let property = event.target.name
+    let value = event.target.value
+
+    setUserData({...userData,
+      [property]:value
+    })
+  }
+
+  const handleSave=()=>{
+    alert(`Usuario Actualizado Exitosamente infor ${userData.name}`)
+    dispatch(updateUser(userData))
+  }
+
+
  
   return (
     <div className={style.profileContainer}>
@@ -110,55 +142,79 @@ function Userprofile() {
     <div className={style.menu}>
       {selectedId == 1 && <div className={style.infoMenu}>
         <div className={style.resumeInfo}>
-          <img src="https://w7.pngwing.com/pngs/421/258/png-transparent-mark-zuckerberg-facebook-f8-social-networking-service-mark-zuckerberg-celebrities-face-head.png"className={style.imgProfile}/>
+          <img src={profileImg}className={style.imgProfile} name="Image"/>
           <div>
-            <p className={style.name}>Mark Zukaritas</p>
-            <p className={style.email}>markzuck@gmail.com</p>
+            <p className={style.name}>{user && user.name}</p>
+            <p className={style.email}>{user &&user.email}</p>
           </div>
         </div>
         <div className={style.form}>
         <div className={style.formLeft}>
         <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />
+                <label htmlFor="name" className={style.placeholder}>
                   Nombre
-                </label>
+                </label>  
+                
               </div>
         <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input onChange={handleChange} name="email" className={style.inputForm} value={user && user.email} />
+                <label htmlFor="email" className={style.placeholder}>
                   Email
                 </label>
               </div>
         <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input name="location" className={style.inputForm} value={userData.location} />
+                <label htmlFor="location" className={style.placeholder}>
                   Location
                 </label>
               </div>
         </div>
         <div className={style.formRight}>
           <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input onChange={handleChange} name="lastname" className={style.inputForm} value={userData.lastname} />
+                <label htmlFor="lastname" className={style.placeholder}>
                   Apellido
                 </label>
               </div>
               <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
-                  Apellido
+                <input name="age" className={style.inputForm} value={userData.age} />
+                <label htmlFor="age" className={style.placeholder}>
+                  Edad
                 </label>
               </div>
-        <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
+              <div className={style.input}>
+                <input 
+                 type="file"
+                  name="file"
+                   className={style.inputForm} 
+                  onChange={ handleChangeimages } />
                 <label htmlFor="titulo" className={style.placeholder}>
-                  Codigo postal
+                 Cambiar Imagen
                 </label>
+                {image.length
+                  ? (
+                    image.map((image, i) => (
+                      <img
+                        key={i}
+                        src={image.url}
+                        alt='imagen'
+                        className='LocalesImage'
+                      />
+                    ))
+                  )
+                  : loading === true
+                    ? (
+                      <Loading color="primary" />
+                    )
+                    : (
+
+                      <RiImageAddFill className='LocalesImage' />
+                    )}
               </div>
         </div>
         </div>
-        <button className={style.saveChanges}>Guardar</button>
+        <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
       </div>}
       {selectedId == 2 && <div className={style.myLocals}>
         <p className={style.titleLocal}>Ultimas reseñas</p>
