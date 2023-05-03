@@ -1,9 +1,10 @@
+
 import { useDispatch, useSelector } from "react-redux";
 import "./Userprofile.css";
 import {
   getReviews,
   getUserProfile,
-  userPostImg,
+  updateUser,
   getUserLocals,
 } from "../../redux/actions/actions";
 import axios from "axios";
@@ -15,27 +16,40 @@ import style from "./UserProfile.module.css";
 import { FiUser, FiGift } from "react-icons/fi"
 import { AiOutlineStar } from "react-icons/ai"
 import { BiRestaurant, BiLogOutCircle } from "react-icons/bi"
-import InfoModal from "../Userprofile/InfoModal/InfoModal";
-import BonoModal from "../Userprofile/BonoModal/BonoModal";
 import { useNavigate } from "react-router-dom";
+import { RiImageAddFill } from 'react-icons/ri';
 
 import UserLocals from "./UserLocals";
 
+const defaultImg = "https://www.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg"
+
+
 function Userprofile() {
   const { image, loading, handleChangeimage } = useUploadImage();
-  const [profileImg, setProfileImg] = useState([]);
 
-  const [openInfoModal, setOpenInfoModal] = useState(false);
-  const [openBonoModal, setOpenBonoModal] = useState(false);
+  const [userData,setUserData]=useState({
+    name:"",
+    lastname:"",
+    age: "",
+    email: "",
+    phone_number:"",
+    image :{ id:"",url:""},
+    location :"",
+    id:""
+
+  })
+
   const [userReview, setUserReview] = useState([]);
+
 
   const dispatch = useDispatch();
   const { userId } = useParams();
 
-  const { user } = useSelector((state) => state.user);
+
   const userProfile = useSelector((state) => state.userProfile);
-  const reviews = useSelector((state) => state.reviews);
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
+  const { user } = useSelector((state) => state.user);
+
   const [userLocal, setUserLocal] = useState(obtainUserLocal);
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(1);
@@ -44,18 +58,28 @@ function Userprofile() {
     user && dispatch(getUserProfile(user.id));
   }, [user]);
 
-  userProfile && console.log(userProfile);
+
   useEffect(() => {
     dispatch(getReviews(userId));
     dispatch(getUserLocals());
   }, []);
 
+  
+
   useEffect(() => {
-    if (image.length) {
-      setProfileImg(image[0].url);
-      user.Image = profileImg;
-    }
-  }, [image, user]);
+    user && setUserData({
+      id:user.id,
+      name: user.name,
+      lastname:user.lastname,
+      age:user.age,
+      email: user.email,
+      phone_number: user.phone_number,
+      image: image[0],
+      location: user.location,
+    })
+  }, [user,image]);
+
+ 
 
   useEffect(() => {
     setUserLocal(obtainUserLocal);
@@ -65,11 +89,7 @@ function Userprofile() {
     handleChangeimage(event);
   };
 
-  const handleSaveImg = async () => {
-    await axios.post(`/user/${user.id}`, {
-      Image: { id: 2, url: [profileImg] },
-    });
-  };
+
 
   const handleDeleteReview = async (e) => {
     const reviewId = Number(e.target.id);
@@ -88,6 +108,21 @@ function Userprofile() {
   const handleInicio = () => {
     navigate("/home/1?name=&city=");
   };
+
+  const handleChange=(event)=>{
+    let property = event.target.name
+    let value = event.target.value
+
+    setUserData({...userData,
+      [property]:value
+    })
+  }
+
+  const handleSave=()=>{
+    dispatch(updateUser(userData))
+    alert(`Usuario Actualizado Exitosamente `)
+  }
+
   return (
     <div className={style.profileContainer}>
     <div className={style.navBar}>
@@ -95,7 +130,7 @@ function Userprofile() {
       <ul className={style.ul}>
         <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser/>  <span>Informacion</span></li>
         <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar/> <span>Reseñas</span></li>
-        <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant/> <span>Locales</span></li>
+        {userProfile.role === "user" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant/> <span>Locales</span></li> : null } 
         <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
         <li className={style.li} onClick={handleInicio}><BiLogOutCircle/> <span>Salir</span></li>
       </ul>
@@ -103,55 +138,79 @@ function Userprofile() {
     <div className={style.menu}>
       {selectedId == 1 && <div className={style.infoMenu}>
         <div className={style.resumeInfo}>
-          <img src="https://w7.pngwing.com/pngs/421/258/png-transparent-mark-zuckerberg-facebook-f8-social-networking-service-mark-zuckerberg-celebrities-face-head.png"className={style.imgProfile}/>
+            <img src={user?.Image ? user?.Image?.url : defaultImg}className={style.imgProfile} name="Image"/>
           <div>
-            <p className={style.name}>Mark Zukaritas</p>
-            <p className={style.email}>markzuck@gmail.com</p>
+            <p className={style.name}>{user && user.name}</p>
+            <p className={style.email}>{user &&user.email}</p>
           </div>
         </div>
         <div className={style.form}>
         <div className={style.formLeft}>
         <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />
+                <label htmlFor="name" className={style.placeholder}>
                   Nombre
-                </label>
+                </label>  
+                
               </div>
         <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input onChange={handleChange} name="email" className={style.inputForm} value={user && user.email} />
+                <label htmlFor="email" className={style.placeholder}>
                   Email
                 </label>
               </div>
         <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input name="location" className={style.inputForm} value={userData.location} onChange={handleChange} />
+                <label htmlFor="location" className={style.placeholder}>
                   Location
                 </label>
               </div>
         </div>
         <div className={style.formRight}>
           <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
+                <input onChange={handleChange} name="lastname" className={style.inputForm} value={userData.lastname} />
+                <label htmlFor="lastname" className={style.placeholder}>
                   Apellido
                 </label>
               </div>
               <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
-                <label htmlFor="titulo" className={style.placeholder}>
-                  Apellido
+                <input name="age" className={style.inputForm} value={userData.age} onChange={handleChange} />
+                <label htmlFor="age" className={style.placeholder}>
+                  Edad
                 </label>
               </div>
-        <div className={style.input}>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
+              <div className={style.input}>
+                <input 
+                 type="file"
+                  name="file"
+                   className={style.inputForm} 
+                  onChange={ handleChangeimages } />
                 <label htmlFor="titulo" className={style.placeholder}>
-                  Codigo postal
+                 Cambiar Imagen
                 </label>
+                {image.length
+                  ? (
+                    image.map((image, i) => (
+                      <img
+                        key={i}
+                        src={image.url}
+                        alt='imagen'
+                        className='LocalesImage'
+                      />
+                    ))
+                  )
+                  : loading === true
+                    ? (
+                      <Loading color="primary" />
+                    )
+                    : (
+
+                      <RiImageAddFill className='LocalesImage' />
+                    )}
               </div>
         </div>
         </div>
-        <button className={style.saveChanges}>Guardar</button>
+        <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
       </div>}
       {selectedId == 2 && <div className={style.myLocals}>
         <p className={style.titleLocal}>Ultimas reseñas</p>
@@ -465,17 +524,3 @@ function Userprofile() {
 
 export default Userprofile;
 
-//  <div className="AgeGroup">
-//                 <h3 className="Age">{user.age}</h3>
-//               </div>
-//               <div className="TelGroup">
-//                 <h3>Tel:</h3>
-//                 <p>{user.phone_number}</p>
-//               </div>
-//               <div className="EmailGroup">
-//                 <h3>E-mail:</h3>
-//                 <p>{user.email}</p>
-//               </div>
-//               <div className="LocationGroup">
-//                 <h3 className="Location">{user.location}</h3>
-//               </div>
