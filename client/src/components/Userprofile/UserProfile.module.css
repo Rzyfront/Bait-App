@@ -293,19 +293,28 @@ list-style: none;
         background-color: var(--bg-tertiary);
     }
     .li{
-        padding: 5px 48px;
+        padding: 5px 43px;
         color:white;
         font-size: 1.7em;
     }
     .li:last-child{
-        display: none;
+        margin:0;
+        padding: 5px 43px;
+        color:white;
+        font-size: 1.7em;
+        /* display: none; */
+    }
+    .li:last-child:hover{
+        background-color: transparent;
+        color:rgb(208, 59, 59);
+        border-right: 3px solid transparent;
     }
     .li:hover{
         background-color: transparent;
         border-right: 3px solid transparent;
     }
     .liSelected{
-        padding: 10px 48px;
+        padding: 10px 43px;
         color:rgb(13, 13, 13);
         font-size: 1.7em;
     border-right: 3px solid transparent;
