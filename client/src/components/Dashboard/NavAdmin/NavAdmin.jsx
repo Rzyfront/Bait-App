@@ -21,6 +21,7 @@ const NavAdmin = ({ fn, section }) => {
             <li className={section === 0 ? style.liSelected : style.li} onClick={() => fn(0)}><FaUserFriends/><span>Usuarios</span></li>
             <li className={section === 1 ? style.liSelected : style.li} onClick={() => fn(1)}><MdOutlineRestaurantMenu/><span>Restaurantes</span></li>
             <li className={section === 2 ? style.liSelected : style.li} onClick={() => fn(2)}><MdReviews/><span>Reseñas</span></li>
+            <li className={section === 3 ? style.liSelected : style.li} onClick={() => fn(4)}><GoUnverified/><span>Locales a verificar</span></li>
             <li className={style.li} onClick={() => navigate('/')}><BiExit/><span>Salir</span></li>
         </ul>
     </nav>

@@ -32,6 +32,7 @@ const DetailRestaurant = ({ id }) => {
 
         </div>
       <p>{detail.location}</p>
+      <p>Estado: {detail.verified}</p>
       </div>
     {detail && detail.verified === 'verified' && <div className='userDetail'>
       {userProfile && userProfile.Images && userProfile.Images.length ? <img src={userProfile.Images[0].url} alt='image' className='photoselect' /> : <img src={imageDefault} alt='foto' className='photoselect' />}

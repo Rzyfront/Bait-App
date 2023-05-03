@@ -5,6 +5,7 @@ import Reseñas from './Reviews/Reviews';
 import ReseñaDetail from './ReviewDetail/ReviewDetail';
 import NavAdmin from './NavAdmin/NavAdmin';
 import { useState } from 'react';
+import LocalsToVerify from './LocalsToVerify/LocalsToVerify';
 
 const Dashboard = () => {
   const [section, setSection] = useState(0);

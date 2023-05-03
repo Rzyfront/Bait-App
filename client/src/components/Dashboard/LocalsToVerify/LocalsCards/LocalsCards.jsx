@@ -1,18 +1,9 @@
 import axios from 'axios';
+import styles from './LocalsCards.module.css';
 import { useState } from 'react';
 import swal from 'sweetalert';
 import { useDispatch } from 'react-redux';
 import { getLocalsToVerify } from '../../../../redux/actions/LocalsAdmin';
-import { AiFillFileUnknown } from 'react-icons/ai';
-import { FaHouseUser } from 'react-icons/fa';
-import { BsHouseSlashFill } from 'react-icons/bs';
-
-const ROLES = {
-  admin: 'Administrador',
-  superAdmin: 'Súper admin',
-  user: 'Usuario',
-  owner: 'Propietario'
-};
 
 export default function LocalsCards ({ local }) {
   const dispatch = useDispatch();
@@ -47,17 +38,16 @@ export default function LocalsCards ({ local }) {
     }
   };
   return (
-    <tr>
-      <td className='align-middle'>{local?.name}</td>
-      <td className='align-middle'>{local?.User?.name}</td>
-      <td className='align-middle'>{ROLES[local?.User?.role]}</td>
-      <td className='align-middle'><button onClick={handleShowDocument} className='dash-res-button'><AiFillFileUnknown /></button>
-        {documentLink && <a href={documentLink} target='_blank' rel="noreferrer" className='dash-res-anchor'>Link al documento</a>}
-        </td>
-      <td className='align-middle'>
-        <button onClick={handlerAssignLocal} className='res-icons assign'>Asignar <FaHouseUser /></button>
-        <button onClick={handlerDenyLocal} className='res-icons deny'>Denegar <BsHouseSlashFill /></button>
-        </td>
-    </tr>
+    <>
+      <div className={styles.localCardContainer}>
+        <h1>{local?.name}</h1>
+        <h2>{local?.User?.name}</h2>
+        <h2>{local?.User?.role}</h2>
+        <button onClick={handleShowDocument} >Document</button>
+        {documentLink && <a href={documentLink} target='_blank' rel="noreferrer" >Link al documento</a>}
+        <button onClick={handlerAssignLocal}>Asignar local</button>
+        <button onClick={handlerDenyLocal}>Denegar</button>
+      </div>
+    </>
   );
 }
