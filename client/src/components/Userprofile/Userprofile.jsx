@@ -21,16 +21,19 @@ import { RiImageAddFill } from 'react-icons/ri';
 
 import UserLocals from "./UserLocals";
 
+const defaultImg = "https://www.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg"
+
+
 function Userprofile() {
   const { image, loading, handleChangeimage } = useUploadImage();
-  const [profileImg, setProfileImg] = useState([]);
+
   const [userData,setUserData]=useState({
     name:"",
     lastname:"",
     age: "",
     email: "",
     phone_number:"",
-    image :{url:""},
+    image :{ id:"",url:""},
     location :"",
     id:""
 
@@ -61,12 +64,7 @@ function Userprofile() {
     dispatch(getUserLocals());
   }, []);
 
-  useEffect(() => {
-    if (image.length) {
-      setProfileImg(image[0].url);
-      user.Image = profileImg;
-    }
-  }, [image, user]);
+  
 
   useEffect(() => {
     user && setUserData({
@@ -76,13 +74,13 @@ function Userprofile() {
       age:user.age,
       email: user.email,
       phone_number: user.phone_number,
-      image: { url: profileImg},
+      image: image[0],
       location: user.location,
     })
-  }, [user,profileImg]);
+  }, [user,image]);
 
-  userData && console.log(userData);
-user && console.log(user);
+ 
+
   useEffect(() => {
     setUserLocal(obtainUserLocal);
   }, [obtainUserLocal]);
@@ -121,12 +119,10 @@ user && console.log(user);
   }
 
   const handleSave=()=>{
-    alert(`Usuario Actualizado Exitosamente infor ${userData.name}`)
     dispatch(updateUser(userData))
+    alert(`Usuario Actualizado Exitosamente `)
   }
 
-
- 
   return (
     <div className={style.profileContainer}>
     <div className={style.navBar}>
@@ -134,7 +130,7 @@ user && console.log(user);
       <ul className={style.ul}>
         <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser/>  Informacion</li>
         <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar/> Reseñas</li>
-        <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant/> Locales</li>
+          {userProfile.role === "user" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> Locales</li> : null } 
         <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> Bonificaciones</li>
         <li className={style.li} onClick={handleInicio}><BiLogOutCircle/> Salir</li>
       </ul>
@@ -142,7 +138,7 @@ user && console.log(user);
     <div className={style.menu}>
       {selectedId == 1 && <div className={style.infoMenu}>
         <div className={style.resumeInfo}>
-          <img src={profileImg}className={style.imgProfile} name="Image"/>
+            <img src={user?.Image ? user?.Image?.url : defaultImg}className={style.imgProfile} name="Image"/>
           <div>
             <p className={style.name}>{user && user.name}</p>
             <p className={style.email}>{user &&user.email}</p>
@@ -164,7 +160,7 @@ user && console.log(user);
                 </label>
               </div>
         <div className={style.input}>
-                <input name="location" className={style.inputForm} value={userData.location} />
+                <input name="location" className={style.inputForm} value={userData.location} onChange={handleChange} />
                 <label htmlFor="location" className={style.placeholder}>
                   Location
                 </label>
@@ -178,7 +174,7 @@ user && console.log(user);
                 </label>
               </div>
               <div className={style.input}>
-                <input name="age" className={style.inputForm} value={userData.age} />
+                <input name="age" className={style.inputForm} value={userData.age} onChange={handleChange} />
                 <label htmlFor="age" className={style.placeholder}>
                   Edad
                 </label>

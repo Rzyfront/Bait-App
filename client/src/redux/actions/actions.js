@@ -231,13 +231,18 @@ export const updateUser = ({id,
   image,
   location}) => {
   return async (dispatch) => {
-    console.log(email,phone_number,image);
+    
+    console.log(location,age);
+    
     try {
-      const response = await axios.put(`/user/${id}`,{
-        name,lastname,age,email,phone_numer,image,location
+       await axios.put(`/user`,{
+        name,lastname,age,email,phone_number,image,location
       });
 
-      
+
+      console.log(image);
+
+     
         dispatch({
           type: UPDATE_USER,
           payload: "Usuario Modificado Correctamente"
