@@ -128,10 +128,10 @@ function Userprofile() {
     <div className={style.navBar}>
       <p className={style.title}>Mi perfil</p>
       <ul className={style.ul}>
-        <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser/>  Informacion</li>
-        <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar/> Reseñas</li>
-          {userProfile.role === "user" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> Locales</li> : null } 
-        <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> Bonificaciones</li>
+        <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser/>  <span>Informacion</span></li>
+        <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar/> <span>Reseñas</span></li>
+        {userProfile.role === "user" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant/> <span>Locales</span></li> : null } 
+        <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
         <li className={style.li} onClick={handleInicio}><BiLogOutCircle/> Salir</li>
       </ul>
     </div>
@@ -226,6 +226,7 @@ function Userprofile() {
         </div>
       </div>}
       {selectedId == 4 && <div className={style.giftMenu}>
+        <p className={style.titleLocal}>Bonificaciones</p>
         <img src="https://cdn-icons-png.flaticon.com/512/5957/5957125.png" className={style.imgGift}/>
         <p className={style.titleGift}>Lamentamos informarte que las recompensas no estan activas</p>
       </div>
