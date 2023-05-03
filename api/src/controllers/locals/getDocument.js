@@ -12,8 +12,6 @@ module.exports = async (req, res) => {
     // const secureURL = cloudinary.url(local.Document.archive, { secure: true });
     //
     // res.redirect(secureURL);
-    // res.set('Content-Type', 'application/pdf');
-    // res.send(local.Document.data);
     const token = jwt.sign({ documentId: local.Document.id }, process.env.SECRET_KEY_2, { expiresIn: '1h' });
     res.status(200).json({ success: true, url: `${process.env.SERVER_DEPLOY}/locals/document?auth=${token}` });
   } catch (error) {
@@ -25,8 +23,8 @@ module.exports = async (req, res) => {
  * @swagger
  * /locals/document/{localId}:
  *   get:
- *     summary: Muestra el PDF del local con el ID proporcionado en los parámetros.
- *     description: Este endpoint devuelve el archivo PDF del documento asociado al local con el ID proporcionado en los parámetros. El usuario debe estar autenticado y tener un token de JWT con una propiedad `role` que tenga el valor `admin` o `superAdmin` para poder realizar la acción.
+ *     summary: Crea un link para acceder a la documentación de un local.
+ *     description: Este endpoint devuelve url verificada mediante un JWT para acceder al documento asociado al local con el ID proporcionado en los parámetros. El usuario debe estar autenticado y tener un token de JWT con una propiedad `role` que tenga el valor `admin` o `superAdmin` para poder realizar la acción.
  *     tags: [Local]
  *     security:
  *       - bearerAuth: []
@@ -47,10 +45,18 @@ module.exports = async (req, res) => {
  *       200:
  *         description: OK. El archivo PDF del documento se ha enviado correctamente.
  *         content:
- *           application/pdf:
+ *           application/json:
  *             schema:
- *               type: string
- *               format: binary
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   description: Indica si la operación fue exitosa.
+ *                   example: true
+ *                 url:
+ *                   type: string
+ *                   description: url autenticada para acceder a la documentación de un local.
+ *                   example: 'https://example.com?auth=JWT'
  *       400:
  *         $ref: '#/components/responses/BadRequest'
  *       401:

@@ -62,9 +62,9 @@ module.exports = async (req, res) => {
  *               location:
  *                 type: string
  *                 description: Ubicación del local
- *               schedule:
+ *               address:
  *                 type: string
- *                 description: Horario de atención del local
+ *                 description: Dirección del local
  *               email:
  *                 type: string
  *                 description: Correo electrónico del local
@@ -75,15 +75,21 @@ module.exports = async (req, res) => {
  *                 type: number
  *                 description: Longitud del local
  *               specialty:
- *                 type: string
- *                 description: Especialidad del local
- *               characteristics:
- *                 $ref: '#/components/schemas/Characteristic'
+ *                 type: array
+ *                 description: Especialidades del local
+ *                 items:
+ *                   type: string
+ *                   description: Especialidad del local
+ *                   example: 'Parrilla'
  *               images:
  *                 type: array
  *                 description: Características del local
  *                 items:
  *                   $ref: '#/components/schemas/Image'
+ *               characteristics:
+ *                 $ref: '#/components/schemas/Characteristic'
+ *               schedule:
+ *                 $ref: '#/components/schemas/Schedule'
  *               document:
  *                 type: object
  *                 description: Documento asociado al local
