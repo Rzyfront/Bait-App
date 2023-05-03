@@ -54,13 +54,14 @@ function Profile () {
         {ShowReviewList && <ReviewLocal sendReview={setShowReviewList}/>}
         <div className='Img-Header'>
 
- <Slider {...settings}>
+        <Slider {...settings}>
          {
           detail.Images?.map(({ url }, index) => {
             return <div key={index} className='Slide-Img-Carrousel'>
             <img src={url} alt={`img${index}`} />
           </div>;
           })
+
          }
         </Slider>
         </div>
