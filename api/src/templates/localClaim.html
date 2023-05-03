@@ -1,0 +1,50 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Te hemos asignado un Local</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #333;
+            height: 100vh;
+            display: grid;
+            place-content: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            /* display: flex; */
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin: 0 0 1.5rem;
+        }
+        p {
+            margin: 0 0 1.5rem;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Hola ${name}, tu reclamo del ${Local}, ha sido verificado</h1>
+        <p>Ahora puedes cargar tu menu en el Local y mostrarle a todos los productos, horarios y tipos de modida que ofreces ¡Gracias por confiar en nuestro trabajo!</p>
+        <a href="${process.env.FRONT_DEPLOY}" class="button">Ir a la página principal</a>
+        <p style="margin-bottom: 0;">Bait</p>
+    </div>
+</body>
+</html>
