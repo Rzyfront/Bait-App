@@ -8,7 +8,7 @@ const ChartToxi = ({ data }) => {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Bar dataKey="value" fill="url(#grad)" height={50}>
-                    <LabelList dataKey='value' content='hola' position="top" />
+                    <LabelList dataKey='value' position="top" />
                     <LabelList position="center" fill='#FA0505'>%</LabelList>
                 </Bar>
             </BarChart>
