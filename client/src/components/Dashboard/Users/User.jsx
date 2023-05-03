@@ -63,9 +63,16 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
     }
   };
 
-  const asigLocal = () => {
-    dispatch(assignLocal({ userId: id, localId }));
-    handleAdd();
+  const asigLocal = async () => {
+    if (role === 'owner') {
+      dispatch(assignLocal({ userId: id, localId }));
+      handleAdd();
+    }
+    if (role === 'user') {
+      await dispatch(changeRole({ id, role: 'owner' }));
+      dispatch(assignLocal({ userId: id, localId }));
+      handleAdd();
+    }
   };
 
   const DeleteUserid = () => {
@@ -110,7 +117,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
       ? 'Ocultar'
       : 'Detalles'}</button>}
     {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
-    {localId && role === 'owner' && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
+    {localId && (role === 'owner' || role === 'user') && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
     {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={stateV} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent} phone_number={phone_number}/>}
 
   </div>;
