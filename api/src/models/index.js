@@ -6,6 +6,8 @@ const imageModel = require('./Image');
 const characteristicsModel = require('./Characteristics');
 const dishModel = require('./Dish');
 const documentModel = require('./Document');
+const scheduleModel = require('./Schedule');
+const specialtyModel = require('./Specialty');
 
 module.exports = {
   localModel,
@@ -16,4 +18,6 @@ module.exports = {
   dishModel,
   characteristicsModel,
   documentModel,
+  scheduleModel,
+  specialtyModel,
 };

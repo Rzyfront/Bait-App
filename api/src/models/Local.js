@@ -32,11 +32,13 @@ module.exports = (sequelize) => {
     lng: {
       type: DataTypes.FLOAT,
     },
-    specialty: {
-      type: DataTypes.STRING(50),
-      // allowNull: true,
+    // specialty: {
+    //   type: DataTypes.STRING(50),
+    //   // allowNull: true,
+    // },
+    address: {
+      type: DataTypes.STRING,
     },
-    schedule: DataTypes.STRING,
   });
 };
 
@@ -80,6 +82,13 @@ module.exports = (sequelize) => {
  *           format: float
  *           description: Longitud de la ubicación del local
  *           example: 20.965678887
+ *       required:
+ *         - name
+ *         - location
+*/
+
+/**
+ *
  *         specialty:
  *           type: string
  *           description: Especialidad del local
@@ -88,7 +97,4 @@ module.exports = (sequelize) => {
  *           type: string
  *           description: Horario del local
  *           example: '18 - 24'
- *       required:
- *         - name
- *         - location
  */
