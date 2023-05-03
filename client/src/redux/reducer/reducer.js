@@ -32,6 +32,7 @@ import {
   REVIEW_DETAIL,
   GETLOCALSADMIN
 } from '../actions/admin';
+import { GET_LOCALS_TO_VERIFY } from '../actions/LocalsAdmin';
 
 const initialState = {
   cards: {},
@@ -61,7 +62,8 @@ const initialState = {
   adminReviewDetail: {},
   adminLocals: {},
   userProfile: [],
-  userDashLocals: {}
+  userDashLocals: {},
+  localsToVerify: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -214,6 +216,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         userDashLocals: payload
+      };
+    case GET_LOCALS_TO_VERIFY:
+      return {
+        ...state,
+        localsToVerify: payload
       };
     default:
       return { ...state };
