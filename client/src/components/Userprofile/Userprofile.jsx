@@ -19,6 +19,7 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { RiImageAddFill } from 'react-icons/ri';
+import swal from 'sweetalert'
 
 import UserLocals from './UserLocals';
 
@@ -28,25 +29,21 @@ function Userprofile () {
   const { image, loading, handleChangeimage } = useUploadImage();
 
   const [userData, setUserData] = useState({
-    name: '',
-    lastname: '',
-    age: '',
-    email: '',
-    phone_number: '',
-    image: { id: '', url: '' },
-    location: '',
-    id: ''
-
+    name: "",
+    lastname: "",
+    age: "",
+    email: "",
+    phone_number: "",
+    image: { id: "", url: "" },
+    location: "",
+    id: ""
   });
-
-  const [userReview, setUserReview] = useState([]);
 
   const dispatch = useDispatch();
   const { userId } = useParams();
 
   const userProfile = useSelector((state) => state.userProfile);
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
-  // const userReviews = useSelector((state) => state.reviews);
   const { user } = useSelector((state) => state.user);
 
   const [userLocal, setUserLocal] = useState(obtainUserLocal);
@@ -84,101 +81,95 @@ function Userprofile () {
     handleChangeimage(event);
   };
 
-  const handleDeleteReview = async (e) => {
-    const reviewId = Number(e.target.id);
+  const handleDeleteReview = async (id) => {
 
-    const newReviews = userReview.filter((rev) => rev.id !== reviewId);
+    swal({
+      title: '¿Está seguro(a)',
+      text: 'Una vez borrado no podrás deshacer esta acción',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await axios.delete(`/reviews/${id}`).then((res) => {
 
-    setUserReview(newReviews);
-    await axios.put(`/reviews/${reviewId}`, {
-      title: 'Modificado',
-      UserId: user.id,
-      toxicity: 0,
-      comment: 'Eliminada',
-      verified: 'archived'
-    });
-  };
-  const handleInicio = () => {
-    navigate('/home/1?name=&city=');
-  };
+            swal('¡Review eliminada con éxito!', {
+              icon: 'success'
+            });
+            dispatch(getAllLocal(1, ''));
 
-  const handleChange = (event) => {
-    const property = event.target.name;
-    const value = event.target.value;
 
-    setUserData({
-      ...userData,
-      [property]: value
-    });
-  };
+          }).catch((err)=>{
+            swal(err.response.data.message)
+          })
+        }
+      })
+  }
 
-  const handleSave = () => {
-    dispatch(updateUser(userData));
-    alert('Usuario Actualizado Exitosamente ');
-  };
+    const handleInicio = () => {
+      navigate("/home/1?name=&city=");
+    };
 
-  userProfile && console.log(userProfile.Reviews);
+    const handleChange = (event) => {
+      let property = event.target.name
+      let value = event.target.value
 
-  return (
-    <div className={style.profileContainer}>
-    <div className={style.navBar}>
-      <p className={style.title}>Mi perfil</p>
-      <ul className={style.ul}>
-          <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser />  <span>Informacion</span></li>
-          <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar /> <span>Reseñas</span></li>
-          {user?.role === 'owner' ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> <span>Locales</span></li> : null}
-          <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
-          <li className={style.li} onClick={handleInicio}><BiLogOutCircle /> <span>Salir</span></li>
-       </ul>
-    </div>
-    <div className={style.menu}>
-      {selectedId === 1 && <div className={style.infoMenu}>
-        <div className={style.resumeInfo}>
-                <input
-                 type="file"
-                  name="file"
-                   className={style.inputFile}
-                  onChange={ handleChangeimages } />
-            <img src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image"/>
-          <div>
-            <p className={style.name}>{user && user.name}</p>
-            <p className={style.email}>{user && user.email}</p>
-          </div>
+      setUserData({
+        ...userData,
+        [property]: value
+      })
+    }
+
+    const handleSave = () => {
+      dispatch(updateUser(userData))
+      swal(`Usuario Actualizado Exitosamente `)
+    }
+
+
+
+    return (
+      <div className={style.profileContainer}>
+        <div className={style.navBar}>
+          <p className={style.title}>Mi perfil</p>
+          <ul className={style.ul}>
+            <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser />  <span>Informacion</span></li>
+            <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar /> <span>Reseñas</span></li>
+            {user?.role === "owner" ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> <span>Locales</span></li> : null}
+            <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
+            <li className={style.li} onClick={handleInicio}><BiLogOutCircle /> <span>Salir</span></li>
+          </ul>
         </div>
-        <div className={style.form}>
-        <div className={style.formLeft}>
-        <div className={style.input}>
-                <input onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />
-                <label htmlFor="name" className={style.placeholder}>
-                  Nombre
-                </label>
+        <div className={style.menu}>
+          {selectedId == 1 && <div className={style.infoMenu}>
+            <div className={style.resumeInfo}>
+              <img src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image" />
+              <div>
+                <p className={style.name}>{user && user.name}</p>
+                <p className={style.email}>{user && user.email}</p>
+              </div>
+            </div>
+            <div className={style.form}>
+              <div className={style.formLeft}>
+                <div className={style.input}>
+                  <input onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />
+                  <label htmlFor="name" className={style.placeholder}>
+                    Nombre
+                  </label>
 
-              </div>
-        <div className={style.input}>
-                <input onChange={handleChange} name="email" className={style.inputForm} value={user && user.email} />
-                <label htmlFor="email" className={style.placeholder}>
-                  Email
-                </label>
-              </div>
-        <div className={style.input}>
-                <input name="location" className={style.inputForm} value={userData.location} onChange={handleChange} />
-                <label htmlFor="location" className={style.placeholder}>
-                  Location
-                </label>
-              </div>
-        </div>
-        <div className={style.formRight}>
-          <div className={style.input}>
-                <input onChange={handleChange} name="lastname" className={style.inputForm} value={userData.lastname} />
-                <label htmlFor="lastname" className={style.placeholder}>
-                  Apellido
-                </label>
-              </div>
-              <div className={style.input}>
-                <input name="age" className={style.inputForm} value={userData.age} onChange={handleChange} />
-                <label htmlFor="age" className={style.placeholder}>
-                  Edad
-                </label>
+                </div>
+                <div className={style.input}>
+                  <input onChange={handleChange} name="email" className={style.inputForm} value={user && user.email} />
+                  <label htmlFor="email" className={style.placeholder}>
+                    Email
+                  </label>
+                </div>
+                <div className={style.input}>
+                  <input name="location" className={style.inputForm} value={userData.location} onChange={handleChange} />
+                  <label htmlFor="location" className={style.placeholder}>
+                    Location
+                  </label>
+                </div>
               </div>
               <div className={style.input}>
                 <input name="phone_number" className={style.inputForm} value={userData.phone_number} onChange={handleChange} />
