@@ -1,10 +1,9 @@
-const { fn, col } = require('sequelize');
-const { Local } = require('../../db');
+const { Specialty } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
-    const allSpecialties = await Local.findAll({
-      attributes: [[fn('DISTINCT', col('specialty')), 'specialty']],
+    const allSpecialties = await Specialty.findAll({
+      attributes: [['name', 'specialty']],
     });
     res.status(200).json({ suceess: true, allSpecialties });
   } catch (error) {
