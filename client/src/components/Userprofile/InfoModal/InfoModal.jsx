@@ -1,6 +1,9 @@
 import '../InfoModal/InfoModal.css';
+
+
 const infoModal = ({ closeModal, name, age, email, lastname, phone_number, location, verified }) => {
-  return (
+    return (
+
         <div className="modalBackground">
             <div className="modalContainer">
                 <div className="closeBtnContainer" >
@@ -28,8 +31,17 @@ const infoModal = ({ closeModal, name, age, email, lastname, phone_number, locat
 
             </div>
 
+            <div>
+
+            </div>
         </div>
-  );
-};
+
+    );
+
+    };
+  
+
+ 
+
 
 export default infoModal;
