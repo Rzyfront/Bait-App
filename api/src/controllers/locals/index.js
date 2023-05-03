@@ -1,25 +1,27 @@
 const deleteLocal = require('./deleteLocal');
+const getDocument = require('./getDocument');
 const getLocals = require('./getLocals');
 const getLocalsDetail = require('./getLocalsDetail');
 const getLocalsName = require('./getLocalsName');
+const getServeDocument = require('./getServeDocument');
 const getSpecialties = require('./getSpecialties');
 const paramLocal = require('./paramLocal');
-const postLocal = require('./postLocal');
-const putLocal = require('./putLocal');
 const postAcquisitionRequest = require('./postAcquisitionRequest');
 const postDocument = require('./postDocument');
-const getDocument = require('./getDocument');
+const postLocal = require('./postLocal');
+const putLocal = require('./putLocal');
 
 module.exports = {
   deleteLocal,
+  getDocument,
   getLocals,
   getLocalsDetail,
   getLocalsName,
+  getServeDocument,
   getSpecialties,
   paramLocal,
-  postLocal,
-  putLocal,
   postAcquisitionRequest,
   postDocument,
-  getDocument,
+  postLocal,
+  putLocal,
 };

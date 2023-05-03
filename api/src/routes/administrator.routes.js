@@ -19,6 +19,7 @@ const {
   putAssignLocal,
   putCreateAdmin,
   getLocalsToVerify,
+  putDenyLocal,
 } = require('../controllers/administrator');
 const { getUserProfile } = require('../controllers/users');
 
@@ -34,6 +35,7 @@ administratorRoute
   .patch('/role/:userId', isAdmin, changeRole)
   .patch('/suspend/:userId', isAdmin, patchSupendUser)
   .put('/assignLocal', isAdmin, putAssignLocal)
+  .put('/denyLocal', isAdmin, putDenyLocal)// TODO doc
   .delete('/review/:reviewId', isAdmin, deleteReview)
   .post('/test', isSuperAdmin, usersTest);
 
