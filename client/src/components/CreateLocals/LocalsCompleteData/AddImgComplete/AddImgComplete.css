@@ -104,7 +104,7 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
-    background-color: var(--btn-primary);
+    background-color: var(--btn-secondary);
     width: 80%;
     height: 40px;
     border-radius: 5px;
@@ -113,6 +113,7 @@
 
 .AddImgComplete .documentInput:hover {
     background-color: var(--btn-secondary);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .AddImgComplete .documentInput:hover .documentInputText{
@@ -120,18 +121,20 @@
 }
 
 .AddImgComplete .documentInput:hover .documentInputIcon {
-    color: var(--tertiary);
+    color: var(--secondary);
 }
 
 .AddImgComplete .documentInput .documentInputText{
     font-size: 1rem;
     font-family: var(--title);
     font-weight: 600;
+    color: var(--tertiary);
 }
 
 .AddImgComplete .documentInput .documentInputIcon {
     font-size: 25px;
     font-family: var(--title);
     font-weight: 700;
+    color: var(--tertiary);
 
 }
