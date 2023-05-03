@@ -1,18 +1,28 @@
-const { Local, User } = require('../../db');
+const { Local, /** User, */ Specialty } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    name, location, schedule, email, characteristics, images, specialty, lat, lng, document,
+    name, location, schedule, email, characteristics, images, specialty, lat, lng, document, address,
   } = req.body;
   try {
-    const user = await User.findByPk(req.userId);
+    // const user = await User.findByPk(req.userId);
     const newLocal = await Local.create({
-      name, location, schedule, email, specialty, lat, lng,
+      name,
+      location,
+      email,
+      address,
+      lat,
+      lng,
     });
+    if (specialty.length) {
+      const specialties = await Promise.all(specialty.map((specialtyName) => Specialty.findOrCreate({ where: { name: specialtyName } })));
+      newLocal.setSpecialties(specialties.map((spl) => spl[0].id));
+    }
+    if (schedule) await newLocal.createSchedule(schedule);
     await newLocal.createCharacteristic(characteristics);
     await newLocal.addImages(images.map((image) => image.id));
     if (document && document.id) {
-      await user.addLocal(newLocal);
+      // await user.addLocal(newLocal);
       await newLocal.setDocument(document.id);
     }
     const local = {
@@ -32,14 +42,14 @@ module.exports = async (req, res) => {
  * /locals:
  *   post:
  *     summary: Crea un nuevo local.
- *     description: Crea un local con los datos recibidos por body,lo añade a los locales del usuario obtenido del token y le asigna imágenes y un documento en caso de ser enviados.
+ *     description: Crea un local con los datos recibidos por body, le asigna imágenes y un documento en caso de ser enviados.
  *     tags: [Local]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: header
  *         name: Authorization
- *         description: Token de autorización JWT del cual se obtiene el id del usuario.
+ *         description: Token de autorización JWT del cual se verifica que el usuario este logueado.
  *         schema:
  *           type: string
  *         required: true
@@ -56,33 +66,34 @@ module.exports = async (req, res) => {
  *               location:
  *                 type: string
  *                 description: Ubicación del local.
- *               schedule:
+ *               address:
  *                 type: string
- *                 description: Horario de atención del local.
+ *                 description: Ubicación del local.
  *               email:
  *                 type: string
  *                 description: Correo electrónico del local.
- *               characteristics:
- *                 type: string
- *                 description: Características del local.
- *               images:
- *                 type: array
- *                 description: Arreglo de objetos con los IDs de las imágenes del local.
- *                 items:
- *                   type: object
- *                   properties:
- *                     id:
- *                       type: integer
- *                       description: ID de la imagen del local.
- *               specialty:
- *                 type: string
- *                 description: Especialidad del local.
  *               lat:
  *                 type: number
  *                 description: Latitud de la ubicación del local.
  *               lng:
  *                 type: number
  *                 description: Longitud de la ubicación del local.
+ *               images:
+ *                 type: array
+ *                 description: Arreglo de objetos con los IDs de las imágenes del local.
+ *                 items:
+ *                   $ref: '#/components/schemas/Image'
+ *               specialty:
+ *                 type: array
+ *                 description: Especialidades del local
+ *                 items:
+ *                   type: string
+ *                   description: Especialidad del local
+ *                   example: 'Parrilla'
+ *               schedule:
+ *                 $ref: '#/components/schemas/Schedule'
+ *               characteristics:
+ *                 $ref: '#/components/schemas/Characteristic'
  *               document:
  *                 type: object
  *                 nullable: true
@@ -116,9 +127,6 @@ module.exports = async (req, res) => {
  *                     location:
  *                       type: string
  *                       description: Ubicación del local.
- *                     specialty:
- *                       type: string
- *                       description: Especialidad del local.
  *                   example:
  *                     id: 1
  *                     name: Mac Donals

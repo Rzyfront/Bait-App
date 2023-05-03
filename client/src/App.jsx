@@ -14,7 +14,7 @@ import {
   MenuForm,
   FindLocals
 } from './components/components.js';
-import Mapdata from './components/Map/Mapdata';
+import HomeReview from './components/HomeReview/HomeReview';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
@@ -50,6 +50,7 @@ function App () {
     <div className='App animated-element'>
       <Routes>
         <Route path='/home/:id' element={<Home />} />
+        <Route path='/writeAReview/:id' element={<HomeReview />} />
         <Route path='/profile/:id' element={<Profile />} />
         {/* <Route path='/userprofile' element={<Userprofile />} /> */}
         <Route path='/createplace' element={<CreateLocals />} />

@@ -39,7 +39,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
             </div>
             <div className='Review-Main-Info'>
                   <h3 className='Review-Card-Title'>{title}</h3>
-                 <div className='Review-Comment-Group'>
+                 <div className={`Review-Comment-Group ${showMore && 'Review-Comment-Group-Extend'}`}>
                     <p className='Comment'>{comment}</p>
                     <p className='More' onClick={handleShowMore}>{showMore
                       ? 'Ver menos...'
