@@ -5,38 +5,39 @@ import {
   getReviews,
   getUserProfile,
   updateUser,
-  getUserLocals
+  getUserLocals,
+  getAllLocal
 } from '../../redux/actions/actions';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useUploadImage } from '../../hooks/useUploadImage';
-import { Loading } from '@nextui-org/react';
+// import { Loading } from '@nextui-org/react';
 import style from './UserProfile.module.css';
 import { FiUser, FiGift } from 'react-icons/fi';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import { RiImageAddFill } from 'react-icons/ri';
-import swal from 'sweetalert'
+// import { RiImageAddFill } from 'react-icons/ri';
+import swal from 'sweetalert';
 
-import UserLocals from './UserLocals';
+// import UserLocals from './UserLocals';
 
 const defaultImg = 'https://i.pinimg.com/474x/bc/df/1d/bcdf1dc5c5f2d1b6665f7f3ea8740ec7.jpg';
 
 function Userprofile () {
-  const { image, loading, handleChangeimage } = useUploadImage();
+  const { image, handleChangeimage } = useUploadImage();
 
   const [userData, setUserData] = useState({
-    name: "",
-    lastname: "",
-    age: "",
-    email: "",
-    phone_number: "",
-    image: { id: "", url: "" },
-    location: "",
-    id: ""
+    name: '',
+    lastname: '',
+    age: '',
+    email: '',
+    phone_number: '',
+    image: { id: '', url: '' },
+    location: '',
+    id: ''
   });
 
   const dispatch = useDispatch();
@@ -82,7 +83,6 @@ function Userprofile () {
   };
 
   const handleDeleteReview = async (id) => {
-
     swal({
       title: '¿Está seguro(a)',
       text: 'Una vez borrado no podrás deshacer esta acción',
@@ -92,41 +92,36 @@ function Userprofile () {
     })
       .then(async (willDelete) => {
         if (willDelete) {
-          await axios.delete(`/reviews/${id}`).then((res) => {
-
+          await axios.delete(`/reviews/${id}`).then(() => {
             swal('¡Review eliminada con éxito!', {
               icon: 'success'
             });
             dispatch(getAllLocal(1, ''));
-
-
-          }).catch((err)=>{
-            swal(err.response.data.message)
-          })
+          }).catch((err) => {
+            swal(err.response.data.message);
+          });
         }
-      })
-  }
+      });
+  };
 
-    const handleInicio = () => {
-      navigate("/home/1?name=&city=");
-    };
+  const handleInicio = () => {
+    navigate('/home/1?name=&city=');
+  };
 
-    const handleChange = (event) => {
-      let property = event.target.name
-      let value = event.target.value
+  const handleChange = (event) => {
+    const property = event.target.name;
+    const value = event.target.value;
 
-      setUserData({
-        ...userData,
-        [property]: value
-      })
-    }
+    setUserData({
+      ...userData,
+      [property]: value
+    });
+  };
 
-    const handleSave = () => {
-      dispatch(updateUser(userData))
-      swal(`Usuario Actualizado Exitosamente `)
-    }
-
-
+  const handleSave = () => {
+    dispatch(updateUser(userData));
+    swal('Usuario Actualizado Exitosamente ');
+  };
 
   return (
     <div className={style.profileContainer}>
@@ -183,8 +178,9 @@ function Userprofile () {
                 </label>
               </div>
         </div>
-        </div>
+        {/* </div> */}
         <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
+      {/* </div> */}
       </div>}
       {selectedId === 2 && <div className={style.myLocals}>
         <p className={style.titleLocal}>Ultimas reseñas</p>
@@ -204,7 +200,7 @@ function Userprofile () {
                 <p className={style.dateReview}>04/12/2023</p>
               </div>
               <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <button className={style.deleteReview}>Eliminar</button>
+                <button className={style.deleteReview} onClick={() => handleDeleteReview(1)}>Eliminar</button>
               </div>
           </div>
           { userProfile?.Reviews.map((rev, i) => {
