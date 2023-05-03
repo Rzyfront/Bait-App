@@ -134,3 +134,30 @@
 .dash-res-button:hover {
     color: var(--btn-primary);
 }
+
+.dash-res-anchor {
+    text-decoration: underline;
+}
+
+.dash-res-anchor:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: var(--btn-primary);
+}
+
+.res-icons {
+    margin-right: 2px;
+    padding: 5px;
+    background-color: var(--bg-secondary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+}
+
+.assign:hover {
+    background-color: var(--optional1);
+}
+
+.deny:hover {
+    background-color: var(--optional2);
+}

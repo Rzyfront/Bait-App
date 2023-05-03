@@ -43,7 +43,7 @@ const OneRestaurant = ({ name, image, verified, filter, id }) => {
           if (willDelete) {
             dispatch(deleteLocal(id)).then((res) => {
               if (!res) {
-                swal('¡Local eliminado con éxito!', {
+                swal('Local archivado.', {
                   icon: 'success'
                 });
                 dispatch(getAllLocal(1, ''));
