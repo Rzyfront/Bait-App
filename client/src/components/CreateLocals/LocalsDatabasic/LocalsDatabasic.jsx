@@ -169,7 +169,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
           />
         </Link>
         <h1 className='Basic-Title'>Crea un <span>nuevo</span> Local</h1>
-        <form onSubmit={handleSubmit} className='Basic-Form-Create'>
+        <div className='Basic-Form-Create'>
           <div className='Map-Basic-Group'>
             <div className='Basic-Inputs-Component'>
               <div className='Name-Input-Group'>
@@ -205,7 +205,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
             <div className='MapSize-Basic'>
               <Mapdata Mapcenter={Mapcenter} statemap={statemap} handleBoton={handleBoton} handlemapdatas={handlemapdatas} />
             </div>
-            <button onClick={searchCity} className='Pick-Location-Basic'>
+            <button onClick={searchCity} type='button' className='Pick-Location-Basic'>
               Buscar ciudad
             </button>
             {statesupmit === true && errors.location && <PopComent text={errors.location} />}
@@ -246,10 +246,10 @@ function LocalsDatabasic ({ formType, setFormType }) {
                     <RiImageAddFill className='LocalesImage' />
                     )}
             </label>
-            <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate /></button>
+            <button type='submit' className='Send-Locals' onClick={ handleSubmit }> Crear nuevo Local <IoCreate /></button>
           </div>
 
-        </form>
+        </div>
 
       </div>
       <ToastContainer className="errors" theme='colored' />
