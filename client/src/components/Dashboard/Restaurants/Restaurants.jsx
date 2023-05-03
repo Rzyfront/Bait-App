@@ -45,7 +45,6 @@ const Restaurantes = () => {
       verified: e.target.value,
       page: 1
     });
-    console.log(filter.verified);
   };
 
   const paginade = (e) => {
@@ -56,39 +55,37 @@ const Restaurantes = () => {
   };
 
   return (
-    <div className={style.options}>
+    <div className='restaurants-container'>
+      <div className='restaurants-title-bar'>
         <h2 className={style.nameSection}>Locales</h2>
-      <select
-        onChange={handleSelect}
-        value={filter.verified}
-        defaultValue=""
-      >
-        <option value="" disabled selected>Estado</option>
-        <option value="" >all</option>
-        <option value="unVerified" >unVerified</option>
-        <option value="verified" >verified</option>
-        <option value="suspended" >suspended</option>
-      </select >
-        <input placeholder="Nombre" className={style.buscador} value={filter.name} onChange={handleFilter} name="name"></input>
-      <input placeholder="ciudad" className={style.buscador} onChange={handleFilter} name='location'></input>
+        <div className='filter-restaurants-group'>
+        <select
+          onChange={handleSelect}
+          value={filter.verified}
+          defaultValue=""
+        >
+          <option value="" disabled selected>Estado</option>
+          <option value="" >Todos</option>
+          <option value="unVerified" >A verificar</option>
+          <option value="verified" >Verificados</option>
+          <option value="suspended" >Suspendidos</option>
+        </select >
 
-        {/* <div className={style.containerUserCard}>
-        {locals
-          ? locals.map((data, index) => {
-            return <OneRestaurant key={index} name={data.name} image={data.Images
-} verified={data.verified} id={data.id} filter={filter}/>;
-          })
-          : ''}
+        <input placeholder="Nombre del local" className='search-res-input' value={filter.name} onChange={handleFilter} name="name"></input>
 
-        </div> */}
+        <input placeholder="Ciudad" className='search-res-input' onChange={handleFilter} name='location'></input>
+        </div>
+      </div>
       <div className="table-responsive">
         <table className="table table-bordered">
-          <thead>
+          <thead className='thead-restaurants'>
             <tr>
               <th>Nombre del local</th>
               <th>Estado</th>
+              <th>Detalle</th>
               {filter.verified === 'unVerified' && <th>Documentación</th>}
-              <th>Detalles</th>
+              <th>Usuario</th>
+              <th>Acciones</th>
             </tr>
           </thead>
           <tbody>
