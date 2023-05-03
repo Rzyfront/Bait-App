@@ -12,11 +12,12 @@ import ReviewLocal from '../FindLocals/ReviewLocal/ReviewLocal';
 import ClaimLocal from './ClaimLocal/ClaimLocal';
 
 function Profile () {
+  const queryParams = new URLSearchParams(location.search);
   const [ShowReviews, ShowMenu] = ['ShowReviews', 'ShowMenu'];
   const dispatch = useDispatch();
   const { detail, successDish } = useSelector(state => state);
   const [toggleModal, setToggleModal] = useState(ShowReviews);
-  const [ShowReviewList, setShowReviewList] = useState(false);
+  const [ShowReviewList, setShowReviewList] = useState(!!queryParams.get('review'));
   const { id } = useParams();
   const [page, setPage] = useState(1);
   const [modalClaimLocal, setModalClaimLocal] = useState(false);

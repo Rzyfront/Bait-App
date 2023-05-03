@@ -41,7 +41,7 @@ const Landing = () => {
                 <span>Reseña</span> los lugares que has visitado y consigue
                 promociones exclusivas
               </h3>
-              <Link to='/home/1?name=&city='>
+              <Link to='/writeAReview/1?name=&city='>
                 <button>Reseñar</button>
               </Link>
             </div>
