@@ -12,3 +12,8 @@ export const path = (id, name, city, { specialty, characteristics, rating, alpha
   };
   return pathFilters;
 };
+
+export const pathReview = (id, name, city) => {
+  const pathFilters = `/writeAReview/${id}?name=${name}&city=${city}`;
+  return pathFilters;
+};
