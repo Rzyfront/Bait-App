@@ -25,13 +25,13 @@ function LocalsCompleteData () {
   const [mapSearch, setMapsearch] = useState('');
   const [showShedule, setShowSchedule] = useState(false);
   const [schedulState, setScheduleState] = useState({
-    lunes: { open: '', close: '' },
-    martes: { open: '', close: '' },
-    miercoles: { open: '', close: '' },
-    jueves: { open: '', close: '' },
-    viernes: { open: '', close: '' },
-    sabado: { open: '', close: '' },
-    domingo: { open: '', close: '' }
+    monday: { open: '', close: '' },
+    tuesday: { open: '', close: '' },
+    wednesday: { open: '', close: '' },
+    thursday: { open: '', close: '' },
+    friday: { open: '', close: '' },
+    saturday: { open: '', close: '' },
+    sunday: { open: '', close: '' }
   });
 
   // map controllers
@@ -74,7 +74,7 @@ function LocalsCompleteData () {
   /// inputs and erros
   const [inputs, setInputs] = useState({
     name: '',
-    schedule: '',
+    schedule: {},
     email: '',
     phone: '',
     specialty: [],
@@ -83,7 +83,8 @@ function LocalsCompleteData () {
     payments: [],
     address: '',
     location: {},
-    images: []
+    images: [],
+    document: {}
   });
   // Error controller
   const [errors, setErrors] = useState({
@@ -102,6 +103,12 @@ function LocalsCompleteData () {
 
     );
   }, [inputs]);
+
+  useEffect(() => {
+    setInputs(
+      { ...inputs, schedule: schedulState }
+    );
+  }, [schedulState]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -135,7 +142,7 @@ function LocalsCompleteData () {
       }, 5000);
     }
   };
-
+  console.log(inputs);
   // const handleSelect = (selectedOptions) => {
   //   console.log(selectedOptions);
   //   const selected = selectedOptions.map(option => option.label);
@@ -172,6 +179,8 @@ function LocalsCompleteData () {
       statemap={statemap}
       handleBoton={handleBoton}
       handlemapdatas={handlemapdatas}
+      handleChange={handleChange}
+      inputs={inputs}
       searchCity={searchCity}
       statesupmit={statesupmit}
       />
