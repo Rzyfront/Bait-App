@@ -76,8 +76,8 @@ User.hasOne(Image);
 Local.hasOne(Schedule, { as: 'schedule' });
 Schedule.belongsTo(Local);
 
-Local.hasMany(Specialty, { as: 'specialties' });
-Specialty.belongsTo(Local);
+Local.belongsToMany(Specialty, { as: 'specialties', through: 'localSpecialties' });
+Specialty.belongsToMany(Local, { as: 'localId', through: 'localSpecialties' });
 
 module.exports = {
   ...sequelize.models,

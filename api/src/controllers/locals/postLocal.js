@@ -1,14 +1,24 @@
-const { Local, User } = require('../../db');
+const { Local, User, Specialty } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    name, location, schedule, email, characteristics, images, specialty, lat, lng, document,
+    name, location, schedule, email, characteristics, images, specialty, lat, lng, document, address,
   } = req.body;
   try {
     const user = await User.findByPk(req.userId);
     const newLocal = await Local.create({
-      name, location, schedule, email, specialty, lat, lng,
+      name,
+      location,
+      email,
+      address,
+      lat,
+      lng,
     });
+    if (specialty.length) {
+      const specialties = await Promise.all(specialty.map((specialtyName) => Specialty.findOrCreate({ where: { name: specialtyName } })));
+      newLocal.setSpecialties(specialties.map((spl) => spl[0].id));
+    }
+    if (schedule) await newLocal.createSchedule(schedule);
     await newLocal.createCharacteristic(characteristics);
     await newLocal.addImages(images.map((image) => image.id));
     if (document && document.id) {
@@ -56,9 +66,11 @@ module.exports = async (req, res) => {
  *               location:
  *                 type: string
  *                 description: Ubicación del local.
- *               schedule:
+ *               address:
  *                 type: string
- *                 description: Horario de atención del local.
+ *                 description: Ubicación del local.
+ *               schedule:
+ *                 $ref: '#/components/schemas/Schedule'
  *               email:
  *                 type: string
  *                 description: Correo electrónico del local.
@@ -75,8 +87,10 @@ module.exports = async (req, res) => {
  *                       type: integer
  *                       description: ID de la imagen del local.
  *               specialty:
- *                 type: string
- *                 description: Especialidad del local.
+ *                 type: array
+ *                 description: Especialidades del local.
+ *                 items:
+ *                   $ref: '#/components/schemas/Specialty'
  *               lat:
  *                 type: number
  *                 description: Latitud de la ubicación del local.
@@ -116,9 +130,6 @@ module.exports = async (req, res) => {
  *                     location:
  *                       type: string
  *                       description: Ubicación del local.
- *                     specialty:
- *                       type: string
- *                       description: Especialidad del local.
  *                   example:
  *                     id: 1
  *                     name: Mac Donals

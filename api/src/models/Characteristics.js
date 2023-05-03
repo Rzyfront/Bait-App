@@ -6,7 +6,7 @@ module.exports = (sequelize) => {
     {
       type: {
         type: DataTypes.ENUM('Elegante', 'Joven', 'Nuevo', 'Colonial'),
-        default: 'Nuevo',
+        defaultValue: 'Nuevo',
       },
       wifi: {
         type: DataTypes.BOOLEAN,

@@ -2,21 +2,26 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define('Specialty', {
-    name: {
-      type: DataTypes.ENUM,
-      values: [
-        'Italiana',
-        'Francesa',
-        'India',
-        'Asiática',
-        'Parrilla',
-        'Comida rápida',
-        'Vegana',
-        'Vegetariana',
-        'Dietas especiales',
-      ],
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-  });
+    name: {
+      type: DataTypes.STRING,
+      // values: [
+      //   'Italiana',
+      //   'Francesa',
+      //   'India',
+      //   'Asiática',
+      //   'Parrilla',
+      //   'Comida rápida',
+      //   'Vegana',
+      //   'Vegetariana',
+      //   'Dietas especiales',
+      // ],
+    },
+  }, { timestamps: false });
 };
 
 /**
@@ -28,7 +33,9 @@ module.exports = (sequelize) => {
  *      properties:
  *        name:
  *          type: string
- *          enum: [Italiana, Francesa, India, Asiática, Parrilla, Comida rápida, Vegana, Vegetariana, Dietas especiales]
  *          description: El nombre de la especialidad de comida.
- *
- */
+ *          example: Parrilla
+*
+*/
+
+// *          enum: [Italiana, Francesa, India, Asiática, Parrilla, Comida rápida, Vegana, Vegetariana, Dietas especiales]

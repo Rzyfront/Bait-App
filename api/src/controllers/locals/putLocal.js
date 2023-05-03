@@ -1,21 +1,26 @@
-const { Characteristic } = require('../../db');
+const { Characteristic, Schedule, Specialty } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
-    name, location, schedule, email, characteristics, lat, lng, specialty, document, images,
+    name, location, schedule, email, characteristics, lat, lng, specialty, document, images, address,
   } = req.body;
   try {
     await Characteristic.update(characteristics, { where: { id: req.local.id } });
+    await Schedule.update(schedule, { where: { id: req.local.id } });
     const updateLocal = await req.local.update({
-      name, location, schedule, email, lat, lng, specialty,
+      name, location, address, email, lat, lng,
     });
+    if (specialty.length) {
+      const specialties = await Promise.all(specialty.map((specialtyName) => Specialty.findOrCreate({ where: { name: specialtyName } })));
+      updateLocal.setSpecialties(specialties.map((spl) => spl[0].id));
+    }
+
     if (document) await updateLocal.setDocument(document.id);
     if (images && images.length) await updateLocal.setImages(images.map((img) => img.id));
     const local = {
       id: updateLocal.id,
       name: updateLocal.name,
       location: updateLocal.location,
-      specialty: updateLocal.specialty,
     };
     return res.status(201).json({ success: true, local });
   } catch (err) {

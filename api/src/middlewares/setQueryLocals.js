@@ -2,7 +2,7 @@ const { Op, fn, col } = require('sequelize');
 
 module.exports = (req, res, next) => {
   const {
-    name, location, order, verified, specialty, menu, ...characteristics
+    name, location, order, verified, specialty, menu, document, toVerify, ...characteristics
   } = req.query;
   const where = {};
   let reqOrder = [];
@@ -21,7 +21,8 @@ module.exports = (req, res, next) => {
     req.requireReviews = true;
   }
   if (specialty) {
-    where.specialty = { [Op.iLike]: `%${specialty}%` };
+    // req.specialty = { name: { [Op.iLike]: `%${specialty}%` } };
+    req.specialty = { name: specialty };
   }
   if (menu) {
     req.menu = { type: menu };
@@ -29,6 +30,14 @@ module.exports = (req, res, next) => {
   where.verified = verified ?? {
     [Op.or]: ['verified', 'unVerified'],
   };
+
+  if (document) {
+    req.queryDocument = document;
+  }
+  if (toVerify) {
+    where.verified = 'unVerified';
+    req.queryDocument = document;
+  }
 
   if (typeof characteristics.characteristics === 'string') req.characteristics = JSON.parse(characteristics.characteristics);
   else req.characteristics = characteristics;
