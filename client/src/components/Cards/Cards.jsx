@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 import './Cards.css';
 import { Card, Pagination } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import eliminarTildes from '../../hooks/eliminarTildes.';
+import { MdAddBusiness } from 'react-icons/md';
 
 function Cards ({ toggle }) {
   const location = useLocation();
@@ -19,6 +20,7 @@ function Cards ({ toggle }) {
   const [characteristics, setCharacteristics] = useState([]);
   const [page, setPage] = useState(1);
   const [outAnimation, setOutAnimation] = useState(false);
+  const ubication = useSelector((state) => state.ubication);
 
   useEffect(() => {
     setPage(pagine.id);
@@ -85,6 +87,19 @@ function Cards ({ toggle }) {
               );
             }
           )}
+          {
+          !locals?.length &&
+            <div className="NoLocalsReview">
+              <h3 className='Nofind'>No existe un local que coincida con la busqueda</h3>
+
+                <Link to={`/home/1?name=&city=${ubication.city}`}>
+                  <div className="AddPlace">
+                    <h2 className="AddPlace_Text">Ver todos</h2> <MdAddBusiness />
+                  </div>
+                </Link>
+
+        </div>
+        }
           </div>
       </div>
       {!toggle &&
