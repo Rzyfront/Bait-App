@@ -20,7 +20,6 @@ module.exports = async (req, res) => {
       offset: (req.page - 1) * 10,
     });
     const totalPages = Math.ceil(count / 10);
-    console.log(rows.length);
     return res.status(200).json({
       totalPages, count, success: true, reviews: rows,
     });
