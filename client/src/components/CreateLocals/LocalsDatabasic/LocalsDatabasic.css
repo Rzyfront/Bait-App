@@ -1,5 +1,6 @@
 .LocalsDataBasic-Component .Container-Basic {
     position: relative;
+    overflow: hidden;
     width: 80%;
     height: 95%;
     padding: 30px;
@@ -9,11 +10,26 @@
     flex-direction: column;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
-    background: conic-gradient(from 60deg at 0% 100%,var(--bg-tertiary) 0%, var(--bg-primary) 100%);
-
+    /* background: conic-gradient(from 60deg at 0% 100%,var(--bg-tertiary) 0%, var(--bg-primary) 100%); */
+    z-index: var(--alto-2);
 }
 
+.LocalsDataBasic-Component .Container-Basic .Wabe-button {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    z-index: var(--bajo-1);
+    border-radius: 10px;
+}
 
+.LocalsDataBasic-Component .Container-Basic .Wabe-Top {
+    position: absolute;
+    height: 200px;
+    top: 0px;
+    right: 0px;
+    z-index: var(--bajo-1);
+    border-radius: 10px;
+}
 
 .LocalsDataBasic-Component .Container-Basic .LinkLogo {
     position: absolute;
@@ -142,24 +158,42 @@
 
 .Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    /* CAMBIAR A CENTER CUANDO AGREGE SLIDE */
-    justify-content: start;
+    justify-content: center;
     text-align: center;
     width: 100%;
     height: 65%;
-    gap: 5px;
-    overflow-y: auto;
     transition: 0.3s;
     background-color: var(--bg-primary);
     border-radius: 10px;
-    padding: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add .Img-Header {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add .Img-Header .Slide-Img-Carrousel {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add:hover {
     transform: scale(1.01);
+}
+
+.Container-Basic .Basic-Form-Create .Basic-Img-Group .Label-Img-Add .Img-Header .Slide-Img-Carrousel img {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* aspect-ratio: 16/9; */
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .Container-Basic .Basic-Form-Create .Basic-Img-Group .Add-Img-Basic{

@@ -1,7 +1,6 @@
 const { Menu, Dish, Image } = require('../../db');
 
 module.exports = async (req, res) => {
-  console.log('aquí');
   try {
     const { menuId } = req.params;
     const menu = await Menu.findByPk(menuId, {
@@ -12,7 +11,7 @@ module.exports = async (req, res) => {
         },
       ],
     });
-    if (!menu) throw new Error('Menu not found');
+    if (!menu) throw new Error('No se encontró el menu');
     res.status(200).json({ success: true, menu });
   } catch (error) {
     res.status(404).json({ message: error.message, success: false });

@@ -28,9 +28,9 @@ module.exports = async (req, res) => {
     if (image) await newUser.setImage(image.id);
     res
       .status(201)
-      .json({ success: true, message: 'Email send' });
+      .json({ success: true, message: `Se envió ha enviado un email de verificación a "${email}", por favor revisa tu bandeja de entrada` });
   } catch (error) {
-    res.status(400).json({ message: `Failed to create user:  ${error.message}`, success: false });
+    res.status(400).json({ message: `Error al crear usuario:  ${error.message}`, success: false });
   }
 };
 

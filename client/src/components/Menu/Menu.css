@@ -101,3 +101,19 @@
 .Menu .buttons-menu .btn-add-sect:hover {
     background-color: var(--btn-primary);
 }
+
+@media screen and (max-width:1050px) {
+    .Menu {
+            width: 85%;
+        }
+}
+@media screen and (max-width:900px) {
+    .Menu {
+        width: 90%;
+    }
+}
+@media screen and (max-width:750px) {
+    .Menu {
+            width: 98%;
+        }
+}

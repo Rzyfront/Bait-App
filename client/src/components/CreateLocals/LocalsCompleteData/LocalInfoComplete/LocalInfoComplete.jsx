@@ -8,7 +8,7 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
     setInputs(inputs => ({ ...inputs, specialty: selectedSpecialty }));
   };
   const handleRestaurantTypeChange = (selectedOptions) => {
-    setInputs(inputs => ({ ...inputs, restaurantType: selectedOptions }));
+    setInputs(inputs => ({ ...inputs, restaurantType: selectedOptions.value }));
   };
   const handleCharacteristicsChange = (selectedOptions) => {
     const selectedCharacteristics = selectedOptions.map(option => option.value);
