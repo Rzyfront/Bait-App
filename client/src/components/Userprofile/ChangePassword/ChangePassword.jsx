@@ -20,7 +20,7 @@ const ChangePassword = ({ id }) => {
 
     const handleSavePassword = async () => {
         try {
-            const response = await axios.put('user/changepassword',
+            const response = await axios.put('/user/changepassword',
                 {
                     oldPassword:passwords.oldPassword,
                     newPassword:passwords.newPassword
