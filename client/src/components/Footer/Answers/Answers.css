@@ -1,4 +1,4 @@
-.Answers-Component{
+.Developers-Component{
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -9,7 +9,7 @@
     background-color: var(--bg-primary);
 }
 
-.Answers-Component .Answers-Container{
+.Developers-Component .Developers-Container{
     width: 60%;
     padding: 30px;
     background-color: var(--bg-primary);
@@ -23,17 +23,17 @@
 
 }
 
-.Answers-Component .Answers-Container .Bait_Logo{
+.Developers-Component .Developers-Container .Bait_Logo{
     width: 130px;
     transition: 0.3s;
 }
 
-.Answers-Component .Answers-Container .Bait_Logo:hover {
+.Developers-Component .Developers-Container .Bait_Logo:hover {
    transform: scale(1.1);
     filter: drop-shadow(0px 0px 1px rgba(17, 17, 17, 0.642))
 }
 
-.Answers-Component .Answers-Container .Title{
+.Developers-Component .Developers-Container .Title{
     font-size: 40px;
     color: var(--primary);
     font-weight: 600;
@@ -41,11 +41,11 @@
     padding-bottom: 20px;
 }
 
-.Answers-Component .Answers-Container .Title span{
+.Developers-Component .Developers-Container .Title span{
     color: var(--secondary);
 }
 
-.Answers-Component .Answers-Container p{
+.Developers-Component .Developers-Container p{
     padding:0px 20px;
     color: var(--primary);
     font-size: 15px;
@@ -53,23 +53,22 @@
     font-weight: 400;
 }
 
-.Answers-Component .Answers-Container p span {
+.Developers-Component .Developers-Container p span {
     color: var(--secondary);
     font-weight: 600;
     font-style: italic;
 }
 
-.Answers-Component .Answers-Container .Header-Answers{
+.Developers-Component .Developers-Container .Header-Developers{
     font-weight: 500;
 }
 
-.Answers-Component .Answers-Container .Answer-Buttons{
+.Developers-Component .Developers-Container .Developers-Buttons{
     display: flex;
     gap: 30px;
 }
 
-.Answers-Component .Answers-Container .Answer-Buttons .Answers-Entendido,
-.Answers-Component .Answers-Container .Answer-Buttons .Answers-Volver{
+.Developers-Component .Developers-Container .Developers-Buttons .Developers-Volver{
     width: 140px;
     height: 35px;
     border-radius: 20px;
@@ -81,14 +80,14 @@
     transition: 0.3s;
 }
 
-.Answers-Component .Answers-Container .Answer-Buttons .Answers-Entendido:hover{
+.Developers-Component .Developers-Container .Answer-Buttons .Developers-Entendido:hover{
  background-color: var(--bg-tertiary);
  color: var(--tertiary);
  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
  rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-.Answers-Component .Answers-Container .Answer-Buttons .Answers-Volver:hover {
+.Developers-Component .Developers-Container .Developers-Buttons .Developers-Volver:hover {
     background-color: var(--optional2);
     color: var(--tertiary);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;

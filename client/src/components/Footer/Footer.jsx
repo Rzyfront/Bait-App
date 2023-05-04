@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <div id='Footer' className="Container_Footer">
       <div className="SocialMedia">
-        <a href='https://www.instagram.com/bait.app/' target='_blank' className="SM_IconLinks SM_Instagram" rel="noreferrer">
+        <a href='https://www.instagram.com/bait.app/' target='_blank' className="SM_IconLinks SM_Instagram" rel="noreferrer"/>
         <a href='https://www.instagram.com/bait.app/' target='_blank' className="SM_IconLinks SM_Instagram" rel="noreferrer">
           <AiFillInstagram />
           <p>Instagram</p>
@@ -84,7 +84,6 @@ const Footer = () => {
         <div className="InfoFooter4">
           <ul>
               <li>
-              <Link to="/createplace#complete-form">Inscribe tu Local</Link>
               <Link to="/createplace#complete-form">Inscribe tu Local</Link>
             </li>
             <li>
