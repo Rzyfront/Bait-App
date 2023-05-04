@@ -66,6 +66,7 @@
 
 .ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .More{
     width: 20%;
+    font-size: 0.9rem;
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
@@ -148,4 +149,66 @@
 .ReviewCard-Simple {
     height: 200px;
     overflow: hidden;
+}
+
+
+@media screen and (max-width: 750px) {
+    .ReviewCard-Completed .ReviewCard-head .Rating-General .Rating-Num {
+        font-size: 1.2rem;
+    }
+    .ReviewCard-Completed .Review-Main-Info .Review-Card-Title {
+        font-size: 1.2rem;
+    }
+    .ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .Comment {
+        font-size: 0.8rem;
+    }
+    .ReviewCard-Completed .Review-Main-Info .Review-Comment-Group .More {
+        font-size: 0.7rem;
+    }
+
+    .ReviewCard-Completed .Aditional-Info .Info-left .Rating-C-Group-Container .Rating-C-Group {
+        font-size: 0.8rem;
+    }
+    .ReviewCard-Completed .Aditional-Info .Info-left {
+        width: 50%;
+        gap: 5px;
+        padding: 10px;
+    }
+        .ReviewCard-Completed .Aditional-Info .Rigth-Img {
+            width: 45%;
+            height: 95%;
+        }
+}
+
+@media screen and (max-width: 550px) {
+    .ReviewCard-Completed {
+            margin: 8px 3px;
+            padding: 8px;
+    }
+
+    .ReviewCard-Completed .Review-Main-Info {
+        padding: 10px 7px;
+    }
+    
+    .ReviewCard-Completed .ReviewCard-head .Rating-General {
+        margin-right: 3px;
+    }
+
+    .ReviewCard-Completed .Aditional-Info {
+            flex-direction: column;
+        }
+
+    .ReviewCard-Completed .Aditional-Info .Info-left {
+        width: 80%;
+        gap: 5px;
+        padding: 10px;
+        align-items: center;
+    }
+
+    .ReviewCard-Completed .Aditional-Info .Rigth-Img {
+        width:70%;
+        height: 95%;
+        align-items: center;
+    }
+
 }

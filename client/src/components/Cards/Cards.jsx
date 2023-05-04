@@ -44,6 +44,7 @@ function Cards ({ toggle }) {
     const ciudad = eliminarTildes(city);
     dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
   }, [name, city, specialty, order, characteristics, page]);
+
   return (
     <div className="containerCardsall animated-element">
       <div className="ContainerCards animated-element">
@@ -60,6 +61,7 @@ function Cards ({ toggle }) {
                 schedule,
                 id,
                 Characteristic,
+                specialty,
                 Images,
                 lat,
                 lng
@@ -69,6 +71,7 @@ function Cards ({ toggle }) {
               return (
               <Card id={id} Name={name} Rating={rating} verified={verified} schedule={schedule}
                     Characteristic={Characteristic}
+                    specialty={specialty}
                     Images={Images}
                     location={location}
                     key={index}
