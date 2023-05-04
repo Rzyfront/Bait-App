@@ -21,6 +21,14 @@
 
 }
 
+.usersSelect {
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--bg-secondary);
+    background-color: transparent;
+}
+
 .userIcon {
     margin-left: 30px;
     width: 50px;
