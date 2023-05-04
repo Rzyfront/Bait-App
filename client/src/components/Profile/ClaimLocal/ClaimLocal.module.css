@@ -4,18 +4,91 @@
     place-content: center;
     width: 100vw;
     height: 100vh;
-    z-index: 100000;
-    backdrop-filter: blur(5px);
+    z-index: var(--alto-2);
+    backdrop-filter: blur(3px);
     top:0;
+    left: 0;
 }
+
+.closeX{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    transition: 0.3s;
+}
+.closeX:hover {
+    transform: scale(1.2);
+    color: var(--secondary);
+}
+
 .claimContain {
-    display: grid;
-    place-content: center;
-    max-width: 30rem;
-    max-height: 30rem;
-    padding: 1rem;
-    background-color: rgba(0, 0, 255, 0.289);
-    width: 100%;
-    height: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    min-width: 350px;
+    max-width: 450px;
+    height: fit-content;
+    border-radius: 5px;
+    background-color: var(--bg-primary);
+    padding: 30px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     
+}
+
+.claimContain h2{
+    font-size: 2.5rem;
+}
+
+.formulario{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inputFile{
+    display: none;
+}
+
+.claimLocals{
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:0 20px;
+    border-radius: 5px;
+}
+
+.docInputIcon{
+    font-size: 5rem;
+    color: var(--primary);
+    transition: 0.3s;
+}
+
+.docInputIcon:hover {
+    color: var(--secondary);
+    transform: scale(1.1);
+    filter: drop-shadow(black, 2px 3px 4px);
+}
+
+.sendDoc{
+    border: none;
+    outline: none;
+    height: 40px;
+    padding: 0 20px;
+    border-radius: 5px;
+    background-color: var(--btn-primary);
+    font-size: 15px;
+    font-family: var(--text);
+}
+
+.sendDoc:hover {
+    color:var(--tertiary);
+    background-color: var(--optional1);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.sendDoc:active {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px -50px 36px -28px inset;
 }
