@@ -49,6 +49,7 @@ function CardsReview ({ toggle }) {
                 schedule,
                 id,
                 Characteristic,
+                address,
                 Images,
                 lat,
                 lng
@@ -63,6 +64,7 @@ function CardsReview ({ toggle }) {
                     key={index}
                     lat={lat}
                     lng={lng}
+                    address={address}
                   />
 
               );
@@ -71,16 +73,16 @@ function CardsReview ({ toggle }) {
         }
         {
           !locals?.length &&
-            <div className="Filters">
-              <h3>El sitio que buscas no se encuentra registrado</h3>
-              <br/>
-              <div className='Left-Home-Buttons'>
+            <div className="NoLocalsReview">
+              <h3 className='Nofind'>¿No encontrás el local que querés reseñár?</h3>
+              <p className='Nofind-p'>Inscribílo tu mismo como usuario de forma anomima y hacé que tu opinion cuente</p>
+
                 <Link to="/createplace">
                   <div className="AddPlace">
-                    <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
+                    <h2 className="AddPlace_Text">Registrá el local</h2> <MdAddBusiness />
                   </div>
                 </Link>
-            </div>
+
         </div>
         }
           </div>

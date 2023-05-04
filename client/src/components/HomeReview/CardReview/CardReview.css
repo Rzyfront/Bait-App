@@ -72,6 +72,7 @@
 .CardReview .LocationGroup {
     position: relative;
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
@@ -286,10 +287,15 @@
     }
 }
 
-.reviewButton {
+.infoCard .reviewButton {
     border-radius: 5px;
+    height: 35px;
+    width: 60%;
+    border: none;
+    background-color: var(--btn-primary);
 }
 
-.reviewButton:hover {
-    background-color: white;
+.infoCard .reviewButton:hover {
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
 }
