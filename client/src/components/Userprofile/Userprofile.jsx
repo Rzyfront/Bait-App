@@ -7,25 +7,25 @@ import {
   updateUser,
   getUserLocals
 } from '../../redux/actions/actions';
+import { Rating as RatingStar } from '@smastrom/react-rating';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useUploadImage } from '../../hooks/useUploadImage';
-import { Loading } from '@nextui-org/react';
 import style from './UserProfile.module.css';
 import { FiUser, FiGift } from 'react-icons/fi';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import { RiImageAddFill } from 'react-icons/ri';
-import swal from 'sweetalert';
+import swal from 'sweetalert';  
+import ChangePassword from './ChangePassword/ChangePassword';
 
 import UserLocals from './UserLocals';
 
 const defaultImg = 'https://www.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg';
 
-function Userprofile () {
-  const { image, loading, handleChangeimage } = useUploadImage();
+function Userprofile() {
+  const { image,  handleChangeimage } = useUploadImage();
 
   const [userData, setUserData] = useState({
     name: '',
@@ -46,10 +46,10 @@ function Userprofile () {
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
   const { user } = useSelector((state) => state.user);
 
-  const [userLocal, setUserLocal] = useState(obtainUserLocal);
+  const [userLocal, setUserLocal] = useState([]);
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(1);
-
+  const [passwordChange, setPasswordChange] = useState(false);
   useEffect(() => {
     user && dispatch(getUserProfile(user.id));
   }, [user]);
@@ -73,8 +73,13 @@ function Userprofile () {
   }, [user, image]);
 
   useEffect(() => {
-    setUserLocal(obtainUserLocal);
+    
+    setUserLocal(obtainUserLocal?.user?.Locals);
+
+    
   }, [obtainUserLocal]);
+
+  
 
   const handleChangeimages = (event) => {
     handleChangeimage(event);
@@ -96,7 +101,7 @@ function Userprofile () {
             });
             dispatch(getAllLocal(1, ''));
           }).catch((err) => {
-            swal(err.response.data.message);
+            swal(err.response.message);
           });
         }
       });
@@ -110,6 +115,11 @@ function Userprofile () {
     const property = event.target.name;
     const value = event.target.value;
 
+    const handleSave = () => {
+      dispatch(updateUser(userData))
+      swal(`Usuario Actualizado Exitosamente `)
+      window.location.reload(false)
+    }
     setUserData({
       ...userData,
       [property]: value
@@ -120,6 +130,12 @@ function Userprofile () {
     dispatch(updateUser(userData));
     swal('Usuario Actualizado Exitosamente ');
   };
+
+  const handlePasswordChange = () => {
+    setPasswordChange(!passwordChange)
+  }
+
+
 
   return (
     <div className={style.profileContainer}>
@@ -136,7 +152,12 @@ function Userprofile () {
       <div className={style.menu}>
         {selectedId == 1 && <div className={style.infoMenu}>
           <div className={style.resumeInfo}>
-            <img src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image" />
+            <input
+              type="file"
+              name="file"
+              className={style.inputFile}
+              onChange={handleChangeimages} />
+            <img  src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image"  />
             <div>
               <p className={style.name}>{user && user.name}</p>
               <p className={style.email}>{user && user.email}</p>
@@ -178,68 +199,76 @@ function Userprofile () {
                 </label>
               </div>
               <div className={style.input}>
-                <input
-                  type="file"
-                  name="file"
-                  className={style.inputForm}
-                  onChange={handleChangeimages} />
-                <label htmlFor="titulo" className={style.placeholder}>
-                  Cambiar Imagen
+                <input name="phone_number" className={style.inputForm} value={userData.phone_number} onChange={handleChange} />
+                <label htmlFor="phone_number" className={style.placeholder}>
+                  Telefono
                 </label>
-                {image.length
-                  ? (
-                      image.map((image, i) => (
-                      <img
-                        key={i}
-                        src={image.url}
-                        alt='imagen'
-                        className='LocalesImage'
-                      />
-                      ))
-                    )
-                  : loading === true
-                    ? (
-                      <Loading color="primary" />
-                      )
-                    : (
-
-                      <RiImageAddFill className='LocalesImage' />
-                      )}
               </div>
+
             </div>
           </div>
-          <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
-        </div>}
-        {selectedId == 2 && <div className={style.myLocals}>
-          <p className={style.titleLocal}>Ultimas reseñas</p>
-          {userProfile?.Reviews.map((rev) => {
-            return (<div key={rev.id}>
-              <h4>{rev.title}</h4>
-              <p>{rev.comment}</p>
-              <div>
-                <p>Calificaciones</p>
-                <p>Ambiente :{rev.environment}</p>
-                <p>Comida :{rev.food}</p>
-                <p>Calida-Precio : {rev.qaPrice}</p>
-                <p>Servicio{rev.service}</p>
-                <p>Estado:{rev.verified}</p>
-                <p>Fecha de Creacion : {rev.updatedAt}</p>
+          {passwordChange
+            ? <ChangePassword
+              id={user.id}
+            />
 
-              </div>
-              <div >
-                <button id={rev.id} onClick={() => { handleDeleteReview(rev.id); }}>Eliminar Review</button>
-              </div>
-            </div>);
-          })}
+            : null}
+
+          <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
+          <button onClick={handlePasswordChange} className={style.saveChanges}>Cambiar Contraseña</button>
+
+
         </div>}
+        {selectedId == 2 &&
+
+          <div className={style.myLocals}>
+            <p className={style.titleLocal}>Ultimas reseñas</p>
+
+            {userProfile?.Reviews.map((rev) => {
+              return (
+                <div key={rev.id} className={style.reviews}>
+                  <div className={style.reviewContainer}>
+                    <div style={{ display: 'flex' }}>
+                      <h4 className={style.titleReview}>{rev.title}</h4><RatingStar
+                        className={style.ratingStar}
+                        name='Rating'
+                        style={{ maxWidth: 100, marginLeft: '20px' }}
+                        value={4}
+                        readOnly
+                      />
+                    </div>
+                    <p className={style.commentReview}>{rev.comment}</p>
+                    <div className={style.detailReview}>
+                      <p className={style.dateReview}>04/12/2023</p>
+                    </div>
+                    <div style={{ textAlign: 'center', marginTop: '20px' }}>
+                      <button className={style.deleteReview} id={rev.id} onClick={() => { handleDeleteReview(rev.id)}}>Eliminar</button>
+                    </div>
+                  </div>
+                  
+                </div>
+              )
+                })
+              }
+            
+        </div>}
+
+
         {selectedId == 3 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Mis locales</p>
           <div className={style.localContainer}>
-            <div className={style.local}></div>
-            <div className={style.local}></div>
-            <div className={style.local}></div>
-            {/* <div className={style.local}></div> */}
-            {/* <div className={style.local}></div> */}
+            {userLocal && userLocal.map((local) => {
+              return (
+                <UserLocals
+                  id={local.id}
+                  name={local.name}
+                  image={local.image}
+                  location={local.location}
+                  specialty={local.specialty}
+                />
+              )
+            })}
+            
           </div>
         </div>}
         {selectedId == 4 && <div className={style.giftMenu}>
@@ -251,6 +280,6 @@ function Userprofile () {
       </div>
     </div>
 
-  );
-}
-export default Userprofile;
+  )}
+
+  export default Userprofile

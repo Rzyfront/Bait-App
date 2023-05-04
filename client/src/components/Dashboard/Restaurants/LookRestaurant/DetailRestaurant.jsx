@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import './DetailRestaurant.css';
 import imageDefault from '../../../../assets/imagenDefault.png';
 import { DetailDataR, DetailDataU } from './DetailDataR';
+import { AiOutlineClose } from 'react-icons/ai';
 
-const DetailRestaurant = ({ id }) => {
+const DetailRestaurant = ({ id, handleDetail }) => {
   const [localData, setLocaldata] = useState();
   const [userData, setUserdata] = useState();
   const [data, setData] = useState();
@@ -31,7 +32,8 @@ const DetailRestaurant = ({ id }) => {
     console.log(userData);
   }, [localData]);
   return <div className='detailRestaurantContainer'>
-        {/* <button onClick={handleDetail}>cerrar</button> */}
+    <h4 className='rating-modal-title'>Rating promedio por categoría</h4>
+    <button onClick={handleDetail} className='dash-res-close-modal'><AiOutlineClose/></button>
        <div className='localDetail'>
       {localData && localData.avgEnvironment && <Chart data={data} />}
       <div className='graph1'>

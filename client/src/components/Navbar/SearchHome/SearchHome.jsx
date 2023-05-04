@@ -15,8 +15,8 @@ function SearchHome () {
     map: ''
   });
   const queryParams = new URLSearchParams(location.search);
-  const Name = queryParams.get('name' || '');
-  const searchMap = queryParams.get('city' || '');
+  const Name = queryParams.get('name') || '';
+  const searchMap = queryParams.get('city') || '';
   useEffect(() => {
     setData({
       ...data,

@@ -23,8 +23,6 @@ const Restaurantes = () => {
     verified: ''
   });
 
-  console.log(locals);
-
   useEffect(() => {
     const url = [];
     // caracters filter
@@ -63,7 +61,6 @@ const Restaurantes = () => {
   };
 
   const handleShowDocs = () => {
-    console.log('Click');
     setChangeTable(!changeTable);
   };
 
