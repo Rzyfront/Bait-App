@@ -63,6 +63,7 @@ function Cards ({ toggle }) {
                 id,
                 Characteristic,
                 specialty,
+                address,
                 Images,
                 lat,
                 lng
@@ -75,6 +76,7 @@ function Cards ({ toggle }) {
                     specialty={specialty}
                     Images={Images}
                     location={location}
+                    address={address}
                     key={index}
                     lat={lat}
                     lng={lng}
