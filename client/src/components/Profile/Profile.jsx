@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import '@smastrom/react-rating/style.css';
 import Slider from 'react-slick';
 // import { getReviews } from '../../redux/actions/actions';
-import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar, ReviewsForm } from '../components';
+import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar } from '../components';
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DetailLocal } from '../../redux/actions/local';
+import { DetailLocal, CleanDetail } from '../../redux/actions/local';
 import { getMenu } from '../../redux/actions/menuDish';
 import ReviewLocal from '../FindLocals/ReviewLocal/ReviewLocal';
 import ClaimLocal from './ClaimLocal/ClaimLocal';
+import LocalsCompleteData from '../CreateLocals/LocalsCompleteData/LocalsCompleteData';
 
 function Profile () {
   const queryParams = new URLSearchParams(location.search);
@@ -21,12 +22,14 @@ function Profile () {
   const { id } = useParams();
   const [page, setPage] = useState(1);
   const [modalClaimLocal, setModalClaimLocal] = useState(false);
+  const [modalUpdate, setModalUpdate] = useState(false);
 
   const handlerClaimLocalModal = (show) => {
     setModalClaimLocal(show);
   };
   useEffect(() => {
     dispatch(DetailLocal(id));
+    return () => { dispatch(CleanDetail()); };
   }, [id]);
 
   useEffect(() => {
@@ -51,7 +54,7 @@ function Profile () {
     <>
       <Navbar />
       <div className="Profile-Locals animated-element">
-        {ShowReviewList && <ReviewLocal sendReview={setShowReviewList}/>}
+        {modalUpdate && <LocalsCompleteData detail={detail} setModalUpdate={setModalUpdate}/>}
         <div className='Img-Header'>
 
         <Slider {...settings}>
@@ -65,13 +68,15 @@ function Profile () {
          }
         </Slider>
         </div>
-        <div className='Info-Profile-Locals-Container'>
-          <InfoLocalsProfile detail={detail} showClaimLocal={handlerClaimLocalModal}/>
-          <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
-          {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
-          {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
-          {modalClaimLocal && <ClaimLocal closeClaimLocal={handlerClaimLocalModal} localId={detail.id}/>}
-        </div>
+        {ShowReviewList
+          ? <ReviewLocal sendReview={setShowReviewList}/>
+          : <div className='Info-Profile-Locals-Container'>
+              <InfoLocalsProfile detail={detail} showClaimLocal={handlerClaimLocalModal} setModalUpdate={setModalUpdate}/>
+              <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
+              {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
+              {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
+              {modalClaimLocal && <ClaimLocal closeClaimLocal={handlerClaimLocalModal} localId={detail.id}/>}
+          </div> };
       </div>
     </>
   );

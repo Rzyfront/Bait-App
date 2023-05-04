@@ -7,7 +7,6 @@ import {
   updateUser,
   getUserLocals
 } from '../../redux/actions/actions';
-import { Rating as RatingStar } from '@smastrom/react-rating';
 import axios from 'axios';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
@@ -19,10 +18,11 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { RiImageAddFill } from 'react-icons/ri';
+import swal from 'sweetalert';
 
 import UserLocals from './UserLocals';
 
-const defaultImg = 'https://i.pinimg.com/474x/bc/df/1d/bcdf1dc5c5f2d1b6665f7f3ea8740ec7.jpg';
+const defaultImg = 'https://www.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg';
 
 function Userprofile () {
   const { image, loading, handleChangeimage } = useUploadImage();
@@ -39,14 +39,11 @@ function Userprofile () {
 
   });
 
-  const [userReview, setUserReview] = useState([]);
-
   const dispatch = useDispatch();
   const { userId } = useParams();
 
   const userProfile = useSelector((state) => state.userProfile);
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
-  // const userReviews = useSelector((state) => state.reviews);
   const { user } = useSelector((state) => state.user);
 
   const [userLocal, setUserLocal] = useState(obtainUserLocal);
@@ -80,24 +77,31 @@ function Userprofile () {
   }, [obtainUserLocal]);
 
   const handleChangeimages = (event) => {
-    alert('Recuerda guardar los cambios');
     handleChangeimage(event);
   };
 
-  const handleDeleteReview = async (e) => {
-    const reviewId = Number(e.target.id);
-
-    const newReviews = userReview.filter((rev) => rev.id !== reviewId);
-
-    setUserReview(newReviews);
-    await axios.put(`/reviews/${reviewId}`, {
-      title: 'Modificado',
-      UserId: user.id,
-      toxicity: 0,
-      comment: 'Eliminada',
-      verified: 'archived'
-    });
+  const handleDeleteReview = async (id) => {
+    swal({
+      title: '¿Está seguro(a)',
+      text: 'Una vez borrado no podrás deshacer esta acción',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await axios.delete(`/reviews/${id}`).then((res) => {
+            swal('¡Review eliminada con éxito!', {
+              icon: 'success'
+            });
+            dispatch(getAllLocal(1, ''));
+          }).catch((err) => {
+            swal(err.response.data.message);
+          });
+        }
+      });
   };
+
   const handleInicio = () => {
     navigate('/home/1?name=&city=');
   };
@@ -114,10 +118,8 @@ function Userprofile () {
 
   const handleSave = () => {
     dispatch(updateUser(userData));
-    alert('Usuario Actualizado Exitosamente ');
+    swal('Usuario Actualizado Exitosamente ');
   };
-
-  userProfile && console.log(userProfile.Reviews);
 
   return (
     <div className={style.profileContainer}>
@@ -144,31 +146,30 @@ function Userprofile () {
             <p className={style.name}>{user && user.name}</p>
             <p className={style.email}>{user && user.email}</p>
           </div>
-        </div>
-        <div className={style.form}>
-        <div className={style.formLeft}>
-        <div className={style.input}>
+          <div className={style.form}>
+            <div className={style.formLeft}>
+              <div className={style.input}>
                 <input onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />
                 <label htmlFor="name" className={style.placeholder}>
                   Nombre
                 </label>
 
               </div>
-        <div className={style.input}>
+              <div className={style.input}>
                 <input onChange={handleChange} name="email" className={style.inputForm} value={user && user.email} />
                 <label htmlFor="email" className={style.placeholder}>
                   Email
                 </label>
               </div>
-        <div className={style.input}>
+              <div className={style.input}>
                 <input name="location" className={style.inputForm} value={userData.location} onChange={handleChange} />
                 <label htmlFor="location" className={style.placeholder}>
                   Location
                 </label>
               </div>
-        </div>
-        <div className={style.formRight}>
-          <div className={style.input}>
+            </div>
+            <div className={style.formRight}>
+              <div className={style.input}>
                 <input onChange={handleChange} name="lastname" className={style.inputForm} value={userData.lastname} />
                 <label htmlFor="lastname" className={style.placeholder}>
                   Apellido
@@ -181,78 +182,79 @@ function Userprofile () {
                 </label>
               </div>
               <div className={style.input}>
-                <input name="phone_number" className={style.inputForm} value={userData.phone_number} onChange={handleChange} />
-                <label htmlFor="phone_number" className={style.placeholder}>
-                  Telefono
+                <input
+                  type="file"
+                  name="file"
+                  className={style.inputForm}
+                  onChange={handleChangeimages} />
+                <label htmlFor="titulo" className={style.placeholder}>
+                  Cambiar Imagen
                 </label>
+                {image.length
+                  ? (
+                      image.map((image, i) => (
+                      <img
+                        key={i}
+                        src={image.url}
+                        alt='imagen'
+                        className='LocalesImage'
+                      />
+                      ))
+                    )
+                  : loading === true
+                    ? (
+                      <Loading color="primary" />
+                      )
+                    : (
+
+                      <RiImageAddFill className='LocalesImage' />
+                      )}
               </div>
-        </div>
-        </div>
-        <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
-      </div>}
-      {selectedId === 2 && <div className={style.myLocals}>
-        <p className={style.titleLocal}>Ultimas reseñas</p>
-        <div className={style.reviews}>
-          <div className={style.reviewContainer}>
-            <div style={{ display: 'flex' }}>
-          <h4 className={style.titleReview}>Mala atencion</h4><RatingStar
-                  className={style.ratingStar}
-                  name='Rating'
-                  style={{ maxWidth: 100, marginLeft: '20px' }}
-                  value={4}
-                  readOnly
-                />
-                </div>
-              <p className={style.commentReview}>Se demoraron como 4 horas para traerme el perdido y cuando llego estaba frio que gonorrea parce</p>
-              <div className={style.detailReview}>
-                <p className={style.dateReview}>04/12/2023</p>
-              </div>
-              <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <button className={style.deleteReview}>Eliminar</button>
-              </div>
+            </div>
           </div>
-          { userProfile?.Reviews.map((rev, i) => {
-            return (<div key={i} className={style.reviewContainer}>
-            <div style={{ display: 'flex' }}>
-          <h4 className={style.titleReview}>{rev.title}</h4><RatingStar
-                  className={style.ratingStar}
-                  name='Rating'
-                  style={{ maxWidth: 100, marginLeft: '20px' }}
-                  value={4}
-                  readOnly
-                />
-                </div>
-              <p className={style.commentReview}>{rev.comment}</p>
-              <div className={style.detailReview}>
-                <p className={style.dateReview}>{rev.updatedAt}</p>
+          <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
+        </div>}
+        {selectedId == 2 && <div className={style.myLocals}>
+          <p className={style.titleLocal}>Ultimas reseñas</p>
+          {userProfile?.Reviews.map((rev) => {
+            return (<div key={rev.id}>
+              <h4>{rev.title}</h4>
+              <p>{rev.comment}</p>
+              <div>
+                <p>Calificaciones</p>
+                <p>Ambiente :{rev.environment}</p>
+                <p>Comida :{rev.food}</p>
+                <p>Calida-Precio : {rev.qaPrice}</p>
+                <p>Servicio{rev.service}</p>
+                <p>Estado:{rev.verified}</p>
+                <p>Fecha de Creacion : {rev.updatedAt}</p>
+
               </div>
-              <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                <button className={style.deleteReview}>Eliminar</button>
+              <div >
+                <button id={rev.id} onClick={() => { handleDeleteReview(rev.id); }}>Eliminar Review</button>
               </div>
             </div>);
           })}
+        </div>}
+        {selectedId == 3 && <div className={style.myLocals}>
+          <p className={style.titleLocal}>Mis locales</p>
+          <div className={style.localContainer}>
+            <div className={style.local}></div>
+            <div className={style.local}></div>
+            <div className={style.local}></div>
+            {/* <div className={style.local}></div> */}
+            {/* <div className={style.local}></div> */}
           </div>
-          </div>}
-      {selectedId === 3 && <div className={style.myLocals}>
-        <p className={style.titleLocal}>Mis locales</p>
-        <div className={style.localContainer}>
-          <div className={style.local}></div>
-          <div className={style.local}></div>
-          <div className={style.local}></div>
-          {/* <div className={style.local}></div> */}
-          {/* <div className={style.local}></div> */}
+        </div>}
+        {selectedId == 4 && <div className={style.giftMenu}>
+          <p className={style.titleLocal}>Bonificaciones</p>
+          <img src="https://cdn-icons-png.flaticon.com/512/5957/5957125.png" className={style.imgGift} />
+          <p className={style.titleGift}>Lamentamos informarte que las recompensas no estan activas</p>
         </div>
-      </div>}
-      {selectedId === 4 && <div className={style.giftMenu}>
-        <p className={style.titleLocal}>Bonificaciones</p>
-        <img src="https://cdn-icons-png.flaticon.com/512/5957/5957125.png" className={style.imgGift}/>
-        <p className={style.titleGift}>Lamentamos informarte que las recompensas no estan activas</p>
+        }
       </div>
-      }
-    </div>
     </div>
 
   );
 }
-
 export default Userprofile;

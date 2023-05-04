@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
   const { userId, toxicity } = req;
   try {
     const local = await Local.findByPk(localId);
-    if (!local) throw new Error('Local not found');
+    if (!local) throw new Error('Local no encontrado');
 
     const rating = (food + environment + service + qaPrice) / 4;
     const newReview = await Review.create({

@@ -1,10 +1,48 @@
 import style from '../FindLocals.module.css';
 import { Rating as RatingStar } from '@smastrom/react-rating';
-import { MdAttachMoney } from 'react-icons/md';
+import { Loading } from '@nextui-org/react';
 import { AiFillStar } from 'react-icons/ai';
+import { GoVerified } from 'react-icons/go';
 import { useEffect, useState } from 'react';
+import { useUploadImage } from '../../../hooks/useUploadImage';
+import { useDispatch } from 'react-redux';
+import { comentarie } from '../../../redux/actions/actions';
+import { useParams } from 'react-router-dom';
+import Tiket from './Tiket';
+import { ErrorReview } from './ErrorReview';
+import { toast, ToastContainer } from 'react-toastify';
+const ReviewLocal = ({ sendReview, close }) => {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+  const { image, loading, handleChangeimage } = useUploadImage();
+  const [inputs, setInputs] = useState({
+    title: '',
+    review: '',
+    Tiket: {},
+    image: {}
+  });
+  const [error, setError] = useState({
+    title: '',
+    review: '',
+    Tiket: '',
+    image: ''
+  });
+  useEffect(() => {
+    const data = image[image.length - 1];
+    if (data) {
+      setInputs({
+        ...inputs,
+        image: { id: data.id, url: data.url }
+      });
+    }
+  }, [image]);
 
-const ReviewLocal = ({ sendReview }) => {
+  useEffect(() => {
+    setError(ErrorReview({
+      ...inputs
+    }));
+    console.log(error);
+  }, [inputs]);
   const [calificar, setCalificar] = useState(false);
   const [calculateAverage, setcalculateAverage] = useState(0);
   const [calificationFood, setCalificationFood] = useState(0);
@@ -44,10 +82,51 @@ const ReviewLocal = ({ sendReview }) => {
     calificationEnvironment,
     calificationService
   ]);
+  const handleData = (event) => {
+    const { name, value } = event.target;
+    console.log(name, value);
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+  };
 
+  const handleSend = async (e) => {
+    e.stopPropagation();
+    if (!Object.values(error).length) {
+      const response = await dispatch(comentarie({ calificationFood, calificationQaPrice, calificationEnvironment, calificationService, inputs, id }));
+      if (response === true) {
+        sendReview();
+      } else {
+        toast.error('Error al enviar reseña', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000
+        });
+      }
+    } else {
+      if (error && error.Tiket) {
+        setStep(2);
+      }
+      if (error && !error.Tiket) {
+        setStep(1);
+      }
+      toast.error('Faltan datos por completar', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
+    }
+  };
+  const handleTiket = (data) => {
+    if (data) {
+      setInputs({
+        ...inputs,
+        Tiket: { id: data.id, url: data.url }
+      });
+    }
+  };
   return (
-    <div className={style.centrar}>
-      <div className={style.formContainer}>
+    <div className={style.centrar} onClick={() => sendReview()}>
+      <div className={style.formContainer} onClick={(e) => e.stopPropagation()}>
       <div className={style.navegador}>
       <button
         className={step === 1 ? style.active : style.deactive}
@@ -59,7 +138,7 @@ const ReviewLocal = ({ sendReview }) => {
         className={step === 2 ? style.active : style.deactive}
         onClick={(e) => handleStep(e, 2)}
       >
-        <MdAttachMoney className={style.icon}/>
+            <GoVerified className={style.icon}/>
       </button>
       </div>
         <form>
@@ -68,7 +147,7 @@ const ReviewLocal = ({ sendReview }) => {
               ? <><div className={style.general}>
               <h4 className={style.titleSection}>Experiencia</h4>
               <div>
-                <input name="titulo" className={style.inputForm} placeholder=" " />
+                <input name="title" className={style.inputForm} value={inputs.title} onChange={handleData}/>
                 <label htmlFor="titulo" className={style.placeholder}>
                   Titulo
                 </label>
@@ -85,16 +164,16 @@ const ReviewLocal = ({ sendReview }) => {
               </div>
               <div>
                 <div className={style.fileSelect}>
-                  <input type="file" className={style.srcFile1} />
+                  <input type="file" className={style.srcFile1} onChange={handleChangeimage}/>
                 </div>
               </div>
               <div>
                 <div className={style.imgUpload}>
-                  <img className={style.img} src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"/>
+                    {loading === true ? <Loading color="primary" className={style.img} /> : JSON.stringify(inputs.image) !== '{}' ? <img src={inputs.image.url} className={style.img} /> : <img className={style.img} src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png" />}
                 </div>
               </div>
               <div>
-                <input name="reseña" className={style.inputForm} placeholder=" " />
+                  <input name="review" className={style.inputForm} onChange={handleData} value={inputs.review} />
                 <label htmlFor="reseña" className={style.placeholder}>
                   Reseña
                 </label>
@@ -147,28 +226,12 @@ const ReviewLocal = ({ sendReview }) => {
           )}
           {step === 2 && (
             <div className={style.general}>
-              <h4 className={style.titleSection}>Precio</h4>
+
               <div>
-                <input name="precio" className={style.inputForm} placeholder=" " />
-                <label htmlFor="precio" className={style.placeholder}>
-                  Precio total
-                </label>
+
               </div>
               <div>
-                <input name="personas" className={style.inputForm} placeholder=" " />
-                <label htmlFor="personas" className={style.placeholder}>
-                  Cantidad de personas
-                </label>
-              </div>
-              <div>
-                <div className={style.fileSelect2}>
-                  <input type="file" className={style.srcFile1} />
-                </div>
-              </div>
-              <div>
-                <div className={style.imgUpload}>
-                  <img className={style.img} src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png"/>
-                </div>
+                <Tiket handleTiket={handleTiket} inputs={inputs}/>
               </div>
               <p className={style.textFactura}><b>IMPORTANTE: </b>Tu factura no sera mostrada en la reseña pero es necesaria para validar que si has comido en ese lugar</p>
             </div>
@@ -176,8 +239,9 @@ const ReviewLocal = ({ sendReview }) => {
         </form>
       </div>
         <div>
-          <button className={style.sendReview} onClick={() => sendReview(false)}>Enviar reseña</button>
+          <button className={style.sendReview} onClick={handleSend}>Enviar reseña</button>
         </div>
+        <ToastContainer/>
       </div>
   );
 };

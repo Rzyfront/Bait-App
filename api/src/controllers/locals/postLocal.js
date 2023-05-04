@@ -1,11 +1,11 @@
-const { Local, /** User, */ Specialty } = require('../../db');
+const { Local, User, Specialty } = require('../../db');
 
 module.exports = async (req, res) => {
   const {
     name, location, schedule, email, characteristics, images, specialty, lat, lng, document, address,
   } = req.body;
   try {
-    // const user = await User.findByPk(req.userId);
+    const user = await User.findByPk(req.userId);
     const newLocal = await Local.create({
       name,
       location,
@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
       lat,
       lng,
     });
-    if (specialty.length) {
+    if (specialty && specialty.length) {
       const specialties = await Promise.all(specialty.map((specialtyName) => Specialty.findOrCreate({ where: { name: specialtyName } })));
       newLocal.setSpecialties(specialties.map((spl) => spl[0].id));
     }
@@ -22,14 +22,13 @@ module.exports = async (req, res) => {
     await newLocal.createCharacteristic(characteristics);
     await newLocal.addImages(images.map((image) => image.id));
     if (document && document.id) {
-      // await user.addLocal(newLocal);
+      await user.addLocal(newLocal);
       await newLocal.setDocument(document.id);
     }
     const local = {
       id: newLocal.id,
       name: newLocal.name,
       location: newLocal.location,
-      specialty: newLocal.specialty,
     };
     return res.status(201).json({ success: true, local });
   } catch (error) {

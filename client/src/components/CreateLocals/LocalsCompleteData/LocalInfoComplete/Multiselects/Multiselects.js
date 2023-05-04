@@ -18,21 +18,21 @@ export const restaurantTypeList = [
   { value: 'Ejecutivo', label: 'Ejecutivo' }
 ];
 export const characteristicsList = [
-  { value: 'Wi-fi', label: 'Wi-fi' },
-  { value: 'Parqueadero', label: 'Parqueadero' },
-  { value: 'Asientos exteriores', label: 'Asientos exteriores' },
-  { value: 'Música', label: 'Música' },
-  { value: 'Servicio a Mesa', label: 'Servicio a Mesa' },
-  { value: 'Grupos grandes', label: 'Grupos grandes' },
-  { value: 'Amigable', label: 'Amigable' },
-  { value: 'Mascotas', label: 'Mascotas' },
-  { value: 'Familiar', label: 'Familiar' },
-  { value: 'Romántico', label: 'Romántico' }
+  { value: 'wifi', label: 'Wi-fi' },
+  { value: 'parking_lot', label: 'Parqueadero' },
+  { value: 'outdoor_seating', label: 'Asientos exteriores' },
+  { value: 'live_music', label: 'Música' },
+  { value: 'table_service', label: 'Servicio a Mesa' },
+  { value: 'big_group', label: 'Grupos grandes' },
+  { value: 'work_friendly', label: 'Amigable' },
+  { value: 'pet_friendly', label: 'Mascotas' },
+  { value: 'family_style', label: 'Familiar' },
+  { value: 'romantic', label: 'Romántico' }
 ];
 
 export const paymentList = [
-  { value: 'Efectivo', label: 'Efectivo' },
-  { value: 'Tarjeta Debito', label: 'Tarjeta Debito' },
-  { value: 'Tarjeta Credito', label: 'Tarjeta Credito' },
-  { value: 'Pay Apps', label: 'Pay Apps' }
+  { value: 'cash', label: 'Efectivo' },
+  { value: 'devit_card', label: 'Tarjeta Debito' },
+  { value: 'credit_card', label: 'Tarjeta Credito' },
+  { value: 'pay_apps', label: 'Pay Apps' }
 ];

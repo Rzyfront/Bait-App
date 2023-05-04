@@ -29,7 +29,7 @@ module.exports = async (req, res, next) => {
       if (value !== undefined) {
         verifiedExists(key, key);
         verifiedTypeOf(value, 'number', key);
-        if (value > 5) { throw new Error(`The value of "${key}" can not be greater than 5`); }
+        if (value > 5) { throw new Error(`El valor de "${key}" no puede ser superior a 5`); }
       }
     });
 
