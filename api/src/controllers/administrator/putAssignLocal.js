@@ -1,3 +1,4 @@
+const { sendNotificationThatLocalWasVerified } = require('../../config/nodemailer/nodemailer-config');
 const { User, Local } = require('../../db');
 
 module.exports = async (req, res) => {
@@ -20,6 +21,7 @@ module.exports = async (req, res) => {
       specialty: local.specialty,
       userId: local.UserId,
     };
+    await sendNotificationThatLocalWasVerified({ userEmail: user.email, userName: user.name, localName: local.name });
     res.status(201).json({ success: true, local: localData });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
