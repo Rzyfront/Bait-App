@@ -89,6 +89,9 @@ const Filters = ({ toggle, setToggle }) => {
       </Link>
       </div>
     <div className='AddResetButtom'>
+      <div className="ResetHome" onClick={onRefresh}>
+          <RiRefreshFill />
+      </div>
       <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
@@ -115,9 +118,6 @@ const Filters = ({ toggle, setToggle }) => {
             : <TbMap2/>}
         </div>
       </div>
-      <div className="ResetHome" onClick={onRefresh}>
-          <RiRefreshFill />
-        </div>
       </div>
     </div>
   );
