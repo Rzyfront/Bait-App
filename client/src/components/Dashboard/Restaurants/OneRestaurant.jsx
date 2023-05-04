@@ -1,16 +1,12 @@
-// import { toast } from 'react-toastify';
 import swal from 'sweetalert';
 import './Restaurant.css';
 // icons
-import { BsPersonFillAdd } from 'react-icons/bs';
 import { FaUserEdit } from 'react-icons/fa';
-import { AiFillDelete } from 'react-icons/ai';
-import { IoIosInformationCircleOutline } from 'react-icons/io';
+import { IoIosInformationCircleOutline, IoMdArchive } from 'react-icons/io';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteLocal, getAllLocal } from '../../../redux/actions/admin';
 import { useEffect, useState } from 'react';
-import Users from '../Users/Users';
-import SelectRestaurant from './LookRestaurant/SelectRestaurant';
 import DetailRestaurant from './LookRestaurant/DetailRestaurant';
 
 const VERIFIED_STATE = {
@@ -19,8 +15,8 @@ const VERIFIED_STATE = {
   archived: 'Archivado'
 };
 
-const OneRestaurant = ({ name, image, verified, filter, id }) => {
-  const [adduser, setAdduser] = useState(false);
+const OneRestaurant = ({ name, verified, id }) => {
+  // const [adduser, setAdduser] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [verifiedLocal, setverifiedLocal] = useState(verified);
   const [DetailRestaurantD, setDetailRestaurantD] = useState(false);
@@ -55,14 +51,14 @@ const OneRestaurant = ({ name, image, verified, filter, id }) => {
         });
     }
   };
-  const handleAdd = () => {
-    if (adduser === true) {
-      setverifiedLocal('verified');
-      setAdduser(false);
-    } else {
-      setAdduser(true);
-    }
-  };
+  // const handleAdd = () => {
+  //   if (!adduser) {
+  //     setverifiedLocal('verified');
+  //     setAdduser(false);
+  //   } else {
+  //   setAdduser(true);
+  //   }
+  // };
 
   const handleDetail = () => {
     if (DetailRestaurantD === false) {
@@ -77,24 +73,28 @@ const OneRestaurant = ({ name, image, verified, filter, id }) => {
       <td className='align-middle'>{name}</td>
       <td className='align-middle'>{VERIFIED_STATE[verified]}</td>
       <td className='align-middle'>
-        <button onClick={handleDetail} className='ActionsDetailRestaurant'><IoIosInformationCircleOutline /></button>
+        <button onClick={handleDetail} className='detail-icon-dash-res'><IoIosInformationCircleOutline /></button>
         {DetailRestaurantD && <DetailRestaurant id={id} handleDetail={handleDetail} />}
       </td>
-      <td className='align-middle'>
         {verifiedLocal && verifiedLocal === 'unVerified'
           ? (
-            <>
-              <BsPersonFillAdd onClick={handleAdd} />
-              <AiFillDelete onClick={deleteRestaurant} />
-            </>
+            < td className='align-middle'>
+                {/* <button className='res-icons assign' onClick={handleAdd} >
+                  <BsPersonFillAdd/>
+                </button> */}
+                <button className='res-icons deny' onClick={deleteRestaurant} >
+                  Archivar  <IoMdArchive />
+                </button>
+            </td>
             )
           : (
-            <>
-              <FaUserEdit onClick={handleAdd} />{' '}
-              <AiFillDelete onClick={deleteRestaurant} />
-            </>
+            <td>
+                <button className='res-icons deny' title='Remover propietario'><FaUserEdit /></button>
+                <button className='res-icons deny' onClick={deleteRestaurant} >
+                  Archivar  <IoMdArchive />
+                </button>
+            </td>
             )}
-      </td>
     </tr>
   );
 };

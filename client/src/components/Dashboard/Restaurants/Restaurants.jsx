@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { getAllLocal } from '../../../redux/actions/admin';
 import { getLocalsToVerify } from '../../../redux/actions/LocalsAdmin';
 import LocalsCards from '../LocalsToVerify/LocalsCards/LocalsCards';
-import { FaFileAlt, FaSearch } from 'react-icons/fa';
 
 import { AiOutlineFileSearch, AiFillFileExcel } from 'react-icons/ai';
 import OneRestaurant from './OneRestaurant';
@@ -78,7 +77,6 @@ const Restaurantes = () => {
       <div className='restaurants-title-bar'>
         <h2 className={style.nameSection}>Locales</h2>
         <div className='filter-restaurants-group'>
-          {/* Locales para verificar */}
           <button onClick={handleShowDocs} className='dash-res-button' title='Ver documentación'>{
             !changeTable
               ? <AiOutlineFileSearch />
