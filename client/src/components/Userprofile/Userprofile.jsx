@@ -19,6 +19,7 @@ import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
 import { RiImageAddFill } from 'react-icons/ri';
 import swal from 'sweetalert';
+import ChangePassword from './ChangePassWord/ChangePassword';
 
 import UserLocals from './UserLocals';
 
@@ -49,7 +50,7 @@ function Userprofile () {
   const [userLocal, setUserLocal] = useState(obtainUserLocal);
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(1);
-
+  const [passwordChange, setPasswordChange] = useState(false);
   useEffect(() => {
     user && dispatch(getUserProfile(user.id));
   }, [user]);
@@ -125,6 +126,10 @@ function Userprofile () {
     dispatch(updateUser(userData));
     swal('Usuario Actualizado Exitosamente ');
   };
+
+  const handlePasswordChange =()=>{
+    setPasswordChange(!passwordChange)
+  }
 
   return (
     <div className={style.profileContainer}>
@@ -212,8 +217,18 @@ function Userprofile () {
                       )}
               </div>
             </div>
-          </div>
-          <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
+          </div>  
+          {passwordChange 
+          ? <ChangePassword 
+            id ={user.id}
+          /> 
+
+          : null}
+         
+            <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
+            <button onClick={handlePasswordChange} className={style.saveChanges}>Cambiar Contraseña</button>
+         
+          
         </div>}
         {selectedId == 2 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Ultimas reseñas</p>
