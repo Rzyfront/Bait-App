@@ -21,7 +21,6 @@ const Dashboard = () => {
     {section === 1 && <Restaurantes/> }
     {section === 2 && <Reseñas fn={changeSection}/> }
     {section === 3 && <ReseñaDetail fn={changeSection}/> }
-
     </div>
   );
 };

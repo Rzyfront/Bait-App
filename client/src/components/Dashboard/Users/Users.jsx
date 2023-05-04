@@ -53,13 +53,14 @@ const Users = ({ localId, handleAdd }) => {
         onChange={handleSelect}
         value={filter.role}
         defaultValue=""
+        className={style.usersSelect}
       >
         <option value="" disabled selected>Seleccionar rol</option>
-        <option value="" >all</option>
-       <option value="user" >user</option>
-       <option value="owner" >owner</option>
-        <option value="admin" >admin</option>
-        <option value="superAdmin" >superAdmin</option>
+        <option value="" >Todos</option>
+       <option value="user" >Usuarions</option>
+       <option value="owner" >Propietario</option>
+        <option value="admin" >Administrador</option>
+        <option value="superAdmin" >Súper admin</option>
       </select >
       <input placeholder="email" name="email" value={filter.email} className={style.buscador} onChange={handleData}></input>
       <div className={style.containerUserCard}>

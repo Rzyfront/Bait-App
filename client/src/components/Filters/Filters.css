@@ -8,6 +8,11 @@
    padding: 0 20px;
 }
 
+.Filters .AddResetButtom{
+    display: flex;
+    gap: 10px;
+}
+
 .Filters .Left-Home-Buttons{
     display: flex;
     gap: 10px;
@@ -49,7 +54,7 @@
     font-size: 23px;
     color: var(--tertiary);
     width: 50px;
-    height: 40px;
+    height: 42px;
     border: none;
     background-color: var(--btn-secondary);
     border-radius: 7px;

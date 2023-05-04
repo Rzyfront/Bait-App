@@ -91,7 +91,8 @@ const ReviewLocal = ({ sendReview, close }) => {
     });
   };
 
-  const handleSend = async () => {
+  const handleSend = async (e) => {
+    e.stopPropagation();
     if (!Object.values(error).length) {
       const response = await dispatch(comentarie({ calificationFood, calificationQaPrice, calificationEnvironment, calificationService, inputs, id }));
       if (response === true) {
@@ -124,8 +125,8 @@ const ReviewLocal = ({ sendReview, close }) => {
     }
   };
   return (
-    <div className={style.centrar}>
-      <div className={style.formContainer}>
+    <div className={style.centrar} onClick={() => sendReview()}>
+      <div className={style.formContainer} onClick={(e) => e.stopPropagation()}>
       <div className={style.navegador}>
       <button
         className={step === 1 ? style.active : style.deactive}

@@ -116,16 +116,14 @@ export const logIn = (credentials) => {
     }
   };
 };
-export const comentarie = (
-  {
-    calificationFood,
-    calificationQaPrice,
-    calificationEnvironment,
-    calificationService,
-    inputs,
-    id
-  }
-) => {
+export const comentarie = ({
+  calificationFood,
+  calificationQaPrice,
+  calificationEnvironment,
+  calificationService,
+  inputs,
+  id
+}) => {
   console.log(inputs);
   return async (dispatch) => {
     try {
@@ -188,8 +186,9 @@ export const ResetUser = () => {
 export const getReviews = (localId, page = 1, order) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`/reviews/${localId}?page=${page}&order=${order}`);
-      console.log(response.data.reviews);
+      const response = await axios(
+        `/reviews/${localId}?page=${page}&order=${order}`
+      );
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
@@ -227,8 +226,8 @@ export const getUserProfile = (id) => {
 export const updateUser = ({
   id,
   name,
-  lastname
-  , age,
+  lastname,
+  age,
   email,
   phone_number,
   image,
@@ -239,7 +238,13 @@ export const updateUser = ({
 
     try {
       await axios.put('/user', {
-        name, lastname, age, email, phone_number, image, location
+        name,
+        lastname,
+        age,
+        email,
+        phone_number,
+        image,
+        location
       });
 
       console.log(image);
