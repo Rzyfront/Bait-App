@@ -129,6 +129,7 @@ function Userprofile() {
     const handleSave = () => {
       dispatch(updateUser(userData))
       swal(`Usuario Actualizado Exitosamente `)
+      window.location.reload(false)
     }
 
 
