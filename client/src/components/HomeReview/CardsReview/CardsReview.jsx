@@ -74,8 +74,8 @@ function CardsReview ({ toggle }) {
         {
           !locals?.length &&
             <div className="NoLocalsReview">
-              <h3 className='Nofind'>¿No encontrás el local que querés reseñár?</h3>
-              <p className='Nofind-p'>Inscribílo tu mismo como usuario de forma anomima y hacé que tu opinion cuente</p>
+              <h3 className='Nofind'>¿No encontrás el local que querés reseñar?</h3>
+              <p className='Nofind-p'>Inscribilo vos mismo como usuario de forma anónima y hacé que tu opinión cuente</p>
 
                 <Link to="/createplace">
                   <div className="AddPlace">

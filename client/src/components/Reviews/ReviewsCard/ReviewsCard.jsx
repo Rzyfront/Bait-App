@@ -10,7 +10,6 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
     activeFillColor: '#343434',
     inactiveFillColor: '#3434343B'
   };
-  console.log(User);
   const handleShowMore = () => {
     if (showMore) {
       setShowMore(false);

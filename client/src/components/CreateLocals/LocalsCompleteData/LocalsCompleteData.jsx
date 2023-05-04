@@ -155,16 +155,7 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
       }, 5000);
     }
   };
-  // const handleSelect = (selectedOptions) => {
-  //   console.log(selectedOptions);
-  //   const selected = selectedOptions.map(option => option.label);
-  //   const { value } = selectedOptions;
-  //   setInputs({
-  //     ...inputs,
-  //     [value]: selected
-  //   });
-  //   console.log(selected);
-  // };
+
   return (
     <div className='LocalsCompleteData-Component'>
       {showShedule && <ScheduleModal setShowSchedule={setShowSchedule} schedulState={schedulState} setScheduleState={setScheduleState}/>}

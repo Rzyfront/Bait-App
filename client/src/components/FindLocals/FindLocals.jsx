@@ -9,7 +9,6 @@ const FindLocals = () => {
   const [selectedId, setSelectedId] = useState(null);
   const handleChange = (e) => setNombre(e.target.value);
   useEffect(() => {
-    console.log('dispatch busqueda');
   }, [nombre]);
 
   const sendReview = () => {
