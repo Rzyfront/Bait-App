@@ -15,7 +15,7 @@ const Footer = () => {
           <AiFillInstagram />
           <p>Instagram</p>
         </a>
-        <a className="SM_IconLinks SM_Facebook">
+        {/* <a className="SM_IconLinks SM_Facebook">
           <FaFacebookSquare />
           <p>Facebook</p>
         </a>
@@ -30,7 +30,7 @@ const Footer = () => {
         <a className="SM_IconLinks SM_Tiktok">
           <IoLogoTiktok />
           <p>Tiktok</p>
-        </a>
+        </a> */}
       </div>
       <div className="PageInformation">
         <div className="InfoFooter1">
