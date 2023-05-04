@@ -2,13 +2,15 @@ import './LocalLocationComplete.css';
 import Mapdata from '../../../Map/Mapdata';
 import { PopComent } from '../../../components';
 
-function LocalLocationComplete ({ handleMap, mapSearch, Mapcenter, statemap, handleBoton, handlemapdatas, searchCity, statesupmit, errors }) {
+function LocalLocationComplete ({ inputs, handleChange, handleMap, mapSearch, Mapcenter, statemap, handleBoton, handlemapdatas, searchCity, statesupmit, errors }) {
   return (
     <div className='LocationCompleteContainer'>
          <input type="text"
                 name='address'
                 placeholder='Direccion'
                 className='Input-C-L Direction-Complete'
+                onChange={handleChange}
+                value={inputs.address}
           />
           <input type="text"
                  name='location'
@@ -27,7 +29,7 @@ function LocalLocationComplete ({ handleMap, mapSearch, Mapcenter, statemap, han
             } }className='Pick-Location-Basic'>
               Buscar ciudad
             </button>
-      {statesupmit === true && errors && errors.location && <PopComent text={errors.location} />}
+            {statesupmit === true && errors?.location && <PopComent text={errors?.location} />}
 
     </div>
   );

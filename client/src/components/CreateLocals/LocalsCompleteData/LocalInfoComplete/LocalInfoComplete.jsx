@@ -12,11 +12,11 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
     setInputs(inputs => ({ ...inputs, restaurantType: selectedRestaurant }));
   };
   const handleCharacteristicsChange = (selectedOptions) => {
-    const selectedCharacteristics = selectedOptions.map(option => option.label);
+    const selectedCharacteristics = selectedOptions.map(option => option.value);
     setInputs(inputs => ({ ...inputs, characteristics: selectedCharacteristics }));
   };
   const handlePaymentChange = (selectedOptions) => {
-    const selectedPayments = selectedOptions.map(option => option.label);
+    const selectedPayments = selectedOptions.map(option => option.value);
     setInputs(inputs => ({ ...inputs, payments: selectedPayments }));
   };
 
