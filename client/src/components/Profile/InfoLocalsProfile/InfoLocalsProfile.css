@@ -100,6 +100,7 @@
     width: 35%;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     justify-content: center;
     gap: 10px;
 }
@@ -118,10 +119,21 @@
     background-color: var(--bg-tertiary);
 }
 
-.InfoLocalsProfile-Compontent .Info-rigth .Info-rigth-title .Info-rinth-Title {
-    font-size: 1.7rem;
-    font-family: var(--text);
-    font-weight: 400;
+.InfoLocalsProfile-Compontent .Info-rigth .Info-rigth-title .ClaimButtom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    color: var(--tertiary);
+    height: 40px;
+    width: 150px;
+    background-color: var(--optional2);
+    transition: 0.3s;
+}
+
+.InfoLocalsProfile-Compontent .Info-rigth .Info-rigth-title .ClaimButtom:hover{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transform: scale(1.02);
 }
 
 .InfoLocalsProfile-Compontent .Info-rigth .Rating-C-Group-Container{
