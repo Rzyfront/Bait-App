@@ -12,13 +12,11 @@ import axios from 'axios';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { useUploadImage } from '../../hooks/useUploadImage';
-import { Loading } from '@nextui-org/react';
 import style from './UserProfile.module.css';
 import { FiUser, FiGift } from 'react-icons/fi';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import { RiImageAddFill } from 'react-icons/ri';
 import swal from 'sweetalert';
 import ChangePassword from './ChangePassWord/ChangePassword';
 
@@ -27,7 +25,7 @@ import UserLocals from './UserLocals';
 const defaultImg = 'https://www.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg';
 
 function Userprofile() {
-  const { image, loading, handleChangeimage } = useUploadImage();
+  const { image,  handleChangeimage } = useUploadImage();
 
   const [userData, setUserData] = useState({
     name: '',
@@ -137,7 +135,7 @@ function Userprofile() {
     setPasswordChange(!passwordChange)
   }
 
- userProfile && console.log(userProfile);
+
 
   return (
     <div className={style.profileContainer}>
