@@ -7,7 +7,7 @@ import { useUploadImage } from '../../../hooks/useUploadImage';
 import { useDispatch } from 'react-redux';
 import { comentarie } from '../../../redux/actions/actions';
 import { useParams } from 'react-router-dom';
-import Tiket from './tiket';
+import Tiket from './Tiket';
 
 const ReviewLocal = ({ sendReview }) => {
   const dispatch = useDispatch();
