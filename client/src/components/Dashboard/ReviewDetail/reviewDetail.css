@@ -1,6 +1,7 @@
 .Modal-Review-Detail {
   width: 100%;
   padding: 30px;
+  overflow: auto;
 }
 
 .Modal-Review-Detail-Date {
