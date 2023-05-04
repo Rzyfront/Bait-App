@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import style from './FindLocals.module.css';
 import Card from '../Card/Card';
 import ReviewLocal from './ReviewLocal/ReviewLocal';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const FindLocals = () => {
   const [nombre, setNombre] = useState();
@@ -13,15 +13,19 @@ const FindLocals = () => {
   }, [nombre]);
 
   const sendReview = () => {
-    toast.success('Hemos enviado un email de verificacion', {
-      position: toast.POSITION.BOTTOM_CENTER
+    toast.success('¡Reseña creada correctamente esperando aprobación!', {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 2000
     });
+    setSelectedId(null);
+  };
+  const close = () => {
     setSelectedId(null);
   };
 
   return (
     <main className={style.main}>
-      { selectedId && <ReviewLocal sendReview={sendReview}/>}
+      { selectedId && <ReviewLocal sendReview={sendReview} close={close}/>}
       <h2 className={style.title}>¿Que lugar queres reseñar?</h2>
       <div className={style.inputContainer}>
       <input placeholder="Nombre" onChange={handleChange} className={style.input}/>
@@ -31,8 +35,10 @@ const FindLocals = () => {
         <Card id={1} Name="prueba" Rating={4} location="Buenos Aires" Images={[]} Price={1} lat={0} lng={0}/>
         <Card id={1} Name="prueba" Rating={4} location="Buenos Aires" Images={[]} Price={1} lat={0} lng={0}/>
         <Card id={1} Name="prueba" Rating={4} location="Buenos Aires" Images={[]} Price={1} lat={0} lng={0}/>
+
       </div>
       </div>
+      <ToastContainer/>
     </main>
   );
 };

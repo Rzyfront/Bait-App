@@ -32,6 +32,20 @@ function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
         // Crea un nuevo marcador con las coordenadas obtenidas del evento click
         const marker = L.marker([lat, lng], { icon: customIcon }).addTo(map).bindPopup(`Dirección: ${information.address.LongLabel}`);
 
+        marker.openPopup();
+      }
+      // dblclick: (e) => {
+      //   map.setView(Mapcenter, 10);
+      // },
+    });
+    useEffect(() => {
+      if (statemap === true) {
+        map.setView(Mapcenter, 12);
+        handleBoton();
+      }
+    }, [Mapcenter]);
+    return null;
+  }
         // data information
         const reverseGeoCoding = async (lng, lat) => {
           const data = await (await fetch(GEOCODE_URL + `${lng},${lat}`)).json();
@@ -60,6 +74,7 @@ function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
           return null;
         }
 
+  return (<MapContainer center={Mapcenter} zoom={12} scrollWheelZoom={false} style={{ width: '100%', height: '100%' }} >
         return <MapContainer center={Mapcenter} zoom={15} scrollWheelZoom={false} className='tamaño'>
   <TileLayer
     url={MAP_LAYER_URL}

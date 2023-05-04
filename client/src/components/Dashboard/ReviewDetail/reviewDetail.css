@@ -1,6 +1,7 @@
 .Modal-Review-Detail {
   width: 100%;
   padding: 30px;
+  overflow: auto;
 }
 
 .Modal-Review-Detail-Date {
@@ -78,7 +79,7 @@
   background-color: var(--optional1);
   color: white;
   font-size: 1.1em;
-  padding: 10px 50px;
+  padding: .5rem 2rem;
   border-radius: 10px;
 }
 
@@ -87,7 +88,7 @@
   background-color: var(--optional2);
   color: white;
   font-size: 1.1em;
-  padding: 10px 50px;
+  padding: .5rem 2rem;
   border-radius: 10px;
 }
 
@@ -96,8 +97,17 @@
   background-color: rgb(255, 204, 0);
   color: white;
   font-size: 1.1em;
-  padding: 10px 50px;
+  padding: .5rem 2rem;
   border-radius: 10px;
+}
+.Modal-Review-Detail-Data-2 .btnToggleImageReview {
+  border: 0;
+  background-color: var(--btn-primary);
+  color: white;
+  font-size: 1.1em;
+  padding: .5rem 2rem;
+  border-radius: 10px;
+  min-width: 10rem;
 }
 
 .Modal-Review-Detail-Data-Description-container {

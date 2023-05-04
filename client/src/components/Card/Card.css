@@ -168,11 +168,11 @@
 }
 
 .Card .infoCard .Card-Tags .Tag-Charact {
-    background-color: var(--bg-tertiary);
+    background-color: var(--btn-secondary);
 }
 
 .Card .infoCard .Card-Tags .Tag-Type {
-    background-color: var(--optional1);
+    background-color: var(--btn-primary);
 }
 
 @media screen and (min-width:1600px) {

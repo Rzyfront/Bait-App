@@ -5,7 +5,6 @@ import Reseñas from './Reviews/Reviews';
 import ReseñaDetail from './ReviewDetail/ReviewDetail';
 import NavAdmin from './NavAdmin/NavAdmin';
 import { useState } from 'react';
-import LocalsToVerify from './LocalsToVerify/LocalsToVerify';
 
 const Dashboard = () => {
   const [section, setSection] = useState(0);
@@ -22,7 +21,6 @@ const Dashboard = () => {
     {section === 1 && <Restaurantes/> }
     {section === 2 && <Reseñas fn={changeSection}/> }
     {section === 3 && <ReseñaDetail fn={changeSection}/> }
-    {section === 4 && <LocalsToVerify fn={changeSection}/> }
     </div>
   );
 };

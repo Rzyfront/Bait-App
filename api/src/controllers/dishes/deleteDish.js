@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
   try {
     const { dishId } = req.params;
     const deleteDish = await Dish.findByPk(dishId);
-    if (!deleteDish) throw new Error('Dish not found');
+    if (!deleteDish) throw new Error('El plato no se encontró');
     deleteDish.destroy();
     res.status(201).json({ success: true, dish: deleteDish });
   } catch (error) {

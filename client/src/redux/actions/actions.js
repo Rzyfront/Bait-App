@@ -1,44 +1,36 @@
 /* eslint-disable no-undef */
 /* eslint-disable camelcase */
-import axios from 'axios';
+import axios from "axios";
 /// ///names/////////////
-export const ORDER = 'ORDER';
-export const RESET = 'RESET';
-export const SEARCH_BY_QUERY = 'SEARCH_BY_QUERY';
-export const DETAIL = 'DETAIL';
-export const COMENTARIE = 'COMENTARIE';
-export const HOMEPAGE = 'HOMEPAGE';
-export const SUCCESS = 'SUCCESS';
-export const ERROR = 'ERROR';
-export const SUCCESS_RESET = 'SUCCESS_RESET';
-export const ERROR_RESET = 'ERROR_RESET';
+export const ORDER = "ORDER";
+export const RESET = "RESET";
+export const COMENTARIE = "COMENTARIE";
+export const HOMEPAGE = "HOMEPAGE";
 
 // ACTION TYPES USER
-export const CREATE_USER = 'CREATE_USER';
-export const CHECKUSER = 'CHEKUSER';
-export const RESETUSER = 'RESETUSER';
-export const UPDATE_USER = 'UPDATE_USER';
+export const CREATE_USER = "CREATE_USER";
+export const CHECKUSER = "CHEKUSER";
+export const RESETUSER = "RESETUSER";
+export const UPDATE_USER = "UPDATE_USER";
 
 // ACTION TYPES USERPROFILE
-export const USER_PROFILE = 'USER_PROFILE';
-export const USER_POST_IMG = 'USER_POST_IMG';
+export const USER_PROFILE = "USER_PROFILE";
+export const USER_POST_IMG = "USER_POST_IMG";
 
 // ACTION TYPES REVIEWS
-export const GET_REVIEWS = 'GET_REVIEWS';
-export const CLEAN_REVIEWS = 'CLEAN_REVIEWS';
+export const GET_REVIEWS = "GET_REVIEWS";
+export const CLEAN_REVIEWS = "CLEAN_REVIEWS";
 
 // ACTION TYPE USERPROFILE DASHBOARD LOCALS
-export const USER_DASH_LOCALS = 'USER_DASH_LOCALS';
+export const USER_DASH_LOCALS = "USER_DASH_LOCALS";
 
 /// ///////actions////////////////////////////
 export const reset = () => {
   return {
     type: RESET,
-    payload: ''
+    payload: "",
   };
 };
-/// loadinglocals
-
 /// Create user
 export const createUser = ({
   name,
@@ -50,11 +42,11 @@ export const createUser = ({
   location,
   verified,
   isActive,
-  role
+  role,
 }) => {
   return async (dispatch) => {
     try {
-      await axios.post('/user', {
+      await axios.post("/user", {
         name,
         lastname,
         age: Number(age),
@@ -64,11 +56,11 @@ export const createUser = ({
         location,
         verified,
         isActive,
-        role
+        role,
       });
       return dispatch({
         type: CREATE_USER,
-        payload: 'Usuario Creado Correctamente'
+        payload: "Usuario Creado Correctamente",
       });
     } catch (error) {
       console.log(error);
@@ -76,83 +68,11 @@ export const createUser = ({
     }
   };
 };
-// Detail id
-export const DetailLocal = (id) => {
-  return async (dispatch) => {
-    try {
-      const datos = await axios.get(`/locals/${id}`);
-      dispatch({
-        type: DETAIL,
-        payload: datos.data
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
-// Detail User
-export const DetailUser = (id) => {
-  return async dispatch => {
-    try {
-      const datos = await axios.get(`/user/${id}`);
-      dispatch({
-        type: DETAIL,
-        payload: datos.data
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
-// correguir imagen cuando este listo la ruta
-export const createLocal = (inputs) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.post('/locals', {
-        email: inputs.email,
-        images: inputs.images,
-        location: inputs.location,
-        name: inputs.name,
-        // phone: inputs.phone,
-        schedule: inputs.schedule,
-        specialty: inputs.specialty
-        // characteristics: chekinputs
-      });
-      if (response.status === 201) {
-        dispatch({
-          type: SUCCESS,
-          payload: response.data.success
-        });
-        setTimeout(() => {
-          dispatch({
-            type: SUCCESS_RESET
-          });
-        }, 3000);
-      }
-    } catch (error) {
-      console.log(error);
-      dispatch({
-        type: ERROR,
-        payload: error.message
-      });
-      // set error state to null after 3 seconds
-      setTimeout(() => {
-        dispatch({
-          type: ERROR_RESET
-        });
-      }, 3000);
-    }
-  };
-};
-
 // order and filters and cards
 export const order = (data, actions) => {
-  console.log(data);
   const datas = data.flat();
   switch (actions) {
-    case 'best':
+    case "best":
       for (let j = 0; j < datas.length; j++) {
         for (let i = 0; i < datas.length - 1; i++) {
           if (datas[i + 1].rating > datas[i].rating) {
@@ -164,19 +84,19 @@ export const order = (data, actions) => {
       }
       return {
         type: ORDER,
-        payload: datas
+        payload: datas,
       };
-    case 'A-Z':
+    case "A-Z":
       const az = datas.sort((a, b) => a.name.localeCompare(b.name));
       return {
         type: ORDER,
-        payload: az
+        payload: az,
       };
-    case 'Z-A':
+    case "Z-A":
       const za = datas.sort((a, b) => b.name.localeCompare(a.name));
       return {
         type: ORDER,
-        payload: za
+        payload: za,
       };
 
     default:
@@ -184,23 +104,11 @@ export const order = (data, actions) => {
   }
   // adgorithm aordering
 };
-export const searchByQuery = (name, city) => {
-  return async (dispatch) => {
-    try {
-      const response = await axios.get(`/locals?name=${name}&location=${city}`);
-      const info = response.data;
-      return dispatch({ type: SEARCH_BY_QUERY, payload: info });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-};
-
 export const logIn = (credentials) => {
   return async (dispatch) => {
     try {
-      const res = await axios.post('/login', credentials);
-      localStorage.setItem('token', res.data.token);
+      const res = await axios.post("/login", credentials);
+      localStorage.setItem("token", res.data.token);
       location.reload();
       return true;
     } catch (error) {
@@ -208,32 +116,31 @@ export const logIn = (credentials) => {
     }
   };
 };
-
-export const comentarie = (
+export const comentarie = ({
   calificationFood,
   calificationQaPrice,
   calificationEnvironment,
   calificationService,
-  calculateAverage,
   inputs,
-  id
-) => {
-  console.log(id);
+  id,
+}) => {
+  console.log(inputs);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/reviews/${id}`, {
         title: inputs.title,
-        rating: calculateAverage,
-        comment: inputs.comment,
-        image: inputs.image,
+        comment: inputs.review,
         food: calificationFood,
         service: calificationService,
         environment: calificationEnvironment,
-        qaPrice: calificationQaPrice
+        qaPrice: calificationQaPrice,
+        image: inputs.image,
+        ticket: inputs.Tiket,
       });
       console.log(response);
       return true;
     } catch (error) {
+      console.log(error);
       return false;
     }
   };
@@ -245,7 +152,7 @@ export const homepage = (id) => {
       const response = await axios.get(`/locals/page/${id}`);
       dispatch({
         type: HOMEPAGE,
-        payload: response.data
+        payload: response.data,
       });
     } catch (error) {
       console.log(error.message);
@@ -257,10 +164,10 @@ export const homepage = (id) => {
 export const checkUser = () => {
   return async (dispatch) => {
     try {
-      const res = await axios.get('/login');
+      const res = await axios.get("/login");
       dispatch({
         type: CHECKUSER,
-        payload: res.data
+        payload: res.data,
       });
     } catch (error) {
       console.log(error);
@@ -271,7 +178,7 @@ export const ResetUser = () => {
   return async (dispatch) => {
     dispatch({
       type: RESETUSER,
-      payload: ''
+      payload: "",
     });
   };
 };
@@ -279,12 +186,13 @@ export const ResetUser = () => {
 export const getReviews = (localId, page = 1, order) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`/reviews/${localId}?page=${page}&order=${order}`);
-      console.log(response.data.reviews);
+      const response = await axios(
+        `/reviews/${localId}?page=${page}&order=${order}`
+      );
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
-          payload: response.data.reviews
+          payload: response.data.reviews,
         });
       }
     } catch (error) {}
@@ -293,7 +201,7 @@ export const getReviews = (localId, page = 1, order) => {
 
 export const cleanReviews = () => {
   return {
-    type: CLEAN_REVIEWS
+    type: CLEAN_REVIEWS,
   };
 };
 
@@ -306,7 +214,7 @@ export const getUserProfile = (id) => {
       if (response.data.success === true) {
         dispatch({
           type: USER_PROFILE,
-          payload: response.data.user
+          payload: response.data.user,
         });
       }
     } catch (error) {
@@ -318,26 +226,32 @@ export const getUserProfile = (id) => {
 export const updateUser = ({
   id,
   name,
-  lastname
-  , age,
+  lastname,
+  age,
   email,
   phone_number,
   image,
-  location
+  location,
 }) => {
   return async (dispatch) => {
     console.log(location, age);
 
     try {
-      await axios.put('/user', {
-        name, lastname, age, email, phone_number, image, location
+      await axios.put("/user", {
+        name,
+        lastname,
+        age,
+        email,
+        phone_number,
+        image,
+        location,
       });
 
       console.log(image);
 
       dispatch({
         type: UPDATE_USER,
-        payload: 'Usuario Modificado Correctamente'
+        payload: "Usuario Modificado Correctamente",
       });
     } catch (error) {
       console.log(error.message);
@@ -348,10 +262,10 @@ export const updateUser = ({
 export const getUserLocals = () => {
   return async (dispatch) => {
     try {
-      const response = await axios.get('/user/profile');
+      const response = await axios.get("/user/profile");
       dispatch({
         type: USER_DASH_LOCALS,
-        payload: response.data
+        payload: response.data,
       });
     } catch (err) {
       console.log(err.message);

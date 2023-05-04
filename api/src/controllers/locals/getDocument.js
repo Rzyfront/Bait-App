@@ -6,8 +6,8 @@ module.exports = async (req, res) => {
   try {
     const { localId } = req.params;
     const local = await Local.findByPk(localId, { include: [{ model: Document }] });
-    if (!local) throw new Error('Local not found');
-    if (!local.Document) throw new Error('Document not found');
+    if (!local) throw new Error('No se encontró el local');
+    if (!local.Document) throw new Error('No se encontró el documento');
 
     // const secureURL = cloudinary.url(local.Document.archive, { secure: true });
     //

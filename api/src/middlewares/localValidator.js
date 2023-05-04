@@ -8,10 +8,10 @@ module.exports = (req, res, next) => {
 
   try {
     if (name) verifiedTypeOf(name, 'string', 'name');
-    else throw new Error('Incomplete data');
+    else throw new Error('Datos incompletos');
 
     if (location) verifiedTypeOf(location, 'string', 'location');
-    else throw new Error('Incomplete data');
+    else throw new Error('Datos incompletos');
 
     verifiedExists(lat, 'lat');
     verifiedExists(lng, 'lng');
