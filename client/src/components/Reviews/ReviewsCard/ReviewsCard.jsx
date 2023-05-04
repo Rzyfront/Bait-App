@@ -10,7 +10,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
     activeFillColor: '#343434',
     inactiveFillColor: '#3434343B'
   };
-
+  console.log(User);
   const handleShowMore = () => {
     if (showMore) {
       setShowMore(false);
@@ -22,7 +22,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
      <div key={index} className={`ReviewCard-Completed ${!showMore && 'ReviewCard-Simple'}`}>
             <div className='ReviewCard-head'>
                 <UserComp
-                src={UserImgDefault}
+                src={User?.Image?.url || UserImgDefault}
                 name={`${User?.name} ${User?.lastname}`}
                 description={reviewDate}
                 className='UserComponent'
