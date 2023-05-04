@@ -81,6 +81,8 @@ function Userprofile() {
     
   }, [obtainUserLocal]);
 
+  
+
   const handleChangeimages = (event) => {
     handleChangeimage(event);
   };
@@ -135,7 +137,7 @@ function Userprofile() {
     setPasswordChange(!passwordChange)
   }
 
-  userProfile && console.log(userProfile.Reviews);
+ userProfile && console.log(userProfile);
 
   return (
     <div className={style.profileContainer}>
@@ -245,26 +247,7 @@ function Userprofile() {
                       <button className={style.deleteReview} id={rev.id} onClick={() => { handleDeleteReview(rev.id)}}>Eliminar</button>
                     </div>
                   </div>
-                  {userProfile?.Reviews.map((rev, i) => {
-                    return (<div key={i} className={style.reviewContainer}>
-                      <div style={{ display: 'flex' }}>
-                        <h4 className={style.titleReview}>{rev.title}</h4><RatingStar
-                          className={style.ratingStar}
-                          name='Rating'
-                          style={{ maxWidth: 100, marginLeft: '20px' }}
-                          value={4}
-                          readOnly
-                        />
-                      </div>
-                      <p className={style.commentReview}>{rev.comment}</p>
-                      <div className={style.detailReview}>
-                        <p className={style.dateReview}>{rev.updatedAt}</p>
-                      </div>
-                      <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                        <button className={style.deleteReview}>Eliminar</button>
-                      </div>
-                    </div>);
-                  })}
+                  
                 </div>
               )
                 })
