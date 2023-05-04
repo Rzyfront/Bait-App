@@ -47,7 +47,7 @@ function Userprofile () {
   const obtainUserLocal = useSelector((state) => state.userDashLocals);
   const { user } = useSelector((state) => state.user);
 
-  const [userLocal, setUserLocal] = useState(obtainUserLocal);
+  const [userLocal, setUserLocal] = useState([]);
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(1);
   const [passwordChange, setPasswordChange] = useState(false);
@@ -74,7 +74,8 @@ function Userprofile () {
   }, [user, image]);
 
   useEffect(() => {
-    setUserLocal(obtainUserLocal);
+
+    setUserLocal(obtainUserLocal?.user?.Locals);
   }, [obtainUserLocal]);
 
   const handleChangeimages = (event) => {
@@ -130,6 +131,8 @@ function Userprofile () {
   const handlePasswordChange =()=>{
     setPasswordChange(!passwordChange)
   }
+
+  userLocal && console.log(userLocal);
 
   return (
     <div className={style.profileContainer}>
@@ -255,9 +258,18 @@ function Userprofile () {
         {selectedId == 3 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Mis locales</p>
           <div className={style.localContainer}>
+            {userLocal && userLocal.map((local)=>{return(
+              <UserLocals 
+                id ={local.id}
+                name ={local.name}
+                image ={local.image}
+                location ={local.location}
+                specialty ={local.specialty}
+              />
+            )}) }
+            {/* <div className={style.local}></div>
             <div className={style.local}></div>
-            <div className={style.local}></div>
-            <div className={style.local}></div>
+            <div className={style.local}></div> */}
             {/* <div className={style.local}></div> */}
             {/* <div className={style.local}></div> */}
           </div>
