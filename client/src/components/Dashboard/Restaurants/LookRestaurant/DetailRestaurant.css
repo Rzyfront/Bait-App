@@ -1,5 +1,9 @@
 .detailRestaurantContainer {
-    width: 100%;
+    width: 60%;
+    background-color: white;
+    margin: 3rem auto;
+    position: relative;
+
 }
 
 .localDetail {
@@ -19,11 +23,36 @@
 }
 
 .userDetail {
+    width: 90%;
+    margin: auto;
+    padding-top: 10px;
     display: flex;
-    gap: 10px;
+    gap: 30px;
     font-size: 2rem;
+    background: rgba(0, 0, 0, 0.048);
+    border-radius: 10px;
+}
+
+.userDetail p {
+    font-size: 1rem;
+    margin: auto;
 }
 
 .localDetail {
     width: 100%;
+}
+
+.dash-res-close-modal {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: larger;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.dash-res-close-modal:hover {
+    font-size: 1.2rem;
+    color: var(--btn-primary);
 }

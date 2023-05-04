@@ -1,8 +1,8 @@
 import './Footer.css';
 import { Link } from 'react-router-dom';
 import { AiFillInstagram } from 'react-icons/ai';
-import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
-import { IoLogoTiktok } from 'react-icons/io5';
+// import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
+// import { IoLogoTiktok } from 'react-icons/io5';
 import { useState } from 'react';
 
 const Footer = () => {
@@ -11,11 +11,11 @@ const Footer = () => {
   return (
     <div id='Footer' className="Container_Footer">
       <div className="SocialMedia">
-        <a href='https://www.instagram.com/bait.app/' className="SM_IconLinks SM_Instagram">
+        <a href='https://www.instagram.com/bait.app/' target='_blank' className="SM_IconLinks SM_Instagram" rel="noreferrer">
           <AiFillInstagram />
           <p>Instagram</p>
         </a>
-        <a className="SM_IconLinks SM_Facebook">
+        {/* <a className="SM_IconLinks SM_Facebook">
           <FaFacebookSquare />
           <p>Facebook</p>
         </a>
@@ -30,7 +30,7 @@ const Footer = () => {
         <a className="SM_IconLinks SM_Tiktok">
           <IoLogoTiktok />
           <p>Tiktok</p>
-        </a>
+        </a> */}
       </div>
       <div className="PageInformation">
         <div className="InfoFooter1">
@@ -39,7 +39,7 @@ const Footer = () => {
               <Link to="/about">Sobre Nosotros</Link>
             </li>
             <li>
-              <a href="mailto:baitdevs2023@gmail.com">Contáctanos</a>
+             <a href="mailto:admin@bait.lat">Contáctanos</a>
             </li>
 
           </ul>
@@ -83,7 +83,7 @@ const Footer = () => {
         <div className="InfoFooter4">
           <ul>
               <li>
-              <Link to="/createplace">Inscribe tu Local</Link>
+              <Link to="/createplace#complete-form">Inscribe tu Local</Link>
             </li>
             <li>
                <Link to="/datatreatment">Tratamiento de datos</Link>

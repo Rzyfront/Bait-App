@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Loading, Input } from '@nextui-org/react';
 import { PopComent } from '../../components';
+import Slider from 'react-slick';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BaitLogo from '../../../assets/LogoBait.svg';
@@ -155,10 +156,21 @@ function LocalsDatabasic ({ formType, setFormType }) {
     }
   }, [image]);
 
+  const settings = {
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000
+  };
+
   return (
     <div className='LocalsDataBasic-Component'>
       {(formType === 'NoSelection') && <CreateLocalsSelector setFormType={setFormType} />}
       <div className='locales_data animated-element Container-Basic'>
+
+         <svg className='Wabe-Top' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#343434" fillOpacity="1" d="M0,0L40,5.3C80,11,160,21,240,21.3C320,21,400,11,480,42.7C560,75,640,149,720,160C800,171,880,117,960,112C1040,107,1120,149,1200,192C1280,235,1360,277,1400,298.7L1440,320L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>
+
         <Link to='/home/1?name=&city=' className='LinkLogo'>
           <img
             src={BaitLogo}
@@ -227,15 +239,18 @@ function LocalsDatabasic ({ formType, setFormType }) {
               ></input>
 
               {image.length
-                ? (
-                    image.map((image, i) => (
-                    <img
-                      key={i}
-                      src={image.url}
-                      alt='imagen'
-                      className='LocalesImage'
-                    />
-                    ))
+                ? (<div className='Img-Header'>
+
+                <Slider {...settings}>
+                {
+                  image?.map(({ url }, index) => {
+                    return <div key={index} className='Slide-Img-Carrousel'>
+                    <img src={url} alt={`img${index}`} />
+                  </div>;
+                  })
+                }
+                </Slider>
+                </div>
                   )
                 : loading === true
                   ? (
@@ -250,6 +265,8 @@ function LocalsDatabasic ({ formType, setFormType }) {
           </div>
 
         </div>
+
+        <svg className='Wabe-button' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3884fd" fillOpacity="1" d="M0,224L30,240C60,256,120,288,180,288C240,288,300,256,360,224C420,192,480,160,540,170.7C600,181,660,235,720,261.3C780,288,840,288,900,277.3C960,267,1020,245,1080,213.3C1140,181,1200,139,1260,128C1320,117,1380,139,1410,149.3L1440,160L1440,320L1410,320C1380,320,1320,320,1260,320C1200,320,1140,320,1080,320C1020,320,960,320,900,320C840,320,780,320,720,320C660,320,600,320,540,320C480,320,420,320,360,320C300,320,240,320,180,320C120,320,60,320,30,320L0,320Z"></path></svg>
 
       </div>
       <ToastContainer className="errors" theme='colored' />

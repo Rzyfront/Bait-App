@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
       attributes: ['title', 'comment', 'id'],
       include: [{ model: User, attributes: ['name', 'email', 'id'] }],
     });
-    if (!deletedReview) throw new Error('Review not found');
+    if (!deletedReview) throw new Error('No se encotró la reseña');
     deletedReview.verified = 'archived';
     await deletedReview.save();
     await sendReviewRejected(

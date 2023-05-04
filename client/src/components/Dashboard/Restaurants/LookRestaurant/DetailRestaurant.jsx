@@ -1,42 +1,49 @@
-import { useDispatch, useSelector } from 'react-redux';
 import Chart from '../../../../hooks/Chart';
-import { DetailLocal } from '../../../../redux/actions/local';
 import { useEffect, useState } from 'react';
 import './DetailRestaurant.css';
-import { getUserProfile } from '../../../../redux/actions/actions';
 import imageDefault from '../../../../assets/imagenDefault.png';
-const DetailRestaurant = ({ id }) => {
-  const dispatch = useDispatch();
-  const { detail, userProfile } = useSelector((state) => state);
+import { DetailDataR, DetailDataU } from './DetailDataR';
+import { AiOutlineClose } from 'react-icons/ai';
+
+const DetailRestaurant = ({ id, handleDetail }) => {
+  const [localData, setLocaldata] = useState();
+  const [userData, setUserdata] = useState();
   const [data, setData] = useState();
   useEffect(() => {
-    dispatch(DetailLocal(id));
+    const loadingData = async () => {
+      const data = await DetailDataR(id);
+      setLocaldata(data);
+    };
+    loadingData();
   }, []);
   useEffect(() => {
-    if (detail && detail.verified === 'verified') {
-      dispatch(getUserProfile(detail.UserId
-      ));
+    const loadingData = async () => {
+      const data = await DetailDataU(localData.UserId);
+      setUserdata(data);
+    };
+
+    if (localData && localData.verified === 'verified') {
+      loadingData();
     }
-    if (detail && detail.avgEnvironment) {
-      const data = [{ name: 'Ambiente', Calificacion: parseFloat(detail.avgEnvironment).toFixed(1) }, { name: 'Comida', Calificacion: parseFloat(detail.avgFood).toFixed(1) }, { name: 'Precio', Calificacion: parseFloat(detail.avgQaPrice).toFixed(1) }, { name: 'Servicio', Calificacion: parseFloat(detail.avgService).toFixed(1) }];
+    if (localData && localData.avgEnvironment) {
+      const data = [{ name: 'Ambiente', Calificacion: parseFloat(localData.avgEnvironment).toFixed(1) }, { name: 'Comida', Calificacion: parseFloat(localData.avgFood).toFixed(1) }, { name: 'Precio', Calificacion: parseFloat(localData.avgQaPrice).toFixed(1) }, { name: 'Servicio', Calificacion: parseFloat(localData.avgService).toFixed(1) }];
       setData(data);
     }
-  }, [detail]);
-
+    console.log(userData);
+  }, [localData]);
   return <div className='detailRestaurantContainer'>
-        {/* <button onClick={handleDetail}>cerrar</button> */}
+    <h4 className='rating-modal-title'>Rating promedio por categoría</h4>
+    <button onClick={handleDetail} className='dash-res-close-modal'><AiOutlineClose/></button>
        <div className='localDetail'>
-      {detail && detail.avgEnvironment && <Chart data={data} />}
-
+      {localData && localData.avgEnvironment && <Chart data={data} />}
       <div className='graph1'>
-
-        </div>
-      <p>{detail.location}</p>
       </div>
-    {detail && detail.verified === 'verified' && <div className='userDetail'>
-      {userProfile && userProfile.Images && userProfile.Images.length ? <img src={userProfile.Images[0].url} alt='image' className='photoselect' /> : <img src={imageDefault} alt='foto' className='photoselect' />}
-      <p>{userProfile.name} {userProfile.lastname}</p>
-      <p>Edad:{userProfile.age}</p>
+      {localData && localData.location && <p>{localData?.location}</p>}
+      </div>
+    {localData && localData.verified === 'verified' && <div className='userDetail'>
+      {userData && userData.Image ? <img src={userData.Image.url} alt='image' className='photoselect' /> : <img src={imageDefault} alt='foto' className='photoselect' />}
+      {userData && userData.name && userData.lastname && <p>{userData.name} {userData.lastname}</p>}
+      {userData && userData.age && <p>Edad:{userData.age}</p>}
     </div>}
 
     </div>;

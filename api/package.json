@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seeds": "node ./src/seeds/images.js",
-    "rootAdmin": "node ./src/seeds/rootAdmin.js"
+    "seedImages": "node ./src/seeds/images.js",
+    "rootAdmin": "node ./src/seeds/rootAdmin.js",
+    "seed": "node ./src/seeds/seed.js"
   },
   "keywords": [],
   "author": "",
@@ -33,6 +34,7 @@
     "swagger-ui-express": "^4.6.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
     "eslint": "^8.38.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.27.5",
