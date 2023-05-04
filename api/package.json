@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seeds": "node ./src/seeds/images.js",
-    "rootAdmin": "node ./src/seeds/rootAdmin.js"
+    "seedImages": "node ./src/seeds/images.js",
+    "rootAdmin": "node ./src/seeds/rootAdmin.js",
+    "seed": "node ./src/seeds/seed.js"
   },
   "keywords": [],
   "author": "",
