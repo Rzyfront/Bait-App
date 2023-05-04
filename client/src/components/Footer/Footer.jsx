@@ -1,8 +1,8 @@
 import './Footer.css';
 import { Link } from 'react-router-dom';
 import { AiFillInstagram } from 'react-icons/ai';
-import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
-import { IoLogoTiktok } from 'react-icons/io5';
+// import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
+// import { IoLogoTiktok } from 'react-icons/io5';
 import { useState } from 'react';
 
 const Footer = () => {
@@ -15,7 +15,7 @@ const Footer = () => {
           <AiFillInstagram />
           <p>Instagram</p>
         </a>
-        <a className="SM_IconLinks SM_Facebook">
+        {/* <a className="SM_IconLinks SM_Facebook">
           <FaFacebookSquare />
           <p>Facebook</p>
         </a>
@@ -30,7 +30,7 @@ const Footer = () => {
         <a className="SM_IconLinks SM_Tiktok">
           <IoLogoTiktok />
           <p>Tiktok</p>
-        </a>
+        </a> */}
       </div>
       <div className="PageInformation">
         <div className="InfoFooter1">

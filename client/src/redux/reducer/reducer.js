@@ -24,7 +24,7 @@ import {
   SEARCH_BY_FILTERS,
   SAVE_SEARCH_HOME
 } from '../actions/cards';
-import { DETAIL, SUCCESS, ERROR } from '../actions/local';
+import { DETAIL, CLEAN_DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
 import {
   GET_ALL_USERS,
@@ -94,6 +94,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         detail: payload
+      };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        detail: []
       };
     case CREATE_USER:
       return {
@@ -212,7 +217,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         success: payload
       };
 
-    
     case USER_DASH_LOCALS:
       return {
         ...state,

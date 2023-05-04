@@ -54,10 +54,10 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
               <div className='Info-left-decoration'></div>
               </div>
             <div className='Rating-C-Group-Container'>
-                <h5 className='Rating-C-Group'>Ambiente: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
-                <h5 className='Rating-C-Group'>Comida: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
-                <h5 className='Rating-C-Group'>Calidad-Precio: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
-                <h5 className='Rating-C-Group'>Servicio: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Ambiente: <RatingStar readOnly style={{ maxWidth: 100 }} value={environment || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Comida: <RatingStar readOnly style={{ maxWidth: 100 }} value={food || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Calidad-Precio: <RatingStar readOnly style={{ maxWidth: 100 }} value={qaPrice || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Servicio: <RatingStar readOnly style={{ maxWidth: 100 }} value={service || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
             </div>
         </div>
                 <div className='Rigth-Img'>

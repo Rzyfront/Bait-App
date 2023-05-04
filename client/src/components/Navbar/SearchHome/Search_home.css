@@ -13,7 +13,7 @@
 .search_home .searchs .input_Eat{
     display: flex;
     width: 50%;
-    border-radius: 0 0 0 10px;
+    /* border-radius: 0 0 0 10px; */
     border-bottom: 1px solid black;
     background: var(--bg-primary);
     height:100%;
@@ -28,7 +28,7 @@
 .search_home .searchs .input_Location {
     display: flex;
     width: 50%;
-    border-radius: 0 0 0 10px;
+    /* border-radius: 0 0 0 10px; */
     border-bottom: 1px solid black;
     background: var(--bg-primary);
     height: 100%;

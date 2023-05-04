@@ -1,7 +1,6 @@
 const { Menu, Dish, Image } = require('../../db');
 
 module.exports = async (req, res) => {
-  console.log('aquí');
   try {
     const { menuId } = req.params;
     const menu = await Menu.findByPk(menuId, {

@@ -77,12 +77,16 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Info-Caracteristic-Group .Info-C-Title{
     font-size: 1rem;
     font-family: var(--text);
-    font-weight: 300;
+    font-weight: 400;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Info-Caracteristic-Group .Info-C-Tag {
@@ -90,7 +94,7 @@
     font-family: var(--text);
     font-weight: 300;
     color: var(--tertiary);
-    background-color: var(--optional2);
+    background-color: var(--btn-secondary);
     border-radius: 5px;
     padding: 2px 5px;
 }
@@ -152,4 +156,61 @@
     font-family: var(--text);
     font-weight: 300;
 
+}
+
+
+@media screen and (max-width:1050px) {
+    .InfoLocalsProfile-Compontent {
+            width: 85%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .InfoLocalsProfile-Compontent {
+            width: 90%;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .InfoLocalsProfile-Compontent {
+        width: 98%;
+    }
+    .InfoLocalsProfile-Compontent .Info-left .Info-Local-Name {
+        font-size: 1.9rem;
+    }
+    .InfoLocalsProfile-Compontent .Info-left .Info-Local-Location {
+        font-size: 0.9rem;
+    }
+    .InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Type-Eat {
+        height: 30px;
+        padding: 5px 8px;
+    }
+    .InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Type-Local {
+        height: 30px;
+        padding: 5px 8px;
+    }
+    .InfoLocalsProfile-Compontent .Info-left {
+
+        width: 60%;
+        gap: 5px;
+    }
+    .InfoLocalsProfile-Compontent .Info-rigth {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:580px) {
+    .InfoLocalsProfile-Compontent {
+           flex-direction: column;
+           align-items: center;
+           gap: 10px;
+        }
+    .InfoLocalsProfile-Compontent .Info-left {
+        width: 95%;
+        gap: 5px;
+    }
+    .InfoLocalsProfile-Compontent .Info-rigth {
+        width: 95%;
+        align-items: flex-start;  
+    }
 }
