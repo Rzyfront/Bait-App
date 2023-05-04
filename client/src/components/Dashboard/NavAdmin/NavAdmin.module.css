@@ -42,6 +42,10 @@
     cursor:pointer;
 }
 
+.li:hover{
+    background-color: var(--btn-primary);
+    color: #fff;
+}
 .liSelected{
     padding:10px 20px;
     transition: .2s;
@@ -50,15 +54,11 @@
     background-color: var(--btn-primary);
 }
 
-.li:last-child{
-    margin-top: 320px;
-}
+/* .li:last-child{
+    margin-top: 20px;
+} */
 
 
-.li:hover{
-    background-color:var(--btn-primary);
-    color:white
-}
 .mobileMenu{
     display:none;
 }

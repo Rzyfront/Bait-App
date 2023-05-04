@@ -11,7 +11,7 @@ export const HOMEPAGE = 'HOMEPAGE';
 export const CREATE_USER = 'CREATE_USER';
 export const CHECKUSER = 'CHEKUSER';
 export const RESETUSER = 'RESETUSER';
-export const UPDATE_USER ="UPDATE_USER"
+export const UPDATE_USER = 'UPDATE_USER';
 
 // ACTION TYPES USERPROFILE
 export const USER_PROFILE = 'USER_PROFILE';
@@ -117,30 +117,32 @@ export const logIn = (credentials) => {
   };
 };
 export const comentarie = (
-  calificationFood,
-  calificationQaPrice,
-  calificationEnvironment,
-  calificationService,
-  calculateAverage,
-  inputs,
-  id
+  {
+    calificationFood,
+    calificationQaPrice,
+    calificationEnvironment,
+    calificationService,
+    inputs,
+    id
+  }
 ) => {
-  console.log(id);
+  console.log(inputs);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/reviews/${id}`, {
         title: inputs.title,
-        rating: calculateAverage,
-        comment: inputs.comment,
-        image: inputs.image,
+        comment: inputs.review,
         food: calificationFood,
         service: calificationService,
         environment: calificationEnvironment,
-        qaPrice: calificationQaPrice
+        qaPrice: calificationQaPrice,
+        image: inputs.image,
+        ticket: inputs.Tiket
       });
       console.log(response);
       return true;
     } catch (error) {
+      console.log(error);
       return false;
     }
   };
@@ -222,39 +224,35 @@ export const getUserProfile = (id) => {
   };
 };
 
-export const updateUser = ({id,
+export const updateUser = ({
+  id,
   name,
   lastname
-  ,age,
+  , age,
   email,
   phone_number,
   image,
-  location}) => {
+  location
+}) => {
   return async (dispatch) => {
-    
-    console.log(location,age);
-    
-    try {
-       await axios.put(`/user`,{
-        name,lastname,age,email,phone_number,image,location
-      });
+    console.log(location, age);
 
+    try {
+      await axios.put('/user', {
+        name, lastname, age, email, phone_number, image, location
+      });
 
       console.log(image);
 
-     
-        dispatch({
-          type: UPDATE_USER,
-          payload: "Usuario Modificado Correctamente"
-        });
-      
+      dispatch({
+        type: UPDATE_USER,
+        payload: 'Usuario Modificado Correctamente'
+      });
     } catch (error) {
       console.log(error.message);
     }
   };
 };
-
-
 
 export const getUserLocals = () => {
   return async (dispatch) => {

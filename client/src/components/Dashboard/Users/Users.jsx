@@ -66,7 +66,7 @@ const Users = ({ localId, handleAdd }) => {
         <Pagination paginade={paginade} page={filter.page} totalPages={data.totalPages} />
         {data && data.users &&
            data.users.map((data, index) => {
-             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
+             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.Image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
                phone_number={data.phone_number} />;
            })
           }

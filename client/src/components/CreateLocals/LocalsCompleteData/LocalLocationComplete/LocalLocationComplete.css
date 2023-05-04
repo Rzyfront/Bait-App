@@ -45,3 +45,27 @@
     border: 2px solid var(--optional1);
     color: var(--optional1);
 }
+
+
+
+@media screen and (max-width: 750px) {
+    .LocationCompleteContainer .Pick-Location-Basic {
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 590px) {
+
+    .LocationCompleteContainer {
+            width: 90%;
+        }
+
+    .LocationCompleteContainer .Map-Complete-Container {
+        height: 240px;
+    }
+
+    .LocationCompleteContainer .Direction-Complete,
+    .LocationCompleteContainer .City-Complete-Location {
+        width: 80%;
+    }
+}

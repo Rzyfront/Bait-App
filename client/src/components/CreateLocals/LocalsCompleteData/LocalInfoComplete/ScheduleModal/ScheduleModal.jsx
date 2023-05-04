@@ -11,10 +11,7 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
         [name]: value
       }
     });
-    console.log(schedulState);
   };
-  //   tuve un error porque es ves de domingo escribria dogimbo jijiji
-
   // asigna horarios y mira la consola para ver como se guardan los datos
   return (
     <div className='ScheduleModal-Component'>
@@ -26,13 +23,13 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
             </div>
             <div className='Selections-Group'>
             <div className='Days'>
-                <h5 className={`day ${(schedulState.lunes.open !== '') && 'Hour-ok'}`}>Lunes</h5>
-                <h5 className={`day ${(schedulState.martes.open !== '') && 'Hour-ok'}`}>Martes</h5>
-                <h5 className={`day ${(schedulState.miercoles.open !== '') && 'Hour-ok'}`}>Miercoles</h5>
-                <h5 className={`day ${(schedulState.jueves.open !== '') && 'Hour-ok'}`}>Jueves</h5>
-                <h5 className={`day ${(schedulState.viernes.open !== '') && 'Hour-ok'}`}>Viernes</h5>
-                <h5 className={`day ${(schedulState.sabado.open !== '') && 'Hour-ok'}`}>Sabado</h5>
-                <h5 className={`day ${(schedulState.domingo.open !== '') && 'Hour-ok'}`}>Domingo</h5>
+                <h5 className={`day ${(schedulState.monday.open !== '') && 'Hour-ok'}`}>Lunes</h5>
+                <h5 className={`day ${(schedulState.tuesday.open !== '') && 'Hour-ok'}`}>Martes</h5>
+                <h5 className={`day ${(schedulState.wednesday.open !== '') && 'Hour-ok'}`}>Miercoles</h5>
+                <h5 className={`day ${(schedulState.thursday.open !== '') && 'Hour-ok'}`}>Jueves</h5>
+                <h5 className={`day ${(schedulState.friday.open !== '') && 'Hour-ok'}`}>Viernes</h5>
+                <h5 className={`day ${(schedulState.saturday.open !== '') && 'Hour-ok'}`}>Sabado</h5>
+                <h5 className={`day ${(schedulState.sunday.open !== '') && 'Hour-ok'}`}>Domingo</h5>
             </div>
             <div className='Hours'>
                 <div className='Open-Close'>
@@ -40,18 +37,20 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
                 width="60px"
                 label="Time"
                 type="time"
-                alt='lunes'
+                alt='monday'
                 className='Input-hours'
                 name='open'
+                value= {schedulState.monday.open}
                 onChange={handleScheduleChange}
                 />
                 <Input
                 width="60px"
                 label="Time"
                 type="time"
-                alt='lunes'
+                alt='monday'
                 className='Input-hours'
                 name='close'
+                value= {schedulState.monday.close}
                 onChange={handleScheduleChange}
                 />
                 </div>
@@ -60,18 +59,20 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
                 width="60px"
                 label="Time"
                 type="time"
-                alt='martes'
+                alt='tuesday'
                 className='Input-hours'
                 name='open'
+                value= {schedulState.tuesday.open}
                 onChange={handleScheduleChange}
                 />
                 <Input
                 width="60px"
                 label="Time"
                 type="time"
-                alt='martes'
+                alt='tuesday'
                 className='Input-hours'
                 name='close'
+                value= {schedulState.tuesday.close}
                 onChange={handleScheduleChange}
                 />
                 </div>
@@ -80,18 +81,20 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
                 width="60px"
                 label="Time"
                 type="time"
-                alt='miercoles'
+                alt='wednesday'
                 className='Input-hours'
                 name='open'
+                value= {schedulState.wednesday.open}
                 onChange={handleScheduleChange}
                 />
                 <Input
                 width="60px"
                 label="Time"
                 type="time"
-                alt='miercoles'
+                alt='wednesday'
                 className='Input-hours'
                 name='close'
+                value= {schedulState.wednesday.close}
                 onChange={handleScheduleChange}
                 />
                 </div>
@@ -100,38 +103,20 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
                 width="60px"
                 label="Time"
                 type="time"
-                alt='jueves'
+                alt='thursday'
                 className='Input-hours'
                 name='open'
+                value= {schedulState.thursday.open}
                 onChange={handleScheduleChange}
                 />
                 <Input
                 width="60px"
                 label="Time"
                 type="time"
-                alt='jueves'
+                alt='thursday'
                 className='Input-hours'
                 name='close'
-                onChange={handleScheduleChange}
-                />
-                </div>
-                <div className='Open-Close'>
-                    <Input
-                width="60px"
-                label="Time"
-                type="time"
-                alt='viernes'
-                className='Input-hours'
-                name='open'
-                onChange={handleScheduleChange}
-                />
-                <Input
-                width="60px"
-                label="Time"
-                type="time"
-                alt='viernes'
-                className='Input-hours'
-                name='close'
+                value= {schedulState.thursday.close}
                 onChange={handleScheduleChange}
                 />
                 </div>
@@ -140,18 +125,20 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
                 width="60px"
                 label="Time"
                 type="time"
-                alt='sabado'
+                alt='friday'
                 className='Input-hours'
                 name='open'
+                value= {schedulState.friday.open}
                 onChange={handleScheduleChange}
                 />
                 <Input
                 width="60px"
                 label="Time"
                 type="time"
-                alt='sabado'
+                alt='friday'
                 className='Input-hours'
                 name='close'
+                value= {schedulState.friday.close}
                 onChange={handleScheduleChange}
                 />
                 </div>
@@ -160,18 +147,42 @@ function ScheduleModal ({ setShowSchedule, schedulState, setScheduleState }) {
                 width="60px"
                 label="Time"
                 type="time"
-                alt='domingo'
+                alt='saturday'
                 className='Input-hours'
                 name='open'
+                value= {schedulState.saturday.open}
                 onChange={handleScheduleChange}
                 />
                 <Input
                 width="60px"
                 label="Time"
                 type="time"
-                alt='domingo'
+                alt='saturday'
                 className='Input-hours'
                 name='close'
+                value= {schedulState.saturday.close}
+                onChange={handleScheduleChange}
+                />
+                </div>
+                <div className='Open-Close'>
+                    <Input
+                width="60px"
+                label="Time"
+                type="time"
+                alt='sunday'
+                className='Input-hours'
+                name='open'
+                value= {schedulState.sunday.open}
+                onChange={handleScheduleChange}
+                />
+                <Input
+                width="60px"
+                label="Time"
+                type="time"
+                alt='sunday'
+                className='Input-hours'
+                name='close'
+                value= {schedulState.sunday.close}
                 onChange={handleScheduleChange}
                 />
                 </div>

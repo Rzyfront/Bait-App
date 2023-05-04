@@ -8,15 +8,14 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
     setInputs(inputs => ({ ...inputs, specialty: selectedSpecialty }));
   };
   const handleRestaurantTypeChange = (selectedOptions) => {
-    const selectedRestaurant = selectedOptions.map(option => option.label);
-    setInputs(inputs => ({ ...inputs, restaurantType: selectedRestaurant }));
+    setInputs(inputs => ({ ...inputs, restaurantType: selectedOptions }));
   };
   const handleCharacteristicsChange = (selectedOptions) => {
-    const selectedCharacteristics = selectedOptions.map(option => option.label);
+    const selectedCharacteristics = selectedOptions.map(option => option.value);
     setInputs(inputs => ({ ...inputs, characteristics: selectedCharacteristics }));
   };
   const handlePaymentChange = (selectedOptions) => {
-    const selectedPayments = selectedOptions.map(option => option.label);
+    const selectedPayments = selectedOptions.map(option => option.value);
     setInputs(inputs => ({ ...inputs, payments: selectedPayments }));
   };
 
@@ -72,14 +71,6 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
         }>Agregar Horarios</div>
         <input
         className='Input-C Input-Email-Complete'
-        type="text"
-        name='email'
-        placeholder='E-mail'
-        value={inputs.email}
-        onChange={handleChange}
-        />
-        <input
-        className='Input-C Input-Email-Complete'
         type="number"
         name='phone'
         placeholder='Telefono/Celular'
@@ -98,7 +89,6 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
           styles={customStyles}
         />
         <Select
-        isMulti
         name="restaurantType"
         options={restaurantTypeList}
         placeholder={'Tipo de restaurante'}

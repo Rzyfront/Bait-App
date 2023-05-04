@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
       lat,
       lng,
     });
-    if (specialty.length) {
+    if (specialty && specialty.length) {
       const specialties = await Promise.all(specialty.map((specialtyName) => Specialty.findOrCreate({ where: { name: specialtyName } })));
       newLocal.setSpecialties(specialties.map((spl) => spl[0].id));
     }

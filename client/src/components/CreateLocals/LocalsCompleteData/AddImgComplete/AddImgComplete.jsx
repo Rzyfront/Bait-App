@@ -1,14 +1,17 @@
 import './AddImgComplete.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IoCreate } from 'react-icons/io5';
 import { RiImageAddFill } from 'react-icons/ri';
 import { Loading } from '@nextui-org/react';
 import { useUploadImage } from '../../../../hooks/useUploadImage';
 import Slider from 'react-slick';
 import { HiOutlineDocumentArrowUp } from 'react-icons/hi2';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 function AddImgComplete ({ inputs, setInputs }) {
   const { image, loading, handleChangeimage } = useUploadImage();
+  const [document, setDocument] = useState({});
   useEffect(() => {
     if (image.length) {
       const data = image.map((data) => {
@@ -19,22 +22,25 @@ function AddImgComplete ({ inputs, setInputs }) {
     }
   }, [image]);
 
+  useEffect(() => {
+    if (document) {
+      setInputs({ ...inputs, document });
+    }
+  }, [document]);
+
   const handleChangeimages = (event) => {
     handleChangeimage(event);
   };
 
   const hanlderInputDocument = async (e) => {
-
-    // MIRAR EL COMPONENTE CLAIMLOCAL PARA COPIAR LA FORMA EN LA QUE SE SUBE EL DOCUMENTO
-
-    // try {
-    //   const formData = new FormData();
-    //   formData.append('document', e.target.files[0]);
-    //   const { data } = await axios.post('/locals/document', formData);
-    //   setDocument(data.newDocument);
-    // } catch (error) {
-    //   swal(error.response.data.message, { type: 'error' });
-    // }
+    try {
+      const formData = new FormData();
+      formData.append('document', e.target.files[0]);
+      const { data } = await axios.post('/locals/document', formData);
+      setDocument(data.newDocument);
+    } catch (error) {
+      swal(error.response.data.message, { type: 'error' });
+    }
   };
 
   const settings = {
