@@ -33,8 +33,8 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
         </div>
         <div className='Info-rigth'>
             <div className='Info-rigth-title'>
-             { detail.verified !== 'verified' && <div onClick={() => showClaimLocal(true)} className='ClaimButtom'>Reclamar local</div>}
-             { verifiedOwner && <div onClick={() => setModalUpdate(true)} className='ClaimButtom'>Actualizar local</div>}
+             { detail?.verified !== 'verified' && <div onClick={() => showClaimLocal(true)} className='ClaimButtom'>Reclamar local</div>}
+             { detail?.verified === 'verified' && verifiedOwner && <div onClick={() => setModalUpdate(true)} className='ClaimButtom'>Actualizar local</div>}
               {/* <h4 className='Info-rinth-Title'>Categorías calificadas</h4> */}
                         </div>
             <div className='Rating-C-Group-Container'>
