@@ -22,7 +22,6 @@ export default function LocalsCards ({ local }) {
       const { data } = await axios.get(`/locals/document/${local.id}`);
       setDocumentLink(data.url);
     } catch (error) {
-      console.log(error);
       swal(error.response.data.message, { type: 'error' });
     }
   };
@@ -32,7 +31,6 @@ export default function LocalsCards ({ local }) {
       swal('Local asignado con éxito', { type: 'success' });
       dispatch(getLocalsToVerify());
     } catch (error) {
-      console.log(error);
       swal(error.response.data.message, { type: 'error' });
     }
   };
@@ -42,7 +40,6 @@ export default function LocalsCards ({ local }) {
       swal('Local denegado con éxito', { type: 'success' });
       dispatch(getLocalsToVerify());
     } catch (error) {
-      console.log(error);
       swal(error.response.data.message, { type: 'error' });
     }
   };

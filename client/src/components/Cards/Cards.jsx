@@ -90,7 +90,7 @@ function Cards ({ toggle }) {
           {
           !locals?.length &&
             <div className="NoLocalsReview">
-              <h3 className='Nofind'>No existe un local que coincida con la busqueda</h3>
+              <h3 className='Nofind'>No existe un local que coincida con la búsqueda</h3>
 
                 <Link to={`/home/1?name=&city=${ubication.city}`}>
                   <div className="AddPlace">
