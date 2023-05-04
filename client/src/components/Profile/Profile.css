@@ -10,6 +10,13 @@
     overflow-x: hidden;
 }
 
+.SpinnerLocalsContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .Profile-Locals .Img-Header {
     width: 100%;
