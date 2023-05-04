@@ -40,14 +40,14 @@ function Mapdata ({ Mapcenter, statemap, handleBoton, handlemapdatas }) {
     });
     useEffect(() => {
       if (statemap === true) {
-        map.setView(Mapcenter, 14);
+        map.setView(Mapcenter, 12);
         handleBoton();
       }
     }, [Mapcenter]);
     return null;
   }
 
-  return (<MapContainer center={Mapcenter} zoom={14} scrollWheelZoom={false} style={{ width: '100%', height: '100%' }} >
+  return (<MapContainer center={Mapcenter} zoom={12} scrollWheelZoom={false} style={{ width: '100%', height: '100%' }} >
   <TileLayer
     url={MAP_LAYER_URL}
     attribution={MAP_LAYER_ATTRIBUTION}
