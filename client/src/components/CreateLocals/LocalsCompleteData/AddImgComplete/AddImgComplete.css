@@ -138,3 +138,59 @@
     color: var(--tertiary);
 
 }
+
+@media screen and (max-width:1090px) {
+
+    .AddImgComplete .Add-Img-Basic {
+        z-index: var(--alto-1);
+        font-size: 15px;
+        gap: 2px;
+    }
+
+    .AddImgComplete .Label-Img-Add{
+        height: 40%;
+    }
+
+
+}
+
+@media screen and (max-width:900px){
+    
+    .AddImgComplete .Add-Img-Basic {
+        z-index: var(--alto-1);
+        font-size: 12px;
+        gap: 2px;
+    }
+
+    .AddImgComplete .documentInput .documentInputText {
+        font-size: 0.8rem;
+    }
+    .AddImgComplete .documentInput .documentInputIcon {
+        font-size: 15px;
+    }
+
+    .AddImgComplete .documentInput {
+        gap: 5px;
+    }
+
+    .AddImgComplete .Send-Locals {
+        font-size: 14px;
+    }
+     .AddImgComplete .Label-Img-Add{
+        height: 30%;
+    }
+
+
+}
+
+@media screen and (max-width: 590px) {
+    .AddImgComplete {
+        width: 90%;
+    }
+
+     .AddImgComplete .Label-Img-Add{
+        height: 55%;
+    }
+
+
+}

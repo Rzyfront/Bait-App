@@ -51,3 +51,27 @@
 .Create-Complete-Container .Title-Complete span{
     color: var(--secondary);
 }
+
+@media screen and (max-width: 768px){
+    
+
+    .Create-Complete-Container .Title-Complete {
+        font-size: 2.5rem;
+    }
+}
+
+
+@media screen and (max-width: 590px) {
+
+.Create-Complete-Container .Complete-Form-Create {
+    flex-direction: column;
+    overflow: auto;
+    align-items: center;
+    gap: 10px;
+}
+
+.Create-Complete-Container .Title-Complete {
+    color: var(--secondary);
+}
+    
+}
