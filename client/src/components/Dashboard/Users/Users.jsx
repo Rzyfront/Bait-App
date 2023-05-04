@@ -57,8 +57,8 @@ const Users = ({ localId, handleAdd }) => {
       >
         <option value="" disabled selected>Seleccionar rol</option>
         <option value="" >Todos</option>
-       <option value="user" >Usuarions</option>
-       <option value="owner" >Propietario</option>
+        <option value="user" >Usuarions</option>
+        <option value="owner" >Propietario</option>
         <option value="admin" >Administrador</option>
         <option value="superAdmin" >Súper admin</option>
       </select >
@@ -66,11 +66,11 @@ const Users = ({ localId, handleAdd }) => {
       <div className={style.containerUserCard}>
         <Pagination paginade={paginade} page={filter.page} totalPages={data.totalPages} />
         {data && data.users &&
-           data.users.map((data, index) => {
-             return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.Image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
-               phone_number={data.phone_number} />;
-           })
-          }
+          data.users.map((data, index) => {
+            return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.Image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
+              phone_number={data.phone_number} />;
+          })
+        }
 
         <ToastContainer />
       </div>
