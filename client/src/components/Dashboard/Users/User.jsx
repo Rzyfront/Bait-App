@@ -86,40 +86,39 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
     }
   };
 
-  return <div className='userContainer'>
-        {image ? <img src={image.url} alt='user foto'/> : <img src={imageDefault} alt='default'/>}
+  return (
+        <div className='userContainer'>
+          {image ? <img src={image.url} alt='user foto'/> : <img src={imageDefault} alt='default'/>}
 
-        <div className='containerName'>
-        <h3>{email}</h3>
-        </div>
-      {role !== 'superAdmin'
-        ? <div className='selectdata'>
-        <select
-          onChange={handleSelect}
-          // value={selector}
-          defaultValue={role}
-          required
-      >
+          <div className='containerName'>
+          <h3>{email}</h3>
+          </div>
+        {role !== 'superAdmin'
+          ? <div className='selectdata'>
+          <select
+            onChange={handleSelect}
+            defaultValue={role}
+        >
 
-          <option value={role}>{role}</option>
-                  {role !== 'user' && <option value="user" >user</option>}
-                  {role !== 'owner' && <option value="owner" >owner</option>}
-          {user && user.role === 'superAdmin' && <option value="admin" >admin</option>}
+            <option value={role}>{role}</option>
+                    {role !== 'user' && <option value="user" >Usuario</option>}
+                    {role !== 'owner' && <option value="owner" >Propietario</option>}
+            {user && user.role === 'superAdmin' && <option value="admin" >Administrador</option>}
 
-      </select >
-              <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></div>
-        : <div className='selectdata'> <h3>{role}</h3>
-        </div>
-        }
-  {/* colores estado cuenta */}
+        </select >
+                <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></div>
+          : <div className='selectdata'> <h3>{role}</h3>
+          </div>
+          }
+    {/* colores estado cuenta */}
 
-    {!localId && <button onClick={handledetail} className='botton'>{detailon && detailon === true
-      ? 'Ocultar'
-      : 'Detalles'}</button>}
-    {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
-    {localId && (role === 'owner' || role === 'user') && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
-    {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={stateV} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent} phone_number={phone_number}/>}
+      {!localId && <button onClick={handledetail} className='botton'>{detailon && detailon === true
+        ? 'Ocultar'
+        : 'Detalles'}</button>}
+      {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
+      {localId && (role === 'owner' || role === 'user') && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
+      {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={stateV} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent} phone_number={phone_number}/>}
 
-  </div>;
+  </div>);
 };
 export default User;

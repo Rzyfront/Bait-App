@@ -18,6 +18,14 @@
     border-radius: 50%;
 }
 
+.userContainer select {
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--bg-secondary);
+    background-color: transparent;
+}
+
 .containerName {
     width: 40%;
     display: flex;
