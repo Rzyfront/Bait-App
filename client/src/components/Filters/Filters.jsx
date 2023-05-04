@@ -87,11 +87,8 @@ const Filters = ({ toggle, setToggle }) => {
           <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
         </div>
       </Link>
-        <div className="ResetHome" onClick={onRefresh}>
-          <RiRefreshFill />
-        </div>
       </div>
-
+    <div className='AddResetButtom'>
       <FilterGroup selectedOptions={selectedOptions}
       handleMultiSelectChange={handleMultiSelectChange}
       Caracteristicaslist={Caracteristicaslist}
@@ -99,7 +96,6 @@ const Filters = ({ toggle, setToggle }) => {
       filters = {filters}
       special = {special}
       />
-
       <div className='ToggleFilterButton-Container'>
         <BiFilterAlt className='ToggleFilterButton' onClick={toggleFilterModal
           ? () => setToggleFilterModal(false)
@@ -117,6 +113,10 @@ const Filters = ({ toggle, setToggle }) => {
           {toggle
             ? <TbMapOff/>
             : <TbMap2/>}
+        </div>
+      </div>
+      <div className="ResetHome" onClick={onRefresh}>
+          <RiRefreshFill />
         </div>
       </div>
     </div>

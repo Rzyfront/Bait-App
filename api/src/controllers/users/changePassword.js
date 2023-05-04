@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     const user = await User.findByPk(req.userId);
 
     const pass = await bcrypt.compare(oldPassword, user.password);
-    if (!pass) throw new Error('Old password incorrect');
+    if (!pass) throw new Error('Contraseña antigua incorrecta');
 
     const passwordHash = await bcrypt.hash(newPassword, 10);
     user.password = passwordHash;

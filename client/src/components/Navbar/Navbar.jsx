@@ -3,14 +3,13 @@ import './Navbar.css';
 import BaitLogo from '../../assets/LogoBait.svg';
 import BaitLogoSmall from '../../assets/LogoBaitSmall.svg';
 import SearchHome from './SearchHome/SearchHome';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Login, DropdownUser } from '../components';
 import { FaUserCircle } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { ResetUser } from '../../redux/actions/actions';
 
 const Navbar = () => {
-  const location = useLocation();
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.user);
   const [toggleMenuUser, setToggleMenuUser] = useState(false);
@@ -25,7 +24,7 @@ const Navbar = () => {
   return (
     <div id='Navbar' className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to={`${location.pathname !== '/' ? '/' : `/home/1?name=&city=${ubication.city}`}`}>
+      <Link to={`/home/1?name=&city=${ubication.city}`}>
         <img
           src={BaitLogo}
           alt="Bait"

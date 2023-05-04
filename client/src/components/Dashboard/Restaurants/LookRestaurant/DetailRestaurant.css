@@ -19,9 +19,19 @@
 }
 
 .userDetail {
+    width: 90%;
+    margin: auto;
+    padding-top: 10px;
     display: flex;
-    gap: 10px;
+    gap: 30px;
     font-size: 2rem;
+    background: rgba(0, 0, 0, 0.048);
+    border-radius: 10px;
+}
+
+.userDetail p {
+    font-size: 1rem;
+    margin: auto;
 }
 
 .localDetail {

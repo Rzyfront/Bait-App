@@ -72,7 +72,7 @@ export const getAllReviews = ({ page = 1, verified = 'unVerified' }) => {
   };
 };
 
-export const createAdmin = async ({ id }) => {
+export const createAdmin = ({ id }) => async (dispatch) => {
   try {
     const { data } = await axios.put(`/administrator/createAdmin/${id}`);
     console.log(data);

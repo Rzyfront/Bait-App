@@ -48,6 +48,23 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
       },
+      // PAYMENT METHODS
+      pay_apps: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      debit_card: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      credit_card: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
+      cash: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     { timestamps: false },
   );
@@ -97,6 +114,18 @@ module.exports = (sequelize) => {
  *         pet_friendly:
  *           type: boolean
  *           default: false
+ *         pay_apps:
+ *           type: boolean
+ *           default: false
+ *         devit_card:
+ *           type: boolean
+ *           default: false
+ *         credit_card:
+ *           type: boolean
+ *           default: false
+ *         cash:
+ *           type: boolean
+ *           default: false
  *       required:
  *         - wifi
  *         - parking_lot
@@ -108,4 +137,8 @@ module.exports = (sequelize) => {
  *         - big_group
  *         - work_friendly
  *         - pet_friendly
+ *         - pay_apps
+ *         - devit_card
+ *         - credit_card
+ *         - cash
  */

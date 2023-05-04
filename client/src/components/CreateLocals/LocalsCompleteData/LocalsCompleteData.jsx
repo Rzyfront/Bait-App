@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 // import { Loading } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchMap from '../../Map/SearchMap/SearchMap';
-import { createLocalFull } from '../../../redux/actions/local';
+import { createLocalFull, updateLocalFull } from '../../../redux/actions/local';
 import { ErrorsDatabasic } from '../LocalHelpers/ErrorsDatabasic';
 import LocalInfoComplete from './LocalInfoComplete/LocalInfoComplete';
 import LocalLocationComplete from './LocalLocationComplete/LocalLocationComplete';
@@ -14,7 +14,7 @@ import AddImgComplete from './AddImgComplete/AddImgComplete';
 import './LocalsCompleteData.css';
 import ScheduleModal from './LocalInfoComplete/ScheduleModal/ScheduleModal';
 
-function LocalsCompleteData () {
+function LocalsCompleteData ({ detail, setModalUpdate }) {
   const ubication = useSelector((state) => state.ubication);
   const positionMap = useSelector((state) => state.ubication);
   const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
@@ -73,15 +73,14 @@ function LocalsCompleteData () {
   };
   /// inputs and erros
   const [inputs, setInputs] = useState({
-    name: '',
+    name: detail?.name ?? '',
     schedule: {},
-    email: '',
-    phone: '',
+    email: detail?.email ?? '',
     specialty: [],
-    restaurantType: [],
+    restaurantType: '',
     characteristics: [],
     payments: [],
-    address: '',
+    address: detail?.address ?? '',
     location: {},
     images: [],
     document: {}
@@ -121,16 +120,30 @@ function LocalsCompleteData () {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!Object.values(errors).length) {
-      const response = await dispatch(createLocalFull(inputs, chekinputs));
-      if (response === true) {
-        toast.success('¡Local creado satisfactoriamente!', {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 2000
-        });
-        setTimeout(() => {
-          Navigate(`/home/1?name=&city=${ubication.city}`);
-        }, 2000);
-      }
+      let response;
+      if (detail) {
+        await dispatch(updateLocalFull(inputs, detail));
+        if (response === true) {
+          toast.success('¡Local actualiizado satisfactoriamente!', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000
+          });
+          setTimeout(() => {
+            setModalUpdate(false);
+          }, 2000);
+        }
+      } else {
+        response = await dispatch(createLocalFull(inputs, chekinputs));
+        if (response === true) {
+          toast.success('¡Local creado satisfactoriamente!', {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000
+          });
+          setTimeout(() => {
+            Navigate(`/home/1?name=&city=${ubication.city}`);
+          }, 2000);
+        }
+      };
     } else {
       setStatesupmit(true);
       toast.error('Datos no válidos', {
@@ -142,7 +155,6 @@ function LocalsCompleteData () {
       }, 5000);
     }
   };
-  console.log(inputs);
   // const handleSelect = (selectedOptions) => {
   //   console.log(selectedOptions);
   //   const selected = selectedOptions.map(option => option.label);
@@ -158,12 +170,18 @@ function LocalsCompleteData () {
       {showShedule && <ScheduleModal setShowSchedule={setShowSchedule} schedulState={schedulState} setScheduleState={setScheduleState}/>}
         <svg className='Wabe-Top' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#343434" fillOpacity="1" d="M0,0L40,5.3C80,11,160,21,240,21.3C320,21,400,11,480,42.7C560,75,640,149,720,160C800,171,880,117,960,112C1040,107,1120,149,1200,192C1280,235,1360,277,1400,298.7L1440,320L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path></svg>
 
-      <Link to='/home/1?name=&city=' className='LinkLogo'>
+      { !detail &&
+        <Link to='/home/1?name=&city=' className='LinkLogo'>
       <img src={BaitLogo} alt="Bait-Logo" className='Logo' />
       </Link>
+      }
       <ToastContainer/>
      <div className='Create-Complete-Container'>
-       <h2 className='Title-Complete'>Crea un <span>nuevo</span> local</h2>
+      {
+        detail
+          ? <h2 className='Title-Complete'>Actualiza <span>tu Local</span></h2>
+          : <h2 className='Title-Complete'>Crea un <span>nuevo</span> local</h2>
+      }
      <form onSubmit={handleSubmit} className='Complete-Form-Create'>
        <LocalInfoComplete
       showShedule={showShedule}
@@ -187,6 +205,8 @@ function LocalsCompleteData () {
       <AddImgComplete
       inputs={inputs}
       setInputs={setInputs}
+      detail={detail}
+      setModalUpdate={setModalUpdate}
       />
      </form>
      </div>

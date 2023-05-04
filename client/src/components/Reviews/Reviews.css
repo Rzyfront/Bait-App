@@ -8,7 +8,7 @@
 }
 
 .Reviews .Reviews-Title {
-    font-size: 30px;
+    font-size: 2rem;
     padding-right: 20px;
     border-right: 1px solid var(--primary);
     font-family: var(--title);
@@ -66,6 +66,32 @@
     transform: scale(1.05);
 }
 
+@media screen and (max-width:1050px) {
+    .Reviews {
+            width: 85%;
+        }
+}
+
+
+@media screen and (max-width:900px) {
+    .Reviews {
+        width: 90%;
+    }
+}
+@media screen and (max-width:750px) {
+    .Reviews {
+            width: 98%;
+        }
+}
+@media screen and (max-width:550px) {
+    .Reviews .Reviews-Title {
+        font-size: 1.5rem;
+    }
+    .Reviews .TitleGroup .Selectors-Group .Order-Rating {
+        height: 35px;
+    
+    }
+}
 /*
 .TitleGroup .Decorator {
     width: 60%;

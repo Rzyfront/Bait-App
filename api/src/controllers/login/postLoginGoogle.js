@@ -5,11 +5,11 @@ module.exports = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ where: { email } });
-    if (!user) throw new Error('User not found');
-    if (!user.isGoogleUser) throw new Error('User is not Google');
+    if (!user) throw new Error('Usuario no encontrado');
+    if (!user.isGoogleUser) throw new Error('No es una cuenta de google');
 
-    if (user.verified === 'unVerified') throw new Error('Verify your email address');
-    if (user.verified === 'suspended') throw new Error('Your account has been suspended');
+    if (user.verified === 'unVerified') throw new Error('Verifique su dirección de correo electrónico');
+    if (user.verified === 'suspended') throw new Error('Su cuenta ha sido suspendida');
 
     const token = jwt.sign({
       email: user.email,
