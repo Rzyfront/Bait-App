@@ -71,10 +71,10 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
         }>Agregar Horarios</div>
         <input
         className='Input-C Input-Email-Complete'
-        type="number"
-        name='phone'
-        placeholder='Telefono/Celular'
-        value={inputs.phone}
+        type="text"
+        name='email'
+        placeholder='E-mail'
+        value={inputs.email}
         onChange={handleChange}
         />
         <Select
