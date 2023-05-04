@@ -4,13 +4,14 @@ module.exports = async (req, res) => {
   try {
     const { reviewId } = req.params;
     const deletedReview = await Review.findByPk(reviewId);
-    if (!deletedReview) throw new Error('Review not found');
+    if (!deletedReview) throw new Error('No se encontró la reseña');
     if (req.userId !== deletedReview.UserId) {
       throw new Error(
-        'Only the user who made the review or an admin can delete reviews',
+        'Sólo el usuario que hizo la reseña o un administrador puede eliminar reseñas',
       );
     }
-    if (deletedReview.verified === 'archived') { throw new Error('Cannot delete an archived review'); }
+    if (deletedReview.verified === 'archived') throw new Error('No se puede eliminar una reseña archivada');
+
     deletedReview.destroy();
     await deletedReview.save();
     return res.status(201).json({ success: true, deletedReview });

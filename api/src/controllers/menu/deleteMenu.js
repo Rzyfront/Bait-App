@@ -4,9 +4,9 @@ module.exports = async (req, res) => {
   try {
     const { menuId } = req.params;
     const menu = await Menu.findByPk(menuId);
-    if (!menu) throw new Error('Menu not found');
+    if (!menu) throw new Error('No se encotró el menú');
     await menu.destroy();
-    res.status(201).json({ success: true, message: 'Menu destroyed successfully c:' });
+    res.status(201).json({ success: true, message: 'El menú ha sido eliminado con éxito' });
   } catch (error) {
     res.status(404).json({ success: false, message: error.message });
   }
