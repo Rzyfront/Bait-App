@@ -4,7 +4,6 @@ import Pagination from '../Pagination/Pagination';
 import { useEffect, useState } from 'react';
 import { getAllReviews, getReviewDetail } from '../../../redux/actions/admin';
 import { Rating as RatingStar } from '@smastrom/react-rating';
-import { IoMdArchive } from 'react-icons/io';
 
 const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
 
@@ -53,31 +52,7 @@ const Reseñas = ({ fn }) => {
           <option value="archived">Archivados</option>
           <option value="verified" >Verificados</option>
         </select>
-        <div className='table-responsive'>
-        <table className='table'>
-          <thead className='thead-restaurants'>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Titulo</th>
-                    <th>Calificacion</th>
-                    <th>Acciones</th>
-                  </tr>
-          </thead>
-          <tbody>
-          <tr>
-      <td className='align-middle'>Edgar Vilchez</td>
-      <td className='align-middle'>Comida asquerosa</td>
-      <td className='align-middle'>-Aca deben ir las estrellas-</td>
-            <td>
-                <button className='res-icons deny'>
-                  Revisar  <IoMdArchive />
-                </button>
-            </td>
-    </tr>
-          </tbody>
-        </table>
-      </div>
-        {/* <div className={style.containerUserCard}>
+        <div className={style.containerUserCard}>
             {
                 allReviews?.reviews?.map((u) =>
                   <div className={style.userCard} key={u?.id}>
@@ -96,7 +71,7 @@ const Reseñas = ({ fn }) => {
                       <button className={style.buttonExaminar} value={u?.id} onClick={redirectDetail}>Examinar</button>
                   </div>
                 )}
-        </div> */}
+        </div>
        <Pagination paginade={paginade} page={page} totalPages={allReviews.totalPages} />
     </div>
   );
