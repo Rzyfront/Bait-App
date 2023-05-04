@@ -17,8 +17,8 @@ import { FiUser, FiGift } from 'react-icons/fi';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
-import ChangePassword from './ChangePassWord/ChangePassword';
+import swal from 'sweetalert';  
+import ChangePassword from './ChangePassword/ChangePassword';
 
 import UserLocals from './UserLocals';
 
@@ -157,7 +157,7 @@ function Userprofile() {
               name="file"
               className={style.inputFile}
               onChange={handleChangeimages} />
-            <img src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image" />
+            <img  src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image"  />
             <div>
               <p className={style.name}>{user && user.name}</p>
               <p className={style.email}>{user && user.email}</p>
