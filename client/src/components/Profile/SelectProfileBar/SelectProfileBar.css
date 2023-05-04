@@ -59,3 +59,30 @@
     background-color: var(--btn-primary);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+
+@media screen and (max-width:1050px) {
+    .SelectProfileBar-Component {
+            width: 85%;
+        }
+}
+@media screen and (max-width:900px) {
+    .SelectProfileBar-Component {
+        width: 90%;
+    }
+}
+@media screen and (max-width:750px) {
+    .SelectProfileBar-Component {
+            width: 98%;
+        }
+}
+
+@media screen and (max-width:550px) {
+.SelectProfileBar-Component .Selection-Group .Options {
+    font-size: 0.9rem;
+        padding: 0 15px;
+}
+.SelectProfileBar-Component .Create-Review-Option {
+    font-size: 0.9rem;
+}
+}
