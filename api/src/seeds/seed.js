@@ -27,6 +27,32 @@ const SPECIALTIES = [
   'Vegetariana',
   'Dietas especiales',
 ];
+const PROVINCES = [
+  'Buenos Aires',
+  'Catamarca',
+  'Chaco',
+  'Chubut',
+  'Córdoba',
+  'Corrientes',
+  'Entre Ríos',
+  'Formosa',
+  'Jujuy',
+  'La Pampa',
+  'La Rioja',
+  'Mendoza',
+  'Misiones',
+  'Neuquén',
+  'Río Negro',
+  'Salta',
+  'San Juan',
+  'San Luis',
+  'Santa Cruz',
+  'Santa Fe',
+  'Santiago del Estero',
+  'Tierra del Fuego',
+  'Tucumán',
+];
+
 const crateSpecialties = () => Promise.all([
   SPECIALTIES.map((specialty) => Specialty.findOrCreate({ where: { name: specialty } })),
 ]);
@@ -65,7 +91,7 @@ const createFakeUser = async () => {
     faker.name.lastName(),
     faker.phone.number('+54 9 ### #######'),
     faker.internet.email(),
-    faker.address.city(),
+    PROVINCES[createRandomNumber(23, 'ceil')],
     bcrypt.hash('1234', 10),
     faker.image.avatar(),
   ]);
@@ -85,7 +111,7 @@ const createFakeUser = async () => {
 const createFakeLocal = async () => {
   const [name, location, address, email, lat, lng, ...images] = await Promise.all([
     faker.company.name(),
-    faker.address.cityName(),
+    PROVINCES[createRandomNumber(23)],
     faker.address.streetAddress(),
     faker.internet.email(),
     faker.address.latitude(),
@@ -143,7 +169,7 @@ const createFakeReview = async (userId, localId) => {
   review.createImage(image);
 };
 
-const FAKES_USERS_TO_CREATE = 20;
+const FAKES_USERS_TO_CREATE = 1;
 const LOCALS_TO_CREATE = 5;
 const REVIEWS_TO_CREATE = 20;
 
