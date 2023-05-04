@@ -189,7 +189,6 @@ export const getReviews = (localId, page = 1, order) => {
   return async (dispatch) => {
     try {
       const response = await axios(`/reviews/${localId}?page=${page}&order=${order}`);
-      console.log(response.data.reviews);
       if (response.status === 200) {
         dispatch({
           type: GET_REVIEWS,
