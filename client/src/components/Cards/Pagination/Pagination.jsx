@@ -11,7 +11,7 @@ const Pagination = ({ totalPages, filters }) => {
   const city = queryParams.get('city');
   const numbers = [];
   const { id } = useParams();
-  for (let i = 0; i < totalPages; i++) {
+  for (let i = 0; i < totalPages && i < 10; i++) {
     numbers.push(
       <Link to={`${path(i + 1, name, city, filters)}`} key={i}>
       <div
