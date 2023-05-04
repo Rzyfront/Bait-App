@@ -29,7 +29,7 @@ module.exports = async (req, res) => {
       return res.status(201).json({ success: true, token });
     }
     sendVerificationEmail(googleUser.id, email);
-    return res.status(201).json({ success: true, message: 'Email send' });
+    return res.status(201).json({ success: true, message: `Se envió ha enviado un email de verificación a "${email}", por favor revisa tu bandeja de entrada` });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }

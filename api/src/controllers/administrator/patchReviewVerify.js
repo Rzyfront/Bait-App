@@ -5,8 +5,8 @@ module.exports = async (req, res) => {
     const { reviewId } = req.params;
     const { verified } = req.query;
     const review = await Review.findByPk(reviewId);
-    if (!review) throw new Error('Review not Found');
-    if (review.UserId === req.userId) throw new Error('You cannot verify a review made by you');
+    if (!review) throw new Error('No se encotró la reseña');
+    if (review.UserId === req.userId) throw new Error('No puede verificar una reseña realizada por usted');
     review.verified = verified ?? 'verified';
     await review.save();
     res.status(201).json({ success: true, review });
