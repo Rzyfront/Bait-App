@@ -76,7 +76,7 @@ const Footer = () => {
                 showTerms ? () => setShowTerms(false) : () => setShowTerms(true)
               }
             >
-              Mapa del Sitio
+               <Link to="/Developers">Desarrolladores</Link>
             </li>
           </ul>
         </div>
