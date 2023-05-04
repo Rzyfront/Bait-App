@@ -9,8 +9,10 @@ module.exports = async (req, res) => {
     if (user.role === 'admin' || user.role === 'superAdmin') throw new Error('El usuario al que se le asigna el local no puede ser administrador o super administrador');
     if (!local) throw new Error('No se encontró el local');
     await local.setUser(user.id);
+    user.role = 'owner';
     local.verified = 'verified';
     await local.save();
+    await user.save();
     const localData = {
       id: local.id,
       name: local.name,
