@@ -6,7 +6,7 @@ import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar } from '../c
 import './Profile.css';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { DetailLocal } from '../../redux/actions/local';
+import { DetailLocal, CleanDetail } from '../../redux/actions/local';
 import { getMenu } from '../../redux/actions/menuDish';
 import ReviewLocal from '../FindLocals/ReviewLocal/ReviewLocal';
 import ClaimLocal from './ClaimLocal/ClaimLocal';
@@ -29,6 +29,7 @@ function Profile () {
   };
   useEffect(() => {
     dispatch(DetailLocal(id));
+    return () => { dispatch(CleanDetail()); };
   }, [id]);
 
   useEffect(() => {
