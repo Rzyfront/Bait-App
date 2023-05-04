@@ -2,12 +2,12 @@ import axios from 'axios';
 import eliminarTildes from '../../hooks/eliminarTildes.';
 export const SUCCESS = 'SUCCESS';
 export const ERROR = 'ERROR';
-export const DETAIL = 'DETAIL'; ;
+export const DETAIL = 'DETAIL';
+export const CLEAN_DETAIL = 'CLEAN_DETAIL';
 export const createLocal = (inputs) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/locals', {
-
         // email: inputs.email,
         images: inputs.images,
         location: eliminarTildes(inputs.location.location),
@@ -45,26 +45,34 @@ export const DetailLocal = (id) => {
   };
 };
 
+export const CleanDetail = () => {
+  return {
+    type: CLEAN_DETAIL
+  };
+};
+
 export const createLocalFull = (inputs, chekinputs) => {
   return async (dispatch) => {
     const schedule = {};
     for (const day in inputs.schedule) {
-      schedule[day] = `${inputs.schedule[day].open}${inputs.schedule[day].open ? '-' : ''}${inputs.schedule[day].close}`;
-    };
+      schedule[day] = `${inputs.schedule[day].open}${
+        inputs.schedule[day].open ? '-' : ''
+      }${inputs.schedule[day].close}`;
+    }
     const characteristics = {};
     if (inputs.characteristics.length) {
       for (const element of inputs.characteristics) {
         characteristics[element] = true;
       }
-    };
+    }
     if (inputs.payments.length) {
       for (const element of inputs.payments) {
         characteristics[element] = true;
       }
-    };
+    }
     if (inputs.restaurantType) {
       characteristics.type = inputs.restaurantType;
-    };
+    }
     try {
       const response = await axios.post('/locals', {
         name: inputs.name,
@@ -101,22 +109,24 @@ export const updateLocalFull = (inputs, detail) => {
   return async (dispatch) => {
     const schedule = {};
     for (const day in inputs.schedule) {
-      schedule[day] = `${inputs.schedule[day].open}${inputs.schedule[day].open ? '-' : ''}${inputs.schedule[day].close}`;
-    };
+      schedule[day] = `${inputs.schedule[day].open}${
+        inputs.schedule[day].open ? '-' : ''
+      }${inputs.schedule[day].close}`;
+    }
     const characteristics = {};
     if (inputs.characteristics.length) {
       for (const element of inputs.characteristics) {
         characteristics[element] = true;
       }
-    };
+    }
     if (inputs.payments.length) {
       for (const element of inputs.payments) {
         characteristics[element] = true;
       }
-    };
+    }
     if (inputs.restaurantType) {
       characteristics.type = inputs.restaurantType;
-    };
+    }
     try {
       const response = await axios.put(`/locals/${detail.id}`, {
         name: inputs.name ?? detail.name,
@@ -126,7 +136,9 @@ export const updateLocalFull = (inputs, detail) => {
         lat: inputs.location.lat ?? detail.lat,
         lng: inputs.location.lng ?? detail.lng,
         images: inputs.images.length ? inputs.images : detail.images,
-        specialty: inputs.specialty.length ? inputs.specialty : detail.specialty,
+        specialty: inputs.specialty.length
+          ? inputs.specialty
+          : detail.specialty,
         schedule: inputs.schedule ? schedule : detail.schedule,
         characteristics: characteristics ?? detail.characteristics
       });
