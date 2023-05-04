@@ -1,8 +1,8 @@
 import './Footer.css';
 import { Link } from 'react-router-dom';
 import { AiFillInstagram } from 'react-icons/ai';
-import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
-import { IoLogoTiktok } from 'react-icons/io5';
+// import { FaFacebookSquare, FaTwitterSquare, FaYoutubeSquare } from 'react-icons/fa';
+// import { IoLogoTiktok } from 'react-icons/io5';
 import { useState } from 'react';
 
 const Footer = () => {
