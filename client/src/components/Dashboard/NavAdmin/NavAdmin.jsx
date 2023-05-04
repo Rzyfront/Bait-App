@@ -2,7 +2,6 @@ import style from './NavAdmin.module.css';
 import LogoBait from '../../../assets/LogoBait.svg';
 import { FaUserFriends } from 'react-icons/fa';
 import { MdOutlineRestaurantMenu, MdReviews } from 'react-icons/md';
-import { GoUnverified } from 'react-icons/go';
 import { BiExit } from 'react-icons/bi';
 import { useNavigate, Link } from 'react-router-dom';
 

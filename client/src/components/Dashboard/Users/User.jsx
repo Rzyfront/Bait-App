@@ -26,7 +26,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
 
   const changeType = async () => {
     if (selector === 'admin') {
-      await dispatch(createAdmin(id));
+      await dispatch(createAdmin({ id }));
       dispatch(getAllUsers(filter));
       setSelector(role);
     }
@@ -92,7 +92,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         <div className='containerName'>
         <h3>{email}</h3>
         </div>
-      {role !== 'superAdmin' && role !== 'admin'
+      {role !== 'superAdmin'
         ? <div className='selectdata'>
         <select
           onChange={handleSelect}

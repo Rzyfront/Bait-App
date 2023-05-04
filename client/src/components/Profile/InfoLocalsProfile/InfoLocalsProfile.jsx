@@ -1,8 +1,10 @@
 import './InfoLocalsProfile.css';
 import { GoLocation } from 'react-icons/go';
 import { Rating as RatingStar, ThinStar } from '@smastrom/react-rating';
-function InfoLocalsProfile ({ detail, showClaimLocal }) {
-  const { name, location, rating, avgEnvironment, avgFood, avgQaPrice, avgService, Characteristic,specialty } = detail;// eslint-disable-line
+
+import { useSelector } from 'react-redux';
+function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
+   const { name, location, rating, avgEnvironment, avgFood, avgQaPrice, avgService, Characteristic,specialty } = detail;// eslint-disable-line
   const myStyles = {
     itemShapes: ThinStar,
     activeFillColor: '#343434',
@@ -32,6 +34,8 @@ function InfoLocalsProfile ({ detail, showClaimLocal }) {
     }
   }
   console.log(detail);
+  const dataUser = useSelector((state) => state.user);
+  const verifiedOwner = detail?.UserId === dataUser?.user?.id;
   return (
     <div className='InfoLocalsProfile-Compontent'>
         <div className='Info-left'>
@@ -56,7 +60,8 @@ function InfoLocalsProfile ({ detail, showClaimLocal }) {
         </div>
         <div className='Info-rigth'>
             <div className='Info-rigth-title'>
-              <div onClick={() => showClaimLocal(true)} className='ClaimButtom'>Reclamar local</div>
+             { detail?.verified !== 'verified' && <div onClick={() => showClaimLocal(true)} className='ClaimButtom'>Reclamar local</div>}
+             { detail?.verified === 'verified' && verifiedOwner && <div onClick={() => setModalUpdate(true)} className='ClaimButtom'>Actualizar local</div>}
               {/* <h4 className='Info-rinth-Title'>Categorías calificadas</h4> */}
                         </div>
             <div className='Rating-C-Group-Container'>

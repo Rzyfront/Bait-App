@@ -4,7 +4,7 @@ const isLocalOwner = (req, res, next) => {
   if (req.local.UserId === req.userId) {
     return next();
   }
-  return res.status(401).json({ message: 'Unauthorized', success: false });
+  return res.status(401).json({ message: 'Sin autorización', success: false });
 };
 
 const isProfileUser = (req, res, next) => {
@@ -12,7 +12,7 @@ const isProfileUser = (req, res, next) => {
   if (userId === req.userId) {
     return next();
   }
-  return res.status(401).json({ message: 'Unauthorized', success: false });
+  return res.status(401).json({ message: 'Sin autorización', success: false });
 };
 
 const isWriterReview = async (req, res, next) => {
@@ -21,7 +21,7 @@ const isWriterReview = async (req, res, next) => {
   if (reviewer.UserId === req.userId) {
     return next();
   }
-  return res.status(401).json({ message: 'Unauthorized', success: false });
+  return res.status(401).json({ message: 'Sin autorización', success: false });
 };
 
 // FALTA MENU Y DISH

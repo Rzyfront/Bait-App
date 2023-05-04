@@ -1,10 +1,10 @@
 module.exports = async (req, res) => {
   try {
     const { local, userId, role } = req;
-    if (userId !== req.local.UserId && role !== 'admin' && role !== 'superAdmin') throw new Error('Only an admin or the owner of the locale can delete a locale');
+    if (userId !== req.local.UserId && role !== 'admin' && role !== 'superAdmin') throw new Error('Sólo un administrador o el propietario del local puede eliminar un local');
     local.verified = 'archived';
     await local.save();
-    return res.status(201).json({ success: true, message: 'Local successfully deleted' });
+    return res.status(201).json({ success: true, message: 'Local eliminado con éxito' });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
   }

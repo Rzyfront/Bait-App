@@ -212,7 +212,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
         success: payload
       };
 
-    
     case USER_DASH_LOCALS:
       return {
         ...state,
