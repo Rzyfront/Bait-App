@@ -36,7 +36,7 @@ const UserDetail = ({ id, lastname, age, role, name, email, verified, handledeta
     <table className='tableActions'>
       <tr>
         <th>Borrar</th>
-        <th>verificar</th>
+        <th>Verificar</th>
         <th>Sancionar</th>
       </tr>
       <tr>

@@ -27,11 +27,15 @@
     gap: 10px;
 }
 
-.ActionsDetailRestaurant {
+.detail-icon-dash-res {
     border: none;
     background: none;
     font-size: 1.7rem;
     font-weight: 700;
+}
+
+.detail-icon-dash-res:hover {
+    color: var(--btn-primary);
 }
 
 .restaurants-container {
@@ -109,7 +113,7 @@
 
 }
 
-.search-dash-restaurants input:focus {
+.search-res-input input:focus {
     outline: none;
     box-shadow: none;
 }
