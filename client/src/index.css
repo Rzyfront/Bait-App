@@ -10,14 +10,26 @@ span{
   font-weight: 600;
 }
 
+select{
+  cursor: pointer;
+}
+
 a{
   all: unset;
+  cursor: pointer;
 }
 a:hover {
   all: unset;
+  cursor: pointer;
 }
 
-p,
+p{
+  margin-top: 0;
+  margin-bottom: 0;
+
+}
+
+
 h1,
 h2,
 h3,

@@ -74,9 +74,59 @@ const sendRequestForOwnership = async ({ userEmail, userName, userId }) => {
   });
 };
 
+const sendNotificationThatReviewWasVerified = async ({ userEmail, userName, reviewTitle }) => {
+  await transporter.sendMail({
+    subject: 'Review verficada',
+    from: email,
+    to: userEmail,
+    html: `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Reseña verificada</title></head><body style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333; height: 100vh; display: grid; place-content: center;"><table cellpadding="0" cellspacing="0" border="0" width="100%"><tr><td align="center"><table cellpadding="0" cellspacing="0" border="0" width="600" style="background-color: #f9f9f9; border: 1px solid #ddd; text-align: center;"><tr><td style="padding: 1.5rem;"><h1 style="font-size: 24px; margin: 0 0 1.5rem;">¡Hola ${userName}, hemos verificado tu reseña con el titulo de ${reviewTitle}</h1><p style="margin: 0 0 1.5rem;">Y esta ha sido publicada para que todos vean tu opinión, ¡Gracias y seguí Disfrutando Bait!</p><a href="${process.env.FRONT_DEPLOY}" style="display: inline-block; background-color: #007bff; color: #fff; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; margin-top: 1.5rem;">Ir a la página principal</a></td></tr></table></td></tr></table></body></html>`,
+  });
+};
+
+const sendSuccessRegisterWithGoogle = async ({ userEmail, userName }) => {
+  await transporter.sendMail({
+    subject: 'Bienvenido a Bait',
+    from: email,
+    to: userEmail,
+    html: `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Confirmación de inicio de sesión con Google</title></head><body bgcolor="#f9f9f9" style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333;"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center"><table width="600" border="0" cellspacing="0" cellpadding="0"><tr><td style="padding: 1.5rem; border: 1px solid #ddd; text-align: center;"><h1 style="font-size: 24px; margin: 0 0 1.5rem;">¡Hola ${userName}, Gracias por registrarte en nuestra App</h1><p style="margin: 0 0 1.5rem;">Al hacerlo con Google, se verifica automáticamente, ya puedes ingresar y comenzar a disfrutar de lo que tenemos para ti en nuestra App, ¡Disfrutá Bait!</p><a href="${process.env.FRONT_DEPLOY}" style="display: inline-block; background-color: #007bff; color: #fff; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; margin-top: 1.5rem;">Ir a la página principal</a><p style="margin-bottom: 10px;">¡Gracias por leer!</p><p style="margin-bottom: 0;">Saludos cordiales,</p><p style="margin-bottom: 0;">Bait</p></td></tr></table></td></tr></table></body></html>`,
+  });
+};
+
+const sendNotificationThatLocalWasVerified = async ({ userName, localName, userEmail }) => {
+  await transporter.sendMail({
+    subject: 'Local verificado',
+    from: email,
+    to: userEmail,
+    html: `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Te hemos asignado un Local</title></head><body style="margin: 0; padding: 0; font-family: Arial, sans-serif;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;"><tr><td align="center" bgcolor="#f9f9f9" style="border: 1px solid #ddd; padding: 20px;"><h1 style="font-size: 24px; margin: 0 0 20px;">¡Hola ${userName}, tu reclamo del ${localName}, ha sido verificado</h1><p style="margin: 0 0 20px;">Ahora puedes cargar tu menu en el Local y mostrarle a todos los productos, horarios y tipos de modida que ofreces ¡Gracias por confiar en nuestro trabajo!</p><a href="${process.env.FRONT_DEPLOY}" style="display: inline-block; background-color: #007bff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 20px;">Ir a la página principal</a><p style="margin: 0; font-size: 12px;">Bait</p></td></tr></table></body></html>`,
+  });
+};
+
+const sendNotiOfLocalCreatedComplete = async ({ userName, userEmail }) => {
+  await transporter.sendMail({
+    subject: 'Local creado con éxito',
+    from: email,
+    to: userEmail,
+    html: `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Confirmación de Creacion de Local como propietario</title></head><body style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #f9f9f9;"><table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #f9f9f9; border: 1px solid #ddd; text-align: center;"><tr><td style="padding: 1.5rem;"><h1 style="font-size: 24px; margin: 0 0 1.5rem;">¡Hola ${userName}, Gracias por crear un Local en nuestra App, es muy importante para nosotros tu opinión!</h1><p style="margin: 0 0 1.5rem;">Tu local será verificado de acuerdo a la documentacion adjunta y recibiras un correo indicándote cuando esto pase, para que puedas ingresar el menú y detalles de tu Local.</p><a href="${process.env.FRONT_DEPLOY}" style="display: inline-block; background-color: #007bff; color: #fff; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; margin-top: 1.5rem;">Ir a la página principal</a></td></tr></table></body></html>`,
+  });
+};
+const sendNotiOfLocalCreatedSmall = async ({ userName, userEmail }) => {
+  await transporter.sendMail({
+    subject: 'Local creado con éxito',
+    from: email,
+    to: userEmail,
+    html: `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8"><title>Confirmación de Creacion de Local como propietario</title></head><body style="font-family: Arial, sans-serif; font-size: 16px; line-height: 1.5; color: #333; height: 100vh; display: flex; justify-content: center; align-items: center; background-color: #f9f9f9;"><table border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #f9f9f9; border: 1px solid #ddd; text-align: center;"><tr><td style="padding: 1.5rem;"><h1 style="font-size: 24px; margin: 0 0 1.5rem;">¡Hola ${userName}, Gracias por crear un Local en nuestra App!</h1><p style="margin: 0 0 1.5rem;">¡Ya puedes crear tu reseña del local, es muy importante para nosotros conocer tu opinión!</p><a href="${process.env.FRONT_DEPLOY}" style="display: inline-block; background-color: #007bff; color: #fff; padding: 1rem 2rem; text-decoration: none; border-radius: 5px; margin-top: 1.5rem;">Ir a la página principal</a></td></tr></table></body></html>`,
+
+  });
+};
+
 module.exports = {
   sendVerificationEmail,
   sendReviewRejected,
   sendRequestOdAcquisitionLocal,
   sendRequestForOwnership,
+  sendNotificationThatReviewWasVerified,
+  sendSuccessRegisterWithGoogle,
+  sendNotificationThatLocalWasVerified,
+  sendNotiOfLocalCreatedComplete,
+  sendNotiOfLocalCreatedSmall,
 };

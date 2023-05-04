@@ -15,6 +15,7 @@ function Card ({
   schedule,
   Characteristic,
   specialty,
+  address,
   Images,
   Price,
   lat,
@@ -81,12 +82,12 @@ function Card ({
           </Link>
         {location && (
           <div className="LocationGroup" onClick={handleFoco}>
+            {address && <p className='Address'>Direccion: {address}</p>}
             <p className="Location"><GoLocation className='locationico' /> {location.split(',').splice(0, location.split(',').length - 2).join(',')}
             </p>
             <PopComent text={'Click para ir'} className='Go-To-Map'/>
           </div>
         )}
-        {Price && <p className="Price">${Price}</p>}
         {
         pathlocation.pathname.includes('/home') &&
         <div className='Card-Tags'>

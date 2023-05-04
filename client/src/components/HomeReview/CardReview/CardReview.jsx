@@ -14,6 +14,7 @@ function CardReview ({
   verified,
   schedule,
   Characteristic,
+  address,
   Images,
   Price,
   lat,
@@ -60,13 +61,14 @@ function CardReview ({
           </div>
         {location && (
           <div className="LocationGroup" onClick={handleFoco}>
+            {address && <p className='Address'>Direccion: {address}</p>}
             <p className="Location"><GoLocation className='locationico' /> {location.split(',').splice(0, location.split(',').length - 2).join(',')}
             </p>
             <PopComent text={'Click para ir'} className='Go-To-Map'/>
           </div>
         )}
         <br/>
-        <button className="reviewButton" onClick={redirectReview}>HACER RESEÑA</button>
+        <button className="reviewButton" onClick={redirectReview}>Hacé tu reseña</button>
       </div>
     </div>
   );
