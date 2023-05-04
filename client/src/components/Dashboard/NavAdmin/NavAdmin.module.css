@@ -5,6 +5,7 @@
     transition: .4s;
     z-index: 10;
     display: block;
+    min-width: fit-content;
 }
 
 .profile {
@@ -22,7 +23,7 @@
 .username {
     color: rgb(126, 125, 125);
     margin-top: 5%;
-    font-size: 1em;
+    font-size: 1.1em;
     letter-spacing: 1px;
     font-weight: 600;
 }
@@ -42,15 +43,27 @@
     cursor: pointer;
 }
 
+.li span{
+    color:grey;
+    margin-left: 20px;
+}
 
+.liSelected span{
+    color:grey;
+    margin-left: 20px;
+}
+
+.li{
+    color: gray;
+}
 
 .li:hover span {
-    color: #fff;
+    color: var(--btn-primary);
 }
 
 .li:hover {
-    color: #fff;
-    background-color: var(--btn-primary);
+    background-color: rgb(203, 224, 242);
+    color: var(--btn-primary);
 }
 
 .liSelected {
@@ -65,9 +78,25 @@
     color: #fff;
 }
 
-/* .li:last-child{
-    margin-top: 20px;
-} */
+.li:last-child{
+    margin-top: 300px;
+    color:rgb(220, 59, 59);
+}
+
+.li:last-child span{
+    /* margin-top: 300px; */
+    color:rgb(220, 59, 59);
+}
+
+.li:last-child:hover{
+    color:rgb(174, 29, 29);
+    background-color: rgb(255, 203, 203);
+}
+
+.li:last-child:hover span{
+    color:rgb(174, 29, 29);
+    /* background-color: rgb(255, 203, 203); */
+}
 
 
 .mobileMenu {
@@ -92,19 +121,21 @@
     .ul span {
         display: none;
     }
-
-    .li {
-        display: inline;
-        width: 10px
+    .li{
+        /* display: inline; */
+        width: 50px;
+        height: 50px;
     }
 
-    .liSelected {
+    .liSelected{
         padding: 10px 20px;
         transition: .2s;
         color: var(--btn-primary);
         background-color: transparent;
         cursor: pointer;
-        display: inline;
+        /* display: inline; */
+        width: 50px;
+        height: 50px;
     }
 
     .img {
@@ -117,21 +148,22 @@
         display: none
     }
 
-    .mobileMenu {
+    /* .mobileMenu {
         position: absolute;
         margin-left: 250px;
         margin-top: 30px;
         display: inline
-    }
+    } */
 
     .ul {
-        width: 280px;
-        margin-left: 200px;
+        width: 60vw;
+        margin-left: 170px;
         display: flex;
         flex-direction: row;
-        margin-top: -60px;
+        margin-top: -80px;
         height: fit-content;
         font-size: 1.5em;
+        justify-content: space-between;
     }
 
     .li:hover {
@@ -141,6 +173,10 @@
 
     .li:last-child {
         margin: 0;
+    }
+    .li:last-child:hover{
+        color:rgb(174, 29, 29);
+        background-color: transparent;
     }
 }
 

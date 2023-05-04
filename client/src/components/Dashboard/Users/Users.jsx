@@ -6,6 +6,8 @@ import { getAllUsers } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
 import User from './User';
 import { ToastContainer } from 'react-toastify';
+import { FaUserEdit } from 'react-icons/fa';
+import { IoIosInformationCircleOutline, IoMdArchive } from 'react-icons/io';
 
 const Users = ({ localId, handleAdd }) => {
   const data = useSelector((state) => state.users);
@@ -65,12 +67,38 @@ const Users = ({ localId, handleAdd }) => {
       <input placeholder="email" name="email" value={filter.email} className={style.buscador} onChange={handleData}></input>
       <div className={style.containerUserCard}>
         <Pagination paginade={paginade} page={filter.page} totalPages={data.totalPages} />
-        {data && data.users &&
+        <div className='table-responsive'>
+        <table className='table'>
+          <thead className='thead-restaurants'>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Email</th>
+                    <th>Rol</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+          </thead>
+          <tbody>
+          <tr>
+      <td className='align-middle'>IMG</td>
+      <td className='align-middle'>edgarrios412@gmail.com</td>
+      <td className='align-middle'>Todopoderoso</td>
+      <td className='align-middle'>Bananeado</td>
+            <td>
+                <button className='res-icons deny'>
+                  Banear  <IoMdArchive />
+                </button>
+            </td>
+    </tr>
+          </tbody>
+        </table>
+      </div>
+        {/* {data && data.users &&
            data.users.map((data, index) => {
              return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.Image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
                phone_number={data.phone_number} />;
            })
-          }
+          } */}
 
         <ToastContainer />
       </div>
