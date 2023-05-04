@@ -76,9 +76,8 @@ function LocalsCompleteData () {
     name: '',
     schedule: {},
     email: '',
-    phone: '',
     specialty: [],
-    restaurantType: [],
+    restaurantType: '',
     characteristics: [],
     payments: [],
     address: '',
@@ -142,7 +141,6 @@ function LocalsCompleteData () {
       }, 5000);
     }
   };
-  console.log(inputs);
   // const handleSelect = (selectedOptions) => {
   //   console.log(selectedOptions);
   //   const selected = selectedOptions.map(option => option.label);

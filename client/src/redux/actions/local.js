@@ -63,7 +63,7 @@ export const createLocalFull = (inputs, chekinputs) => {
       }
     };
     if (inputs.restaurantType) {
-      characteristics.type = inputs.restaurantType[0];
+      characteristics.type = inputs.restaurantType;
     };
     try {
       const response = await axios.post('/locals', {
