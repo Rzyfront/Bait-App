@@ -27,8 +27,8 @@ function Cards ({ toggle }) {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     setName(queryParams.get('name') || '');
-    // setCity(queryParams.get('city') || 'buenos aires');
-    setCity(queryParams.get('city') || '');
+    setCity(queryParams.get('city') || 'buenos aires');
+    // setCity(queryParams.get('city') || '');
     setSpecialty(queryParams.get('specialty') || '');
     setOrder(queryParams.get('order') || '');
 

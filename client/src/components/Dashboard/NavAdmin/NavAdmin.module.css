@@ -43,17 +43,17 @@
     cursor: pointer;
 }
 
-.li span{
-    color:grey;
+.li span {
+    color: grey;
     margin-left: 20px;
 }
 
-.liSelected span{
-    color:grey;
+.liSelected span {
+    color: grey;
     margin-left: 20px;
 }
 
-.li{
+.li {
     color: gray;
 }
 
@@ -78,23 +78,23 @@
     color: #fff;
 }
 
-.li:last-child{
+.li:last-child {
     margin-top: 300px;
-    color:rgb(220, 59, 59);
+    color: rgb(220, 59, 59);
 }
 
-.li:last-child span{
+.li:last-child span {
     /* margin-top: 300px; */
-    color:rgb(220, 59, 59);
+    color: rgb(220, 59, 59);
 }
 
-.li:last-child:hover{
-    color:rgb(174, 29, 29);
+.li:last-child:hover {
+    color: rgb(174, 29, 29);
     background-color: rgb(255, 203, 203);
 }
 
-.li:last-child:hover span{
-    color:rgb(174, 29, 29);
+.li:last-child:hover span {
+    color: rgb(174, 29, 29);
     /* background-color: rgb(255, 203, 203); */
 }
 
@@ -121,13 +121,14 @@
     .ul span {
         display: none;
     }
-    .li{
+
+    .li {
         /* display: inline; */
         width: 50px;
         height: 50px;
     }
 
-    .liSelected{
+    .liSelected {
         padding: 10px 20px;
         transition: .2s;
         color: var(--btn-primary);
@@ -174,8 +175,9 @@
     .li:last-child {
         margin: 0;
     }
-    .li:last-child:hover{
-        color:rgb(174, 29, 29);
+
+    .li:last-child:hover {
+        color: rgb(174, 29, 29);
         background-color: transparent;
     }
 }
