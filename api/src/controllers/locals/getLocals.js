@@ -5,7 +5,7 @@ const {
   Image,
   Review,
   Menu,
-  Specialty,
+  // Specialty,
   Document,
 } = require('../../db');
 
@@ -38,16 +38,16 @@ module.exports = async (req, res) => {
           where: req.menu,
           required: !!req.menu.type,
         },
-        {
-          model: Specialty,
-          attributes: [],
-          as: 'specialties',
-          where: req.specialty ?? {},
-          required: !!req.specialty,
-          through: {
-            attributes: [],
-          },
-        },
+        // {
+        //   model: Specialty,
+        //   attributes: [],
+        //   as: 'specialties',
+        //   where: req.specialty ?? {},
+        //   required: !!req.specialty,
+        //   through: {
+        //     attributes: [],
+        //   },
+        // },
         {
           model: Document,
           attributes: [],
@@ -62,7 +62,7 @@ module.exports = async (req, res) => {
         attributes: {
           include: [
             [fn('AVG', col('Reviews.rating')), 'rating'],
-            [literal('(SELECT ARRAY_AGG("name") FROM "Specialties" INNER JOIN "localSpecialties" ON "Specialties"."id" = "localSpecialties"."SpecialtyId" WHERE "localSpecialties"."LocalId" = "Local"."id")'), 'specialtiy'],
+            // [literal('(SELECT ARRAY_AGG("name") FROM "Specialties" INNER JOIN "localSpecialties" ON "Specialties"."id" = "localSpecialties"."SpecialtyId" WHERE "localSpecialties"."LocalId" = "Local"."id")'), 'specialtiy'],
           ],
           exclude: ['email', 'createdAt', 'updatedAt'],
         },
