@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
     updateUser.age = age;
     updateUser.phone_number = phone_number;
     updateUser.location = location;
-    updateUser.setImage(image.id);
+    if (image && image.id) await updateUser.setImage(image.id);
     await updateUser.save();
 
     const user = {

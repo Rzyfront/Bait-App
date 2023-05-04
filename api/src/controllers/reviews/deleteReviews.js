@@ -11,6 +11,7 @@ module.exports = async (req, res) => {
       );
     }
     if (deletedReview.verified === 'archived') throw new Error('No se puede eliminar una reseña archivada');
+
     deletedReview.destroy();
     await deletedReview.save();
     return res.status(201).json({ success: true, deletedReview });
