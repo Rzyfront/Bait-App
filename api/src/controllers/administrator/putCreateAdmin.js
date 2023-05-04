@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     // buca el usuario en la base de datos utilizando su clave primaria
     const user = await User.findByPk(userId);
     // si el usuario no se encuentra lanza un error
-    if (!user) throw new Error('User not found');
+    if (!user) throw new Error('Usuario no econtrado');
     // si el usuario se encuentra cambia su rol a  administrador
     user.role = 'admin';
 

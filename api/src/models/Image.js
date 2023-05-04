@@ -25,7 +25,6 @@ module.exports = (sequelize) => {
  *           type: integer
  *           format: int32
  *           description: Identificador único de la imagen.
- *           readOnly: true
  *           example: 1
  *         url:
  *           type: string

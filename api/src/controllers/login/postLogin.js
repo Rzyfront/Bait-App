@@ -7,13 +7,13 @@ module.exports = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ where: { email }, include: [{ model: Image, attribute: ['url'], required: false }] });
-    if (!user) throw new Error('Password or email incorrect');
+    if (!user) throw new Error('Contraseña o email incorrecto');
 
     const pass = await bcrypt.compare(password, user.password);
-    if (!pass) throw new Error('Password or email incorrect');
+    if (!pass) throw new Error('Contraseña o email incorrecto');
 
-    if (user.verified === 'unVerified') throw new Error('Verify your email address');
-    if (user.verified === 'suspended') throw new Error('Your account has been suspended');
+    if (user.verified === 'unVerified') throw new Error('Verfica tu correo electrónico');
+    if (user.verified === 'suspended') throw new Error('Su cuenta ah sido suspendida');
 
     const token = jwt.sign({
       email: user.email,
@@ -84,5 +84,5 @@ module.exports = async (req, res) => {
  *                 message:
  *                   type: string
  *                   description: Mensaje de error detallado.
- *                   example: "Password or email incorrect"
+ *                   example: "Contraseña o email incorrecto"
  */

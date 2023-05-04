@@ -4,8 +4,8 @@ module.exports = async (req, res) => {
   try {
     const { userId } = req;
     const user = await User.findByPk(userId);
-    if (!user) throw new Error('User not found');
-    if (user.role === 'superAdmin') throw new Error('SuperAdmin cannot be suspended');
+    if (!user) throw new Error('Usuario no encontrado');
+    if (user.role === 'superAdmin') throw new Error('Un super administrador no puede ser eliminado');
     user.verified = 'suspended';
     await user.save();
     return res.status(201).json({ success: true });
