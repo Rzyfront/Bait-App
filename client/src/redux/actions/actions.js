@@ -117,30 +117,32 @@ export const logIn = (credentials) => {
   };
 };
 export const comentarie = (
-  calificationFood,
-  calificationQaPrice,
-  calificationEnvironment,
-  calificationService,
-  calculateAverage,
-  inputs,
-  id
+  {
+    calificationFood,
+    calificationQaPrice,
+    calificationEnvironment,
+    calificationService,
+    inputs,
+    id
+  }
 ) => {
-  console.log(id);
+  console.log(inputs);
   return async (dispatch) => {
     try {
       const response = await axios.post(`/reviews/${id}`, {
         title: inputs.title,
-        rating: calculateAverage,
-        comment: inputs.comment,
-        image: inputs.image,
+        comment: inputs.review,
         food: calificationFood,
         service: calificationService,
         environment: calificationEnvironment,
-        qaPrice: calificationQaPrice
+        qaPrice: calificationQaPrice,
+        image: inputs.image,
+        ticket: inputs.Tiket
       });
       console.log(response);
       return true;
     } catch (error) {
+      console.log(error);
       return false;
     }
   };

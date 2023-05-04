@@ -56,7 +56,8 @@ const Reseñas = ({ fn }) => {
             {
                 allReviews?.reviews?.map((u) =>
                   <div className={style.userCard} key={u?.id}>
-                      <img className={style.userIcon} src={u?.User?.Image || imageDefault}></img>
+                    <img className={style.userIcon} src={u?.User?.Image
+                      ?.url || imageDefault}></img>
                       <div className={style.nameAndUser}>
                         <p className={style.name}>{u?.Local?.name}</p>
                         <p className={style.usernames}>{u?.User?.name}</p>

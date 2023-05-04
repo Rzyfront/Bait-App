@@ -101,7 +101,7 @@ const ReseñaDetail = ({ fn }) => {
 
         <div className='Modal-Review-Detail-Data-2'>
           <div className='Modal-Review-Detail-Data-UserProfile'>
-            <img className='ImageProfile' src={review?.User?.Image || imageDefault}></img>
+            <img className='ImageProfile' src={review?.User?.Image?.url || imageDefault}></img>
             <div>
               <p>{`${review?.User?.name} ${review?.User?.lastname}`}</p>
               <p>{review?.User?.email}</p>
