@@ -61,7 +61,6 @@ const Restaurantes = () => {
       page: e
     });
   };
-  console.log(changeTable);
 
   const handleShowDocs = () => {
     console.log('Click');
@@ -99,7 +98,7 @@ const Restaurantes = () => {
         </div>
       </div>
       <div className='table-responsive'>
-        <table className='table table-bordered'>
+        <table className='table'>
           <thead className='thead-restaurants'>
             {
               !changeTable
