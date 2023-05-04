@@ -8,7 +8,7 @@ module.exports = async (req, res, next, id) => {
       req.local = localFound;
       next();
     } else {
-      throw new Error('Local not found');
+      throw new Error('Local no encontrado');
     }
   } catch (err) {
     return res.status(404).json({ success: false, message: err.message });

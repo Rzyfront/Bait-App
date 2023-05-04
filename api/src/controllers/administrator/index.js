@@ -7,6 +7,7 @@ const patchReviewVerify = require('./patchReviewVerify');
 const patchSupendUser = require('./patchSupendUser');
 const putAssignLocal = require('./putAssignLocal');
 const putCreateAdmin = require('./putCreateAdmin');
+const putDenyLocal = require('./putDenyLocal');
 const getLocalsToVerify = require('./getLocalsToVerify');
 
 module.exports = {
@@ -20,4 +21,5 @@ module.exports = {
   putAssignLocal,
   putCreateAdmin,
   getLocalsToVerify,
+  putDenyLocal,
 };

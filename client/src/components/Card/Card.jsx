@@ -11,10 +11,11 @@ function Card ({
   Name,
   Rating,
   location,
-
   verified,
   schedule,
   Characteristic,
+  specialty,
+  address,
   Images,
   Price,
   lat,
@@ -33,6 +34,26 @@ function Card ({
     activeFillColor: '#343434',
     inactiveFillColor: '#3434343B'
   };
+  const properties = {
+    big_group: 'Grupo grande',
+    family_style: 'Familiar',
+    live_music: 'Música',
+    outdoor_seating: 'Aire libre',
+    parking_lot: 'Estacionamiento',
+    pet_friendly: 'Acepta mascotas',
+    romantic: 'Romántico',
+    table_service: 'Servicio de mesa',
+    wifi: 'Wifi',
+    work_friendly: 'Para trabajar'
+  };
+
+  const trueProperties = [];
+
+  for (const [property, value] of Object.entries(Characteristic)) {
+    if (value && properties[property]) {
+      trueProperties.push(properties[property]);
+    }
+  }
 
   return (
     <div className="Card animated-element" key={id}>
@@ -61,17 +82,22 @@ function Card ({
           </Link>
         {location && (
           <div className="LocationGroup" onClick={handleFoco}>
+            {address && <p className='Address'>Direccion: {address}</p>}
             <p className="Location"><GoLocation className='locationico' /> {location.split(',').splice(0, location.split(',').length - 2).join(',')}
             </p>
             <PopComent text={'Click para ir'} className='Go-To-Map'/>
           </div>
         )}
-        {Price && <p className="Price">${Price}</p>}
         {
         pathlocation.pathname.includes('/home') &&
         <div className='Card-Tags'>
-          <div className='Tag-Type'><p>Vegana</p></div>
-          <div className='Tag-Charact'><p>Pet</p></div>
+          {specialty && <div className='Tag-Type'><p>{specialty}</p></div>}
+          {
+            trueProperties?.map((p, i) => {
+              return <div key={i} className='Tag-Charact'><p>{p}</p></div>;
+            })
+          }
+
         </div>
         }
       </div>

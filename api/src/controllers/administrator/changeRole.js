@@ -4,11 +4,11 @@ module.exports = async (req, res) => {
   try {
     const { userId } = req.params;
     const { role } = req.body;
-    if (!role) throw new Error('Need a role to update');
-    if (role === 'admin') throw new Error('You cannot change the role to admin, contact a superAdmin');
+    if (!role) throw new Error('Se debe enviar un rol');
+    if (role === 'admin') throw new Error('No puedes cambiar el rol a admin, contacta con un superAdmin');
 
     const updateUser = await User.findByPk(userId);
-    if (!updateUser) throw new Error('User not found');
+    if (!updateUser) throw new Error('Usuario no encontrado');
     updateUser.role = role;
     await updateUser.save();
     const user = {

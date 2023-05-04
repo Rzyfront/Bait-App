@@ -1,13 +1,17 @@
 import './AddImgComplete.css';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { IoCreate } from 'react-icons/io5';
 import { RiImageAddFill } from 'react-icons/ri';
 import { Loading } from '@nextui-org/react';
 import { useUploadImage } from '../../../../hooks/useUploadImage';
 import Slider from 'react-slick';
+import { HiOutlineDocumentArrowUp } from 'react-icons/hi2';
+import axios from 'axios';
+import swal from 'sweetalert';
 
-function AddImgComplete ({ inputs, setInputs }) {
+function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setModalUpdate }) {
   const { image, loading, handleChangeimage } = useUploadImage();
+  const [document, setDocument] = useState({});
   useEffect(() => {
     if (image.length) {
       const data = image.map((data) => {
@@ -18,8 +22,25 @@ function AddImgComplete ({ inputs, setInputs }) {
     }
   }, [image]);
 
+  useEffect(() => {
+    if (document) {
+      setInputs({ ...inputs, document });
+    }
+  }, [document]);
+
   const handleChangeimages = (event) => {
     handleChangeimage(event);
+  };
+
+  const hanlderInputDocument = async (e) => {
+    try {
+      const formData = new FormData();
+      formData.append('document', e.target.files[0]);
+      const { data } = await axios.post('/locals/document', formData);
+      setDocument(data.newDocument);
+    } catch (error) {
+      swal(error.response.data.message, { type: 'error' });
+    }
   };
 
   const settings = {
@@ -59,14 +80,6 @@ function AddImgComplete ({ inputs, setInputs }) {
                 }
                 </Slider>
                 </div>
-              // image.map((image, i) => (
-              // <img
-              //   key={i}
-              //   src={image.url}
-              //   alt='imagen'
-              //   className='LocalesImage'
-              // />
-              // ))
                   )
                 : loading === true
                   ? (
@@ -77,7 +90,17 @@ function AddImgComplete ({ inputs, setInputs }) {
                     <RiImageAddFill className='LocalesImage' />
                     )}
             </label>
-            <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate /></button>
+            {detail
+              ? <>
+                <button type='submit' className='Send-Locals'> Actualizar <IoCreate /></button>
+                <button className='Send-Locals' onClick={() => setModalUpdate(false)}> Cerrar </button>
+              </>
+              : <><label htmlFor="documentInput" className='documentInput'>
+              <h3 className='documentInputText'>Subir documentación</h3><HiOutlineDocumentArrowUp className='documentInputIcon'/>
+            </label>
+            <input className='documentInputNone' id='documentInput' type="file" name="document" onChange={hanlderInputDocument} accept='application/pdf'/>
+            <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate /></button> </>
+            }
     </div>
   );
 }

@@ -10,7 +10,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
     activeFillColor: '#343434',
     inactiveFillColor: '#3434343B'
   };
-
+  console.log(User);
   const handleShowMore = () => {
     if (showMore) {
       setShowMore(false);
@@ -22,7 +22,7 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
      <div key={index} className={`ReviewCard-Completed ${!showMore && 'ReviewCard-Simple'}`}>
             <div className='ReviewCard-head'>
                 <UserComp
-                src={UserImgDefault}
+                src={User?.Image?.url || UserImgDefault}
                 name={`${User?.name} ${User?.lastname}`}
                 description={reviewDate}
                 className='UserComponent'
@@ -54,10 +54,10 @@ function ReviewsCard ({ index, User, title, rating, comment, Image, environment,
               <div className='Info-left-decoration'></div>
               </div>
             <div className='Rating-C-Group-Container'>
-                <h5 className='Rating-C-Group'>Ambiente: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
-                <h5 className='Rating-C-Group'>Comida: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
-                <h5 className='Rating-C-Group'>Calidad-Precio: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
-                <h5 className='Rating-C-Group'>Servicio: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Ambiente: <RatingStar readOnly style={{ maxWidth: 100 }} value={environment || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Comida: <RatingStar readOnly style={{ maxWidth: 100 }} value={food || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Calidad-Precio: <RatingStar readOnly style={{ maxWidth: 100 }} value={qaPrice || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
+                <h5 className='Rating-C-Group'>Servicio: <RatingStar readOnly style={{ maxWidth: 100 }} value={service || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
             </div>
         </div>
                 <div className='Rigth-Img'>

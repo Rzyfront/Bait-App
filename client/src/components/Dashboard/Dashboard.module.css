@@ -2,6 +2,7 @@
     /* background-color: red; */
     height: 100vh;
     overflow: auto;
+    position: relative;
     width: 100%;
     text-align: center;
 
@@ -16,8 +17,16 @@
 
 .containerUserCard {
     margin-top: 50px;
-
     width: 100%;
+
+}
+
+.usersSelect {
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--bg-secondary);
+    background-color: transparent;
 }
 
 .userIcon {
@@ -204,7 +213,7 @@
 
 @media screen and (max-width: 800px) {
     .options {
-        margin-top: 100px;
+        padding-top: 100px;
     }
 
     .nameSection {

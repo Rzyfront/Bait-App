@@ -1,6 +1,6 @@
 .AddImgComplete{
     width: 40%;
-    gap: 5%;
+    gap: 3%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,4 +92,105 @@
     /* aspect-ratio: 16/9; */
     object-fit: cover;
     border-radius: 5px;
+}
+
+.AddImgComplete .documentInputNone{
+    display: none;
+}
+
+.AddImgComplete .documentInput{
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: var(--btn-secondary);
+    width: 80%;
+    height: 40px;
+    border-radius: 5px;
+    padding: 0 10px;
+}
+
+.AddImgComplete .documentInput:hover {
+    background-color: var(--btn-secondary);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.AddImgComplete .documentInput:hover .documentInputText{
+    color: var(--tertiary);
+}
+
+.AddImgComplete .documentInput:hover .documentInputIcon {
+    color: var(--secondary);
+}
+
+.AddImgComplete .documentInput .documentInputText{
+    font-size: 1rem;
+    font-family: var(--title);
+    font-weight: 600;
+    color: var(--tertiary);
+}
+
+.AddImgComplete .documentInput .documentInputIcon {
+    font-size: 25px;
+    font-family: var(--title);
+    font-weight: 700;
+    color: var(--tertiary);
+
+}
+
+@media screen and (max-width:1090px) {
+
+    .AddImgComplete .Add-Img-Basic {
+        z-index: var(--alto-1);
+        font-size: 15px;
+        gap: 2px;
+    }
+
+    .AddImgComplete .Label-Img-Add{
+        height: 40%;
+    }
+
+
+}
+
+@media screen and (max-width:900px){
+    
+    .AddImgComplete .Add-Img-Basic {
+        z-index: var(--alto-1);
+        font-size: 12px;
+        gap: 2px;
+    }
+
+    .AddImgComplete .documentInput .documentInputText {
+        font-size: 0.8rem;
+    }
+    .AddImgComplete .documentInput .documentInputIcon {
+        font-size: 15px;
+    }
+
+    .AddImgComplete .documentInput {
+        gap: 5px;
+    }
+
+    .AddImgComplete .Send-Locals {
+        font-size: 14px;
+    }
+     .AddImgComplete .Label-Img-Add{
+        height: 30%;
+    }
+
+
+}
+
+@media screen and (max-width: 590px) {
+    .AddImgComplete {
+        width: 90%;
+    }
+
+     .AddImgComplete .Label-Img-Add{
+        height: 55%;
+    }
+
+
 }

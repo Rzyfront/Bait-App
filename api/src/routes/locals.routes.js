@@ -22,13 +22,15 @@ const {
   postAcquisitionRequest,
   postDocument,
   getDocument,
+  getServeDocument,
 } = require('../controllers/locals');
 const { isOwner, isAdmin } = require('../middlewares/validateRole');
 const multerDocs = require('../config/multerDocs.');
 
 localsRoute
   .post('/document', multerDocs.single('document'), postDocument)
-  .get('/document/:localId', userExtractor, isAdmin, getDocument)
+  .get('/document', getServeDocument)// TODO
+  .get('/document/:localId', userExtractor, isAdmin, getDocument)// TODO
   .get('/', setQueryLocals, getLocals)
   .get('/page/:numPage', setQueryLocals, getLocals)
   .get('/:localId/menu', getMenu)
@@ -39,7 +41,7 @@ localsRoute
   .get('/specialties', getSpecialties)
   .param('localId', paramLocal)
   .get('/:localId', getLocalsDetail)
-  .post('/acquisition/:localId', userExtractor, postAcquisitionRequest)// TODO
+  .post('/acquisition/:localId', userExtractor, postAcquisitionRequest)
   .post('/:localId/menu', userExtractor, isOwner, postMenu)
   .put('/:localId', userExtractor, isOwner, localValidator, putLocal)
   .delete('/:localId', userExtractor, isOwner, deleteLocal);

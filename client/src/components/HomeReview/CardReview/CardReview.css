@@ -1,0 +1,301 @@
+.CardReview {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 95%;
+    height: 220px;
+    gap: 20px;
+    color: var(--prymary);
+    background-color: var(--bg-primary);
+    margin: 10px;
+    padding: 15px 15px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    text-align: left;
+    transition: 0.3s;
+}
+
+
+
+.CardReview .Img-Card-Group{
+    width: 50%;
+    height: 100%;
+}
+
+.CardReview .imgCard {
+    aspect-ratio: 16/9;
+    width: 20rem;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    align-self: center;
+    background-color: var(--bg-primary);
+}
+
+.CardReview .infoCard {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    min-width: 50%;
+    max-width: 62%;
+    height: 100%;
+    padding: 0 5px;
+    background-color: var(--bg-primary);
+}
+
+.CardReview .infoCard .placeName {
+    font-size: 25px;
+    font-family: var(--title);
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.CardReview .infoCard .RatingGroup {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 29px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.CardReview .RatingGroup .Rating {
+    font-family: var(--text);
+    font-size: 20px;
+}
+
+
+.CardReview .LocationGroup {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    min-height: 25px;
+    max-height: 50px;
+    font-size: 16px;
+    font-family: var(--text);
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.CardReview .LocationGroup:hover {
+   color: var(--secondary);
+   transform: scale(1.02);
+}
+
+.CardReview .LocationGroup .popover-container {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: -0%;
+    width: 70px;
+    height: 20px;
+    background-color: #ffffffc4;
+    padding: 5px;
+    border-radius:0 8px 8px 0;
+    box-shadow: 0 0 10px rgba(119, 119, 119, 0.2);
+    line-height: 1.4;
+    animation: aparecer .5s ease-in-out;
+    z-index: var(--alto-5);
+}
+
+.CardReview .LocationGroup:hover .popover-container{
+    display: inline-block;
+    transform: scale(1.1);
+}
+
+.CardReview .LocationGroup .popover-container .popcoment-text {
+    color: var(--optional2);
+    font-size: 8px;
+    font-family: var(--text);
+    font-weight: 800;
+}
+
+.CardReview .LocationGroup .popover-arrow {
+    position: absolute;
+    top: 50%;
+    left: -12px;
+    margin-top: -10px;
+    width: 0;
+    height: 0;
+    border-width: 10px 12px 10px 0;
+    border-color: transparent #ffffffc4 transparent transparent;
+
+}
+
+.CardReview .Price {
+    font-family: var(--text);
+}
+
+.CardReview .infoCard .Card-Tags {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 24px;
+    gap: 5px;
+    margin: 5px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.CardReview .infoCard .Card-Tags .Tag-Type,
+.CardReview .infoCard .Card-Tags .Tag-Charact {
+    height: 22px;
+    width: max-content;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 1px;
+}
+
+.CardReview .infoCard .Card-Tags .Tag-Type p,
+.CardReview .infoCard .Card-Tags .Tag-Charact p {
+    color: var(--tertiary);
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.CardReview .infoCard .Card-Tags .Tag-Charact {
+    background-color: var(--bg-tertiary);
+}
+
+.CardReview .infoCard .Card-Tags .Tag-Type {
+    background-color: var(--optional1);
+}
+
+@media screen and (min-width:1600px) {
+    .CardReview {
+        height: 400px;
+    }
+    .CardReview .imgCard {
+        width: 50rem;
+    }
+}
+
+@media screen and (max-width:1050px) {
+
+.CardReview .LocationGroup {
+        font-size: 14px;
+        min-height: 20px;
+        max-height: 40px;
+}
+
+.CardReviewReview .infoCard .RatingGroup {
+    height: 25px;
+}
+
+.CardReview .RatingGroup .Rating {
+        font-family: var(--text);
+        font-size: 16px;
+}
+
+.CardReview .RatingGroup .Stars-Cards{
+    width: 80px;
+}
+    
+.CardReview {
+        height: 190px;
+}
+.CardReview .Img-Card-Group {
+    width: 42%;
+    height: 100%;
+}
+.CardReview .infoCard .placeName {
+    font-size: 20px;
+    height: 26px;
+
+}
+
+}
+
+@media screen and (max-width:900px) {
+
+    .CardReview {
+        height: 160px;
+        gap: 10px;
+        padding: 10px 10px;
+    }
+
+}
+
+@media screen and (max-width:750px) {
+    .CardReview .imgCard {
+            width: 15rem;
+        }
+    .CardReview .infoCard .RatingGroup {
+            height: 23px;
+        }
+     
+    .CardReview .RatingGroup .Stars-Cards {
+            width: 70px;
+        }
+    .CardReview {
+        height: 150px;
+        gap: 7px;
+        margin: 7px;
+        padding: 7px 7px;
+    }
+
+    .CardReview .Img-Card-Group {
+        width: 38%;
+        height: 100%;
+    }
+    .CardReview .infoCard .placeName {
+        height: 24px;
+
+    }
+}
+
+@media screen and (max-width:550px) {
+    .CardReview .imgCard {
+            width: 10rem;
+        }
+
+.CardReview .infoCard .RatingGroup {
+        height: 20px;
+    }
+    .CardReview .RatingGroup .Stars-Cards {
+            width: 60px;
+            height: 16px;
+        }
+    .CardReview {
+        height: 120px;
+        gap: 5px;
+        margin: 5px;
+        padding: 5px 5px;
+    }
+
+    .CardReview .Img-Card-Group {
+        width: 38%;
+        height: 100%;
+    }
+    .CardReview .infoCard .Card-Tags {
+        margin: 0;
+    }
+    .CardReview .LocationGroup .popover-container {
+        width: 70px;
+        right: -0%;
+    }
+}
+
+.infoCard .reviewButton {
+    border-radius: 5px;
+    height: 35px;
+    width: 60%;
+    border: none;
+    background-color: var(--btn-primary);
+}
+
+.infoCard .reviewButton:hover {
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
+}

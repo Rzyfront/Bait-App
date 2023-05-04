@@ -6,7 +6,7 @@ import { DeleteUser, assignLocal, changeRole, createAdmin, getAllUsers, suspendU
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillHouseAddFill } from 'react-icons/bs';
 import UserDetail from './UserDetail';
-const User = ({ id, lastname, age, role, image, name, email, filter, localId, handleAdd, verified }) => {
+const User = ({ id, lastname, age, role, image, name, email, filter, localId, handleAdd, verified, phone_number }) => {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
 
   const changeType = async () => {
     if (selector === 'admin') {
-      await dispatch(createAdmin(id));
+      await dispatch(createAdmin({ id }));
       dispatch(getAllUsers(filter));
       setSelector(role);
     }
@@ -63,9 +63,16 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
     }
   };
 
-  const asigLocal = () => {
-    dispatch(assignLocal({ userId: id, localId }));
-    handleAdd();
+  const asigLocal = async () => {
+    if (role === 'owner') {
+      dispatch(assignLocal({ userId: id, localId }));
+      handleAdd();
+    }
+    if (role === 'user') {
+      await dispatch(changeRole({ id, role: 'owner' }));
+      dispatch(assignLocal({ userId: id, localId }));
+      handleAdd();
+    }
   };
 
   const DeleteUserid = () => {
@@ -79,37 +86,39 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
     }
   };
 
-  return <div className='userContainer'>
-        {image ? <img src={image.url} alt='user foto'/> : <img src={imageDefault} alt='default'/>}
-        <div className='containerName'>
+  return (
+    <div className='userContainer'>
+      {image ? <img src={image.url} alt='user foto' /> : <img src={imageDefault} alt='default' />}
+
+      <div className='containerName'>
         <h3>{email}</h3>
-        </div>
-      {role !== 'superAdmin' && role !== 'admin'
+      </div>
+      {role !== 'superAdmin'
         ? <div className='selectdata'>
-        <select
-          onChange={handleSelect}
-          // value={selector}
-          defaultValue={role}
-          required
-      >
+          <select
+            onChange={handleSelect}
+            defaultValue={role}
+          >
 
-          <option value={role}>{role}</option>
-                  {role !== 'user' && <option value="user" >user</option>}
-                  {role !== 'owner' && <option value="owner" >owner</option>}
-          {user && user.role === 'superAdmin' && <option value="admin" >admin</option>}
+            <option value={role}>{role}</option>
+            {role !== 'user' && <option value="user" >Usuario</option>}
+            {role !== 'owner' && <option value="owner" >Propietario</option>}
+            {user && user.role === 'superAdmin' && <option value="admin" >Administrador</option>}
 
-      </select >
-              <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></div>
+          </select >
+          <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></div>
         : <div className='selectdata'> <h3>{role}</h3>
         </div>
-        }
-  {/* colores estado cuenta */}
+      }
+      {/* colores estado cuenta */}
 
-    {!localId && <button onClick={handledetail}>Detalles</button>}
+      {!localId && <button onClick={handledetail} className='botton'>{detailon && detailon === true
+        ? 'Ocultar'
+        : 'Detalles'}</button>}
+      {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
+      {localId && (role === 'owner' || role === 'user') && <BsFillHouseAddFill className='icon' onClick={asigLocal} />}
+      {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={stateV} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent} phone_number={phone_number} />}
 
-    {localId && role === 'owner' && <BsFillHouseAddFill className='icon' onClick={asigLocal}/>}
-    {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={stateV} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent} />}
-    {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
-  </div>;
+    </div>);
 };
 export default User;

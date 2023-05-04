@@ -9,12 +9,12 @@ module.exports = async (req, res) => {
     const { document } = req.body;
     const { localId } = req.params;
     const user = await User.findByPk(userId);
-    if (local.verified === 'verified') throw new Error('You cannot claim a verified location');
+    if (local.verified === 'verified') throw new Error('No se puede reclamar un local verificada');
     const doc = await local.getDocument();
     if (doc) {
       const Doc = await Document.findByPk(document.id);
       await Doc.destroy();
-      throw new Error('This location already has documentation, if this local belongs to you, please contact support.');
+      throw new Error('Este local ya tiene documentación, si este local le pertenece a usted, por favor contacte con soporte.');
     }
     await local.setDocument(document.id);
     await local.setUser(userId);
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
       localId,
       localName: local.name,
     });
-    res.status(200).json({ success: true, message: 'Email send successfully' });
+    res.status(200).json({ success: true, message: 'Se envió una notificación a la adminitración, pronto contactarán con usted' });
   } catch (error) {
     res.status(400).json({ message: error.message, success: false });
   }

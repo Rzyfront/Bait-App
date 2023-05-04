@@ -8,8 +8,8 @@ module.exports = async (req, res) => {
   } = req.body;
   try {
     const updReview = await Review.findByPk(reviewId);
-    if (userId !== updReview.UserId) throw new Error('The user is not the reviewer');
-    if (updReview.verified === 'archived') throw new Error('Cannot modify an archived review');
+    if (userId !== updReview.UserId) throw new Error('Solo el usuario que realizó la review puede modificarla');
+    if (updReview.verified === 'archived') throw new Error('No se puede modificar una reseña archivada');
     const rating = (food + environment + service + qaPrice) / 4;
     // Update the review with the new information
     await updReview.update({

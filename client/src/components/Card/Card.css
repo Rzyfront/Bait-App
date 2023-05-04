@@ -76,6 +76,7 @@
 .Card .LocationGroup {
     position: relative;
     display: flex;
+    flex-direction: column  ;
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
@@ -168,11 +169,11 @@
 }
 
 .Card .infoCard .Card-Tags .Tag-Charact {
-    background-color: var(--bg-tertiary);
+    background-color: var(--btn-secondary);
 }
 
 .Card .infoCard .Card-Tags .Tag-Type {
-    background-color: var(--optional1);
+    background-color: var(--btn-primary);
 }
 
 @media screen and (min-width:1600px) {

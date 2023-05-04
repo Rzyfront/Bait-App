@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User, Image } = require('../../db');
-const { sendVerificationEmail } = require('../../config/nodemailer/nodemailer-config');
+const { sendVerificationEmail, sendSuccessRegisterWithGoogle } = require('../../config/nodemailer/nodemailer-config');
 
 module.exports = async (req, res) => {
   try {
@@ -26,10 +26,11 @@ module.exports = async (req, res) => {
         role: googleUser.role,
         verified: googleUser.verified,
       }, process.env.SECRET_KEY);
+      await sendSuccessRegisterWithGoogle({ userEmail: googleUser.email, userName: googleUser.name });
       return res.status(201).json({ success: true, token });
     }
     sendVerificationEmail(googleUser.id, email);
-    return res.status(201).json({ success: true, message: 'Email send' });
+    return res.status(201).json({ success: true, message: `Se envió ha enviado un email de verificación a "${email}", por favor revisa tu bandeja de entrada` });
   } catch (error) {
     return res.status(400).json({ success: false, message: error.message });
   }

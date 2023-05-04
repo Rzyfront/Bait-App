@@ -1,30 +1,36 @@
-const { fn, col } = require('sequelize');
+const { fn, col, literal } = require('sequelize');
 const {
-  Local, Characteristic, Image, Review, Menu,
+  Local,
+  Characteristic,
+  Image,
+  Review,
+  Menu,
+  Specialty,
+  Document,
 } = require('../../db');
-const { allCharacteristics } = require('../../helpers/allCharacteristics');
 
 module.exports = async (req, res) => {
   const { numPage } = req.params;
   const page = numPage || 1;
   try {
-    const { count, rows } = await Local.findAndCountAll({
+    const query = {
       where: req.where,
       include: [
         {
           model: Characteristic,
-          attributes: allCharacteristics,
+          attributes: { exclude: ['id', 'LocalId'] },
           where: req.characteristics,
         },
         {
           model: Image,
           attributes: ['url'],
+          separate: true,
         },
         {
           model: Review,
           attributes: [],
           where: { verified: 'verified' },
-          required: false,
+          required: req.requireReviews ?? false,
         },
         {
           model: Menu,
@@ -32,17 +38,47 @@ module.exports = async (req, res) => {
           where: req.menu,
           required: !!req.menu.type,
         },
+        {
+          model: Specialty,
+          attributes: [],
+          as: 'specialties',
+          where: req.specialty ?? {},
+          required: !!req.specialty,
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Document,
+          attributes: [],
+          required: req.queryDocument ?? false,
+        },
       ],
-      attributes: ['id', [fn('AVG', col('Reviews.rating')), 'rating'], 'name', 'location', 'specialty', 'verified', 'schedule', 'UserId', 'lat', 'lng'],
-      order: req.order,
-      limit: 10,
-      offset: (page - 1) * 10,
-      group: ['Local.id', 'Images.id', 'Characteristic.id'],
-      subQuery: false,
-    });
-    const totalPages = Math.ceil((count.length - 1) / 10);
+    };
+    const [count, rows] = await Promise.all([
+      Local.count({ ...query, distinct: true }),
+      Local.findAll({
+        ...query,
+        attributes: {
+          include: [
+            [fn('AVG', col('Reviews.rating')), 'rating'],
+            [literal('(SELECT ARRAY_AGG("name") FROM "Specialties" INNER JOIN "localSpecialties" ON "Specialties"."id" = "localSpecialties"."SpecialtyId" WHERE "localSpecialties"."LocalId" = "Local"."id")'), 'specialtiy'],
+          ],
+          exclude: ['email', 'createdAt', 'updatedAt'],
+        },
+        order: req.order,
+        limit: 10,
+        offset: (page - 1) * 10,
+        group: ['Local.id', 'Characteristic.id'],
+        subQuery: false,
+      }),
+    ]);
+    const totalPages = Math.ceil(count / 10);
     res.status(200).json({
-      success: true, count: count.length - 1, totalPages, locals: rows,
+      success: true,
+      count,
+      totalPages,
+      locals: rows,
     });
   } catch (error) {
     console.log(error);
@@ -92,6 +128,16 @@ module.exports = async (req, res) => {
  *         schema:
  *           type: string
  *       - in: query
+ *         name: document
+ *         description: Filtra todos aquellos locales que tienen documento.
+ *         schema:
+ *           type: boolean
+ *       - in: query
+ *         name: toVerify
+ *         description: Filtra todos aquellos locales que tienen documento y no estan verificados.
+ *         schema:
+ *           type: boolean
+ *       - in: query
  *         name: characteristics
  *         description: Características que tiene el local (wifi, parking_lot, outdoor_seating, live_music, table_service, family_style, romantic, big_group, work_friendly, pet_friendly). Si el valor es true, se buscan los locales que tengan la característica. Si el valor es false, se buscan los locales que no tengan la característica. Si no se especifica, no se filtra por esta propiedad. O filtra por el type.
  *         schema:
@@ -134,9 +180,16 @@ module.exports = async (req, res) => {
  *                             $ref: '#/components/schemas/Characteristic'
  *                           Images:
  *                             type: array
- *                             description: Lista de reviews que coinciden con la consulta.
+ *                             description: Lista de imagenes del local.
  *                             items:
  *                               $ref: '#/components/schemas/Image'
+ *                           specialty:
+ *                             type: array
+ *                             description: Lista de especialidades del local.
+ *                             items:
+ *                               type: string
+ *                               description: Especialidad
+ *                               exmaple: "Parrilla"
  *       '404':
  *         $ref: '#/components/responses/NotFound'
-*/
+ */

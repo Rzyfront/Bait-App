@@ -8,8 +8,8 @@ import {
   GET_REVIEWS,
   CLEAN_REVIEWS,
   USER_PROFILE,
-  USER_POST_IMG,
-  USER_DASH_LOCALS
+  USER_DASH_LOCALS,
+  UPDATE_USER
 } from '../actions/actions';
 import {
   POST_MENU,
@@ -24,7 +24,7 @@ import {
   SEARCH_BY_FILTERS,
   SAVE_SEARCH_HOME
 } from '../actions/cards';
-import { DETAIL, SUCCESS, ERROR } from '../actions/local';
+import { DETAIL, CLEAN_DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
 import {
   GET_ALL_USERS,
@@ -32,6 +32,7 @@ import {
   REVIEW_DETAIL,
   GETLOCALSADMIN
 } from '../actions/admin';
+import { GET_LOCALS_TO_VERIFY } from '../actions/LocalsAdmin';
 
 const initialState = {
   cards: {},
@@ -61,7 +62,8 @@ const initialState = {
   adminReviewDetail: {},
   adminLocals: {},
   userProfile: [],
-  userDashLocals: {}
+  userDashLocals: {},
+  localsToVerify: []
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -92,6 +94,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         detail: payload
+      };
+    case CLEAN_DETAIL:
+      return {
+        ...state,
+        detail: []
       };
     case CREATE_USER:
       return {
@@ -204,16 +211,21 @@ const rootReducer = (state = initialState, { type, payload }) => {
         ...state,
         userProfile: payload
       };
-
-    case USER_POST_IMG:
+    case UPDATE_USER:
       return {
         ...state,
-        user: { payload }
+        success: payload
       };
+
     case USER_DASH_LOCALS:
       return {
         ...state,
         userDashLocals: payload
+      };
+    case GET_LOCALS_TO_VERIFY:
+      return {
+        ...state,
+        localsToVerify: payload
       };
     default:
       return { ...state };

@@ -1,47 +1,58 @@
 import './LocalInfoComplete.css';
 import Select from 'react-select';
+import { specialtyList, characteristicsList, paymentList, restaurantTypeList } from './Multiselects/Multiselects';
 
-function LocalInfoComplete ({ handleSelect, inputs, handleChange }) {
-  const specialtyList = [
-    { value: 'Mexican', label: 'Mexicana' },
-    { value: 'Argentina', label: 'Argentina' },
-    { value: 'China', label: 'China' },
-    { value: 'Vegana', label: 'Vegana' },
-    { value: 'Italiana', label: 'Italiana' },
-    { value: 'Fancesa', label: 'Fancesa' },
-    { value: 'India', label: 'India' },
-    { value: 'Asiatica', label: 'Asiatica' },
-    { value: 'Comida Rapida', label: 'Comida Rapida' },
-    { value: 'Parrilla', label: 'Parilla' }
-  ];
-  const restaurantTypeList = [
-    { value: 'Joven', label: 'Joven' },
-    { value: 'Elegante', label: 'Elegante' },
-    { value: 'Nuevo', label: 'Nuevo' },
-    { value: 'Colonial', label: 'Colonial' },
-    { value: 'Romantico', label: 'Romantico' },
-    { value: 'Ejecutivo', label: 'Ejecutivo' }
-  ];
-  const characteristicsList = [
-    { value: 'wifi', label: 'Wi-fi' },
-    { value: 'parking_lot', label: 'Parqueadero' },
-    { value: 'outdoor_seating', label: 'Asientos exteriores' },
-    { value: 'live_music', label: 'Música' },
-    { value: 'table_service', label: 'Servicio a Mesa' },
-    { value: 'big_group', label: 'Grupos grandes' },
-    { value: 'work_friendly', label: 'Amigable' },
-    { value: 'pet_friendly', label: 'Mascotas' },
-    { value: 'family_style', label: 'Familiar' },
-    { value: 'romantic', label: 'Romántico' }
-  ];
+function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setShowSchedule }) {
+  const handleSpecialtyChange = (selectedOptions) => {
+    const selectedSpecialty = selectedOptions.map(option => option.label);
+    setInputs(inputs => ({ ...inputs, specialty: selectedSpecialty }));
+  };
+  const handleRestaurantTypeChange = (selectedOptions) => {
+    setInputs(inputs => ({ ...inputs, restaurantType: selectedOptions.value }));
+  };
+  const handleCharacteristicsChange = (selectedOptions) => {
+    const selectedCharacteristics = selectedOptions.map(option => option.value);
+    setInputs(inputs => ({ ...inputs, characteristics: selectedCharacteristics }));
+  };
+  const handlePaymentChange = (selectedOptions) => {
+    const selectedPayments = selectedOptions.map(option => option.value);
+    setInputs(inputs => ({ ...inputs, payments: selectedPayments }));
+  };
 
-  const paymentList = [
-    { value: 'Efectivo', label: 'Efectivo' },
-    { value: 'Tarjeta Debito', label: 'Tarjeta Debito' },
-    { value: 'Tarjeta Credito', label: 'Tarjeta Credito' },
-    { value: 'Pay Apps', label: 'Pay Apps' }
-  ];
+  const customStyles = {
+    control: (provided) => ({
+      ...provided,
+      maxHeight: '40px',
+      maxWidth: '100%',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      paddingRight: '55px'
+    }),
+    multiValue: (provided) => ({
+      ...provided,
+      position: 'relative',
+      maxWidth: '80%',
+      whiteSpace: 'nowrap',
+      overflow: 'auto',
+      textOverflow: 'ellipsis'
+    }),
+    dropdownIndicator: (provided) => ({
+      ...provided,
+      position: 'absolute',
+      top: '0px',
+      right: '0px',
+      border: 'none'
 
+    }),
+    clearIndicator: (provided) => ({
+      ...provided,
+      position: 'absolute',
+      top: '0px',
+      right: '20px',
+      border: 'none'
+    })
+  };
   return (
     <div className='LocalInfoComplete'>
         <input
@@ -52,7 +63,12 @@ function LocalInfoComplete ({ handleSelect, inputs, handleChange }) {
         value={inputs.name}
         onChange={handleChange}
         />
-        <button className='Add-schelude-button'>Agregar Horarios</button>
+        <div className='Add-schelude-button'
+        onClick={
+          (showShedule
+            ? () => setShowSchedule(false)
+            : () => setShowSchedule(true))
+        }>Agregar Horarios</div>
         <input
         className='Input-C Input-Email-Complete'
         type="text"
@@ -61,55 +77,48 @@ function LocalInfoComplete ({ handleSelect, inputs, handleChange }) {
         value={inputs.email}
         onChange={handleChange}
         />
-        <input
-        className='Input-C Input-Email-Complete'
-        type="number"
-        name='phone'
-        placeholder='Telefono/Celular'
-        value={inputs.phone}
-        onChange={handleChange}
-        />
         <Select
           isMulti
           name="specialty"
           options={specialtyList}
-          value={inputs.specialty}
           placeholder={'Tipo de comida'}
-          onChange={handleSelect}
+          onChange={handleSpecialtyChange}
           className="specialty-List-Select"
           classNamePrefix="specialty-List"
           menuPlacement="auto"
+          styles={customStyles}
         />
         <Select
-        isMulti
-        name="restaurant-Type"
+        name="restaurantType"
         options={restaurantTypeList}
-        value={inputs.restaurantType}
         placeholder={'Tipo de restaurante'}
-        onChange={handleSelect}
+        onChange={handleRestaurantTypeChange}
         className="restaurant-Type-List-Select"
         classNamePrefix="restaurant-Type-List"
         menuPlacement="auto"
+        styles={customStyles}
         />
         <Select
         isMulti
-        name="Characteristics"
+        name="characteristics"
         options={characteristicsList}
-        value={inputs.characteristics}
         placeholder={'Caracteristicas'}
-        onChange={handleSelect}
+        onChange={handleCharacteristicsChange}
         className="characteristic-List-Select"
         classNamePrefix="characteristic-List"
         menuPlacement="auto"
+        styles={customStyles}
         />
         <Select
         isMulti
-        name="payment"
+        name="payments"
         options={paymentList}
         placeholder={'Metodos de Pago'}
+        onChange={handlePaymentChange}
         className="payment-List-Select"
         classNamePrefix="payment-List"
         menuPlacement="auto"
+        styles={customStyles}
         />
 
     </div>

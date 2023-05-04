@@ -1,13 +1,32 @@
-const { Review } = require('../../db');
+const { sendNotificationThatReviewWasVerified, sendReviewRejected } = require('../../config/nodemailer/nodemailer-config');
+const { Review, User } = require('../../db');
 
 module.exports = async (req, res) => {
   try {
     const { reviewId } = req.params;
-    const { verified } = req.query;
-    const review = await Review.findByPk(reviewId);
-    if (!review) throw new Error('Review not Found');
-    if (review.UserId === req.userId) throw new Error('You cannot verify a review made by you');
+    const { verified, reason } = req.query;
+    const review = await Review.findByPk(reviewId, {
+      attributes: ['title', 'comment', 'id'],
+      include: [{ model: User, attributes: ['name', 'email', 'id'] }],
+    });
+    if (!review) throw new Error('No se encotró la reseña');
+    if (review.UserId === req.userId) throw new Error('No puede verificar una reseña realizada por usted');
     review.verified = verified ?? 'verified';
+    if (!verified || verified === 'verified') {
+      await sendNotificationThatReviewWasVerified({
+        userName: review.User.name,
+        userEmail: review.User.email,
+        reviewTitle: review.title,
+      });
+    } else if (verified === 'archived') {
+      await sendReviewRejected(
+        review.User.email,
+        review.User.name,
+        review.title,
+        review.comment,
+        reason,
+      );
+    }
     await review.save();
     res.status(201).json({ success: true, review });
   } catch (error) {

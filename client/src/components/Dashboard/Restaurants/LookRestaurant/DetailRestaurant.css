@@ -1,12 +1,58 @@
 .detailRestaurantContainer {
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    width: 60%;
+    background-color: white;
+    margin: 3rem auto;
+    position: relative;
+
+}
+
+.localDetail {
+    margin-bottom: 20px;
+    text-align: left;
     width: 100%;
-    height: 100%;
-    transform: translate(-50%, -50%);
-    background: rgba(238, 236, 236, 0.178);
-    backdrop-filter: blur(10px);
+    margin-left: 40px;
+    margin-top: 20px;
+    font-size: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+
+}
+
+.localDetail p {
+    font-size: 1rem;
+}
+
+.userDetail {
+    width: 90%;
+    margin: auto;
+    padding-top: 10px;
+    display: flex;
+    gap: 30px;
+    font-size: 2rem;
+    background: rgba(0, 0, 0, 0.048);
     border-radius: 10px;
-    z-index: var(--alto-3);
+}
+
+.userDetail p {
+    font-size: 1rem;
+    margin: auto;
+}
+
+.localDetail {
+    width: 100%;
+}
+
+.dash-res-close-modal {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    font-size: larger;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.dash-res-close-modal:hover {
+    font-size: 1.2rem;
+    color: var(--btn-primary);
 }
