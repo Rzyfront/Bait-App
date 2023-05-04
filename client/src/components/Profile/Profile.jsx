@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import '@smastrom/react-rating/style.css';
 import Slider from 'react-slick';
+// import BaitImgAux from '../../assets/BaitPhotoAux.jpg';
 // import { getReviews } from '../../redux/actions/actions';
 import { Menu, Navbar, Reviews, InfoLocalsProfile, SelectProfileBar } from '../components';
 import './Profile.css';
@@ -11,6 +12,7 @@ import { getMenu } from '../../redux/actions/menuDish';
 import ReviewLocal from '../FindLocals/ReviewLocal/ReviewLocal';
 import ClaimLocal from './ClaimLocal/ClaimLocal';
 import LocalsCompleteData from '../CreateLocals/LocalsCompleteData/LocalsCompleteData';
+import { Oval } from 'react-loader-spinner';
 
 function Profile () {
   const queryParams = new URLSearchParams(location.search);
@@ -44,13 +46,20 @@ function Profile () {
   // const [toogleModal2, setToggleModal2] = useState(false);
   const settings = {
     infinite: true,
-    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
     pauseOnHover: true
   };
-  return (
+  if (detail?.Images?.length > 2) {
+    settings.slidesToShow = 3;
+  } else if (detail?.Images?.length === 2) {
+    settings.slidesToShow = 2;
+  } else if (detail?.Images?.length === 1) {
+    settings.slidesToShow = 1;
+  }
+  return (detail.Images
+    ? (
     <>
       <Navbar />
       <div className="Profile-Locals animated-element">
@@ -58,15 +67,14 @@ function Profile () {
         <div className='Img-Header'>
 
         <Slider {...settings}>
-         {
+         {(detail.Images && detail.Images.length > 2) &&
           detail.Images?.map(({ url }, index) => {
             return <div key={index} className='Slide-Img-Carrousel'>
             <img src={url} alt={`img${index}`} />
           </div>;
-          })
-
-         }
+          })}
         </Slider>
+
         </div>
         {ShowReviewList
           ? <ReviewLocal sendReview={setShowReviewList}/>
@@ -79,6 +87,23 @@ function Profile () {
           </div> };
       </div>
     </>
+      )
+    : (
+      <div className='SpinnerLocalsContainer'>
+    <Oval
+      height={80}
+      width={80}
+      color="#3884fd"
+      wrapperStyle={{}}
+      wrapperClass=""
+      visible={true}
+      ariaLabel='oval-loading'
+      secondaryColor="#343434"
+      strokeWidth={2}
+      strokeWidthSecondary={2}
+    />
+    </div>
+      )
   );
 }
 

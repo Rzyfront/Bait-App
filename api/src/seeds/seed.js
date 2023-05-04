@@ -90,12 +90,12 @@ const createFakeLocal = async () => {
     faker.internet.email(),
     faker.address.latitude(),
     faker.address.longitude(),
-    { url: faker.image.food() },
-    { url: faker.image.food() },
-    { url: faker.image.food() },
-    { url: faker.image.food() },
-    { url: faker.image.food() },
-    { url: faker.image.food() },
+    { url: faker.image.food(640, 480, true) },
+    { url: faker.image.food(640, 480, true) },
+    { url: faker.image.food(640, 480, true) },
+    { url: faker.image.food(640, 480, true) },
+    { url: faker.image.food(640, 480, true) },
+    { url: faker.image.food(640, 480, true) },
   ]);
   const local = await Local.create({
     name,
@@ -116,7 +116,7 @@ const createFakeReview = async (userId, localId) => {
   const [title, comment, image] = await Promise.all([
     faker.lorem.words(createRandomNumber(3, 'ceil') + 1),
     faker.lorem.words(createRandomNumber(25, 'ceil') + 5),
-    { url: faker.image.food() },
+    { url: faker.image.food(640, 480, true) },
   ]);
   const [food, environment, service, qaPrice] = [
     createRandomNumber(5, 'ceil'),
