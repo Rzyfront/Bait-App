@@ -30,10 +30,9 @@ function InfoLocalsProfile ({ detail, showClaimLocal }) {
         </div>
         <div className='Info-rigth'>
             <div className='Info-rigth-title'>
-              <button onClick={() => showClaimLocal(true)}>Reclamar local</button>
+              <div onClick={() => showClaimLocal(true)} className='ClaimButtom'>Reclamar local</div>
               {/* <h4 className='Info-rinth-Title'>Categorías calificadas</h4> */}
-              <div className='Info-rigth-decoration'></div>
-              </div>
+                        </div>
             <div className='Rating-C-Group-Container'>
                 <h5 className='Rating-C-Group'>Ambiente: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
                 <h5 className='Rating-C-Group'>Comida: <RatingStar readOnly style={{ maxWidth: 100 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
