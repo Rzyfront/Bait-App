@@ -17,10 +17,10 @@ const NavAdmin = ({ fn, section }) => {
             <p className={style.username}>ADMINISTRACIÓN</p>
         </div>
         <ul className={style.ul}>
-            <li className={section === 0 ? style.liSelected : style.li} onClick={() => fn(0)}><FaUserFriends/><span>Usuarios</span></li>
-            <li className={section === 1 ? style.liSelected : style.li} onClick={() => fn(1)}><MdOutlineRestaurantMenu/><span>Restaurantes</span></li>
-            <li className={section === 2 ? style.liSelected : style.li} onClick={() => fn(2)}><MdReviews/><span>Reseñas</span></li>
-            <li className={style.li} onClick={() => navigate('/')}><BiExit/><span>Salir</span></li>
+            <li className={section === 0 ? style.liSelected : style.li} onClick={() => fn(0)}><b><FaUserFriends/></b><span>Usuarios</span></li>
+            <li className={section === 1 ? style.liSelected : style.li} onClick={() => fn(1)}><b><MdOutlineRestaurantMenu/></b><span>Restaurantes</span></li>
+            <li className={section === 2 ? style.liSelected : style.li} onClick={() => fn(2)}><b><MdReviews/></b><span>Reseñas</span></li>
+            <li className={style.li} onClick={() => navigate('/')}><b><BiExit/></b><span>Salir</span></li>
         </ul>
     </nav>
   );
