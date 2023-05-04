@@ -1,3 +1,4 @@
+const { sendNotiOfLocalCreatedComplete, sendNotiOfLocalCreatedSmall } = require('../../config/nodemailer/nodemailer-config');
 const { Local, User, Specialty } = require('../../db');
 
 module.exports = async (req, res) => {
@@ -24,7 +25,8 @@ module.exports = async (req, res) => {
     if (document && document.id) {
       await user.addLocal(newLocal);
       await newLocal.setDocument(document.id);
-    }
+      sendNotiOfLocalCreatedComplete({ userEmail: user.email, userName: user.name });
+    } else sendNotiOfLocalCreatedSmall({ userEmail: user.email, userName: user.name });
     const local = {
       id: newLocal.id,
       name: newLocal.name,
