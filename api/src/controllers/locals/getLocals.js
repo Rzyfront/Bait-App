@@ -1,4 +1,4 @@
-const { fn, col } = require('sequelize');
+const { fn, col, literal } = require('sequelize');
 const {
   Local,
   Characteristic,
@@ -24,6 +24,7 @@ module.exports = async (req, res) => {
         {
           model: Image,
           attributes: ['url'],
+          separate: true,
         },
         {
           model: Review,
@@ -39,11 +40,13 @@ module.exports = async (req, res) => {
         },
         {
           model: Specialty,
-          attributes: ['name'],
+          attributes: [],
           as: 'specialties',
           where: req.specialty ?? {},
           required: !!req.specialty,
-          through: { attributes: [] },
+          through: {
+            attributes: [],
+          },
         },
         {
           model: Document,
@@ -52,29 +55,24 @@ module.exports = async (req, res) => {
         },
       ],
     };
-    const [count, { rows }] = await Promise.all([
+    const [count, rows] = await Promise.all([
       Local.count({ ...query, distinct: true }),
-      Local.findAndCountAll({
+      Local.findAll({
         ...query,
-        attributes: [
-          'id',
-          [fn('AVG', col('Reviews.rating')), 'rating'],
-          'name',
-          'location',
-          'verified',
-          'UserId',
-          'lat',
-          'lng',
-        ],
+        attributes: {
+          include: [
+            [fn('AVG', col('Reviews.rating')), 'rating'],
+            [literal('(SELECT ARRAY_AGG("name") FROM "Specialties" INNER JOIN "localSpecialties" ON "Specialties"."id" = "localSpecialties"."SpecialtyId" WHERE "localSpecialties"."LocalId" = "Local"."id")'), 'specialtiy'],
+          ],
+          exclude: ['email', 'createdAt', 'updatedAt'],
+        },
         order: req.order,
         limit: 10,
         offset: (page - 1) * 10,
-        group: ['Local.id', 'Images.id', 'Characteristic.id', 'specialties.id'],
+        group: ['Local.id', 'Characteristic.id'],
         subQuery: false,
-        distinct: true,
       }),
     ]);
-
     const totalPages = Math.ceil(count / 10);
     res.status(200).json({
       success: true,
@@ -185,6 +183,13 @@ module.exports = async (req, res) => {
  *                             description: Lista de imagenes del local.
  *                             items:
  *                               $ref: '#/components/schemas/Image'
+ *                           specialty:
+ *                             type: array
+ *                             description: Lista de especialidades del local.
+ *                             items:
+ *                               type: string
+ *                               description: Especialidad
+ *                               exmaple: "Parrilla"
  *       '404':
  *         $ref: '#/components/responses/NotFound'
  */

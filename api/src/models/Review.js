@@ -17,10 +17,10 @@ module.exports = (sequelize) => {
             args: [3, 50],
             msg: 'Title must be between 3 and 50 characters long.',
           },
-          is: {
-            args: /^[a-zA-Z0-9ñÑ\s]*$/i,
-            msg: 'Title can only contain letters, numbers, and spaces.',
-          },
+          // is: {
+          //   args: /^[a-zA-Z0-9ñÑ\s]*$/i,
+          //   msg: 'Title can only contain letters, numbers, and spaces.',
+          // },
         },
       },
       comment: {

@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
         'Only the user who made the review or an admin can delete reviews',
       );
     }
-    if (deletedReview.verified === 'archived') throw new Error('Cannot delete an archived review');
+    if (deletedReview.verified === 'archived') { throw new Error('Cannot delete an archived review'); }
     deletedReview.destroy();
     await deletedReview.save();
     return res.status(201).json({ success: true, deletedReview });
