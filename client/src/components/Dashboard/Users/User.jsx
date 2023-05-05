@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import { DeleteUser, changeRole, createAdmin, getAllUsers, suspendUser } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
 import { AiFillDelete } from 'react-icons/ai';
-import { FiUserX } from 'react-icons/fi';
+import { FiUserX, FiEdit } from 'react-icons/fi';
 import { MdVerified } from 'react-icons/md';
 import { USER_STATE, ROLES } from '../dictionaries';
 
@@ -16,6 +16,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   const dispatch = useDispatch();
   const [selector, setSelector] = useState(role);
   const [stateV, setStateV] = useState(verified);
+  const [showSelect, setShowSelect] = useState(false);
 
   // Update role
   useEffect(() => {
@@ -28,6 +29,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   };
 
   const changeType = async () => {
+    setShowSelect(false);
     if (selector === 'admin') {
       await dispatch(createAdmin({ id }));
       dispatch(getAllUsers(filter));
@@ -101,7 +103,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
             {user && user.role === 'superAdmin' && <option value="admin" >Administrador</option>}
 
           </select >
-          <button className={selector === role ? 'bottontrue' : 'bottonfalse'} onClick={changeType}>Cambiar</button></td>
+          <button onClick={changeType} className='dash-user-btn'><FiEdit/></button></td>
         : <td>{ROLES[role]}</td>
       }
       <td>
