@@ -91,7 +91,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
       <td>{email}</td>
       <td>{phone_number}</td>
       {ROLES[role] !== 'Súper admin'
-        ? <td>
+        ? <><td>
           {
             showSelect && <select
               onChange={handleSelect}
@@ -103,9 +103,9 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
               {role !== 'user' && <option value="user" >Usuario</option>}
               {user && user.role === 'superAdmin' && <option value="admin" >Administrador</option>}
             </select >
-          }
-          {!showSelect && ROLES[role]}
-          <button onClick={changeType} className='dash-user-btn'><FiEdit/></button></td>
+          }</td>
+          <td>{!showSelect && ROLES[role]}</td>
+          <td><button onClick={changeType} className='dash-user-btn'><FiEdit /></button></td></>
         : <td>{ROLES[role]}</td>
       }
       <td>
@@ -121,7 +121,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
       <td>
         {verified !== 'iconSuspended' && ROLES[role] !== 'Súper admin' && <FiUserX className='icon Action' onClick={handleSuspent} />}
       </td>
-      <td>
+      <td colSpan={2}>
         {ROLES[role] !== 'Súper admin' && <AiFillDelete className='icon delete' onClick={deleteUserId} />}
       </td>
     </tr>);

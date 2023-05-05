@@ -76,7 +76,7 @@ const Users = ({ localId, handleAdd }) => {
               <th>Edad</th>
               <th>Email</th>
               <th>Celular</th>
-              <th>Rol</th>
+              <th colSpan={2}>Rol</th>
               <th colSpan={2}>Estado</th>
               <th colSpan={3}>Acciones</th>
             </tr>
