@@ -29,7 +29,6 @@ const DetailRestaurant = ({ id, handleDetail }) => {
       const data = [{ name: 'Ambiente', Calificacion: parseFloat(localData.avgEnvironment).toFixed(1) }, { name: 'Comida', Calificacion: parseFloat(localData.avgFood).toFixed(1) }, { name: 'Precio', Calificacion: parseFloat(localData.avgQaPrice).toFixed(1) }, { name: 'Servicio', Calificacion: parseFloat(localData.avgService).toFixed(1) }];
       setData(data);
     }
-    console.log(userData);
   }, [localData]);
   return <div className='detailRestaurantContainer'>
     <h4 className='rating-modal-title'>Rating promedio por categoría</h4>

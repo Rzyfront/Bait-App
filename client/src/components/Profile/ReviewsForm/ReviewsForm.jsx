@@ -45,7 +45,6 @@ function ReviewsForm ({ setShowReviewList, id }) {
     setErrors(validate({
       ...inputs
     }));
-    console.log(errors);
   }, [inputs]);
 
   const handleSubmit = async (event) => {

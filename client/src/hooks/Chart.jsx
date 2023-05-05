@@ -1,6 +1,5 @@
 import { BarChart, Bar, XAxis, ResponsiveContainer, YAxis, LabelList } from 'recharts';
 function Chart ({ data }) {
-  console.log(data);
   return (<ResponsiveContainer width={600}
   height={400}>
     <BarChart data={data} margin={{ top: 30, left: 0, ringth: 0, bottom: 50 }} >

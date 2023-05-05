@@ -82,6 +82,11 @@
     background-color: var(--btn-primary);
 }
 
+.ContainerCards .widthcards .NoLocalsReview .AddPlace:hover {
+    background-color: var(--btn-secondary);
+    color: var(--tertiary);
+}
+
 .ContainerCards .widthcards .NoLocalsReview .AddPlace .AddPlace_Text{
     font-size: 1rem;
 }

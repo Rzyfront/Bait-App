@@ -53,7 +53,7 @@ const initialState = {
   ubication: {
     lat: -34.60762000391614,
     lng: -58.381592,
-    city: 'buenos aires',
+    city: '',
     gps: false
   },
   user: {},

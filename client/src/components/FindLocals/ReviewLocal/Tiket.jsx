@@ -7,7 +7,6 @@ const Tiket = ({ handleTiket, inputs }) => {
   useEffect(() => {
     const data = image[image.length - 1];
     handleTiket(data);
-    console.log(inputs);
   }, [image]);
 
   return <div className={style.imgUpload}>

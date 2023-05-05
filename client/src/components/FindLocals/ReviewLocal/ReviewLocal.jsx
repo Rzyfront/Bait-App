@@ -41,7 +41,6 @@ const ReviewLocal = ({ sendReview, close }) => {
     setError(ErrorReview({
       ...inputs
     }));
-    console.log(error);
   }, [inputs]);
   const [calificar, setCalificar] = useState(false);
   const [calculateAverage, setcalculateAverage] = useState(0);
@@ -84,7 +83,6 @@ const ReviewLocal = ({ sendReview, close }) => {
   ]);
   const handleData = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setInputs({
       ...inputs,
       [name]: value

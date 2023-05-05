@@ -33,7 +33,6 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
       }
     }
   }
-  console.log(detail);
   const dataUser = useSelector((state) => state.user);
   const verifiedOwner = detail?.UserId === dataUser?.user?.id;
   return (

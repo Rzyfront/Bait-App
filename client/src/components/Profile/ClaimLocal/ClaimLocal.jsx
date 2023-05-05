@@ -23,7 +23,6 @@ export default function ClaimLocal ({ closeClaimLocal, localId }) {
       const { data } = await axios.post(`/locals/acquisition/${localId}`, { document });
       swal(data.message, { type: 'success' });
     } catch (error) {
-      console.log(error);
       swal(error.response.data.message, { type: 'error' });
     }
   };
