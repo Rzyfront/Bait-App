@@ -29,11 +29,12 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   };
 
   const changeType = async () => {
-    setShowSelect(false);
+    setShowSelect(true);
     if (selector === 'admin') {
       await dispatch(createAdmin({ id }));
       dispatch(getAllUsers(filter));
       setSelector(role);
+      setShowSelect(false);
     }
     if (selector === role) {
       toast.error(`El usuario ya es ${role}`, {
@@ -91,27 +92,28 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
       <td>{phone_number}</td>
       {ROLES[role] !== 'Súper admin'
         ? <td>
-          <select
-            onChange={handleSelect}
-            defaultValue={ROLES[role]}
-            className='dash-user-rol-select'
-          >
+          {
+            showSelect && <select
+              onChange={handleSelect}
+              defaultValue={ROLES[role]}
+              className='dash-user-rol-select'
+            >
 
-            <option value={ROLES[role]}>{ROLES[role]}</option>
-            {role !== 'user' && <option value="user" >Usuario</option>}
-            {role !== 'owner' && <option value="owner" >Propietario</option>}
-            {user && user.role === 'superAdmin' && <option value="admin" >Administrador</option>}
-
-          </select >
+              <option value={ROLES[role]}>{ROLES[role]}</option>
+              {role !== 'user' && <option value="user" >Usuario</option>}
+              {user && user.role === 'superAdmin' && <option value="admin" >Administrador</option>}
+            </select >
+          }
+          {!showSelect && ROLES[role]}
           <button onClick={changeType} className='dash-user-btn'><FiEdit/></button></td>
         : <td>{ROLES[role]}</td>
       }
       <td>
-        {USER_STATE[verified]}
+        {role !== 'superAdmin' && USER_STATE[verified]}
       </td>
       <td>
         {/* STATE COLOR CODE */}
-        {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
+        {verified && role !== 'superAdmin' && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
       </td>
       <td>
         {(verified === 'suspended' || verified === 'unVerified') && ROLES[role] !== 'Súper admin' && <MdVerified className='icon Verified' onClick={handleSuspent} />}
