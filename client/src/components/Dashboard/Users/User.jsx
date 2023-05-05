@@ -1,11 +1,13 @@
 import './User.css';
-import imageDefault from '../../../assets/imagenDefault.png';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { DeleteUser, assignLocal, changeRole, createAdmin, getAllUsers, suspendUser } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
 import { BsFillHouseAddFill } from 'react-icons/bs';
 import UserDetail from './UserDetail';
+
+const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
+
 const User = ({ id, lastname, age, role, image, name, email, filter, localId, handleAdd, verified, phone_number }) => {
   const { user } = useSelector((state) => state.user);
 
@@ -87,17 +89,18 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   };
 
   return (
-    <div className='userContainer'>
-      {image ? <img src={image.url} alt='user foto' /> : <img src={imageDefault} alt='default' />}
+    <tr>
+      <td>
+        {image ? <img src={image.url} alt='user foto' className='dash-user-img' /> : <img src={imageDefault} alt='default' className='dash-user-img' />}
+      </td>
 
-      <div className='containerName'>
-        <h3>{email}</h3>
-      </div>
-      {role !== 'superAdmin'
+      <td>{email}</td>
+      <td>{role !== 'superAdmin'
         ? <div className='selectdata'>
           <select
             onChange={handleSelect}
             defaultValue={role}
+            className='dash-user-rol-select'
           >
 
             <option value={role}>{role}</option>
@@ -110,15 +113,17 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         : <div className='selectdata'> <h3>{role}</h3>
         </div>
       }
+      </td>
       {/* colores estado cuenta */}
-
+      <td>
       {!localId && <button onClick={handledetail} className='botton'>{detailon && detailon === true
         ? 'Ocultar'
         : 'Detalles'}</button>}
+      </td>
       {verified && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
       {localId && (role === 'owner' || role === 'user') && <BsFillHouseAddFill className='icon' onClick={asigLocal} />}
       {detailon && detailon === true && <UserDetail id={id} lastname={lastname} age={age} role={selector} image name={name} email={email} verified={stateV} handledetail={handledetail} DeleteUserid={DeleteUserid} suspent={suspent} phone_number={phone_number} />}
 
-    </div>);
+    </tr>);
 };
 export default User;

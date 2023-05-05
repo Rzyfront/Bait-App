@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import style from '../Dashboard.module.css';
+import style from './Users.module.css';
 import Pagination from '../Pagination/Pagination';
 // import swal from '@sweetalert/with-react';
 import { getAllUsers } from '../../../redux/actions/admin';
@@ -47,33 +47,50 @@ const Users = ({ localId, handleAdd }) => {
   };
 
   return (
-    <div className={style.options}>
-      <h2 className={style.nameSection}>Usuarios</h2>
-      <select
-        onChange={handleSelect}
-        value={filter.role}
-        defaultValue=""
-        className={style.usersSelect}
-      >
-        <option value="" disabled selected>Seleccionar rol</option>
-        <option value="" >Todos</option>
-        <option value="user" >Usuarions</option>
-        <option value="owner" >Propietario</option>
-        <option value="admin" >Administrador</option>
-        <option value="superAdmin" >Súper admin</option>
-      </select >
-      <input placeholder="email" name="email" value={filter.email} className={style.buscador} onChange={handleData}></input>
-      <div className={style.containerUserCard}>
-        <Pagination paginade={paginade} page={filter.page} totalPages={data.totalPages} />
-        {data && data.users &&
-          data.users.map((data, index) => {
-            return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.Image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
+    <div className={style.container}>
+      <header className={style.header}>
+          <h2 className={style.nameSection}>Usuarios</h2>
+          <article className={style.filters}>
+            <select
+              onChange={handleSelect}
+              value={filter.role}
+              defaultValue=''
+              className={style.select}
+            >
+              <option value='' disabled selected>Seleccionar rol</option>
+              <option value='' >Todos</option>
+              <option value='user' >Usuario</option>
+              <option value='owner' >Propietario</option>
+              <option value='admin' >Administrador</option>
+              <option value='superAdmin' >Súper admin</option>
+            </select >
+            <input placeholder='Email' name='email' value={filter.email} className={style.input} onChange={handleData}></input>
+        </article>
+      </header>
+      <main className={style.tableResponsive}>
+        <table className={style.table}>
+          <thead>
+            <tr>
+              <th>Foto de perfil</th>
+              <th>Email</th>
+              <th>Rol</th>
+              <th>Estado</th>
+              <th>Detalle</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+          {data.users &&
+            data.users.map((data, index) => {
+              return <User id={data.id} lastname={data.lastname} age={data.age} role={data.role} key={index} image={data.Image} name={data.name} email={data.email} filter={filter} localId={localId} handleAdd={handleAdd} verified={data.verified}
               phone_number={data.phone_number} />;
-          })
-        }
-
+            })
+          }
+          </tbody>
+        </table>
+        <Pagination paginade={paginade} page={filter.page} totalPages={data.totalPages} />
         <ToastContainer />
-      </div>
+      </main>
 
     </div>
   );

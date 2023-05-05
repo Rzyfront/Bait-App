@@ -1,26 +1,11 @@
-.userContainer {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    background: rgb(225, 225, 225);
-    color: var(--prymary);
-    margin-bottom: 15px;
-    border-radius: 10px;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    transition: all 2s ease;
-}
-
-.userContainer img {
-    width: 100px;
-    height: 100px;
+.dash-user-img {
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
 }
 
-.userContainer select {
-    padding: 10px;
-    border: none;
+.dash-user-rol-select {
+    padding: 5px;
     outline: none;
     border-bottom: 2px solid var(--bg-secondary);
     background-color: transparent;
