@@ -119,6 +119,7 @@
 
 .table tbody tr:hover {
     background-color: var(--bg-opac);
+    cursor: default;
 }
 
 

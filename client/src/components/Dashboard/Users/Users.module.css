@@ -56,11 +56,17 @@
     font-size: 0.9em;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     text-align: center;
+    width: 100%;
 }
 
 .table thead tr {
     background-color: var(--bg-secondary);
     color: #fff;
+    
+}
+
+.table thead th {
+    padding: 0.5rem 1.2rem;
 }
 
 .align-middle {
@@ -79,7 +85,11 @@
     border-bottom: 2px solid var(--optional1);
 }
 
-.table tbody td {
-    width: fit-content;
+.table tbody tr:hover {
+    background-color: var(--bg-opac);
+    cursor: default;
+}
+
+.table tbody td{
     padding: auto 20px;
 }

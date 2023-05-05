@@ -7,7 +7,7 @@
 .dash-user-rol-select {
     padding: 5px;
     outline: none;
-    border-bottom: 2px solid var(--bg-secondary);
+    border-radius: 4px;
     background-color: transparent;
 }
 
@@ -51,19 +51,13 @@
 
 }
 
-.icon {
-    font-size: 1rem;
-    width: 30%;
-    margin: auto;
-
-}
-
 .icon:hover {
     cursor: pointer;
-    color: var(--optional2);
+    color: var(--btn-primary);
 
 }
 
+/* STATE COLOR CODE */
 .green {
     margin: 0 5px;
     width: 15px;
@@ -92,23 +86,13 @@
     border-radius: 50%;
 }
 
-.botton {
-    height: min-content;
-    padding: 3px;
-    border-radius: 10px;
-    margin: auto;
+.detail-icon-user {
+    border: none;
+    background: none;
+    font-size: 1.7rem;
+    font-weight: 700;
 }
 
-.tableActions {
-    text-align: center;
-    margin-left: 10px;
-    margin-bottom: 10px;
-
-
-}
-
-.tableActions th {
-    padding: 10px;
-    border-radius: 10px;
-
+.detail-icon-user:hover {
+    color: var(--btn-primary);
 }

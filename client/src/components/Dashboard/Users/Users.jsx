@@ -71,12 +71,14 @@ const Users = ({ localId, handleAdd }) => {
         <table className={style.table}>
           <thead>
             <tr>
-              <th>Foto de perfil</th>
+              <th></th>
+              <th>Nombre</th>
+              <th>Edad</th>
               <th>Email</th>
+              <th>Celular</th>
               <th>Rol</th>
-              <th>Estado</th>
-              <th>Detalle</th>
-              <th>Acciones</th>
+              <th colSpan={2}>Estado</th>
+              <th colSpan={3}>Acciones</th>
             </tr>
           </thead>
           <tbody>

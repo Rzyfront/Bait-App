@@ -6,13 +6,7 @@ import { getLocalsToVerify } from '../../../../redux/actions/LocalsAdmin';
 import { AiFillFileUnknown } from 'react-icons/ai';
 import { FaHouseUser } from 'react-icons/fa';
 import { BsHouseSlashFill } from 'react-icons/bs';
-
-const ROLES = {
-  admin: 'Administrador',
-  superAdmin: 'Súper admin',
-  user: 'Usuario',
-  owner: 'Propietario'
-};
+import { ROLES } from '../../dictionaries';
 
 export default function LocalsCards ({ local }) {
   const dispatch = useDispatch();
