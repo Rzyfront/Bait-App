@@ -5,17 +5,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { verifyReview } from '../../../redux/actions/admin';
 import { Rating as RatingStar } from '@smastrom/react-rating';
+import { LOWER_REVIEW_STATE, LOWER_ROLES } from '../dictionaries';
 import ChartToxi from '../../../hooks/ChartToxi';
 const reviewImage =
   'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png';
 const imageDefault =
   'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
 
-const statusOfReviews = {
-  unVerified: 'Sin verificar',
-  archived: 'Archivado',
-  verified: 'Verificado'
-};
 const opciones = { day: '2-digit', month: '2-digit', year: 'numeric' };
 
 const ReseñaDetail = ({ fn }) => {
@@ -28,14 +24,14 @@ const ReseñaDetail = ({ fn }) => {
     setReview(reviewDetail);
     const grap = [
       {
-        name: 'Toxico',
+        name: 'Tóxico',
         value: Math.ceil(reviewDetail.toxicity * 100),
-        fill: '#FC9811'
+        fill: '#e01e00'
       },
       {
-        name: 'No Toxico',
+        name: 'No Tóxico',
         value: 100 - Math.ceil(reviewDetail.toxicity * 100),
-        fill: '#27F1E8'
+        fill: '#679436'
       }
     ];
     setData(grap);
@@ -47,7 +43,7 @@ const ReseñaDetail = ({ fn }) => {
     );
     if (response.success === true) {
       toast.success(
-        `Estado de la reseña actualizada a  ${statusOfReviews[value]} con éxito`,
+        `El nuevo estado de la reseña es:  ${LOWER_REVIEW_STATE[value]}.`,
         {
           position: toast.POSITION.TOP_CENTER
         }
@@ -65,9 +61,9 @@ const ReseñaDetail = ({ fn }) => {
   };
 
   return (
-    <div className="Modal-Review-Detail">
-      <ToastContainer className="notify" />
-      <div className="Modal-Review-Detail-Date">
+    <div className='Modal-Review-Detail'>
+      <ToastContainer className='notify' />
+      <div className='Modal-Review-Detail-Date'>
         <p>{`Fecha de creación: ${formatDate(
           review.createdAt
         ).toLocaleDateString('es-ES', opciones)}`}</p>
@@ -76,71 +72,68 @@ const ReseñaDetail = ({ fn }) => {
         ).toLocaleDateString('es-ES', opciones)}`}</p>
       </div>
 
-      <div className="Modal-Review-Detail-Data">
-        <div className="Modal-Review-Detail-Data-Information">
-          <h3 className="Title">{review?.title.toUpperCase()}</h3>
-          <div className="Modal-Review-Detail-Data-Description-container">
+      <div className='Modal-Review-Detail-Data'>
+        <div className='Modal-Review-Detail-Data-Information'>
+          <h3 className='Title'>{review?.title.toUpperCase()}</h3>
+          <div className='Modal-Review-Detail-Data-Description-container'>
             <p>{review?.comment}</p>
           </div>
 
-          <div className="InfoGroup">
-            <h6>Nivel de toxicidad:</h6>
-
-            <p>{Math.ceil(review?.toxicity * 100)}%</p>
+          <div className='InfoGroup'>
+            <p>Nivel de toxicidad: {Math.ceil(review?.toxicity * 100)}%</p>
           </div>
-          <div className="InfoGroup">
-            <h6>Estado:</h6>
-            <p>{statusOfReviews[review?.verified]}</p>
+          <div className='InfoGroup'>
+            <p>Estado: {LOWER_REVIEW_STATE[review?.verified]}.</p>
           </div>
-          <div className="Info">
-            <div className="RatingGroup">
-              <h6>Rating de comida:</h6>
+          <div className='Info'>
+            <div className='RatingGroup'>
+              Rating de comida:
               <RatingStar
                 readOnly
                 style={{ maxWidth: 100 }}
                 value={review?.food || 5}
               />
             </div>
-            <div className="RatingGroup">
-              <h6>Rating de ambiente:</h6>
+            <div className='RatingGroup'>
+              Rating de ambiente:
               <RatingStar
                 readOnly
                 style={{ maxWidth: 100 }}
                 value={review?.environment || 5}
               />
             </div>
-            <div className="RatingGroup">
-              <h6>Rating de precio/calidad:</h6>
+            <div className='RatingGroup'>
+              Rating de precio/calidad:
               <RatingStar
                 readOnly
                 style={{ maxWidth: 100 }}
                 value={review?.qaPrice || 5}
               />
             </div>
-            <div className="RatingGroup">
-              <h6>Rating de servicio:</h6>
+            <div className='RatingGroup'>
+              Rating de servicio:
               <RatingStar
                 readOnly
                 style={{ maxWidth: 100 }}
                 value={review?.service || 5}
               />
             </div>
-            <div className="RatingGroup">
-              <h5>Rating promedio:</h5>
+            <div className='RatingGroup'>
+              Rating promedio:
               <RatingStar
                 readOnly
                 style={{ maxWidth: 100 }}
                 value={review?.rating || 5}
               />
             </div>
-            <ChartToxi data={data} className="graphic" />
+            <ChartToxi data={data} className='graphic' />
           </div>
         </div>
 
-        <div className="Modal-Review-Detail-Data-2">
-          <div className="Modal-Review-Detail-Data-UserProfile">
+        <div className='Modal-Review-Detail-Data-2'>
+          <div className='Modal-Review-Detail-Data-UserProfile'>
             <img
-              className="ImageProfile"
+              className='ImageProfile'
               src={review?.User?.Image?.url || imageDefault}
             ></img>
             <div>
@@ -148,28 +141,28 @@ const ReseñaDetail = ({ fn }) => {
               <p>{review?.User?.email}</p>
             </div>
             <div>
-              <p>Role: {review?.User?.role}</p>
+              <p>Rol: {LOWER_ROLES[review?.User?.role]}</p>
               <p>Edad: {review?.User?.age}</p>
             </div>
           </div>
           {toggleImage
             ? (
             <img
-              className="ImageReview"
+              className='ImageReview'
               src={review?.ticket?.url || reviewImage}
             ></img>
               )
             : (
             <img
-              className="ImageReview"
+              className='ImageReview'
               src={review?.Image?.url || reviewImage}
             ></img>
               )}
-          <div className="Review-Detail-Button">
+          <div className='Review-Detail-Button'>
             {review?.verified !== 'verified' && (
               <button
-                value="verified"
-                className="botonAccept"
+                value='verified'
+                className='botonAccept'
                 onClick={verifiedChange}
               >
                 Aceptar
@@ -177,8 +170,8 @@ const ReseñaDetail = ({ fn }) => {
             )}
             {review?.verified !== 'archived' && (
               <button
-                value="archived"
-                className="botonDenied"
+                value='archived'
+                className='botonDenied'
                 onClick={verifiedChange}
               >
                 Rechazar
@@ -186,8 +179,8 @@ const ReseñaDetail = ({ fn }) => {
             )}
             {review?.verified !== 'unVerified' && (
               <button
-                value="unVerified"
-                className="botonInvalid"
+                value='unVerified'
+                className='botonInvalid'
                 onClick={verifiedChange}
               >
                 Invalidar

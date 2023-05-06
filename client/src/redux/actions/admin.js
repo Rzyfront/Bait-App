@@ -1,4 +1,5 @@
 import axios from 'axios';
+import swal from 'sweetalert'
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const GET_ALL_REVIEWS = 'GET_ALL_REVIEWS';
 export const VERIFY_REVIEWS = 'VERIFY_REVIEWS';
@@ -29,16 +30,15 @@ export const changeRole = ({ id, role }) => async (dispatch) => {
     const { data } = await axios.patch(`/administrator/role/${id}`, { role });
     return dispatch({ type: CHANGE_ROLE, payload: data });
   } catch (error) {
-    console.log(error);
+    swal(`Ocurrió un error: ${error.message}`);
   }
 };
-export const DeleteUser = (id) => async (dispatch) => {
-  console.log(id, 'sas');
+export const deleteUser = (id) => async () => {
   try {
     await axios.delete(`/administrator/${id}`);
     return true;
   } catch (error) {
-    console.log(error);
+    swal(`Ocurrió un error: ${error.message}`);
   }
 };
 
@@ -54,7 +54,7 @@ export const suspendUser = ({ id, action }) => async (dispatch) => {
     const { status } = await axios.patch(`/administrator/suspend/${id}?verified=${action}`);
     return status;
   } catch (error) {
-    console.log(error);
+    swal(`Ocurrió un error: ${error.message}`);
   }
 };
 
@@ -66,8 +66,7 @@ export const getAllReviews = ({ page = 1, verified = 'unVerified' }) => {
       const { data } = await axios(`/administrator/reviews?page=${page}&verified=${verified}`);
       return dispatch({ type: GET_ALL_REVIEWS, payload: data });
     } catch (error) {
-      console.log(error);
-      window.alert('why not?');
+      swal(`Ocurrió un error: ${error.message}`);
     }
   };
 };
@@ -77,7 +76,7 @@ export const createAdmin = ({ id }) => async (dispatch) => {
     const { data } = await axios.put(`/administrator/createAdmin/${id}`);
     console.log(data);
   } catch (error) {
-    console.log(error);
+    swal(`Ocurrió un error: ${error.message}`);
   }
 };
 
@@ -98,8 +97,8 @@ export const verifyReview = ({ id, verified }) => async (dispatch) => {
 export const getReviewDetail = (detail) => {
   try {
     return { type: REVIEW_DETAIL, payload: detail };
-  } catch (err) {
-    console.log(err);
+  } catch (error) {
+    swal(`Ocurrió un error: ${error.message}`);
   }
 };
 /// // locals
@@ -128,6 +127,6 @@ export const assignLocal = ({ userId, localId }) => async (dispatch) => {
     const { data } = await axios.put('/administrator/assignLocal', { userId, localId });
     return dispatch({ type: SUSPEND_USER, payload: data });
   } catch (error) {
-    console.log(error);
+    swal(`Ocurrió un error: ${error.message}`);
   }
 };
