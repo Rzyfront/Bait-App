@@ -1,22 +1,16 @@
 import swal from 'sweetalert';
 import './Restaurant.css';
 // icons
-import { FaUserEdit } from 'react-icons/fa';
+// import { FaUserEdit } from 'react-icons/fa';
 import { IoIosInformationCircleOutline, IoMdArchive } from 'react-icons/io';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteLocal, getAllLocal } from '../../../redux/actions/admin';
 import { useEffect, useState } from 'react';
 import DetailRestaurant from './LookRestaurant/DetailRestaurant';
-
-const VERIFIED_STATE = {
-  unVerified: 'No verificado',
-  verified: 'Verficado',
-  archived: 'Archivado'
-};
+import { LOCAL_STATE } from '../dictionaries';
 
 const OneRestaurant = ({ name, verified, id }) => {
-  // const [adduser, setAdduser] = useState(false);
   const { user } = useSelector((state) => state.user);
   const [verifiedLocal, setverifiedLocal] = useState(verified);
   const [DetailRestaurantD, setDetailRestaurantD] = useState(false);
@@ -31,7 +25,7 @@ const OneRestaurant = ({ name, verified, id }) => {
     if (user.role === 'superAdmin' || user.role === 'admin') {
       swal({
         title: '¿Está seguro(a)',
-        text: 'Una vez borrado no podrás deshacer esta acción',
+        text: 'Al aceptar el local será archivado y removido del sitio.',
         icon: 'warning',
         buttons: true,
         dangerMode: true
@@ -52,14 +46,6 @@ const OneRestaurant = ({ name, verified, id }) => {
         });
     }
   };
-  // const handleAdd = () => {
-  //   if (!adduser) {
-  //     setverifiedLocal('verified');
-  //     setAdduser(false);
-  //   } else {
-  //   setAdduser(true);
-  //   }
-  // };
 
   const handleDetail = () => {
     if (DetailRestaurantD === false) {
@@ -73,7 +59,7 @@ const OneRestaurant = ({ name, verified, id }) => {
   return (
     <tr>
       <td className='align-middle'>{name}</td>
-      <td className='align-middle'>{VERIFIED_STATE[verified]}</td>
+      <td className='align-middle'>{LOCAL_STATE[verified]}</td>
       <td className='align-middle'>
         <button onClick={handleDetail} className='detail-icon-dash-res'><IoIosInformationCircleOutline /></button>
         {showModal && (
@@ -81,14 +67,10 @@ const OneRestaurant = ({ name, verified, id }) => {
             <DetailRestaurant id={id} handleDetail={() => setShowModal(false)} />
           </div>
         )}
-        {/* {DetailRestaurantD && <DetailRestaurant id={id} handleDetail={handleDetail} />} */}
       </td>
         {verifiedLocal && verifiedLocal === 'unVerified'
           ? (
             < td className='align-middle'>
-                {/* <button className='res-icons assign' onClick={handleAdd} >
-                  <BsPersonFillAdd/>
-                </button> */}
                 <button className='res-icons deny' onClick={deleteRestaurant} >
                   Archivar  <IoMdArchive />
                 </button>
@@ -96,7 +78,7 @@ const OneRestaurant = ({ name, verified, id }) => {
             )
           : (
             <td>
-                <button className='res-icons deny' title='Remover propietario'><FaUserEdit /></button>
+                {/* <button className='res-icons deny' title='Remover propietario'><FaUserEdit /></button> */}
                 <button className='res-icons deny' onClick={deleteRestaurant} >
                   Archivar  <IoMdArchive />
                 </button>
