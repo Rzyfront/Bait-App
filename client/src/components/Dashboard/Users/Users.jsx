@@ -78,7 +78,7 @@ const Users = ({ localId, handleAdd }) => {
               <th>Celular</th>
               <th colSpan={2}>Rol</th>
               <th colSpan={2}>Estado</th>
-              <th colSpan={3}>Acciones</th>
+              <th colSpan={2}>Acciones</th>
             </tr>
           </thead>
           <tbody>

@@ -1,16 +1,18 @@
 import './User.css';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { DeleteUser, changeRole, createAdmin, getAllUsers, suspendUser } from '../../../redux/actions/admin';
+import { deleteUser, changeRole, createAdmin, getAllUsers, suspendUser } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
-import { AiFillDelete } from 'react-icons/ai';
-import { FiUserX, FiEdit } from 'react-icons/fi';
+import { AiOutlineSave } from 'react-icons/ai';
+import { FiEdit, FiUserMinus } from 'react-icons/fi';
+import { BiUserMinus } from 'react-icons/bi';
+import { BsArchive } from 'react-icons/bs';
 import { MdVerified } from 'react-icons/md';
-import { USER_STATE, ROLES } from '../dictionaries';
+import { USER_STATE, ROLES, LOWER_USER_STATE } from '../dictionaries';
 
 const imageDefault = 'https://objetivoligar.com/wp-content/uploads/2017/03/blank-profile-picture-973460_1280-580x580.jpg';
 
-const User = ({ id, lastname, age, role, image, name, email, filter, localId, handleAdd, verified, phone_number }) => {
+const User = ({ id, lastname, age, role, image, name, email, filter, verified, phone_number }) => {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -21,7 +23,9 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   // Update role
   useEffect(() => {
     setSelector(role);
-  }, [role, verified]);
+    setStateV(verified);
+    dispatch(getAllUsers(filter));
+  }, [role, verified, user]);
 
   const handleSelect = (event) => {
     const { value } = event.target;
@@ -29,7 +33,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   };
 
   const changeType = async () => {
-    setShowSelect(true);
+    setShowSelect(!showSelect);
     if (selector === 'admin') {
       await dispatch(createAdmin({ id }));
       dispatch(getAllUsers(filter));
@@ -37,13 +41,13 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
       setShowSelect(false);
     }
     if (selector === role) {
-      toast.error(`El usuario ya es ${role}`, {
+      toast.error(`No se puede reasignar el rol actual. Rol actual: ${ROLES[role]}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
     } else {
       await dispatch(changeRole({ id, role: selector }));
-      toast.success('¡Rol cambiado satisfactoriamente!', {
+      toast.success('Rol cambiado satisfactoriamente', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
@@ -56,7 +60,7 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
     const respuesta = await dispatch(suspendUser({ id, action }));
 
     if (respuesta === 201) {
-      toast.success(`El usuario ${name + ' ' + lastname} su estado es ${action}`, {
+      toast.success(`El nuevo estado de ${name} ${lastname} es ${LOWER_USER_STATE[action]}`, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 4000
       });
@@ -72,13 +76,15 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
   const handleSuspent = async () => {
     if (verified === 'suspended') {
       await suspent('verified');
+      dispatch(getAllUsers(filter));
     } else {
       await suspent('suspended');
+      dispatch(getAllUsers(filter));
     }
   };
 
   const deleteUserId = () => {
-    dispatch(DeleteUser(id));
+    dispatch(deleteUser(id));
   };
 
   return (
@@ -90,24 +96,26 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
       <td>{age}</td>
       <td>{email}</td>
       <td>{phone_number}</td>
-      {ROLES[role] !== 'Súper admin'
-        ? <><td>
           {
-            showSelect && <select
+            showSelect
+              ? <td><select
               onChange={handleSelect}
-              defaultValue={ROLES[role]}
+            value={selector}
               className='dash-user-rol-select'
             >
 
-              <option value={ROLES[role]}>{ROLES[role]}</option>
+              {/* <option value={ROLES[role]}>{ROLES[role]}</option> */}
+              <option value=''>Seleccione un rol</option>
               {role !== 'user' && <option value="user" >Usuario</option>}
               {user && user.role === 'superAdmin' && <option value="admin" >Administrador</option>}
-            </select >
-          }</td>
-          <td>{!showSelect && ROLES[role]}</td>
-          <td><button onClick={changeType} className='dash-user-btn'><FiEdit /></button></td></>
-        : <td>{ROLES[role]}</td>
-      }
+            </select ></td>
+              : <td>{!showSelect && ROLES[role]}</td>
+
+            }
+      <td>
+        {ROLES[role] !== 'Súper admin' && <button onClick={() => setShowSelect(!showSelect)} className='dash-user-btn'>{showSelect ? <AiOutlineSave title='Guardar' onClick={changeType}/> : <FiEdit title='Cambiar rol'/>}</button>}
+      </td>
+
       <td>
         {role !== 'superAdmin' && USER_STATE[verified]}
       </td>
@@ -116,13 +124,10 @@ const User = ({ id, lastname, age, role, image, name, email, filter, localId, ha
         {verified && role !== 'superAdmin' && <div className={stateV && stateV === 'verified' ? 'green' : stateV === 'unVerified' ? 'orange' : 'red'}></div>}
       </td>
       <td>
-        {(verified === 'suspended' || verified === 'unVerified') && ROLES[role] !== 'Súper admin' && <MdVerified className='icon Verified' onClick={handleSuspent} />}
-      </td>
-      <td>
-        {verified !== 'iconSuspended' && ROLES[role] !== 'Súper admin' && <FiUserX className='icon Action' onClick={handleSuspent} />}
-      </td>
-      <td colSpan={2}>
-        {ROLES[role] !== 'Súper admin' && <AiFillDelete className='icon delete' onClick={deleteUserId} />}
+        {(verified === 'suspended' || verified === 'unVerified') && ROLES[role] !== 'Súper admin'
+          ? <MdVerified className='icon Verified' onClick={handleSuspent} />
+          : ROLES[role] !== 'Súper admin' && <FiUserMinus className='iconAction' onClick={handleSuspent} />
+        }
       </td>
     </tr>);
 };
