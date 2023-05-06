@@ -40,11 +40,26 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
     min-width: 50%;
     max-width: 62%;
     height: 100%;
     padding: 0 5px;
     background-color: var(--bg-primary);
+}
+
+.Card .infoCard .CardVerified{
+  position: absolute;
+    top: 0px;
+    right: 10px;
+    color: var(--bg-tertiary);
+}
+
+.Card .infoCard .CardUnverified{
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    color: rgba(62, 62, 62, 0.701);
 }
 
 .Card .infoCard .placeName {
@@ -80,8 +95,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     width: 100%;
-    min-height: 25px;
-    max-height: 50px;
+    height: fit-content;
     font-size: 16px;
     font-family: var(--text);
     font-weight: 400;
@@ -91,9 +105,18 @@
     transition: 0.3s;
 }
 
-.Card .LocationGroup:hover {
+.Card .LocationGroup .Location {
+    width: 100%;
+    height: fit-content;
+    transition: 0.3s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.Card .LocationGroup .Location:hover {
    color: var(--secondary);
-   transform: scale(1.02);
+   transform: scale(1.01);
 }
 
 .Card .LocationGroup .popover-container {
