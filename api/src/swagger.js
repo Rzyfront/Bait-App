@@ -6,7 +6,11 @@ const swaggerUi = require('swagger-ui-express');
 const options = {
   definition: {
     openapi: '3.0.0',
-    info: { title: 'Bait-API', version: '1.0.0' },
+    info: {
+      title: 'Bait-API',
+      version: '1.0.0',
+      description: 'Esta es una RESTFUL API desarrolada para bait-app en ella se pueden encontrar todos lo endpoint utilizados por el frontend, hay algunos endpoints que no estan documentados deibido a la falta de tiempo y por que de momento no son utilizados por el frontend.Att:Franco Gutierrez(franco4457)',
+    },
     basePath: '/',
   },
   apis: [
