@@ -27,10 +27,10 @@ const Landing = () => {
             </div>
             <img src={ImgSlide1} alt='ImgSlide1' />
           </div>
-          <a className='Slide-Arrow' href="#Footer"><IoIosArrowDown/></a>
+          <a className='Slide-Arrow' href='#Footer'><IoIosArrowDown/></a>
         </div>
         <div id='CarrouselItem2' className='CarrouselItem'>
-          <a className='Slide-Arrow2' href="#Navbar"><IoIosArrowUp/></a>
+          <a className='Slide-Arrow2' href='#Navbar'><IoIosArrowUp/></a>
           <div className='SlideItem2'>
             <img src={ImgSlide2} alt='ImgSlide1' />
             <div className='SecondTitle'>

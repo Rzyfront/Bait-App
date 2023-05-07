@@ -21,7 +21,7 @@ const UserLocals = ({ id, name, image, location, specialty, schedule }) => {
         <h6>Horario: {schedule}</h6>
       </div>
       {<div className='state'>
-          <button onClick={userLocalNavigate}>EXAMINAR</button>
+          <button onClick={userLocalNavigate}>Ver local</button>
       </div>}
     </div>);
 };
