@@ -17,10 +17,6 @@ export default function ClaimLocal ({ closeClaimLocal, localId }) {
       const { data } = await axios.post('/locals/document', formData);
       setDocument(data.newDocument);
       setLoading(false);
-      toast.success('¡documentos cargados correctamente!', {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000
-      });
     } catch (error) {
       swal(error.response.data.message, { type: 'error' });
       setLoading(false);
