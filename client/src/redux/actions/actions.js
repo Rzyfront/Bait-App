@@ -218,7 +218,7 @@ export const getUserProfile = (id) => {
         });
       }
     } catch (error) {
-      console.log(error.message);
+      swal(`Hubo un error: ${error.message}`);
     }
   };
 };
