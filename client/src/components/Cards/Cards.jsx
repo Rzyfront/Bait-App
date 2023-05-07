@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import './Cards.css';
 import { Card, Pagination } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchByFilters } from '../../redux/actions/cards';
+import { saveFilter, saveInfoSearchHome, searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import { MdAddBusiness } from 'react-icons/md';
 
@@ -44,9 +44,15 @@ function Cards ({ toggle }) {
     setPage(data + 1);
   };
 
-  const refresh=()=>{
-    
-  }
+  const refresh = () => {
+    dispatch(saveFilter({
+      specialty: '',
+      characteristics: [],
+      order: '',
+      alphabet: ''
+    }));
+    dispatch(saveInfoSearchHome({ name: '', location: '' }));
+  };
   return (
     <div className="containerCardsall animated-element">
       <div className="ContainerCards animated-element">
@@ -91,7 +97,7 @@ function Cards ({ toggle }) {
             <div className="NoLocalsReview">
               <h3 className='Nofind'>No existe un local que coincida con la búsqueda</h3>
 
-                  <div className="AddPlace" onClick={}>
+                  <div className="AddPlace" onClick={() => refresh()}>
                     <h2 className="AddPlace_Text">Ver todos</h2> <MdAddBusiness />
                   </div>
 
