@@ -95,7 +95,13 @@ const ReviewLocal = ({ sendReview, close }) => {
     if (!Object.values(error).length) {
       const response = await dispatch(comentarie({ calificationFood, calificationQaPrice, calificationEnvironment, calificationService, inputs, id }));
       if (response === true) {
-        sendReview();
+        toast.success('¡Reseña creada correctamente esperando aprobación!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000
+        });
+        setTimeout(() => {
+          sendReview();
+        }, 2000);
       } else {
         toast.error('Error al enviar reseña', {
           position: toast.POSITION.TOP_CENTER,
