@@ -17,7 +17,6 @@ export const searchByQuery = (name, city) => {
 };
 
 export const searchByFilters = ({ page = 1, filter }) => {
-  console.log(`/locals/page/${page ?? 1}?${filter}`);
   return async (dispatch) => {
     try {
       const response = await axios.get(

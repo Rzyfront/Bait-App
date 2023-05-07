@@ -16,7 +16,6 @@ function SearchHome () {
   });
   useEffect(() => {
     if (searchName !== data) {
-      console.log('cambio');
       setData(searchName);
     }
   }, [searchName]);

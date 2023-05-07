@@ -45,7 +45,6 @@ const Filters = ({ toggle, setToggle }) => {
   }, []);
 
   useEffect(() => {
-    console.log(filters);
     dispatch(saveFilter(filters));
   }, [filters]);
 
