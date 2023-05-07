@@ -135,15 +135,15 @@ function Userprofile () {
       <div className={style.navBar}>
         <p className={style.title}>Mi perfil</p>
         <ul className={style.ul}>
-          <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser />  <span>Informacion</span></li>
-          <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar /> <span>Reseñas</span></li>
-          {user?.role === 'owner' ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> <span>Locales</span></li> : null}
-          <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
+          <li className={selectedId === 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser />  <span>Informacion</span></li>
+          <li className={selectedId === 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar /> <span>Reseñas</span></li>
+          {user?.role === 'owner' ? <li className={selectedId === 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> <span>Locales</span></li> : null}
+          <li className={selectedId === 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
           <li className={style.li} onClick={handleInicio}><BiLogOutCircle /> Salir</li>
         </ul>
       </div>
       <div className={style.menu}>
-        {selectedId == 1 && <div className={style.infoMenu}>
+        {selectedId === 1 && <div className={style.infoMenu}>
           <div className={style.resumeInfo}>
             <input
               type="file"
@@ -211,7 +211,7 @@ function Userprofile () {
           <button onClick={handlePasswordChange} className={style.saveChanges}>Cambiar Contraseña</button>
 
         </div>}
-        {selectedId == 2 &&
+        {selectedId === 2 &&
 
           <div className={style.myLocals}>
             <p className={style.titleLocal}>Ultimas reseñas</p>
@@ -245,10 +245,10 @@ function Userprofile () {
 
         </div>}
 
-        {selectedId == 3 && <div className={style.myLocals}>
+        {selectedId === 3 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Mis locales</p>
           <div className={style.localContainer}>
-            {userLocal && userLocal.map((local) => {
+            {userLocal && userLocal.map((local, index) => {
               return (
                 <UserLocals
                   id={local.id}
@@ -256,13 +256,14 @@ function Userprofile () {
                   image={local.image}
                   location={local.location}
                   specialty={local.specialty}
+                  key={index}
                 />
               );
             })}
 
           </div>
         </div>}
-        {selectedId == 4 && <div className={style.giftMenu}>
+        {selectedId === 4 && <div className={style.giftMenu}>
           <p className={style.titleLocal}>Bonificaciones</p>
           <img src="https://cdn-icons-png.flaticon.com/512/5957/5957125.png" className={style.imgGift} />
           <p className={style.titleGift}>Lamentamos informarte que las recompensas no estan activas</p>
