@@ -90,7 +90,8 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
     schedule: '',
     email: '',
     location: '',
-    specialty: ''
+    specialty: '',
+    document: ''
   });
 
   useEffect(() => {
@@ -118,8 +119,8 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
   const chekinputs = [];
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let response;
     if (!Object.values(errors).length) {
+      let response;
       if (detail) {
         response = await dispatch(updateLocalFull(inputs, detail));
         if (response.success === true) {
@@ -130,6 +131,15 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
           setTimeout(() => {
             setModalUpdate(false);
           }, 2000);
+        } else {
+          setStatesupmit(true);
+          toast.error(response.message, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000
+          });
+          setTimeout(() => {
+            setStatesupmit(false);
+          }, 5000);
         }
       } else {
         response = await dispatch(createLocalFull(inputs, chekinputs));
@@ -141,11 +151,20 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
           setTimeout(() => {
             Navigate('/home');
           }, 2000);
+        } else {
+          setStatesupmit(true);
+          toast.error(response.message, {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000
+          });
+          setTimeout(() => {
+            setStatesupmit(false);
+          }, 5000);
         }
       };
     } else {
       setStatesupmit(true);
-      toast.error(response.message, {
+      toast.error(Object.values(errors)[0], {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });
