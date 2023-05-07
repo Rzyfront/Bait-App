@@ -3,7 +3,7 @@ export const specialtyList = [
   { value: 'Argentina', label: 'Argentina' },
   { value: 'China', label: 'China' },
   { value: 'Vegana', label: 'Vegana' },
-  { value: 'Fancesa', label: 'Francesa' },
+  { value: 'Francesa', label: 'Francesa' },
   { value: 'India', label: 'India' },
   { value: 'Asiatica', label: 'Asiática' },
   { value: 'Comida Rapida', label: 'Comida Rápida' },
