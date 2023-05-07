@@ -5,10 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveFilter, saveInfoSearchHome, searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import { MdAddBusiness } from 'react-icons/md';
-
+import { useNavigate } from 'react-router-dom';
+import Login from '../Login/Login';
 function Cards ({ toggle }) {
   const { locals, totalPages } = useSelector((state) => state.cards);
-
+  const [userLogin, setUserLogin] = useState(false);
+  const dataUser = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const currentPath = window.location.pathname;
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [outAnimation, setOutAnimation] = useState(false);
@@ -44,6 +48,10 @@ function Cards ({ toggle }) {
     setPage(data + 1);
   };
 
+  const enrollSite = () => {
+    if (dataUser?.user?.name) navigate('/createplace');
+    else setUserLogin(true);
+  };
   const refresh = () => {
     dispatch(saveFilter({
       specialty: '',
@@ -55,6 +63,7 @@ function Cards ({ toggle }) {
   };
   return (
     <div className="containerCardsall animated-element">
+        {userLogin && <Login setToggleLogin={setUserLogin} />}
       <div className="ContainerCards animated-element">
         {totalPages > 0 && <Pagination totalPages={totalPages} handlePage={handlePage}/>}
           <div className='widthcards'>
@@ -96,6 +105,9 @@ function Cards ({ toggle }) {
           !locals?.length &&
             <div className="NoLocalsReview">
               <h3 className='Nofind'>No existe un local que coincida con la búsqueda</h3>
+                {currentPath.split('/').includes('writeAReview') && <div className="AddPlace" onClick={enrollSite}>
+                  <h2 className="AddPlace_Text">Inscribe el sito</h2> <MdAddBusiness />
+                </div>}
 
                   <div className="AddPlace" onClick={() => refresh()}>
                     <h2 className="AddPlace_Text">Ver todos</h2> <MdAddBusiness />
