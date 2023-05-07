@@ -53,13 +53,13 @@ function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setMod
 
   return (
     <div className='AddImgComplete'>
-      <label htmlFor="photo-upload">
-              <h5 className='Add-Img-Basic'>{image.length ? 'Agrega otra imagen' : 'Agrega almenos 3 imagenes del local'}<RiImageAddFill /></h5>
+      <label htmlFor='photo-upload'>
+              <h5 className='Add-Img-Basic'>{image.length ? 'Agrega otra imagen' : 'Agrega almenos 3 imágenes del local'}<RiImageAddFill /></h5>
             </label>
-            <label htmlFor="photo-upload" className='Label-Img-Add'>
+            <label htmlFor='photo-upload' className='Label-Img-Add'>
               <input
                 className='Basic-File'
-                id="photo-upload"
+                id='photo-upload'
                 type='file'
                 name='imagen'
                 accept='image/png,image/jpeg,image/jpg,image/gif'
@@ -83,7 +83,7 @@ function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setMod
                   )
                 : loading === true
                   ? (
-                    <Loading color="primary" className='LoadingImg' />
+                    <Loading color='primary' className='LoadingImg' />
                     )
                   : (
 
@@ -95,11 +95,11 @@ function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setMod
                 <button type='submit' className='Send-Locals'> Actualizar <IoCreate /></button>
                 <button className='Send-Locals' onClick={() => setModalUpdate(false)}> Cerrar </button>
               </>
-              : <><label htmlFor="documentInput" className='documentInput'>
+              : <><label htmlFor='documentInput' className='documentInput'>
               <h3 className='documentInputText'>Subir documentación</h3><HiOutlineDocumentArrowUp className='documentInputIcon'/>
             </label>
-            <input className='documentInputNone' id='documentInput' type="file" name="document" onChange={hanlderInputDocument} accept='application/pdf'/>
-            <button type='submit' className='Send-Locals'> Crear nuevo Local <IoCreate /></button> </>
+            <input className='documentInputNone' id='documentInput' type='file' name='document' onChange={hanlderInputDocument} accept='application/pdf'/>
+            <button type='submit' className='Send-Locals'> Crear nuevo local <IoCreate /></button> </>
             }
     </div>
   );

@@ -5,10 +5,10 @@ export const ErrorsDatabasic = (contenido) => {
     error.name = 'Nombre muy grande';
   }
   if (contenido.name === '') {
-    error.name = 'no tiene nombre';
+    error.name = 'Falta un nombre';
   }
   if (JSON.stringify(contenido.location) === '{}') {
-    error.location = 'selecciona punto';
+    error.location = 'Selecciona un punto';
   }
   // limit argentina create locals
   if (JSON.stringify(contenido.location) !== '{}' &&
