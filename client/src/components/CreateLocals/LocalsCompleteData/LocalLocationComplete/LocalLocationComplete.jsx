@@ -5,14 +5,14 @@ import { PopComent } from '../../../components';
 function LocalLocationComplete ({ inputs, handleChange, handleMap, mapSearch, Mapcenter, statemap, handleBoton, handlemapdatas, searchCity, statesupmit, errors }) {
   return (
     <div className='LocationCompleteContainer'>
-         <input type="text"
+         <input type='text'
                 name='address'
-                placeholder='Direccion'
+                placeholder='Dirección'
                 className='Input-C-L Direction-Complete'
                 onChange={handleChange}
                 value={inputs.address}
           />
-          <input type="text"
+          <input type='text'
                  name='location'
                  placeholder='Ciudad'
                  className='Input-C-L City-Complete-Location'

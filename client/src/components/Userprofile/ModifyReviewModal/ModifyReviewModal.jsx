@@ -1,6 +1,6 @@
-import "./modifyReviewModal.css"
-const ModifyReviewModal = ({ closeReviewModal })=>{
-    return (
+import './modifyReviewModal.css';
+const ModifyReviewModal = ({ closeReviewModal }) => {
+  return (
         <div className="modalBackground">
             <div className="modalContainer">
                 <div className="closeBtnContainer" >
@@ -18,17 +18,15 @@ const ModifyReviewModal = ({ closeReviewModal })=>{
                     </form>
                 </div>
 
-                
                 <div className="footer">
                     <button>Regresar</button>
-                    
+
                 </div>
 
             </div>
 
         </div>
-    )
-   
-}
+  );
+};
 
-export default ModifyReviewModal
+export default ModifyReviewModal;
