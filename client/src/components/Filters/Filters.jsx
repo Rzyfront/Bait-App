@@ -4,25 +4,21 @@ import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
 import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import FilterGroup from './FilterGroup/FilterGroup';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { path } from '../../helpers/path';
-import { useDispatch, useSelector } from 'react-redux';
-import { saveInfoSearchHome } from '../../redux/actions/cards';
+import { useDispatch } from 'react-redux';
+import { saveFilter, saveInfoSearchHome } from '../../redux/actions/cards';
 
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = ({ toggle, setToggle }) => {
-  const { city } = useSelector((state) => state.ubication);
   const dispatch = useDispatch();
   const [toggleFilterModal, setToggleFilterModal] = useState(false);
-  const navigate = useNavigate();
-  const { searchName, ubication } = useSelector((state) => state);
   const initialFilter = {
     specialty: '',
     characteristics: [],
-    rating: '',
+    order: '',
     alphabet: ''
   };
   const [filters, setFilters] = useState(initialFilter);
@@ -49,29 +45,24 @@ const Filters = ({ toggle, setToggle }) => {
   }, []);
 
   useEffect(() => {
-    navigate(path(1, searchName.input, searchName.map, filters));
+    console.log(filters);
+    dispatch(saveFilter(filters));
   }, [filters]);
-
-  useEffect(() => {
-    setFilters(initialFilter);
-    navigate(path(1, searchName.input, searchName.map, initialFilter));
-    setSelectedOptions([]);
-  }, [searchName, ubication]);
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
-    if (name === 'rating') {
+    if (name === 'order') {
       setFilters({ ...filters, alphabet: '', [name]: value });
     } else if (name === 'alphabet') {
-      setFilters({ ...filters, rating: '', [name]: value });
+      setFilters({ ...filters, order: '', [name]: value });
     } else { setFilters({ ...filters, [name]: value }); };
   };
 
   const onRefresh = () => {
     setFilters(initialFilter);
     setSelectedOptions([]);
-    dispatch(saveInfoSearchHome({ input: '', map: city }));
-    // navigate(path(1, searchName, ubication.city, initialFilter));
+    dispatch(saveFilter(initialFilter));
+    dispatch(saveInfoSearchHome({ name: '', location: '' }));
   };
 
   const handleMultiSelectChange = (selectedOptions) => {

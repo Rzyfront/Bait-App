@@ -14,7 +14,6 @@ const Navbar = () => {
   const dataUser = useSelector((state) => state.user);
   const [toggleMenuUser, setToggleMenuUser] = useState(false);
   const [toogleLogin, setToggleLogin] = useState(false);
-  const ubication = useSelector((state) => state.ubication);
 
   const close = () => {
     localStorage.clear();
@@ -24,7 +23,7 @@ const Navbar = () => {
   return (
     <div id='Navbar' className="all_navbar animated-element">
       {toogleLogin && <Login setToggleLogin={setToggleLogin} />}
-      <Link to={`/home/1?name=&city=${ubication.city}`}>
+      <Link to={'/home'}>
         <img
           src={BaitLogo}
           alt="Bait"
