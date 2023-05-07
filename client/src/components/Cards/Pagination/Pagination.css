@@ -5,6 +5,8 @@
     align-items: center;
     margin-bottom: 2rem;
     gap: 5px;
+    margin-top: 15px;
+
 }
 
 .Pagination .page-num {
@@ -12,6 +14,7 @@
     cursor: pointer;
     border-radius: 3px;
     font-weight: 400;
+    background-color: rgba(66, 66, 66, 0.055);
 
 }
 
