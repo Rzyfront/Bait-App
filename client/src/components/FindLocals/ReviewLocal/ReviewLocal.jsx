@@ -2,6 +2,7 @@ import style from '../FindLocals.module.css';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import { Loading } from '@nextui-org/react';
 import { AiFillStar } from 'react-icons/ai';
+import { RiImageAddFill } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go';
 import { useEffect, useState } from 'react';
 import { useUploadImage } from '../../../hooks/useUploadImage';
@@ -162,14 +163,14 @@ const ReviewLocal = ({ sendReview, close }) => {
               </div>
               <div>
                 <div className={style.fileSelect}>
-                  <input type="file" className={style.srcFile1} onChange={handleChangeimage}/>
+                  <input id='inputImgReview' type="file" className={style.srcFile1} onChange={handleChangeimage}/>
                 </div>
               </div>
-              <div>
+              <label htmlFor='inputImgReview'>
                 <div className={style.imgUpload}>
-                    {loading === true ? <Loading color="primary" className={style.img} /> : JSON.stringify(inputs.image) !== '{}' ? <img src={inputs.image.url} className={style.img} /> : <img className={style.img} src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png" />}
+                    {loading === true ? <Loading color="primary" className={style.img} /> : JSON.stringify(inputs.image) !== '{}' ? <img src={inputs.image.url} className={style.img} /> : <RiImageAddFill className={style.ImgUploadIco} />}
                 </div>
-              </div>
+              </label>
               <div>
                   <input name="review" className={style.inputForm} onChange={handleData} value={inputs.review} />
                 <label htmlFor="reseña" className={style.placeholder}>

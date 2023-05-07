@@ -9,6 +9,7 @@
     font-size: 3em;
     margin-top: 30px;
     padding: 0px 50px;
+    cursor: pointer;
 }
 
 .inputContainer {
@@ -142,6 +143,7 @@
     outline: 1px solid rgba(190, 190, 190, 0.447);
     z-index: 10;
     position: relative;
+    
 }
 
 .inputForm:focus {
@@ -175,6 +177,7 @@
     z-index: 300;
     transform: scale(.75) translateY(-25px) translateX(-10px);
     color: rgb(85, 85, 85);
+    cursor: pointer;
 }
 
 .ratingStar {
@@ -197,6 +200,7 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
+    cursor: pointer;
 }
 
 .textRating {
@@ -205,6 +209,7 @@
     margin-left: 5%;
     color: grey;
     font-size: .80em;
+    cursor: pointer;
 }
 
 /* INPUT FILEEE */
@@ -213,6 +218,7 @@
     position: relative;
     display: inline-block;
     width: 350px;
+    cursor: pointer;
 }
 
 .fileSelect::before {
@@ -229,12 +235,14 @@
     right: 0;
     top: 0;
     bottom: 0;
+    cursor: pointer;
 }
 
 .fileSelect2 {
     position: relative;
     display: inline-block;
     width: 350px;
+    cursor: pointer;
 }
 
 .fileSelect2::before {
@@ -251,6 +259,7 @@
     right: 0;
     top: 0;
     bottom: 0;
+    cursor: pointer;
 }
 
 .fileSelect2 input[type="file"] {
@@ -258,6 +267,7 @@
     width: 350px;
     height: 32px;
     display: inline-block;
+    cursor: pointer;
 }
 
 .fileSelect input[type="file"] {
@@ -265,11 +275,55 @@
     width: 350px;
     height: 32px;
     display: inline-block;
+    cursor: pointer;
 }
 
 .img {
-    width: 150px;
+    width: 70%;
+    border-radius: 10px;
     height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.tiketImg {
+    width: 70%;
+    border-radius: 10px;
+    height: 150px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.imgUpload{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    cursor: pointer;
+}
+
+.tikedUpload{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    cursor: pointer;
+}
+
+.ImgUploadIco{
+    font-size: 10rem;
+    cursor: pointer;
+}
+
+.labelInputTiket{
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 .sendReview {
@@ -281,6 +335,7 @@
     color: white;
     font-weight: 600;
     font-size: 1.2em;
+    cursor: pointer;
 }
 
 .btnVolver {
@@ -294,4 +349,5 @@
     /* align-items: center; */
     border-radius: 3px;
     border: 0;
+    cursor: pointer;
 }
