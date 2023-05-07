@@ -8,7 +8,7 @@ export const specialtyList = [
   { value: 'Asiatica', label: 'Asiática' },
   { value: 'Comida Rapida', label: 'Comida Rápida' },
   { value: 'Parilla', label: 'Parilla' },
-  { value: 'Italiana', label: 'Iataliana' }
+  { value: 'Italiana', label: 'Italiana' }
 ];
 export const restaurantTypeList = [
   { value: 'Joven', label: 'Joven' },
