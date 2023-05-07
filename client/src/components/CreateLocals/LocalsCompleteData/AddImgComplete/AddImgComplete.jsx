@@ -6,11 +6,13 @@ import { Loading } from '@nextui-org/react';
 import { useUploadImage } from '../../../../hooks/useUploadImage';
 import Slider from 'react-slick';
 import { HiOutlineDocumentArrowUp } from 'react-icons/hi2';
+import { GrDocumentVerified } from 'react-icons/gr';
 import axios from 'axios';
 import swal from 'sweetalert';
 
 function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setModalUpdate }) {
   const { image, loading, handleChangeimage } = useUploadImage();
+  const [loadingDoc, setLoadingDoc] = useState(false);
   const [document, setDocument] = useState({});
   useEffect(() => {
     if (image.length) {
@@ -34,12 +36,15 @@ function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setMod
 
   const hanlderInputDocument = async (e) => {
     try {
+      setLoadingDoc(true);
       const formData = new FormData();
       formData.append('document', e.target.files[0]);
       const { data } = await axios.post('/locals/document', formData);
       setDocument(data.newDocument);
+      setLoadingDoc(false);
     } catch (error) {
       swal(error.response.data.message, { type: 'error' });
+      setLoadingDoc(false);
     }
   };
 
@@ -96,10 +101,16 @@ function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setMod
                 <button className='Send-Locals' onClick={() => setModalUpdate(false)}> Cerrar </button>
               </>
               : <><label htmlFor='documentInput' className='documentInput'>
-              <h3 className='documentInputText'>Subir documentación</h3><HiOutlineDocumentArrowUp className='documentInputIcon'/>
-            </label>
-            <input className='documentInputNone' id='documentInput' type='file' name='document' onChange={hanlderInputDocument} accept='application/pdf'/>
-            <button type='submit' className='Send-Locals'> Crear nuevo local <IoCreate /></button> </>
+                    {loadingDoc === true
+                      ? <Loading color="primary" />
+                      : document && document.archive
+                        ? <h3 className='documentInputText'>Carga exitosa <GrDocumentVerified className='documentInputIcon' /></h3>
+                        : <h3 className='documentInputText'>Subir documentación <HiOutlineDocumentArrowUp className='documentInputIcon' /></h3>
+                    }
+                  </label>
+                  <input className='documentInputNone' id='documentInput' type='file' name='document' onChange={hanlderInputDocument} accept='application/pdf'/>
+                  <button type='submit' className='Send-Locals'> Crear nuevo local <IoCreate /></button>
+                </>
             }
     </div>
   );
