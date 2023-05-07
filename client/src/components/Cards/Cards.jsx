@@ -1,22 +1,29 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import './Cards.css';
 import { Card, Pagination } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchByFilters } from '../../redux/actions/cards';
+import { searchByFilters, saveFilter, saveInfoSearchHome } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
 import { MdAddBusiness } from 'react-icons/md';
 
 function Cards ({ toggle }) {
   const { locals, totalPages } = useSelector((state) => state.cards);
-
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
   const [outAnimation, setOutAnimation] = useState(false);
-  const ubication = useSelector((state) => state.ubication);
 
   const { filters, searchName } = useSelector((state) => state);
   // APLICATION FILTER
+  const handleRefresh = () => {
+    dispatch(saveFilter({
+      specialty: '',
+      characteristics: [],
+      order: '',
+      alphabet: ''
+    }));
+    dispatch(saveInfoSearchHome({ name: '', location: '' }));
+  };
+
   useEffect(() => {
     let allFilter = '';
     if (filters && searchName) {
@@ -89,11 +96,9 @@ function Cards ({ toggle }) {
             <div className="NoLocalsReview">
               <h3 className='Nofind'>No existe un local que coincida con la búsqueda</h3>
 
-                <Link to={`/home/1?name=&city=${ubication.city}`}>
-                  <div className="AddPlace">
+                  <div className="AddPlace" onClick={() => handleRefresh()}>
                     <h2 className="AddPlace_Text">Ver todos</h2> <MdAddBusiness />
                   </div>
-                </Link>
 
         </div>
         }
