@@ -62,7 +62,7 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
         <h4 className='Info-Local-Location'><GoLocation className='locationico'/>  {address || location}</h4>
         <div className='Info-Rating-Group'>
           <h4 className='Info-Rating' title={`Rating promedio ${rating || 0}`}>Calificación: <RatingStar readOnly style={{ maxWidth: 150 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h4>
-          <h4 className='Info-Rating-Number'>{rating.toFixed(1)}</h4>
+          <h4 className='Info-Rating-Number'>{rating && rating.toFixed(1)}</h4>
         </div>
         <div className='Info-Caracteristic-Group'>
            {trueProperties.length ? <h5 className='Info-C-Title'>Características:</h5> : ''}

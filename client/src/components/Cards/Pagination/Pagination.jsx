@@ -6,14 +6,16 @@ function Pagination ({ handlePage }) {
   const { filters, searchName } = useSelector((state) => state);
   const { totalPages } = useSelector((state) => state.cards);
   const [activePage, setActivePage] = useState(0);
-
+  const [limit, setLimit] = useState(1);
   const handlePageClick = (event) => {
     setActivePage(event.selected);
     handlePage(event.selected);
+    setLimit(Event.selected + 1);
   };
 
   useEffect(() => {
     setActivePage(0);
+    setLimit(1);
     handlePage(activePage);
   }, [filters, searchName]);
 
@@ -23,7 +25,8 @@ function Pagination ({ handlePage }) {
         breakLabel="..."
         nextLabel="next >"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={3}
+        marginPagesDisplayed={limit}
+        pageRangeDisplayed={4} // Limita a 5 números de página
         pageCount={totalPages}
         previousLabel="< previous"
         renderOnZeroPageCount={null}

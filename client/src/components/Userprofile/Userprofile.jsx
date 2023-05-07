@@ -17,15 +17,15 @@ import { FiUser, FiGift } from 'react-icons/fi';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';  
+import swal from 'sweetalert';
 import ChangePassword from './ChangePassword/ChangePassword';
 
 import UserLocals from './UserLocals';
 
 const defaultImg = 'https://www.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg';
 
-function Userprofile() {
-  const { image,  handleChangeimage } = useUploadImage();
+function Userprofile () {
+  const { image, handleChangeimage } = useUploadImage();
 
   const [userData, setUserData] = useState({
     name: '',
@@ -73,13 +73,8 @@ function Userprofile() {
   }, [user, image]);
 
   useEffect(() => {
-    
     setUserLocal(obtainUserLocal?.user?.Locals);
-
-    
   }, [obtainUserLocal]);
-
-  
 
   const handleChangeimages = (event) => {
     handleChangeimage(event);
@@ -108,7 +103,7 @@ function Userprofile() {
   };
 
   const handleInicio = () => {
-    navigate('/home/1?name=&city=');
+    navigate('/home');
   };
 
   const handleChange = (event) => {
@@ -116,10 +111,10 @@ function Userprofile() {
     const value = event.target.value;
 
     const handleSave = () => {
-      dispatch(updateUser(userData))
-      swal(`Usuario Actualizado Exitosamente `)
-      window.location.reload(false)
-    }
+      dispatch(updateUser(userData));
+      swal('Usuario Actualizado Exitosamente ');
+      window.location.reload(false);
+    };
     setUserData({
       ...userData,
       [property]: value
@@ -132,32 +127,30 @@ function Userprofile() {
   };
 
   const handlePasswordChange = () => {
-    setPasswordChange(!passwordChange)
-  }
-
-
+    setPasswordChange(!passwordChange);
+  };
 
   return (
     <div className={style.profileContainer}>
       <div className={style.navBar}>
         <p className={style.title}>Mi perfil</p>
         <ul className={style.ul}>
-          <li className={selectedId == 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser />  <span>Informacion</span></li>
-          <li className={selectedId == 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar /> <span>Reseñas</span></li>
-          {user?.role === 'owner' ? <li className={selectedId == 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> <span>Locales</span></li> : null}
-          <li className={selectedId == 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
+          <li className={selectedId === 1 ? style.liSelected : style.li} onClick={() => setSelectedId(1)}><FiUser />  <span>Informacion</span></li>
+          <li className={selectedId === 2 ? style.liSelected : style.li} onClick={() => setSelectedId(2)}><AiOutlineStar /> <span>Reseñas</span></li>
+          {user?.role === 'owner' ? <li className={selectedId === 3 ? style.liSelected : style.li} onClick={() => setSelectedId(3)}><BiRestaurant /> <span>Locales</span></li> : null}
+          <li className={selectedId === 4 ? style.liSelected : style.li} onClick={() => setSelectedId(4)}><FiGift /> <span>Bonificaciones</span></li>
           <li className={style.li} onClick={handleInicio}><BiLogOutCircle /> Salir</li>
         </ul>
       </div>
       <div className={style.menu}>
-        {selectedId == 1 && <div className={style.infoMenu}>
+        {selectedId === 1 && <div className={style.infoMenu}>
           <div className={style.resumeInfo}>
             <input
               type="file"
               name="file"
               className={style.inputFile}
               onChange={handleChangeimages} />
-            <img  src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image"  />
+            <img src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image" />
             <div>
               <p className={style.name}>{user && user.name}</p>
               <p className={style.email}>{user && user.email}</p>
@@ -217,9 +210,8 @@ function Userprofile() {
           <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
           <button onClick={handlePasswordChange} className={style.saveChanges}>Cambiar Contraseña</button>
 
-
         </div>}
-        {selectedId == 2 &&
+        {selectedId === 2 &&
 
           <div className={style.myLocals}>
             <p className={style.titleLocal}>Ultimas reseñas</p>
@@ -242,22 +234,21 @@ function Userprofile() {
                       <p className={style.dateReview}>04/12/2023</p>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                      <button className={style.deleteReview} id={rev.id} onClick={() => { handleDeleteReview(rev.id)}}>Eliminar</button>
+                      <button className={style.deleteReview} id={rev.id} onClick={() => { handleDeleteReview(rev.id); }}>Eliminar</button>
                     </div>
                   </div>
-                  
+
                 </div>
-              )
-                })
+              );
+            })
               }
-            
+
         </div>}
 
-
-        {selectedId == 3 && <div className={style.myLocals}>
+        {selectedId === 3 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Mis locales</p>
           <div className={style.localContainer}>
-            {userLocal && userLocal.map((local) => {
+            {userLocal && userLocal.map((local, index) => {
               return (
                 <UserLocals
                   id={local.id}
@@ -265,13 +256,14 @@ function Userprofile() {
                   image={local.image}
                   location={local.location}
                   specialty={local.specialty}
+                  key={index}
                 />
-              )
+              );
             })}
-            
+
           </div>
         </div>}
-        {selectedId == 4 && <div className={style.giftMenu}>
+        {selectedId === 4 && <div className={style.giftMenu}>
           <p className={style.titleLocal}>Bonificaciones</p>
           <img src="https://cdn-icons-png.flaticon.com/512/5957/5957125.png" className={style.imgGift} />
           <p className={style.titleGift}>Lamentamos informarte que las recompensas no estan activas</p>
@@ -280,6 +272,7 @@ function Userprofile() {
       </div>
     </div>
 
-  )}
+  );
+}
 
-  export default Userprofile
+export default Userprofile;
