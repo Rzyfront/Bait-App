@@ -4,7 +4,7 @@ import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
 import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import FilterGroup from './FilterGroup/FilterGroup';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
