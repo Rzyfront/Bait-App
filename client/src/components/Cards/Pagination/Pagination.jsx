@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import './Pagination.css';
 import { useSelector } from 'react-redux';
+import { FcPrevious, FcNext } from 'react-icons/fc';
 function Pagination ({ handlePage }) {
   const { filters, searchName } = useSelector((state) => state);
   const { totalPages } = useSelector((state) => state.cards);
@@ -23,17 +24,17 @@ function Pagination ({ handlePage }) {
     <>
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel={activePage !== totalPages - 1 ? <FcNext className='page-icon' /> : null}
         onPageChange={handlePageClick}
         marginPagesDisplayed={limit}
         pageRangeDisplayed={4} // Limita a 5 números de página
         pageCount={totalPages}
-        previousLabel="< previous"
+        previousLabel={activePage !== 0 ? <FcPrevious className='page-icon'/> : null}
         renderOnZeroPageCount={null}
         containerClassName='Pagination'
         pageLinkClassName='page-num'
-        previousLinkClassName='page-num'
-        nextLinkClassName='page-num'
+        previousLinkClassName={activePage !== 0 ? 'page-icon' : null}
+        nextLinkClassName={activePage !== totalPages - 1 ? 'page-icon' : null}
         activeLinkClassName='active'
         forcePage={activePage}
       />

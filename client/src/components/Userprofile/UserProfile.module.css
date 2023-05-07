@@ -316,23 +316,22 @@ list-style: none;
 }
 
 .localContainer{
-    /* background-color: red; */
-    width: 60vw;
-    margin-left: 11vw;
-    margin-top: 13vh;
-    height: 60vh;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    grid-template-rows: 200px;
-    grid-template-columns: 200px;
+    justify-content: space-evenly;
+    margin-top: 2rem;
 }
 
-.local{
-    border-radius: 20px;
-    width: 200px;
-    height: 200px;
-    background-color: blue;
+.userLocalsTable {
+    text-align: center;
+}
+
+.userLocalsTable thead{
+    background-color: var(--bg-secondary);
+    color: #fff;
+}
+
+.userLocalsTable th{
+    padding: 0.7rem;
 }
 
 /* REVIEWS */

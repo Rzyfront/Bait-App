@@ -248,8 +248,6 @@ function Userprofile () {
                   id={local.id}
                   name={local.name}
                   image={local.image}
-                  location={local.location}
-                  specialty={local.specialty}
                   key={index}
                 />
               );
