@@ -14,7 +14,6 @@ import {
   MenuForm,
   FindLocals
 } from './components/components.js';
-import HomeReview from './components/HomeReview/HomeReview';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { checkUser } from './redux/actions/actions';
@@ -49,10 +48,9 @@ function App () {
   return (
     <div className='App animated-element'>
       <Routes>
-        <Route path='/home/:id' element={<Home />} />
-        <Route path='/writeAReview/:id' element={<HomeReview />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/writeAReview' element={<Home/>} />
         <Route path='/profile/:id' element={<Profile />} />
-        {/* <Route path='/userprofile' element={<Userprofile />} /> */}
         <Route path='/createplace' element={<CreateLocals />} />
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />

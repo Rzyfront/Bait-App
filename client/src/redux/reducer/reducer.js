@@ -22,7 +22,8 @@ import {
 import {
   SEARCH_BY_QUERY,
   SEARCH_BY_FILTERS,
-  SAVE_SEARCH_HOME
+  SAVE_SEARCH_HOME,
+  SAVE_FILTER_HOME
 } from '../actions/cards';
 import { DETAIL, CLEAN_DETAIL, SUCCESS, ERROR } from '../actions/local';
 import { FOCO, UBICATIONDATA } from '../actions/ubication';
@@ -45,7 +46,7 @@ const initialState = {
   newMenu: {},
   reset: [],
   reviews: [],
-  searchName: { input: '', map: '' },
+  searchName: { name: '', location: '' },
   success: null,
   successDel: null,
   successDish: null,
@@ -63,7 +64,13 @@ const initialState = {
   adminLocals: {},
   userProfile: [],
   userDashLocals: {},
-  localsToVerify: []
+  localsToVerify: [],
+  filters: {
+    specialty: '',
+    characteristics: [],
+    order: '',
+    alphabet: ''
+  }
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -226,6 +233,11 @@ const rootReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         localsToVerify: payload
+      };
+    case SAVE_FILTER_HOME:
+      return {
+        ...state,
+        filters: payload
       };
     default:
       return { ...state };

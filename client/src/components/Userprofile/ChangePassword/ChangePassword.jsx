@@ -27,7 +27,7 @@ const ChangePassword = ({ id }) => {
         });
 
       if (response.data.success) {
-        alert('Contraseña cambiada con exito');
+        alert('Contraseña actualizada con éxito');
       }
     } catch (error) {
       alert(`Hubo Un error ${error.message}`);

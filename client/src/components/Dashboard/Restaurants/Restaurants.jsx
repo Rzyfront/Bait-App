@@ -70,31 +70,32 @@ const Restaurantes = () => {
 
   return (
     <div className='restaurants-container'>
-      <div className='restaurants-title-bar'>
+      <header className='restaurants-title-bar'>
         <h2 className={style.nameSection}>Locales</h2>
-        <div className='filter-restaurants-group'>
+        <article className='filter-restaurants-group'>
           <button onClick={handleShowDocs} className='dash-res-button' title='Ver documentación'>{
             !changeTable
               ? <AiOutlineFileSearch />
-              : <AiFillFileExcel />}</button>
-        <select
-          onChange={handleSelect}
-          value={filter.verified}
-          defaultValue=''
-        >
-          <option value='' disabled selected>Estado</option>
-          <option value='' >Todos</option>
-          <option value='unVerified' >No verificados</option>
-          <option value='verified' >Verificados</option>
-          <option value='archived' >Archivados</option>
-        </select >
+              : <AiFillFileExcel />}
+          </button>
+          <select
+            onChange={handleSelect}
+            value={filter.verified}
+            defaultValue=''
+          >
+            <option value='' disabled selected>Estado</option>
+            <option value='' >Todos</option>
+            <option value='unVerified' >No verificados</option>
+            <option value='verified' >Verificados</option>
+            <option value='archived' >Archivados</option>
+          </select >
 
-        <input placeholder='Nombre del local' className='search-res-input' value={filter.name} onChange={handleFilter} name='name'></input>
+          <input placeholder='Nombre del local' className='search-res-input' value={filter.name} onChange={handleFilter} name='name'/>
 
-        <input placeholder='Ciudad' className='search-res-input' onChange={handleFilter} name='location'></input>
-        </div>
-      </div>
-      <div className='table-responsive'>
+          <input placeholder='Ciudad' className='search-res-input' onChange={handleFilter} name='location'/>
+        </article>
+      </header>
+      <main className='table-responsive'>
         <table className='table'>
           <thead className='thead-restaurants'>
             {
@@ -131,7 +132,7 @@ const Restaurantes = () => {
             {!changeTable ? !locals?.length && <td colSpan='4'>No hay resultados</td> : !localsToVerify?.length && <td colSpan='5'>No hay documentos para revisar.</td>}
           </tbody>
         </table>
-      </div>
+      </main>
       <Pagination paginade={paginade} page={filter.page} totalPages={totalPages} />
       <ToastContainer/>
     </div>

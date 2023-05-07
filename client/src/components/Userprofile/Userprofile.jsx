@@ -134,7 +134,7 @@ function Userprofile () {
   };
 
   const handleInicio = () => {
-    navigate('/home/1?name=&city=');
+    navigate('/home');
   };
 
   const handleChange = (event) => {
@@ -155,6 +155,10 @@ function Userprofile () {
   const handleSave = () => {
     dispatch(updateUser(userData));
     swal('Usuario Actualizado Exitosamente ');
+  };
+
+  const handlePasswordChange = () => {
+    setPasswordChange(!passwordChange);
   };
 
   return (
@@ -187,7 +191,7 @@ function Userprofile () {
           <div className={style.form}>
             <div className={style.formLeft}>
               <div className={style.input}>
-                { edit ? <input onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />:<input readOnly onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />}
+                { edit ? <input onChange={handleChange} name="name" className={style.inputForm} value={userData.name} /> : <input readOnly onChange={handleChange} name="name" className={style.inputForm} value={userData.name} />}
                 <label htmlFor="name" className={style.placeholder}>
                   Nombre
                 </label>
@@ -228,7 +232,7 @@ function Userprofile () {
               <div className={style.input}>
                 {edit ? <input name="phone_number" className={style.inputForm} value={userData.phone_number} onChange={handleChange} /> : <input name="phone_number" readOnly className={style.inputForm} value={userData.phone_number} onChange={handleChange} /> }
                 <label htmlFor="phone_number" className={style.placeholder}>
-                  Telefono
+                  Teléfono
                 </label>
               </div>
               <div className={style.input}>
@@ -237,12 +241,12 @@ function Userprofile () {
                   Nueva contraseña
                 </label>
               </div>
-
             </div>
           </div>
           <div className={style.buttonContainer}>
-          {edit ? <button onClick={() => setEdit(!edit)} className={style.editChanges}>Guardar</button> : 
-          <button onClick={() => setEdit(!edit)} className={style.saveChanges}>Editar</button>}
+          {edit
+            ? <button onClick={() => {setEdit(!edit); handleSavePassword()}} className={style.editChanges}>Guardar</button>
+            : <button onClick={() => setEdit(!edit)} className={style.saveChanges}>Editar</button>}
           </div>
         </div>}
         {selectedId === 2 && <div className={style.myLocals}>
@@ -339,18 +343,20 @@ function Userprofile () {
               }
 
         </div>}
-        {selectedId === 3 && <div className={style.myLocals}>
+
+        {selectedId == 3 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Mis locales</p>
           <div className={style.localContainer}>
-            {userLocal && userLocal.map((local) => {
+            {userLocal && userLocal.map((local, index) => {
               return (
                 <UserLocals
-                  key={local.id}
+                  // key={local.id}
                   id={local.id}
                   name={local.name}
                   image={local.image}
                   location={local.location}
                   specialty={local.specialty}
+                  key={index}
                 />
               );
             })}
@@ -360,7 +366,7 @@ function Userprofile () {
         {selectedId === 4 && <div className={style.giftMenu}>
           <p className={style.titleLocal}>Bonificaciones</p>
           <img src="https://cdn-icons-png.flaticon.com/512/5957/5957125.png" className={style.imgGift} />
-          <p className={style.titleGift}>Lamentamos informarte que las recompensas no estan activas</p>
+          <p className={style.titleGift}>Lamentamos informarte que las recompensas no están activas</p>
         </div>
         }
       </div>

@@ -1,57 +1,54 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useParams, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Cards.css';
 import { Card, Pagination } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
 import { searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
-import eliminarTildes from '../../hooks/eliminarTildes.';
 import { MdAddBusiness } from 'react-icons/md';
 
 function Cards ({ toggle }) {
-  const location = useLocation();
   const { locals, totalPages } = useSelector((state) => state.cards);
-  const pagine = useParams();
+
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [specialty, setSpecialty] = useState('');
-  const [order, setOrder] = useState('');
-  const [characteristics, setCharacteristics] = useState([]);
   const [page, setPage] = useState(1);
   const [outAnimation, setOutAnimation] = useState(false);
   const ubication = useSelector((state) => state.ubication);
 
+  const { filters, searchName } = useSelector((state) => state);
+  // APLICATION FILTER
   useEffect(() => {
-    setPage(pagine.id);
-  }, [pagine]);
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    setName(queryParams.get('name') || '');
-    // setCity(queryParams.get('city') || 'buenos aires');
-    setCity(queryParams.get('city') || '');
-    setSpecialty(queryParams.get('specialty') || '');
-    setOrder(queryParams.get('order') || '');
-
-    const characteristicsArr = [];
-    queryParams.forEach((value, key) => {
-      if (key === 'characteristics[]') {
-        characteristicsArr.push(value);
+    let allFilter = '';
+    if (filters && searchName) {
+      for (const property in searchName) {
+        if (searchName[property] !== '') {
+          const data = (`${property}=${searchName[property]}&`);
+          allFilter = allFilter + data;
+        }
       }
-    });
-    setCharacteristics(characteristicsArr);
-  }, [location]);
-
-  useEffect(() => {
-    const ciudad = eliminarTildes(city);
-    dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
-  }, [name, city, specialty, order, characteristics, page]);
-
+      for (const property in filters) {
+        if (property !== 'characteristics' && filters[property] !== '') {
+          const data = (`${property}=${filters[property]}&`);
+          allFilter = allFilter + data;
+        }
+        if (property === 'characteristics' && filters[property].length) {
+          const objetnew = {};
+          filters[property].forEach(data => {
+            objetnew[data] = true;
+          });
+          allFilter = allFilter + (`${property}=${JSON.stringify(objetnew)}&`);
+        }
+      }
+    }
+    dispatch(searchByFilters({ page, filter: allFilter }));
+  }, [filters, searchName, page]);
+  const handlePage = (data) => {
+    setPage(data + 1);
+  };
   return (
     <div className="containerCardsall animated-element">
       <div className="ContainerCards animated-element">
-      {totalPages ? <Pagination totalPages={totalPages} filters={{ name, city, specialty, order, characteristics, page }} /> : ''}
+        {totalPages > 0 && <Pagination totalPages={totalPages} handlePage={handlePage}/>}
           <div className='widthcards'>
         {locals &&
           locals.map(

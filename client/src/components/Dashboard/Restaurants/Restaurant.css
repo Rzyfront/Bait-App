@@ -1,9 +1,53 @@
 .restaurants-container {
     overflow: auto;
+    height: 100vh;
+    width: 100%;
+    margin: 2rem auto;
 }
-.state {
-    width: 30%;
+/* HEADER */
+
+.restaurants-title-bar {
+    display: flex;
+    margin: auto 2.3rem;
+    justify-content: space-between;
+    color: var(--primary);
+}
+
+.filter-restaurants-group {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-restaurants-group select {
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-bottom: 2px solid var(--bg-secondary);
+    background-color: transparent;
+}
+
+.filter-restaurants-group input {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid var(--optional1);
+    box-shadow: none;
+    font-size: 1rem;
+    font-family: var(--subtitle);
+    background: var(--bg-primary);
+    font-weight: 400;
+
+}
+
+.search-res-input input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.search_home .searchs .icosearch {
+    transition: 0.3s;
     margin: auto;
+    width: 10%;
 }
 
 .userAdd {
@@ -38,11 +82,7 @@
     color: var(--btn-primary);
 }
 
-.restaurants-container {
-    height: 100vh;
-    width: 100%;
-    margin: 2rem auto;
-}
+/* TABLE */
 
 .table-responsive {
     margin: 2.5rem 2.7rem;
@@ -79,50 +119,9 @@
 
 .table tbody tr:hover {
     background-color: var(--bg-opac);
+    cursor: default;
 }
 
-.restaurants-title-bar{
-    display: flex;
-    margin: auto 2.3rem;
-    justify-content: space-between;
-    color: var(--primary);
-}
-
-.filter-restaurants-group {
-    display: flex;
-    gap: 10px;
-}
-
-.filter-restaurants-group select {
-    padding: 10px;
-    border: none;
-    outline: none;
-    border-bottom: 2px solid var(--bg-secondary);
-    background-color: transparent;
-}
-.filter-restaurants-group input {
-    text-decoration: none;
-    outline: none;
-    border: none;
-    border-bottom: 2px solid var(--optional1);
-    box-shadow: none;
-    font-size: 1rem;
-    font-family: var(--subtitle);
-    background: var(--bg-primary);
-    font-weight: 400;
-
-}
-
-.search-res-input input:focus {
-    outline: none;
-    box-shadow: none;
-}
-
-.search_home .searchs .icosearch {
-    transition: 0.3s;
-    margin: auto;
-    width: 10%;
-}
 
 .no-results-dash {
     text-align: center;
