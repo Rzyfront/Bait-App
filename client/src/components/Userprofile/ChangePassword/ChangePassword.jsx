@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import axios from 'axios';
+import style from "../UserProfile.module.css"
+
 const ChangePassword = ({ id }) => {
   const [passwords, setPassWords] = useState({
     oldPassword: '',
     newPassword: ''
-
   });
 
   const handleChangePasswords = (event) => {
@@ -35,7 +36,7 @@ const ChangePassword = ({ id }) => {
 
   return (
         <div>
-            <h4>Cambiar Contraseña</h4>
+            {/* <h4>Cambiar Contraseña</h4>
             <div>
                 <input onChange={handleChangePasswords} type='password' name='oldPassword' placeholder='Contraseña Actual' />
 
@@ -46,7 +47,7 @@ const ChangePassword = ({ id }) => {
             </div>
             <div>
                 <button onClick={handleSavePassword}>Cambiar</button>
-            </div>
+            </div> */}
 
         </div>
   );

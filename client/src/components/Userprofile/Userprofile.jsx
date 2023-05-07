@@ -1,4 +1,3 @@
-
 import { useDispatch, useSelector } from 'react-redux';
 import './Userprofile.css';
 import {
@@ -50,12 +49,12 @@ function Userprofile () {
   const navigate = useNavigate();
   const [selectedId, setSelectedId] = useState(1);
   const [passwordChange, setPasswordChange] = useState(false);
+
   useEffect(() => {
     user && dispatch(getUserProfile(user.id));
   }, [user]);
 
   useEffect(() => {
-    dispatch(getReviews(userId));
     dispatch(getUserLocals());
   }, []);
 
@@ -80,7 +79,7 @@ function Userprofile () {
     handleChangeimage(event);
   };
 
-  const handleDeleteReview = async (id) => {
+  const handleDeleteReview = (id) => {
     swal({
       title: '¿Está seguro(a)',
       text: 'Una vez borrado no podrás deshacer esta acción',
@@ -88,17 +87,17 @@ function Userprofile () {
       buttons: true,
       dangerMode: true
     })
-      .then(async (willDelete) => {
+      .then((willDelete) => {
         if (willDelete) {
-          await axios.delete(`/reviews/${id}`).then((res) => {
+          axios.delete(`/reviews/${id}`).then(res => {
             swal('¡Review eliminada con éxito!', {
               icon: 'success'
             });
-            dispatch(getAllLocal(1, ''));
-          }).catch((err) => {
-            swal(err.response.message);
+            dispatch(getUserProfile(userId));
           });
         }
+      }).catch((err) => {
+        swal(err.response.message);
       });
   };
 
@@ -110,11 +109,6 @@ function Userprofile () {
     const property = event.target.name;
     const value = event.target.value;
 
-    const handleSave = () => {
-      dispatch(updateUser(userData));
-      swal('Usuario actualizado exitosamente ');
-      window.location.reload(false);
-    };
     setUserData({
       ...userData,
       [property]: value
@@ -123,7 +117,7 @@ function Userprofile () {
 
   const handleSave = () => {
     dispatch(updateUser(userData));
-    swal('Usuario Actualizado Exitosamente ');
+    swal('Usuario actualizado exitosamente ');
   };
 
   const handlePasswordChange = () => {
@@ -208,7 +202,7 @@ function Userprofile () {
             : null}
 
           <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
-          <button onClick={handlePasswordChange} className={style.saveChanges}>Cambiar Contraseña</button>
+          <button onClick={handlePasswordChange} className={style.saveChanges}>Cambiar contraseña</button>
 
         </div>}
         {selectedId === 2 &&
@@ -241,9 +235,9 @@ function Userprofile () {
                 </div>
               );
             })
-              }
+            }
 
-        </div>}
+          </div>}
 
         {selectedId === 3 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Mis locales</p>
