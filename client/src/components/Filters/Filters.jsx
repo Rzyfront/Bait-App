@@ -27,7 +27,7 @@ const Filters = ({ toggle, setToggle }) => {
 
   const Caracteristicaslist = [
     { value: 'wifi', label: 'Wi-fi' },
-    { value: 'parking_lot', label: 'Parqueadero' },
+    { value: 'parking_lot', label: 'Estacionamiento' },
     { value: 'outdoor_seating', label: 'Asientos exteriores' },
     { value: 'live_music', label: 'Música' },
     { value: 'table_service', label: 'Servicio a Mesa' },

@@ -1,5 +1,6 @@
 import { useUploadImage } from '../../../hooks/useUploadImage';
 import style from '../FindLocals.module.css';
+import { RiImageAddFill } from 'react-icons/ri';
 import { useEffect } from 'react';
 import { Loading } from '@nextui-org/react';
 const Tiket = ({ handleTiket, inputs }) => {
@@ -9,12 +10,14 @@ const Tiket = ({ handleTiket, inputs }) => {
     handleTiket(data);
   }, [image]);
 
-  return <div className={style.imgUpload}>
-      <div className={style.fileSelect2}>
-          <input type="file" className={style.srcFile1} onChange={handleChangeimage} />
-      </div>
-    {loading === true ? <Loading color="primary" className={style.img} /> : JSON.stringify(inputs.Tiket) !== '{}' ? <img src={inputs.Tiket.url} className={style.img} /> : <img className={style.img} src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png" />}
+  return <label htmlFor="inputTiketid" className={style.labelInputTiket}>
 
-    </div>;
+  <div className={style.tikedUpload}>
+      <div className={style.fileSelect2}>
+          <input id='inputTiketid' type="file" className={style.srcFile1} onChange={handleChangeimage} />
+      </div>
+    {loading === true ? <Loading color="primary" className={style.tiketImg} /> : JSON.stringify(inputs.Tiket) !== '{}' ? <img src={inputs.Tiket.url} className={style.tiketImg} /> : <RiImageAddFill className={style.ImgUploadIco} />}
+    </div>
+    </label>;
 };
 export default Tiket;
