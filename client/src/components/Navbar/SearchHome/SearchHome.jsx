@@ -19,6 +19,9 @@ function SearchHome () {
       setData(searchName);
     }
   }, [searchName]);
+  useEffect(() => {
+    setData(searchName);
+  }, []);
 
   const handleinputs = (e) => {
     setData({
@@ -29,7 +32,7 @@ function SearchHome () {
   const searchDatas = async (e) => {
     e.preventDefault();
     const currentPath = location.pathname;
-    if (currentPath.split('/').includes('home')) {
+    if (currentPath.split('/').includes('home') || currentPath.split('/').includes('writeAReview')) {
       await dispatch(saveInfoSearchHome(data));
     } else {
       await dispatch(saveInfoSearchHome(data));

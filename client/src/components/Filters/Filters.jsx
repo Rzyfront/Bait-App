@@ -42,6 +42,9 @@ const Filters = ({ toggle, setToggle }) => {
     axios.get('/locals/specialties')
       .then(res => setSpecial(res.data.allSpecialties.map(e => e.specialty)))
       .catch(err => console.log(err));
+    return () => {
+      onRefresh();
+    };
   }, []);
 
   useEffect(() => {

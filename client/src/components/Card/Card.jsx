@@ -2,11 +2,12 @@ import { GoLocation, GoVerified, GoUnverified } from 'react-icons/go';
 import { Rating as RatingStar, ThinStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import './Card.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { foco } from '../../redux/actions/ubication';
 import { PopComent } from '../components';
 ;
+
 function Card ({
   id,
   Name,
@@ -22,12 +23,18 @@ function Card ({
   lat,
   lng
 }) {
+  const currentPath = window.location.pathname;
+  const navigate = useNavigate();
   const pathlocation = useLocation();
   const dispatch = useDispatch();
 
   const handleFoco = () => {
     const data = { lat, lng };
     dispatch(foco(data));
+  };
+
+  const redirectReview = () => {
+    navigate(`/profile/${id}?review=true`);
   };
 
   const myStyles = {
@@ -55,8 +62,6 @@ function Card ({
       trueProperties.push(properties[property]);
     }
   }
-
-  console.log(verified);
 
   return (
     <div className="Card animated-element" key={id}>
@@ -94,6 +99,7 @@ function Card ({
             <PopComent text={'Click para ir'} className='Go-To-Map'/>
           </div>
         )}
+        {currentPath && currentPath.split('/').includes('writeAReview') === true && <button className="reviewButton" onClick={redirectReview}>Hacé tu reseña</button>}
         {
         pathlocation.pathname.includes('/home') &&
         <div className='Card-Tags'>
@@ -105,8 +111,10 @@ function Card ({
           }
 
         </div>
+
         }
       </div>
+
     </div>
   );
 }
