@@ -5,7 +5,7 @@ import { GrDocumentUpload, GrDocumentVerified } from 'react-icons/gr';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { Loading } from '@nextui-org/react';
-
+import { toast, ToastContainer } from 'react-toastify';
 export default function ClaimLocal ({ closeClaimLocal, localId }) {
   const [loading, setLoading] = useState(false);
   const [document, setDocument] = useState();
@@ -17,9 +17,17 @@ export default function ClaimLocal ({ closeClaimLocal, localId }) {
       const { data } = await axios.post('/locals/document', formData);
       setDocument(data.newDocument);
       setLoading(false);
+      toast.success('¡documentos cargados correctamente!', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
     } catch (error) {
       swal(error.response.data.message, { type: 'error' });
       setLoading(false);
+      toast.error('Error al subir los documentos', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 2000
+      });
     }
   };
   const handleSubmitDocument = async (e) => {
@@ -49,6 +57,7 @@ export default function ClaimLocal ({ closeClaimLocal, localId }) {
             <button className={styles.sendDoc}>Enviar documentación</button>
           </form>
         </div>
+        <ToastContainer/>
       </div>
     </>
   );
