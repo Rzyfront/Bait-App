@@ -17,15 +17,15 @@ import { FiUser, FiGift } from 'react-icons/fi';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiRestaurant, BiLogOutCircle } from 'react-icons/bi';
 import { useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';  
+import swal from 'sweetalert';
 import ChangePassword from './ChangePassword/ChangePassword';
 
 import UserLocals from './UserLocals';
 
 const defaultImg = 'https://www.shutterstock.com/image-vector/user-login-authenticate-icon-human-260nw-1365533969.jpg';
 
-function Userprofile() {
-  const { image,  handleChangeimage } = useUploadImage();
+function Userprofile () {
+  const { image, handleChangeimage } = useUploadImage();
 
   const [userData, setUserData] = useState({
     name: '',
@@ -73,13 +73,8 @@ function Userprofile() {
   }, [user, image]);
 
   useEffect(() => {
-    
     setUserLocal(obtainUserLocal?.user?.Locals);
-
-    
   }, [obtainUserLocal]);
-
-  
 
   const handleChangeimages = (event) => {
     handleChangeimage(event);
@@ -108,7 +103,7 @@ function Userprofile() {
   };
 
   const handleInicio = () => {
-    navigate('/home/1?name=&city=');
+    navigate('/home');
   };
 
   const handleChange = (event) => {
@@ -116,10 +111,10 @@ function Userprofile() {
     const value = event.target.value;
 
     const handleSave = () => {
-      dispatch(updateUser(userData))
-      swal(`Usuario Actualizado Exitosamente `)
-      window.location.reload(false)
-    }
+      dispatch(updateUser(userData));
+      swal('Usuario Actualizado Exitosamente ');
+      window.location.reload(false);
+    };
     setUserData({
       ...userData,
       [property]: value
@@ -132,10 +127,8 @@ function Userprofile() {
   };
 
   const handlePasswordChange = () => {
-    setPasswordChange(!passwordChange)
-  }
-
-
+    setPasswordChange(!passwordChange);
+  };
 
   return (
     <div className={style.profileContainer}>
@@ -157,7 +150,7 @@ function Userprofile() {
               name="file"
               className={style.inputFile}
               onChange={handleChangeimages} />
-            <img  src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image"  />
+            <img src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image" />
             <div>
               <p className={style.name}>{user && user.name}</p>
               <p className={style.email}>{user && user.email}</p>
@@ -217,7 +210,6 @@ function Userprofile() {
           <button onClick={handleSave} className={style.saveChanges}>Guardar</button>
           <button onClick={handlePasswordChange} className={style.saveChanges}>Cambiar Contraseña</button>
 
-
         </div>}
         {selectedId == 2 &&
 
@@ -242,17 +234,16 @@ function Userprofile() {
                       <p className={style.dateReview}>04/12/2023</p>
                     </div>
                     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-                      <button className={style.deleteReview} id={rev.id} onClick={() => { handleDeleteReview(rev.id)}}>Eliminar</button>
+                      <button className={style.deleteReview} id={rev.id} onClick={() => { handleDeleteReview(rev.id); }}>Eliminar</button>
                     </div>
                   </div>
-                  
-                </div>
-              )
-                })
-              }
-            
-        </div>}
 
+                </div>
+              );
+            })
+              }
+
+        </div>}
 
         {selectedId == 3 && <div className={style.myLocals}>
           <p className={style.titleLocal}>Mis locales</p>
@@ -266,9 +257,9 @@ function Userprofile() {
                   location={local.location}
                   specialty={local.specialty}
                 />
-              )
+              );
             })}
-            
+
           </div>
         </div>}
         {selectedId == 4 && <div className={style.giftMenu}>
@@ -280,6 +271,7 @@ function Userprofile() {
       </div>
     </div>
 
-  )}
+  );
+}
 
-  export default Userprofile
+export default Userprofile;
