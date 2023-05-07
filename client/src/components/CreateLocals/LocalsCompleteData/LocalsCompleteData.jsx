@@ -16,7 +16,7 @@ import ScheduleModal from './LocalInfoComplete/ScheduleModal/ScheduleModal';
 
 function LocalsCompleteData ({ detail, setModalUpdate }) {
   const positionMap = useSelector((state) => state.ubication);
-  const [Mapcenter, setMapcenter] = useState([40.574215, -105.08333]);
+  const [Mapcenter, setMapcenter] = useState([positionMap.lat, positionMap.lng]);
   const [statesupmit, setStatesupmit] = useState(false);
   const Navigate = useNavigate();
   const dispatch = useDispatch();
