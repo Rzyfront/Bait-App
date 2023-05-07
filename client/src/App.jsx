@@ -49,10 +49,9 @@ function App () {
   return (
     <div className='App animated-element'>
       <Routes>
-        <Route path='/home/:id' element={<Home />} />
+        <Route path='/home' element={<Home />} />
         <Route path='/writeAReview/:id' element={<HomeReview />} />
         <Route path='/profile/:id' element={<Profile />} />
-        {/* <Route path='/userprofile' element={<Userprofile />} /> */}
         <Route path='/createplace' element={<CreateLocals />} />
         <Route path='/answers' element={<Answers />} />
         <Route path='/about' element={<About />} />
