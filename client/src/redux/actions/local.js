@@ -24,10 +24,9 @@ export const createLocal = (inputs) => {
         type: SUCCESS,
         payload: response.data.success
       });
-      return true;
+      return response.data;
     } catch (error) {
-      console.log(error);
-      return false;
+      return error.response.data;
     }
   };
 };
@@ -93,14 +92,14 @@ export const createLocalFull = (inputs, chekinputs) => {
           type: SUCCESS,
           payload: response.data.success
         });
-        return true;
+        return response.data;
       }
     } catch (error) {
       dispatch({
         type: ERROR,
         payload: error.message
       });
-      return false;
+      return error.response.data;
     }
   };
 };
@@ -147,13 +146,13 @@ export const updateLocalFull = (inputs, detail) => {
         type: SUCCESS,
         payload: response.data.success
       });
-      return true;
+      return response.data;
     } catch (error) {
       dispatch({
         type: ERROR,
         payload: error.message
       });
-      return false;
+      return error.response.data;
     }
   };
 };

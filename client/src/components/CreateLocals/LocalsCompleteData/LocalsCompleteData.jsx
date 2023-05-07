@@ -119,11 +119,11 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
   const chekinputs = [];
   const handleSubmit = async (event) => {
     event.preventDefault();
+    let response;
     if (!Object.values(errors).length) {
-      let response;
       if (detail) {
-        await dispatch(updateLocalFull(inputs, detail));
-        if (response === true) {
+        response = await dispatch(updateLocalFull(inputs, detail));
+        if (response.success === true) {
           toast.success('¡Local actualiizado satisfactoriamente!', {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2000
@@ -134,7 +134,7 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
         }
       } else {
         response = await dispatch(createLocalFull(inputs, chekinputs));
-        if (response === true) {
+        if (response.success === true) {
           toast.success('¡Local creado satisfactoriamente!', {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2000
@@ -146,7 +146,7 @@ function LocalsCompleteData ({ detail, setModalUpdate }) {
       };
     } else {
       setStatesupmit(true);
-      toast.error('Datos no válidos', {
+      toast.error(response.message, {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000
       });

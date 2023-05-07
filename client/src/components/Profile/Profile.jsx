@@ -76,15 +76,14 @@ function Profile () {
         </Slider>
 
         </div>
-        {ShowReviewList
-          ? <ReviewLocal sendReview={setShowReviewList}/>
-          : <div className='Info-Profile-Locals-Container'>
-              <InfoLocalsProfile detail={detail} showClaimLocal={handlerClaimLocalModal} setModalUpdate={setModalUpdate}/>
-              <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
-              {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
-              {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
-              {modalClaimLocal && <ClaimLocal closeClaimLocal={handlerClaimLocalModal} localId={detail.id}/>}
-          </div> };
+          {ShowReviewList && <ReviewLocal sendReview={setShowReviewList}/>}
+          <div className='Info-Profile-Locals-Container'>
+            <InfoLocalsProfile detail={detail} showClaimLocal={handlerClaimLocalModal} setModalUpdate={setModalUpdate}/>
+            <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
+            {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
+            {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
+            {modalClaimLocal && <ClaimLocal closeClaimLocal={handlerClaimLocalModal} localId={detail.id}/>}
+        </div> ;
       </div>
     </>
       )

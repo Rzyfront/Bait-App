@@ -108,7 +108,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
     if (!Object.values(errors).length) {
       const response = await dispatch(createLocal(inputs));
 
-      if (response === true) {
+      if (response.success === true) {
         toast.success('¡Local creado satisfactoriamente!', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
@@ -117,7 +117,7 @@ function LocalsDatabasic ({ formType, setFormType }) {
           Navigate('/home');
         }, 2000);
       } else {
-        toast.error('No pudimos enviar los datos', {
+        toast.error(response.message, {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
         });

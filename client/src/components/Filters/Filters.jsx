@@ -4,12 +4,13 @@ import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
 import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import FilterGroup from './FilterGroup/FilterGroup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveFilter, saveInfoSearchHome } from '../../redux/actions/cards';
+import Login from '../Login/Login';
 
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = ({ toggle, setToggle }) => {
@@ -24,6 +25,9 @@ const Filters = ({ toggle, setToggle }) => {
   const [filters, setFilters] = useState(initialFilter);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [special, setSpecial] = useState([]);
+  const [userLogin, setUserLogin] = useState(false);
+  const dataUser = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const Caracteristicaslist = [
     { value: 'wifi', label: 'Wi-fi' },
@@ -72,14 +76,18 @@ const Filters = ({ toggle, setToggle }) => {
     setFilters({ ...filters, characteristics: selectedOptions.map(e => e.value) });
   };
 
+  const enrollSite = () => {
+    if (dataUser?.user?.name) navigate('/createplace');
+    else setUserLogin(true);
+  };
+
   return (
     <div className="Filters">
+      {userLogin && <Login setToggleLogin={setUserLogin} />}
       <div className='Left-Home-Buttons'>
-        <Link to="/createplace">
-        <div className="AddPlace">
+        <div className="AddPlace" onClick={enrollSite}>
           <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
         </div>
-      </Link>
       </div>
     <div className='AddResetButtom'>
       <div className="ResetHome" onClick={onRefresh}>
