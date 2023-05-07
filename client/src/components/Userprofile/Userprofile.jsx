@@ -25,7 +25,9 @@ const defaultImg = 'https://www.shutterstock.com/image-vector/user-login-authent
 
 function Userprofile () {
   const { image, handleChangeimage } = useUploadImage();
-
+  useEffect(() => {
+    console.log(image);
+  }, [image]);
   const [userData, setUserData] = useState({
     name: '',
     lastname: '',
@@ -66,7 +68,7 @@ function Userprofile () {
       age: user.age,
       email: user.email,
       phone_number: user.phone_number,
-      image: image[0],
+      image: image[image.length - 1],
       location: user.location
     });
   }, [user, image]);
@@ -144,7 +146,7 @@ function Userprofile () {
               name="file"
               className={style.inputFile}
               onChange={handleChangeimages} />
-            <img src={user?.Image ? user?.Image?.url : defaultImg} className={style.imgProfile} name="Image" />
+            <img src={image ? image.length ? image[image.length - 1].url : user && Image && user.Image?.url : defaultImg} className={style.imgProfile} name="Image" />
             <div>
               <p className={style.name}>{user && user.name}</p>
               <p className={style.email}>{user && user.email}</p>

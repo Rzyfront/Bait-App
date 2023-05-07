@@ -12,10 +12,6 @@ const FindLocals = () => {
   }, [nombre]);
 
   const sendReview = () => {
-    toast.success('¡Reseña creada correctamente esperando aprobación!', {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 2000
-    });
     setSelectedId(null);
   };
   const close = () => {
