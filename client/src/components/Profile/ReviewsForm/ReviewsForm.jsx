@@ -63,7 +63,7 @@ function ReviewsForm ({ setShowReviewList, id }) {
         )
       );
       if (response === true) {
-        toast.success('¡Gracias por tu Opinion!', {
+        toast.success('¡Gracias por tu opinión!', {
           position: toast.POSITION.TOP_CENTER
         });
         location.reload();
