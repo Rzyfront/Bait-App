@@ -7,10 +7,8 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 
 import './Landing.css';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const Landing = () => {
-  const ubication = useSelector((state) => state.ubication);
   return (
     <div className='Landing animated-element'>
       <Navbar />
@@ -23,7 +21,7 @@ const Landing = () => {
                 Bienvenido a <span>Bait</span>
               </h1>
               <h2>Descubrí dónde comer</h2>
-              <Link to={`/home/1?name=&city=${ubication.city}`} >
+              <Link to={'/home'} >
                 <button>Explorar</button>
               </Link>
             </div>
@@ -41,7 +39,7 @@ const Landing = () => {
                 <span>Reseña</span> los lugares que has visitado y consigue
                 promociones exclusivas
               </h3>
-              <Link to='/writeAReview/1?name=&city='>
+              <Link to='/writeAReview'>
                 <button>Reseñar</button>
               </Link>
             </div>
