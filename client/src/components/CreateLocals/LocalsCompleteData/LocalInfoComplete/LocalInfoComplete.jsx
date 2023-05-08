@@ -68,7 +68,7 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
           (showShedule
             ? () => setShowSchedule(false)
             : () => setShowSchedule(true))
-        }>Agregar Horarios</div>
+        }>Agregar horarios</div>
         <input
         className='Input-C Input-Email-Complete'
         type='text'

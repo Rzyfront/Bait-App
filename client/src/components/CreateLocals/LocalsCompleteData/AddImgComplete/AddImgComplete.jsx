@@ -59,7 +59,7 @@ function AddImgComplete ({ inputs, setInputs, detail, onCloseModalUpdate, setMod
   return (
     <div className='AddImgComplete'>
       <label htmlFor='photo-upload'>
-              <h5 className='Add-Img-Basic'>{image.length ? 'Agrega otra imagen' : 'Agrega almenos 3 imágenes del local'}<RiImageAddFill /></h5>
+              <h5 className='Add-Img-Basic'>{image.length ? 'Agrega otra imagen' : 'Agrega al menos 3 imágenes del local'}<RiImageAddFill /></h5>
             </label>
             <label htmlFor='photo-upload' className='Label-Img-Add'>
               <input
