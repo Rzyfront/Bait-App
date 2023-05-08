@@ -5,8 +5,8 @@ export const specialtyList = [
   { value: 'Vegana', label: 'Vegana' },
   { value: 'Francesa', label: 'Francesa' },
   { value: 'India', label: 'India' },
-  { value: 'Asiatica', label: 'Asiática' },
-  { value: 'Comida Rapida', label: 'Comida Rápida' },
+  { value: 'Asiática', label: 'Asiática' },
+  { value: 'Comida Rápida', label: 'Comida Rápida' },
   { value: 'Parilla', label: 'Parilla' },
   { value: 'Italiana', label: 'Italiana' }
 ];
@@ -15,7 +15,7 @@ export const restaurantTypeList = [
   { value: 'Elegante', label: 'Elegante' },
   { value: 'Nuevo', label: 'Nuevo' },
   { value: 'Colonial', label: 'Colonial' },
-  { value: 'Romantico', label: 'Romántico' },
+  { value: 'Romántico', label: 'Romántico' },
   { value: 'Ejecutivo', label: 'Ejecutivo' }
 ];
 export const characteristicsList = [
