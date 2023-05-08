@@ -90,10 +90,10 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
             <p className='Week-schedule' title='Hora de apertura y cierre'>Lunes:
             {schedule.monday}</p>
             <p className='Week-schedule' title='Hora de apertura y cierre'>Martes:    {schedule.tuesday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Miercoles:    {schedule.wednesday}</p>
+            <p className='Week-schedule' title='Hora de apertura y cierre'>Miércoles:    {schedule.wednesday}</p>
             <p className='Week-schedule' title='Hora de apertura y cierre'>Jueves:    {schedule.thursday}</p>
             <p className='Week-schedule' title='Hora de apertura y cierre'>Viernes:    {schedule.friday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Sabado:    {schedule.saturday}</p>
+            <p className='Week-schedule' title='Hora de apertura y cierre'>Sábado:    {schedule.saturday}</p>
             <p className='Week-schedule' title='Hora de apertura y cierre'>Domingo:    {schedule.sunday}</p>
             </div>}
         </div>
