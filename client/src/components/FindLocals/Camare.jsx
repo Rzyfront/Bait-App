@@ -52,7 +52,7 @@ const Camara = ({ sendPhotos }) => {
         <div className='phader'>
            {screenshot ? '' : <video ref={videoref} autoPlay={true} className='camara'/>}
           {screenshot && <div className='camara'>
-              <img src={screenshot} alt="captura" />
+              <img src={screenshot} alt="captura" className='camara' />
               <div className='options'>
                   <AiOutlineCheck className='chek' onClick={send}/>
                   <AiOutlineClose className='notchek' onClick={deletePhoto}/>
