@@ -175,7 +175,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 </label>
               </div>
               <div className={style.calificacion} onClick={() => { resetearRating(); setCalificar(true); }}>
-                <b style={{ marginRight: '20px', marginTop: '4px' }}>Puntuacion:</b>
+                <b style={{ marginRight: '20px', marginTop: '4px' }}>Puntuación:</b>
               <RatingStar
                 className={style.ratingStar}
                 name='Rating'
@@ -184,7 +184,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 readOnly
               />
               </div>
-                <button onClick={activeCamare} className={style.sendReview}>camara</button>
+                <button onClick={activeCamare} className={style.sendReview}>Cámara</button>
                 {camara && camara === true && <Camara activeCamare={activeCamare} sendPhotos={sendPhotos}/>}
                 {camara !== true &&
                    <div>
