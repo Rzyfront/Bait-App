@@ -48,9 +48,9 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
               </div>;
             })}
 
-        <div className='Tag-Type-Local' title='Tipo de Restaurant'>
-           {Characteristic && <h5 className='Tag-Text'>{Characteristic.type}</h5>}
-        </div>
+        {Characteristic && <div className='Tag-Type-Local' title='Tipo de Restaurant'>
+            <h5 className='Tag-Text'>{Characteristic.type}</h5>
+        </div>}
         </div>
         <div className='Info-Name-Group'>
           <h2 className='Info-Local-Name'>{name}</h2>
