@@ -11,7 +11,7 @@ const NavAdmin = ({ fn, section }) => {
   return (
     <nav className={style.nav}>
       <div className={style.profile}>
-        <Link to='/home/1?name=&city='>
+        <Link to='/home'>
           <img src={LogoBait} className={style.img}></img>
         </Link>
         <p className={style.username}>ADMINISTRACIÓN</p>

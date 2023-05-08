@@ -99,8 +99,8 @@ list-style: none;
     margin-left: 10vw;
     margin-top: 10vh;
     height: 80vh;
-    scale:0;
-    animation: aparecer .5s ease-in-out forwards;
+    opacity:0;
+    animation: aparecer .3s ease-in-out forwards;
 }
 
 .resumeInfo{
@@ -117,6 +117,8 @@ list-style: none;
     box-shadow: 0px 0px 5px 5px rgba(211, 211, 211, 0.453);
     transition:.2s;
     outline: 3px solid white;
+  z-index: -1;
+  margin-left:-120px;
 }
 
 .imgProfile:hover{
@@ -125,18 +127,39 @@ list-style: none;
     cursor:pointer;
 }
 
+/* .inputFile::before {
+    background-color: #5678EF;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    content: 'Seleccionar';
+    width: 10px;
+    height: 10px;
+    position: relative;
+    /* margin-left: -50px; 
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+  } */
+
 .inputFile{
-    position: absolute;
+    margin-left: -100px;
+    /* position: absolute;  */
     width: 120px;
     height: 120px;
     background-color: black;
-    opacity: 0;
+    opacity: 1;
     border-radius: 50%;
     transition: .3s;
     color: green;
     z-index: 10;
     cursor:pointer;
-    /* opacity:0; */
+    opacity: 0;
+    margin-left: 0px;
 }
 .inputFile:hover + .imgProfile{
     filter:brightness(.65);
@@ -160,7 +183,7 @@ list-style: none;
 .form{
     margin-top: 40px;
     width: 600px;
-    justify-content: space-between;
+    justify-content: space-around;
     display: flex;
 }
 
@@ -174,12 +197,29 @@ list-style: none;
     border-radius: 10px;
     color:white;
     font-weight: 600;
+    width: 200px;
+}
+.editChanges{
+    margin-top: 50px;
+    margin-left: 210px;
+    padding: 8px 60px;
+    font-size: 1.1em;
+    background-color: rgb(42, 136, 42);
+    border: 0;
+    border-radius: 10px;
+    color:white;
+    font-weight: 600;
+    width: 200px;
 }
 
 /* INPUTS */
 
 .input{
-    margin-top: 20px;
+    /* margin-left: -100px; */
+    margin-top: 30px;
+}
+.inputForm[readOnly]{
+    color: grey;
 }
 
 .inputForm{
@@ -194,7 +234,7 @@ list-style: none;
     transition: .1s;
     background-color: transparent;
     outline: 1px solid rgba(190, 190, 190, 0.447);
-    z-index: 10;
+    z-index: 0;
     position:relative;
 }
 
@@ -209,7 +249,7 @@ list-style: none;
 }
 
 .placeholder {
-    position: absolute;
+    /* position: absolute; */
     margin-top: 7px;
     margin-left: -240px;
     font-size: 1em;
@@ -235,16 +275,13 @@ list-style: none;
 .giftMenu{
     /* background-color: red; */
     text-align: center;
-    scale:0;
-    animation: aparecer .5s ease-in-out forwards;
+    opacity:0;
+    animation: aparecer .3s ease-in-out forwards;
 }
 
 @keyframes aparecer{
-    70%{
-        scale: 1.1;
-    }
     100%{
-        scale:1;
+        opacity:1;
     }
 }
 
@@ -266,7 +303,8 @@ list-style: none;
 /* LOCAL MENU */
 
 .myLocals{
-
+    opacity:0;
+    animation: aparecer .3s ease-in-out forwards;
 }
 
 .titleLocal{
@@ -278,23 +316,22 @@ list-style: none;
 }
 
 .localContainer{
-    /* background-color: red; */
-    width: 60vw;
-    margin-left: 11vw;
-    margin-top: 13vh;
-    height: 60vh;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    grid-template-rows: 200px;
-    grid-template-columns: 200px;
+    justify-content: space-evenly;
+    margin-top: 2rem;
 }
 
-.local{
-    border-radius: 20px;
-    width: 200px;
-    height: 200px;
-    background-color: blue;
+.userLocalsTable {
+    text-align: center;
+}
+
+.userLocalsTable thead{
+    background-color: var(--bg-secondary);
+    color: #fff;
+}
+
+.userLocalsTable th{
+    padding: 0.7rem;
 }
 
 /* REVIEWS */
@@ -351,6 +388,9 @@ list-style: none;
     .profileContainer{
         display: flex;
         flex-direction: column;
+        overflow: scroll;
+        height: 100vh;
+        /* position: absolute; */
     }
     .title{
         display: none;
@@ -390,7 +430,7 @@ list-style: none;
         border-right: 3px solid transparent;
     }
     .liSelected{
-        padding: 10px 43px;
+        padding: 5px 43px;
         color:rgb(13, 13, 13);
         font-size: 1.7em;
     border-right: 3px solid transparent;
@@ -404,6 +444,7 @@ list-style: none;
     }
     .menu{
         width:100vw;
+        height: 70vh;
         overflow: visible;
     }
     .infoMenu{
@@ -422,16 +463,20 @@ list-style: none;
         height: 160px;
         box-shadow: none;
         outline: 3px solid white;
-        margin-top: -90px;
-        margin-left: 55%;
+        margin-top: -110px;
+        margin-left: 35%;
         /* transform: translateX(-50%); */
+    }
+    .buttonContainer{
+        text-align: center;
+        width: 100vw;
     }
     .imgProfile{
         width:160px;
         height: 160px;
         box-shadow: none;
         outline: 3px solid white;
-        margin-top: -50px;
+        margin-top: -150px;
         margin-left: 50%;
         transform: translateX(-50%);
     }
@@ -445,6 +490,7 @@ list-style: none;
         margin-left: -32px;
     }
     .form{
+        margin-top: 50px;
         margin-left: 40%;
         /* transform: translateX(-); */
         flex-direction: column;
@@ -452,6 +498,11 @@ list-style: none;
     .titleLocal{
         margin-top: -70px;
         color:white;
+    }
+    .editChanges,
+    .saveChanges{
+        margin:30px 0px;
+        /* width: 250px; */
     }
     .localContainer{
         flex-direction: column;

@@ -13,6 +13,7 @@ import ReviewLocal from '../FindLocals/ReviewLocal/ReviewLocal';
 import ClaimLocal from './ClaimLocal/ClaimLocal';
 import LocalsCompleteData from '../CreateLocals/LocalsCompleteData/LocalsCompleteData';
 import { Oval } from 'react-loader-spinner';
+import imageEmpy from '../../assets/BaitPhotoAux.jpg';
 
 function Profile () {
   const queryParams = new URLSearchParams(location.search);
@@ -49,15 +50,17 @@ function Profile () {
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
-    pauseOnHover: true
+    pauseOnHover: true,
+    slidesToShow: 3
   };
+  /*
   if (detail?.Images?.length > 2) {
     settings.slidesToShow = 3;
   } else if (detail?.Images?.length === 2) {
     settings.slidesToShow = 2;
   } else if (detail?.Images?.length === 1) {
     settings.slidesToShow = 1;
-  }
+  } */
   return (detail.Images
     ? (
     <>
@@ -67,24 +70,33 @@ function Profile () {
         <div className='Img-Header'>
 
         <Slider {...settings}>
-         {(detail.Images && detail.Images.length > 2) &&
+          { (detail.Images && detail.Images.length >= 1 && detail.Images.length < 2) &&
+            <div className='Slide-Img-Carrousel'>
+            <img src={imageEmpy} alt={'imageDefault1'} />
+          </div>
+          }
+         {detail.Images &&
           detail.Images?.map(({ url }, index) => {
             return <div key={index} className='Slide-Img-Carrousel'>
             <img src={url} alt={`img${index}`} />
           </div>;
           })}
+          { (detail.Images && detail.Images.length >= 1 && detail.Images.length < 3) &&
+            <div className='Slide-Img-Carrousel'>
+            <img src={imageEmpy} alt={'imageDefault2'} />
+          </div>
+          }
         </Slider>
 
         </div>
-        {ShowReviewList
-          ? <ReviewLocal sendReview={setShowReviewList}/>
-          : <div className='Info-Profile-Locals-Container'>
-              <InfoLocalsProfile detail={detail} showClaimLocal={handlerClaimLocalModal} setModalUpdate={setModalUpdate}/>
-              <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
-              {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
-              {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
-              {modalClaimLocal && <ClaimLocal closeClaimLocal={handlerClaimLocalModal} localId={detail.id}/>}
-          </div> };
+          {ShowReviewList && <ReviewLocal sendReview={setShowReviewList}/>}
+          <div className='Info-Profile-Locals-Container'>
+            <InfoLocalsProfile detail={detail} showClaimLocal={handlerClaimLocalModal} setModalUpdate={setModalUpdate}/>
+            <SelectProfileBar toggleModal={toggleModal} setToggleModal={setToggleModal} ShowReviews={ShowReviews} ShowMenu={ShowMenu} setShowReviewList={setShowReviewList}/>
+            {(toggleModal === ShowReviews) && <Reviews localId={id} page={page} setPage={setPage}/>}
+            {(toggleModal === ShowMenu) && <Menu localUser={detail.UserId}/>}
+            {modalClaimLocal && <ClaimLocal closeClaimLocal={handlerClaimLocalModal} localId={detail.id}/>}
+        </div> ;
       </div>
     </>
       )

@@ -5,7 +5,11 @@
     position: relative;
     width: 100%;
     text-align: center;
-
+    
+}
+.nameSection {
+    margin-top: 20px;
+    color: var(--secondary)
 }
 
 .container {
@@ -119,10 +123,6 @@
     outline: 0;
 }
 
-.nameSection {
-    margin-top: 20px;
-    color: var(--secondary)
-}
 
 .roles {
     position: absolute;
