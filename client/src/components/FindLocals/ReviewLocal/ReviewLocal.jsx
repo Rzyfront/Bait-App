@@ -98,7 +98,7 @@ const ReviewLocal = ({ sendReview, close }) => {
     if (!Object.values(error).length) {
       const response = await dispatch(comentarie({ calificationFood, calificationQaPrice, calificationEnvironment, calificationService, inputs, id }));
       if (response === true) {
-        toast.success('¡Reseña creada correctamente esperando aprobación!', {
+        toast.success('¡Reseña creada correctamente, espera la aprobación!', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
         });
@@ -171,7 +171,7 @@ const ReviewLocal = ({ sendReview, close }) => {
               <div>
                 <input name="title" className={style.inputForm} value={inputs.title} onChange={handleData}/>
                 <label htmlFor="titulo" className={style.placeholder}>
-                  Titulo
+                  Título
                 </label>
               </div>
               <div className={style.calificacion} onClick={() => { resetearRating(); setCalificar(true); }}>
