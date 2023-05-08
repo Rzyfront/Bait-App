@@ -33,7 +33,7 @@ const Tiket = ({ handleTiket, inputs }) => {
       </div>}
       {camara === true && <Camara sendPhotos={sendPhotos} />}
     {loading === true ? <Loading color="primary" className={style.tiketImg} /> : JSON.stringify(inputs.Tiket) !== '{}' ? <img src={inputs.Tiket.url} className={style.tiketImg} /> : <RiImageAddFill className={style.ImgUploadIco} />}
-      <div onClick={activeCamare} className={style.sendReview}>camara</div>
+      <div onClick={activeCamare} className={style.sendReview}>Cámara</div>
 
     </div>
     </label>;

@@ -98,7 +98,7 @@ const ReviewLocal = ({ sendReview, close }) => {
     if (!Object.values(error).length) {
       const response = await dispatch(comentarie({ calificationFood, calificationQaPrice, calificationEnvironment, calificationService, inputs, id }));
       if (response === true) {
-        toast.success('¡Reseña creada correctamente esperando aprobación!', {
+        toast.success('¡Reseña creada correctamente, espera la aprobación!', {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000
         });
@@ -171,11 +171,11 @@ const ReviewLocal = ({ sendReview, close }) => {
               <div>
                 <input name="title" className={style.inputForm} value={inputs.title} onChange={handleData}/>
                 <label htmlFor="titulo" className={style.placeholder}>
-                  Titulo
+                  Título
                 </label>
               </div>
               <div className={style.calificacion} onClick={() => { resetearRating(); setCalificar(true); }}>
-                <b style={{ marginRight: '20px', marginTop: '4px' }}>Puntuacion:</b>
+                <b style={{ marginRight: '20px', marginTop: '4px' }}>Puntuación:</b>
               <RatingStar
                 className={style.ratingStar}
                 name='Rating'
@@ -184,7 +184,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 readOnly
               />
               </div>
-                <button onClick={activeCamare} className={style.sendReview}>camara</button>
+                <button onClick={activeCamare} className={style.sendReview}>Cámara</button>
                 {camara && camara === true && <Camara activeCamare={activeCamare} sendPhotos={sendPhotos}/>}
                 {camara !== true &&
                    <div>
@@ -208,9 +208,9 @@ const ReviewLocal = ({ sendReview, close }) => {
               </div>
             </div></>
               : <>
-              <h3 style={{ marginBottom: '30px' }}>Puntuacion</h3>
+              <h3 style={{ marginBottom: '30px' }}>Puntuación</h3>
               <h5>Calidad-Precio</h5>
-              <p className={style.textRating}>Como te parecio la calidad con relacion al precio</p>
+              <p className={style.textRating}>Cómo te pareció la calidad con relación al precio</p>
               <RatingStar
               className={style.ratingStar}
                 name='enviroment'
@@ -220,7 +220,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Ambiente</h5>
-              <p className={style.textRating}>Como te parecio el lugar</p>
+              <p className={style.textRating}>Cómo te pareció el lugar</p>
               <RatingStar
               className={style.ratingStar}
                 name='enviroment'
@@ -230,7 +230,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Servicio</h5>
-              <p className={style.textRating}>Como te parecio la atencion y el servicio</p>
+              <p className={style.textRating}>Cómo te pareció la atención y el servicio</p>
               <RatingStar
                 name='enviroment'
                 className={style.ratingStar}
@@ -240,7 +240,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Comida</h5>
-              <p className={style.textRating}>Cuentanos que tal estuvo la comida</p>
+              <p className={style.textRating}>Cuéntanos qué tal estuvo la comida</p>
               <RatingStar
                 name='enviroment'
                 className={style.ratingStar}
@@ -261,7 +261,7 @@ const ReviewLocal = ({ sendReview, close }) => {
               <div>
                 <Tiket handleTiket={handleTiket} inputs={inputs}/>
               </div>
-              <p className={style.textFactura}><b>IMPORTANTE: </b>Tu factura no sera mostrada en la reseña pero es necesaria para validar que si has comido en ese lugar</p>
+              <p className={style.textFactura}><b>IMPORTANTE: </b>Tu factura no será mostrada en la reseña pero es necesaria para soportar la validez de la misma.</p>
             </div>
           )}
         </form>

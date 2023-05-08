@@ -21,7 +21,7 @@ const FindLocals = () => {
   return (
     <main className={style.main}>
       { selectedId && <ReviewLocal sendReview={sendReview} close={close}/>}
-      <h2 className={style.title}>¿Que lugar queres reseñar?</h2>
+      <h2 className={style.title}>¿Qué lugar querés reseñar?</h2>
       <div className={style.inputContainer}>
       <input placeholder="Nombre" onChange={handleChange} className={style.input}/>
       <div className={style.locals} onClick={() => setSelectedId(1)}>

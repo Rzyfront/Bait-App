@@ -1,7 +1,6 @@
 import './InfoLocalsProfile.css';
 import { GoLocation, GoVerified, GoUnverified } from 'react-icons/go';
 import { Rating as RatingStar, ThinStar } from '@smastrom/react-rating';
-
 import { useSelector } from 'react-redux';
 function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
   const { name, location, rating, avgEnvironment, avgFood, avgQaPrice, avgService, Characteristic, specialties, verified, address, schedule
@@ -37,6 +36,7 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
   }
   const dataUser = useSelector((state) => state.user);
   const verifiedOwner = detail?.UserId === dataUser?.user?.id;
+
   return (
     <div className='InfoLocalsProfile-Compontent'>
         <div className='Info-left'>
@@ -48,9 +48,9 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
               </div>;
             })}
 
-        <div className='Tag-Type-Local' title='Tipo de Restaurant'>
-           {Characteristic && <h5 className='Tag-Text'>{Characteristic.type}</h5>}
-        </div>
+        {Characteristic && <div className='Tag-Type-Local' title='Tipo de Restaurant'>
+            <h5 className='Tag-Text'>{Characteristic.type}</h5>
+        </div>}
         </div>
         <div className='Info-Name-Group'>
           <h2 className='Info-Local-Name'>{name}</h2>
@@ -85,14 +85,15 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
                 <h5 className='Rating-C-Group'>Servicio: <RatingStar readOnly style={{ maxWidth: 100 }} value={avgService || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
             </div>
             {schedule &&
-            <div className='Schedule-Info' title='Horario Semanal de servicio'>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Lunes:    {schedule.monday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Martes:    {schedule.tuesday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Miercoles:    {schedule.wednesday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Jueves:    {schedule.thursday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Viernes:    {schedule.friday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Sabado:    {schedule.saturday}</p>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Domingo:    {schedule.sunday}</p>
+            <div className='Schedule-Info' title='Horario semanal de servicio'>
+            {(schedule.monday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Lunes:    {schedule.monday}</p>}
+            {(schedule.tuesday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Martes:    {schedule.tuesday}</p>}
+            {(schedule.wednesday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Miércoles:    {schedule.wednesday}</p>}
+            {(schedule.thursday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Jueves:    {schedule.thursday}</p>}
+            {(schedule.friday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Viernes:    {schedule.friday}</p>}
+            {(schedule.saturday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Sábado:    {schedule.saturday}</p>}
+            {(schedule.sunday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Domingo:    {schedule.sunday}</p>}
+
             </div>}
         </div>
     </div>
