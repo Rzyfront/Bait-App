@@ -12,10 +12,13 @@ import { useParams } from 'react-router-dom';
 import Tiket from './Tiket';
 import { ErrorReview } from './ErrorReview';
 import { toast, ToastContainer } from 'react-toastify';
+import Camara from '../Camare';
+
 const ReviewLocal = ({ sendReview, close }) => {
+  const [camara, setcamara] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { image, loading, handleChangeimage } = useUploadImage();
+  const { image, loading, handleChangeimage, handlePhoto } = useUploadImage();
   const [inputs, setInputs] = useState({
     title: '',
     review: '',
@@ -129,6 +132,20 @@ const ReviewLocal = ({ sendReview, close }) => {
       });
     }
   };
+  const activeCamare = (e) => {
+    e.preventDefault();
+    if (camara === true) {
+      setcamara(false);
+    } else {
+      setcamara(true);
+    }
+  };
+
+  const sendPhotos = async (e) => {
+    await handlePhoto(e);
+    setcamara(false);
+  };
+
   return (
     <div className={style.centrar} onClick={() => sendReview()}>
       <div className={style.formContainer} onClick={(e) => e.stopPropagation()}>
@@ -167,16 +184,22 @@ const ReviewLocal = ({ sendReview, close }) => {
                 readOnly
               />
               </div>
-              <div>
-                <div className={style.fileSelect}>
-                  <input id='inputImgReview' type="file" className={style.srcFile1} onChange={handleChangeimage}/>
+                <button onClick={activeCamare} className={style.sendReview}>camara</button>
+                {camara && camara === true && <Camara activeCamare={activeCamare} sendPhotos={sendPhotos}/>}
+                {camara !== true &&
+                   <div>
+                  <div className={style.fileSelect}>
+                    <input id='inputImgReview' type="file" className={style.srcFile1} onChange={handleChangeimage} />
+                  </div>
+
                 </div>
-              </div>
-              <label htmlFor='inputImgReview'>
-                <div className={style.imgUpload}>
+                  }
+                {camara !== true && <label htmlFor='inputImgReview'>
+                  <div className={style.imgUpload}>
                     {loading === true ? <Loading color="primary" className={style.img} /> : JSON.stringify(inputs.image) !== '{}' ? <img src={inputs.image.url} className={style.img} /> : <RiImageAddFill className={style.ImgUploadIco} />}
-                </div>
-              </label>
+                  </div>
+                </label>}
+
               <div>
                   <input name="review" className={style.inputForm} onChange={handleData} value={inputs.review} />
                 <label htmlFor="reseña" className={style.placeholder}>
