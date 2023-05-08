@@ -1,0 +1,41 @@
+.camara {
+    width: 300px;
+    height: 180px;
+}
+
+.phader {
+    position: relative;
+}
+
+.funtions {
+    position: relative;
+    background: red;
+    width: fit-content;
+    margin: auto;
+}
+
+.options {
+
+    font-size: 1.5rem;
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 30px;
+
+}
+
+.options .chek {
+    color: aqua;
+    cursor: pointer;
+}
+
+.options .notchek {
+    color: rgb(247, 11, 11);
+    cursor: pointer;
+}
+
+.cambio {
+    color: aqua;
+}
