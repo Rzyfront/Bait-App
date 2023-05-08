@@ -69,7 +69,7 @@ function Reviews ({ localId, setPage, page }) {
             );
           })
           : <div className='NoReviews'>
-            <p className='NoReviewsText'>No hay más reseñas para mostrar, si visitáste este lugar dejá tu reseña.
+            <p className='NoReviewsText'>No hay reseñas para mostrar, si visitáste este lugar dejá tu reseña.
             </p>
           </div>
       }
@@ -78,7 +78,7 @@ function Reviews ({ localId, setPage, page }) {
         ? <div className='Load-More'>
         <h4 className='Load' onClick={() => setPage(++page)}>Cargar más</h4>
        </div>
-        : <div className='Load-More'>
+        : (page > 1) && <div className='Load-More'>
         <h4 className='Load' onClick={() => setPage(1)}>Atrás</h4>
        </div>}
     </div>

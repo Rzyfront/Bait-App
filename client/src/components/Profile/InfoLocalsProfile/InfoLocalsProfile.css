@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: column;
     width: 65%;
-    gap: 8px;
+    gap: 10px;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group{
@@ -97,6 +97,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
+    margin-top: 20px;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Info-Rating-Group .Info-Rating{
@@ -272,4 +273,8 @@
         width: 95%;
         align-items: flex-start;  
     }
+
+    .InfoLocalsProfile-Compontent .Info-left .Info-Rating-Group{
+    margin-top: 0px;
+}
 }
