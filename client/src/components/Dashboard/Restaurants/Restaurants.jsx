@@ -132,8 +132,8 @@ const Restaurantes = () => {
             {!changeTable ? !locals?.length && <td colSpan='4'>No hay resultados</td> : !localsToVerify?.length && <td colSpan='5'>No hay documentos para revisar.</td>}
           </tbody>
         </table>
+        <span style={{ textAlign: 'center' }}><Pagination paginade={paginade} page={filter.page} totalPages={totalPages}/></span>
       </main>
-      <Pagination paginade={paginade} page={filter.page} totalPages={totalPages} />
       <ToastContainer/>
     </div>
   );
