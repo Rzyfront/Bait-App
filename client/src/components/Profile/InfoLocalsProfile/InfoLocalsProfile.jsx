@@ -1,15 +1,16 @@
 import './InfoLocalsProfile.css';
-import { GoLocation } from 'react-icons/go';
+import { GoLocation, GoVerified, GoUnverified } from 'react-icons/go';
 import { Rating as RatingStar, ThinStar } from '@smastrom/react-rating';
-
 import { useSelector } from 'react-redux';
 function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
-   const { name, location, rating, avgEnvironment, avgFood, avgQaPrice, avgService, Characteristic,specialty } = detail;// eslint-disable-line
+  const { name, location, rating, avgEnvironment, avgFood, avgQaPrice, avgService, Characteristic, specialties, verified, address, schedule
+ } = detail;// eslint-disable-line
   const myStyles = {
     itemShapes: ThinStar,
     activeFillColor: '#343434',
     inactiveFillColor: '#3434343B'
   };
+  console.log(detail);
 
   const properties = {
     big_group: 'Grupo grande',
@@ -33,23 +34,36 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
       }
     }
   }
-  console.log(detail);
   const dataUser = useSelector((state) => state.user);
   const verifiedOwner = detail?.UserId === dataUser?.user?.id;
+
   return (
     <div className='InfoLocalsProfile-Compontent'>
         <div className='Info-left'>
         <div className='Tags-Info-Group'>
-         {specialty && <div className='Tag-Type-Eat' title='Tipo de Comida'>
-            <h5 className='Tag-Text'>{specialty}</h5>
+         {specialties &&
+            specialties?.map(({ name }, i) => {
+              return <div className='Tag-Type-Eat' title='Tipo de Comida' key={i}>
+              <h5 className='Tag-Text' >{name}</h5>
+              </div>;
+            })}
+
+        {Characteristic && <div className='Tag-Type-Local' title='Tipo de Restaurant'>
+            <h5 className='Tag-Text'>{Characteristic.type}</h5>
         </div>}
-        <div className='Tag-Type-Local' title='Tipo de Restaurant'>
-            <h5 className='Tag-Text'>Colonial</h5>
         </div>
+        <div className='Info-Name-Group'>
+          <h2 className='Info-Local-Name'>{name}</h2>
+          {verified === 'verified'
+            ? <GoVerified className='LocalVerified'title='Verificado'/>
+            : <GoUnverified className='LocalUnverified' title='No verificado'/>
+        }
         </div>
-        <h2 className='Info-Local-Name'>{name}</h2>
-        <h4 className='Info-Local-Location'><GoLocation className='locationico'/>  {location}</h4>
-        <h4 className='Info-Rating' title={`Rating promedio ${rating || 0}`}>Calificación: <RatingStar readOnly style={{ maxWidth: 150 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h4>
+        <h4 className='Info-Local-Location'><GoLocation className='locationico'/>  {address || location}</h4>
+        <div className='Info-Rating-Group'>
+          <h4 className='Info-Rating' title={`Rating promedio ${rating || 0}`}>Calificación: <RatingStar readOnly style={{ maxWidth: 150 }} value={rating || 0} className='Stars-Cards' itemStyles={myStyles}/></h4>
+          <h4 className='Info-Rating-Number'>{rating && rating.toFixed(1)}</h4>
+        </div>
         <div className='Info-Caracteristic-Group'>
            {trueProperties.length ? <h5 className='Info-C-Title'>Características:</h5> : ''}
             {/* Mapear characteristias y renderizar cada una true en un div */}
@@ -64,12 +78,23 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
              { detail?.verified === 'verified' && verifiedOwner && <div onClick={() => setModalUpdate(true)} className='ClaimButtom'>Actualizar local</div>}
               {/* <h4 className='Info-rinth-Title'>Categorías calificadas</h4> */}
                         </div>
-            <div className='Rating-C-Group-Container'>
+            <div className='Rating-C-Group-Container' title='Aspectos calificdos'>
                 <h5 className='Rating-C-Group'>Ambiente: <RatingStar readOnly style={{ maxWidth: 100 }} value={avgEnvironment || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
                 <h5 className='Rating-C-Group'>Comida: <RatingStar readOnly style={{ maxWidth: 100 }} value={avgFood || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
                 <h5 className='Rating-C-Group'>Calidad-Precio: <RatingStar readOnly style={{ maxWidth: 100 }} value={avgQaPrice || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
                 <h5 className='Rating-C-Group'>Servicio: <RatingStar readOnly style={{ maxWidth: 100 }} value={avgService || 0} className='Stars-Cards' itemStyles={myStyles}/></h5>
             </div>
+            {schedule &&
+            <div className='Schedule-Info' title='Horario semanal de servicio'>
+            {(schedule.monday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Lunes:    {schedule.monday}</p>}
+            {(schedule.tuesday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Martes:    {schedule.tuesday}</p>}
+            {(schedule.wednesday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Miércoles:    {schedule.wednesday}</p>}
+            {(schedule.thursday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Jueves:    {schedule.thursday}</p>}
+            {(schedule.friday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Viernes:    {schedule.friday}</p>}
+            {(schedule.saturday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Sábado:    {schedule.saturday}</p>}
+            {(schedule.sunday.length > 0) && <p className='Week-schedule' title='Hora de apertura y cierre'>Domingo:    {schedule.sunday}</p>}
+
+            </div>}
         </div>
     </div>
   );

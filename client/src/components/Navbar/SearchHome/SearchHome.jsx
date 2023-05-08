@@ -7,24 +7,21 @@ import { saveInfoSearchHome } from '../../../redux/actions/cards';
 import { useNavigate } from 'react-router-dom';
 
 function SearchHome () {
-  const { city } = useSelector((state) => state.ubication);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { searchName } = useSelector((state) => state);
   const [data, setData] = useState({
-    input: '',
-    map: ''
+    name: '',
+    location: ''
   });
-  const queryParams = new URLSearchParams(location.search);
-  const Name = queryParams.get('name') || '';
-  const searchMap = queryParams.get('city') || '';
   useEffect(() => {
-    setData({
-      ...data,
-      input: Name,
-      map: searchMap
-
-    });
-  }, [Name, searchMap]);
+    if (searchName !== data) {
+      setData(searchName);
+    }
+  }, [searchName]);
+  useEffect(() => {
+    setData(searchName);
+  }, []);
 
   const handleinputs = (e) => {
     setData({
@@ -35,19 +32,11 @@ function SearchHome () {
   const searchDatas = async (e) => {
     e.preventDefault();
     const currentPath = location.pathname;
-    if (currentPath !== currentPath.split('/').at(1) && (data.input.length || data.map.length)) {
-      dispatch(saveInfoSearchHome(data));
-      // setData({
-      //   input: '',
-      //   map: ''
-      // });
-      navigate('/home/1?');
-    }
-    if (!data.input && !data.map && currentPath !== currentPath.split('/').at(1)) {
-      dispatch(saveInfoSearchHome({ input: '', map: city }));
-      navigate('/home/1?');
+    if (currentPath.split('/').includes('home') || currentPath.split('/').includes('writeAReview')) {
+      await dispatch(saveInfoSearchHome(data));
     } else {
-      dispatch(saveInfoSearchHome(data));
+      await dispatch(saveInfoSearchHome(data));
+      navigate('/home');
     }
   };
   return (
@@ -56,8 +45,8 @@ function SearchHome () {
         <div className="input_Eat">
           <MdOutlineRestaurant className="EatIcon icosearch" />
           <input
-            value={data.input}
-            name="input"
+            value={data.name}
+            name="name"
             onChange={handleinputs}
             placeholder="Restaurante"
             className="EatInput"
@@ -66,8 +55,8 @@ function SearchHome () {
         <div className="input_Location">
           <BiMap className="icosearch LocationIcon" />
           <input
-            value={data.map}
-            name="map"
+            value={data.location}
+            name="location"
             onChange={handleinputs}
             placeholder="Lugar"
             className="LocationInput"

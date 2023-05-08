@@ -29,10 +29,10 @@ function FilterGroup ({
         </select>
 
         <select
-          name = "rating"
+          name = "order"
           className="RatingOrder"
           onChange={handleFilters}
-          value={filters.rating}
+          value={filters.order}
         >
           <option value="" >
             Ordena por Rating

@@ -9,18 +9,18 @@
     border-radius: 3rem;
 
     display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        color: var(--prymary);
-        background-color: var(--bg-primary);
-        margin: 0 auto;
-        margin-top: 8rem;
-        padding: 10px 2px;
-        border-radius: 5px;
-        box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
-        text-align: left;
-        transition: 0.3s;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--prymary);
+    background-color: var(--bg-primary);
+    margin: 0 auto;
+    margin-top: 8rem;
+    padding: 10px 2px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 1px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    text-align: left;
+    transition: 0.3s;
    
     
 }
@@ -182,16 +182,16 @@ width: 100%;
     align-items: center;
         
     width: 100%;
-        height: 35px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 5px;
-        transition: 0.1s;
-        opacity: 0.8;
-        background-color: rgb(213, 213, 213);
-        cursor: pointer;
+    height: 35px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: 0.1s;
+    opacity: 0.8;
+    background-color: rgb(213, 213, 213);
+    cursor: pointer;
 }
 
 
@@ -202,10 +202,35 @@ width: 100%;
     height: 150px;
 }
 
-.LocalesImage{
-    width: 100px;
-    height: 100px;
-    border-radius: 20rem;
+.restaurant-card {
+    padding: 2rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    text-align: center;
 }
 
+.restaurant-card .name-view-group {
+    display: flex;
+    gap: 10px;
+}
 
+.restaurant-card .name-view-group span{
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.1rem;
+    text-shadow: 2px 2px 3px var(--bg-thumb);
+}
+
+.btn-local-user {
+    border: none;
+    background-color: transparent;
+    
+}
+
+.btn-local-icon {
+    font-size: 1.2rem;
+}
+.btn-local-icon:hover {
+    border-bottom: 2px solid var(--btn-primary);
+    
+}

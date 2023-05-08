@@ -57,9 +57,9 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
     <div className='LocalInfoComplete'>
         <input
         className='Input-C Input-Name-Complete'
-        type="text"
+        type='text'
         name='name'
-        placeholder='Nombre del Local'
+        placeholder='Nombre del local'
         value={inputs.name}
         onChange={handleChange}
         />
@@ -68,10 +68,10 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
           (showShedule
             ? () => setShowSchedule(false)
             : () => setShowSchedule(true))
-        }>Agregar Horarios</div>
+        }>Agregar horarios</div>
         <input
         className='Input-C Input-Email-Complete'
-        type="text"
+        type='text'
         name='email'
         placeholder='E-mail'
         value={inputs.email}
@@ -79,45 +79,45 @@ function LocalInfoComplete ({ inputs, handleChange, setInputs, showShedule, setS
         />
         <Select
           isMulti
-          name="specialty"
+          name='specialty'
           options={specialtyList}
           placeholder={'Tipo de comida'}
           onChange={handleSpecialtyChange}
-          className="specialty-List-Select"
-          classNamePrefix="specialty-List"
-          menuPlacement="auto"
+          className='specialty-List-Select'
+          classNamePrefix='specialty-List'
+          menuPlacement='auto'
           styles={customStyles}
         />
         <Select
-        name="restaurantType"
+        name='restaurantType'
         options={restaurantTypeList}
         placeholder={'Tipo de restaurante'}
         onChange={handleRestaurantTypeChange}
-        className="restaurant-Type-List-Select"
-        classNamePrefix="restaurant-Type-List"
-        menuPlacement="auto"
+        className='restaurant-Type-List-Select'
+        classNamePrefix='restaurant-Type-List'
+        menuPlacement='auto'
         styles={customStyles}
         />
         <Select
         isMulti
-        name="characteristics"
+        name='characteristics'
         options={characteristicsList}
-        placeholder={'Caracteristicas'}
+        placeholder={'Características'}
         onChange={handleCharacteristicsChange}
-        className="characteristic-List-Select"
-        classNamePrefix="characteristic-List"
-        menuPlacement="auto"
+        className='characteristic-List-Select'
+        classNamePrefix='characteristic-List'
+        menuPlacement='auto'
         styles={customStyles}
         />
         <Select
         isMulti
-        name="payments"
+        name='payments'
         options={paymentList}
-        placeholder={'Metodos de Pago'}
+        placeholder={'Métodos de Pago'}
         onChange={handlePaymentChange}
-        className="payment-List-Select"
-        classNamePrefix="payment-List"
-        menuPlacement="auto"
+        className='payment-List-Select'
+        classNamePrefix='payment-List'
+        menuPlacement='auto'
         styles={customStyles}
         />
 

@@ -1,11 +1,13 @@
-import { GoLocation } from 'react-icons/go';
+import { GoLocation, GoVerified, GoUnverified } from 'react-icons/go';
 import { Rating as RatingStar, ThinStar } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import './Card.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { foco } from '../../redux/actions/ubication';
 import { PopComent } from '../components';
+;
+
 function Card ({
   id,
   Name,
@@ -21,12 +23,18 @@ function Card ({
   lat,
   lng
 }) {
+  const currentPath = window.location.pathname;
+  const navigate = useNavigate();
   const pathlocation = useLocation();
   const dispatch = useDispatch();
 
   const handleFoco = () => {
     const data = { lat, lng };
     dispatch(foco(data));
+  };
+
+  const redirectReview = () => {
+    navigate(`/profile/${id}?review=true`);
   };
 
   const myStyles = {
@@ -73,6 +81,10 @@ function Card ({
       </Link>
       </div>
       <div className="infoCard">
+        {verified === 'verified'
+          ? <GoVerified className='CardVerified'title='Verificado'/>
+          : <GoUnverified className='CardUnverified' title='No verificado'/>
+        }
         <Link to={`/profile/${id}`} >
         <h2 className="placeName">{Name || 'No name'}</h2>
           <div className="RatingGroup">
@@ -82,12 +94,12 @@ function Card ({
           </Link>
         {location && (
           <div className="LocationGroup" onClick={handleFoco}>
-            {address && <p className='Address'>Direccion: {address}</p>}
-            <p className="Location"><GoLocation className='locationico' /> {location.split(',').splice(0, location.split(',').length - 2).join(',')}
+            <p className="Location" title='GeoLocalizacion'><GoLocation className='locationico' /> {location.split(',').splice(0, location.split(',').length - 2).join(',')}
             </p>
             <PopComent text={'Click para ir'} className='Go-To-Map'/>
           </div>
         )}
+        {currentPath && currentPath.split('/').includes('writeAReview') === true && <button className="reviewButton" onClick={redirectReview}>Hacé tu reseña</button>}
         {
         pathlocation.pathname.includes('/home') &&
         <div className='Card-Tags'>
@@ -99,8 +111,10 @@ function Card ({
           }
 
         </div>
+
         }
       </div>
+
     </div>
   );
 }

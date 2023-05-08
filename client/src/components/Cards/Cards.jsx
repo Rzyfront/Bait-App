@@ -1,57 +1,71 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useParams, Link } from 'react-router-dom';
 import './Cards.css';
 import { Card, Pagination } from '../components';
 import { useDispatch, useSelector } from 'react-redux';
-import { searchByFilters } from '../../redux/actions/cards';
+import { saveFilter, saveInfoSearchHome, searchByFilters } from '../../redux/actions/cards';
 import MapHouse from '../Map/Maphouse';
-import eliminarTildes from '../../hooks/eliminarTildes.';
 import { MdAddBusiness } from 'react-icons/md';
-
+import { useNavigate } from 'react-router-dom';
+import Login from '../Login/Login';
 function Cards ({ toggle }) {
-  const location = useLocation();
   const { locals, totalPages } = useSelector((state) => state.cards);
-  const pagine = useParams();
+  const [userLogin, setUserLogin] = useState(false);
+  const dataUser = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const currentPath = window.location.pathname;
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [city, setCity] = useState('');
-  const [specialty, setSpecialty] = useState('');
-  const [order, setOrder] = useState('');
-  const [characteristics, setCharacteristics] = useState([]);
   const [page, setPage] = useState(1);
   const [outAnimation, setOutAnimation] = useState(false);
-  const ubication = useSelector((state) => state.ubication);
 
+  const { filters, searchName } = useSelector((state) => state);
+  // APLICATION FILTER
   useEffect(() => {
-    setPage(pagine.id);
-  }, [pagine]);
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    setName(queryParams.get('name') || '');
-    setCity(queryParams.get('city') || 'buenos aires');
-    // setCity(queryParams.get('city') || '');
-    setSpecialty(queryParams.get('specialty') || '');
-    setOrder(queryParams.get('order') || '');
-
-    const characteristicsArr = [];
-    queryParams.forEach((value, key) => {
-      if (key === 'characteristics[]') {
-        characteristicsArr.push(value);
+    let allFilter = '';
+    if (filters && searchName) {
+      for (const property in searchName) {
+        if (searchName[property] !== '') {
+          const data = (`${property}=${searchName[property]}&`);
+          allFilter = allFilter + data;
+        }
       }
-    });
-    setCharacteristics(characteristicsArr);
-  }, [location]);
+      for (const property in filters) {
+        if (property !== 'characteristics' && filters[property] !== '') {
+          const data = (`${property}=${filters[property]}&`);
+          allFilter = allFilter + data;
+        }
+        if (property === 'characteristics' && filters[property].length) {
+          const objetnew = {};
+          filters[property].forEach(data => {
+            objetnew[data] = true;
+          });
+          allFilter = allFilter + (`${property}=${JSON.stringify(objetnew)}&`);
+        }
+      }
+    }
+    dispatch(searchByFilters({ page, filter: allFilter }));
+  }, [filters, searchName, page]);
+  const handlePage = (data) => {
+    setPage(data + 1);
+  };
 
-  useEffect(() => {
-    const ciudad = eliminarTildes(city);
-    dispatch(searchByFilters({ name, city: ciudad, specialty, order, characteristics, page }));
-  }, [name, city, specialty, order, characteristics, page]);
-
+  const enrollSite = () => {
+    if (dataUser?.user?.name) navigate('/createplace');
+    else setUserLogin(true);
+  };
+  const refresh = () => {
+    dispatch(saveFilter({
+      specialty: '',
+      characteristics: [],
+      order: '',
+      alphabet: ''
+    }));
+    dispatch(saveInfoSearchHome({ name: '', location: '' }));
+  };
   return (
     <div className="containerCardsall animated-element">
+        {userLogin && <Login setToggleLogin={setUserLogin} />}
       <div className="ContainerCards animated-element">
-      {totalPages ? <Pagination totalPages={totalPages} filters={{ name, city, specialty, order, characteristics, page }} /> : ''}
+        {totalPages > 0 && <Pagination totalPages={totalPages} handlePage={handlePage}/>}
           <div className='widthcards'>
         {locals &&
           locals.map(
@@ -90,13 +104,14 @@ function Cards ({ toggle }) {
           {
           !locals?.length &&
             <div className="NoLocalsReview">
-              <h3 className='Nofind'>No existe un local que coincida con la busqueda</h3>
+              <h3 className='Nofind'>No existe un local que coincida con la búsqueda</h3>
+                {currentPath.split('/').includes('writeAReview') && <div className="AddPlace" onClick={enrollSite}>
+                  <h2 className="AddPlace_Text">Inscribe el sito</h2> <MdAddBusiness />
+                </div>}
 
-                <Link to={`/home/1?name=&city=${ubication.city}`}>
-                  <div className="AddPlace">
+                  <div className="AddPlace" onClick={() => refresh()}>
                     <h2 className="AddPlace_Text">Ver todos</h2> <MdAddBusiness />
                   </div>
-                </Link>
 
         </div>
         }

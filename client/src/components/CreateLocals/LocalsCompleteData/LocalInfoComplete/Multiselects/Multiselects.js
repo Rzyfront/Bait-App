@@ -3,23 +3,24 @@ export const specialtyList = [
   { value: 'Argentina', label: 'Argentina' },
   { value: 'China', label: 'China' },
   { value: 'Vegana', label: 'Vegana' },
-  { value: 'Fancesa', label: 'Fancesa' },
+  { value: 'Francesa', label: 'Francesa' },
   { value: 'India', label: 'India' },
-  { value: 'Asiatica', label: 'Asiatica' },
-  { value: 'Comida Rapida', label: 'Comida Rapida' },
-  { value: 'Parilla', label: 'Parilla' }
+  { value: 'Asiática', label: 'Asiática' },
+  { value: 'Comida Rápida', label: 'Comida Rápida' },
+  { value: 'Parilla', label: 'Parilla' },
+  { value: 'Italiana', label: 'Italiana' }
 ];
 export const restaurantTypeList = [
   { value: 'Joven', label: 'Joven' },
   { value: 'Elegante', label: 'Elegante' },
   { value: 'Nuevo', label: 'Nuevo' },
   { value: 'Colonial', label: 'Colonial' },
-  { value: 'Romantico', label: 'Romantico' },
+  { value: 'Romántico', label: 'Romántico' },
   { value: 'Ejecutivo', label: 'Ejecutivo' }
 ];
 export const characteristicsList = [
   { value: 'wifi', label: 'Wi-fi' },
-  { value: 'parking_lot', label: 'Parqueadero' },
+  { value: 'parking_lot', label: 'Estacionamiento' },
   { value: 'outdoor_seating', label: 'Asientos exteriores' },
   { value: 'live_music', label: 'Música' },
   { value: 'table_service', label: 'Servicio a Mesa' },
@@ -32,7 +33,7 @@ export const characteristicsList = [
 
 export const paymentList = [
   { value: 'cash', label: 'Efectivo' },
-  { value: 'devit_card', label: 'Tarjeta Debito' },
-  { value: 'credit_card', label: 'Tarjeta Credito' },
+  { value: 'devit_card', label: 'Tarjeta Débito' },
+  { value: 'credit_card', label: 'Tarjeta Crédito' },
   { value: 'pay_apps', label: 'Pay Apps' }
 ];

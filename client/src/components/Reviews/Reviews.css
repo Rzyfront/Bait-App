@@ -9,6 +9,7 @@
 
 .Reviews .Reviews-Title {
     font-size: 2rem;
+
     padding-right: 20px;
     border-right: 1px solid var(--primary);
     font-family: var(--title);
@@ -16,7 +17,7 @@
 
 .Reviews .Reviews-List {
     width: 98%;
-    height: 80%;
+    height: fit-content;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -29,7 +30,7 @@
     position: relative;
     z-index: 99;
     width: 100%;
-    height: 10%;
+    min-height: 70px;
     padding: 0 20px;
     display: flex;
     justify-content: space-between;
@@ -64,6 +65,21 @@
 .Reviews .Load-More .Load:hover {
     color: var(--secondary);
     transform: scale(1.05);
+}
+
+.Reviews .NoReviews{
+    width: 98%;
+    margin: 10px 0;
+    height: fit-content;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    text-align: center;
+}
+
+.Reviews .NoReviews .NoReviewsText{
+    font-size: 1rem;
+    font-family: var(--text);
+    font-weight: 400;
 }
 
 @media screen and (max-width:1050px) {

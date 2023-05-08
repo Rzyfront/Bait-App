@@ -9,38 +9,59 @@
     display: flex;
     flex-direction: column;
     width: 65%;
-    gap: 5px;
+    gap: 10px;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group{
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     width: 100%;
     height: 35px;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Type-Eat{
-    height: 35px;
-    background-color: var(--bg-tertiary);
-    padding: 7px 10px;
+    height: 30px;
+    background-color: rgba(71, 99, 183, 0.213);
+    border: 1px solid var(--btn-primary);
+    color: var(--secondary);
+    padding: 4px 8px;
     border-radius: 5px;
-    color: var(--tertiary);
 }
 
 
 .InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Type-Local{
-    height: 35px;
-    background-color: var(--optional1);
-    color: var(--tertiary);
-    padding: 7px 10px;
+    height: 30px;
+    background-color: rgba(0, 128, 0, 0.226);
+    border: 1px solid var(--optional1);
+    color: var(--optional1);
+    padding: 4px 8px;
     border-radius: 5px;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Tags-Info-Group .Tag-Text {
     font-size: 1rem;
     font-family: var(--text);
-    font-weight: 300;
+    font-weight: 400;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Name-Group{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Name-Group .LocalVerified{
+    color: var(--bg-tertiary);
+    font-size: 1.5rem;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Name-Group .LocalUnverified {
+    color: rgba(62, 62, 62, 0.701);
+    font-size: 1.5rem;
 }
 
 
@@ -49,14 +70,22 @@
     font-family: var(--title);
     font-weight: 400;
     color: var(--primary);
+    width: 90%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Info-Local-Location{
+    width: 100%;
     font-size: 1rem;
     font-family: var(--title);
     font-weight: 300;
     color: var(--primary);
     transition: 0.3s;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .InfoLocalsProfile-Compontent .Info-left .Info-Local-Location:hover{
@@ -64,10 +93,25 @@
     color: var(--secondary);
 }
 
-.InfoLocalsProfile-Compontent .Info-left .Info-Rating{
+.InfoLocalsProfile-Compontent .Info-left .Info-Rating-Group{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Rating-Group .Info-Rating{
     display: flex;
     align-items: center;
     gap: 10px;
+    font-family: var(--text);
+    font-weight: 400;
+    font-size: 1.6rem;
+}
+
+.InfoLocalsProfile-Compontent .Info-left .Info-Rating-Group .Info-Rating-Number {
+    padding-left: 10px;
+    border-left: 1px solid var(--btn-secondary);
     font-family: var(--text);
     font-weight: 400;
     font-size: 1.6rem;
@@ -133,6 +177,7 @@
     width: 150px;
     background-color: var(--optional2);
     transition: 0.3s;
+    cursor: pointer;
 }
 
 .InfoLocalsProfile-Compontent .Info-rigth .Info-rigth-title .ClaimButtom:hover{
@@ -156,6 +201,21 @@
     font-family: var(--text);
     font-weight: 300;
 
+}
+
+.InfoLocalsProfile-Compontent .Info-rigth .Schedule-Info{
+    width: 90%;
+    padding: 15px;
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    letter-spacing: 1px;
+}
+
+.InfoLocalsProfile-Compontent .Info-rigth .Schedule-Info .Week-schedule{
+    width: 100%;
+    font-size: 1rem;
+    font-family: var(--text);
+    font-weight: 300;
 }
 
 
@@ -213,4 +273,8 @@
         width: 95%;
         align-items: flex-start;  
     }
+
+    .InfoLocalsProfile-Compontent .Info-left .Info-Rating-Group{
+    margin-top: 0px;
+}
 }

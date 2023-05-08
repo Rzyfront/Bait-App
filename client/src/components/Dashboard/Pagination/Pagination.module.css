@@ -5,6 +5,7 @@
 .atras{
     background-color: var(--btn-primary);
     color: white;
+    font-weight: 500;
     padding: 3px 15px;
     border-radius: 10px;
     margin-left: -20px;
@@ -19,6 +20,7 @@
 .next{
     background-color: var(--btn-primary);
     color: white;
+    font-weight: 500;
     padding: 3px 15px;
     border-radius: 10px;
     margin-left: 20px;

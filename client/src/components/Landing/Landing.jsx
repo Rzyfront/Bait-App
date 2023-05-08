@@ -7,10 +7,8 @@ import '@coreui/coreui/dist/css/coreui.min.css';
 
 import './Landing.css';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const Landing = () => {
-  const ubication = useSelector((state) => state.ubication);
   return (
     <div className='Landing animated-element'>
       <Navbar />
@@ -23,16 +21,16 @@ const Landing = () => {
                 Bienvenido a <span>Bait</span>
               </h1>
               <h2>Descubrí dónde comer</h2>
-              <Link to={`/home/1?name=&city=${ubication.city}`} >
+              <Link to={'/home'} >
                 <button>Explorar</button>
               </Link>
             </div>
             <img src={ImgSlide1} alt='ImgSlide1' />
           </div>
-          <a className='Slide-Arrow' href="#Footer"><IoIosArrowDown/></a>
+          <a className='Slide-Arrow' href='#Footer'><IoIosArrowDown/></a>
         </div>
         <div id='CarrouselItem2' className='CarrouselItem'>
-          <a className='Slide-Arrow2' href="#Navbar"><IoIosArrowUp/></a>
+          <a className='Slide-Arrow2' href='#Navbar'><IoIosArrowUp/></a>
           <div className='SlideItem2'>
             <img src={ImgSlide2} alt='ImgSlide1' />
             <div className='SecondTitle'>
@@ -41,7 +39,7 @@ const Landing = () => {
                 <span>Reseña</span> los lugares que has visitado y consigue
                 promociones exclusivas
               </h3>
-              <Link to='/writeAReview/1?name=&city='>
+              <Link to='/writeAReview'>
                 <button>Reseñar</button>
               </Link>
             </div>

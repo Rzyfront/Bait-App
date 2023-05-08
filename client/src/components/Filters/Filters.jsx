@@ -4,34 +4,34 @@ import { RiRefreshFill } from 'react-icons/ri';
 import { BiFilterAlt } from 'react-icons/bi';
 import { TbMapOff, TbMap2 } from 'react-icons/tb';
 import FilterGroup from './FilterGroup/FilterGroup';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { TbToolsKitchen2 } from "react-icons/tb";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { path } from '../../helpers/path';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveInfoSearchHome } from '../../redux/actions/cards';
+import { saveFilter, saveInfoSearchHome } from '../../redux/actions/cards';
+import Login from '../Login/Login';
 
 // import Filtertype from "./filtertype/Filtertype";
 const Filters = ({ toggle, setToggle }) => {
-  const { city } = useSelector((state) => state.ubication);
   const dispatch = useDispatch();
   const [toggleFilterModal, setToggleFilterModal] = useState(false);
-  const navigate = useNavigate();
-  const { searchName, ubication } = useSelector((state) => state);
   const initialFilter = {
     specialty: '',
     characteristics: [],
-    rating: '',
+    order: '',
     alphabet: ''
   };
   const [filters, setFilters] = useState(initialFilter);
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [special, setSpecial] = useState([]);
+  const [userLogin, setUserLogin] = useState(false);
+  const dataUser = useSelector((state) => state.user);
+  const navigate = useNavigate();
 
   const Caracteristicaslist = [
     { value: 'wifi', label: 'Wi-fi' },
-    { value: 'parking_lot', label: 'Parqueadero' },
+    { value: 'parking_lot', label: 'Estacionamiento' },
     { value: 'outdoor_seating', label: 'Asientos exteriores' },
     { value: 'live_music', label: 'Música' },
     { value: 'table_service', label: 'Servicio a Mesa' },
@@ -46,32 +46,29 @@ const Filters = ({ toggle, setToggle }) => {
     axios.get('/locals/specialties')
       .then(res => setSpecial(res.data.allSpecialties.map(e => e.specialty)))
       .catch(err => console.log(err));
+    return () => {
+      onRefresh();
+    };
   }, []);
 
   useEffect(() => {
-    navigate(path(1, searchName.input, searchName.map, filters));
+    dispatch(saveFilter(filters));
   }, [filters]);
-
-  useEffect(() => {
-    setFilters(initialFilter);
-    navigate(path(1, searchName.input, searchName.map, initialFilter));
-    setSelectedOptions([]);
-  }, [searchName, ubication]);
 
   const handleFilters = (e) => {
     const { name, value } = e.target;
-    if (name === 'rating') {
+    if (name === 'order') {
       setFilters({ ...filters, alphabet: '', [name]: value });
     } else if (name === 'alphabet') {
-      setFilters({ ...filters, rating: '', [name]: value });
+      setFilters({ ...filters, order: '', [name]: value });
     } else { setFilters({ ...filters, [name]: value }); };
   };
 
   const onRefresh = () => {
     setFilters(initialFilter);
     setSelectedOptions([]);
-    dispatch(saveInfoSearchHome({ input: '', map: city }));
-    // navigate(path(1, searchName, ubication.city, initialFilter));
+    dispatch(saveFilter(initialFilter));
+    dispatch(saveInfoSearchHome({ name: '', location: '' }));
   };
 
   const handleMultiSelectChange = (selectedOptions) => {
@@ -79,14 +76,18 @@ const Filters = ({ toggle, setToggle }) => {
     setFilters({ ...filters, characteristics: selectedOptions.map(e => e.value) });
   };
 
+  const enrollSite = () => {
+    if (dataUser?.user?.name) navigate('/createplace');
+    else setUserLogin(true);
+  };
+
   return (
     <div className="Filters">
+      {userLogin && <Login setToggleLogin={setUserLogin} />}
       <div className='Left-Home-Buttons'>
-        <Link to="/createplace">
-        <div className="AddPlace">
+        <div className="AddPlace" onClick={enrollSite}>
           <h2 className="AddPlace_Text">Inscribir sitio</h2> <MdAddBusiness />
         </div>
-      </Link>
       </div>
     <div className='AddResetButtom'>
       <div className="ResetHome" onClick={onRefresh}>

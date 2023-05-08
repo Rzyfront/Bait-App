@@ -3,7 +3,6 @@ import { auth, googleProvider } from '../config/firebase-config';
 import axios from 'axios';
 
 export const signInWithGoogle = async () => {
-  console.log('google authentication');
   try {
     const user = await signInWithPopup(auth, googleProvider);
     const { firstName, lastName } = user._tokenResponse;
@@ -18,13 +17,11 @@ export const signInWithGoogle = async () => {
         emailVerified
       })
       .then((res) => {
-        console.log(res.data);
         if (res.data.token) {
           window.localStorage.setItem('token', res.data.token);
           location.reload();
-        };
-      }
-      );
+        }
+      });
   } catch (error) {
     console.log(error);
   }
@@ -43,11 +40,9 @@ export const loginWithGoogle = async () => {
     verified: user.emailVerified
   };
   console.log(data);
-  await axios
-    .post('/login/google', { email: user.email })
-    .then((res) => {
-      window.localStorage.setItem('token', res.data.token);
-      location.reload();
-    });
+  await axios.post('/login/google', { email: user.email }).then((res) => {
+    window.localStorage.setItem('token', res.data.token);
+    location.reload();
+  });
 };
 //

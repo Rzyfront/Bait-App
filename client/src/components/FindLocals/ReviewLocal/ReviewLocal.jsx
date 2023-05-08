@@ -2,6 +2,7 @@ import style from '../FindLocals.module.css';
 import { Rating as RatingStar } from '@smastrom/react-rating';
 import { Loading } from '@nextui-org/react';
 import { AiFillStar } from 'react-icons/ai';
+import { RiImageAddFill } from 'react-icons/ri';
 import { GoVerified } from 'react-icons/go';
 import { useEffect, useState } from 'react';
 import { useUploadImage } from '../../../hooks/useUploadImage';
@@ -11,10 +12,13 @@ import { useParams } from 'react-router-dom';
 import Tiket from './Tiket';
 import { ErrorReview } from './ErrorReview';
 import { toast, ToastContainer } from 'react-toastify';
+import Camara from '../Camare';
+
 const ReviewLocal = ({ sendReview, close }) => {
+  const [camara, setcamara] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { image, loading, handleChangeimage } = useUploadImage();
+  const { image, loading, handleChangeimage, handlePhoto } = useUploadImage();
   const [inputs, setInputs] = useState({
     title: '',
     review: '',
@@ -41,7 +45,6 @@ const ReviewLocal = ({ sendReview, close }) => {
     setError(ErrorReview({
       ...inputs
     }));
-    console.log(error);
   }, [inputs]);
   const [calificar, setCalificar] = useState(false);
   const [calculateAverage, setcalculateAverage] = useState(0);
@@ -84,7 +87,6 @@ const ReviewLocal = ({ sendReview, close }) => {
   ]);
   const handleData = (event) => {
     const { name, value } = event.target;
-    console.log(name, value);
     setInputs({
       ...inputs,
       [name]: value
@@ -96,7 +98,13 @@ const ReviewLocal = ({ sendReview, close }) => {
     if (!Object.values(error).length) {
       const response = await dispatch(comentarie({ calificationFood, calificationQaPrice, calificationEnvironment, calificationService, inputs, id }));
       if (response === true) {
-        sendReview();
+        toast.success('¡Reseña creada correctamente, espera la aprobación!', {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000
+        });
+        setTimeout(() => {
+          sendReview();
+        }, 2000);
       } else {
         toast.error('Error al enviar reseña', {
           position: toast.POSITION.TOP_CENTER,
@@ -124,6 +132,20 @@ const ReviewLocal = ({ sendReview, close }) => {
       });
     }
   };
+  const activeCamare = (e) => {
+    e.preventDefault();
+    if (camara === true) {
+      setcamara(false);
+    } else {
+      setcamara(true);
+    }
+  };
+
+  const sendPhotos = async (e) => {
+    await handlePhoto(e);
+    setcamara(false);
+  };
+
   return (
     <div className={style.centrar} onClick={() => sendReview()}>
       <div className={style.formContainer} onClick={(e) => e.stopPropagation()}>
@@ -149,11 +171,11 @@ const ReviewLocal = ({ sendReview, close }) => {
               <div>
                 <input name="title" className={style.inputForm} value={inputs.title} onChange={handleData}/>
                 <label htmlFor="titulo" className={style.placeholder}>
-                  Titulo
+                  Título
                 </label>
               </div>
               <div className={style.calificacion} onClick={() => { resetearRating(); setCalificar(true); }}>
-                <b style={{ marginRight: '20px', marginTop: '4px' }}>Puntuacion:</b>
+                <b style={{ marginRight: '20px', marginTop: '4px' }}>Puntuación:</b>
               <RatingStar
                 className={style.ratingStar}
                 name='Rating'
@@ -162,16 +184,22 @@ const ReviewLocal = ({ sendReview, close }) => {
                 readOnly
               />
               </div>
-              <div>
-                <div className={style.fileSelect}>
-                  <input type="file" className={style.srcFile1} onChange={handleChangeimage}/>
+                <button onClick={activeCamare} className={style.sendReview}>Cámara</button>
+                {camara && camara === true && <Camara activeCamare={activeCamare} sendPhotos={sendPhotos}/>}
+                {camara !== true &&
+                   <div>
+                  <div className={style.fileSelect}>
+                    <input id='inputImgReview' type="file" className={style.srcFile1} onChange={handleChangeimage} />
+                  </div>
+
                 </div>
-              </div>
-              <div>
-                <div className={style.imgUpload}>
-                    {loading === true ? <Loading color="primary" className={style.img} /> : JSON.stringify(inputs.image) !== '{}' ? <img src={inputs.image.url} className={style.img} /> : <img className={style.img} src="https://res.cloudinary.com/dirsusbyy/image/upload/v1680389194/ppex43qn0ykjyejn1amk.png" />}
-                </div>
-              </div>
+                  }
+                {camara !== true && <label htmlFor='inputImgReview'>
+                  <div className={style.imgUpload}>
+                    {loading === true ? <Loading color="primary" className={style.img} /> : JSON.stringify(inputs.image) !== '{}' ? <img src={inputs.image.url} className={style.img} /> : <RiImageAddFill className={style.ImgUploadIco} />}
+                  </div>
+                </label>}
+
               <div>
                   <input name="review" className={style.inputForm} onChange={handleData} value={inputs.review} />
                 <label htmlFor="reseña" className={style.placeholder}>
@@ -180,9 +208,9 @@ const ReviewLocal = ({ sendReview, close }) => {
               </div>
             </div></>
               : <>
-              <h3 style={{ marginBottom: '30px' }}>Puntuacion</h3>
+              <h3 style={{ marginBottom: '30px' }}>Puntuación</h3>
               <h5>Calidad-Precio</h5>
-              <p className={style.textRating}>Como te parecio la calidad con relacion al precio</p>
+              <p className={style.textRating}>Cómo te pareció la calidad con relación al precio</p>
               <RatingStar
               className={style.ratingStar}
                 name='enviroment'
@@ -192,7 +220,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Ambiente</h5>
-              <p className={style.textRating}>Como te parecio el lugar</p>
+              <p className={style.textRating}>Cómo te pareció el lugar</p>
               <RatingStar
               className={style.ratingStar}
                 name='enviroment'
@@ -202,7 +230,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Servicio</h5>
-              <p className={style.textRating}>Como te parecio la atencion y el servicio</p>
+              <p className={style.textRating}>Cómo te pareció la atención y el servicio</p>
               <RatingStar
                 name='enviroment'
                 className={style.ratingStar}
@@ -212,7 +240,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Comida</h5>
-              <p className={style.textRating}>Cuentanos que tal estuvo la comida</p>
+              <p className={style.textRating}>Cuéntanos qué tal estuvo la comida</p>
               <RatingStar
                 name='enviroment'
                 className={style.ratingStar}
@@ -233,7 +261,7 @@ const ReviewLocal = ({ sendReview, close }) => {
               <div>
                 <Tiket handleTiket={handleTiket} inputs={inputs}/>
               </div>
-              <p className={style.textFactura}><b>IMPORTANTE: </b>Tu factura no sera mostrada en la reseña pero es necesaria para validar que si has comido en ese lugar</p>
+              <p className={style.textFactura}><b>IMPORTANTE: </b>Tu factura no será mostrada en la reseña pero es necesaria para soportar la validez de la misma.</p>
             </div>
           )}
         </form>

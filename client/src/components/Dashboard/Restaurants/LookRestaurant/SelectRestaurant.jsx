@@ -8,9 +8,8 @@ const SelectRestaurant = ({ id, handleAdd }) => {
   const { detail } = useSelector((state) => state);
   useEffect(() => {
     dispatch(DetailLocal(id));
-    console.log(detail);
   }, []);
-  console.log(detail);
+
   return <div className='selectcontainer'>
     <div className='father'>
       {detail && detail.Images && detail.Images.length ? <img src={detail.Images[0].url} alt='image' className='photoselect' /> : <img src={photoDefault} alt='foto' className='photoselect'/>}

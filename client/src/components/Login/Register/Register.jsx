@@ -80,104 +80,104 @@ const Register = ({ setToggleLogin, loginRegister, login }) => {
         className={`${!login && 'register scale-up-bottom'}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <ToastContainer className="notify" theme="colored" />
+        <ToastContainer className='notify' theme='colored' />
         <TfiClose
-          className="CloseIcon"
+          className='CloseIcon'
           onClick={() => {
             setToggleLogin(false);
           }}
         />
 
-        <h3 className="Registro">Registro</h3>
+        <h3 className='Registro'>Registro</h3>
 
-        <div className="formulario">
-          <div className="container" ref={formRef}>
-            <form autoComplete="off" className="form">
+        <div className='formulario'>
+          <div className='container' ref={formRef}>
+            <form autoComplete='off' className='form'>
               <input
-                className="input"
-                type="text"
-                name="name"
+                className='input'
+                type='text'
+                name='name'
                 value={dataRegister.name}
                 onChange={handleRegister}
-                autoComplete="off"
-                placeholder="Nombre"
+                autoComplete='off'
+                placeholder='Nombre'
               ></input>
               <input
-                className="input"
-                type="text"
-                name="lastname"
+                className='input'
+                type='text'
+                name='lastname'
                 value={dataRegister.lastname}
                 onChange={handleRegister}
-                autoComplete="off"
-                placeholder="Apellido"
+                autoComplete='off'
+                placeholder='Apellido'
               ></input>
               <input
-                className="input"
-                type="number"
-                name="age"
+                className='input'
+                type='number'
+                name='age'
                 value={dataRegister.age}
                 onChange={handleRegister}
-                autoComplete="off"
-                placeholder="Edad"
+                autoComplete='off'
+                placeholder='Edad'
               ></input>
               <input
-                className="input"
-                type="text"
-                name="phone_number"
+                className='input'
+                type='text'
+                name='phone_number'
                 value={dataRegister.phone_number}
                 onChange={handleRegister}
-                autoComplete="off"
-                placeholder="Telefono"
+                autoComplete='off'
+                placeholder='Teléfono'
               ></input>
               <input
-                className="input"
-                type="text"
-                name="email"
+                className='input'
+                type='text'
+                name='email'
                 value={dataRegister.email}
                 onChange={handleRegister}
-                autoComplete="off"
-                placeholder="Email"
+                autoComplete='off'
+                placeholder='Email'
               ></input>{' '}
               <input
-                className="input"
-                type="text"
-                name="location"
+                className='input'
+                type='text'
+                name='location'
                 value={dataRegister.location}
                 onChange={handleRegister}
-                autoComplete="off"
-                placeholder="Ciudad"
+                autoComplete='off'
+                placeholder='Ciudad'
               ></input>
               <input
-                className="input"
-                type="password"
-                name="password"
+                className='input'
+                type='password'
+                name='password'
                 value={dataRegister.password}
                 onChange={handleRegister}
-                autoComplete="off"
-                placeholder="Contraseña"
+                autoComplete='off'
+                placeholder='Contraseña'
               ></input>
-              <div className="PasswordGroup">
+              <div className='PasswordGroup'>
                 <input
-                  type="password"
-                  name="password2"
-                  autoComplete="off"
+                  type='password'
+                  name='password2'
+                  autoComplete='off'
                   value={dataRegister.password2}
                   onChange={handleRegister}
-                  className="input"
-                  placeholder="Repetir contraseña"
+                  className='input'
+                  placeholder='Repetir contraseña'
                   ref={passRef}
                 ></input>
               </div>
-              <button className="button" onClick={sendRegister}>
+              <button className='button' onClick={sendRegister}>
                 Registrarme
               </button>
-              <div className="loginwith">
-                <FcGoogle className="google" />
-                <span className="texto" onClick={() => signInWithGoogle()}>
+              <div className='loginwith'>
+                <FcGoogle className='google' />
+                <span className='texto' onClick={() => signInWithGoogle()}>
                   Registro con Google
                 </span>
               </div>
-              <div className="registrarme" onClick={() => loginRegister()}>
+              <div className='registrarme' onClick={() => loginRegister()}>
                 <p>¿Ya tienes cuenta?</p>
                 <h5>Inicia sesión</h5>
               </div>

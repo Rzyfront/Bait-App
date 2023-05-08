@@ -6,13 +6,7 @@ import { getLocalsToVerify } from '../../../../redux/actions/LocalsAdmin';
 import { AiFillFileUnknown } from 'react-icons/ai';
 import { FaHouseUser } from 'react-icons/fa';
 import { BsHouseSlashFill } from 'react-icons/bs';
-
-const ROLES = {
-  admin: 'Administrador',
-  superAdmin: 'Súper admin',
-  user: 'Usuario',
-  owner: 'Propietario'
-};
+import { ROLES } from '../../dictionaries';
 
 export default function LocalsCards ({ local }) {
   const dispatch = useDispatch();
@@ -22,7 +16,6 @@ export default function LocalsCards ({ local }) {
       const { data } = await axios.get(`/locals/document/${local.id}`);
       setDocumentLink(data.url);
     } catch (error) {
-      console.log(error);
       swal(error.response.data.message, { type: 'error' });
     }
   };
@@ -32,7 +25,6 @@ export default function LocalsCards ({ local }) {
       swal('Local asignado con éxito', { type: 'success' });
       dispatch(getLocalsToVerify());
     } catch (error) {
-      console.log(error);
       swal(error.response.data.message, { type: 'error' });
     }
   };
@@ -42,7 +34,6 @@ export default function LocalsCards ({ local }) {
       swal('Local denegado con éxito', { type: 'success' });
       dispatch(getLocalsToVerify());
     } catch (error) {
-      console.log(error);
       swal(error.response.data.message, { type: 'error' });
     }
   };
