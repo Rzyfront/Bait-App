@@ -37,6 +37,7 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
   }
   const dataUser = useSelector((state) => state.user);
   const verifiedOwner = detail?.UserId === dataUser?.user?.id;
+
   return (
     <div className='InfoLocalsProfile-Compontent'>
         <div className='Info-left'>
@@ -86,7 +87,8 @@ function InfoLocalsProfile ({ detail, showClaimLocal, setModalUpdate }) {
             </div>
             {schedule &&
             <div className='Schedule-Info' title='Horario Semanal de servicio'>
-            <p className='Week-schedule' title='Hora de apertura y cierre'>Lunes:    {schedule.monday}</p>
+            <p className='Week-schedule' title='Hora de apertura y cierre'>Lunes:
+            {schedule.monday}</p>
             <p className='Week-schedule' title='Hora de apertura y cierre'>Martes:    {schedule.tuesday}</p>
             <p className='Week-schedule' title='Hora de apertura y cierre'>Miercoles:    {schedule.wednesday}</p>
             <p className='Week-schedule' title='Hora de apertura y cierre'>Jueves:    {schedule.thursday}</p>

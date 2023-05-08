@@ -32,6 +32,7 @@ function Reviews ({ localId, setPage, page }) {
       dispatch(cleanReviews());
     };
   }, [page, order]);
+  console.log(reviews);
   return (
     <div className='Reviews animated-element'>
       <div className='TitleGroup'>
@@ -47,9 +48,10 @@ function Reviews ({ localId, setPage, page }) {
         </div>
       </div>
       <div className='Reviews-List'>
-        {reviews?.map(({ User, rating, Image, comment, title, environment, food, qaPrice, service, createdAt }, index) => {
-          const reviewDate = FormatDate(createdAt);
-          return (
+        {reviews.length > 0
+          ? reviews?.map(({ User, rating, Image, comment, title, environment, food, qaPrice, service, createdAt }, index) => {
+            const reviewDate = FormatDate(createdAt);
+            return (
            <ReviewsCard
            index={index}
            key={index}
@@ -64,12 +66,21 @@ function Reviews ({ localId, setPage, page }) {
            service={service}
            reviewDate={reviewDate}
            />
-          );
-        })}
+            );
+          })
+          : <div className='NoReviews'>
+            <p className='NoReviewsText'>No hay más reseñas para mostrar, si visitáste este lugar dejá tu reseña.
+            </p>
+          </div>
+      }
       </div>
-       <div className='Load-More'>
+      {reviews.length > 0
+        ? <div className='Load-More'>
         <h4 className='Load' onClick={() => setPage(++page)}>Cargar más</h4>
        </div>
+        : <div className='Load-More'>
+        <h4 className='Load' onClick={() => setPage(1)}>Atrás</h4>
+       </div>}
     </div>
   );
 }
