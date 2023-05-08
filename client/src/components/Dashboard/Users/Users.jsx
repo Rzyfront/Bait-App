@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import style from './Users.module.css';
 import Pagination from '../Pagination/Pagination';
-// import swal from '@sweetalert/with-react';
 import { getAllUsers } from '../../../redux/actions/admin';
 import { useDispatch, useSelector } from 'react-redux';
 import User from './User';
@@ -57,7 +56,7 @@ const Users = ({ localId, handleAdd }) => {
               defaultValue=''
               className={style.select}
             >
-              <option value='' disabled selected>Seleccionar rol</option>
+              <option value='' disabled>Seleccionar rol</option>
               <option value='' >Todos</option>
               <option value='user' >Usuario</option>
               <option value='owner' >Propietario</option>

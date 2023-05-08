@@ -3,23 +3,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
     gap: 5px;
-    margin-top: 15px;
-
+    border-bottom: 1px solid var(--bg-tertiary);
+    transition: 0.3s;
+    gap: 3px;
+    border-radius: 5px;
+    width: fit-content;
+    margin: 10px auto;
+    padding-bottom: 4px;
 }
 
-.Pagination .page-num {
-    padding: 8px 15px;
+.Pagination .page-num{
+    padding: 3px 8px;
     cursor: pointer;
     border-radius: 3px;
     font-weight: 400;
-    background-color: rgba(66, 66, 66, 0.055);
-
 }
 
 .Pagination .page-num:hover {
-    background-color: var(--secondary);
+    background-color: rgba(0, 0, 0, 0.196);
     color: var(--bg-primary);
 }
 
