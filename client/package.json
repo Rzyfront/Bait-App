@@ -17,6 +17,7 @@
     "chart.js": "^4.3.0",
     "dotenv": "^16.0.3",
     "firebase": "^9.19.1",
+    "html2canvas": "^1.4.1",
     "jest": "^27.5.1",
     "jquery": "^3.6.4",
     "leaflet": "^1.9.3",

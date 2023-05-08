@@ -21,5 +21,16 @@ export const useUploadImage = () => {
     };
     reader.readAsDataURL(file);
   };
-  return { image, loading, handleChangeimage };
+  const handlePhoto = (event) => {
+    setLoading(true);
+    axios.post('/images', { image: event })
+      .then(res => {
+        setImage([...image, res.data.image]);
+      }).catch(err => {
+        console.log(err);
+      }).finally(() => {
+        setLoading(false);
+      });
+  };
+  return { image, loading, handleChangeimage, handlePhoto };
 };
