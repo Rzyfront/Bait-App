@@ -208,9 +208,9 @@ const ReviewLocal = ({ sendReview, close }) => {
               </div>
             </div></>
               : <>
-              <h3 style={{ marginBottom: '30px' }}>Puntuacion</h3>
+              <h3 style={{ marginBottom: '30px' }}>Puntuación</h3>
               <h5>Calidad-Precio</h5>
-              <p className={style.textRating}>Como te parecio la calidad con relacion al precio</p>
+              <p className={style.textRating}>Cómo te pareció la calidad con relación al precio</p>
               <RatingStar
               className={style.ratingStar}
                 name='enviroment'
@@ -220,7 +220,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Ambiente</h5>
-              <p className={style.textRating}>Como te parecio el lugar</p>
+              <p className={style.textRating}>Cómo te pareció el lugar</p>
               <RatingStar
               className={style.ratingStar}
                 name='enviroment'
@@ -230,7 +230,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Servicio</h5>
-              <p className={style.textRating}>Como te parecio la atencion y el servicio</p>
+              <p className={style.textRating}>Cómo te pareció la atención y el servicio</p>
               <RatingStar
                 name='enviroment'
                 className={style.ratingStar}
@@ -240,7 +240,7 @@ const ReviewLocal = ({ sendReview, close }) => {
                 isRequired
               />
               <h5>Comida</h5>
-              <p className={style.textRating}>Cuentanos que tal estuvo la comida</p>
+              <p className={style.textRating}>Cuéntanos qué tal estuvo la comida</p>
               <RatingStar
                 name='enviroment'
                 className={style.ratingStar}
@@ -261,7 +261,7 @@ const ReviewLocal = ({ sendReview, close }) => {
               <div>
                 <Tiket handleTiket={handleTiket} inputs={inputs}/>
               </div>
-              <p className={style.textFactura}><b>IMPORTANTE: </b>Tu factura no sera mostrada en la reseña pero es necesaria para validar que si has comido en ese lugar</p>
+              <p className={style.textFactura}><b>IMPORTANTE: </b>Tu factura no será mostrada en la reseña pero es necesaria para soportar la validez de la misma.</p>
             </div>
           )}
         </form>
