@@ -5,7 +5,7 @@ export default function TYC ({ setTemsAndConditions }) {
   return (
         <div className='termAndConditions-container'>
           <div className='termAndConditions animated-element'>
-              <Link to='/home/1?name=&city=' className='LinkLogo'>
+              <Link to='/home' className='LinkLogo'>
                   <img
                       src={BaitLogo}
                       alt='Bait'
@@ -36,7 +36,7 @@ export default function TYC ({ setTemsAndConditions }) {
               <p>Ley aplicable y jurisdicción: Estos términos y condiciones se rigen por las leyes del país donde se encuentra Bait. Cualquier disputa relacionada con estos términos y condiciones será resuelta por los tribunales competentes en el lugar donde se encuentra Bait.</p>
               <div className='termsButtons'>
                   <button className='Ok' onClick={() => setTemsAndConditions(true)}>Aceptar</button>
-                  <Link to='/home/1?name=&city='>
+                  <Link to='/home'>
                       <button className='No' >Rechazar</button>
                   </Link>
               </div>

@@ -5,7 +5,7 @@ function DataTreatment () {
   return (
     <div className="DataTreatment-Component animated-element">
         <div className="DataTreatment-Container">
-          <Link to="/home/1?name=&city=">
+          <Link to="/home">
             <img src={BaitLogo} alt="Bait_Logo" className='BaitLogo'/>
           </Link>
             <h2 className="Title">Política de tratamiento de <span>datos</span> personales - <span>Bait</span></h2>
@@ -55,7 +55,7 @@ function DataTreatment () {
 
             <p>En conclusión, la política de tratamiento de datos de <span>Bait</span> se basará en los principios de transparencia, responsabilidad y seguridad. La privacidad de los datos de los usuarios será una prioridad en todo momento, y se tomarán las medidas necesarias para garantizar que los datos sean tratados de manera responsable y en cumplimiento con la ley.</p>
 
-            <Link to="/home/1?name=&city=">
+            <Link to="/home">
             <button>Volver</button>
           </Link>
         </div>

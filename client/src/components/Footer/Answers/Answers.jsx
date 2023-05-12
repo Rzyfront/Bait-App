@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function Answers () {
   return <div className='Answers-Component animated-element'>
     <div className="Answers-Container">
-    <Link to={'/home/1?name=&city='}>
+    <Link to={'/home'}>
     <img src={BaitLogo} alt="Bait_Logo" className='Bait_Logo'/>
     </Link>
     <h2 className="Title">Preguntas <span>frecuentes</span></h2>
@@ -93,12 +93,12 @@ function Answers () {
       Si deseas cerrar tu cuenta en <span>Bait</span>, por favor contáctanos y nuestro equipo de soporte te ayudará con el proceso de cierre de cuenta.</p>
 
       <div className='Answer-Buttons'>
-        <Link to={'/home/1?name=&city='}>
+        <Link to={'/home'}>
         <button className='Answers-Entendido'>
           Entendido!
         </button>
         </Link>
-         <Link to={'/home/1?name=&city='}>
+         <Link to={'/home'}>
         <button className='Answers-Volver'>Volver</button>
         </Link>
       </div>
