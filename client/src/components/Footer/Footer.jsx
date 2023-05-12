@@ -49,20 +49,7 @@ const Footer = () => {
             <li>
               <Link to="/Answers">Preguntas Frecuentes</Link>
             </li>
-            <li
-              onClick={
-                showTerms ? () => setShowTerms(false) : () => setShowTerms(true)
-              }
-            >
-              Términos de Uso
-            </li>
-
-          </ul>
-        </div>
-        <div className="InfoFooter3">
-          <ul>
-
-            <li
+             <li
               onClick={
                 showCookies
                   ? () => setShowCookies(false)
@@ -71,16 +58,9 @@ const Footer = () => {
             >
               Declaración de privacidad y cookies
             </li>
-            <li
-              onClick={
-                showTerms ? () => setShowTerms(false) : () => setShowTerms(true)
-              }
-            >
-              Mapa del Sitio
-            </li>
           </ul>
         </div>
-        <div className="InfoFooter4">
+        <div className="InfoFooter3">
           <ul>
               <li>
               <Link to="/createplace#complete-form">Inscribe tu Local</Link>
